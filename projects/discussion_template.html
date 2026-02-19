@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>討論記錄模板</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; padding: 20px; color: #eee; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 30px; color: #00d9ff; }
+        .section { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        h2 { color: #00d9ff; margin-bottom: 15px; font-size: 1.2em; }
+        label { display: block; margin-bottom: 5px; color: #aaa; font-size: 0.9em; }
+        input, textarea, select { width: 100%; padding: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 6px; color: #fff; font-size: 14px; }
+        textarea { min-height: 80px; resize: vertical; }
+        .row { display: flex; gap: 10px; }
+        .row > div { flex: 1; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: rgba(0,217,255,0.1); color: #00d9ff; }
+        .btn { background: #00d9ff; color: #000; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; margin-right: 10px; }
+        .btn:hover { background: #00b8d4; }
+        .btn-secondary { background: #444; color: #fff; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: rgba(0,217,255,0.2); color: #00d9ff; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; cursor: pointer; }
+        .tag:hover { background: rgba(0,217,255,0.4); }
+        .add-row { background: transparent; border: 1px dashed #555; color: #888; padding: 8px; width: 100%; cursor: pointer; }
+        .add-row:hover { border-color: #00d9ff; color: #00d9ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 討論記錄模板</h1>
+        
+        <div class="section">
+            <h2>📋 基本資訊</h2>
+            <div class="row">
+                <div><label>主題</label><input type="text" id="topic" placeholder="討論主題"></div>
+                <div><label>時間</label><input type="text" id="time" placeholder="YYYY-MM-DD HH:MM"></div>
+            </div>
+            <div class="row">
+                <div><label>主持人</label><input type="text" id="host" placeholder="主持人"></div>
+                <div><label>參與節點</label><input type="text" id="participants" placeholder="節點1, 節點2, ..."></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💬 討論過程</h2>
+            <table id="discussion-table">
+                <thead>
+                    <tr><th>節點</th><th>角色</th><th>觀點</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><input type="text" placeholder="節點名"></td><td><input type="text" placeholder="角色"></td><td><input type="text" placeholder="觀點"></td></tr>
+                </tbody>
+            </table>
+            <button class="add-row" onclick="addRow()">+ 添加節點觀點</button>
+            
+            <label style="margin-top:15px">優點</label>
+            <textarea id="pros" placeholder="列出優點..."></textarea>
+            <label>缺點</label>
+            <textarea id="cons" placeholder="列出缺點..."></textarea>
+        </div>
+
+        <div class="section">
+            <h2>🗳️ 投票結果</h2>
+            <table id="vote-table">
+                <thead>
+                    <tr><th>選項</th><th>內容</th><th>票數</th><th>占比</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><input type="text" placeholder="選項"></td><td><input type="text" placeholder="內容"></td><td><input type="number" placeholder="0"></td><td><input type="text" placeholder="%"></td></tr>
+                </tbody>
+            </table>
+            <button class="add-row" onclick="addVoteRow()">+ 添加投票選項</button>
+        </div>
+
+        <div class="section">
+            <h2>🤝 共識結論</h2>
+            <div class="row">
+                <div><label>推薦方案</label><input type="text" id="recommendation" placeholder="推薦方案"></div>
+                <div><label>共識度</label><input type="text" id="consensus" placeholder="例如: 67%"></div>
+            </div>
+            <label>用戶決定</label>
+            <select id="decision">
+                <option value="">請選擇...</option>
+                <option value="confirmed">✅ 確認執行</option>
+                <option value="rejected">❌ 否決</option>
+                <option value="override">⚠️ Override</option>
+                <option value="pending">⏳ 待定</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <h2>📚 學習要點</h2>
+            <textarea id="lessons" placeholder="從討論中提取的知識點..."></textarea>
+        </div>
+
+        <div class="section">
+            <h2>🏷️ 標籤</h2>
+            <div class="tags">
+                <span class="tag" onclick="addTag('#技術')">#技術</span>
+                <span class="tag" onclick="addTag('#設計')">#設計</span>
+                <span class="tag" onclick="addTag('#高共識')">#高共識</span>
+                <span class="tag" onclick="addTag('#低共識')">#低共識</span>
+                <span class="tag" onclick="addTag('#需要更多數據')">#需要更多數據</span>
+            </div>
+            <input type="text" id="custom-tags" placeholder="自訂標籤（用逗號分隔）">
+        </div>
+
+        <div style="text-align:center; margin-top:30px;">
+            <button class="btn" onclick="exportMarkdown()">📥 匯出 Markdown</button>
+            <button class="btn btn-secondary" onclick="saveToLocal()">💾 儲存</button>
+        </div>
+    </div>
+
+    <script>
+        function addRow() {
+            const tbody = document.querySelector('#discussion-table tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = '<td><input type="text" placeholder="節點名"></td><td><input type="text" placeholder="角色"></td><td><input type="text" placeholder="觀點"></td>';
+            tbody.appendChild(tr);
+        }
+        function addVoteRow() {
+            const tbody = document.querySelector('#vote-table tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = '<td><input type="text" placeholder="選項"></td><td><input type="text" placeholder="內容"></td><td><input type="number" placeholder="0"></td><td><input type="text" placeholder="%"></td>';
+            tbody.appendChild(tr);
+        }
+        function addTag(tag) {
+            const input = document.getElementById('custom-tags');
+            const current = input.value ? input.value.split(',').map(t=>t.trim()).filter(t=>t) : [];
+            if (!current.includes(tag)) current.push(tag);
+            input.value = current.join(', ');
+        }
+        function exportMarkdown() {
+            let md = '# 討論記錄\n\n## 基本資訊\n';
+            md += `- **主題：** ${document.getElementById('topic').value}\n`;
+            md += `- **時間：** ${document.getElementById('time').value}\n`;
+            md += `- **主持人：** ${document.getElementById('host').value}\n`;
+            md += `- **參與節點：** ${document.getElementById('participants').value}\n\n`;
+            
+            md += '## 討論過程\n\n| 節點 | 角色 | 觀點 |\n|------|------|------|\n';
+            document.querySelectorAll('#discussion-table tbody tr').forEach(tr => {
+                const inputs = tr.querySelectorAll('input');
+                if (inputs[0].value) md += `| ${inputs[0].value} | ${inputs[1].value} | ${inputs[2].value} |\n`;
+            });
+            
+            md += `\n**優點：**\n- ${document.getElementById('pros').value}\n\n`;
+            md += `**缺點：**\n- ${document.getElementById('cons').value}\n\n`;
+            
+            md += '## 投票結果\n\n| 選項 | 內容 | 票數 | 占比 |\n|------|------|------|------|\n';
+            document.querySelectorAll('#vote-table tbody tr').forEach(tr => {
+                const inputs = tr.querySelectorAll('input');
+                if (inputs[0].value) md += `| ${inputs[0].value} | ${inputs[1].value} | ${inputs[2].value} | ${inputs[3].value} |\n`;
+            });
+            
+            md += '\n## 共識結論\n\n';
+            md += `- **推薦方案：** ${document.getElementById('recommendation').value}\n`;
+            md += `- **共識度：** ${document.getElementById('consensus').value}\n`;
+            md += `- **用戶決定：** ${document.getElementById('decision').value}\n\n`;
+            
+            md += '## 學習要點\n\n';
+            md += document.getElementById('lessons').value.split('\n').map(l => `1. ${l}`).join('\n') + '\n\n';
+            
+            const tags = document.getElementById('custom-tags').value;
+            if (tags) md += `## 標籤\n\n${tags}\n`;
+            
+            const blob = new Blob([md], {type: 'text/markdown'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `discussion_${new Date().toISOString().slice(0,10)}.md`;
+            a.click();
+        }
+        function saveToLocal() {
+            const data = {
+                topic: document.getElementById('topic').value,
+                time: document.getElementById('time').value,
+                host: document.getElementById('host').value,
+                participants: document.getElementById('participants').value,
+                pros: document.getElementById('pros').value,
+                cons: document.getElementById('cons').value,
+                recommendation: document.getElementById('recommendation').value,
+                consensus: document.getElementById('consensus').value,
+                decision: document.getElementById('decision').value,
+                lessons: document.getElementById('lessons').value,
+                tags: document.getElementById('custom-tags').value
+            };
+            localStorage.setItem('discussion_template', JSON.stringify(data));
+            alert('已儲存！');
+        }
+    </script>
+</body>
+</html>
