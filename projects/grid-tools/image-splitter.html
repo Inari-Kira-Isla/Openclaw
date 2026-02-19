@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9宮格圖切割工具</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang TC', sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .upload-section {
+            border: 3px dashed #ccc;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        .upload-section:hover {
+            border-color: #11998e;
+            background: #f0fff4;
+        }
+        .upload-section input {
+            display: none;
+        }
+        .grid-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .grid-option {
+            padding: 15px 30px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .grid-option.active {
+            border-color: #11998e;
+            background: #11998e;
+            color: white;
+        }
+        .preview-section {
+            margin: 30px 0;
+        }
+        .original-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .original-image img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 10px;
+        }
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .split-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .split-grid img:hover {
+            transform: scale(1.05);
+        }
+        .download-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .download-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+        .download-single {
+            background: #11998e;
+            color: white;
+        }
+        .download-zip {
+            background: #667eea;
+            color: white;
+        }
+        .tip {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .tip a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✂️ 9宮格圖切割工具</h1>
+        
+        <div class="upload-section" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])">
+            <p>📁 點擊上傳九宮格圖片或拼圖</p>
+            <p style="color: #999; font-size: 14px;">支援 JPG, PNG, WebP</p>
+        </div>
+        
+        <div class="grid-options">
+            <div class="grid-option active" onclick="setGrid(3)">3x3 九宮格</div>
+            <div class="grid-option" onclick="setGrid(2)">2x2 四宮格</div>
+            <div class="grid-option" onclick="setGrid(4)">4x4 十六宮格</div>
+        </div>
+        
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <div class="original-image">
+                <h3>原始圖片</h3>
+                <img id="originalImg" src="" alt="Original">
+            </div>
+            
+            <h3 style="text-align: center; margin: 20px 0;">切割結果</h3>
+            <div class="split-grid" id="splitGrid"></div>
+            
+            <div class="download-btns">
+                <button class="download-btn download-zip" onclick="downloadZip()">📦 批次下載 (ZIP)</button>
+            </div>
+            
+            <div class="tip">
+                💡 畫質若太差，可至 <a href="https://jimeng.jianying.com" target="_blank">即夢</a> 或 <a href="https://www.doubao.com" target="_blank">豆包</a> 進行 AI 高清修復
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let gridSize = 3;
+        let originalImage = null;
+        let splitImages = [];
+        
+        function setGrid(size) {
+            gridSize = size;
+            document.querySelectorAll('.grid-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            if (originalImage) {
+                splitImage();
+            }
+        }
+        
+        function handleFile(file) {
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage = new Image();
+                originalImage.onload = () => {
+                    document.getElementById('originalImg').src = e.target.result;
+                    document.getElementById('previewSection').style.display = 'block';
+                    splitImage();
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function splitImage() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const cols = gridSize;
+            const rows = gridSize;
+            
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            
+            const cellWidth = canvas.width / cols;
+            const cellHeight = canvas.height / rows;
+            
+            const grid = document.getElementById('splitGrid');
+            grid.innerHTML = '';
+            splitImages = [];
+            
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const cellCanvas = document.createElement('canvas');
+                    cellCanvas.width = cellWidth;
+                    cellCanvas.height = cellHeight;
+                    
+                    const cellCtx = cellCanvas.getContext('2d');
+                    cellCtx.drawImage(
+                        originalImage,
+                        col * cellWidth, row * cellHeight,
+                        cellWidth, cellHeight,
+                        0, 0,
+                        cellWidth, cellHeight
+                    );
+                    
+                    const img = document.createElement('img');
+                    img.src = cellCanvas.toDataURL('image/jpeg', 0.9);
+                    img.onclick = () => downloadSingle(img.src, row * cols + col + 1);
+                    img.title = '點擊下載';
+                    grid.appendChild(img);
+                    
+                    splitImages.push({
+                        data: cellCanvas.toDataURL('image/jpeg', 0.9),
+                        name: `image_${row * cols + col + 1}.jpg`
+                    });
+                }
+            }
+        }
+        
+        function downloadSingle(src, num) {
+            const link = document.createElement('a');
+            link.href = src;
+            link.download = `split_${num}.jpg`;
+            link.click();
+        }
+        
+        function downloadZip() {
+            const zip = new JSZip();
+            
+            splitImages.forEach((img, index) => {
+                const data = img.data.split(',')[1];
+                zip.file(img.name, data, {base64: true});
+            });
+            
+            zip.generateAsync({type: 'blob'}).then(content => {
+                saveAs(content, 'split_images.zip');
+            });
+        }
+    </script>
+</body>
+</html>

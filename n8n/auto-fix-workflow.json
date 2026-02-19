@@ -1,0 +1,137 @@
+{
+  "name": "OpenClaw Auto Fix",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "openclaw-error",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 解析錯誤內容\nconst errors = $json.errors || [];\n\n// 提取關鍵錯誤訊息\nconst errorMessages = errors.map(e => e.message).join('\\n');\nconst keywords = [...new Set(errors.map(e => e.keyword))];\n\nreturn {\n  errors,\n  errorMessages,\n  keywords,\n  summary: `偵測到 ${errors.length} 個錯誤，關鍵詞: ${keywords.join(', ')}`\n};"
+      },
+      "id": "parse-error",
+      "name": "Parse Error",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendMessage",
+        "channel": "Slack",
+        "text": "🔍 *OpenClaw 錯誤分析*\\n{{ $json.summary }}",
+        "additionalFields": {}
+      },
+      "id": "slack-notify",
+      "name": "Slack Notify",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 3,
+      "position": [650, 300],
+      "credentials": {
+        "slackApi": "slack-credentials"
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// 決定使用哪個模型\nconst errors = $json.errors || [];\nconst severity = errors.some(e => e.keyword === 'CRITICAL' || e.keyword === 'FATAL') ? 'high' : 'medium';\n\n// 選擇模型\nlet model = 'ollama';\nif (severity === 'high' || errors.length > 5) {\n  model = 'minimax';\n}\n\nreturn {\n  model,\n  severity,\n  reason: severity === 'high' ? '嚴重錯誤需要更強模型' : '一般錯誤使用本地模型'\n};"
+      },
+      "id": "model-decision",
+      "name": "Model Decision",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// 模擬 AI 修復分析\nconst errors = $json.errors || [];\n\n// 生成修復建議\nconst fixes = errors.map((error, index) => ({\n  step: index + 1,\n  issue: error.message.substring(0, 100),\n  action: '檢查相關模組',\n  priority: error.keyword === 'CRITICAL' ? 'high' : 'medium'\n}));\n\nreturn {\n  fixes,\n  analysis: `分析了 ${errors.length} 個錯誤，請查看修復建議`\n};"
+      },
+      "id": "ai-analyze",
+      "name": "AI Analyze",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendMessage",
+        "channel": "Slack",
+        "text": "✅ *修復分析完成*\\n{{ $json.analysis }}",
+        "additionalFields": {}
+      },
+      "id": "slack-result",
+      "name": "Slack Result",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 3,
+      "position": [1250, 300],
+      "credentials": {
+        "slackApi": "slack-credentials"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Parse Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Error": {
+      "main": [
+        [
+          {
+            "node": "Slack Notify",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Model Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Model Decision": {
+      "main": [
+        [
+          {
+            "node": "AI Analyze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analyze": {
+      "main": [
+        [
+          {
+            "node": "Slack Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "openclaw-auto-fix",
+  "tags": ["openclaw", "error", "auto-fix"]
+}

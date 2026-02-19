@@ -1,0 +1,203 @@
+# Model Dispatcher 配置
+
+## 模型列表
+
+```yaml
+models:
+  local:
+    llama3:
+      name: "llama3"
+      type: "general"
+      size: "4.7GB"
+      strengths: ["對話", "創意"]
+    
+    mistral:
+      name: "mistral"
+      type: "reasoning"
+      size: "4.4GB"
+      strengths: ["推理", "邏輯"]
+    
+    codellama:
+      name: "codellama"
+      type: "coding"
+      size: "3.8GB"
+      strengths: ["程式碼", "代碼生成"]
+    
+    deepseek-coder:
+      name: "deepseek-coder"
+      type: "coding"
+      size: "776MB"
+      strengths: ["輕量程式"]
+
+  cloud:
+    minimax:
+      name: "MiniMax-M2.5"
+      type: "all-purpose"
+      strengths: ["推理", "程式", "創意"]
+```
+
+## 調度規則
+
+```yaml
+dispatch_rules:
+  # 簡單對話 - 直接用本地
+  - name: "簡單對話"
+    keywords:
+      - "你好"
+      - "天氣"
+      - "現在"
+      - "幫我"
+      - "告訴我"
+    model: "local:llama3"
+    verify: false
+    priority: 1
+
+  # 程式碼 - 用 codellama + 驗證
+  - name: "程式碼"
+    keywords:
+      - "程式"
+      - "代碼"
+      - "function"
+      - "def "
+      - "class "
+      - "import "
+      - "code"
+      - "python"
+      - "javascript"
+      - "寫一個"
+    model: "local:codellama"
+    verify: true
+    verify_with: "minimax"
+    priority: 2
+
+  # 複雜推理 - 用 mistral + 驗證
+  - name: "複雜推理"
+    keywords:
+      - "分析"
+      - "推理"
+      - "邏輯"
+      - "為什麼"
+      - "怎麼"
+      - "如何解決"
+      - "比較"
+    model: "local:mistral"
+    verify: true
+    verify_with: "minimax"
+    priority: 2
+
+  # 創意寫作 - 用本地
+  - name: "創意寫作"
+    keywords:
+      - "寫"
+      - "創作"
+      - "故事"
+      - "文章"
+      - "部落格"
+    model: "local:llama3"
+    verify: false
+    priority: 1
+
+  # 預設 - 用本地
+  - name: "預設"
+    model: "local:llama3"
+    verify: false
+    priority: 0
+```
+
+## Fallback 機制
+
+```yaml
+fallback:
+  # 本地模型失敗時
+  local_failover:
+    - local:llama3
+    - local:mistral
+    - local:codellama
+    - cloud:minimax
+
+  # 驗證失敗時
+  verify_failover:
+    action: "use_cloud"
+    cloud_model: "minimax"
+    record_feedback: true
+
+  # 超時設定
+  timeout:
+    local: 60  # 秒
+    cloud: 30  # 秒
+```
+
+## 驗證設定
+
+```yaml
+verification:
+  # 什麼任務需要驗證
+  required_for:
+    - "程式碼"
+    - "複雜推理"
+    - "重要決策"
+
+  # 相似度閾值
+  similarity_threshold:
+    good: 0.8
+    acceptable: 0.6
+    poor: 0.6  # 低於此值用雲端
+
+  # 反饋記錄
+  feedback:
+    enabled: true
+    file: "~/Desktop/local-model-feedback.json"
+    weekly_review: true
+```
+
+## 自我優化觸發
+
+```yaml
+auto_optimization:
+  # 觸發條件
+  triggers:
+    - condition: "avg_similarity < 0.7"
+      action: "adjust_prompt"
+    - condition: "fail_count > 3"
+      action: "switch_model"
+    - condition: "new_task_type"
+      action: "add_rule"
+
+  # 定時檢查
+  schedule:
+    daily: false
+    weekly: true
+    monthly: true
+```
+
+## 使用統計
+
+```yaml
+statistics:
+  track:
+    - "model_usage_count"
+    - "task_type_distribution"
+    - "similarity_scores"
+    - "fallback_count"
+    - "verification_results"
+
+  report:
+    frequency: "weekly"
+    metrics:
+      - "本地模型使用率"
+      - "驗證通過率"
+      - "平均相似度"
+      - "優化建議"
+```
+
+---
+
+## 啟動方式
+
+```bash
+# 測試本地模型
+ollama run llama3 "你好"
+
+# 測試優化系統
+python scripts/local_model_optimizer.py "寫一個 Python 函數"
+```

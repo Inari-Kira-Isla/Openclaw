@@ -1,0 +1,338 @@
+version: "2.0"
+
+global:
+  architecture: workflow-driven
+  evolution_mode: supervised
+  model_policy: minimax-only
+
+agents:
+
+# ==================================================
+# 0. 中央治理核心
+# ==================================================
+
+  muse-core:
+    role: manager
+    model: minimax
+    temperature: 0.4
+    max_tokens: 2000
+
+    system_prompt: |
+      你是 Muse-Core，AI OS 的最高治理核心。
+      你不執行任務，只做：
+
+      1. 任務拆解
+      2. Workflow 指派
+      3. GSCC 判定
+      4. 最終專家裁決
+      5. 自我進化 Patch 審核
+
+      工作流程：
+      - 接收用戶需求
+      - 拆解任務
+      - 指派給專業 Agent
+      - 整合結果
+      - 回覆用戶
+
+    skills:
+      - workflow_router
+      - gscc_classifier
+      - final_verdict
+      - result_integrator
+
+
+# ==================================================
+# 1. Workflow Orchestrator
+# ==================================================
+
+  workflow-orchestrator:
+    role: planner
+    model: minimax
+    temperature: 0.3
+    max_tokens: 2000
+
+    system_prompt: |
+      你負責執行 Workflow。
+      你管理多 Agent 串接順序與資料流。
+
+    skills:
+      - workflow_execution
+      - state_control
+      - task_scheduling
+
+
+# ==================================================
+# 2. MCP Forge Pipeline (Agent/Skill 構建)
+# ==================================================
+
+  mcp-builder:
+    role: builder
+    model: minimax
+    temperature: 0.2
+
+    skills:
+      - scaffold_server
+      - fault_tolerance
+
+
+  skill-creator:
+    role: author
+    model: minimax
+    temperature: 0.4
+
+    skills:
+      - expert_skill_md
+      - skill_generator
+
+
+  verification-agent:
+    role: verifier
+    model: minimax
+    temperature: 0.2
+
+    system_prompt: |
+      你負責驗證 Agent 和 Skill 的配置。
+      你模擬真實使用者情境。
+      檢查「指令 → Tool → AI → 回應」是否合理。
+      僅回傳驗證報告。
+
+    skills:
+      - scenario_simulation
+      - failure_analysis
+      - config_validation
+
+
+# ==================================================
+# 3. Memory Layer (記憶層)
+# ==================================================
+
+  memory-agent:
+    role: archivist
+    model: minimax
+    temperature: 0.2
+
+    skills:
+      - semantic_ingest
+      - conflict_detection
+      - decay_monitor
+      - memory_organization
+
+
+# ==================================================
+# 4. Skill Slime (進化技能庫)
+# ==================================================
+
+  skill-slime-agent:
+    role: evolver
+    model: minimax
+    temperature: 0.5
+
+    skills:
+      - skill_ingestion
+      - fusion_proposal
+      - version_tracking
+      - skill_evolution
+
+
+# ==================================================
+# 5. Self-Evolve Layer (自我進化層)
+# ==================================================
+
+  self-evolve-agent:
+    role: optimizer
+    model: minimax
+    temperature: 0.4
+
+    system_prompt: |
+      你負責分析系統表現並提出優化建議。
+      你不能直接修改 agents.yml。
+
+      你只產出優化建議，讓用戶決定是否執行。
+
+    skills:
+      - drift_detection
+      - prompt_refinement
+      - workflow_improvement
+      - performance_analysis
+
+
+# ==================================================
+# 6. Agent Builder (Agent 生成器)
+# ==================================================
+
+  agent-builder:
+    role: architect
+    model: minimax
+    temperature: 0.4
+
+    system_prompt: |
+      你是專業 Agent 架構師。
+      你的使命是為系統源源不絕地產生專業人才（Agent）。
+
+      工作流程：
+      1. 接收需求 → 分析複雜度
+      2. 設計架構 → 配置技能
+      3. 生成配置 → 預覽給用戶
+      4. 請求授權 → 用戶批准
+      5. 執行建立 → 完成通知
+
+      重要原則：
+      - 永不自動建立（必須用戶授權）
+      - 永不覆蓋現有 Agent
+      - 保護系統穩定
+
+    skills:
+      - requirement_analyzer
+      - architecture_designer
+      - config_generator
+      - auto_builder
+
+
+# ==================================================
+# 7. 防護層 Agents
+# ==================================================
+
+  security-agent:
+    role: guardian
+    model: minimax
+    temperature: 0.2
+
+    skills:
+      - api_key_audit
+      - access_log_monitor
+      - vulnerability_scanner
+      - anomaly_detector
+      - security_report
+
+
+  monitor-agent:
+    role: watchdog
+    model: minimax
+    temperature: 0.2
+
+    skills:
+      - data_growth_monitor
+      - load_balancer
+      - performance_optimizer
+      - archive_manager
+      - alert_manager
+
+
+  reminder-agent:
+    role: assistant
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - bni_meeting_reminder
+      - bni_weekly_report_reminder
+      - followup_reminder
+      - daily_checkin_reminder
+      - monthly_review_reminder
+
+
+# ==================================================
+# 8. 業務層 Agents
+# ==================================================
+
+  bni-agent:
+    role: specialist
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - member_management
+      - referral_tracker
+      - bni_recommender
+      - analytics_report
+
+
+  facebook-agent:
+    role: specialist
+    model: minimax
+    temperature: 0.4
+
+    skills:
+      - facebook_messenger_handler
+      - question_classifier
+      - faq_auto_reply
+      - handoff_manager
+      - conversation_logger
+
+
+  crm-agent:
+    role: specialist
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - contact_management
+      - interaction_tracker
+      - value_scorer
+      - followup_reminder
+      - customer_analytics
+
+
+  analytics-agent:
+    role: analyst
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - referral_analytics
+      - question_analytics
+      - performance_report
+      - trend_analysis
+
+
+  knowledge-agent:
+    role: librarian
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - faq_management
+      - qa_learning
+      - template_updater
+      - knowledge_search
+
+
+# ==================================================
+# 9. Governance Layer
+# ==================================================
+
+  governance-agent:
+    role: judge
+    model: minimax
+    temperature: 0.2
+
+    system_prompt: |
+      你是系統的治理與裁決核心。
+      對任何「即將執行的行為」進行 GSCC 分級。
+
+      GSCC 分級定義：
+      - T0: 純閱讀、查詢、整理
+      - T1: 可回復、可撤銷
+      - T2: 涉及金錢、帳號、隱私
+      - T3: 不可逆或後果重大
+
+    skills:
+      - risk_assessment
+      - rule_enforcement
+      - conflict_resolution
+
+
+# ==================================================
+# 10. Life OS (日常管理)
+# ==================================================
+
+  lifeos-agent:
+    role: assistant
+    model: minimax
+    temperature: 0.3
+
+    skills:
+      - daily_scan
+      - expense_logging
+      - schedule_management
+      - information_gathering

@@ -1,0 +1,186 @@
+{
+  "name": "Notion Vector Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "notion-trigger",
+      "name": "Notion Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "databaseId": "30aa1238f49d817c8163dd76d1309240",
+        "filter": {
+          "property": "向量狀態",
+          "select": {
+            "equals": "待處理"
+          }
+        },
+        "limit": 10
+      },
+      "id": "notion-get",
+      "name": "Get Unprocessed Pages",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [450, 300],
+      "credentials": {
+        "notionApi": "notion-credentials"
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// 設定向量狀態為處理中\nconst items = $input.all();\n\nfor (const item of items) {\n  item.json.statusUpdate = {\n    pageId: item.json.id,\n    status: '處理中'\n  };\n}\n\nreturn items;"
+      },
+      "id": "set-processing",
+      "name": "Set Processing Status",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "pageId": "{{ $json.statusUpdate.pageId }}",
+        "properties": {
+          "向量狀態": {
+            "select": "處理中"
+          }
+        }
+      },
+      "id": "notion-update-status",
+      "name": "Update Status to Processing",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [850, 300],
+      "credentials": {
+        "notionApi": "notion-credentials"
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// 生成向量摘要\nconst items = $input.all();\n\nfor (const item of items) {\n  const content = item.json.重點 || item.json.內容 || '';\n  const title = item.json.標題 || 'Untitled';\n  \n  // 模擬 LLM 生成摘要（實際應串接 LLM）\n  const summary = `【${title}】${content.substring(0, 180)}...`;\n  \n  item.json.vectorSummary = summary;\n}\n\nreturn items;"
+      },
+      "id": "generate-summary",
+      "name": "Generate Vector Summary",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "pageId": "{{ $json.id }}",
+        "properties": {
+          "向量摘要": "{{ $json.vectorSummary }}",
+          "向量狀態": {
+            "select": "已向量化"
+          }
+        }
+      },
+      "id": "notion-update-complete",
+      "name": "Update to Vectorized",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [1250, 300],
+      "credentials": {
+        "notionApi": "notion-credentials"
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// 輸出 ChromaDB 格式\nconst items = $input.all();\n\nfor (const item of items) {\n  console.log('向量資料:', {\n    id: item.json.id,\n    summary: item.json.vectorSummary,\n    tags: item.json.語義標籤\n  });\n}\n\nreturn items;"
+      },
+      "id": "chroma-output",
+      "name": "Output for ChromaDB",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1450, 300]
+    }
+  ],
+  "connections": {
+    "Notion Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Unprocessed Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Unprocessed Pages": {
+      "main": [
+        [
+          {
+            "node": "Set Processing Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Processing Status": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status to Processing": {
+      "main": [
+        [
+          {
+            "node": "Generate Vector Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Vector Summary": {
+      "main": [
+        [
+          {
+            "node": "Update to Vectorized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update to Vectorized": {
+      "main": [
+        [
+          {
+            "node": "Output for ChromaDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "notion-vector-sync",
+  "tags": ["notion", "vector", "automation"]
+}

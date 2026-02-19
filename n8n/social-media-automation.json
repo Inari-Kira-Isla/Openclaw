@@ -1,0 +1,59 @@
+{
+  "name": "Social Media Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{"field": "hours", "hoursInterval": 2}]
+        }
+      },
+      "id": "schedule",
+      "name": "定時觸發",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "generate",
+        "prompt": "={{ $json.topic }}",
+        "numberOfImages": 4,
+        "size": "1024x1024"
+      },
+      "id": "openai-image",
+      "name": "OpenAI 圖片生成",
+      "type": "openai",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.postiz.com/v1/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {"name": "platform", "value": "={{ $json.platform }}"},
+            {"name": "content", "value": "={{ $json.caption }}"},
+            {"name": "media", "value": "={{ $json.images }}"}
+          ]
+        }
+      },
+      "id": "postiz",
+      "name": "Postiz 發布",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "定時觸發": {
+      "main": [[{"node": "OpenAI 圖片生成", "type": "main", "index": 0}]]
+    },
+    "OpenAI 圖片生成": {
+      "main": [[{"node": "Postiz 發布", "type": "main", "index": 0}]]
+    }
+  }
+}
