@@ -1,92 +1,83 @@
 ---
-name: vector-summary-workflow
-description: 向量摘要完整工作流程 - Ollama + MiniMax
-metadata: {"openclaw": {"emoji": "📊"}}
+name: vector_summary_workflow
+description: 向量摘要完整工作流。當需要執行端到端的向量摘要管線時觸發，包括：Ollama + MiniMax 雙模型處理、本地向量庫管理、檢索查詢、Notion 同步。
 ---
 
-# 向量摘要完整工作流程
+# 向量摘要完整工作流
 
-## 概述
+## 功能說明
 
-使用 Ollama 本地生成向量摘要，配合 MiniMax 驗證優化。
+端到端的向量摘要管線，整合 Ollama 本地生成與 MiniMax 雲端驗證，管理本地向量庫並支援相似度檢索。此為向量摘要系列的最完整版本。
 
 ## 工作流程
 
-```
-1. 文本切分 (Chunking)
-   ↓
-2. 生成摘要 (Ollama llama3)
-   ↓
-3. MiniMax 驗證 (可選)
-   ↓
-4. 向量化 (Embedding)
-   ↓
-5. 建立關聯 (本地儲存)
-   ↓
-6. 檢索 (相似度比對)
-```
+### 第一步：文本切分
+- 每區塊約 250 字，以句號等標點切分
+- 過濾無效短片段
 
-## 腳本
+### 第二步：Ollama 摘要生成
+- 使用 llama3 本地模型快速生成摘要
 
-### 主要腳本
+### 第三步：MiniMax 驗證（可選）
+- 使用 MiniMax-M2.5 生成對照版本
+- 選擇品質較佳者作為最終摘要
 
-| 腳本 | 功能 |
-|------|------|
-| `vector_summary_v2.py` | Ollama 版本 |
-| `vector_summary_verify.py` | Ollama + MiniMax 驗證版 |
+### 第四步：向量化與儲存
+- 轉為 128 維向量，歸一化後儲存
+- 本地向量庫位置：`~/Desktop/vector-db/`
+- 每筆記錄包含：chunk_index、summary、source_chunk、embedding
 
-## 配置
+### 第五步：Notion 同步
+- 回寫向量摘要、向量狀態、語義標籤、重點、應用分類
 
-### Ollama
+### 第六步：檢索服務
+- 支援餘弦相似度檢索
+- 返回最相關的片段及來源筆記
+
+## 工具指引
 
 ```bash
-# 確保運行
+# Ollama 環境
 ollama serve
 
-# 模型
-llama3:latest (4.7GB)
-```
-
-### MiniMax (驗證用)
-
-```bash
-# 環境變數
+# MiniMax 環境（驗證用）
 export MINIMAX_API_KEY="your-key"
-```
 
-## 使用方式
-
-```bash
-# 使用 Ollama 處理
+# 執行 Ollama 版本
 python scripts/vector_summary_v2.py
 
-# 使用 Ollama + MiniMax 驗證
+# 執行 Ollama + MiniMax 驗證版
 python scripts/vector_summary_verify.py
 ```
 
-## 數據存儲
-
-- **本地向量庫**: `~/Desktop/vector-db/`
-- **每筆記錄**:
-  - chunk_index
-  - summary (摘要)
-  - source_chunk (原文)
-  - embedding (128維向量)
-
-## Notion 同步
-
-- 向量摘要
-- 向量狀態
-- 語義標籤
-- 重點
-- 應用分類
-
-## 狀態標記
+## 狀態標記對照
 
 | 標記 | 意義 |
 |------|------|
-| 已向量化 | 基礎處理 |
+| 已向量化 | 基礎處理完成 |
 | 已向量化(標準流程) | Ollama 完整流程 |
-| 已向量化(Ollama+MiniMax) | 驗證優化版 |
+| 已向量化(Ollama+MiniMax) | 雙模型驗證優化版 |
 
----
+## 錯誤處理
+
+| 情境 | 處理方式 |
+|------|----------|
+| Ollama 服務未啟動 | 嘗試自動啟動，失敗則提示用戶 |
+| MiniMax API Key 無效 | 跳過驗證，僅使用 Ollama 結果並記錄警告 |
+| 向量庫檔案損壞 | 從 Notion 重新拉取原文，重建該筆記的向量 |
+| 檢索無結果 | 擴大相似度閾值或提示用戶換關鍵字 |
+| Notion 同步失敗 | 保留本地結果，下次執行時重試 |
+
+## 使用範例
+
+- 「執行完整向量摘要工作流」
+- 「用雙模型處理所有 Notion 筆記」
+- 「在向量庫中搜尋跟『機器學習』相關的筆記」
+
+## 護欄
+
+- API Key 必須使用環境變數，禁止寫死在程式碼中
+- 本地向量庫不上傳至外部服務
+- 不修改 Notion 原始筆記內容
+- 摘要長度不超過 30 字，區塊數量 1-11 個
+- 向量維度固定 128 維，確保檢索一致性

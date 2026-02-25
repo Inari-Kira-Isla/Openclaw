@@ -1,68 +1,61 @@
 ---
 name: skill_ingestion
-description: 技能攝入與學習。當需要學習外部技能並整合到系統時觸發，包括：技能發現、分析評估、轉換適配、整合測試。
+description: 技能攝入學習。當需要學習外部技能或整合新 SKILL.md 到系統時觸發。
+metadata: { "openclaw": { "emoji": "📚" } }
 ---
 
-# Skill Ingestion
+# 技能攝入學習
 
-## 攝入流程
+發現、評估並整合外部技能到 OpenClaw 系統。
+
+## 操作 / 工作流程
+
+1. **來源發現** — 從以下管道尋找技能：
+   - workspace/skills/ 目錄掃描
+   - 用戶手動提供 SKILL.md
+   - 從參考文檔中提取技能定義
+2. **分析評估** — LLM 分析技能內容：
+   - 功能是否符合需求
+   - 與現有技能是否重疊（呼叫 `memory_search` 查詢已有技能）
+   - 品質評估（結構完整性、指令清晰度）
+3. **轉換適配** — 確保格式符合標準 SKILL.md 模板：
+   - 補齊 YAML frontmatter（name, description, metadata）
+   - 補齊缺失段落（錯誤處理、使用範例）
+   - 路徑與依賴調整
+4. **配置更新** — 將技能加入對應 agent 的設定
+5. **驗證測試** — 模擬觸發測試技能是否正常運作
+
+## 參數
+
+| 參數 | 類型 | 預設 | 說明 |
+|------|------|------|------|
+| source | string | 必填 | 技能來源（檔案路徑 / URL / 文本內容） |
+| target_agent | string | "" | 目標 agent 名稱，空則自動建議 |
+| auto_install | boolean | false | 是否自動安裝（否則僅預覽） |
+
+## 輸出格式
 
 ```
-來源發現 → 技能分析 → 評估價值 → 轉換處理 → 整合測試 → 上線啟用
+📚 技能攝入報告
+- 技能名稱：{skill_name}
+- 來源：{source}
+- 品質評分：{quality_score}/10
+- 重疊技能：{overlapping_skills}
+- 建議 Agent：{suggested_agent}
+- 狀態：{installed / preview}
 ```
 
-## 來源類型
+## 錯誤處理
 
-### 1. ClawHub
-```bash
-clawhub search <關鍵詞>
-clawhub install <skill-name>
-```
+| 錯誤 | 處理 |
+|------|------|
+| 來源無法存取 | 回報來源錯誤，請用戶確認路徑 |
+| SKILL.md 格式不合規 | 自動修正格式，列出修正項目 |
+| 與現有技能高度重疊（> 80%） | 建議使用 fusion_proposal 合併 |
+| 目標 agent 不存在 | 列出可用 agent，請用戶選擇 |
 
-### 2. GitHub
-- 搜尋 MCP Server 專案
-- 評估程式碼品質
-- 提取技能定義
+## 使用範例
 
-### 3. 自定義
-- 用戶自行開發
-- 從參考文檔生成
-
-## 評估維度
-
-### 功能評估
-- 是否符合需求
-- 功能完整性
-- 與現有技能重疊
-
-### 質量評估
-- 程式碼品質
-- 維護狀態
-- 社群支援
-
-### 風險評估
-- 安全漏洞
-- 依賴風險
-- 相容性問題
-
-## 整合處理
-
-### 轉換適配
-- 格式轉換為標準結構
-- 路徑調整
-- 依賴修復
-
-### 配置更新
-- 添加到 agents.yml
-- 設定權限
-- 配置參數
-
-## 測試驗證
-```json
-{
-  "test_status": "passed",
-  "functionality": "ok",
-  "integration": "ok",
-  "security": "ok"
-}
-```
+- "學習這個新技能：{SKILL.md 內容}"
+- "把這個檔案的技能加到 memory-agent"
+- "評估一下這個技能適不適合用"

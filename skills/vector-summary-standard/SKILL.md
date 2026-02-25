@@ -1,144 +1,87 @@
 ---
-name: vector-summary-standard
-description: 向量摘要標準流程 - Ollama 生成 + MiniMax 驗證
-metadata:
-  openclaw:
-    emoji: "📊"
-    version: "1.0"
-    date: "2026-02-19"
+name: vector_summary_standard
+description: 向量摘要標準流程。當需要對 Notion 筆記進行高品質向量化處理時觸發，包括：Ollama 生成 + MiniMax 驗證、Notion 同步、品質控管。
 ---
 
 # 向量摘要標準流程
 
-## 概述
+## 功能說明
 
-Notion 筆記向量化的標準工作流程，確保所有筆記都有高質量的向量摘要。
+Notion 筆記向量化的標準工作流程，使用 Ollama 生成摘要並可選搭配 MiniMax 驗證，確保高品質向量摘要。處理完成後自動同步回 Notion。
 
-## 流程圖
+## 工作流程
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    向量摘要標準流程                           │
-├─────────────────────────────────────────────────────────────┤
-│  1. 文本切分 (Chunking)                                      │
-│     ↓                                                        │
-│  2. 生成摘要 (Ollama llama3)                                │
-│     ↓                                                        │
-│  3. MiniMax 驗證 (可選)                                     │
-│     ↓                                                        │
-│  4. 向量化 (Embedding)                                      │
-│     ↓                                                        │
-│  5. 建立關聯 (Linking)                                      │
-│     ↓                                                        │
-│  6. Notion 同步                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+### 第一步：文本切分
+- 每區塊約 250 字，以標點符號為切分點
+- 過濾低於 20 字的片段
 
-## 步驟詳解
+### 第二步：Ollama 摘要生成
+- 使用 llama3 生成 30 字以內精簡摘要
+- 提示詞：「用30字以內摘要核心概念：{片段}」
 
-### 1. 文本切分 (Chunking)
+### 第三步：MiniMax 驗證（可選）
+- 使用 MiniMax-M2.5 生成對照摘要
+- 比較兩版本，選擇品質較佳者
 
-```python
-def chunk_text(text, chunk_size=250):
-    sentences = text.replace('。', '。|').replace('！', '！|')...
-    chunks = []
-    # 每區塊約 250 字
-    return [c for c in chunks if len(c) > 20]
-```
+### 第四步：向量化
+- 轉為 128 維向量並歸一化
 
-### 2. 生成摘要 (Ollama)
+### 第五步：本地儲存
+- 儲存至 `~/Desktop/vector-db/{page_id}.json`
 
-```python
-def generate_summary(chunk):
-    prompt = f'用30字以內摘要核心概念：{chunk[:200]}'
-    result = subprocess.run(['ollama', 'run', 'llama3', prompt]...)
-    return result.stdout.strip()[:80]
-```
+### 第六步：Notion 同步
+- 回寫以下欄位：
 
-### 3. MiniMax 驗證 (可選)
-
-```python
-def generate_summary_minimax(chunk):
-    # 使用 MiniMax-M2.5 生成更高質量摘要
-    # 比對選擇更好的版本
-```
-
-### 4. 向量化
-
-```python
-def get_embedding(text):
-    vec = [0.0] * 128
-    for i, c in enumerate(text[:128]):
-        vec[i % 128] += ord(c)
-    # 歸一化
-    return [x/mag for x in vec]
-```
-
-### 5. 建立關係
-
-- 儲存位置: `~/Desktop/vector-db/`
-- 檔案格式: `{page_id}.json`
-
-### 6. Notion 同步
-
-| 欄位 | 值 |
-|------|-----|
-| 向量摘要 | 摘要文字 (500字) |
+| Notion 欄位 | 內容 |
+|-------------|------|
+| 向量摘要 | 摘要文字（500 字內） |
 | 向量狀態 | 已向量化(標準流程) |
 | 語義標籤 | Chunk_{數量} |
-| 重點 | 首要摘要 (50字) |
-| 應用 | 分類 |
+| 重點 | 首要摘要（50 字） |
+| 應用 | 分類標籤 |
 
-## 腳本位置
-
-| 腳本 | 功能 |
-|------|------|
-| `scripts/vector_summary_v2.py` | Ollama 版本 |
-| `scripts/vector_summary_verify.py` | Ollama + MiniMax 驗證版 |
-
-## 使用方式
+## 工具指引
 
 ```bash
 # 確保 Ollama 運行
 ollama serve
 
-# 處理 Notion 頁面
+# 標準流程（Ollama）
 python scripts/vector_summary_v2.py
+
+# 驗證版（Ollama + MiniMax）
+python scripts/vector_summary_verify.py
 ```
 
-## 數據結構
-
-```json
-{
-  "title": "筆記標題",
-  "vectors": [
-    {
-      "chunk_index": 0,
-      "summary": "摘要內容",
-      "source_chunk": "原文片段",
-      "embedding": [0.15, 0.14, ...]
-    }
-  ]
-}
-```
-
-## 質量標準
+## 品質標準
 
 | 項目 | 標準 |
 |------|------|
-| 摘要長度 | ≤30 字 |
+| 摘要長度 | 不超過 30 字 |
 | 區塊數量 | 1-11 個 |
 | 向量維度 | 128 維 |
 | 狀態標記 | 已向量化(標準流程) |
 
-## 里程碑
+## 錯誤處理
 
-- **2026-02-19**: 首次完成 50 頁 Notion 筆記向量優化
-- **11萬檔案整理**: 同步記錄到 Notion
+| 情境 | 處理方式 |
+|------|----------|
+| Ollama 未啟動 | 提示用戶執行 `ollama serve` |
+| MiniMax API 失敗 | 跳過驗證步驟，僅使用 Ollama 結果 |
+| Notion API 逾時 | 重試 3 次，失敗則僅保存本地 |
+| 頁面內容為空 | 跳過並記錄到日誌 |
+| 摘要比對差異過大 | 標記該頁面待人工審核 |
 
-## 相關技能
+## 使用範例
 
-- `vector-summary-ollama` - Ollama 版本
-- `vector-summary-workflow` - 完整工作流
+- 「用標準流程處理 Notion 筆記向量化」
+- 「跑一次帶 MiniMax 驗證的向量摘要」
+- 「處理所有未向量化的筆記並同步回 Notion」
 
----
+## 護欄
+
+- 不修改 Notion 原始筆記內容
+- 每段摘要嚴格不超過 30 字
+- MiniMax API Key 不寫死在腳本中，使用環境變數
+- 向量庫本地儲存，不上傳至外部
+- 同步失敗時必須保留本地備份

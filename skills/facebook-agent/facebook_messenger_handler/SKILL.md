@@ -1,120 +1,93 @@
 ---
 name: facebook_messenger_handler
-description: Facebook Messenger 處理。當需要處理 Facebook Messenger 訊息時觸發，包括：訊息接收、分類、回覆、記錄。
+description: Facebook Messenger 訊息處理核心。當粉絲專頁收到 Messenger 訊息時觸發，包括：訊息接收解析、分類路由、AI 回覆生成、對話記錄同步。
 ---
 
-# Facebook Messenger Handler
+# Facebook Messenger Handler — Messenger 訊息處理
 
-## 概述
+## 功能說明
 
-透過 n8n 中轉處理 Facebook Messenger 訊息，統一由 OpenClaw AI 大腦處理回覆。
+作為 Facebook Messenger 自動化的核心樞紐，透過 n8n 中轉接收粉絲專頁訊息，協調分類、回覆與記錄的完整流程。
 
-## 架構
-
-```
-Facebook Messenger → n8n Webhook → OpenClaw API → AI 處理 → 回覆 → n8n → Messenger
-```
-
-## 功能
-
-### 1. 訊息接收
-- 接收粉絲專頁 Messenger 訊息
-- 解析用戶身份與訊息內容
-- 轉發給 OpenClaw 處理
-
-### 2. 訊息分類
-- 問答類 → FAQ Auto Reply
-- 訂單類 → 轉接人工
-- 抱怨類 → 轉接人工
-- 未知類 → AI 回覆
-
-### 3. 回覆處理
-- AI 生成回覆
-- 統一回覆格式
-- 記錄對話歷史
-
-### 4. 對話記錄
-- 同步到 Notion
-- 建立客戶檔案
-- 追蹤互動歷史
-
-## 使用情境
-
-- 「粉絲透過 Messenger 詢問產品資訊」
-- 「客戶在 FB 私訊詢價」
-- 「粉絲專頁收到投訴訊息」
-
-## 必要設定
-
-### n8n Workflow 節點
-
-1. **Facebook Webhook** - 接收訊息
-2. **HTTP Request** - 發送至 OpenClaw
-3. **OpenAI/LLM** - 生成回覆 (可選)
-4. **Facebook Messenger** - 發送回覆
-
-### 環境變數
+## 架構流程
 
 ```
-FACEBOOK_PAGE_ACCESS_TOKEN=xxx
-FACEBOOK_VERIFY_TOKEN=xxx
-OPENCLAW_API_URL=http://localhost:8080
-NOTION_API_KEY=xxx
+用戶訊息 → Facebook → n8n Webhook → OpenClaw API → AI 處理 → n8n → 回覆用戶
+                                                      ↓
+                                               Notion（對話記錄）
 ```
 
-## 對話流程
+## 操作步驟
 
-```
-1. 用戶發送訊息到粉絲專頁
-2. n8n 接收 Webhook 觸發
-3. 解析訊息並記錄到 Notion
-4. 發送至 OpenClaw API
-5. AI 生成回覆
-6. 回覆透過 n8n 發送回 Messenger
-7. 對話記錄同步到 Notion
-```
+### 訊息接收與處理
+1. n8n Webhook 接收粉絲專頁 Messenger 訊息
+2. 解析用戶身份（FB ID、姓名）與訊息內容
+3. 呼叫 question_classifier 進行分類
+4. 依分類結果路由：
+   - FAQ 類 → faq_auto_reply 處理
+   - 投訴/複雜 → handoff_manager 轉人工
+   - 其他 → AI 直接生成回覆
+5. 回覆透過 n8n 發送回 Messenger
+6. 呼叫 conversation_logger 記錄對話
+
+### 訊息路由表
+
+| 分類結果 | 處理方式 | 回覆來源 |
+|----------|----------|----------|
+| 價格/產品/服務 | FAQ 自動回覆 | faq_auto_reply |
+| 訂單/投訴 | 轉接人工 | handoff_manager |
+| 閒聊/其他 | AI 生成回覆 | 本技能直接處理 |
 
 ## 回覆格式
 
 ### 自動回覆
 ```
-👋 您好！感謝您的訊息。
-
+您好！感謝您的訊息。
 [AI 生成的回覆內容]
-
-💡 如需更多幫助，請告訴我！
+如需更多幫助，請隨時告訴我！
 ```
 
 ### 轉接人工
 ```
-📋 您的問題已經記錄。
-
-我們的團隊將盡快與您聯繫。
-預計等待時間：X 分鐘
+您的問題已經記錄，我們的團隊將盡快與您聯繫。
+預計回覆時間：30 分鐘內。
 ```
 
-## 常見問題處理
+## 工具指引
 
-| 問題類型 | 處理方式 |
-|----------|----------|
-| 產品詢問 | AI 回覆 + 產品資訊 |
-| 價格諮詢 | AI 回覆 + 轉人工 |
-| 訂單問題 | 轉接人工客服 |
-| 抱怨投訴 | 轉接人工 + 標記優先 |
-| 陌生訊息 | AI 初步回覆 + 分類 |
+- **n8n Workflow**：Webhook 接收 + Messenger API 發送回覆
+- **Notion API**：對話記錄存儲
+- **question_classifier**：訊息分類
+- **faq_auto_reply**：FAQ 自動回覆
+- **handoff_manager**：人工轉接
+- **conversation_logger**：對話記錄
 
-## 整合檢查清單
+### 必要環境變數
+- `FACEBOOK_PAGE_ACCESS_TOKEN` — 粉絲專頁存取權杖
+- `FACEBOOK_VERIFY_TOKEN` — Webhook 驗證權杖
+- `OPENCLAW_API_URL` — OpenClaw API 端點
+- `NOTION_API_KEY` — Notion API 金鑰
 
-- [ ] Facebook 開發者帳號
-- [ ] 粉絲專頁
-- [ ] Meta App 建立
-- [ ] Messenger 產品啟用
-- [ ] Page Access Token 取得
-- [ ] n8n Workflow 完成
-- [ ] Webhook 設定
-- [ ] Notion 對話資料庫
+## 錯誤處理
 
-## 參考資源
+| 情境 | 處理方式 |
+|------|----------|
+| n8n Webhook 未觸發 | 檢查 Webhook URL 設定與 Facebook App 狀態 |
+| Messenger API 回覆失敗 | 重試一次，若仍失敗則記錄錯誤並通知管理員 |
+| AI 回覆生成逾時 | 先送出「正在處理中」訊息，稍後補發完整回覆 |
+| 用戶身份解析失敗 | 以匿名身份處理，但標記需人工確認 |
+| Notion 同步失敗 | 不影響回覆流程，將記錄排入重試佇列 |
 
-- Facebook Messenger API: https://developers.facebook.com/docs/messenger-platform
-- n8n Facebook 節點: https://docs.n8n.io/integrations/builtin/app-nodes/n8n.nodes.facebookTrigger/
+## 使用範例
+
+- 「粉絲透過 Messenger 詢問產品資訊」→ 分類 + FAQ 回覆
+- 「客戶在 FB 私訊詢價」→ 分類 + 價格模板回覆
+- 「粉絲專頁收到投訴訊息」→ 分類 + 轉人工 + 記錄
+
+## 防護規則
+
+- 回覆內容不可包含競爭對手的負面評論
+- 不可承諾具體交期或價格，除非來自官方 FAQ
+- 所有對話須記錄，不可跳過 conversation_logger
+- 非文字訊息（貼圖、語音）需轉人工處理，不可忽略
+- 遵循 Facebook 平台政策，不發送促銷垃圾訊息

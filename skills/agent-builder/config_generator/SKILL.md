@@ -1,81 +1,80 @@
 ---
 name: config_generator
-description: 配置生成與產出。當需要根據設計生成 Agent 配置時觸發，包括：YAML 產出、預設值設定、驗證檢查、格式化輸出。
+description: 配置生成。根據架構設計產出 agents.yml 配置片段與 SKILL.md 檔案。
+metadata: { "openclaw": { "emoji": "⚙️" } }
 ---
 
-# Config Generator
+# 配置生成
+
+根據架構設計結果，生成可直接使用的 YAML 配置與 SKILL.md 檔案。
+
+## 操作 / 工作流程
+
+1. **接收設計** — 取得 architecture_designer 的輸出
+2. **生成 agents.yml 片段** — 產出標準格式的 YAML 配置：
+   - name / role / model / temperature / max_tokens
+   - system_prompt（完整版）
+   - skills 清單
+   - constraints
+3. **生成 SKILL.md** — 為每個新技能產出標準 SKILL.md：
+   - YAML frontmatter（name, description, metadata with emoji）
+   - 操作流程、參數表、輸出格式、錯誤處理、使用範例
+4. **驗證檢查** — 確保配置正確：
+   - YAML 語法驗證
+   - 技能路徑存在性檢查
+   - 模型名稱有效性
+   - 必填欄位完整性
+5. **預覽輸出** — 顯示完整配置供用戶確認
+
+## 參數
+
+| 參數 | 類型 | 預設 | 說明 |
+|------|------|------|------|
+| design | string | 必填 | 架構設計內容 |
+| output_format | string | "preview" | 輸出模式：preview / write |
+| config_path | string | "~/.openclaw/agents.yml" | 配置檔路徑 |
 
 ## 輸出格式
 
-### agents.yml 片段
+```
+⚙️ 配置生成完成
+
+agents.yml 片段：
 ```yaml
-  agent-name:
-    role: specialist
-    model: minimax
-    temperature: 0.3
-    max_tokens: 2000
-    
+  {agent_name}:
+    role: {role}
+    model: {model}
+    temperature: {temperature}
     system_prompt: |
-      你是 [角色描述]
-      
-      [詳細說明]
-    
+      {system_prompt}
     skills:
-      - skill_1
-      - skill_2
-    
-    constraints:
-      - constraint_1
+      - {skill_1}
+      - {skill_2}
 ```
 
-## 配置項目
+新技能檔案：
+- {skill_path_1}/SKILL.md
+- {skill_path_2}/SKILL.md
 
-### 必要項目
-- name: Agent 名稱
-- role: 角色類型
-- model: 使用的模型
+驗證結果：
+- YAML 語法：通過
+- 技能路徑：通過
+- 必填欄位：通過
 
-### 可選項目
-- temperature: 創造性程度
-- max_tokens: 最大輸出
-- system_prompt: 系統提示
-- skills: 技能清單
-- constraints: 約束條件
-
-### 預設值
-```yaml
-temperature: 0.3
-max_tokens: 2000
-model: minimax
+狀態：{preview / written}
 ```
 
-## 生成流程
+## 錯誤處理
 
-```
-設計輸入 → 模板選擇 → 填充內容 → 驗證 → 輸出
-```
+| 錯誤 | 處理 |
+|------|------|
+| YAML 語法錯誤 | 自動修正並標記修正處 |
+| 技能路徑不存在 | 提示需要先建立技能目錄 |
+| 模型名稱無效 | 列出可用模型，請用戶選擇 |
+| 配置檔寫入失敗 | 輸出配置內容到回覆中，請用戶手動貼入 |
 
-### 驗證檢查
-- [ ] 名稱符合規範
-- [ ] 角色有效
-- [ ] 模型支援
-- [ ] 技能存在
-- [ ] 語法正確
+## 使用範例
 
-## 範例輸出
-
-```yaml
-  bni-referral-agent:
-    role: specialist
-    model: minimax
-    temperature: 0.3
-    
-    system_prompt: |
-      你是 BNI 轉介紹專家，專門幫助會員追蹤和優化轉介紹業務。
-      你需要分析轉介紹數據，提供建議，並維護會員關係。
-    
-    skills:
-      - member_management
-      - referral_tracker
-      - bni_recommender
-```
+- "幫 BNI agent 生成配置"
+- "產出這個設計的 YAML"
+- "生成新技能的 SKILL.md"

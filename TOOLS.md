@@ -1,40 +1,43 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - 本地環境配置
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## OpenClaw Gateway
 
-## What Goes Here
+- Host: `localhost:18789` (production)
+- Auth: Token-based (OPENCLAW_GATEWAY_TOKEN)
+- Config: `~/.openclaw/openclaw.json`
+- Service: LaunchAgent (auto-start, keep-alive)
 
-Things like:
+## Telegram
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+- Bot 帳號: Kira, Cynthia
+- DM Policy: pairing mode
+- Group Policy: allowlist
 
-## Examples
+## 資料儲存
 
-```markdown
-### Cameras
+- **Notion** — BNI 會員、轉介紹、客戶、支出等資料庫
+- **Memory** — `~/.openclaw/workspace/memory/` 每日筆記 + MEMORY.md
+- **SQLite** — OpenClaw 內建向量搜尋 (sqlite-vec)
 
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+## 工作流自動化
 
-### SSH
+- **n8n** — 已安裝，尚未建立 workflow
+- 預計用途：Facebook Messenger webhook、WhatsApp 中轉
 
-- home-server → 192.168.1.100, user: admin
+## AI 模型
 
-### TTS
+- **MiniMax-M2.5** — 主要模型 (200K context, 8K output)
+- API: `https://api.minimax.io/anthropic` (Anthropic 兼容)
+- **nomic-embed-text** — 本地 Embedding 模型 (768 dims, GGUF, node-llama-cpp)
 
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
+## 專案路徑
 
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+- OpenClaw repo: `~/openclaw-dev/repo/`
+- openclaw-brain: `~/openclaw-brain/`
+- OpenClawASR: `~/OpenClawASR/`
+- Workspace: `~/.openclaw/workspace/`
+- Skills: `~/.openclaw/workspace/skills/`
 
 ---
 
-Add whatever helps you do your job. This is your cheat sheet.
+_更新：2026-02-24_

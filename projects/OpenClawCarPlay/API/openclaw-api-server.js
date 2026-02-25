@@ -1,8 +1,9 @@
 // OpenClaw API Server - Express.js
-// 這是需要安裝在 OpenClaw 系統中的 API Server
+// 更新版本：整合 carplay.sh 語音功能
 
 const express = require('express');
 const cors = require('cors');
+const { exec } = require('child_process');
 const app = express();
 
 app.use(cors());
@@ -11,33 +12,149 @@ app.use(express.json());
 // Configuration
 const CONFIG = {
     port: process.env.PORT || 8080,
-    userID: 'carplay-ios'
+    userID: 'carplay-ios',
+    voiceScript: '/Users/ki/.openclaw/workspace/projects/OpenClawCarPlay/carplay.sh'
 };
 
-// In-memory storage (replace with database)
+// In-memory storage
 let tasks = [];
 let schedule = [];
 let conversationHistory = [];
 
-// Routes
+// ==================== 語音功能 ====================
+
+// 執行 carplay.sh 腳本
+function runVoiceScript(command, args) {
+    return new Promise((resolve, reject) => {
+        const scriptPath = CONFIG.voiceScript;
+        exec(`${scriptPath} ${command} "${args}"`, (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(stdout);
+            }
+        });
+    });
+}
+
+// ==================== API Endpoints ====================
 
 // 1. Ping
 app.get('/api/ping', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+    res.json({ 
+        status: 'ok', 
+        timestamp: new Date().toISOString(),
+        carplay: 'connected'
+    });
 });
 
-// 2. Voice Message
+// 2. 取得連線狀態
+app.get('/api/status', async (req, res) => {
+    try {
+        const voiceResult = await runVoiceScript('get-voice', '');
+        res.json({
+            status: 'ok',
+            voice: voiceResult.trim(),
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        res.json({
+            status: 'ok',
+            voice: 'default',
+            timestamp: new Date().toISOString()
+        });
+    }
+});
+
+// 3. 設定語音
+app.post('/api/voice/set', async (req, res) => {
+    const { voice } = req.body;
+    try {
+        await runVoiceScript('set-voice', voice);
+        res.json({ success: true, voice: voice });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// 4. 列出可用語音
+app.get('/api/voice/list', (req, res) => {
+    exec(`${CONFIG.voiceScript} voices`, (error, stdout, stderr) => {
+        if (error) {
+            res.json({ voices: ['Meijia', 'Tingting'] });
+        } else {
+            res.json({ voices: stdout.split('\n').filter(v => v.trim()) });
+        }
+    });
+});
+
+// 5. 任務完成通知 (NEW!)
+app.post('/api/task-complete', async (req, res) => {
+    const { taskName, details } = req.body;
+    
+    try {
+        // 觸發語音通知
+        await runVoiceScript('notify', taskName || '任務完成');
+        
+        res.json({
+            success: true,
+            message: `任務通知已發送: ${taskName}`,
+            voice: true
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// 6. 語音回覆 (NEW!)
+app.post('/api/voice-reply', async (req, res) => {
+    const { message, type } = req.body;
+    
+    try {
+        // 根據類型選擇語音
+        const command = type === 'error' ? 'error' : 'reply';
+        await runVoiceScript(command, message);
+        
+        res.json({
+            success: true,
+            message: message,
+            voice: true
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// 7. 測試語音
+app.post('/api/voice/test', async (req, res) => {
+    const { text } = req.body;
+    
+    try {
+        await runVoiceScript('reply', text || '測試成功');
+        res.json({ success: true, message: '語音測試完成' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// 8. Voice Message
 app.post('/api/voice', async (req, res) => {
     const { text, userID } = req.body;
     
-    // Store in history
     conversationHistory.push({
         user: text,
         timestamp: new Date().toISOString()
     });
     
-    // Process command
+    // 處理命令
     const response = await processCommand(text);
+    
+    // 語音回覆
+    try {
+        await runVoiceScript('reply', response);
+    } catch (e) {
+        console.log('語音回覆失敗:', e);
+    }
     
     res.json({
         success: true,
@@ -46,139 +163,110 @@ app.post('/api/voice', async (req, res) => {
     });
 });
 
-// 3. Search
+// 9. Search
 app.post('/api/search', async (req, res) => {
-    const { query, userID } = req.body;
+    const { query } = req.body;
     
-    // TODO: Integrate with web search
-    const results = await performSearch(query);
-    
-    res.json({
-        success: true,
-        message: `搜尋結果：${results.join(', ')}`,
-        data: { results }
-    });
-});
-
-// 4. Music
-app.post('/api/music', (req, res) => {
-    const { command, userID } = req.body;
-    
-    const musicCommands = {
-        'play': '正在播放音樂',
-        'pause': '已暫停',
-        'next': '已切換到下一首',
-        'previous': '已切換到上一首',
-        'shuffle': '已開啟隨機播放'
-    };
-    
-    res.json({
-        success: true,
-        message: musicCommands[command] || '未知指令'
-    });
-});
-
-// 5. Tasks
-app.post('/api/task', (req, res) => {
-    const { command, title, taskID, userID } = req.body;
-    
-    switch (command) {
-        case 'create':
-            const newTask = {
-                id: Date.now().toString(),
-                title,
-                status: 'pending',
-                createdAt: new Date().toISOString()
-            };
-            tasks.push(newTask);
-            res.json({
-                success: true,
-                message: `已建立任務：${title}`,
-                data: { task: newTask }
-            });
-            break;
-            
-        case 'list':
-            res.json({
-                success: true,
-                message: `共有 ${tasks.length} 個任務`,
-                data: { tasks }
-            });
-            break;
-            
-        case 'complete':
-            const taskIndex = tasks.findIndex(t => t.id === taskID);
-            if (taskIndex >= 0) {
-                tasks[taskIndex].status = 'completed';
-                res.json({
-                    success: true,
-                    message: '任務已完成',
-                    data: { task: tasks[taskIndex] }
-                });
-            } else {
-                res.json({ success: false, message: '找不到任務' });
-            }
-            break;
-            
-        default:
-            res.json({ success: false, message: '未知指令' });
+    try {
+        const result = await runVoiceScript('reply', `搜尋結果：${query}`);
+        res.json({
+            success: true,
+            results: result,
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
     }
 });
 
-// 6. Schedule
-app.post('/api/schedule', (req, res) => {
-    const { command, date, userID } = req.body;
+// 10. Music Control
+app.post('/api/music', async (req, res) => {
+    const { action, track } = req.body;
     
-    // Return mock schedule
-    const mockSchedule = [
-        { time: '09:00', title: '會議', location: '辦公室' },
-        { time: '14:00', title: '午餐', location: '餐廳' }
-    ];
+    let response = '';
+    switch(action) {
+        case 'play':
+            response = '正在播放音樂';
+            break;
+        case 'pause':
+            response = '已暫停';
+            break;
+        case 'next':
+            response = '切換下一首';
+            break;
+        case 'previous':
+            response = '切換上一首';
+            break;
+        default:
+            response = '未知指令';
+    }
+    
+    // 語音回覆
+    await runVoiceScript('reply', response);
     
     res.json({
         success: true,
-        message: `今日有 ${mockSchedule.length} 個日程`,
-        data: { schedule: mockSchedule }
+        message: response,
+        timestamp: new Date().toISOString()
     });
+});
+
+// 11. Tasks
+app.get('/api/tasks', (req, res) => {
+    res.json({ tasks });
+});
+
+app.post('/api/tasks', (req, res) => {
+    const { title, description } = req.body;
+    const task = {
+        id: Date.now(),
+        title,
+        description,
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+    tasks.push(task);
+    res.json({ success: true, task });
+});
+
+// 12. Schedule
+app.get('/api/schedule', (req, res) => {
+    res.json({ schedule });
+});
+
+app.post('/api/schedule', (req, res) => {
+    const { title, time, description } = req.body;
+    const event = {
+        id: Date.now(),
+        title,
+        time,
+        description,
+        createdAt: new Date().toISOString()
+    };
+    schedule.push(event);
+    res.json({ success: true, event });
 });
 
 // Command Processor
 async function processCommand(text) {
-    const lowerText = text.toLowerCase();
-    
-    if (lowerText.includes('天氣')) {
-        return '今天天氣晴朗，溫度 22 度';
-    }
-    
-    if (lowerText.includes('任務')) {
-        return `目前有 ${tasks.length} 個任務`;
-    }
-    
-    if (lowerText.includes('音樂') || lowerText.includes('播放')) {
+    if (text.includes('天氣')) {
+        return '今天天氣晴朗，溫度適中';
+    } else if (text.includes('任務')) {
+        return '你有 3 個待辦任務';
+    } else if (text.includes('行程') || text.includes('日程')) {
+        return '今天沒有其他行程';
+    } else if (text.includes('音樂')) {
         return '正在播放音樂';
+    } else {
+        return '我收到了：' + text;
     }
-    
-    if (lowerText.includes('日程') || lowerText.includes('行程')) {
-        return '今天的行程：早上 9 點會議，下午 2 點午餐';
-    }
-    
-    // Default: Echo with processing
-    return `收到：${text}。我正在處理中...`;
-}
-
-// Search Function
-async function performSearch(query) {
-    // TODO: Integrate with actual search API
-    return [
-        '結果 1: ' + query + ' - 相關資訊',
-        '結果 2: ' + query + ' - 維基百科',
-        '結果 3: ' + query + ' - 新聞報導'
-    ];
 }
 
 // Start Server
-app.listen(CONFIG.port, () => {
-    console.log(`OpenClaw API Server running on port ${CONFIG.port}`);
+const PORT = CONFIG.port;
+app.listen(PORT, () => {
+    console.log(`🚀 OpenClaw CarPlay API Server running on port ${PORT}`);
+    console.log(`📱 Voice script: ${CONFIG.voiceScript}`);
 });
 
 module.exports = app;

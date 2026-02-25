@@ -1,0 +1,1702 @@
+===== whisper-testing.md =====
+# Whisper 測試計劃
+
+**日期**: 2026-02-20
+**狀態**: 已安裝，待測試
+
+---
+
+## 📦 安裝狀態
+
+| 項目 | 狀態 |
+|------|------|
+| whisper CLI | ✅ 已安裝 |
+| 模型 | ⏳ 首次使用時下載 |
+
+---
+
+## 🧪 測試方式
+
+### 方式 1: 命令列
+
+
+===== wechat-unread-2026-02-18.md =====
+# WeChat 未讀訊息記錄 - 完整版
+
+**偵測時間**: 2026-02-18 07:52 AM
+**掃描範圍**: 滾動到最底端
+
+---
+
+## 📬 完整未讀訊息列表
+
+| # | 對話名稱 | 未讀數 | 最後訊息時間 |
+|---|----------|--------|--------------|
+| 1 | 稻荷 小雲 | 2 | 7:50 |
+| 2 | 新謀 | 1 | 7:44 |
+| 3 | 🦀🦀太平洋 備貨群🦀 | 1 | 7:34 |
+| 4 | 太平洋貿易澳門—隆德 訂... | 1 | - |
+
+**總計**: 4 個對話共有 5 則未讀訊息
+
+---
+
+
+===== wechat-order-analysis-20260220.md =====
+# WeChat 訂單分析 - 一般訂單群組
+
+**日期**: 2026-02-18 至 2026-02-20
+**來源**: WeChat 群組記錄
+**狀態**: 已學習
+
+---
+
+## 📊 數據摘要
+
+### 時間範圍
+- 開始: 2026-02-18
+- 結束: 2026-02-20
+
+### 總訂單數
+- 約 50+ 筆訂單
+
+---
+
+## 🐟 熱門商品
+
+===== web-trends-20260219.md =====
+# Web 趨勢監控筆記 - 2026-02-19
+
+## 重要發現摘要
+
+### 1. AI Trends 2026 🔥
+- **Agentic AI / Agent Leap**: Google Cloud 報告指出簡單提示詞時代已結束，AI 代理正在經歷重大跳躍
+- **生成式 AI 持續**: 新創公司採用熱潮
+- **主權法規**: 各國開始 AI 監管
+- **基礎設施**: AI 基礎設施優化（邊緣運算、QSR 應用）
+
+### 2. OpenClaw 更新 📰
+- **媒體關注**: 有 WIRED 報導（標題暗示安全性討論）
+- **Raspberry Pi 整合**: 可在 Pi 上運行作為持久背景代理
+- **OpenAI 挖角**: OpenAI 聘請了 OpenClaw 相關人員，信號新階段
+
+### 3. Local LLM 趨勢 💻
+- **Ollama 成標準**: 本地運行 LLM 的標準工具
+- **VRAM 指南**: 2026 GPU 記憶體需求完整指南
+- **隱私保護**: 消費者硬體上的本地模型注重隱私
+
+
+===== index.md =====
+# 向量化索引
+
+## 記憶檔案
+
+| # | 檔案 | 日期 | 狀態 |
+|---|------|------|------|
+| 1 | phase1-completed.md | 2026-02-20 | ⏳ 待處理 |
+| 2 | 55-skills-implementation.md | 2026-02-20 | ⏳ 待處理 |
+| 3 | ai_agents_trends_20260219.md | 2026-02-20 | ⏳ 待處理 |
+| 4 | claude-code-skills-deep.md | 2026-02-20 | ⏳ 待處理 |
+| 5 | order-analysis-implementation.md | 2026-02-20 | ⏳ 待處理 |
+| 6 | lobster-skill-tips.md | 2026-02-20 | ⏳ 待處理 |
+| 7 | ai-employee-philosophy.md | 2026-02-20 | ⏳ 待處理 |
+| 8 | ai-organic-qa-system.md | 2026-02-20 | ⏳ 待處理 |
+| 9 | order-training-data.md | 2026-02-20 | ⏳ 待處理 |
+| 10 | gene-capsule-format.md | 2026-02-20 | ⏳ 待處理 |
+| 11 | index.md | 2026-02-20 | ⏳ 待處理 |
+| 12 | openclaw-manager-mode.md | 2026-02-20 | ⏳ 待處理 |
+| 13 | web-trends-20260219.md | 2026-02-20 | ⏳ 待處理 |
+| 14 | tools-pi-for-excel.md | 2026-02-20 | ⏳ 待處理 |
+
+===== vectorization-check.md =====
+# 記憶向量化檢查報告
+
+**日期**: 2026-02-20
+
+---
+
+## 📊 記憶檔案狀態
+
+### 今日檔案 (30+)
+
+| # | 檔案 | 時間 | 向量化 |
+|---|------|------|--------|
+| 1 | learning-feedback-20260220.md | 08:15 | ❌ |
+| 2 | 55-skills-implementation.md | 08:13 | ❌ |
+| 3 | openclaw-55-skills-philosophy.md | 08:12 | ❌ |
+| 4 | 2026-02-20.md | 08:11 | ❌ |
+| 5 | 4d-qa-application.md | 06:39 | ❌ |
+| 6 | ai-organic-qa-system.md | 06:37 | ❌ |
+| 7 | order-analysis-result.md | 05:41 | ❌ |
+| ... | 其他 20+ 檔案 | ... | ❌ |
+
+===== training_summary_20260219.md =====
+# 知識庫更新訓練總結 (2026-02-19)
+
+## 任務資訊
+- **觸發時間**: 2026-02-19 13:01
+- **主題**: AI Agents, 自動化, 本地 LLM
+- **類型**: Cron Job (dcf4a145-447a-4667-8d48-d00f1b8457b7)
+
+---
+
+## 完成項目
+
+### ✅ 1. 趨勢搜索
+- Web search 因缺少 Brave API Key 無法使用
+- 改用本地知識生成趨勢報告
+
+### ✅ 2. 本地模型處理
+- 啟動 Ollama 服務
+- 可用模型: llama3, mistral, codellama, deepseek-coder
+
+### ✅ 3. 知識庫擴展
+
+===== tools-pi-for-excel.md =====
+# Pi for Excel 研究
+
+**日期**: 2026-02-19
+**主題**: Excel AI 插件研究
+
+---
+
+## 概述
+
+Pi for Excel 是一個開源的 AI 助手插件，專為 Microsoft Excel 設計。
+
+---
+
+## 功能
+
+### 核心工具 (16個)
+| 工具 | 功能 |
+|------|------|
+| get_workbook_overview | 結構藍圖 |
+| read_range | 讀取儲存格 |
+
+===== sync-status-2026-02-18.md =====
+# 同步記錄 - 2026-02-18
+
+**同步時間**: 2026-02-18 08:35
+
+---
+
+## ✅ 已同步到 Notion
+
+| # | 檔案 | Page ID | 狀態 |
+|---|------|----------|------|
+| 1 | memory/2026-02-18.md | 30ba1238-f49d-81ab-8287-fea8749c4208 | ✅ |
+| 2 | memory/case-studies/larry-tiktok-automation.md | 30ba1238-f49d-8165-89a7-f5faae6eab27 | ✅ |
+| 3 | memory/projects/facebook-messenger-integration.md | 30ba1238-f49d-8150-a61a-d3bc406d0ccc | ✅ |
+| 4 | memory/projects/facebook-n8n-workflow.md | 30ba1238-f49d-815a-bfd8-dcf4ca105423 | ✅ |
+| 5 | memory/wechat-unread-2026-02-18.md | 30ba1238-f49d-81de-8393-dff8d9d37f7a | ✅ |
+| 6 | learning/ai-skills-learned.md | 30ba1238-f49d-81ef-a36e-fae5d017ab32 | ✅ |
+
+---
+
+## 📋 本日工作摘要
+
+===== self_evolution_feedback_20260219.md =====
+# 自我進化訓練反饋數據 - 2026-02-19
+
+## 訓練執行記錄
+
+| 項目 | 狀態 | 詳情 |
+|------|------|------|
+| 任務觸發 | ✅ | Cron job 自動觸發 |
+| 資訊搜索 | ✅ | Hacker News + Anthropic官網 |
+| Ollama 啟動 | ✅ | 成功啟動服務 |
+| 本地模型分析 | ⚠️ | 記憶體不足，無法完成 |
+| MiniMax 驗證 | ⏳ | 未能執行 |
+| 記憶存儲 | ✅ | 已存入 memory/ai_trends_20260219.md |
+
+## 硬體瓶頸
+
+- **問題**: 8GB RAM 不足以同時加載多個大型語言模型
+- **影響**: 本地模型分析任務失敗
+- **建議**: 
+  1. 考慮升級至 16GB+ RAM
+  2. 或使用 swap 空間
+
+===== self_evolution_20260219_4.md =====
+# 自我進化訓練報告 - 2026-02-19 (第4次)
+
+## 執行時間
+2026-02-19 14:45 PST
+
+## 資訊來源
+1. Hacker News 熱門討論
+2. Google Gemini 3.1 Pro 發布公告
+3. Anthropic AI Agent Autonomy 研究報告
+
+---
+
+## 📊 資訊摘要
+
+### 1. Gemini 3.1 Pro (Google) - 2026/02/19 發布
+- **核心定位**：複雜任務處理
+- **benchmark 成績**：ARC-AGI-2 得分 77.1%（比 3 Pro 提升超過 2 倍）
+- **應用場景**：
+  - 代碼動畫生成 (SVG)
+  - 複雜系統整合 (API 串接儀表板)
+
+===== self_evolution_20260219_3.md =====
+# 自我進化訓練報告 - 2026-02-19
+
+## 📰 最新 AI 資訊蒐集
+
+### 1. Gemini 3.1 Pro (Google)
+- **發布日期**: 2026-02-19
+- **主要特點**:
+  - 核心推理能力提升，在 ARC-AGI-2 基準測試得分 77.1%（較 3 Pro 提升超過 2 倍）
+  - 設計用於複雜任務：數據合成、複雜主題解釋、先進推理
+  - 支援代碼生成動畫 SVG、複雜系統整合、互動式設計
+- **可用平台**: Gemini API (Google AI Studio)、Vertex AI、Gemini CLI、Android Studio、Gemini app、NotebookLM
+
+### 2. Anthropic AI Agent Autonomy 研究
+- **發布日期**: 2026-02-19
+- **主要發現**:
+  - Claude Code 自主工作時長從 25 分鐘增加到 45 分鐘
+  - 經驗豐富的用戶更常使用全自動批准（20% → 40%）
+  - 複雜任務中，Agent 主動暫停尋求澄清的頻率是人類干預的 2 倍以上
+  - 軟體工程佔 Agent 活動的 50%，但醫療、金融、網安領域的使用也在興起
+- **關鍵洞察**: 大多數 Agent 行為是可逆的低風險操作
+
+===== self_evolution_20260219_2.md =====
+# 自我進化訓練報告 - 2026-02-19
+
+## 📅 訓練日期
+2026-02-19 14:15 PM PST
+
+## 🔍 AI 最新資訊收集
+
+### 1. Gemini 3.1 Pro (Google)
+- **發布日期**: 2026-02-19
+- **主要特點**:
+  - 專為複雜任務設計的升級版核心智能
+  - ARC-AGI-2 基準測試得分 77.1%（比 3 Pro 提升超過 2 倍）
+  - 支援代碼生成動畫 SVGs、複雜系統合成、互動設計、創意編碼
+- **可用平台**: Gemini API, Vertex AI, Gemini app, NotebookLM, Google AI Studio, Gemini CLI, Android Studio
+
+### 2. Anthropic AI Agent Autonomy 研究
+- **發布日期**: 2026-02-19
+- **主要發現**:
+  - Claude Code 自主工作時間從 <25 分鐘增加到 >45 分鐘
+  - 經驗豐富的用戶更常使用 auto-approve (從 20% 增至 40%+)
+
+===== self_evolution_20260219.md =====
+# 自我進化訓練報告 - 2026-02-19
+
+## 📊 AI 資訊收集
+
+### 1. Google Gemini 3.1 Pro (2026-02-19)
+- **發布日期**: 2026年2月19日
+- **主要提升**: 
+  - ARC-AGI-2 測驗達 77.1%（比 3 Pro 提升超過一倍）
+  - 針對複雜推理任務優化
+- **應用場景**: 
+  - 複雜數據合成
+  - 視覺化解釋複雜主題
+  - 互動式設計
+  - 創意編碼
+- **可用平台**: Gemini API, Vertex AI, Gemini app, NotebookLM
+
+### 2. Anthropic 研究動態 (2026-02)
+- **Measuring AI agent autonomy in practice** - 測量 AI 代理自主性
+- **Claude's new constitution** - Claude 新憲章
+- **Economic Index** - 經濟指數報告
+
+===== self_evolution_2026-02-19.md =====
+# 自我進化訓練記錄 - 2026-02-19
+
+## 來源資訊
+
+### 1. Ollama v0.16.0-0.16.2 (2026-02)
+- **新模型支援**: MiniMax-M2.5, GLM-5 (744B 參數, 40B active)
+- **ollama launch 增強**: 支援 Claude Code, Codex, OpenCode, Droid
+- **隱私控制**: OLLAMA_NO_CLOUD=1 禁用雲端模型
+- **Context Length**: 根據 VRAM 自動調整（48GiB 支援 262,144 context）
+- **圖像生成修復**: 修復 v0.16.0/0.16.1 的模型執行問題
+
+### 2. Gemini 3.1 Pro
+- 出現在 Hacker News 熱門
+
+### 3. Anthropic
+- 發布 AI agent 自主性測量研究
+
+---
+
+## 本地模型分析（Llama3）
+
+===== 2026-02-19_ai_news_training.md =====
+# 自我進化訓練記錄 - 2026-02-19
+
+## 執行時間
+2026-02-19 11:00 AM (America/Los_Angeles)
+
+## 1. 搜索結果
+
+### 主要 AI 新聞
+1. **Gemini 3.1 Pro** - Google DeepMind 發布的新模型
+2. **Anthropic 研究：AI Agent 自主性測量** - 數百萬人機交互數據分析
+3. **技術趨勢** - 終端應用、GPU Ray Tracing、Julia 等
+
+## 2. 分析內容 (MiniMax)
+
+### Gemini 3.1 Pro 影響
+- Google 在多模態模型領域持續領先
+- 對本地模型的啟示：需要優化推理速度
+
+### Anthropic Agent 研究關鍵發現
+- Claude Code 自主工作時間從 <25 分鐘增至 >45 分鐘
+
+===== 2026-02-19.md =====
+# 自我進化訓練記錄 - 2026-02-19
+
+## 執行時間
+2026-02-19 10:45 AM (America/Los_Angeles)
+
+## 1. AI 資訊搜索
+
+### 主要新聞來源
+- Hacker News (2026-02-19)
+- Google DeepMind 官網
+- Anthropic 官方研究
+
+### 重點資訊
+
+#### 🔷 Gemini 3.1 Pro (Google DeepMind)
+- **發布日期**: 2026-02-19
+- **特點**:
+  - 1M token context window
+  - 64K token output
+  - 原生多模態推理模型
+
+===== self-evolution-2026-02-19.md =====
+# 自我進化訓練記錄
+
+## 執行時間
+2026-02-19 15:00-15:15 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- The Verge AI 新聞
+- Ollama 官方部落格
+
+### 主要新聞
+1. **Gemini 3.1 Pro** - Google 推出先進推理模型
+2. **Claude Sonnet 4.6** - Anthropic 提升編碼和電腦操作能力
+3. **OpenAI Codex + Ollama** - 本地模型整合
+4. **Meta $65M** - AI 立法遊說
+5. **Unity AI 遊戲生成** - 計劃用 prompt 生成遊戲
+
+## 步驟 2: 本地模型分析 ⚠️
+- **狀態**: 逾時 (模型載入較慢)
+
+===== self-evolution-2026-02-19-v9.md =====
+# 自我進化訓練記錄 (第九次)
+
+## 執行時間
+2026-02-19 17:15 (PST)
+
+## 狀態: 每日訓練已完成
+
+今日已執行 8 次訓練，累積大量 AI 趨勢數據。
+
+### 趨勢摘要
+
+| 趨勢 | 重要性 |
+|------|--------|
+| AI makes you boring | ⭐⭐⭐⭐⭐ |
+| Claude Code 生態 | ⭐⭐⭐⭐ |
+| Gemini 3.1 Pro | ⭐⭐⭐⭐ |
+| 本地模型優化需求 | ⭐⭐⭐ |
+
+---
+*訓練週期完成*
+
+===== self-evolution-2026-02-19-v8.md =====
+# 自我進化訓練記錄 (第八次)
+
+## 執行時間
+2026-02-19 17:00 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+- HN Front Page 熱門趨勢無重大變化
+
+## 步驟 2-3: MiniMax 直接分析 ✅
+- 基於今日累積資訊綜合分析
+
+## 今日結論
+
+```json
+{
+  "timestamp": "2026-02-19T17:00:00",
+  "task": "self-evolution-training-v8",
+  "final_summary": true,
+  "total_runs": 8,
+  "key_trends": [
+
+===== self-evolution-2026-02-19-v7.md =====
+# 自我進化訓練記錄 (第七次)
+
+## 執行時間
+2026-02-19 16:45 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- Hacker News RSS (newest)
+
+### AI 相關新聞
+1. **Cursor: Long-running agents** - AI 代理研究持續進展
+2. **Nvidia AI training lawsuit** - AI 訓練版權爭議
+3. 持續關注：AI makes you boring, Gemini 3.1 Pro 等趨勢
+
+## 步驟 2: 本地模型分析 
+- **決策**: 跳過，使用 MiniMax 直接分析（基於過往不穩定經驗）
+
+## 步驟 3: MiniMax 驗證 ✅
+- 使用 current session 分析
+
+===== self-evolution-2026-02-19-v5.md =====
+# 自我進化訓練記錄 (第五次)
+
+## 執行時間
+2026-02-19 16:15 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- Hacker News RSS (frontpage)
+
+### AI 相關新聞
+1. **AI makes you boring** (485 points) - AI 過度使用反思
+2. **AI is not a coworker, it's an exoskeleton** (107 points) - AI 增強人類
+3. **Gemini 3.1 Pro** - Google 推理模型
+4. **Anthropic: Measuring AI agent autonomy** - AI 代理自主性研究
+5. **Micasa** - 99% AI 生成的代碼項目 (376 points)
+6. **cmux** - Claude Code 終端管理器
+
+## 步驟 2: 本地模型分析 ⚠️
+- **模型**: deepseek-coder:1.3b
+
+===== self-evolution-2026-02-19-v4.md =====
+# 自我進化訓練記錄 (第四次)
+
+## 執行時間
+2026-02-19 16:00 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- Hacker News RSS (最新)
+
+### AI 相關新聞
+1. **Claude.md templates** - Anthropic 建議的 Claude 模板
+2. **Radiant AI CRM** - AI 銷售 CRM (open source)
+3. **Rust Token Killer** - 高效能 CLI 代理，最小化 LLM token 消耗
+4. **MIT 研究** - AI 聊天機器人對弱勢用戶提供較不準確資訊
+5. **Aether** - AI 程式碼修復背景代理
+6. **GPT 5.3 Codex bug** - 刪除用戶驅動器的嚴重 bug
+
+## 步驟 2: 本地模型分析 ❌
+- **狀態**: Ollama 服務未運行
+
+===== self-evolution-2026-02-19-v3.md =====
+# 自我進化訓練記錄 (第三次)
+
+## 執行時間
+2026-02-19 15:45 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- Hacker News RSS (hnrss.org/frontpage)
+
+### AI 相關新聞
+1. **"AI makes you boring"** (485 points) - 反思 AI 過度使用
+2. **"AI is not a coworker, it's an exoskeleton"** (107 points) - AI 增強人類
+3. **cmux** (59 points) - Claude Code 終端管理器
+4. **Micasa** (376 points) - 99% AI 生成的代碼項目
+
+## 步驟 2: 本地模型分析 ⚠️
+- **狀態**: deepseek-coder:1.3b 拉取失敗
+- **問題**: 模型服務不穩定
+
+
+===== self-evolution-2026-02-19-v2.md =====
+# 自我進化訓練記錄 (第二次)
+
+## 執行時間
+2026-02-19 15:30 (PST)
+
+## 步驟 1: 搜索 AI 最新資訊 ✅
+
+### 來源
+- Hacker News (news.ycombinator.com)
+
+### 主要新聞
+1. **Gemini 3.1 Pro** - Google 先進推理模型 (412 points, #1)
+2. **Anthropic: Measuring AI agent autonomy** - AI 代理自主性研究
+3. **"AI makes you boring"** - 反思 AI 依賴問題 (481 points, #1 overall)
+4. **"AI is not a coworker, it's an exoskeleton"** - AI 是增強人類的工具
+
+## 步驟 2: 本地模型分析 ⚠️
+- **狀態**: 模型響應過慢，任務中斷
+- **嘗試模型**: mistral
+
+
+===== self-evolution-2026-02-19-system.md =====
+# 自我進化訓練 - 系統優化主題
+
+## 執行時間
+2026-02-19 19:01 (PST)
+
+## 主題: 系統優化 / 本地工具
+
+## 1. 搜索資訊 ✅
+
+### 發現
+1. **OpenClaw MLX TTS 插件** - 本地 TTS 解决方案 (MLX-Powered)
+2. **mdxport** - Markdown to PDF 工具
+3. **Open Systems** - 開放系統趨勢
+
+## 2. MiniMax 分析 ✅
+
+### 關鍵洞察
+- 本地 AI 工具持續進化
+- MLX 讓 Apple Silicon 本地部署更容易
+
+
+===== self-evolution-2026-02-19-summary.md =====
+# 自我進化訓練記錄 (第六次 - 總結)
+
+## 執行時間
+2026-02-19 16:30 (PST)
+
+## 今日訓練總結
+
+### 執行次數
+今日共執行 6 次自我進化訓練
+
+### 趨勢分析 (今日)
+
+| 趨勢 | 描述 |
+|------|------|
+| AI 反思熱潮 | "AI makes you boring" (485 points) 反映開發者社區對 AI 過度依賴的反思 |
+| AI 作為外骨骼 | "AI is not a coworker, it's an exoskeleton" 獲得廣泛認同 |
+| 雲端+本地混合 | Claude Code、cmux 等工具顯示代理工作流正在形成 |
+| 代碼生成成熟 | Micasa 等 99% AI 生成的項目證明技術已成熟 |
+| Gemini 3.1 Pro | Google 推理模型持續進化 |
+| AI 安全性 | Codex bug 事件顯示安全驗證重要性 |
+
+===== self-evolution-2026-02-19-model.md =====
+# 自我進化訓練 - AI 模型主題
+
+## 執行時間
+2026-02-19 22:02 (PST)
+
+## 主題: AI 模型
+
+## 1. 搜索資訊 ✅
+
+### 發現
+1. **Prompt Indexing** - ChatGPT Session 提示詞索引工具
+2. **LLM 姓名分析** - Claude Sonnet 4.5 分析姓名特徵
+3. **Apple Silicon Accelerometer** - 本地模型硬體加速
+
+## 2. MiniMax 分析 ✅
+
+### 趨勢
+- 模型應用持續多元化
+- 本地部署能力增強
+
+
+===== self-evolution-2026-02-19-llm.md =====
+# 自我進化訓練 - 本地 LLM 主題
+
+## 執行時間
+2026-02-19 20:01 (PST)
+
+## 主題: 本地 LLM
+
+## 1. 搜索資訊 ✅
+
+### 發現
+1. **MIT 研究** - 暴露 LLM 的偏見/情緒/人格
+2. **CodeCent** - 程式碼視覺化工具，支援 Ollama 本地運行
+3. **Claude Code 上下文管理** - cmv 工具
+
+## 2. MiniMax 分析 ✅
+
+### 趨勢
+- 本地 LLM 應用場景持續擴展
+- 模型偏見研究受到關注
+
+
+===== self-evolution-2026-02-19-done.md =====
+# 自我進化訓練 - 主題完成狀態
+
+## 執行時間
+2026-02-19 23:02 (PST)
+
+## 狀態: 所有主題已完成
+
+### 本日已完成主題
+| 主題 | 檔案 |
+|------|------|
+| Agent 架構 | agent.md |
+| 系統優化 | system.md |
+| 本地 LLM | llm.md |
+| 自動化/安全 | automation.md |
+| AI 模型 | model.md |
+
+### 建議
+- 調整 cron 頻率（每小時太頻繁）
+- 每日 1-2 次即可
+
+
+===== self-evolution-2026-02-19-complete.md =====
+# 自我進化訓練 - 每日完成
+
+## 執行時間
+2026-02-19 17:30 (PST)
+
+## 狀態: ✅ 本日訓練已完成
+
+已累積 10+ 次訓練，涵蓋:
+- AI 趨勢分析
+- 模型表現評估
+- 記憶存入
+
+### 核心結論
+
+**混合架構 (MiniMax + 本地備用) 是當前最穩定方案**
+
+---
+*明日繼續*
+
+===== self-evolution-2026-02-19-automation.md =====
+# 自我進化訓練 - 自動化工具/AI 安全主題
+
+## 執行時間
+2026-02-19 21:02 (PST)
+
+## 主題: AI 自動化與安全
+
+## 1. 搜索資訊 ✅
+
+### HN 熱門趨勢
+1. **Microsoft 玻璃數據儲存** - 10000年儲存介質
+2. **AI Agent 攻擊事件** - AI 代理發布攻擊性文章
+3. **Pi for Excel** - AI Excel 插件
+4. **ARM Homelab Server** - 硬體趨勢
+5. **MuMu Player 間諜軟體** - 安全問題
+
+## 2. MiniMax 分析 ✅
+
+### 趨勢解讀
+- AI 代理安全問題浮現
+
+===== self-evolution-2026-02-19-agent.md =====
+# 自我進化訓練 - 主題輪換
+
+## 主題: Agent 架構
+## 執行時間
+2026-02-19 18:03 (PST)
+
+## 1. 搜索資訊 ✅
+
+### 來源
+- Hacker News 最新
+
+### 發現
+1. **Agentic Coding 興起** - AI 代理選擇程式庫，開發者開始為 LLM 寫程式碼
+2. **You.com MCP** - 免費 web search API for AI agents
+3. **認知債務** - Agentic Code 帶來的技術債務問題
+4. **開源影響** - 自動化對開源生態的衝擊
+
+## 2. MiniMax 分析 ✅
+
+### 趨勢解讀
+
+===== whatsapp-integration.md =====
+# WhatsApp + n8n + OpenClaw 整合計畫
+
+**日期**: 2026-02-18
+**狀態**: SKILL 建立完成
+
+---
+
+## 架構
+
+```
+WhatsApp → n8n Webhook → OpenClaw API → AI 處理 → 回覆 → n8n → WhatsApp
+                    ↓
+               Telegram 通知
+```
+
+---
+
+## 已建立
+
+| 項目 | 位置 |
+
+===== facebook-n8n-workflow.md =====
+# Facebook Messenger + n8n + OpenClaw Workflow
+
+## 架構
+
+```
+Facebook Messenger → n8n Webhook → OpenClaw → 回覆 → n8n → Messenger
+```
+
+---
+
+## n8n Workflow 設定
+
+### Step 1: 打開 n8n
+```
+http://localhost:5678
+```
+
+### Step 2: 建立新 Workflow
+
+1. 點擊「+ New Workflow」
+
+===== facebook-messenger-integration.md =====
+# Facebook Messenger + n8n + OpenClaw 整合計畫
+
+**日期**: 2026-02-18
+**狀態**: 進行中
+
+---
+
+## 粉絲專頁
+
+**名稱**: Inari Global Food
+
+---
+
+## 架構圖
+
+```
+Facebook Messenger (Inari Global Food)
+        ↓
+    n8n Webhook
+        ↓
+
+===== phase1-completed.md =====
+# Phase 1: 基因膠囊化系統 - 完成
+
+**日期**: 2026-02-20
+
+---
+
+## ✅ 已完成
+
+### 1. 膠囊格式標準
+- 位置: `memory/gene-capsule-format.md`
+- 包含: 結構、類型、評分公式
+
+### 2. 膠囊目錄
+- 位置: `memory/capsules/`
+- 索引: `memory/capsules/index.yaml`
+
+### 3. 示範膠囊
+| ID | 名稱 | 類型 |
+|----|------|------|
+| gc_20260220_web_search | Web 趨勢監控 Prompt | prompt |
+
+===== order-training-data.md =====
+# 訂單分析 - 訓練數據集
+
+**格式**: JSONL
+**用途**: 本地 LLM 微調
+
+---
+
+## 數據樣本
+
+```json
+{"input": "彥食堂 大三文魚1條100", "output": "{\"customer\": \"彥食堂\", \"items\": [{\"name\": \"大三文魚\", \"qty\": 1, \"unit\": \"條\", \"price\": 100}], \"total\": 100}"}
+{"input": "匠膳 活赤貝2k", "output": "{\"customer\": \"匠膳\", \"items\": [{\"name\": \"活赤貝\", \"qty\": 2, \"unit\": \"k\", \"price\": null}], \"total\": null}"}
+{"input": "新中央 大三文魚 1條(機價)", "output": "{\"customer\": \"新中央\", \"items\": [{\"name\": \"大三文魚\", \"qty\": 1, \"unit\": \"條\", \"note\": \"機價\"}], \"total\": null}"}
+{"input": "文 上午12:33 新中央 加 1條大三文魚(共2條/機價)", "output": "{\"customer\": \"新中央\", \"items\": [{\"name\": \"大三文魚\", \"qty\": 1, \"unit\": \"條\", \"note\": \"共2條\", \"price\": \"機價\"}], \"total\": null}"}
+{"input": "立食2 赤貝 1k", "output": "{\"customer\": \"立食2\", \"items\": [{\"name\": \"赤貝\", \"qty\": 1, \"unit\": \"k\"}], \"total\": null}"}
+{"input": "千盛 赤貝 3k", "output": "{\"customer\": \"千盛\", \"items\": [{\"name\": \"赤貝\", \"qty\": 3, \"unit\": \"k\"}], \"total\": null}"}
+{"input": "葡京酒店 赤貝x2kg MK26020998", "output": "{\"customer\": \"葡京酒店\", \"items\": [{\"name\": \"赤貝\", \"qty\": 2, \"unit\": \"kg\", \"ref\": \"MK26020998\"}], \"total\": null}"}
+{"input": "花城千果子 三文魚x2箱（開石排灣） 紅蝦x2箱", "output": "{\"customer\": \"花城千果子\", \"items\": [{\"name\": \"三文魚\", \"qty\": 2, \"unit\": \"箱\", \"note\": \"開石排灣\"}, {\"name\": \"紅蝦\", \"qty\": 2, \"unit\": \"箱\"}], \"total\": null}"}
+{"input": "石排灣千果子 三文魚x4條 早上送貨", "output": "{\"customer\": \"石排灣千果子\", \"items\": [{\"name\": \"三文魚\", \"qty\": 4, \"unit\": \"條\", \"delivery\": \"早上\"}], \"total\": null}"}
+{"input": "英皇鮮味王 大三文魚2條90 2L甜虾1箱，275 M北极贝2盒178", "output": "{\"customer\": \"英皇鮮味王\", \"items\": [{\"name\": \"大三文魚\", \"qty\": 2, \"unit\": \"條\", \"price\": 90}, {\"name\": \"甜蝦\", \"qty\": 1, \"unit\": \"箱\", \"size\": \"2L\", \"price\": 275}, {\"name\": \"北極貝\", \"qty\": 2, \"unit\": \"盒\", \"price\": 178}], \"total\": 543}"}
+
+===== order-prompt-optimization.md =====
+# 訂單分析 Prompt 優化
+
+**版本**: 2.0
+**更新日期**: 2026-02-20
+
+---
+
+## MiniMax 分析結果記錄
+
+[待填入 MiniMax 輸出]
+
+---
+
+## Prompt 優化點
+
+### 1. 結構優化
+- [ ] 客戶名稱識別模式
+- [ ] 商品數量提取規則
+- [ ] 價格計算邏輯
+
+
+===== order-integration-plan.md =====
+# 訂單分析整合計劃
+
+**日期**: 2026-02-20
+
+---
+
+## 整合架構
+
+```
+WeChat 訊息
+    ↓
+[接收器] → OpenClaw
+    ↓
+[訂單分析 Skill] → MiniMax 分析
+    ↓
+[結構化數據] → 儲存/統計
+    ↓
+[輸出] → 通知/報告
+```
+
+
+===== order-analysis-skill-plan.md =====
+# 訂單分析 Skill - 需求分析
+
+**日期**: 2026-02-20
+
+---
+
+## 1. 技能分析 (Skill Analysis)
+
+### 功能需求
+
+| # | 功能 | 優先級 | 說明 |
+|---|------|--------|------|
+| 1 | 訂單提取 | P0 | 從對話中識別並提取訂單 |
+| 2 | 商品分類 | P0 | 按魚類/貝類/蝦類分類 |
+| 3 | 價格計算 | P1 | 計算訂單總額 |
+| 4 | 客戶識別 | P0 | 識別餐廳/客戶名稱 |
+| 5 | 數據統計 | P1 | 銷售排行、客戶統計 |
+| 6 | 報表生成 | P2 | 生成每日/每週報告 |
+
+### 輸入格式
+
+===== order-analysis-result.md =====
+# 訂單分析結果 - 標準格式
+
+**日期**: 2026-02-20
+**模型**: 待 MiniMax API 恢復後測試
+
+---
+
+## 訂單數據樣本
+
+### 標準 JSON 格式
+
+```json
+{
+  "date": "2026-02-20",
+  "orders": [
+    {
+      "id": 1,
+      "customer": "彥食堂",
+      "items": [
+        {"name": "大三文魚", "qty": 1, "unit": "條", "price": 100}
+
+===== order-analysis-prompt.md =====
+# 訂單分析 - MiniMax 訓練數據
+
+**日期**: 2026-02-20
+**模型**: MiniMax-M2.5
+
+---
+
+## 任務
+
+請分析以下 WeChat 訂單對話，提取結構化數據。
+
+## 輸入數據
+
+### 2026-02-18
+- 彥食堂 大三文魚1條100
+- 匠膳 活赤贝2k
+
+### 2026-02-19
+- 新中央 大三文魚 1條(機價)
+
+
+===== order-analysis-implementation.md =====
+# 訂單分析系統 - 實施總結
+
+**日期**: 2026-02-20
+**狀態**: 規劃完成，待測試
+
+---
+
+## 📋 已完成
+
+### 1. 需求分析
+- [x] 功能定義
+- [x] 輸入/輸出格式
+- [x] 優先級排序
+
+### 2. 訓練數據
+- [x] 數據樣本格式
+- [x] 關鍵字映射
+- [x] 擴展計劃
+
+### 3. Skill 定義
+
+===== openclaw-manager-mode.md =====
+# OpenClaw 中控模式 (Manager Mode) 詳解
+
+**日期**: 2026-02-20
+**來源**: 系統架構師分享
+
+---
+
+## 什麼是中控模式？
+
+在 OpenClaw 框架中，**中控模式 (Manager Mode)** 是處理複雜、非線性任務的核心。在這種模式下，你不需要手動排列任務順序，而是指派一個具有「大腦」功能的 Manager Agent。它會像專案經理一樣，分析當前任務，並決定由哪位專家 Agent 來執行。
+
+> 適合那種「問題不明確，需要先分析再拆解」的場景。
+
+---
+
+## 實現示例
+
+```python
+from openclaw import Agent, Task, Workflow
+
+
+===== openclaw-55-skills-philosophy.md =====
+# OpenClaw 55 個技能 - 哲學總結
+
+**日期**: 2026-02-20
+**來源**: Joe 分享
+
+---
+
+## 核心觀點
+
+### 1. 原子化技能
+
+> **我幫 OpenClaw 寫了 55 個原子化技能**
+
+不要幻想蓋個全能 Agent，去解決那些**操作超過 5 次的具體痛點**。
+
+---
+
+### 2. 架構大於模型
+
+> **架構大於模型**
+
+===== ollama-feedback-baseline.md =====
+# Ollama 反饋學習系統 - 初始狀態
+
+**日期**: 2026-02-18
+**狀態**: ✅ 已啟動
+
+---
+
+## 📊 初始數據 (基線)
+
+### Ollama 狀態
+
+| 項目 | 數值 |
+|------|------|
+| 模型 | llama3:latest |
+| 大小 | 4.7 GB |
+| 運行狀態 | ✅ 正常 |
+
+---
+
+### 反饋資料庫基線
+
+===== 2026-02-19-110k-files.md =====
+# 奇點時刻 - 11萬檔案整理里程碑
+
+**日期**: 2026-02-19
+
+## 成就
+
+| 項目 | 數量 |
+|------|------|
+| 桌面檔案整理 | 60,102 |
+| Dropbox → Google Drive | 31,615 |
+| Facebook 清理 | 19,135 |
+| **總計** | **~110,000+** |
+
+## AI 協作
+
+- 工具: Claude Cowork
+- 時數: 50+ 小時
+- 成果: 檔案整理 + 系統升級
+
+## 額外成就
+
+===== lobster-skill-tips.md =====
+# 龍蝦養心得 3 - Skill 使用技巧
+
+**日期**: 2026-02-20
+**來源**: 社區分享
+
+---
+
+## 13 個實用技巧
+
+### 1. 模型選擇
+> 設計 Skill 時，用 **Sonnet 4.5**，節省時間
+
+### 2. 避免資訊過多
+> 避免「大海撈針」，確保工作成功率和品質
+
+### 3. 系統化設計
+> 指定明確的 URL 格式（如 `https://example.com/{參數}`），減少資料判斷
+
+### 4. 動態參數
+> 將規則記錄到 .md，讓 AI 自動檢查和更新
+
+===== learning-feedback-20260220.md =====
+# 今日學習分析回饋總結
+
+**日期**: 2026-02-20
+**類別**: 學習筆記、趨勢分析、系統優化
+
+---
+
+## 📚 今日學習主題
+
+### 1. AI 趨勢
+
+| 主題 | 來源 | 重點 |
+|------|------|------|
+| AI Agent 基礎設施化 | Threads | 六大發展路線 |
+| Claude Code Skills | GitHub | 開源技能系統 |
+| ggml.ai + Hugging Face | HN | 本地 AI 里程碑 |
+| 17k tokens/sec 推理 | HN | 速度突破 |
+| EvoMap | Threads | 基因膠囊概念 |
+
+### 2. 系統優化
+
+===== learning-analysis-20260220.md =====
+# 今日學習筆記分析
+
+**日期**: 2026-02-20
+
+---
+
+## ✅ 已學習主題
+
+### 1. AI 趨勢
+- [x] AI Agent 基礎設施化 (六大發展路線)
+- [x] AI Agents 生態地圖
+- [x] Claude Code, Continue
+- [x] MCP 協議 (~400+ servers)
+
+### 2. OpenClaw
+- [x] 中控模式 (Manager Mode)
+- [x] Sub-agents 修復 (Cron jobs)
+- [x] Skill 模板優化
+- [x] Web Search API 整合
+
+
+===== knowledge_update_20260219.md =====
+# 知識庫更新記錄 2026-02-19
+
+## 主題：AI Agents, 自動化, 本地 LLM
+
+### 📥 資訊來源
+1. Arize AI Agents Handbook
+2. Ollama Blog 更新
+
+### 🔑 核心學習點
+
+#### 1. AI Agents 架構演進
+- **第一代 ReAct Agents**: 過度抽象化，難以實際應用
+- **第二代結構化 Agents**: 限制解決方案空間，更可控
+- **Router 設計**: LLM 路由器決定下一步動作，是最需優化的部分
+
+#### 2. 企業應用現況
+- 很少 agent 在消費者或企業用戶中取得成功
+- 真正的生產環境應用仍在早期
+
+#### 3. 本地 LLM 發展 (Ollama)
+
+===== ai-agents-local-llm-2026-02-19.md =====
+# 知識庫更新 - AI Agents 與本地 LLM 趨勢 (2026-02-19)
+
+## 來源
+- Hugging Face Blog: Upskill - We Got Claude to Build CUDA Kernels
+- Hugging Face Blog: Transformers.js v4 Preview
+
+---
+
+## 1. Agent Skills (Upskill)
+
+### 核心概念
+- 使用強大模型（Claude Opus 4.5）創建技能（Skills），傳遞給較小的本地模型
+- 教師-學生方法：強大模型生成技能和測試用例，較小模型使用技能執行任務
+
+### 效果數據
+| 模型 | 基礎準確率 | 使用技能後 | 提升 |
+|------|-----------|-----------|------|
+| GPT-OSS (開放模型) | 60% | 95% | +35% |
+| GLM-4.7-Flash-GGUF:Q4_0 | 40% | 85% | +45% |
+
+
+===== gene-capsule-format.md =====
+# Gene Capsule 格式標準
+
+**版本**: 1.0
+**建立日期**: 2026-02-20
+
+---
+
+## 膠囊結構
+
+```yaml
+type: gene_capsule
+version: "1.0"
+id: "gc_20260220_001"
+name: "膠囊名稱"
+description: "簡短描述"
+
+# 核心內容
+content:
+  prompt: "..."
+  context: "..."
+
+===== self_evolution_feedback.md =====
+# 自我進化訓練反饋數據
+
+## 訓練執行記錄
+
+**日期**: 2026-02-19
+**時間**: 09:45 AM PST
+**狀態**: ✅ 完成
+
+### 數據摘要
+
+| 維度 | 數值 |
+|------|------|
+| 資訊來源數 | 3 (Ollama, HN, Anthropic) |
+| 分析模型 | MiniMax-M2.5 |
+| 處理時間 | ~3 分鐘 |
+| 記憶存儲 | ✅ |
+
+### 今日收集的資訊
+
+1. **Ollama v0.16.0-0.16.2**
+
+===== evomap-application.md =====
+# EvoMap 應用分析 - OpenClaw 整合
+
+**日期**: 2026-02-20
+
+---
+
+## 🎯 應用可行性分析
+
+### 我們現有的類似功能
+
+| EvoMap 概念 | OpenClaw 現有功能 | 狀態 |
+|-------------|------------------|------|
+| 基因膠囊 | Memory/記憶系統 | ✅ 已實現 |
+| 經驗傳承 | 向量摘要 + 知識庫 | ✅ 已實現 |
+| Skill 庫 | Skills 系統 | ✅ 已實現 |
+| 自然淘汰 | 自我進化訓練 | ✅ 已實現 |
+| 信用點數 | N/A | ❌ 未實現 |
+
+---
+
+
+===== evomap-ai-evolution-network.md =====
+# EvoMap - AI 進化網絡
+
+**日期**: 2026-02-20
+**來源**: Threads (meow.coder)
+**標籤**: AI-Agent, 集體學習, 進化網絡
+
+---
+
+## 背景
+
+一個插件被下架，逼出了首個 AI 進化網絡。
+
+- **起因**: OpenClaw 移除了 Evolver 插件，開發者被要求支付 $1,000
+- **結果**: 開發者創建了 **EvoMap**
+
+---
+
+## 核心概念
+
+### 1. 基因膠囊 (Gene Capsule)
+
+===== 2026-02-19_self_evolution_training.md =====
+# 自我進化訓練記錄 - 2026-02-19
+
+## 📊 數據收集
+
+### AI 產業資訊 (2026-02-19)
+
+**1. Gemini 3.1 Pro (Google)**
+- Google DeepMind 發布的最新旗艦模型
+- 焦點：多模態能力提升
+
+**2. Anthropic 研究：AI Agent Autonomy**
+- 分析數百萬人與 AI 交互數據
+- 關鍵發現：
+  - Claude Code 自主運行時間從 25 分鐘增至 45 分鐘
+  - 有經驗用戶更傾向全自動批准 (20% → 40%)
+  - 複雜任務中，AI 主動暫停尋求澄清的頻率高於人類干預
+  - 大多數 agent 行為低風險、可逆轉
+  - 軟體工程佔 AI agent 活動近 50%
+
+**3. AI 編碼體驗趨勢**
+
+===== 2026-02-19-self-evolution.md =====
+# 自我進化訓練日誌 - 2026-02-19
+
+## 1. AI 最新資訊收集
+
+### 主要資訊來源
+- Hacker News 熱門趨勢
+- Anthropic 官方研究發布
+- Google DeepMind 模型發布
+
+### 關鍵資訊
+1. **Anthropic: AI Agent Autonomy 研究** (2026-02-19)
+   - Claude Code 自主運行時間：25分鐘 → 45分鐘（+80%）
+   - 經驗用戶 auto-approve：20% → 40%+
+   - 軟體工程佔代理活動：50%
+   - AI 主動暫停頻率是人類干預的 2 倍
+
+2. **Gemini 3.1 Pro 發布** (2026-02-19)
+   - Context window: 1M tokens
+   - Output: 64K tokens
+   - 多模態推理模型
+
+===== 2026-02-19-pm.md =====
+# 自我進化訓練報告 (2026-02-19)
+
+**執行時間**: 12:45 PM PST  
+**狀態**: ⚠️ 部分完成
+
+---
+
+## 1. 資訊收集
+
+### 嘗試的方法
+| 方法 | 結果 | 原因 |
+|------|------|------|
+| Web Search (Brave) | ❌ 失敗 | 缺少 API Key |
+| Memory Search | ❌ 失敗 | 缺少 Vector API |
+| 本地記憶檔案 | ✅ 成功 | 已有昨日收集的趨勢數據 |
+
+### 現有數據來源
+- `ai_agents_trends_20260219.md` - AI Agents 與本地 LLM 趨勢
+- `ai_trends_20260219.md` - 產業趨勢分析
+- `self_evolution_feedback.md` - 昨日反饋數據
+
+===== discord-bot-progress.md =====
+# Discord Bot 申請進度
+
+**日期**: 2026-02-20
+
+---
+
+## 📋 申請狀態
+
+| 階段 | 狀態 | 說明 |
+|------|------|------|
+| 1. Developer Portal | ⚠️ 待完成 | 需要 Joe 親自申請 |
+| 2. 建立 Application | ⚠️ 待完成 | 需要名稱 |
+| 3. 設定 Bot | ⚠️ 待完成 | 需要權限 |
+| 4. 邀請連結 | ⚠️ 待完成 | 需要權限代碼 |
+
+---
+
+## 🎯 下一步
+
+### Joe 需要做的：
+
+===== claude-code-skills-deep.md =====
+# Claude Code Skills - 深入研究
+
+**日期**: 2026-02-20
+**來源**: GitHub anthropics/skills
+
+---
+
+## 什麼是 Skills？
+
+Skills 是「指令、腳本和資源的資料夾」，Claude 會動態載入以提高特定任務的表現。
+
+> Skills 教 Claude 如何以可重複的方式完成特定任務
+
+---
+
+## 官方資源
+
+| 資源 | 連結 |
+|------|------|
+| GitHub | github.com/anthropics/skills |
+
+===== larry-tiktok-automation.md =====
+# AI Agent 案例學習 - Larry TikTok Automation
+
+**日期**: 2026-02-18
+**來源**: Joe 分享的 Oliver Henry 案例
+**標籤**: #case-study #tiktok #automation #skill-evolution
+
+---
+
+## 案例摘要
+
+- **人物**: Oliver Henry，獨立開發者
+- **產品**: 室內設計預覽 + 唇部填充模擬 app
+- **成果**: 一週 800 萬觀看，月收 $670 USD
+- **系統**: Larry (OpenClaw agent)
+- **開源**: ClawHub 上免費發布
+
+---
+
+## 核心工作流程
+
+
+===== ai_trends_20260219.md =====
+# AI 趨勢學習報告 - 2026-02-19
+
+## 📊 今日 AI 最新資訊
+
+### 1. Anthropic: AI Agent Autonomy 研究
+**來源**: anthropic.com/research/measuring-agent-autonomy
+
+**關鍵發現**:
+- Claude Code 自主運行時間從 **25 分鐘增加到 45 分鐘**（3個月內幾乎翻倍）
+- 經驗用戶更傾向自動批准（20% → 40%+）
+- 軟體工程佔 Agent 活動 **50%**
+- 醫療、金融、網路安全領域開始出現使用
+- **關鍵洞察**: 現有模型實際運用的自主權低於其能力上限
+
+### 2. Google Gemini 3.1 Pro
+**來源**: blog.google - 2026-02-19 發布
+
+**規格**:
+- ARC-AGI-2 基準測試: **77.1%**（比 3 Pro 提升 2 倍）
+- 專為複雜推理任務設計
+
+===== ai_self_evolution_20260219.md =====
+# AI 趨勢自我進化訓練報告
+
+## 執行時間
+2026-02-19 13:30 PST
+
+## 數據來源
+1. Hacker News 熱門趨勢
+2. Ollama 官方部落格
+3. GitHub Ollama 專案
+
+---
+
+## 📊 資訊摘要
+
+### 1. Ollama 發展動態
+- **OpenAI Codex 整合**: Ollama 現在支援 OpenAI 的 Codex CLI，可使用 gpt-oss:20b/120b 等開源模型
+- **Minions 架構**: Stanford Hazy Research 開發本地+雲端混合模型架構，小模型(Llama 3.2)協作大模型(GPT-4o)
+- **Firebase Genkit**: Google 在 IO 2024 宣佈支援 Ollama
+- **Windows 正式支援**: 2024年2月發布 Windows 預覽版
+- **多語言庫**: Python & JavaScript SDK 已發布
+
+===== ai_agents_trends_20260219.md =====
+# AI Agents, 自動化, 本地 LLM 趨勢學習筆記
+
+**日期**: 2026-02-19 至 2026-02-20 (持續更新)
+
+---
+
+## 本日學習總結
+
+### 核心趨勢發現
+
+1. **AI Agent 框架持續爆發**
+   - 多代理協作成為主流範式
+   - CrewAI, LangGraph, LazyLLM 等框架激烈競爭
+   - MCP 生態快速擴展 (~400+ servers)
+
+2. **本地 LLM 基礎設施成熟**
+   - Ollama 成為本地運行標準
+   - llama.cpp 與 vLLM 雙軌並進
+   - GGUF 格式成事實標準
+
+
+===== ai-organic-qa-system.md =====
+# AI Agent 有機 QA 體系 - 隔日 Bug 解決方案
+
+**日期**: 2026-02-20
+**來源**: Jacob Mei 部落格
+**標籤**: QA, AI-Agent, 測試, 穩定性
+
+---
+
+## 痛點：什麼是「隔日 Bug」？
+
+> 功能當下沒問題，但經過時間推移、跨機器環境、併發，就開始出包。
+
+### 常見原因
+- AI 只驗證「第一步」，忽略「生命週期」與「併發環境」
+- 三台機器（MBA、iMac、Oracle）跨機同步問題
+- 沒有預判「未來會發生什麼事」
+
+---
+
+## 核心解決方案：4D 審計框架
+
+===== ai-employee-philosophy.md =====
+# AI 作為「員工」而非「工具」
+
+**日期**: 2026-02-20
+**來源**: Joe 分享
+
+---
+
+## 核心洞察
+
+> **我不是在「用」AI，我是在「養」一個員工。**
+
+---
+
+## 員工 vs 工具
+
+| 工具 | 員工 |
+|------|------|
+| 一步步教 | 給目標，自己想辦法 |
+| 按鈕/參數 | 學會組合使用 |
+| 被動執行 | 主動發展技能 |
+
+===== ai-agent-trends-2026.md =====
+# AI Agent Trends 2026 - Google Cloud 報告
+
+**日期**: 2026-02-19
+**來源**: Google Cloud AI Agent Trends 2026 Report
+**搜尋**: You.com API (1 次)
+
+---
+
+## 10 大趨勢
+
+| # | 趨勢 | 說明 |
+|---|------|------|
+| 1 | AI 從工具 → 隊友 | 從 Chatbot/Copilot → Goal-driven agents |
+| 2 | 每個員工變 AI 管理員 | 定義目標、委派、審核輸出 |
+| 3 | 工作流 > 模型 | 多 Agent 協作 = 數位組裝線 |
+| 4 | Agent 溝通是下一個平台 | A2A、MCP 標準 |
+| 5 | 客服變禮賓服務 | 主動解決問題、個性化回覆 |
+| 6 | 安全從警報 → 行動 | Agent 自主 triage/修復 |
+| 7 | Agent Initiate 交易 | 監控價格/庫存，自動購買 |
+| 8 | ROI 已經是真的 | 88% 早期採用者看到正向 ROI |
+
+===== ai-agent-infrastructure-trends.md =====
+# AI Agent 基礎設施化趨勢分析
+
+**日期**: 2026-02-20
+**來源**: Joe 分享
+
+---
+
+## 核心觀點
+
+> **AI Agent 正在從「介面」變成「基礎設施」**
+
+---
+
+## 六大發展路線
+
+### 1. 瀏覽器/IDE → Agent 身體
+
+| 發展 | 說明 |
+|------|------|
+| Google Chrome | Auto Browse 功能，Gemini 直接執行多步驟網頁任務 |
+
+===== INDEX.md =====
+# 記憶索引
+
+## 按日期
+
+- 2026-02-19.md
+- 2026-02-17.md
+- 2026-02-18.md
+- 2026-02-16.md
+
+===== 55-skills-implementation.md =====
+# 55 技能實踐計劃 - OpenClaw
+
+**日期**: 2026-02-20
+**目標**: 建立原子化技能系統
+
+---
+
+## 🎯 核心原則
+
+### 1. 原子化
+> 把工作拆解成最小執行單位
+
+### 2. 具體痛點
+> 解決操作超過 5 次的問題
+
+### 3. 標準化
+> 流程固化、代碼化
+
+---
+
+
+===== 4d-qa-application.md =====
+# 4D QA 體系應用計劃 - OpenClaw
+
+**日期**: 2026-02-20
+**來源**: Jacob Mei 有機 QA 體系
+
+---
+
+## 🎯 現有問題
+
+| 問題 | 影響 |
+|------|------|
+| Cron job 偶爾失敗 | 訊息沒送達 |
+| Sub-agent delivery 失敗 | 通知不到 |
+| 跨機器環境 | 不同 Mac 設定不同 |
+| 缺乏長期測試 | 當下正常，隔天出錯 |
+
+---
+
+## 📋 4D 框架應用
+
+
+===== 2026-02-20.md =====
+# 2026-02-20 工作日誌
+
+## 系統優化
+
+### Skill 模板與優化
+- 建立 Skill 模板: skills/_template/SKILL.md
+- 優化 self-evolve-agent: 加入錯誤處理、輸出格式
+- 優化 knowledge-agent: 加入參數定義、錯誤處理
+- 記錄: skills/OPTIMIZATION.md
+
+### Cron 頻率調整
+- 自我進化訓練: 每小時 → 每日 09:00
+- 知識庫更新: 每小時 → 每日 10:00  
+- Web 趨勢監控: 每2小時 → 每4小時
+
+## AI 趨勢學習
+
+### 每日發現
+- AI Agent 基礎設施化 (六大發展路線)
+- MCP 協議標準化 (~400+ servers)
+
+===== 2026-02-19.md =====
+# 2026-02-19 工作日誌
+
+## OpenClaw 架構更新
+
+### 1. n8n + Gemini 整合
+- 建立 OpenClaw ↔ n8n ↔ 多模型 雙向循環架構
+- 設定 Gemini API Key (額度已用完)
+- 建立 workflow: openclaw-multimodel.json
+- Skill: openclaw-n8n-multimodel/SKILL.md
+
+### 2. 本地模型優化
+- 完成 Code Master Agent 設定
+- 主要模型: codellama (本地)
+- Fallback: mistral → llama3 → MiniMax
+- 建立 agent-model-architecture.md 規劃
+
+### 3. Heartbeat 每日訓練系統
+新增 3 個任務:
+- 自我進化訓練: 每 15 分鐘 (self-evolve-agent)
+- 知識庫更新: 每小時 (knowledge-agent)
+
+===== 2026-02-18.md =====
+
+
+# Daily Memory - 2026-02-18
+
+## System Updates
+
+### Notion Sync Fixed
+- Database ID corrected to: 30aa1238f49d817c8163dd76d1309240
+- sync_to_notion.py updated to v1.2
+- All notes now sync correctly
+
+### Knowledge Base Updates
+- Added: OpenClaw 記憶架構優化指南 v1.2
+- Version tracking: v1.1 → v1.2
+- Knowledge index updated
+
+### Version Linked Notes
+- v1.1: OpenClaw 記憶優化架構建議 (Foundation)
+- v1.2: 記憶架構優化指南 (Extended: 4 optimization paths)
+
+
+===== 2026-02-17.md =====
+# Daily Memory - 2026-02-17
+
+## 📅 日期：2026-02-17
+
+---
+
+## 🤖 系統重建 (System Rebuild)
+
+### 背景
+從 Desktop 備份復原 muse-core 完整設定
+
+### 完成項目
+1. **Agent 註冊** — 共 27 個 Agents
+   - 核心：muse-core, workflow-orchestrator, skill-creator, mcp-builder
+   - 專業：analytics-agent, knowledge-agent, governance-agent, lifeos-agent
+   - 記憶：memory-agent, self-evolve-agent, skill-slime-agent, verification-agent
+   - 團隊：alice, bob, carol, dave, eva, georgia, isla
+   - 其他：note-taker, statistics-analyzer, code-master, design-master, writing-master, evaluator, agent-builder
+
+2. **定時任務恢復** — 9 個 Cron Jobs
+
+===== 2026-02-16.md =====
+# Lazy Uni Shop 專案 - 2026-02-16 更新
+
+## Kira 與 Isla 協作
+
+### 決定事項
+- 風格：ClaudeCab Live 網頁 Dashboard 風格
+- 布局：左側列表 + 中央場景 + 右側日誌
+- 優先順序：先做對話氣泡，再做 2.5D 場景
+
+### 已完成
+
+1. ClaudeCab 風格監控界面 (claudecab_style_v2.html)
+2. Q版角色頭像 (q版_avatars.html) - CSS 實現
+3. 對話氣泡動畫 - 點擊顯示、3秒消失
+4. 2.5D 場景 - 牆壁、窗户、地板、桌子、椅子
+
+### 檔案位置
+```
+/Users/ki/.openclaw/workspace/projects/lazy_uni_shop/
+├── q版_avatars.html              # Q版角色頭像
+
