@@ -1,112 +1,85 @@
 ---
-name: social-media-automation
-description: 全自動社群媒體經營機器人 - OpenClaw + OpenAI + Postiz
-metadata:
-  openclaw:
-    emoji: "🤖"
-    version: "1.0"
-    date: "2026-02-19"
+name: social_media_automation
+description: 全自動社群媒體經營機器人。當需要自動化社群媒體內容生成與發布時觸發，包括：AI 圖片生成、文案撰寫、排程發布、數據追蹤。
 ---
 
-# 全自動社群媒體經營機器人
+# 全自動社群媒體經營
 
-## 概述
+## 功能說明
 
-使用 OpenClaw + OpenAI Image Generation + Postiz 实现零人力、自动化的社群媒体经营。
+整合 OpenClaw + OpenAI Image + Postiz + n8n，實現零人力自動化的社群媒體經營。從內容靈感到排程發布全程自動。
 
 ## 技術堆疊
 
 | 元件 | 功能 | 成本 |
 |------|------|------|
 | OpenClaw | Agent 核心決策 | $0 |
-| OpenAI API | AI 圖片生成 | 按量計費 |
+| OpenAI API | AI 圖片生成（DALL-E） | 按量計費 |
 | Postiz | 社群排程發布 | $0-29/月 |
 | n8n | 工作流自動化 | $0 |
 
 ## 工作流程
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    全自動社群經營流程                           │
-├─────────────────────────────────────────────────────────────┤
-│  1. 內容靈感 (OpenClaw)                                     │
-│     ↓                                                        │
-│  2. 圖片生成 (OpenAI DALL-E)                               │
-│     ↓                                                        │
-│  3. 文案撰寫 (OpenClaw + Ollama)                          │
-│     ↓                                                        │
-│  4. 排程發布 (Postiz)                                      │
-│     ↓                                                        │
-│  5. 數據追蹤 (n8n)                                         │
-└─────────────────────────────────────────────────────────────┘
-```
+### 第一步：內容靈感生成
+- OpenClaw 根據品牌定位和近期趨勢生成內容方向
+- 分析目標受眾的痛點和興趣
 
-## 實現步驟
+### 第二步：AI 圖片生成
+- 呼叫 OpenAI DALL-E API 生成配圖
+- 根據品牌風格調整提示詞
+- 生成多張候選圖，選擇最佳
 
-### 1. OpenAI 圖片生成
+### 第三步：文案撰寫
+- OpenClaw + Ollama 撰寫貼文文案
+- 根據平台特性調整格式和長度
+- 加入適當的 hashtag
 
-```python
-import openai
+### 第四步：排程發布
+- 透過 Postiz API 設定排程時間
+- 支援多平台同步發布
 
-response = openai.Image.create(
-  prompt="時尚品牌形象照片，簡約風格",
-  n=4,
-  size="1024x1024"
-)
-```
-
-### 2. Postiz API 整合
-
-```python
-import requests
-
-def post_to_social(platform, image_url, caption):
-    response = requests.post(
-        "https://api.postiz.com/v1/posts",
-        headers={"Authorization": f"Bearer {POSTIZ_API_KEY}"},
-        json={
-            "platform": platform,
-            "media": [{"url": image_url}],
-            "content": caption,
-            "scheduled_at": "2026-02-20T10:00:00Z"
-        }
-    )
-    return response.json()
-```
-
-### 3. n8n Workflow
-
-- 觸發：每日定時
-- 動作：生成內容 → 製圖 → 發布
+### 第五步：數據追蹤
+- n8n 定期收集互動數據
+- 回饋優化下次內容方向
 
 ## 支援平台
 
-- Instagram
-- Facebook
-- Twitter/X
-- LinkedIn
-- TikTok
+Instagram、Facebook、Twitter/X、LinkedIn、TikTok
 
-## 自動化程度
+## 自動化等級
 
-| レベル | 內容 |
-|--------|------|
-| 🌱 初級 | 圖片 + 文案生成，手動發布 |
-| 🚀 中級 | 自動生成 + 排程發布 |
-| 🤖 高級 | 完全自動化 + 數據優化 |
+| 等級 | 說明 |
+|------|------|
+| 初級 | 圖片 + 文案生成，手動發布 |
+| 中級 | 自動生成 + 排程發布 |
+| 高級 | 完全自動化 + 數據優化回饋 |
 
-## 應用案例
+## 工具指引
 
-### Lazy Uni Shop
+- Postiz API：`POST https://api.postiz.com/v1/posts`（需 Bearer Token）
+- OpenAI Image API：`openai.Image.create()`
+- n8n Workflow：每日定時觸發
 
-- 產品圖片自動生成
-- 社群貼文排程
-- 客戶訊息自動回覆
+## 錯誤處理
 
-## 相關技能
+| 情境 | 處理方式 |
+|------|----------|
+| OpenAI API 額度不足 | 提示用戶充值，暫停圖片生成功能 |
+| Postiz 排程失敗 | 重試 3 次，失敗則記錄待手動發布 |
+| 圖片生成不符預期 | 自動重新生成（最多 3 次），仍不佳則提示人工介入 |
+| n8n 工作流中斷 | 發送告警通知，記錄斷點以便續跑 |
+| 平台 API 限流 | 自動延遲重試，調整發布間隔 |
 
-- `facebook-messenger-handler` - FB 訊息處理
-- `whatsapp-handler` - WhatsApp 處理
-- `n8n-workflow` - 自動化排程
+## 使用範例
 
----
+- 「幫 Lazy Uni Shop 自動排程這週的 IG 貼文」
+- 「生成 5 張產品圖 + 文案，排到下週發布」
+- 「查看上週社群數據，優化本週內容方向」
+
+## 護欄
+
+- API Key 必須使用環境變數或 n8n credentials，禁止寫死
+- 發布前必須經過內容審核（至少自動檢查敏感詞）
+- 每日發布數量不超過各平台建議上限
+- 不自動回覆私訊，僅處理公開貼文
+- 圖片生成不使用真實人物肖像（除非獲得授權）

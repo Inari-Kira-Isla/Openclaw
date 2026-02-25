@@ -1,0 +1,167 @@
+{
+  "name": "OpenClaw GitHub Release 檢查",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        },
+        "triggerAt": {
+          "hour": 8,
+          "minute": 0
+        }
+      },
+      "id": "schedule",
+      "name": "每日 8:00 AM PST 觸發",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/openclaw/openclaw/releases/latest",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "github",
+      "name": "取得最新 Release",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fileName": "last-release.txt",
+        "dataPropertyName": "lastRelease",
+        "options": {}
+      },
+      "id": "read",
+      "name": "讀取上次版本",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.tag_name }}",
+              "value2": "={{ $('讀取上次版本').item.json.lastRelease }}"
+            }
+          ]
+        }
+      },
+      "id": "if",
+      "name": "檢查是否有新版本",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "fileName": "last-release.txt",
+        "data": "={{ $json.tag_name }}",
+        "options": {}
+      },
+      "id": "save",
+      "name": "儲存版本號",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [1050, 450]
+    },
+    {
+      "parameters": {
+        "chatId": "{{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=<b>📥 OpenClaw 新版本發布！</b>\n\n<b>版本：</b> {{ $json.tag_name }}\n<b>發布日期：</b> {{ $json.published_at }}\n\n<b>更新內容：</b>\n{{ $json.body.slice(0, 500) }}...\n\n<a href=\"{{ $json.html_url }}\">查看詳情</a>",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "telegram",
+      "name": "Telegram 通知",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "message": "無新版本"
+      },
+      "id": "noop",
+      "name": "無新版本",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1050, 150]
+    }
+  ],
+  "connections": {
+    "每日 8:00 AM PST 觸發": {
+      "main": [
+        [
+          {
+            "node": "取得最新 Release",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "取得最新 Release": {
+      "main": [
+        [
+          {
+            "node": "讀取上次版本",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "讀取上次版本": {
+      "main": [
+        [
+          {
+            "node": "檢查是否有新版本",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "檢查是否有新版本": {
+      "true": [
+        [
+          {
+            "node": "Telegram 通知",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "儲存版本號",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "false": [
+        [
+          {
+            "node": "無新版本",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "id": "openclaw-github-release-check"
+}

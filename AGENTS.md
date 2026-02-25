@@ -1,86 +1,117 @@
-# AGENTS.md - Agent 架構
+# AGENTS.md - 運營指南
 
-## 版本資訊
-- **版本**: 2.0
-- **架構**: Workflow-driven
-- **模型策略**: minimax-only
+## 每次 Session 啟動
+
+1. 讀 `SOUL.md` — 你是誰
+2. 讀 `USER.md` — 你在幫誰
+3. 讀 `memory/YYYY-MM-DD.md`（今天 + 昨天）— 最近發生什麼
+4. 主 Session 才讀 `MEMORY.md` — 長期記憶（群組中不讀，保護隱私）
+
+不需要問許可，直接讀。
+
+## 記憶管理
+
+- **每日筆記**: `memory/YYYY-MM-DD.md` — 原始紀錄
+- **長期記憶**: `MEMORY.md` — 篩選後的精華
+- 想記住的事就寫進檔案，不要只「記在腦中」
+- 定期整理 daily → MEMORY.md
+
+## Agent 總覽
+
+### 運作中
+
+| Agent | 功能 |
+|-------|------|
+| **muse-core (Kira)** | 中央治理：任務分流、GSCC 評估、結果整合 |
+| **model-dispatcher** | 模型選擇與調度 |
+
+### 優先啟用（商業價值）
+
+| Agent | 功能 | 技能數 |
+|-------|------|--------|
+| **reminder-agent** | BNI 提醒、每日簽到、跟進提醒、月度回顧 | 5 |
+| **bni-agent** | 會員管理、轉介紹追蹤、推薦、數據報告 | 4 |
+| **lifeos-agent** | 每日掃描、支出記錄、日程管理、WhatsApp/WeChat | 6 |
+| **crm-agent** | 聯絡人管理、互動追蹤、價值評分、跟進 | 5 |
+| **facebook-agent** | Messenger 處理、FAQ 自動回覆、轉接、記錄 | 5 |
+| **project-manager** | 任務追蹤、會議記錄、進度報告 | 3 |
+
+### 核心基礎（下一階段）
+
+| Agent | 功能 | 技能數 |
+|-------|------|--------|
+| **workflow-orchestrator** | 多步驟任務排程與狀態追蹤 | 3 |
+| **memory-agent** | 語義記憶搜尋、衝突偵測、記憶整理 | 7 |
+| **knowledge-agent** | FAQ 管理、知識搜尋、範本更新 | 5 |
+
+### 進化與安全
+
+| Agent | 功能 | 技能數 |
+|-------|------|--------|
+| **self-evolve-agent** | 漂移偵測、Prompt 優化、效能分析 | 5 |
+| **verification-agent** | 情境模擬、失敗分析、配置驗證 | 3 |
+| **skill-slime-agent** | 技能融合、版本追蹤、演進管理 | 4 |
+| **analytics-agent** | 轉介紹分析、趨勢分析、診斷分析 | 5 |
+| **governance-agent** | 風險評估、規則執行、衝突解決 | 3 |
+
+### 建構工具
+
+| Agent | 功能 | 技能數 |
+|-------|------|--------|
+| **mcp-builder** | MCP Server 骨架生成、容錯處理 | 2 |
+| **skill-creator** | SKILL.md 撰寫、自動化技能生成 | 2 |
+| **agent-builder** | 需求分析、架構設計、配置生成 | 4 |
+
+### 專業大師
+
+| Agent | 功能 |
+|-------|------|
+| **code-master** | 程式碼審查、軟體開發、架構設計 |
+| **design-master** | UX/UI 設計、視覺設計方案 |
+| **writing-master** | 專業文案撰寫、內容創作 |
+| **note-taker** | 知識記錄、筆記整理、學習歸納 |
+| **statistics-analyzer** | 統計分析、數據聚合、分析報告 |
+| **evaluator** | 品質評估、效能檢驗、輸出校正 |
+
+### 團隊角色
+
+| Agent | 角色 | 功能 |
+|-------|------|------|
+| **alice** | Writing Master (粉色) | 內容創作、故事敘述 |
+| **bob** | IT Engineer (青色) | 技術方案、系統架構 |
+| **carol** | Data Analyst (綠色) | 商業數據、趨勢分析 |
+| **dave** | Tech Scout (橙色) | 新興技術偵察、機會識別 |
+| **eva** | Analyst (紅色) | 數據分析、商業情報 |
+| **georgia** | Gaming Advisor (紫色) | 遊戲娛樂、創意建議 |
+| **isla** | Team Member | 團隊支援 |
+
+### 系統代理
+
+| Agent | 功能 |
+|-------|------|
+| **cynthia** | Kira 分身、知識管理、FAQ 維護、系統優化建議 |
+
+## 安全規則
+
+- 私人資料不外洩，群組中不分享 Joe 的個人資訊
+- `trash` > `rm`（可恢復比永久刪除好）
+- 讀檔、搜尋、整理：自由做
+- 發訊息、呼叫外部 API：先確認
+- 不確定就問
+
+## 群組行為
+
+- 被提到或被問問題才回應
+- 能提供實質價值才發言
+- 不要回覆每一則訊息，質量 > 數量
+- 支援 emoji reaction 的平台（Discord/Slack）用 reaction 代替回覆
+
+## 格式注意
+
+- Telegram：短段落、項目符號、適當 emoji
+- Discord/WhatsApp：不用 markdown 表格，用 bullet list
+- Discord 連結用 `<>` 包裹避免預覽
 
 ---
 
-## 📊 Agent 總覽
-
-| # | Agent ID | 名稱 | 類型 | 狀態 |
-|---|----------|------|------|------|
-| 0 | muse-core | 中央治理核心 | core | ✅ 運作中 |
-| 12 | model-dispatcher | 模型調度員 | dispatcher | ✅ 新建立 |
-| 1 | workflow-orchestrator | 工作流協調器 | planner | ⏳ 待設定 |
-| 2 | mcp-builder | MCP 構建器 | builder | ⏳ 待設定 |
-| 3 | skill-creator | 技能創建器 | author | ⏳ 待設定 |
-| 4 | verification-agent | 驗證代理 | verifier | ⏳ 待設定 |
-| 5 | memory-agent | 記憶代理 | archivist | ⏳ 待設定 |
-| 6 | skill-slime-agent | 技能史萊姆 | evolver | ⏳ 待設定 |
-| 7 | self-evolve-agent | 自我進化代理 | optimizer | ⏳ 待設定 |
-| 8 | analytics-agent | 分析師 | analyst | ⏳ 待設定 |
-| 9 | knowledge-agent | 知識庫管理 | librarian | ⏳ 待設定 |
-| 10 | governance-agent | 治理代理 | judge | ⏳ 待設定 |
-| 11 | lifeos-agent | 生活 OS | assistant | ⏳ 待設定 |
-
----
-
-## 🏛️ 核心層（Core Layer）
-
-### muse-core（中央治理核心）
-- **狀態**: ✅ 運作中
-- **角色**: manager
-- **模型**: minimax
-- **功能**: 任務拆解、Workflow 指派、GSCC 判定、最終裁決
-
----
-
-## 📋 Agent 類型說明
-
-| 類型 | 說明 | 範例 |
-|------|------|------|
-| **core** | 中央治理核心 | muse-core |
-| **planner** | 規劃與協調 | workflow-orchestrator |
-| **builder** | 構建與開發 | mcp-builder, skill-creator |
-| **assistant** | 輔助工具 | lifeos-agent |
-| **archivist** | 記憶管理 | memory-agent |
-| **evolver** | 進化優化 | skill-slime-agent, self-evolve-agent |
-| **judge** | 治理裁決 | governance-agent |
-| **analyst** | 數據分析 | analytics-agent |
-| **librarian** | 知識管理 | knowledge-agent |
-
----
-
-## 🔄 系統優化流程
-
-### 收到新資料時的處理流程
-
-1. **分析內容** → 評估系統優化點
-2. **應用優化** → 更新 Agent/Skill/Workflow
-3. **生成筆記** → 記錄到 Notion
-
-### 相關檔案
-- `/system/提示詞資料庫.md`
-- `/system/系統優化工作流.md`
-
----
-
-## 🔄 設定狀態
-
-- Workspace SOUL.md: ✅ 已更新為 muse-core
-- Sub-agents: ✅ 主要 agents 已建立
-- 技能: ✅ 向量摘要標準流程已建立
-
----
-
-## 📊 最新成就 (2026-02-19)
-
-- 11萬檔案整理里程碑
-- 50頁 Notion 筆記向量優化
-- Ollama + MiniMax 混合系統
-
----
-
-_Last Updated: 2026-02-19_
+_更新：2026-02-24_

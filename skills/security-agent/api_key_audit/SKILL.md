@@ -1,64 +1,52 @@
 ---
 name: api_key_audit
-description: API 金鑰審計。當需要檢查和管理 API 金鑰時觸發，包括：金鑰識別、風險評估、到期檢查、安全建議。
+description: API 金鑰審計。當用戶說「檢查金鑰」「audit keys」「金鑰安全」時觸發。
+metadata: { "openclaw": { "emoji": "🔑" } }
 ---
 
-# API Key Audit
+# API 金鑰審計
 
-## 審計維度
+掃描所有已配置的 API 金鑰，檢查有效性、過期狀態與暴露風險，產出審計報告。
 
-### 1. 存在性檢查
-- 哪些金鑰已配置
-- 存放位置
-- 覆蓋範圍
+## 操作 / 工作流程
+1. 用 `browser` 讀取 `~/.openclaw/` 下所有設定檔，列出已配置金鑰清單
+2. 逐一檢查每把金鑰：存放位置、是否過期、權限範圍
+3. 評估風險等級（是否明文存放、權限是否過大、是否有輪換機制）
+4. 用 `memory_search` 查詢上次審計紀錄，比對差異
+5. 產出審計報告，透過 `message` 傳送到 Telegram
+6. 若有高風險項目，立即標記並建議處理方式
 
-### 2. 有效性檢查
-- 是否過期
-- 是否有效
-- 權限範圍
+## 參數
+| 參數 | 類型 | 預設 | 說明 |
+|------|------|------|------|
+| scope | string | all | 審計範圍：`all` / `expired` / `high_risk` |
+| notify | bool | true | 是否傳送報告到 Telegram |
 
-### 3. 安全性檢查
-- 暴露風險
-- 權限過度
-- 誰有訪問權
+## 輸出格式
+```
+🔑 API 金鑰審計報告
 
-## 檢查清單
+掃描時間：{timestamp}
+金鑰總數：{total}
 
-```json
-{
-  "keys": [
-    {
-      "name": "telegram_token",
-      "location": "config",
-      "status": "valid",
-      "expires": null,
-      "risk": "low"
-    },
-    {
-      "name": "openai_api_key",
-      "location": "env",
-      "status": "expiring_soon",
-      "expires": "2024-02-01",
-      "risk": "medium"
-    }
-  ]
-}
+| 金鑰名稱 | 狀態 | 過期日 | 風險 |
+|----------|------|--------|------|
+| {name}   | {status} | {expires} | {risk_level} |
+
+⚠️ 需要處理：
+- {high_risk_item}: {建議}
+
+✅ 下次審計：{next_audit_date}
 ```
 
-## 安全建議
-
-| 風險 | 建議 |
+## 錯誤處理
+| 錯誤 | 處理 |
 |------|------|
-| 金鑰暴露 | 使用環境變數 |
-| 權限過大 | 最小權限原則 |
-| 未過期 | 設定過期時間 |
-| 無輪換 | 定期輪換 |
+| 設定檔無法讀取 | 記錄錯誤，通知管理員檢查權限 |
+| 金鑰驗證失敗 | 標記為「無法驗證」，建議手動確認 |
+| 審計超時 | 回報已完成部分，排程重新掃描未完成項目 |
 
-## 審計命令
-```bash
-# 檢查配置
-openclaw config get
-
-# 安全審計
-openclaw security audit
-```
+## 使用範例
+- "幫我檢查所有 API 金鑰的安全狀況"
+- "哪些金鑰快過期了"
+- "做一次金鑰審計"

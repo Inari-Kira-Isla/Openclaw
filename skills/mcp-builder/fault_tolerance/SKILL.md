@@ -1,108 +1,57 @@
 ---
 name: fault_tolerance
-description: 容錯與錯誤處理。當需要為系統添加錯誤處理和容錯機制時觸發，包括：重試策略、降級處理、超時控制、熔斷機制。
+description: 容錯與錯誤處理機制。當需要為系統加入重試、降級、超時或熔斷等容錯策略時觸發。
+metadata: { "openclaw": { "emoji": "🛡️" } }
 ---
 
-# Fault Tolerance
+# 容錯處理
 
-## 重試策略
+為系統添加容錯機制，包含重試策略、降級處理、超時控制與熔斷機制。
 
-### 指數退避
-```typescript
-async function withRetry<T>(
-  fn: () => Promise<T>,
-  options: { maxRetries: number; baseDelay: number }
-): Promise<T> {
-  for (let i = 0; i < options.maxRetries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (i === options.maxRetries - 1) throw error;
-      await sleep(options.baseDelay * Math.pow(2, i));
-    }
-  }
-  throw new Error('Max retries exceeded');
-}
+## 操作 / 工作流程
+
+1. **識別風險點** — 分析工作流中可能失敗的步驟（API 呼叫、外部服務、網路請求）
+2. **選擇策略** — 依風險類型選擇容錯策略：
+   - **重試**：暫時性錯誤（網路波動、超時），使用指數退避
+   - **降級**：服務不可用時，依序嘗試 L1 快取回退 → L2 預設值 → L3 降級服務 → L4 優雅失敗
+   - **超時**：設定最大等待時間，避免無限阻塞
+   - **熔斷**：連續失敗超過閾值，暫停請求（closed → open → half-open）
+3. **套用機制** — 將容錯策略包裝到目標步驟
+4. **監控回報** — 記錄每次觸發的容錯事件，透過 `message` 通知異常
+
+## 參數
+
+| 參數 | 類型 | 預設 | 說明 |
+|------|------|------|------|
+| strategy | string | retry | retry / fallback / timeout / circuit_breaker |
+| max_retries | number | 3 | 最大重試次數 |
+| base_delay | number | 1000 | 重試基礎延遲（毫秒） |
+| timeout_ms | number | 30000 | 超時時間（毫秒） |
+| failure_threshold | number | 5 | 熔斷觸發的連續失敗次數 |
+
+## 輸出格式
+
+```
+🛡️ 容錯處理報告
+策略：[重試 / 降級 / 超時 / 熔斷]
+觸發原因：[錯誤描述]
+處理結果：[成功恢復 / 降級回應 / 最終失敗]
+重試次數：[N] 次
+耗時：[M] ms
 ```
 
-### 重試配置
-```json
-{
-  "max_retries": 3,
-  "base_delay": 1000,
-  "max_delay": 30000,
-  "backoff": "exponential",
-  "retry_on": ["timeout", "network_error"]
-}
-```
+## 錯誤處理
 
-## 降級處理
-
-### 降級策略
-| 層級 | 策略 |
+| 錯誤 | 處理 |
 |------|------|
-| L1 | 緩存回退 |
-| L2 | 預設值回退 |
-| L3 | 降級服務 |
-| L4 | 優雅失敗 |
+| 重試次數用盡 | 觸發降級策略，回傳最後一次錯誤 |
+| 降級到 L4 仍失敗 | 回報優雅失敗訊息，通知管理者 |
+| 熔斷器開啟 | 快速回傳錯誤，定期測試服務是否恢復 |
+| 超時觸發 | 取消進行中的請求，嘗試重試或降級 |
 
-### 實現模式
-```typescript
-async function withFallback<T>(
-  primary: () => Promise<T>,
-  fallback: () => Promise<T>
-): Promise<T> {
-  try {
-    return await primary();
-  } catch (error) {
-    return await fallback();
-  }
-}
-```
+## 使用範例
 
-## 超時控制
-
-```typescript
-async function withTimeout<T>(
-  fn: () => Promise<T>,
-  timeoutMs: number
-): Promise<T> {
-  return Promise.race([
-    fn(),
-    new Promise<T>((_, reject) => 
-      setTimeout(() => reject(new Error('Timeout')), timeoutMs)
-    )
-  ]);
-}
-```
-
-## 熔斷機制
-
-```
-狀態：closed → open → half-open
-
-closed: 正常運作，記錄失敗次數
-open: 快速失敗，不執行請求
-half-open: 測試服務是否恢復
-```
-
-```typescript
-class CircuitBreaker {
-  private failures = 0;
-  private state: 'closed' | 'open' | 'half-open' = 'closed';
-  
-  async execute<T>(fn: () => Promise<T>): Promise<T> {
-    if (this.state === 'open') {
-      throw new Error('Circuit open');
-    }
-    try {
-      const result = await fn();
-      this.onSuccess();
-      return result;
-    } catch (error) {
-      this.onFailure();
-      throw error;
-    }
-  }
-}
-```
+- "這個 API 呼叫需要加上重試機制"
+- "服務掛了，啟用降級處理"
+- "設定 30 秒超時"
+- "連續失敗太多次，暫停請求"

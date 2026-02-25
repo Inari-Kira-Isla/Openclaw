@@ -1,245 +1,96 @@
 ---
-name: openclaw-n8n-multimodel
-description: OpenClaw ↔ n8n ↔ 多模型雙向循環架構
-metadata:
-  openclaw:
-    emoji: "🔄"
-    version: "1.0"
-    date: "2026-02-19"
+name: openclaw_n8n_multimodel
+description: OpenClaw + n8n 多模型雙向循環架構。當需要設定或管理 OpenClaw 透過 n8n 調度多模型時觸發，包括：任務路由、模型選擇、Fallback 機制、Webhook 配置。
 ---
 
-# OpenClaw ↔ n8n ↔ 多模型 雙向循環架構
+# OpenClaw + n8n 多模型架構
 
-## 整體資料流
+## 功能說明
+
+透過 n8n 作為中間層，讓 OpenClaw 根據任務類型自動路由到最適合的 AI 模型（本地 Ollama / Gemini / Claude），並支援自動 Fallback 切換。
+
+## 架構概覽
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      OpenClaw (Orchestrator)                    │
-│                                                                  │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    │
-│  │ 本地模型      │    │ Gemini       │    │ Claude      │    │
-│  │ (快速反應)   │    │ (即時分析)   │    │ (複雜邏輯)  │    │
-│  └──────────────┘    └──────────────┘    └──────────────┘    │
-└─────────────────────────────────────────────────────────────────┘
-         ↑                        ↑                        ↑
-         │                        │                        │
-    ┌────┴────────────────────────┴────────────────────────┴────┐
-    │                      n8n (Pipeline & Router)               │
-    │                                                               │
-    │  ┌─────────────┐   ┌─────────────┐   ┌─────────────┐    │
-    │  │ Webhook     │ → │ Model       │ → │ Fallback   │    │
-    │  │ Trigger     │   │ Router      │   │ Logic      │    │
-    │  └─────────────┘   └─────────────┘   └─────────────┘    │
-    └─────────────────────────────────────────────────────────────┘
+OpenClaw (決策層)
+    ↓ POST webhook
+n8n (路由層)
+    ├── 簡單任務 → 直接處理 → 回傳
+    ├── 即時分析 → Gemini API → 回傳
+    └── 複雜邏輯 → Claude API → 回傳
 ```
 
----
+## 工作流程
 
-## 架構組件
+### 第一步：任務分發
+- OpenClaw 分析用戶請求的任務類型
+- 發送 POST webhook 到 n8n，包含任務內容和建議模型
 
-### 1. OpenClaw (Orchestrator)
+### 第二步：n8n 模型路由
+- Webhook Trigger 接收請求（path: `openclaw-trigger`）
+- Switch 節點根據 `json.model` 欄位路由：
+  - `local` → 直接回傳本地結果
+  - `gemini` → 呼叫 Gemini API
+  - `claude` → 呼叫 Claude API
 
-| 功能 | 說明 |
-|------|------|
-| 任務分發 | 判斷任務類型，發送 webhook |
-| 結果整合 | 接收 n8n 回傳，存入記憶 |
-| 本地模型 | 快速反應、簡單任務 |
+### 第三步：模型執行
+- Gemini：`https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
+- Claude：`https://api.anthropic.com/v1/messages`
 
-### 2. n8n (Pipeline & Router)
+### 第四步：Fallback 處理
+- 若首選模型失敗，自動切換備選模型
+- Gemini 失敗 → Claude → 本地模型
 
-| 功能 | 說明 |
-|------|------|
-| Webhook Trigger | 接收 OpenClaw 請求 |
-| Model Router | 根據任務選擇模型 |
-| Fallback Logic | 自動切換模型 |
-| API 整合 | Gemini / Claude API |
+### 第五步：結果回傳
+- POST 回 OpenClaw Gateway：`http://localhost:18789/agent/main/respond`
+- OpenClaw 存入記憶並回覆用戶
 
-### 3. 多模型 (Specialist AI)
+## 模型選擇邏輯
 
-| 模型 | 擅長 | 場景 |
-|------|------|------|
+| 模型 | 擅長場景 | 適用任務 |
+|------|----------|----------|
 | 本地 Ollama | 快速反應 | 簡單對話、筆記 |
 | Gemini | 即時分析 | 市場數據、搜尋 |
-| Claude | 複雜邏輯 | Code 重構、推理 |
+| Claude | 複雜邏輯 | 程式重構、推理 |
 
----
-
-## 工作流設計
-
-### Flow 1: OpenClaw 發送到 n8n
-
-```
-OpenClaw
-    │
-    ▼ POST webhook
-n8n Webhook (openclaw-trigger)
-    │
-    ▼
-n8n Model Router
-    │
-    ├── 簡單任務 → 直接處理 → 回傳 OpenClaw
-    │
-    ├── Gemini 任務 → Gemini API → 回傳 OpenClaw
-    │
-    └── Claude 任務 → Claude API → 回傳 OpenClaw
-```
-
-### Flow 2: Fallback 機制
-
-```
-IF Gemini 失敗
-    → 呼叫 Claude
-    → IF Claude 失敗
-        → 回傳本地模型結果
-```
-
----
-
-## n8n Workflow 節點
-
-### 節點 1: Webhook Trigger
-- Path: `openclaw-trigger`
-- Method: POST
-
-### 節點 2: Router (Switch)
-- 根據 `json.model` 判斷
-  - `gemini` → Gemini flow
-  - `claude` → Claude flow
-  - `local` → 直接回傳
-
-### 節點 3: Gemini HTTP Request
-- URL: `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`
-- Auth: API Key in env
-
-### 節點 4: Claude HTTP Request
-- URL: `https://api.anthropic.com/v1/messages`
-- Auth: API Key in header
-
-### 節點 5: Fallback Logic
-- IF 失敗 → 切換模型
-- IF 全部失敗 → 回傳錯誤
-
-### 節點 6: HTTP Request (回傳 OpenClaw)
-- POST 到 OpenClaw Gateway
-- URL: `http://localhost:18789/agent/main/respond`
-
----
-
-## 使用場景
-
-### 場景 1: 市場分析
-
-```
-用戶: "分析 BTC 今日趨勢"
-    │
-    ▼
-OpenClaw 判斷: 需要即時數據
-    │
-    ▼ POST webhook {task: "分析", context: "...", model: "gemini"}
-    │
-    ▼
-n8n 接收 → 呼叫 Gemini API
-    │
-    ▼
-Gemini 分析結果回傳
-    │
-    ▼
-n8n POST 回 OpenClaw
-    │
-    ▼
-OpenClaw 存入記憶 → 回覆用戶
-```
-
-### 場景 2: 程式重構
-
-```
-用戶: "重構這段 Python 代碼"
-    │
-    ▼
-OpenClaw 判斷: 需要複雜邏輯
-    │
-    ▼ POST webhook {task: "重構", code: "...", model: "claude"}
-    │
-    ▼
-n8n → Claude API
-    │
-    ▼
-Claude 重構結果回傳
-    │
-    ▼
-OpenClaw 存入記憶 → 回覆用戶
-```
-
-### 場景 3: 簡單任務
-
-```
-用戶: "天氣怎麼樣?"
-    │
-    ▼
-OpenClaw 直接用本地模型回覆
-    │
-    (不需要發送到 n8n)
-```
-
----
-
-## API Key 設定
-
-### n8n 環境變數
+## 工具指引
 
 ```bash
-# Docker 環境
-docker exec -e GEMINI_API_KEY="your-key" n8n
-docker exec -e ANTHROPIC_API_KEY="your-key" n8n
+# OpenClaw Gateway 設定（允許外部訪問）
+# config.yaml:
+#   gateway:
+#     bind: "0.0.0.0"
+#     port: 18789
 
-# 或在 n8n credentials 中設定
-```
-
-### 安全原則
-
-- ❌ 不要寫死在 workflow JSON 中
-- ✅ 使用環境變數或 n8n credentials
-- ✅ 定期輪換 API Key
-
----
-
-## OpenClaw Gateway 設定
-
-### 允許外部訪問
-
-```yaml
-# config.yaml
-gateway:
-  bind: "0.0.0.0"  # 允許外部訪問
-  port: 18789
-```
-
-### 測試連接
-
-```bash
-# 從 n8n 容器測試
+# 從 n8n 容器測試連線
 curl -X POST http://host.docker.internal:18789/agent/main/respond \
   -H "Content-Type: application/json" \
   -d '{"result": "test"}'
 ```
 
----
+n8n Workflow 檔案：`n8n/openclaw-multimodel.json`
 
-## 檔案清單
+## 錯誤處理
 
-| 檔案 | 說明 |
-|------|------|
-| `n8n/openclaw-multimodel.json` | n8n workflow |
-| `skills/openclaw-n8n-multimodel/SKILL.md` | Skill 文檔 |
-| `learning/openclaw-n8n-architecture.md` | 學習筆記 |
+| 情境 | 處理方式 |
+|------|----------|
+| n8n Webhook 無回應 | 檢查 n8n 容器是否運行，確認 webhook path 正確 |
+| Gemini API 失敗 | 自動 Fallback 到 Claude |
+| Claude API 失敗 | Fallback 到本地模型 |
+| 全部模型失敗 | 回傳錯誤訊息給用戶，記錄到日誌 |
+| OpenClaw Gateway 連線失敗 | 檢查 port 18789，確認 bind 設定為 0.0.0.0 |
+| API Key 無效 | 回傳認證錯誤，提示更新 credentials |
 
----
+## 使用範例
 
-## 下一步
+- 「分析 BTC 今日趨勢」（路由到 Gemini，即時數據分析）
+- 「重構這段 Python 代碼」（路由到 Claude，複雜邏輯）
+- 「天氣怎麼樣？」（本地模型直接回覆，不經 n8n）
 
-- [ ] 設定 OpenClaw Gateway 允許外部訪問
-- [ ] 建立 n8n Multimodel Workflow
-- [ ] 測試雙向循環
-- [ ] 監控與優化
+## 護欄
 
----
+- API Key 使用 n8n credentials 或環境變數，禁止寫死在 workflow JSON
+- 定期輪換 API Key
+- Gateway bind 0.0.0.0 僅限本地開發環境，生產環境需加認證
+- Fallback 最多嘗試 3 個模型，避免無限循環
+- 不記錄完整 API 回應內容到日誌，僅記錄狀態和錯誤

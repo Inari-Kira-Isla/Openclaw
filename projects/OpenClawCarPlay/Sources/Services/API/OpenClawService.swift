@@ -6,8 +6,9 @@ class OpenClawService: ObservableObject {
     @Published var errorMessage: String?
     
     // OpenClaw API Configuration
-    private let baseURL = "http://localhost:8080/api"
+    private let baseURL = "http://localhost:18789"
     private let userID = "carplay-ios"
+    private let token = "openclaw123"
     
     init() {
         checkConnection()
@@ -17,9 +18,12 @@ class OpenClawService: ObservableObject {
     
     func checkConnection() {
         // Ping OpenClaw gateway
-        guard let url = URL(string: "\(baseURL)/ping") else { return }
+        guard let url = URL(string: "\(baseURL)/health") else { return }
         
-        URLSession.shared.dataTask(with: url) { [weak self] _, response, error in
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: urlRequest) { [weak self] _, response, error in
             DispatchQueue.main.async {
                 if let httpResponse = response as? HTTPURLResponse {
                     self?.isConnected = (httpResponse.statusCode == 200)
@@ -139,14 +143,16 @@ class OpenClawService: ObservableObject {
     // MARK: - Private
     
     private func send(_ request: OpenClawRequest, completion: @escaping (OpenClawResponse) -> Void) {
-        guard let url = URL(string: "\(baseURL)/voice") else { return }
+        guard let url = URL(string: "\(baseURL)/v1/responses") else { return }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         do {
-            urlRequest.httpBody = try JSONEncoder().encode(request)
+            let body = ["message": request.text ?? request.command ?? ""]
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body)
         } catch {
             errorMessage = "Encoding error"
             return
@@ -155,12 +161,23 @@ class OpenClawService: ObservableObject {
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             // For demo, simulate response
             DispatchQueue.main.async {
-                let mockResponse = OpenClawResponse(
-                    success: true,
-                    message: "收到指令：\(request.text)",
-                    data: nil
-                )
-                completion(mockResponse)
+                if let data = data,
+                   let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let message = json["text"] as? String ?? json["message"] as? String {
+                    let mockResponse = OpenClawResponse(
+                        success: true,
+                        message: message,
+                        data: nil
+                    )
+                    completion(mockResponse)
+                } else {
+                    let mockResponse = OpenClawResponse(
+                        success: true,
+                        message: "收到指令：\(request.text ?? request.command ?? "")",
+                        data: nil
+                    )
+                    completion(mockResponse)
+                }
             }
         }.resume()
     }

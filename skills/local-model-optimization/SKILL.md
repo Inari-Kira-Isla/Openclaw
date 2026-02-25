@@ -1,193 +1,87 @@
 ---
-name: local-model-optimization
-description: 本地模型優化流程 - MiniMax 驗證反饋系統
-metadata:
-  openclaw:
-    emoji: "🔄"
-    version: "1.0"
-    date: "2026-02-19"
+name: local_model_optimization
+description: 本地模型優化流程。當需要建立或管理本地模型與雲端模型的驗證反饋系統時觸發，包括：MiniMax 驗證、品質比對、提示詞優化、本地化遷移。
 ---
 
 # 本地模型優化流程
 
-## 概述
+## 功能說明
 
-建立 MiniMax 驗證 → 本地模型優化 的閉環系統，逐步實現本地化。
+建立 MiniMax 驗證 + 本地模型優化的閉環系統，透過持續比對和反饋學習，逐步提升本地模型品質，最終實現完全本地化。
 
-## 架構
+## 演進階段
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    模型調度架構                               │
-├─────────────────────────────────────────────────────────────┤
-│  用戶請求                                                    │
-│     ↓                                                        │
-│  model-dispatcher                                           │
-│     ↓                                                        │
-│  ┌──────────────┐    ┌──────────────┐                     │
-│  │ 本地模型      │    │ MiniMax      │                     │
-│  │ (Ollama)    │ ←→ │ (驗證)       │                     │
-│  └──────────────┘    └──────────────┘                     │
-│     ↓                                                        │
-│  結果輸出                                                    │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## 階段
-
-### Phase 1: 混合模式 (現在)
-
-| 任務類型 | 模型 | 驗證 |
-|----------|------|------|
-| 簡單對話 | Ollama | 無 |
-| 複雜推理 | Ollama → MiniMax 驗證 | ✅ |
-| 程式碼 | codellama → MiniMax 驗證 | ✅ |
-
-### Phase 2: 本地優先
-
-| 任務類型 | 模型 | 驗證 |
-|----------|------|------|
-| 簡單對話 | Ollama | 無 |
-| 複雜推理 | Ollama | 抽樣驗證 |
-| 程式碼 | codellama | 抽樣驗證 |
-
-### Phase 3: 完全本地
-
-| 任務類型 | 模型 |
-|----------|------|
-| 所有任務 | 本地模型 |
-| 異常 | 觸發反饋學習 |
-
----
+| 階段 | 模式 | 驗證方式 | 本地化率 |
+|------|------|----------|----------|
+| Phase 1 | 混合模式 | 每次驗證 | ~50% |
+| Phase 2 | 本地優先 | 抽樣驗證 | ~80% |
+| Phase 3 | 完全本地 | 異常觸發 | ~95% |
 
 ## 工作流程
 
-### 1. 請求處理
+### 第一步：請求分析
+- 分析任務類型（對話/推理/程式碼/寫作）
+- 根據 dispatch_rules 選擇模型
 
-```
-收到請求
-   ↓
-分析任務類型
-   ↓
-選擇模型 (本地/MiniMax)
-   ↓
-執行
-```
+### 第二步：模型調度
 
-### 2. 驗證流程 (Phase 1)
+| 任務類型 | 模型 | 驗證 |
+|----------|------|------|
+| 簡單對話 | ollama:llama3 | 無 |
+| 複雜推理 | ollama:mistral | MiniMax 驗證 |
+| 程式碼 | ollama:codellama | MiniMax 驗證 |
+| 創意寫作 | ollama:llama3 | 無 |
 
-```
-本地模型輸出
-   ↓
-比對 MiniMax 結果
-   ↓
-計算差異分數
-   ↓
-記錄反饋
-   ↓
-調整模型參數/提示詞
-```
+### 第三步：驗證比對（Phase 1）
+- 本地模型產出結果
+- MiniMax 產出對照結果
+- 計算餘弦相似度
+- 相似度 < 0.8 時記錄差異並觸發優化
 
-### 3. 反饋學習
+### 第四步：反饋學習
+- 記錄差異模式（語法、風格、邏輯）
+- 調整提示詞模板
+- 更新 dispatch_rules 權重
 
-```python
-def verify_and_learn(local_output, minimax_output):
-    similarity = cosine_similarity(local_output, minimax_output)
-    
-    if similarity < 0.8:
-        # 記錄差異
-        record_feedback(
-            task_type=task_type,
-            local_output=local_output,
-            minimax_output=minimax_output,
-            score=similarity
-        )
-        
-        # 調整提示詞
-        optimize_prompt(task_type)
-    
-    return similarity
-```
+### 第五步：週期檢查
+- 每週檢查平均相似度
+- 平均 < 0.7 → 觸發全面優化
+- 連續 3 次失敗 → 切換模型
+- 新任務類型 → 添加規則
 
----
-
-## 模型選擇邏輯
-
-### model-dispatcher 規則
-
-```yaml
-dispatch_rules:
-  - name: "簡單對話"
-    keywords: ["你好", "天氣", "現在"]
-    model: "ollama:llama3"
-    verify: false
-  
-  - name: "複雜推理"
-    keywords: ["分析", "邏輯", "推理"]
-    model: "ollama:mistral"
-    verify: true
-    verify_with: "minimax"
-  
-  - name: "程式碼"
-    keywords: ["代碼", "程式", "function", "def"]
-    model: "ollama:codellama"
-    verify: true
-    verify_with: "minimax"
-  
-  - name: "創意寫作"
-    keywords: ["寫", "創作", "故事"]
-    model: "ollama:llama3"
-    verify: false
-```
-
----
-
-## 反饋記錄
-
-### 記錄格式
+## 反饋記錄格式
 
 ```json
 {
   "timestamp": "2026-02-19T06:30:00",
   "task_type": "程式碼",
   "local_model": "codellama",
-  "local_output": "...",
-  "minimax_output": "...",
   "similarity": 0.85,
   "issues": ["語法錯誤", "風格不一致"],
-  "optimization": "添加更多注釋"
+  "optimization": "添加更多注釋提示"
 }
 ```
 
----
+## 錯誤處理
 
-## 數據收集
+| 情境 | 處理方式 |
+|------|----------|
+| 本地模型回應逾時 | 設定 30 秒超時，逾時後直接使用 MiniMax |
+| MiniMax API 不可用 | 跳過驗證，記錄待驗證標記 |
+| 相似度持續低於 0.5 | 該任務類型暫時回退至雲端模型 |
+| 新增未知任務類型 | 預設使用 llama3 + 全量驗證 |
+| 反饋記錄寫入失敗 | 輸出到 stderr，不阻斷主流程 |
 
-| 指標 | 追蹤 |
-|------|------|
-| 相似度分數 | 每週平均 |
-| 驗證次數 | 每日 |
-| 優化次數 | 每月 |
-| 模型切換率 | 每日 |
+## 使用範例
 
----
+- 「檢查本地模型這週的品質分數」
+- 「把程式碼任務的模型從 codellama 換成 deepseek-coder」
+- 「執行一次完整的本地模型 vs MiniMax 品質比對」
 
-## 自我優化觸發條件
+## 護欄
 
-```
-每週檢查:
-  - 平均相似度 < 0.7 → 觸發優化
-  - 連續3次失敗 → 切換模型
-  - 新任務類型 → 添加規則
-```
-
----
-
-## 里程碑
-
-- [ ] Phase 1: 混合模式建立
-- [ ] Phase 2: 80% 本地化
-- [ ] Phase 3: 95% 本地化
-- [ ] Phase 4: 完全本地 + 自我優化
-
----
+- MiniMax API Key 使用環境變數管理
+- 反饋記錄不包含完整輸入輸出，僅保留摘要和分數
+- 自動優化不修改核心模型權重，僅調整提示詞
+- Phase 切換需人工確認，不自動跳級
+- 完全本地化後仍保留雲端驗證能力作為備用

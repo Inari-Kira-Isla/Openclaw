@@ -1,0 +1,396 @@
+{
+  "version": "1.0",
+  "created": "2026-02-20",
+  "documents": [
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v9.md",
+      "title": "自我進化訓練記錄 (第九次)"
+    },
+    {
+      "type": "memory",
+      "source": "phase1-completed.md",
+      "title": "Phase 1: 基因膠囊化系統 - 完成"
+    },
+    {
+      "type": "memory",
+      "source": "55-skills-implementation.md",
+      "title": "55 技能實踐計劃 - OpenClaw"
+    },
+    {
+      "type": "memory",
+      "source": "ai_agents_trends_20260219.md",
+      "title": "AI Agents, 自動化, 本地 LLM 趨勢學習筆記"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-summary.md",
+      "title": "自我進化訓練記錄 (第六次 - 總結)"
+    },
+    {
+      "type": "memory",
+      "source": "claude-code-skills-deep.md",
+      "title": "Claude Code Skills - 深入研究"
+    },
+    {
+      "type": "memory",
+      "source": "order-analysis-implementation.md",
+      "title": "訂單分析系統 - 實施總結"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_20260219_2.md",
+      "title": "自我進化訓練報告 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-18.md",
+      "title": ""
+    },
+    {
+      "type": "memory",
+      "source": "lobster-skill-tips.md",
+      "title": "龍蝦養心得 3 - Skill 使用技巧"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_20260219_3.md",
+      "title": "自我進化訓練報告 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "ai-employee-philosophy.md",
+      "title": "AI 作為「員工」而非「工具」"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19.md",
+      "title": "2026-02-19 工作日誌"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agent-trends-2026.md",
+      "title": "AI Agent Trends 2026 - Google Cloud 報告"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v8.md",
+      "title": "自我進化訓練記錄 (第八次)"
+    },
+    {
+      "type": "memory",
+      "source": "wechat-unread-2026-02-18.md",
+      "title": "WeChat 未讀訊息記錄 - 完整版"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_20260219.md",
+      "title": "自我進化訓練報告 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "ai-organic-qa-system.md",
+      "title": "AI Agent 有機 QA 體系 - 隔日 Bug 解決方案"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v3.md",
+      "title": "自我進化訓練記錄 (第三次)"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-16.md",
+      "title": "Lazy Uni Shop 專案 - 2026-02-16 更新"
+    },
+    {
+      "type": "memory",
+      "source": "order-training-data.md",
+      "title": "訂單分析 - 訓練數據集"
+    },
+    {
+      "type": "memory",
+      "source": "facebook-n8n-workflow.md",
+      "title": "Facebook Messenger + n8n + OpenClaw Workflow"
+    },
+    {
+      "type": "memory",
+      "source": "facebook-messenger-integration.md",
+      "title": "Facebook Messenger + n8n + OpenClaw 整合計畫"
+    },
+    {
+      "type": "memory",
+      "source": "whatsapp-integration.md",
+      "title": "WhatsApp + n8n + OpenClaw 整合計畫"
+    },
+    {
+      "type": "memory",
+      "source": "gene-capsule-format.md",
+      "title": "Gene Capsule 格式標準"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v7.md",
+      "title": "自我進化訓練記錄 (第七次)"
+    },
+    {
+      "type": "memory",
+      "source": "index.md",
+      "title": "向量化索引"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-manager-mode.md",
+      "title": "OpenClaw 中控模式 (Manager Mode) 詳解"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v2.md",
+      "title": "自我進化訓練記錄 (第二次)"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-17.md",
+      "title": "Daily Memory - 2026-02-17"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_feedback.md",
+      "title": "自我進化訓練反饋數據"
+    },
+    {
+      "type": "memory",
+      "source": "knowledge_update_20260219.md",
+      "title": "知識庫更新記錄 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "web-trends-20260219.md",
+      "title": "Web 趨勢監控筆記 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "larry-tiktok-automation.md",
+      "title": "AI Agent 案例學習 - Larry TikTok Automation"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v5.md",
+      "title": "自我進化訓練記錄 (第五次)"
+    },
+    {
+      "type": "memory",
+      "source": "tools-pi-for-excel.md",
+      "title": "Pi for Excel 研究"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_feedback_20260219.md",
+      "title": "自我進化訓練反饋數據 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "sync-status-2026-02-18.md",
+      "title": "同步記錄 - 2026-02-18"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-20.md",
+      "title": "2026-02-20 工作日誌"
+    },
+    {
+      "type": "memory",
+      "source": "INDEX.md",
+      "title": "記憶索引"
+    },
+    {
+      "type": "memory",
+      "source": "order-analysis-result.md",
+      "title": "訂單分析結果 - 標準格式"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-automation.md",
+      "title": "自我進化訓練 - 自動化工具/AI 安全主題"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-model.md",
+      "title": "自我進化訓練 - AI 模型主題"
+    },
+    {
+      "type": "memory",
+      "source": "discord-bot-progress.md",
+      "title": "Discord Bot 申請進度"
+    },
+    {
+      "type": "memory",
+      "source": "vectorization-check.md",
+      "title": "記憶向量化檢查報告"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19-pm.md",
+      "title": "自我進化訓練報告 (2026-02-19)"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19_self_evolution_training.md",
+      "title": "自我進化訓練記錄 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19-self-evolution.md",
+      "title": "自我進化訓練日誌 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "order-analysis-skill-plan.md",
+      "title": "訂單分析 Skill - 需求分析"
+    },
+    {
+      "type": "memory",
+      "source": "learning-analysis-20260220.md",
+      "title": "今日學習筆記分析"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-agent.md",
+      "title": "自我進化訓練 - 主題輪換"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19-110k-files.md",
+      "title": "奇點時刻 - 11萬檔案整理里程碑"
+    },
+    {
+      "type": "memory",
+      "source": "4d-qa-application.md",
+      "title": "4D QA 體系應用計劃 - OpenClaw"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-v4.md",
+      "title": "自我進化訓練記錄 (第四次)"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19.md",
+      "title": "自我進化訓練記錄"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_2026-02-19.md",
+      "title": "自我進化訓練記錄 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19.md",
+      "title": "自我進化訓練記錄 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "2026-02-19_ai_news_training.md",
+      "title": "自我進化訓練記錄 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-complete.md",
+      "title": "自我進化訓練 - 每日完成"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-done.md",
+      "title": "自我進化訓練 - 主題完成狀態"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-55-skills-philosophy.md",
+      "title": "OpenClaw 55 個技能 - 哲學總結"
+    },
+    {
+      "type": "memory",
+      "source": "order-analysis-prompt.md",
+      "title": "訂單分析 - MiniMax 訓練數據"
+    },
+    {
+      "type": "memory",
+      "source": "order-integration-plan.md",
+      "title": "訂單分析整合計劃"
+    },
+    {
+      "type": "memory",
+      "source": "ollama-feedback-baseline.md",
+      "title": "Ollama 反饋學習系統 - 初始狀態"
+    },
+    {
+      "type": "memory",
+      "source": "learning-feedback-20260220.md",
+      "title": "今日學習分析回饋總結"
+    },
+    {
+      "type": "memory",
+      "source": "ai_self_evolution_20260219.md",
+      "title": "AI 趨勢自我進化訓練報告"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_20260219_4.md",
+      "title": "自我進化訓練報告 - 2026-02-19 (第4次)"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agents-local-llm-2026-02-19.md",
+      "title": "知識庫更新 - AI Agents 與本地 LLM 趨勢 (2026-02-19)"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-llm.md",
+      "title": "自我進化訓練 - 本地 LLM 主題"
+    },
+    {
+      "type": "memory",
+      "source": "training_summary_20260219.md",
+      "title": "知識庫更新訓練總結 (2026-02-19)"
+    },
+    {
+      "type": "memory",
+      "source": "whisper-testing.md",
+      "title": "Whisper 測試計劃"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-system.md",
+      "title": "自我進化訓練 - 系統優化主題"
+    },
+    {
+      "type": "memory",
+      "source": "order-prompt-optimization.md",
+      "title": "訂單分析 Prompt 優化"
+    },
+    {
+      "type": "memory",
+      "source": "wechat-order-analysis-20260220.md",
+      "title": "WeChat 訂單分析 - 一般訂單群組"
+    },
+    {
+      "type": "memory",
+      "source": "evomap-application.md",
+      "title": "EvoMap 應用分析 - OpenClaw 整合"
+    },
+    {
+      "type": "memory",
+      "source": "ai_trends_20260219.md",
+      "title": "AI 趨勢學習報告 - 2026-02-19"
+    },
+    {
+      "type": "memory",
+      "source": "evomap-ai-evolution-network.md",
+      "title": "EvoMap - AI 進化網絡"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agent-infrastructure-trends.md",
+      "title": "AI Agent 基礎設施化趨勢分析"
+    }
+  ]
+}
