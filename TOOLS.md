@@ -21,8 +21,9 @@
 
 ## 工作流自動化
 
-- **n8n** — 已安裝，尚未建立 workflow
-- 預計用途：Facebook Messenger webhook、WhatsApp 中轉
+- **n8n** — 可透過 `npx n8n` 啟動（需時再啟用）
+- **自動化腳本** — `scripts/automation.js` (Notion/Telegram 整合)
+- **自動記錄鉤子** — `scripts/auto_record.py`
 
 ## AI 模型
 

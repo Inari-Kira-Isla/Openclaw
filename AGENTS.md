@@ -1,117 +1,166 @@
-# AGENTS.md - 運營指南
+# AGENTS.md - 5 Bot 完整架構
 
-## 每次 Session 啟動
+## Bot 總覽
 
-1. 讀 `SOUL.md` — 你是誰
-2. 讀 `USER.md` — 你在幫誰
-3. 讀 `memory/YYYY-MM-DD.md`（今天 + 昨天）— 最近發生什麼
-4. 主 Session 才讀 `MEMORY.md` — 長期記憶（群組中不讀，保護隱私）
-
-不需要問許可，直接讀。
-
-## 記憶管理
-
-- **每日筆記**: `memory/YYYY-MM-DD.md` — 原始紀錄
-- **長期記憶**: `MEMORY.md` — 篩選後的精華
-- 想記住的事就寫進檔案，不要只「記在腦中」
-- 定期整理 daily → MEMORY.md
-
-## Agent 總覽
-
-### 運作中
-
-| Agent | 功能 |
-|-------|------|
-| **muse-core (Kira)** | 中央治理：任務分流、GSCC 評估、結果整合 |
-| **model-dispatcher** | 模型選擇與調度 |
-
-### 優先啟用（商業價值）
-
-| Agent | 功能 | 技能數 |
-|-------|------|--------|
-| **reminder-agent** | BNI 提醒、每日簽到、跟進提醒、月度回顧 | 5 |
-| **bni-agent** | 會員管理、轉介紹追蹤、推薦、數據報告 | 4 |
-| **lifeos-agent** | 每日掃描、支出記錄、日程管理、WhatsApp/WeChat | 6 |
-| **crm-agent** | 聯絡人管理、互動追蹤、價值評分、跟進 | 5 |
-| **facebook-agent** | Messenger 處理、FAQ 自動回覆、轉接、記錄 | 5 |
-| **project-manager** | 任務追蹤、會議記錄、進度報告 | 3 |
-
-### 核心基礎（下一階段）
-
-| Agent | 功能 | 技能數 |
-|-------|------|--------|
-| **workflow-orchestrator** | 多步驟任務排程與狀態追蹤 | 3 |
-| **memory-agent** | 語義記憶搜尋、衝突偵測、記憶整理 | 7 |
-| **knowledge-agent** | FAQ 管理、知識搜尋、範本更新 | 5 |
-
-### 進化與安全
-
-| Agent | 功能 | 技能數 |
-|-------|------|--------|
-| **self-evolve-agent** | 漂移偵測、Prompt 優化、效能分析 | 5 |
-| **verification-agent** | 情境模擬、失敗分析、配置驗證 | 3 |
-| **skill-slime-agent** | 技能融合、版本追蹤、演進管理 | 4 |
-| **analytics-agent** | 轉介紹分析、趨勢分析、診斷分析 | 5 |
-| **governance-agent** | 風險評估、規則執行、衝突解決 | 3 |
-
-### 建構工具
-
-| Agent | 功能 | 技能數 |
-|-------|------|--------|
-| **mcp-builder** | MCP Server 骨架生成、容錯處理 | 2 |
-| **skill-creator** | SKILL.md 撰寫、自動化技能生成 | 2 |
-| **agent-builder** | 需求分析、架構設計、配置生成 | 4 |
-
-### 專業大師
-
-| Agent | 功能 |
-|-------|------|
-| **code-master** | 程式碼審查、軟體開發、架構設計 |
-| **design-master** | UX/UI 設計、視覺設計方案 |
-| **writing-master** | 專業文案撰寫、內容創作 |
-| **note-taker** | 知識記錄、筆記整理、學習歸納 |
-| **statistics-analyzer** | 統計分析、數據聚合、分析報告 |
-| **evaluator** | 品質評估、效能檢驗、輸出校正 |
-
-### 團隊角色
-
-| Agent | 角色 | 功能 |
-|-------|------|------|
-| **alice** | Writing Master (粉色) | 內容創作、故事敘述 |
-| **bob** | IT Engineer (青色) | 技術方案、系統架構 |
-| **carol** | Data Analyst (綠色) | 商業數據、趨勢分析 |
-| **dave** | Tech Scout (橙色) | 新興技術偵察、機會識別 |
-| **eva** | Analyst (紅色) | 數據分析、商業情報 |
-| **georgia** | Gaming Advisor (紫色) | 遊戲娛樂、創意建議 |
-| **isla** | Team Member | 團隊支援 |
-
-### 系統代理
-
-| Agent | 功能 |
-|-------|------|
-| **cynthia** | Kira 分身、知識管理、FAQ 維護、系統優化建議 |
-
-## 安全規則
-
-- 私人資料不外洩，群組中不分享 Joe 的個人資訊
-- `trash` > `rm`（可恢復比永久刪除好）
-- 讀檔、搜尋、整理：自由做
-- 發訊息、呼叫外部 API：先確認
-- 不確定就問
-
-## 群組行為
-
-- 被提到或被問問題才回應
-- 能提供實質價值才發言
-- 不要回覆每一則訊息，質量 > 數量
-- 支援 emoji reaction 的平台（Discord/Slack）用 reaction 代替回覆
-
-## 格式注意
-
-- Telegram：短段落、項目符號、適當 emoji
-- Discord/WhatsApp：不用 markdown 表格，用 bullet list
-- Discord 連結用 `<>` 包裹避免預覽
+| Bot | Telegram | 團隊 | SOUL | Workflow | Skill | Tool | Model |
+|-----|----------|------|------|----------|-------|------|-------|
+| **Nei** | @Neicheok_bot | 雙核心 | 決策審視者 | 審視→質疑→建議 | gscc_classifier, result_integrator | Claude API | Claude 4.5 |
+| **Kira** | @KiraIsla_bot | 記憶層 | 中央治理 | 任務分流→整合回覆 | memory_search, gscc_classifier | Telegram, Notion | MiniMax-M2.5 |
+| **Cynthia** | @CynthiaChoi_bot | 記憶層 | 知識庫守護者 | 查詢→回覆→更新知識庫 | knowledge_search, faq_management | Notion, SQLite-Vec | MiniMax-M2.5 |
+| **史萊姆** | @Joejoebaby_bot | 學習機制 | 持續學習優化 | 學習→優化→驗證→報告 | prompt_refinement, drift_detection | OpenClaw 工具 | MiniMax-M2.5 |
+| **Team** | @Inarijoe_bot | 進化引擎 | 工作流協調者 | 接收→排程→執行→回報 | task_scheduling, state_control | Cron, Heartbeat | MiniMax-M2.5 |
+| **Evolution** | @GodKiraCheok_bot | 進化引擎 | 技能進化者 | 評估→融合→版本控制→發布 | skill-creator, workflow_improvement | Skills 資料夾 | MiniMax-M2.5 |
 
 ---
 
-_更新：2026-02-24_
+## 雙核心制 (2026-03-01)
+
+```
+         ┌─────────────┐
+         │   User      │
+         │   Request   │
+         └──────┬──────┘
+                │
+         ┌──────▼──────┐
+         │    Kira     │ ◄── 方案提出 (MiniMax)
+         └──────┬──────┘
+                │
+         ┌──────▼──────┐
+         │    Nei      │ ◄── 裁決 (Claude 4.5)
+         └──────┬──────┘
+                │
+         ┌──────▼──────┐
+         │  Evolution  │ ◄── 上訴裁決
+         └──────┬──────┘
+                │
+         ┌──────▼──────┐
+         │    Team     │ ◄── 執行
+         └─────────────┘
+```
+
+### 決策流程
+
+1. **Kira** 收到需求 → 分析 → 提出方案
+2. **Nei** 審視方案 → 最終裁決
+3. **Team** 執行決策
+
+### 裁決規則
+
+| 情況 | 處理方式 |
+|------|----------|
+| Nei 同意 | 執行 |
+| Nei 否決 | 重新提案或上訴 |
+| 上訴 | Evolution 裁決 |
+| 重大分歧 | Joe 裁決 |
+
+### 時限與制約
+
+| 項目 | 規則 |
+|------|------|
+| Nei 回覆時限 | 60 秒內 |
+| 若 Nei 無回覆 | Kira 可直接執行 |
+| 上訴次數 | 最多 2 次 |
+
+---
+
+## 團隊分工
+
+### 記憶層 (Memory Layer)
+```
+Kira (@KiraIsla_bot) ─┬─ Cynthia (@CynthiaChoi_bot)
+                      │    └─ 知識庫管理、FAQ、向量搜尋
+                      │
+                      └─ 中央治理、決策分流
+```
+
+### 學習機制 (Learning Engine)
+```
+史萊姆 (@Joejoebaby_bot)
+    ├─ Prompt 優化
+    ├─ 漂移偵測
+    └─ 效能分析
+```
+
+### 進化引擎 (Evolution Engine)
+```
+Team (@Inarijoe_bot) ─┬─ 任務排程、狀態追蹤
+                      │
+Evolution (@GodKiraCheok_bot)
+    └─ 技能融合、版本控制、風險評估
+```
+
+---
+
+## 協作流程
+
+```
+                    ┌─────────────┐
+                    │   User      │
+                    │   Request   │
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │    Kira     │ ◄── 中央治理
+                    │  (分流決策)  │
+                    └──────┬──────┘
+                           │
+         ┌─────────────────┼─────────────────┐
+         │                 │                 │
+    ┌────▼────┐      ┌─────▼─────┐    ┌─────▼─────┐
+    │ Cynthia │      │  史萊姆   │    │   Team    │
+    │ (記憶層) │      │(學習機制) │    │(進化-協作)│
+    └────┬────┘      └─────┬─────┘    └─────┬─────┘
+         │                 │                 │
+         └─────────────────┼─────────────────┘
+                           │
+                    ┌──────▼──────┐
+                    │  Evolution  │ ◄── 技能進化
+                    │(進化-進化)  │
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │  整合回覆    │
+                    └─────────────┘
+```
+
+---
+
+## Workspace 配置
+
+```
+~/.openclaw/workspace/
+├── BOT_SETUP.md      ← 5 Bot 完整設定
+├── SOUL.md           ← Kira 靈魂
+├── AGENTS.md         ← 團隊架構
+├── MEMORY.md         ← 長期記憶
+├── USER.md           ← Joe 資料
+├── TOOLS.md          ← 工具配置
+├── HEARTBEAT.md      ← 心跳檢查
+│
+├── memory/
+│   ├── 2026-02-27.md
+│   └── enterprise-neural-system.md
+│
+└── skills/           ← 40+ Skills
+    ├── knowledge-agent/
+    ├── self-evolve-agent/
+    ├── workflow-orchestrator/
+    └── ...
+```
+
+---
+
+## 使用場景
+
+| 場景 | 召喚 Bot |
+|------|----------|
+| 重大決策審視 | @Neicheok_bot |
+| 知識查詢 | @CynthiaChoi_bot |
+| 學習優化 | @Joejoebaby_bot |
+| 任務排程 | @Inarijoe_bot |
+| 技能升級 | @GodKiraCheok_bot |
+| 綜合決策 | @KiraIsla_bot |
+
+---
+
+_更新：2026-02-27_
