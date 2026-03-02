@@ -3055,3 +3055,57 @@
 - Practical Philosophy Discussion Topics | by Jack Krupansky - Medium
 - https://jackkrupansky.medium.com/practical-philosophy-discussion-topics-792c1194a72a
 
+# 每小時熱門話題 - 2026-03-02 17:01
+
+### 影片 [YouTube]
+- Wearable Spring 2026 Shoe Trends - What's Trending NOW
+- https://www.youtube.com/watch?v=NjFEVchUk-M
+
+### 影片 [YouTube]
+- 2026 fashion trends I'd actually wear (and the ones I'll skip)
+- https://www.youtube.com/watch?v=30L-EHe4WAQ
+
+### 影片 [YouTube]
+- Spring 2026 Trends: What to Wear (And How to Style It)
+- https://www.youtube.com/watch?v=S6K5K79bOdo
+
+### AI [Google]
+- AI Trends 2026 | Info-Tech Research Group
+- https://www.infotech.com/research/ss/ai-trends-2026
+
+### AI [Google]
+- The trends that will shape AI and tech in 2026 | IBM
+- https://www.ibm.com/think/news/ai-tech-trends-predictions-2026
+
+### 科技 [Google]
+- The trends that will shape AI and tech in 2026 | IBM
+- https://www.ibm.com/think/news/ai-tech-trends-predictions-2026
+
+### 科技 [Google]
+- The Tech That Will Invade Our Lives in 2026 - The New York Times
+- https://www.nytimes.com/2026/01/08/technology/personaltech/2026-tech-trends.html
+
+### 金融 [Google]
+- Investor.gov: Home
+- https://www.investor.gov/
+
+### 金融 [Google]
+- Investing.com - Stock Market Quotes & Financial News
+- https://www.investing.com/
+
+### 數學 [Google]
+- The Top 10 Math Discoveries of 2025 | Scientific American
+- https://www.scientificamerican.com/article/the-top-10-math-discoveries-of-2025/
+
+### 數學 [Google]
+- 2025's Biggest Breakthroughs in Mathematics - YouTube
+- https://www.youtube.com/watch?v=hRpcWpAeWng
+
+### 哲學 [Google]
+- What philosophical questions are good conversation starters among ...
+- https://www.reddit.com/r/askphilosophy/comments/6jsmhn/what_philosophical_questions_are_good/
+
+### 哲學 [Google]
+- Practical Philosophy Discussion Topics | by Jack Krupansky
+- https://jackkrupansky.medium.com/practical-philosophy-discussion-topics-792c1194a72a
+
