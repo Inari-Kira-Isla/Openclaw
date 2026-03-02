@@ -3,29 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Code 提示詞工程完整教學</title>
-    <meta name="description" content="深入學習 Claude Code 提示詞編寫技巧，從基礎語法到進階策略，幫助您充分發揮 AI 輔助程式開發的潛力。">
-    <meta name="keywords" content="Claude Code, 提示詞, Prompt Engineering, AI 程式設計, 生成式 AI">
+    <meta name="description" content="深入探索 Claude Code 提示詞工程的核心技巧，學習如何撰寫高效的提示詞以獲得最佳的 AI 回應。適合開發者和 AI 愛好者。">
+    <meta name="keywords" content="Claude Code, 提示詞, AI, prompt engineering, 開發者, 教程">
+    <title>掌握 Claude Code 提示詞工程 - 從入門到實戰</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.8; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        article { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .metadata { background: #ecf0f1; padding: 15px; border-radius: 8px; margin-bottom: 30px; }
+        .metadata p { margin: 5px 0; }
+        .keywords { color: #7f8c8d; font-size: 0.9em; }
+        .scenario { background: #e8f6f3; padding: 15px; border-left: 4px solid #1abc9c; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .tip { background: #fef9e7; padding: 12px; border-left: 4px solid #f39c12; margin: 10px 0; border-radius: 0 8px 8px 0; }
+        .tip-number { font-weight: bold; color: #d35400; }
+        footer { text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 0.9em; }
+    </style>
 </head>
 <body>
     <article>
-        <h1>Claude Code 提示詞工程完整教學</h1>
+        <h1>掌握 Claude Code 提示詞工程 - 從入門到實戰</h1>
         
+        <div class="metadata">
+            <p><strong>標題：</strong>掌握 Claude Code 提示詞工程 - 從入門到實戰</p>
+            <p><strong>描述：</strong>深入探索 Claude Code 提示詞工程的核心技巧，學習如何撰寫高效的提示詞以獲得最佳的 AI 回應。適合開發者和 AI 愛好者。</p>
+            <p class="keywords"><strong>關鍵詞：</strong>Claude Code, 提示詞, AI, prompt engineering, 開發者, 教程</p>
+        </div>
+
+        <p>在人工智慧快速發展的時代，提示詞工程（Prompt Engineering）已成為與 AI 溝通的關鍵技能。掌握正確的提示詞撰寫技巧，不僅能大幅提升 AI 的回應質量，還能讓開發效率翻倍。本文將帶你深入了解 Claude Code 提示詞工程的核心概念與實戰應用。</p>
+
         <h2>適用場景</h2>
-        <ul>
-            <li><strong>程式碼重構與優化</strong>：使用 Claude Code 協助重構既有程式碼，提升可讀性與效能</li>
-            <li><strong>新專案開發</strong>：透過精心設計的提示詞快速生成專案結構與基礎程式碼</li>
-            <li><strong>錯誤排查與除錯</strong>：利用提示詞引導 Claude Code 分析錯誤訊息並提供解決方案</li>
-        </ul>
-        
+
+        <div class="scenario">
+            <strong>場景一：軟體開發與代碼生成</strong>
+            <p>當你需要快速生成、重構或優化程式碼時，精確的提示詞能幫助 Claude Code 理解你的需求。例如，指定程式語言、框架版本和具體功能要求，能獲得更符合預期的代碼解決方案。這對於加速原型開發和解決技術難題特別有效。</p>
+        </div>
+
+        <div class="scenario">
+            <strong>場景二：文件撰寫與技術文檔</strong>
+            <p>使用 Claude Code 協助撰寫 API 文檔、README 文件或技術規格說明時，清晰的提示詞結構能確保輸出內容的完整性和專業度。你可以指定文檔格式、目標讀者群體和詳細程度，獲得結構嚴謹、內容準確的文件。</p>
+        </div>
+
+        <div class="scenario">
+            <strong>場景三：問題排查與錯誤分析</strong>
+            <p>當遇到程式錯誤或系統問題時，透過精心設計的提示詞，你可以讓 Claude Code 扮演專業的技術顧問角色。提供錯誤訊息、程式碼上下文和環境資訊，能獲得準確的問題診斷和解決建議，大幅縮短除錯時間。</p>
+        </div>
+
         <h2>使用技巧</h2>
-        <ol>
-            <li><strong>明確指定上下文</strong>：在提示詞中提供完整的程式碼背景、語言版本、相依套件等資訊，幫助 AI 準確理解需求</li>
-            <li><strong>使用結構化格式</strong>：採用 Markdown 標題、清單、分段說明等方式組織提示詞，讓 AI 能夠清晰解析任務要求</li>
-            <li><strong>設定輸出格式</strong>：明確要求 AI 以特定格式輸出，如 JSON、程式碼塊、表格等，提升後續處理效率</li>
-            <li><strong>分步驟引導</strong>：對於複雜任務，将其拆分成多個小步驟，逐步引導 AI 完成，避免一次給予過多要求</li>
-            <li><strong>提供範例參考</strong>：在提示詞中加入期望輸出範例，讓 AI 更容易理解您的具體需求與風格偏好</li>
-        </ol>
+
+        <div class="tip">
+            <span class="tip-number">技巧一：</span>使用明確的角色定義<br>
+            在提示詞開頭明確指定 AI 扮演的角色，如「你是一位資深 Python 開發工程師」或「你是一位技術文檔專家」。角色定義能幫助 AI 調整回應的語氣、專業深度和思考方式，顯著提升回應的相關性。
+        </div>
+
+        <div class="tip">
+            <span class="tip-number">技巧二：</span>結構化輸入資訊<br>
+            將複雜的問題分解為清晰的結構，包括：背景資訊、具體需求、預期輸出格式和限制條件。使用編號或項目符號列表組織資訊，讓 AI 能夠準確理解每個要素，避免遺漏重要細節。
+        </div>
+
+        <div class="tip">
+            <span class="tip-number">技巧三：</span>提供具體範例<br>
+            當期望特定格式或風格的輸出時，附上範例是最有效的方法。例如「請按照以下格式輸出：\n1. 問題：...\n2. 原因：...\n3. 解決方案：...」，AI 能夠透過範例精確理解你的需求，大幅減少來回修正的次數。
+        </div>
+
+        <div class="tip">
+            <span class="tip-number">技巧四：</span>運用迭代式提示<br>
+            對於複雜任務，不要期望一次提示就獲得完美結果。採用迭代方式：先獲得初步回應，根據結果調整提示詞，逐步引導 AI 逼近最終目標。這種方法特別適合需要精細調整的創意寫作和複雜程式開發。
+        </div>
+
+        <div class="tip">
+            <span class="tip-number">技巧五：</span>設置輸出約束<br>
+            明確指定回應的長度、格式和範圍，如「請用不超過 500 字解釋」或「請以 JSON 格式輸出」。適當的約束能避免過度冗長的回應，同時確保關鍵資訊不被遺漏，提升溝通效率。
+        </div>
+
+        <h2>總結</h2>
+        <p>提示詞工程是與 AI 高效溝通的藝術。透過明確的角色定義、结构化資訊、具體範例、迭代優化和輸出約束這五大技巧，你可以顯著提升 Claude Code 的回應質量。持續練習和反思，你將發現 AI 成為你最強大的開發夥伴。>
+            <p</p>
+
+        <footer>網址：https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-02_claude-code-prompt-engineering.html</p>
+        </footer>
     </article>
 </body>
 </html>
