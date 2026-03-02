@@ -1,0 +1,11 @@
+{
+  "task_type": "memory_recall",
+  "description": "查詢長期記憶以獲取上下文",
+  "trigger": "user_query_about_prior_work",
+  "steps": [
+    {"action": "memory_search", "tool": "memory_search", "params": {"query": "<query_keywords>"}},
+    {"action": "get_relevant_snippets", "tool": "memory_get", "params": {"path": "<path_from_search>"}}
+  ],
+  "expected_output": "Relevant historical context and past decisions",
+  "frequency": "on_demand"
+}

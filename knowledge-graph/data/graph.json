@@ -1,0 +1,211 @@
+{
+  "nodes": [
+    {
+      "id": "node_1772209134017",
+      "type": "Person",
+      "label": "Joe (你)",
+      "properties": {},
+      "created_at": "2026-02-27T16:18:54.017Z"
+    },
+    {
+      "id": "node_1772209137166",
+      "type": "Project",
+      "label": "Enterprise Neural System",
+      "properties": {},
+      "created_at": "2026-02-27T16:18:57.166Z"
+    },
+    {
+      "id": "node_1772209137290",
+      "type": "Tool",
+      "label": "Notion",
+      "properties": {},
+      "created_at": "2026-02-27T16:18:57.290Z"
+    },
+    {
+      "id": "node_1772209137408",
+      "type": "Tool",
+      "label": "n8n",
+      "properties": {},
+      "created_at": "2026-02-27T16:18:57.408Z"
+    },
+    {
+      "id": "node_1772209137529",
+      "type": "Tool",
+      "label": "OpenClaw",
+      "properties": {},
+      "created_at": "2026-02-27T16:18:57.529Z"
+    },
+    {
+      "id": "node_1772209140954",
+      "type": "Person",
+      "label": "Alice",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:00.954Z"
+    },
+    {
+      "id": "node_1772209141076",
+      "type": "Person",
+      "label": "Bob",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:01.076Z"
+    },
+    {
+      "id": "node_1772209141209",
+      "type": "Document",
+      "label": "API Spec",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:01.209Z"
+    },
+    {
+      "id": "node_1772209141336",
+      "type": "Document",
+      "label": "Meeting Notes",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:01.336Z"
+    },
+    {
+      "id": "node_1772209141457",
+      "type": "Tool",
+      "label": "VS Code",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:01.457Z"
+    },
+    {
+      "id": "node_1772209141577",
+      "type": "Project",
+      "label": "AI Automation",
+      "properties": {},
+      "created_at": "2026-02-27T16:19:01.577Z"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_1772209150391",
+      "source": "node_1772209134017",
+      "target": "node_1772209137166",
+      "relation": "owns",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:10.391Z"
+    },
+    {
+      "id": "edge_1772209150525",
+      "source": "node_1772209134017",
+      "target": "node_1772209137290",
+      "relation": "owns",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:10.525Z"
+    },
+    {
+      "id": "edge_1772209150658",
+      "source": "node_1772209134017",
+      "target": "node_1772209137408",
+      "relation": "uses",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:10.658Z"
+    },
+    {
+      "id": "edge_1772209150796",
+      "source": "node_1772209134017",
+      "target": "node_1772209137529",
+      "relation": "uses",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:10.796Z"
+    },
+    {
+      "id": "edge_1772209150932",
+      "source": "node_1772209134017",
+      "target": "node_1772209140954",
+      "relation": "collaborates_with",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:10.932Z"
+    },
+    {
+      "id": "edge_1772209151058",
+      "source": "node_1772209134017",
+      "target": "node_1772209141076",
+      "relation": "collaborates_with",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:11.058Z"
+    },
+    {
+      "id": "edge_1772209156525",
+      "source": "node_1772209140954",
+      "target": "node_1772209141577",
+      "relation": "works_on",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:16.525Z"
+    },
+    {
+      "id": "edge_1772209156654",
+      "source": "node_1772209141076",
+      "target": "node_1772209137166",
+      "relation": "works_on",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:16.654Z"
+    },
+    {
+      "id": "edge_1772209156786",
+      "source": "node_1772209137166",
+      "target": "node_1772209141577",
+      "relation": "related_to",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:16.786Z"
+    },
+    {
+      "id": "edge_1772209156922",
+      "source": "node_1772209137290",
+      "target": "node_1772209141209",
+      "relation": "contains",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:16.922Z"
+    },
+    {
+      "id": "edge_1772209157049",
+      "source": "node_1772209137290",
+      "target": "node_1772209141336",
+      "relation": "contains",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:17.049Z"
+    },
+    {
+      "id": "edge_1772209157175",
+      "source": "node_1772209141457",
+      "target": "node_1772209137166",
+      "relation": "used_in",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:17.175Z"
+    },
+    {
+      "id": "edge_1772209157305",
+      "source": "node_1772209137408",
+      "target": "node_1772209141577",
+      "relation": "automates",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:17.305Z"
+    },
+    {
+      "id": "edge_1772209160507",
+      "source": "node_1772209137529",
+      "target": "node_1772209137408",
+      "relation": "related_to",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:20.507Z"
+    },
+    {
+      "id": "edge_1772209160642",
+      "source": "node_1772209140954",
+      "target": "node_1772209137290",
+      "relation": "owns",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:20.642Z"
+    },
+    {
+      "id": "edge_1772209160775",
+      "source": "node_1772209141076",
+      "target": "node_1772209141457",
+      "relation": "owns",
+      "weight": 1,
+      "created_at": "2026-02-27T16:19:20.775Z"
+    }
+  ]
+}

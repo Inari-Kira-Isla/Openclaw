@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "315a1238-f49d-8101-8663-d5fd4b36db72",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8101-9775-c12dd69c587f",
+    "title": "Social Post (故事)",
+    "created_time": "2026-02-28T10:52:00.000Z",
+    "last_edited_time": "2026-02-28T10:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "健康"
+  },
+  {
+    "id": "315a1238-f49d-8107-97c8-f0a6fbc2278e",
+    "title": "Hook 5",
+    "created_time": "2026-02-28T12:48:00.000Z",
+    "last_edited_time": "2026-02-28T12:48:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Perplexity"
+  },
+  {
+    "id": "315a1238-f49d-8108-a143-d59ccb6b6bee",
+    "title": "rag_retrieve",
+    "created_time": "2026-02-28T13:49:00.000Z",
+    "last_edited_time": "2026-02-28T13:49:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "retrieve"
+  },
+  {
+    "id": "315a1238-f49d-810d-865b-c9059980e840",
+    "title": "Social Post (故事)",
+    "created_time": "2026-02-28T10:53:00.000Z",
+    "last_edited_time": "2026-02-28T10:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "美食"
+  },
+  {
+    "id": "315a1238-f49d-810e-8ef9-e5f19595bf44",
+    "title": "Hourly Trend + Kira Discussion",
+    "created_time": "2026-02-28T08:51:00.000Z",
+    "last_edited_time": "2026-02-28T08:51:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 72.22222222222221%",
+    "工作流": "search → analyze → trigger_kira"
+  },
+  {
+    "id": "315a1238-f49d-810e-92b6-e42936e49f0c",
+    "title": "Hourly Trend + Kira Discussion",
+    "created_time": "2026-02-28T07:45:00.000Z",
+    "last_edited_time": "2026-02-28T07:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 72.22222222222221%",
+    "工作流": "search → analyze → trigger_kira"
+  },
+  {
+    "id": "315a1238-f49d-810f-a47a-cb871bbde6c3",
+    "title": "execution",
+    "created_time": "2026-02-28T10:11:00.000Z",
+    "last_edited_time": "2026-02-28T10:11:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-810f-a5ad-cba976254ffb",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-810f-ab2d-d797987c285a",
+    "title": "rag_retrieve",
+    "created_time": "2026-02-28T13:54:00.000Z",
+    "last_edited_time": "2026-02-28T13:54:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "retrieve"
+  },
+  {
+    "id": "315a1238-f49d-8112-b766-f348e39a8135",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8114-9fff-c33620b02f7e",
+    "title": "japan_seafood_research",
+    "created_time": "2026-02-28T13:03:00.000Z",
+    "last_edited_time": "2026-02-28T13:03:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "price → policy → supply"
+  },
+  {
+    "id": "315a1238-f49d-8114-afbc-d14f3f3a567a",
+    "title": "Memory Optimization",
+    "created_time": "2026-02-28T11:57:00.000Z",
+    "last_edited_time": "2026-02-28T11:57:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "gc_collected"
+  },
+  {
+    "id": "315a1238-f49d-8115-9f8c-f300cedff8e2",
+    "title": "execution",
+    "created_time": "2026-02-28T10:11:00.000Z",
+    "last_edited_time": "2026-02-28T10:11:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8115-a9ba-fd35c26abaee",
+    "title": "Dolphin Marketing System",
+    "created_time": "2026-02-28T05:39:00.000Z",
+    "last_edited_time": "2026-02-28T05:39:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "Conflict Analysis → Hook Generation → Title Optimization → Content Strategy"
+  },
+  {
+    "id": "315a1238-f49d-8115-b243-eaa8efa4fe30",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8115-b25a-d0e82330ea3e",
+    "title": "Hook 5",
+    "created_time": "2026-02-28T12:44:00.000Z",
+    "last_edited_time": "2026-02-28T12:44:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Perplexity"
+  },
+  {
+    "id": "315a1238-f49d-8116-83dd-ef70b9287360",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8116-8d2a-e439e8b756c1",
+    "title": "hook:social_marketing",
+    "created_time": "2026-02-28T14:21:00.000Z",
+    "last_edited_time": "2026-02-28T14:21:00.000Z",
+    "類型": null,
+    "Lessons": "",
+    "描述": "5 posts generated",
+    "工作流": ""
+  },
+  {
+    "id": "315a1238-f49d-8117-9385-fb83c320f917",
+    "title": "Research: Japan Sea Food",
+    "created_time": "2026-02-28T13:05:00.000Z",
+    "last_edited_time": "2026-02-28T13:05:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "research"
+  },
+  {
+    "id": "315a1238-f49d-811b-8027-eea5f16b060e",
+    "title": "Triple System Pipeline",
+    "created_time": "2026-02-28T11:32:00.000Z",
+    "last_edited_time": "2026-02-28T11:32:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "intake → high_value_alert"
+  },
+  {
+    "id": "315a1238-f49d-811b-b9fd-fe8a98a99a4b",
+    "title": "Triple System Pipeline",
+    "created_time": "2026-02-28T11:35:00.000Z",
+    "last_edited_time": "2026-02-28T11:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "intake → high_value_alert"
+  },
+  {
+    "id": "315a1238-f49d-811c-aba5-e6b213a933a3",
+    "title": "Memory System Enhancement",
+    "created_time": "2026-02-28T08:40:00.000Z",
+    "last_edited_time": "2026-02-28T08:40:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "error_pattern_identification → forget_risk_detection"
+  },
+  {
+    "id": "315a1238-f49d-811d-a6ee-e142ba715d65",
+    "title": "System Critique: Notion同步",
+    "created_time": "2026-02-28T05:56:00.000Z",
+    "last_edited_time": "2026-02-28T05:56:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "同步次數 → 失敗數 → 數據完整性"
+  },
+  {
+    "id": "315a1238-f49d-811f-a3ef-eea3726ea857",
+    "title": "hook:test_hook",
+    "created_time": "2026-02-28T14:21:00.000Z",
+    "last_edited_time": "2026-02-28T14:21:00.000Z",
+    "類型": null,
+    "Lessons": "",
+    "描述": "OK",
+    "工作流": ""
+  },
+  {
+    "id": "315a1238-f49d-8120-8730-ee5fefeb6512",
+    "title": "Hook 1",
+    "created_time": "2026-02-28T11:15:00.000Z",
+    "last_edited_time": "2026-02-28T11:15:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "ChatGPT"
+  },
+  {
+    "id": "315a1238-f49d-8120-95a7-e9236156006d",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8120-9615-c548fc4fa159",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8121-b17c-f68a01a04508",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:52:00.000Z",
+    "last_edited_time": "2026-02-28T13:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8122-a0b9-d48cc4d32dea",
+    "title": "Perfect Closed Loop",
+    "created_time": "2026-02-28T10:11:00.000Z",
+    "last_edited_time": "2026-02-28T10:11:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "established → test_events → processed"
+  },
+  {
+    "id": "315a1238-f49d-8123-abf6-e727334f8bf8",
+    "title": "AI Conflict Hook (2)",
+    "created_time": "2026-02-28T10:57:00.000Z",
+    "last_edited_time": "2026-02-28T10:57:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "AIAssistant"
+  },
+  {
+    "id": "315a1238-f49d-8125-ad36-eea8895cf727",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8126-85f1-d39650bb20e8",
+    "title": "Session Optimization",
+    "created_time": "2026-02-28T12:48:00.000Z",
+    "last_edited_time": "2026-02-28T12:48:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "check"
+  },
+  {
+    "id": "315a1238-f49d-8126-8f03-f39b65ebb4cf",
+    "title": "System Critique: 排程系統 + Discussion",
+    "created_time": "2026-02-28T07:28:00.000Z",
+    "last_edited_time": "2026-02-28T07:28:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "執行次數 → 失敗率 → 延遲時間 → discussion_initiated"
+  },
+  {
+    "id": "315a1238-f49d-8126-b1c4-d71a9001b9d5",
+    "title": "feeding",
+    "created_time": "2026-02-28T05:14:00.000Z",
+    "last_edited_time": "2026-02-28T05:14:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "turn_right"
+  },
+  {
+    "id": "315a1238-f49d-8126-b74a-ddfcbfb2f595",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8129-aecc-c3a8598986ff",
+    "title": "correct_danger",
+    "created_time": "2026-02-28T05:32:00.000Z",
+    "last_edited_time": "2026-02-28T05:32:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "flee"
+  },
+  {
+    "id": "315a1238-f49d-812a-8ad3-f4f3b7c99b00",
+    "title": "Backup",
+    "created_time": "2026-02-28T11:25:00.000Z",
+    "last_edited_time": "2026-02-28T11:25:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "backup"
+  },
+  {
+    "id": "315a1238-f49d-812c-827f-e1d0956176a0",
+    "title": "Closed Loop System",
+    "created_time": "2026-02-28T10:04:00.000Z",
+    "last_edited_time": "2026-02-28T10:04:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "listen → discuss → execute → feedback → learn"
+  },
+  {
+    "id": "315a1238-f49d-812c-a4fa-ccce5a7e6599",
+    "title": "Session Optimization",
+    "created_time": "2026-02-28T11:26:00.000Z",
+    "last_edited_time": "2026-02-28T11:26:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "check"
+  },
+  {
+    "id": "315a1238-f49d-812d-b95f-fd4984b5b1f7",
+    "title": "每小時系統質疑討論機制啟動",
+    "created_time": "2026-02-28T08:47:00.000Z",
+    "last_edited_time": "2026-02-28T08:47:00.000Z",
+    "類型": "自動化",
+    "Lessons": "",
+    "描述": "成功設定每小時系統質疑分析並發送到群組觸發討論",
+    "工作流": "Evolution 分析 + Kira 發送到群組"
+  },
+  {
+    "id": "315a1238-f49d-812e-89e4-e56e1c08881f",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:52:00.000Z",
+    "last_edited_time": "2026-02-28T13:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-812f-999c-c50009373af5",
+    "title": "Hourly Trend Research",
+    "created_time": "2026-02-28T05:56:00.000Z",
+    "last_edited_time": "2026-02-28T05:56:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 14.285714285714285%",
+    "工作流": "search → analyze → discuss → execute"
+  },
+  {
+    "id": "315a1238-f49d-812f-9ff6-f52dd7a2c7b5",
+    "title": "train:lobster-20260228",
+    "created_time": "2026-02-28T14:21:00.000Z",
+    "last_edited_time": "2026-02-28T14:21:00.000Z",
+    "類型": null,
+    "Lessons": "",
+    "描述": "8 samples",
+    "工作流": ""
+  },
+  {
+    "id": "315a1238-f49d-8131-9fb8-d0ae8cc4d628",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8131-afa7-cde84ea28043",
+    "title": "Marketing Research",
+    "created_time": "2026-02-28T10:52:00.000Z",
+    "last_edited_time": "2026-02-28T10:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "內容行銷"
+  },
+  {
+    "id": "315a1238-f49d-8131-b6c7-d446917e05f7",
+    "title": "Social Post (故事)",
+    "created_time": "2026-02-28T10:52:00.000Z",
+    "last_edited_time": "2026-02-28T10:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "海膽"
+  },
+  {
+    "id": "315a1238-f49d-8131-be0e-f51a156f34f1",
+    "title": "System Critique: 決策網絡",
+    "created_time": "2026-02-28T05:56:00.000Z",
+    "last_edited_time": "2026-02-28T05:56:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "探索率 → 成功率 → 決策多樣性"
+  },
+  {
+    "id": "315a1238-f49d-8132-8950-dfb8ac5d99bd",
+    "title": "process",
+    "created_time": "2026-02-28T09:59:00.000Z",
+    "last_edited_time": "2026-02-28T09:59:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8132-8aa5-ed5aee29f8d3",
+    "title": "explore",
+    "created_time": "2026-02-28T05:32:00.000Z",
+    "last_edited_time": "2026-02-28T05:32:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 85.0%",
+    "工作流": "move_carefully → check_surroundings → remember_path"
+  },
+  {
+    "id": "315a1238-f49d-8132-900d-e5e5c7fe4f63",
+    "title": "System Critique: 記憶系統",
+    "created_time": "2026-02-28T08:39:00.000Z",
+    "last_edited_time": "2026-02-28T08:39:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "錯誤記錄數 → 權重更新"
+  },
+  {
+    "id": "315a1238-f49d-8133-907b-c448aaf018a6",
+    "title": "hook:test_hook",
+    "created_time": "2026-02-28T12:33:00.000Z",
+    "last_edited_time": "2026-02-28T12:33:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "execute"
+  },
+  {
+    "id": "315a1238-f49d-8133-b076-cf17c772abbe",
+    "title": "agent_code_1",
+    "created_time": "2026-02-28T10:45:00.000Z",
+    "last_edited_time": "2026-02-28T10:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8134-afc2-ff6ff1944936",
+    "title": "Triple System Pipeline",
+    "created_time": "2026-02-28T11:35:00.000Z",
+    "last_edited_time": "2026-02-28T11:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 10.0%",
+    "工作流": "intake → normal"
+  },
+  {
+    "id": "315a1238-f49d-8134-b703-e91c2ef5fe66",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8135-90fc-da9d7038ca4e",
+    "title": "Bug Fix: 驗證機制",
+    "created_time": "2026-02-28T07:57:00.000Z",
+    "last_edited_time": "2026-02-28T07:57:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "identify_issue → implement_fix → test → verify"
+  },
+  {
+    "id": "315a1238-f49d-8135-ad11-cfc842f515d1",
+    "title": "agent_code_1",
+    "created_time": "2026-02-28T10:45:00.000Z",
+    "last_edited_time": "2026-02-28T10:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8137-97ee-e3941d71f9f2",
+    "title": "Hook 3",
+    "created_time": "2026-02-28T12:48:00.000Z",
+    "last_edited_time": "2026-02-28T12:48:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Claude"
+  },
+  {
+    "id": "315a1238-f49d-8138-ad34-f92d0d4cf6c7",
+    "title": "hook:social_marketing",
+    "created_time": "2026-02-28T12:33:00.000Z",
+    "last_edited_time": "2026-02-28T12:33:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "execute"
+  },
+  {
+    "id": "315a1238-f49d-8139-8a7c-f6d03679e63f",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8139-989e-fc4b5f1860d4",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8139-ae7f-d77918efd756",
+    "title": "Triple System Pipeline",
+    "created_time": "2026-02-28T12:35:00.000Z",
+    "last_edited_time": "2026-02-28T12:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "intake → high_value_alert"
+  },
+  {
+    "id": "315a1238-f49d-813a-b64d-ec0a783d6753",
+    "title": "rag_retrieve",
+    "created_time": "2026-02-28T13:49:00.000Z",
+    "last_edited_time": "2026-02-28T13:49:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "retrieve"
+  },
+  {
+    "id": "315a1238-f49d-813c-81ed-cf3029729293",
+    "title": "Tag Analysis",
+    "created_time": "2026-02-28T11:35:00.000Z",
+    "last_edited_time": "2026-02-28T11:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "analyze"
+  },
+  {
+    "id": "315a1238-f49d-813d-a97a-d961fd2977a1",
+    "title": "AI Conflict Hook (2)",
+    "created_time": "2026-02-28T10:59:00.000Z",
+    "last_edited_time": "2026-02-28T10:59:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "智能家居"
+  },
+  {
+    "id": "315a1238-f49d-813f-8a46-d0dec8fbaac7",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8140-904f-e32af8b07753",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8140-aeac-dfed7292a642",
+    "title": "Evening Review",
+    "created_time": "2026-02-28T05:44:00.000Z",
+    "last_edited_time": "2026-02-28T05:44:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 85.0%",
+    "工作流": "tasks_completed → errors_logged → learning_recorded"
+  },
+  {
+    "id": "315a1238-f49d-8140-be8a-f490f474ba93",
+    "title": "Hook 3",
+    "created_time": "2026-02-28T12:44:00.000Z",
+    "last_edited_time": "2026-02-28T12:44:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Gemini"
+  },
+  {
+    "id": "315a1238-f49d-8141-abe6-edbca48a733b",
+    "title": "AI Conflict Hook (1)",
+    "created_time": "2026-02-28T10:57:00.000Z",
+    "last_edited_time": "2026-02-28T10:57:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Gemini"
+  },
+  {
+    "id": "315a1238-f49d-8142-ab82-cb5a1037c558",
+    "title": "Tag Analysis",
+    "created_time": "2026-02-28T11:32:00.000Z",
+    "last_edited_time": "2026-02-28T11:32:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "analyze"
+  },
+  {
+    "id": "315a1238-f49d-8142-ad38-e4031980b75a",
+    "title": "agent_analytics_1",
+    "created_time": "2026-02-28T10:45:00.000Z",
+    "last_edited_time": "2026-02-28T10:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8143-9fc6-c0a67843c079",
+    "title": "rag_retrieve",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "retrieve"
+  },
+  {
+    "id": "315a1238-f49d-8144-82f1-d029948240bb",
+    "title": "danger",
+    "created_time": "2026-02-28T05:14:00.000Z",
+    "last_edited_time": "2026-02-28T05:14:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "turn_right"
+  },
+  {
+    "id": "315a1238-f49d-8144-9e1f-f34e7fc9a5d2",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8144-ab19-c17393580668",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:52:00.000Z",
+    "last_edited_time": "2026-02-28T13:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8145-ae95-d81c2c08317c",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:53:00.000Z",
+    "last_edited_time": "2026-02-28T13:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8146-b04a-e582bdfb3deb",
+    "title": "danger",
+    "created_time": "2026-02-28T05:14:00.000Z",
+    "last_edited_time": "2026-02-28T05:14:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "turn_right"
+  },
+  {
+    "id": "315a1238-f49d-8147-bd68-e0da54b2cf1b",
+    "title": "market_research",
+    "created_time": "2026-02-28T14:21:00.000Z",
+    "last_edited_time": "2026-02-28T14:21:00.000Z",
+    "類型": null,
+    "Lessons": "",
+    "描述": "6 findings",
+    "工作流": ""
+  },
+  {
+    "id": "315a1238-f49d-8148-a487-fe9839050326",
+    "title": "Tag Analysis",
+    "created_time": "2026-02-28T12:35:00.000Z",
+    "last_edited_time": "2026-02-28T12:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "analyze"
+  },
+  {
+    "id": "315a1238-f49d-814b-a46a-e2a0e075e16e",
+    "title": "hunt_food",
+    "created_time": "2026-02-28T04:31:00.000Z",
+    "last_edited_time": "2026-02-28T05:14:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "detect → approach → grab"
+  },
+  {
+    "id": "315a1238-f49d-814b-b351-f13106438f2c",
+    "title": "Memory Optimization",
+    "created_time": "2026-02-28T11:58:00.000Z",
+    "last_edited_time": "2026-02-28T11:58:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "gc_collected"
+  },
+  {
+    "id": "315a1238-f49d-814c-aab4-c74a4a905fbb",
+    "title": "agent_write_1",
+    "created_time": "2026-02-28T10:45:00.000Z",
+    "last_edited_time": "2026-02-28T10:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-814d-8f69-ecda0a12853b",
+    "title": "Tag Analysis",
+    "created_time": "2026-02-28T11:42:00.000Z",
+    "last_edited_time": "2026-02-28T11:42:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 95.0%",
+    "工作流": "analyze"
+  },
+  {
+    "id": "315a1238-f49d-8153-8d00-cad0ea218bb2",
+    "title": "System Critique: 排程系統",
+    "created_time": "2026-02-28T05:54:00.000Z",
+    "last_edited_time": "2026-02-28T05:54:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 80.0%",
+    "工作流": "執行次數 → 失敗率 → 延遲時間"
+  },
+  {
+    "id": "315a1238-f49d-8155-9354-e074e7cf67e0",
+    "title": "Midnight Optimization",
+    "created_time": "2026-02-28T05:44:00.000Z",
+    "last_edited_time": "2026-02-28T05:44:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "analysis → discussion → improvement_plan"
+  },
+  {
+    "id": "315a1238-f49d-8158-bfdb-fe9a7023be36",
+    "title": "Hook 5",
+    "created_time": "2026-02-28T12:35:00.000Z",
+    "last_edited_time": "2026-02-28T12:35:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Claude"
+  },
+  {
+    "id": "315a1238-f49d-8159-8053-e5ac06675892",
+    "title": "AI Conflict Hook (5)",
+    "created_time": "2026-02-28T10:57:00.000Z",
+    "last_edited_time": "2026-02-28T10:57:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 90.0%",
+    "工作流": "Perplexity"
+  },
+  {
+    "id": "315a1238-f49d-815a-950b-ea93590c6044",
+    "title": "agent_code_1",
+    "created_time": "2026-02-28T10:48:00.000Z",
+    "last_edited_time": "2026-02-28T10:48:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-815b-a622-eb7d234f1702",
+    "title": "Backup",
+    "created_time": "2026-02-28T11:26:00.000Z",
+    "last_edited_time": "2026-02-28T11:26:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "backup"
+  },
+  {
+    "id": "315a1238-f49d-8160-a0f1-dd4a10b343e3",
+    "title": "agent_research_1",
+    "created_time": "2026-02-28T10:46:00.000Z",
+    "last_edited_time": "2026-02-28T10:46:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8162-88c0-de3cb75c7a50",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8165-94ea-cdf0408a2c2e",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:52:00.000Z",
+    "last_edited_time": "2026-02-28T13:52:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8165-aa10-e6cb377c21e4",
+    "title": "agent_write_1",
+    "created_time": "2026-02-28T10:45:00.000Z",
+    "last_edited_time": "2026-02-28T10:45:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-8166-9684-f4565301cb53",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8167-946c-d1b899b78a28",
+    "title": "rag_ingest",
+    "created_time": "2026-02-28T13:50:00.000Z",
+    "last_edited_time": "2026-02-28T13:50:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "ingest"
+  },
+  {
+    "id": "315a1238-f49d-8169-a7ef-e36470f23ba6",
+    "title": "Hourly Trend Research",
+    "created_time": "2026-02-28T06:00:00.000Z",
+    "last_edited_time": "2026-02-28T06:00:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 61.111111111111114%",
+    "工作流": "search → analyze → discuss → execute"
+  },
+  {
+    "id": "315a1238-f49d-8169-b945-d9890fe3ec84",
+    "title": "Hourly Trend Research",
+    "created_time": "2026-02-28T05:53:00.000Z",
+    "last_edited_time": "2026-02-28T05:53:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 14.285714285714285%",
+    "工作流": "search → analyze → discuss → execute"
+  },
+  {
+    "id": "315a1238-f49d-8169-bd9e-d9a52f09d153",
+    "title": "agent_code_1",
+    "created_time": "2026-02-28T10:46:00.000Z",
+    "last_edited_time": "2026-02-28T10:46:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  },
+  {
+    "id": "315a1238-f49d-816b-8592-c9775f0409dd",
+    "title": "agent_code_1",
+    "created_time": "2026-02-28T10:48:00.000Z",
+    "last_edited_time": "2026-02-28T10:48:00.000Z",
+    "類型": "成功流程",
+    "Lessons": "成功模式，已記住",
+    "描述": "效率: 100.0%",
+    "工作流": "complete"
+  }
+]

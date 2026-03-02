@@ -1,0 +1,13 @@
+# Lobster Auto-Detect Cron Job
+# Run every hour to detect and record errors
+
+lobster-detect:
+  cron: "0 * * * *"
+  enabled: true
+  description: "Lobster - Auto-detect and record errors"
+  command: "cd /Users/ki/.openclaw/workspace/projects/lobster && node dist/index.js detect"
+  timezone: "Asia/Macau"
+  env:
+    NOTION_API_KEY: "***REMOVED***"
+    NOTION_ERROR_DB_ID: "315a1238f49d81efbe80c632e0b5e493"
+    NOTION_SUCCESS_DB_ID: "315a1238f49d8149b67df138cc7c7f7c"

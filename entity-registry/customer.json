@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Customer",
+  "type": "object",
+  "required": ["id", "name", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique customer identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Customer full name"
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" }
+      }
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

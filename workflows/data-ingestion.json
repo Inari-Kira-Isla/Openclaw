@@ -1,0 +1,80 @@
+{
+  "name": "data-ingestion",
+  "description": "數據攝取流程 - 從多個來源收集並處理數據",
+  "trigger": {
+    "type": "schedule",
+    "cron": "0 */6 * * *",
+    "description": "每6小時執行一次"
+  },
+  "nodes": [
+    {
+      "id": "fetch-source-1",
+      "name": "獲取API數據",
+      "type": "http",
+      "config": {
+        "url": "https://api.example.com/data",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer ${API_TOKEN}"
+        }
+      },
+      "output": "api_data"
+    },
+    {
+      "id": "fetch-source-2",
+      "name": "獲取數據庫數據",
+      "type": "database",
+      "config": {
+        "query": "SELECT * FROM raw_data WHERE created_at > :last_run",
+        "connection": "main_db"
+      },
+      "output": "db_data"
+    },
+    {
+      "id": "transform-data",
+      "name": "數據轉換",
+      "type": "transform",
+      "input": ["api_data", "db_data"],
+      "config": {
+        "mappings": {
+          "timestamp": "created_at",
+          "value": "amount",
+          "source": "data_source"
+        }
+      },
+      "output": "transformed_data"
+    },
+    {
+      "id": "validate-data",
+      "name": "數據驗證",
+      "type": "validation",
+      "input": "transformed_data",
+      "config": {
+        "rules": [
+          {"field": "timestamp", "type": "required"},
+          {"field": "value", "type": "numeric", "min": 0}
+        ]
+      },
+      "output": "validated_data"
+    }
+  ],
+  "output": {
+    "storage": {
+      "type": "database",
+      "table": "processed_data",
+      "connection": "main_db"
+    },
+    "notifications": [
+      {
+        "on": "success",
+        "channel": "telegram",
+        "message": "數據攝取完成，共處理 ${record_count} 條記錄"
+      },
+      {
+        "on": "failure",
+        "channel": "telegram",
+        "message": "數據攝取失敗: ${error_message}"
+      }
+    ]
+  }
+}

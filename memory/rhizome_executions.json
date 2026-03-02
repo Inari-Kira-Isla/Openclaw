@@ -1,0 +1,35 @@
+{
+  "records": [
+    {
+      "id": "exec_20260228193348",
+      "action_type": "generate_quote",
+      "description": "\u751f\u6210\u5831\u50f9\u55ae",
+      "params": {
+        "node_id": "1",
+        "node_label": "\u6d77\u81bd\u50f9\u683c\u4e0b\u8dcc",
+        "category": "price",
+        "weight": 0.9
+      },
+      "status": "success",
+      "created_at": "2026-02-28T19:33:48.165325"
+    },
+    {
+      "id": "exec_20260228193348",
+      "action_type": "create_reminder",
+      "description": "\u5efa\u7acb\u63d0\u9192",
+      "params": {
+        "node_id": "2",
+        "node_label": "\u65b0\u6295\u8cc7\u6a5f\u6703",
+        "category": "opportunity",
+        "weight": 0.85
+      },
+      "status": "success",
+      "created_at": "2026-02-28T19:33:48.165649"
+    }
+  ],
+  "stats": {
+    "total": 2,
+    "success": 2,
+    "failed": 0
+  }
+}

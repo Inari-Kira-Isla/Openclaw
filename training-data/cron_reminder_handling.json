@@ -1,0 +1,26 @@
+{
+  "task_type": "cron_reminder_handling",
+  "description": "定時處理多個系統監控提醒",
+  "trigger": "scheduled (multiple cron jobs)",
+  "steps": [
+    {"action": "check_gateway_status", "tool": "exec", "params": {"command": "openclaw gateway status --json"}},
+    {"action": "check_system_memory", "tool": "exec", "params": {"command": "vm_stat"}},
+    {"action": "check_sessions", "tool": "exec", "params": {"command": "openclaw status | grep Sessions"}},
+    {"action": "log_to_memory", "tool": "edit", "params": {"file_path": "memory/performance.md", "template": "## {timestamp}\n| Check | Status |\n|-------|--------|\n"}},
+    {"action": "send_alert_if_needed", "tool": "message", "params": {"action": "send", "if": "anomaly_detected"}}
+  ],
+  "examples": [
+    {
+      "input": "System: Emergency Check",
+      "expected": "✅ System healthy"
+    },
+    {
+      "input": "System: Security Monitoring", 
+      "expected": "✅ No threats detected"
+    }
+  ],
+  "frequency": "per minute (multiple reminders)"
+}
+---
+## 07:09
+- 重複工作: 無新項目

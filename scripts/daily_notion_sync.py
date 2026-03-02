@@ -1,42 +1,45 @@
 #!/usr/bin/env python3
 """
-每日 Notion 同步腳本 - 系統狀態同步
+每日 Notion 同步腳本 - 完整記憶同步
 """
 
 import requests
+import os
 from datetime import datetime
 
 NOTION_API_KEY = "***REMOVED***"
 DATABASE_ID = "30aa1238f49d817c8163dd76d1309240"
 NOTION_VERSION = "2022-06-28"
 
-def create_daily_sync():
-    """建立每日同步記錄"""
-    
+def read_memory_file():
+    """讀取今日記憶檔案"""
     today = datetime.now().strftime("%Y-%m-%d")
-    current_time = datetime.now().strftime("%H:%M:%S")
+    memory_path = os.path.expanduser(f"~/.openclaw/workspace/memory/{today}.md")
     
-    system_status = "## 系統狀態\n- 中央治理核心 (muse-core): 運作中\n- 模型調度員 (model-dispatcher): 新建立\n- 其他 10 個 Agent: 待設定"
-    sync_items = "## 同步項目\n- AGENTS.md: 已更新 (v2.0)\n- 工作流協調器: 待設定\n- MCP 構建器: 待設定\n- 技能創建器: 待設定"
-    tech_details = f"## 技術細節\n- 架構: Workflow-driven\n- 模型策略: minimax-only\n- 同步時間: {current_time} (Asia/Macau)"
-    next_steps = "## 下一步\n- 完成其餘 Agent 設定\n- 啟用工作流協調器\n- 優化技能系統"
+    if os.path.exists(memory_path):
+        with open(memory_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    return None
+
+def create_notion_page(title, content):
+    """建立 Notion 頁面"""
     
-    page_data = {
-        'parent': {'database_id': DATABASE_ID},
-        'properties': {
-            '標題': {'title': [{'text': {'content': f'每日同步 - {today}'}}]},
-            '向量狀態': {'select': {'name': '已向量化'}},
-            '應用': {'rich_text': [{'text': {'content': 'OpenClaw 系統'}}]},
-            '重點': {'rich_text': [{'text': {'content': 'muse-core 運作中，12 個 Agent 已建立'}}]},
-            '向量摘要': {'rich_text': [{'text': {'content': '每日 Cron 同步完成，系統正常運作'}}]}
-        },
-        'children': [
-            {'paragraph': {'rich_text': [{'text': {'content': system_status}}]}},
-            {'paragraph': {'rich_text': [{'text': {'content': sync_items}}]}},
-            {'paragraph': {'rich_text': [{'text': {'content': tech_details}}]}},
-            {'paragraph': {'rich_text': [{'text': {'content': next_steps}}]}}
-        ]
-    }
+    # 將內容分段（Notion 每個 block 有長度限制）
+    chunks = []
+    current_chunk = ""
+    for line in content.split('\n'):
+        if len(current_chunk) + len(line) + 1 > 1900:  # Notion block limit
+            if current_chunk:
+                chunks.append(current_chunk)
+            current_chunk = line
+        else:
+            if current_chunk:
+                current_chunk += '\n' + line
+            else:
+                current_chunk = line
+    
+    if current_chunk:
+        chunks.append(current_chunk)
     
     headers = {
         'Authorization': f'Bearer {NOTION_API_KEY}',
@@ -44,16 +47,52 @@ def create_daily_sync():
         'Content-Type': 'application/json'
     }
     
+    # 建立第一個 block（標題）
+    children = []
+    for i, chunk in enumerate(chunks[:100]):  # Notion 限制 100 個 children
+        children.append({'paragraph': {'rich_text': [{'text': {'content': chunk[:1900]}}]}})
+    
+    page_data = {
+        'parent': {'database_id': DATABASE_ID},
+        'properties': {
+            '標題': {'title': [{'text': {'content': title}}]},
+            '向量狀態': {'select': {'name': '已向量化'}},
+            '應用': {'rich_text': [{'text': {'content': 'OpenClaw 系統'}}]},
+            '重點': {'rich_text': [{'text': {'content': f'同步 {len(chunks)} 個區塊'}}]},
+            '向量摘要': {'rich_text': [{'text': {'content': '完整記憶同步'}}]}
+        },
+        'children': children
+    }
+    
     response = requests.post('https://api.notion.com/v1/pages', headers=headers, json=page_data)
     
+    return response
+
+def main():
+    today = datetime.now().strftime("%Y-%m-%d")
+    print(f"📓 同步 {today} 記憶到 Notion...")
+    
+    content = read_memory_file()
+    if not content:
+        print(f"❌ 找不到記憶檔案")
+        return False
+    
+    # 取前 100 行作為標題參考
+    preview = '\n'.join(content.split('\n')[:5])
+    print(f"📝 內容預覽:\n{preview}")
+    
+    response = create_notion_page(f"記憶同步 - {today}", content)
+    
     if response.status_code == 200:
-        print('✅ 每日同步成功')
-        print(f'   Page ID: {response.json().get("id", "N/A")}')
+        page_id = response.json().get("id", "N/A")
+        print('✅ 同步成功!')
+        print(f'   Page ID: {page_id}')
+        print(f'   URL: https://notion.so/{page_id.replace("-", "")}')
         return True
     else:
         print(f'❌ 同步失敗: {response.status_code}')
-        print(f'   {response.text[:200]}')
+        print(f'   {response.text[:300]}')
         return False
 
 if __name__ == '__main__':
-    create_daily_sync()
+    main()

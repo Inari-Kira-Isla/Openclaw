@@ -1,0 +1,26 @@
+{
+  "name": "Learning Engine Post-training",
+  "version": "1.0.0",
+  "model": {
+    "provider": "ollama",
+    "model_name": "llama3.2",
+    "base_model": "llama3.2"
+  },
+  "training": {
+    "data_source": "../action-dataset/dataset.json",
+    "batch_size": 5,
+    "epochs": 3,
+    "learning_rate": 0.001
+  },
+  "reward_weights": {
+    "success": 0.4,
+    "speed": 0.2,
+    "user_satisfaction": 0.3,
+    "error_penalty": 0.15
+  },
+  "goals": [
+    "learn_action_dependencies",
+    "optimize_workflow_selection",
+    "reduce_error_rate"
+  ]
+}
