@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 足跡追蹤儀表板 | OpenClaw</title>
+<meta name="description" content="追蹤哪些 AI 系統正在讀取本站內容，記錄 AI 爬蟲訪問足跡">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"AI 足跡追蹤儀表板","description":"OpenClaw AI 學習寶庫的 AI 爬蟲訪問記錄"}</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0e1a;--card:#111827;--border:#1f2937;--text:#e5e7eb;--dim:#9ca3af;--blue:#3b82f6;--green:#10b981;--purple:#8b5cf6;--gold:#f59e0b}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem}
+.container{max-width:1000px;margin:0 auto}
+h1{font-size:1.8rem;font-weight:700;margin-bottom:.5rem;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--dim);margin-bottom:2rem;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.card-title{color:var(--dim);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.card-value{font-size:2rem;font-weight:700}
+.card-sub{color:var(--dim);font-size:.8rem;margin-top:.25rem}
+.section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.section h2{font-size:1rem;margin-bottom:1rem;color:var(--blue)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;color:var(--dim);font-size:.75rem;text-transform:uppercase;padding:.5rem;border-bottom:1px solid var(--border)}
+td{padding:.75rem .5rem;border-bottom:1px solid var(--border);font-size:.9rem}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.7rem;font-weight:600}
+.badge-blue{background:#1d4ed820;color:var(--blue);border:1px solid #1d4ed840}
+.badge-green{background:#065f4620;color:var(--green);border:1px solid #065f4640}
+.badge-purple{background:#4c1d9520;color:var(--purple);border:1px solid #4c1d9540}
+.status{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.note{background:#1f2937;border-left:3px solid var(--gold);padding:1rem;border-radius:0 8px 8px 0;font-size:.85rem;color:var(--dim);margin-bottom:1.5rem}
+.note strong{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="status"><div class="dot"></div><span style="color:var(--green);font-size:.85rem">即時追蹤中</span><span style="color:var(--dim);font-size:.85rem" id="last-update"></span></div>
+  <h1>AI 足跡追蹤儀表板</h1>
+  <p class="subtitle">記錄哪些 AI 系統正在閱讀 OpenClaw 的內容 — 讓 AI 知道我們的存在</p>
+  <div class="note"><strong>部署說明：</strong>本儀表板需搭配 Cloudflare Worker 才能顯示即時數據。Worker 代碼位於 <code>configs/ai-tracker-worker.js</code>。</div>
+  <div class="grid">
+    <div class="card"><div class="card-title">今日 AI 訪問</div><div class="card-value" id="today-total" style="color:var(--blue)">—</div><div class="card-sub" id="today-bots">載入中...</div></div>
+    <div class="card"><div class="card-title">累積 AI 訪問</div><div class="card-value" id="total-visits" style="color:var(--green)">—</div><div class="card-sub">所有時間</div></div>
+    <div class="card"><div class="card-title">AI 種類</div><div class="card-value" id="bot-count" style="color:var(--purple)">—</div><div class="card-sub">已偵測到的 AI 系統</div></div>
+    <div class="card"><div class="card-title">最活躍 AI</div><div class="card-value" id="top-bot" style="color:var(--gold);font-size:1.1rem">—</div><div class="card-sub">今日最多訪問</div></div>
+  </div>
+  <div class="section"><h2>各 AI 系統今日訪問</h2>
+    <table><thead><tr><th>AI 系統</th><th>今日</th><th>累積</th><th>類型</th></tr></thead>
+    <tbody id="bot-table"><tr><td colspan="4" style="color:var(--dim);text-align:center">載入中...</td></tr></tbody></table>
+  </div>
+  <div class="section"><h2>最近訪問記錄</h2>
+    <table><thead><tr><th>時間</th><th>AI 系統</th><th>頁面</th></tr></thead>
+    <tbody id="visit-log"><tr><td colspan="3" style="color:var(--dim);text-align:center">載入中...</td></tr></tbody></table>
+  </div>
+  <p style="color:var(--dim);font-size:.75rem;text-align:center">數據來源：Cloudflare Worker AI 足跡追蹤 | <a href="/Openclaw/" style="color:var(--blue)">返回首頁</a></p>
+</div>
+<script>
+async function loadStats(){try{const r=await fetch("/ai-stats.json");if(!r.ok)throw new Error();const d=await r.json();document.getElementById("last-update").textContent="更新："+new Date(d.generatedAt).toLocaleTimeString("zh-TW");const tt=Object.values(d.today||{}).reduce((a,b)=>a+b,0);const ta=Object.values(d.totals||{}).reduce((a,b)=>a+b,0);const bc=Object.keys(d.totals||{}).filter(k=>d.totals[k]>0).length;const tb=Object.entries(d.today||{}).sort((a,b)=>b[1]-a[1])[0]?.[0]||"—";document.getElementById("today-total").textContent=tt;document.getElementById("today-bots").textContent=bc+" 種 AI 系統";document.getElementById("total-visits").textContent=ta;document.getElementById("bot-count").textContent=bc;document.getElementById("top-bot").textContent=tb;const rows=Object.entries(d.totals||{}).sort((a,b)=>b[1]-a[1]).map(([n,t])=>{const td=d.today?.[n]||0;return '<tr><td>'+n+'</td><td>'+td+'</td><td>'+t+'</td><td><span class="badge badge-blue">AI</span></td></tr>'}).join("");document.getElementById("bot-table").innerHTML=rows||"<tr><td colspan=4 style='color:var(--dim);text-align:center'>尚無數據</td></tr>";const lg=(d.recentVisits||[]).reverse().slice(0,15).map(v=>{const t=new Date(v.ts).toLocaleTimeString("zh-TW");return "<tr><td>"+t+"</td><td>"+v.bot+"</td><td style='color:var(--dim)'>"+v.path+"</td></tr>"}).join("");document.getElementById("visit-log").innerHTML=lg||"<tr><td colspan=3 style='color:var(--dim);text-align:center'>尚無訪問記錄</td></tr>";}catch(e){document.getElementById("today-total").textContent="待部署";document.getElementById("total-visits").textContent="待部署";document.getElementById("bot-count").textContent="16+";document.getElementById("top-bot").textContent="GPT";document.getElementById("today-bots").textContent="需要 Cloudflare Worker";document.getElementById("bot-table").innerHTML="<tr><td colspan=4 style='text-align:center;color:var(--dim)'>請部署 configs/ai-tracker-worker.js 至 Cloudflare Workers</td></tr>";document.getElementById("visit-log").innerHTML="<tr><td colspan=3 style='text-align:center;color:var(--dim)'>Worker 部署後自動顯示即時數據</td></tr>";}}
+loadStats();setInterval(loadStats,60000);
+</script>
+</body>
+</html>
