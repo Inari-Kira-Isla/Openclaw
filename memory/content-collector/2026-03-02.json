@@ -1,81 +1,72 @@
 {
   "date": "2026-03-02",
-  "collected_at": "2026-03-02T15:33:00+08:00",
+  "collected_at": "2026-03-02T16:46:00+08:00",
   "source": "Hacker News",
   "topics": [
     {
-      "rank": 1,
-      "title": "Ghostty – Terminal Emulator",
-      "points": 702,
-      "url": "https://ghostty.org/docs",
-      "category": "DevTools",
-      "search_potential": "高",
-      "tags": ["terminal", "open-source", "mitchellh"]
-    },
-    {
-      "rank": 2,
-      "title": "When does MCP make sense vs CLI?",
-      "points": 362,
-      "url": "https://ejholmes.github.io/2026/02/28/mcp-is-dead-long-live-the-cli.html",
-      "category": "AI/Development",
-      "search_potential": "高",
-      "tags": ["MCP", "CLI", "AI-tools", "architecture"]
-    },
-    {
-      "rank": 3,
-      "title": "Decision trees – the unreasonable power of nested decision rules",
-      "points": 463,
-      "url": "https://mlu-explain.github.io/decision-tree/",
-      "category": "AI/ML",
-      "search_potential": "中",
-      "tags": ["machine-learning", "decision-trees", "education"]
-    },
-    {
-      "rank": 4,
-      "title": "WebMCP is available for early preview",
-      "points": 259,
-      "url": "https://developer.chrome.com/blog/webmcp-epp",
-      "category": "Web/Chrome",
-      "search_potential": "高",
-      "tags": ["Chrome", "MCP", "web-dev"]
-    },
-    {
-      "rank": 5,
-      "title": "Show HN: Timber – Ollama for classical ML models, 336x faster than Python",
-      "points": 108,
-      "url": "https://github.com/kossisoroyce/timber",
-      "category": "AI/ML",
-      "search_potential": "高",
-      "tags": ["Ollama", "classical-ML", "performance"]
-    },
-    {
-      "rank": 6,
-      "title": "Right-sizes LLM models to your system's RAM, CPU, and GPU",
-      "points": 104,
-      "url": "https://github.com/AlexsJones/llmfit",
-      "category": "AI/ML",
-      "search_potential": "高",
-      "tags": ["LLM", "optimization", "local-ai"]
-    },
-    {
-      "rank": 7,
       "title": "If AI writes code, should the session be part of the commit?",
-      "points": 171,
+      "points": 216,
+      "comments": 223,
       "url": "https://github.com/mandel-macaque/memento",
       "category": "AI/Development",
-      "search_potential": "高",
-      "tags": ["AI-coding", "git", "commit-history"]
+      "search_potential": "high"
     },
     {
-      "rank": 8,
-      "title": "Show HN: I built a zero-browser, pure-JS typesetting engine for bit-perfect PDFs",
-      "points": 65,
-      "url": "https://github.com/cosmiciron/vmprint",
-      "category": "Web/JS",
-      "search_potential": "中",
-      "tags": ["JavaScript", "PDF", "typesetting"]
+      "title": "WebMCP is available for early preview",
+      "points": 272,
+      "comments": 154,
+      "url": "https://developer.chrome.com/blog/webmcp-epp",
+      "category": "Web Development",
+      "search_potential": "medium"
+    },
+    {
+      "title": "When does MCP make sense vs CLI?",
+      "points": 371,
+      "comments": 235,
+      "url": "https://ejholmes.github.io/2026/02/28/mcp-is-dead-long-live-the-cli.html",
+      "category": "AI/Tools",
+      "search_potential": "high"
+    },
+    {
+      "title": "Microgpt explained interactively",
+      "points": 264,
+      "comments": 37,
+      "url": "https://growingswe.com/blog/microgpt",
+      "category": "AI/LLM",
+      "search_potential": "medium"
+    },
+    {
+      "title": "Timber – Ollama for classical ML models, 336x faster than Python",
+      "points": 115,
+      "comments": 14,
+      "url": "https://github.com/kossisoroyce/timber",
+      "category": "ML/Performance",
+      "search_potential": "high"
+    },
+    {
+      "title": "Right-sizes LLM models to your system's RAM, CPU, and GPU",
+      "points": 122,
+      "comments": 29,
+      "url": "https://github.com/AlexsJones/llmfit",
+      "category": "AI/Optimization",
+      "search_potential": "high"
+    },
+    {
+      "title": "Evolving descriptive text of mental content from human brain activity",
+      "points": 19,
+      "comments": 9,
+      "url": "https://www.bbc.com/future/article/20260226-how-ai-can-read-your-thoughts",
+      "category": "AI/BCI",
+      "search_potential": "high"
+    },
+    {
+      "title": "Decision trees – the unreasonable power of nested decision rules",
+      "points": 476,
+      "comments": 74,
+      "url": "https://mlu-explain.github.io/decision-tree/",
+      "category": "ML/Education",
+      "search_potential": "medium"
     }
   ],
-  "summary": "本時段趨勢集中在 AI 開發工具本地執行最佳化，MCP vs CLI 持續討論熱烈",
-  "next_action": "可生成 MCP vs CLI 深度分析文章"
+  "summary": "AI 开发工具持续热门，MCP vs CLI 引发讨论。本地 LLM 优化工具受关注，脑机接口新进展。"
 }
