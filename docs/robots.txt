@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inari-kira-isla.github.io/Openclaw/sitemap.xml
