@@ -1,0 +1,14 @@
+[
+  { "id": "res_001", "action_id": "act_001", "success": true, "reward_score": 1.0, "feedback": "找到正確答案，用戶滿意" },
+  { "id": "res_002", "action_id": "act_002", "success": true, "reward_score": 0.9, "feedback": "FAQ 新增成功" },
+  { "id": "res_003", "action_id": "act_003", "success": true, "reward_score": 0.8, "feedback": "查詢成功但無結果" },
+  { "id": "res_004", "action_id": "act_004", "success": true, "reward_score": 1.0, "feedback": "訊息已發送" },
+  { "id": "res_005", "action_id": "act_005", "success": true, "reward_score": 1.0, "feedback": "檔案讀取成功" },
+  { "id": "res_006", "action_id": "act_006", "success": true, "reward_score": 0.95, "feedback": "搜尋結果精確" },
+  { "id": "res_007", "action_id": "act_007", "success": true, "reward_score": 0.85, "feedback": "範本已更新" },
+  { "id": "res_008", "action_id": "act_008", "success": true, "reward_score": 1.0, "feedback": "提醒已建立" },
+  { "id": "res_009", "action_id": "act_009", "success": true, "reward_score": 0.92, "feedback": "影像辨識高準確度" },
+  { "id": "res_010", "action_id": "act_010", "success": true, "reward_score": 0.88, "feedback": "語音生成成功" },
+  { "id": "res_011", "action_id": "act_011", "success": true, "reward_score": 1.0, "feedback": "天氣資料準確" },
+  { "id": "res_012", "action_id": "act_012", "success": true, "reward_score": 0.75, "feedback": "知識庫內容較少" }
+]

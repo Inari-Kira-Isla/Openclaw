@@ -1,0 +1,41 @@
+{
+  "rateLimit": {
+    "perMinute": 10,
+    "per5Minutes": 40,
+    "perHour": 300,
+    "cooldownSeconds": 6
+  },
+  "schedules": {
+    "groupA": {
+      "crons": ["cynthia-heartbeat", "slime-heartbeat", "team-heartbeat", "evolution-heartbeat"],
+      "offset": 0,
+      "interval": "30m"
+    },
+    "groupB": {
+      "crons": ["monitor-dashboard", "系統健康", "效能監控警報"],
+      "offset": 5,
+      "interval": "15m"
+    },
+    "groupC": {
+      "crons": ["安全監控", "記憶變更監控", "學習即時應用"],
+      "offset": 10,
+      "interval": "15m"
+    },
+    "vectorGroup": {
+      "crons": ["sync-quick", "sync-full", "deep-embed", "quality-check"],
+      "offset": 3,
+      "interval": "mixed",
+      "description": "向量化專用通道，錯峰執行"
+    }
+  },
+  "disabled": [
+    "auto-vectorize-rag",
+    "自動向量提取",
+    "對話-快速存儲"
+  ],
+  "monitoring": {
+    "alertThreshold": 80,
+    "criticalThreshold": 100,
+    "trackVectorJobs": true
+  }
+}

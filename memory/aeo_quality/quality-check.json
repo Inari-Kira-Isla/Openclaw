@@ -1,0 +1,61 @@
+{
+  "version": "2.0",
+  "quality_standards": {
+    "min_word_count": 1000,
+    "required_sections": [
+      "title",
+      "overview", 
+      "main_content",
+      "code_examples",
+      "faq",
+      "resources"
+    ],
+    "structure": {
+      "h1_required": true,
+      "h2_minimum": 3,
+      "h3_minimum": 2
+    },
+    "code_examples": {
+      "min_count": 1,
+      "languages": ["python", "javascript", "bash", "yaml", "json"]
+    },
+    "seo": {
+      "title_required": true,
+      "description_required": true,
+      "keywords_min": 3,
+      "jsonld_required": true
+    }
+  },
+  "scoring": {
+    "word_count": {
+      "full_score": 1500,
+      "passing": 1000,
+      "weights": 20
+    },
+    "structure": {
+      "h1": 10,
+      "h2": 5,
+      "h3": 3,
+      "weights": 30
+    },
+    "code_examples": {
+      "per_example": 10,
+      "weights": 20
+    },
+    "seo": {
+      "title": 5,
+      "description": 5,
+      "keywords": 5,
+      "jsonld": 5,
+      "weights": 20
+    },
+    "content_depth": {
+      "weights": 10
+    }
+  },
+  "thresholds": {
+    "excellent": 90,
+    "good": 70,
+    "poor": 50
+  }
+}

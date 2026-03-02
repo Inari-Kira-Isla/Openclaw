@@ -1,0 +1,59 @@
+[
+  {
+    "id": "1772142217594",
+    "question": "什麼是 MCP?",
+    "answer": "Model Context Protocol，是一種代理間溝通的標準協議",
+    "metadata": {},
+    "createdAt": "2026-02-26T21:43:37.594Z"
+  },
+  {
+    "id": "1772143629054",
+    "question": "什麼是 MCP?",
+    "answer": "Model Context Protocol，是代理間溝通的標準協議",
+    "metadata": {
+      "source": "import",
+      "date": "2026-02-27"
+    },
+    "createdAt": "2026-02-26T22:07:09.054Z"
+  },
+  {
+    "id": "1772143629055",
+    "question": "Kira 是誰?",
+    "answer": "AI OS 的中央治理核心，負責任務分流與 Agent 管理",
+    "metadata": {
+      "source": "import",
+      "date": "2026-02-27"
+    },
+    "createdAt": "2026-02-26T22:07:09.055Z"
+  },
+  {
+    "id": "1772143629055",
+    "question": "史萊姆系統是做什麼的?",
+    "answer": "學習記憶優化系統，包含記憶層、學習機制、進化引擎",
+    "metadata": {
+      "source": "import",
+      "date": "2026-02-27"
+    },
+    "createdAt": "2026-02-26T22:07:09.055Z"
+  },
+  {
+    "id": "1772143629055",
+    "question": "OpenClaw 是什麼?",
+    "answer": "自架 AI 助理平台，類似 Claude Desktop",
+    "metadata": {
+      "source": "import",
+      "date": "2026-02-27"
+    },
+    "createdAt": "2026-02-26T22:07:09.055Z"
+  },
+  {
+    "id": "1772143629055",
+    "question": "Joe 的技術栈?",
+    "answer": "Node.js, Docker, TypeScript, OpenClaw, ComfyUI, n8n",
+    "metadata": {
+      "source": "import",
+      "date": "2026-02-27"
+    },
+    "createdAt": "2026-02-26T22:07:09.055Z"
+  }
+]

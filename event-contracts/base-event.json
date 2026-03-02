@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://muse-core.event-schemas/base-event.json",
+  "title": "Base Event",
+  "description": "Base event format for Muse Core event system",
+  "type": "object",
+  "required": ["type", "payload", "timestamp", "source", "version"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Event type identifier",
+      "pattern": "^[a-z0-9.-]+$"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event payload data"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp"
+    },
+    "source": {
+      "type": "string",
+      "description": "Event source identifier"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Event schema version"
+    },
+    "traceId": {
+      "type": "string",
+      "description": "Distributed tracing identifier"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["data-ingestion", "knowledge-update", "action-trigger", "feedback"],
+      "description": "Event category"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata"
+    }
+  }
+}

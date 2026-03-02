@@ -1,0 +1,13 @@
+{
+  "name": "@muse-core/event-contracts",
+  "version": "1.0.0",
+  "description": "Muse Core Event Contract Registry",
+  "main": "validator.js",
+  "scripts": {
+    "test": "node validator.js"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1"
+  }
+}
