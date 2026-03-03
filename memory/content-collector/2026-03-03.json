@@ -1,0 +1,87 @@
+{
+  "date": "2026-03-03",
+  "hour": "10:00",
+  "sources": ["Hacker News"],
+  "trends": [
+    {
+      "topic": "Meta AI Smart Glasses Privacy",
+      "title": "Workers behind Meta's smart glasses can see everything",
+      "description": "Data privacy concerns raised by workers who have access to footage from Meta's AI-powered smart glasses",
+      "source": "Hacker News",
+      "votes": 616,
+      "search_potential": "high",
+      "angles": ["隱私疑慮", "AI 設備監控", "數據安全", "智能穿戴裝置"]
+    },
+    {
+      "topic": "Low Latency Voice Agent",
+      "title": "Sub-500ms latency voice agent built from scratch",
+      "description": "A developer built a voice agent with less than 500ms latency, showing real-time AI voice interaction is achievable",
+      "source": "Hacker News",
+      "votes": 187,
+      "search_potential": "high",
+      "angles": ["即時語音 AI", "延遲優化", "Voice AI 技術", "LLM 即時回應"]
+    },
+    {
+      "topic": "M4 Neural Engine Reverse Engineering",
+      "title": "Inside the M4 Apple Neural Engine - Part 1",
+      "description": "Deep dive into Apple's M4 neural engine architecture through reverse engineering",
+      "source": "Hacker News",
+      "votes": 275,
+      "search_potential": "medium",
+      "angles": ["Apple M4", "Neural Engine", "AI 晶片", "硬體優化"]
+    },
+    {
+      "topic": "Motorola GrapheneOS Partnership",
+      "title": "Motorola announces partnership with GrapheneOS",
+      "description": "Motorola partners with GrapheneOS for secure B2B solutions - huge win for privacy-focused mobile OS",
+      "source": "Hacker News",
+      "votes": 2079,
+      "search_potential": "high",
+      "angles": ["GrapheneOS", "手機安全", "隱私手機", "企業資安"]
+    },
+    {
+      "topic": "iPhone 17e Launch",
+      "title": "Apple introduces iPhone 17e",
+      "description": "Apple's latest budget iPhone model announcement",
+      "source": "Hacker News",
+      "votes": 202,
+      "search_potential": "medium",
+      "angles": ["iPhone 17e", "Apple 新機", "預算 iPhone"]
+    },
+    {
+      "topic": "New iPad Air M4",
+      "title": "New iPad Air powered by M4",
+      "description": "Apple launches new iPad Air with M4 chip",
+      "source": "Hacker News",
+      "votes": 332,
+      "search_potential": "medium",
+      "angles": ["iPad Air M4", "Apple M4", "平板 AI"]
+    },
+    {
+      "topic": "Build Your Own Quantum Computer",
+      "title": "How to Build Your Own Quantum Computer",
+      "description": "Guide to building quantum computing hardware",
+      "source": "Hacker News",
+      "votes": 35,
+      "search_potential": "medium",
+      "angles": ["量子計算", "DIY 量子電腦", "硬體製作"]
+    },
+    {
+      "topic": "Programmable Cryptography",
+      "title": "Programmable Cryptography",
+      "description": "Advances in programmable cryptographic systems",
+      "source": "Hacker News",
+      "votes": 46,
+      "search_potential": "low",
+      "angles": ["加密技術", "零知識證明"]
+    }
+  ],
+  "top_5_picks": [
+    "Meta AI Smart Glasses Privacy - 隱私/AI設備熱門議題",
+    "Motorola GrapheneOS Partnership - 安全手機突破",
+    "Low Latency Voice Agent - 即時語音AI技術",
+    "M4 Neural Engine - Apple AI硬體深度解析",
+    "iPhone 17e - Apple新品發布"
+  ],
+  "generated_at": "2026-03-03T10:53:00+08:00"
+}

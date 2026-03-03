@@ -23,5 +23,6 @@
 
 ### 新增訓練數據
 - `cron_reminder_handling.json` - 定時處理系統監控提醒
+- `training_data_collection_20260302.json` - 訓練數據收集與效能監控
 
 ---

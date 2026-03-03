@@ -1,0 +1,25 @@
+{
+  "collected_at": "2026-03-03T06:34:31+08:00",
+  "source": "Google Trends + Serper API",
+  "topics": [
+    {
+      "title": "9 Trends Shaping Work in 2026 and Beyond",
+      "url": "https://hbr.org/2026/02/9-trends-shaping-work-in-2026-and-beyond",
+      "source": "HBR",
+      "insight": "2026 年工作趨勢：AI 協作、远程工作、技能重塑"
+    },
+    {
+      "title": "The trends that will shape AI and tech in 2026",
+      "url": "https://www.ibm.com/think/news/ai-tech-trends-predictions-2026",
+      "source": "IBM",
+      "insight": "IBM 預測 2026 AI 與科技發展方向"
+    },
+    {
+      "title": "AI agent trends 2026 report",
+      "url": "https://cloud.google.com/resources/content/ai-agent-trends-2026",
+      "source": "Google Cloud",
+      "insight": "AI Agent 從概念驗證走向實際應用"
+    }
+  ],
+  "discussion_prompt": "📈 **今日 AI 趨勢焦點**\n\n1. **HBR: 9 Trends Shaping Work in 2026** - 工作方式將如何轉變？\n\n2. **IBM: AI and Tech Trends 2026** - 科技巨頭看到了什麼？\n\n3. **Google Cloud: AI Agent Trends** - AI Agent 崛起帶來什麼機會？"
+}

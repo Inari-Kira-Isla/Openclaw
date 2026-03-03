@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI API - 一鍵複製調用</title>
+  <meta name="description" content="OpenAI、Claude、 Gemini API 一鍵複製代碼">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --primary: #10b981; --bg: #f8fafc; --text: #1e293b; }
+    body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    h1 { color: var(--primary); margin-bottom: 1rem; }
+    .breadcrumb { margin-bottom: 1rem; font-size: 0.9rem; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .api-card { background: #fff; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .api-card h2 { color: var(--primary); margin-bottom: 0.5rem; }
+    .api-card p { color: #64748b; margin-bottom: 1rem; }
+    .code-block { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.9rem; position: relative; }
+    .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: #10b981; color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+    .copy-btn:hover { background: #059669; }
+    .tag { display: inline-block; background: #d1fae5; color: #065f46; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.5rem; }
+  </style>
+  <script>
+    function copyCode(btn) {
+      const code = btn.previousElementSibling.textContent;
+      navigator.clipboard.writeText(code);
+      btn.textContent = '✅ 已複製';
+      setTimeout(() => btn.textContent = '📋 複製', 2000);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb"><a href="/ai-hub/">首頁</a> > AI API</nav>
+    
+    <h1>🟢 AI API 一鍵複製</h1>
+    <p style="color: #64748b; margin-bottom: 2rem;">點擊複製按鈕即可獲取 API 調用代碼</p>
+    
+    <div class="api-card">
+      <h2>OpenAI API</h2>
+      <p>GPT-4 / GPT-4o 調用</p>
+      <span class="tag">Python</span><span class="tag">Node.js</span>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+import openai
+
+client = openai.OpenAI(api_key="YOUR_API_KEY")
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": "你好"}]
+)
+print(response.choices[0].message.content)</div>
+    </div>
+    
+    <div class="api-card">
+      <h2>Claude API</h2>
+      <p>Claude 3.5 Sonnet 調用</p>
+      <span class="tag">Python</span><span class="tag">Node.js</span>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+import anthropic
+
+client = anthropic.Anthropic(api_key="YOUR_API_KEY")
+message = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "你好"}]
+)
+print(message.content[0].text)</div>
+    </div>
+    
+    <div class="api-card">
+      <h2>Google Gemini API</h2>
+      <p>Gemini Pro 調用</p>
+      <span class="tag">Python</span><span class="tag">Node.js</span>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 複製</button>
+import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+model = genai.GenerativeModel('gemini-pro')
+response = model.generate_content("你好")
+print(response.text)</div>
+    </div>
+  </div>
+</body>
+</html>
