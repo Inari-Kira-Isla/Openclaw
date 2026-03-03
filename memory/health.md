@@ -1,33 +1,34 @@
-# 系統健康檢查 | 2026-03-03
+# 健康檢查 - 2026-03-04 00:00
 
-## 檢查時間
-12:08 PM (Asia/Macau)
+## 系統狀態
 
-## Gateway 狀態
-| 項目 | 狀態 | 數值 |
+| 項目 | 狀態 | 備註 |
 |------|------|------|
-| Service | ✅ 運行中 | pid 69823 |
-| Response Time | ✅ 正常 | 29ms |
-| Port | ✅ 正常 | 18789 |
-| Auth | ✅ 已設定 | Token |
+| Gateway | ✅ 運行中 | pid 58572, Web UI 正常 |
+| Web UI | ✅ 正常 | HTML 響應 |
+| RPC | ⚠️ 緩慢 | Method Not Allowed |
+| Sessions CLI | ⚠️ 逾時 | 記憶體壓力 |
 
-## 排程狀態
-| 項目 | 狀態 |
-|------|------|
-| Active Sessions | ✅ 491 |
-| Agents | ✅ 35 (33 bootstrap) |
-| Heartbeat | ✅ 30m (main) |
+## 資源使用
 
-## Email 監控
-- Gmail Classifier: 未設定 (skill available)
+| 項目 | 使用量 |
+|------|--------|
+| Claude 進程 | 2個 (28258, 95641) |
+| Gateway | 114MB RAM |
+| Chrome | 多個標籤 |
+| Free Pages | 3,633 (14MB) |
 
-## 閉環系統
-- 趨勢收集: ✅ 今日已完成 (03:00)
-- 熱門話題: Motorola+GrapheneOS (2079票), Meta AI glasses (616票)
-- 討論包裝: 5個議題已準備
+## 診斷
 
-## 異常記錄
-無
+- 記憶體壓力導致 RPC 響應緩慢
+- 多個 Claude 會話佔用資源
+- Gateway 運行但響應遲緩
+
+## 處理
+
+- 記錄狀態
+- 凌晨時段，不發送警報
+- 建議：白天重啟部分會話
 
 ---
-_記錄時間: 2026-03-03 12:08_
+**檢查時間:** 2026-03-04 00:00

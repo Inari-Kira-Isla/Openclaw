@@ -5,13 +5,22 @@ Notion 自動同步系統 - Notion Auto Sync System
 """
 
 import os
+
+# Load .env
+_env_file = os.path.expanduser("~/.openclaw/.env")
+if os.path.exists(_env_file):
+    for _l in open(_env_file):
+        _l = _l.strip()
+        if _l and not _l.startswith("#") and "=" in _l:
+            _k, _v = _l.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 import json
 import requests
 from datetime import datetime
 
 class NotionSync:
     def __init__(self):
-        self.key = "***REMOVED***"
+        self.key = os.environ.get("NOTION_API_KEY", "")
         self.base_url = "https://api.notion.com/v1"
         self.headers = {
             "Authorization": f"Bearer {self.key}",

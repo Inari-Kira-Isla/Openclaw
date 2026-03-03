@@ -1,64 +1,80 @@
 # AI Hub 資料搜集 - 2026-03-03
 
-## 熱門 AI 話題 (48h)
+## 📊 今日 AI 趨勢熱門話題
 
-### 1. Anthropic/Pentagon 風波
-- Trump 宣布禁用 Claude，但隨後對伊朗軍事行動仍使用 Claude 進行情報評估
-- Anthropic 被列為「供應鏈風險」，業內擔憂 AI 產業可能走向部分國有化
-- Ilya Sutskever 呼籲 AI 公司團結制定紅線
+### 1. 熱門 AI 話題 (48h內)
 
-### 2. OpenAI 軍事合作
-- OpenAI 與五角大廈達成新協議，允許在保密網路部署模型
-- Sam Altman：希望禁止大規模監控，要求對自主武器系統負責
+| 話題 | 來源 | 流量/關注度 |
+|------|------|-------------|
+| **Claude Opus 4.6 解決數學問題** | Hacker News, Stanford | ⭐⭐⭐⭐ |
+| **Voice AI Agent 低延遲技術** | Hacker News (489 points) | ⭐⭐⭐⭐⭐ |
+| **AI 生成的藝術版權問題** | Supreme Court 新聞 | ⭐⭐⭐⭐ |
+| **Meta AI Smart Glasses 隱私爭議** | Hacker News (1226 points) | ⭐⭐⭐⭐⭐ |
+| **AI 假新聞/假引用爭議** | Ars Technica 事件 | ⭐⭐⭐ |
+| **AI Agent 測試與監控工具** | YC Startup (Cekura) | ⭐⭐⭐ |
 
-### 3. Claude 新功能
-- 記憶功能新增 prompt 匯入工具，可從其他 AI 平台複製資料
+### 2. 重點趨勢分析
 
-### 4. Perplexity Computer
-- 推出 AI Agent 平台，跨子代理執行任務，被稱為「通用數位工作者」
-
-### 5. Google Flow 更新
-- 整合 Whisk、ImageFX 進入統一生成工作區
-
-### 6. YouTube AI 垃圾內容
-- 研究發現 40%+ 兒童 Shorts 為 AI 生成內容
+- **Voice AI 崛起**: 低延遲 voice agent 成為新熱點 (<500ms)
+- **AI 倫理/法律**: 版權問題、假資訊、隱私疑慮持續發燒
+- **AI 應用工具化**: 測試、監控、自動化工具需求增加
 
 ---
 
-## 繁中關鍵字建議 (高流量/低競爭)
+## 🔍 高流量低競爭 繁中關鍵字
 
-| 關鍵字 | 競爭程度 | 搜尋意圖 |
-|--------|----------|----------|
-| Claude 記憶功能 教學 | 低 | 教學類 |
-| AI 影片生成 工具 比較 | 中 | 評測類 |
-| ChatGPT 提示詞 範例 | 中 | 教學類 |
+| 關鍵字 | 搜尋意圖 | 競爭程度 | 建議類型 |
+|--------|----------|----------|----------|
+| **Claude 教學** | 學習使用 | 中等 | 教學文 |
+| **AI  Prompt 技巧** | 提升產出 | 低 | 技巧文 |
+| **AI 工具推薦** | 尋找解決方案 | 中等 | 評測文 |
 
----
-
-## 文章標題 + SEO Slug 建議
-
-### 1. Claude 記憶功能怎麼用？完整教學 2026
-- **Slug:** `claude-memory-tutorial-2026`
-- **標籤:** Claude, 教學, AI
-- **內容方向:** 新功能介紹 + 實際案例
-
-### 2. OpenAI 與美軍合作掀波瀾：AI 軍事爭議一次看
-- **Slug:** `openai-pentagon-controversy-2026`
-- **標籤:** OpenAI, 軍事, AI 倫理
-- **內容方向:** 事件分析 + 產業影響
-
-### 3. AI 影片生成工具比較：Google Flow  vs Perplexity
-- **Slug:** `ai-video-generation-tools-comparison`
-- **標籤:** AI影片, Google, Perplexity
-- **內容方向:** 功能對比 + 選擇建議
+### 長尾關鍵字建議
+- "Claude API 教學"
+- "AI 寫文案技巧"
+- "Prompt Engineering 中文"
 
 ---
 
-## 競品內容空缺
+## 📉 競品內容空缺分析
 
-- 繁中市場缺乏 Claude 記憶功能完整教學
-- AI 軍事爭議議題鮮少中文深度分析
-- AI 影片工具比較文章少見（多為英文）
+| 競品類型 | 現有內容 | 空缺機會 |
+|----------|----------|----------|
+| 科技媒體 | 國外新聞編譯 | 繁中深度分析 |
+| YouTube 教學 | 英文為主 | 中文入門教程 |
+| 部落格 | 零散分享 | 系統化學習路徑 |
+
+### 建議切入點
+1. **AI Tool 評測** - 繁中市場缺乏詳細評測
+2. **Prompt 模板庫** - 可批量生成內容
+3. **AI 工作流** - 實際應用場景教學
 
 ---
-*搜集時間: 2026-03-03 08:25*
+
+## 📝 建議文章標題 + SEO Slug
+
+### 文章 1
+**標題**: Claude Code 完整教學：AI 程式助手的實戰應用
+**Slug**: `claude-code-jiao-cheng-ai-cheng-shi-zhu-shou`
+**關鍵字**: Claude Code, AI 程式助手, 教學
+
+### 文章 2
+**標題**: Prompt Engineering 入門：5 個提升 AI 產出的黃金法則
+**Slug**: `prompt-engineierung-ru-men-ti-sheng-ai-chan-chu`
+**關鍵字**: Prompt Engineering, AI 產出, 技巧
+
+### 文章 3
+**標題**: 2026 AI 工具推薦：繁中使用者必備的 10 款應用
+**Slug**: `2026-ai-gong-ju-tui-jian-fan-zhong-ying-yong`
+**關鍵字**: AI 工具推薦, 2026, 必備
+
+---
+
+## ✅ 執行建議
+
+1. **優先發布**: 文章 2 (Prompt Engineering) - 競爭低、易 SEO
+2. **第二發布**: 文章 1 (Claude Code) - 技術門檻高、忠實讀者
+3. **第三發布**: 文章 3 (AI 工具) - 流量大、可搭配聯盟行銷
+
+---
+_收集時間: 2026-03-03 22:42 (Asia/Macau)_

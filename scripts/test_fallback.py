@@ -12,7 +12,6 @@ import sys
 from datetime import datetime
 
 # 配置
-MINIMAX_API_KEY = "***REMOVED***"  # 你的 key
 
 # 模型配置
 MODELS = {
