@@ -2,7 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://inari-kira-isla.github.io/Openclaw/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://inari-kira-isla.github.io/Openclaw/prompts/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://inari-kira-isla.github.io/Openclaw/configs/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-02_ai-prompt-design-guide.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-02_結構化提示詞設計完全指南.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-02_chain-of-thought-prompt.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-02_claude-code-prompt-engineering.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://inari-kira-isla.github.io/Openclaw/tutorials/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://inari-kira-isla.github.io/Openclaw/workflows/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-ai-trends.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-02_ai-coding-workflow.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-02_思維鏈提示詞.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://inari-kira-isla.github.io/Openclaw/configs/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
