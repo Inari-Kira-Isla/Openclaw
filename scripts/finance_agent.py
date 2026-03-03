@@ -6,13 +6,22 @@ Finance Agent - 財務管理 Agent
 """
 
 import os
+
+# Load .env
+_env_file = os.path.expanduser("~/.openclaw/.env")
+if os.path.exists(_env_file):
+    for _l in open(_env_file):
+        _l = _l.strip()
+        if _l and not _l.startswith("#") and "=" in _l:
+            _k, _v = _l.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 import json
 import subprocess
 from datetime import datetime, timedelta
 
 class FinanceAgent:
     def __init__(self):
-        self.notion_key = os.environ.get("NOTION_API_KEY", "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")
+        self.notion_key = os.environ.get("NOTION_API_KEY", "")
         self.database_id = "315a1238-f49d-81ef-be80-c632e0b5e493"  # 支出資料庫
         self.data_path = os.path.expanduser("~/.openclaw/workspace/memory/expenses.json")
         self.load_data()

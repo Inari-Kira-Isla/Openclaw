@@ -1,0 +1,22 @@
+{
+  "task_type": "heartbeat_maintenance",
+  "description": "每日維護任務 - 系統健康檢查",
+  "timestamp": "2026-03-03T15:45:00Z",
+  "actions": [
+    "檢查 openclaw status",
+    "驗證 Gateway 響應時間",
+    "檢查 Session 數量",
+    "分析 Context 使用率",
+    "檢查錯誤日誌",
+    "驗證供應鏈狀態",
+    "記錄到 MEMORY.md"
+  ],
+  "result": {
+    "status": "success",
+    "session_count": 494,
+    "context_usage": "11-22%",
+    "gateway_latency": "18ms",
+    "errors": 0
+  },
+  "patterns": ["system_health_check", "maintenance", "monitoring"]
+}

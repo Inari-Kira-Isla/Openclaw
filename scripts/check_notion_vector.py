@@ -3,10 +3,19 @@
 # 檢查 Notion AI Agent 系統架構學習筆記 資料庫狀態
 
 import os
+
+# Load .env
+_env_file = os.path.expanduser("~/.openclaw/.env")
+if os.path.exists(_env_file):
+    for _l in open(_env_file):
+        _l = _l.strip()
+        if _l and not _l.startswith("#") and "=" in _l:
+            _k, _v = _l.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 import requests
 import json
 
-NOTION_KEY = os.environ.get("NOTION_API_KEY", "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")
+NOTION_KEY = os.environ.get("NOTION_API_KEY", "")
 DB_ID = "30aa1238f49d817c8163dd76d1309240"
 
 print("========================================")

@@ -12,7 +12,6 @@ import sys
 from datetime import datetime
 
 # 配置
-MINIMAX_API_KEY = "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"  # 你的 key
 
 # 模型配置
 MODELS = {

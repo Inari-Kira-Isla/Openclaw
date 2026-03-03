@@ -4,6 +4,15 @@ Notion to ChromaDB Sync - 完整同步腳本
 """
 
 import os
+
+# Load .env
+_env_file = os.path.expanduser("~/.openclaw/.env")
+if os.path.exists(_env_file):
+    for _l in open(_env_file):
+        _l = _l.strip()
+        if _l and not _l.startswith("#") and "=" in _l:
+            _k, _v = _l.split("=", 1)
+            os.environ.setdefault(_k.strip(), _v.strip())
 import sys
 import json
 import requests
@@ -16,7 +25,7 @@ import chromadb
 from chromadb.config import Settings
 
 # Notion 設定
-NOTION_API_KEY = "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"
+NOTION_API_KEY = os.environ.get("NOTION_API_KEY", "")
 DATABASE_ID = "30aa1238f49d817c8163dd76d1309240"
 
 # ChromaDB 設定
