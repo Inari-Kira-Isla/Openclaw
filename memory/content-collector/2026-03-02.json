@@ -1,72 +1,98 @@
 {
   "date": "2026-03-02",
-  "collected_at": "2026-03-02T16:46:00+08:00",
-  "source": "Hacker News",
+  "collected_at": "2026-03-03T11:58:00+08:00",
+  "sources": ["Hacker News"],
   "topics": [
     {
-      "title": "If AI writes code, should the session be part of the commit?",
-      "points": 216,
-      "comments": 223,
-      "url": "https://github.com/mandel-macaque/memento",
-      "category": "AI/Development",
-      "search_potential": "high"
+      "title": "Meta AI Smart Glasses Privacy Concerns",
+      "description": "Workers behind Meta's smart glasses can see everything users see, raising major privacy concerns",
+      "source": "HN",
+      "votes": 707,
+      "url": "https://www.svd.se/a/K8nrV4/metas-ai-smart-glasses-and-data-privacy-concerns-workers-say-we-see-everything",
+      "search_potential": "high",
+      "tags": ["AI", "privacy", "wearables", "Meta"]
     },
     {
-      "title": "WebMCP is available for early preview",
-      "points": 272,
-      "comments": 154,
-      "url": "https://developer.chrome.com/blog/webmcp-epp",
-      "category": "Web Development",
-      "search_potential": "medium"
+      "title": "Sub-500ms Latency Voice Agent",
+      "description": "Building a ultra-low latency voice AI agent from scratch",
+      "source": "HN",
+      "votes": 232,
+      "url": "https://www.ntik.me/posts/voice-agent",
+      "search_potential": "high",
+      "tags": ["AI", "voice", "latency", "real-time"]
     },
     {
-      "title": "When does MCP make sense vs CLI?",
-      "points": 371,
-      "comments": 235,
-      "url": "https://ejholmes.github.io/2026/02/28/mcp-is-dead-long-live-the-cli.html",
-      "category": "AI/Tools",
-      "search_potential": "high"
+      "title": "AI Agents Making Money in 2026",
+      "description": "Analysis of whether AI agents are actually generating revenue or just hype",
+      "source": "HN",
+      "votes": 9,
+      "url": "https://www.siliconsnark.com/do-ai-agents-actually-make-money-in-2026-or-is-it-just-mac-minis-and-vibes/",
+      "search_potential": "high",
+      "tags": ["AI", "agents", "business", "2026"]
     },
     {
-      "title": "Microgpt explained interactively",
-      "points": 264,
-      "comments": 37,
-      "url": "https://growingswe.com/blog/microgpt",
-      "category": "AI/LLM",
-      "search_potential": "medium"
+      "title": "Ars Technica Fires Reporter Over AI-Generated Fabricated Quotes",
+      "description": "AI controversy in journalism - reporter fired for AI-generated fake quotes",
+      "source": "HN",
+      "votes": 20,
+      "url": "https://futurism.com/artificial-intelligence/ars-technica-fires-reporter-ai-quotes",
+      "search_potential": "medium",
+      "tags": ["AI", "journalism", "ethics", "media"]
     },
     {
-      "title": "Timber – Ollama for classical ML models, 336x faster than Python",
-      "points": 115,
-      "comments": 14,
-      "url": "https://github.com/kossisoroyce/timber",
-      "category": "ML/Performance",
-      "search_potential": "high"
+      "title": "M4 Apple Neural Engine Reverse Engineering",
+      "description": "Deep dive into Apple's M4 neural engine architecture",
+      "source": "HN",
+      "votes": 283,
+      "url": "https://maderix.substack.com/p/inside-the-m4-apple-neural-engine",
+      "search_potential": "medium",
+      "tags": ["AI", "Apple", "M4", "hardware", "neural"]
     },
     {
-      "title": "Right-sizes LLM models to your system's RAM, CPU, and GPU",
-      "points": 122,
-      "comments": 29,
-      "url": "https://github.com/AlexsJones/llmfit",
-      "category": "AI/Optimization",
-      "search_potential": "high"
+      "title": "Motorola Partners with GrapheneOS",
+      "description": "Major phone manufacturer partnering with privacy-focused OS",
+      "source": "HN",
+      "votes": 2093,
+      "url": "https://motorolanews.com/motorola-three-new-b2b-solutions-at-mwc-2026/",
+      "search_potential": "medium",
+      "tags": ["mobile", "privacy", "GrapheneOS", "Android"]
     },
     {
-      "title": "Evolving descriptive text of mental content from human brain activity",
-      "points": 19,
-      "comments": 9,
-      "url": "https://www.bbc.com/future/article/20260226-how-ai-can-read-your-thoughts",
-      "category": "AI/BCI",
-      "search_potential": "high"
+      "title": "New iPad Air with M4 Chip",
+      "description": "Apple announces new iPad Air powered by M4",
+      "source": "HN",
+      "votes": 342,
+      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/",
+      "search_potential": "low",
+      "tags": ["Apple", "M4", "iPad", "hardware"]
     },
     {
-      "title": "Decision trees – the unreasonable power of nested decision rules",
-      "points": 476,
-      "comments": 74,
-      "url": "https://mlu-explain.github.io/decision-tree/",
-      "category": "ML/Education",
-      "search_potential": "medium"
+      "title": "iPhone 17e Released",
+      "description": "Apple releases new iPhone 17e model",
+      "source": "HN",
+      "votes": 216,
+      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-iphone-17e/",
+      "search_potential": "low",
+      "tags": ["Apple", "iPhone", "hardware"]
+    },
+    {
+      "title": "Building Your Own Quantum Computer",
+      "description": "Guide to building a quantum computer at home",
+      "source": "HN",
+      "votes": 49,
+      "url": "https://physics.aps.org/articles/v19/24",
+      "search_potential": "medium",
+      "tags": ["quantum", "DIY", "hardware"]
+    },
+    {
+      "title": "In-Utero Stem Cell Therapy for Spina Bifida",
+      "description": "First successful stem cell therapy for fetal spina bifida repair",
+      "source": "HN",
+      "votes": 260,
+      "url": "https://health.ucdavis.edu/news/headlines/first-ever-in-utero-stem-cell-therapy-for-fetal-spina-bifida-repair-is-safe-study-finds/2026/02",
+      "search_potential": "medium",
+      "tags": ["medical", "stem cells", "innovation"]
     }
   ],
-  "summary": "AI 开发工具持续热门，MCP vs CLI 引发讨论。本地 LLM 优化工具受关注，脑机接口新进展。"
+  "summary": "AI trends: Voice AI latency improvements, AI agent business viability questions, privacy concerns with AI wearables, AI ethics in journalism. Major tech: Apple M4 chip expansion, Motorola-GrapheneOS partnership."
 }

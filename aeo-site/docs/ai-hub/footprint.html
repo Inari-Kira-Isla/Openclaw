@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 足跡 - 互動記錄</title>
+  <meta name="description" content="記錄 AI 互動歷史，分析使用模式">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --primary: #3b82f6; --bg: #f8fafc; --text: #1e293b; }
+    body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    h1 { color: var(--primary); margin-bottom: 1rem; }
+    .breadcrumb { margin-bottom: 1rem; font-size: 0.9rem; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: #fff; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .stat-num { font-size: 2rem; font-weight: bold; color: var(--primary); }
+    .stat-label { color: #64748b; font-size: 0.9rem; }
+    .timeline { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .timeline h2 { color: var(--primary); margin-bottom: 1rem; }
+    .timeline-item { padding: 1rem 0; border-bottom: 1px solid #e2e8f0; }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date { color: #64748b; font-size: 0.85rem; }
+    .timeline-content { margin-top: 0.5rem; }
+    .tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb"><a href="/ai-hub/">首頁</a> > AI 足跡</nav>
+    <h1>🔵 AI 足跡</h1>
+    <p style="color: #64748b; margin-bottom: 2rem;">記錄你的 AI 互動歷史與使用趨勢</p>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-num">127</div>
+        <div class="stat-label">總對話次數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">45</div>
+        <div class="stat-label">使用天數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12</div>
+        <div class="stat-label">使用主題</div>
+      </div>
+    </div>
+    
+    <div class="timeline">
+      <h2>📝 最近互動</h2>
+      <div class="timeline-item">
+        <div class="timeline-date">2026-03-02 21:30</div>
+        <div class="timeline-content">
+          <span class="tag">網站優化</span>
+          生成 AEO 文章，優化網站結構
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026-03-02 14:20</div>
+        <div class="timeline-content">
+          <span class="tag">AI 趨勢</span>
+          分析最新 AI 趨勢熱門主題
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026-03-02 10:00</div>
+        <div class="timeline-content">
+          <span class="tag">系統設定</span>
+          建立 AEO 閉環系統
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

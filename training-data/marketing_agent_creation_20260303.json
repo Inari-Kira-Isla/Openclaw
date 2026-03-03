@@ -1,0 +1,27 @@
+{
+  "task_type": "new_agent_training",
+  "timestamp": "2026-03-03T10:40:00+08:00",
+  "agent_name": "marketing-agent",
+  "actions": [
+    "role_definition_creation",
+    "memory_structure_setup",
+    "task_assignment",
+    "performance_logging"
+  ],
+  "agent_spec": {
+    "name": "marketing-agent",
+    "core_capabilities": [
+      "content_generation",
+      "trend_analysis", 
+      "scheduling",
+      "analytics"
+    ],
+    "integrations": ["slack", "telegram", "facebook"],
+    "status": "testing"
+  },
+  "results": {
+    "role_defined": true,
+    "memory_structure": "created",
+    "status": "pending_integration"
+  }
+}
