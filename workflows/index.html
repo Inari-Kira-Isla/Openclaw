@@ -1,29 +1,142 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<title>工作流 | AI 學習寶庫</title>
-<meta name="description" content="工作流 - AI 學習寶庫">
-<link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#2563eb;--bg:#f8fafc}
-body{font-family:-apple-system,sans-serif;background:var(--bg);max-width:800px;margin:0 auto;padding:2rem}
-h1{color:var(--primary);margin-bottom:1rem}
-.article-list{list-style:none}
-.article-list li{padding:1rem 0;border-bottom:1px solid #e2e8f0}
-.article-list li a{color:#1e293b;text-decoration:none;font-size:1.1rem}
-.article-list li a:hover{color:var(--primary)}
-.breadcrumb{font-size:0.9rem;margin-bottom:1rem}
-.breadcrumb a{color:var(--primary);text-decoration:none}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工作流 | AI 學習寶庫</title>
+  <meta name="description" content="AI 自動化工作流與實際應用案例，大幅提升工作效率。包含 n8n、Make、Zapier 等自動化平台的 AI 整合教學。">
+  <meta name="keywords" content="AI工作流, 自動化, n8n, Make, Zapier, AI自動化, 工作效率">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="工作流 | AI 學習寶庫">
+  <meta property="og:description" content="AI 自動化工作流與實際應用案例。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/">
 </head>
-<body>
-<nav class="breadcrumb"><a href="/Openclaw/">首頁</a> > 工作流</nav>
-<h1>工作流</h1>
-<ul class="article-list">
+<body class="page-wrap">
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link active">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
 
-<li>敬請期待...</li>
-</ul>
+  <main>
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/Openclaw/">首頁</a>
+        <span class="bc-sep">›</span>
+        <span>工作流</span>
+      </nav>
+    </div>
+
+    <div class="page-header">
+      <div class="container">
+        <div class="page-header-icon">🔄</div>
+        <h1>工作流</h1>
+        <p>自動化流程與實際應用案例，大幅提升工作效率</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <div class="art-list">
+
+          <a href="/Openclaw/workflows/ai-content-pipeline.html" class="art-item reveal">
+            <div class="art-item-badge">內容自動化</div>
+            <h3>AI 內容生產流水線：從靈感到發布全自動化</h3>
+            <p>使用 n8n + Claude API 建立完整的內容生產工作流，自動完成主題研究、草稿撰寫、圖片生成到多平台發布的全流程。</p>
+            <div class="art-item-meta">
+              <span>2026-03-03</span>
+              <span class="sep">·</span>
+              <span>18 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/workflows/customer-service-bot.html" class="art-item reveal reveal-d1">
+            <div class="art-item-badge">智能客服</div>
+            <h3>AI 智能客服系統：多平台自動回覆工作流</h3>
+            <p>整合 Facebook Messenger、LINE、Telegram 的統一 AI 客服工作流，結合 FAQ 匹配與 LLM 生成實現高效自動回覆。</p>
+            <div class="art-item-meta">
+              <span>2026-02-27</span>
+              <span class="sep">·</span>
+              <span>22 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/workflows/daily-digest.html" class="art-item reveal reveal-d2">
+            <div class="art-item-badge">資訊聚合</div>
+            <h3>每日 AI 科技摘要：自動聚合並推送最新資訊</h3>
+            <p>建立自動化資訊聚合工作流，每日從多個來源收集 AI 科技新聞，透過 Claude 生成摘要後推送到 Telegram/Email。</p>
+            <div class="art-item-meta">
+              <span>2026-02-23</span>
+              <span class="sep">·</span>
+              <span>15 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/workflows/notion-ai-integration.html" class="art-item reveal reveal-d3">
+            <div class="art-item-badge">Notion 整合</div>
+            <h3>Notion + AI 知識管理工作流</h3>
+            <p>將 AI 深度整合到 Notion 工作流中，實現文章自動分類、標籤提取、相關內容推薦與知識庫自動同步。</p>
+            <div class="art-item-meta">
+              <span>2026-02-17</span>
+              <span class="sep">·</span>
+              <span>14 分鐘閱讀</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+        <a href="/Openclaw/llms.txt">llms.txt</a>
+      </nav>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved;
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
