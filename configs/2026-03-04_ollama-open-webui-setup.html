@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南 | AI 學習寶庫</title>
+  <meta name="description" content="本文詳解如何在本地電腦安裝 Ollama 與 Open WebUI，打造專屬 AI 對話環境，支援離線使用與自訂模型。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南">
+  <meta property="og:description" content="本文詳解如何在本地電腦安裝 Ollama 與 Open WebUI，打造專屬 AI 對話環境，支援離線使用與自訂模型。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南", "description": "本文詳解如何在本地電腦安裝 Ollama 與 Open WebUI，打造專屬 AI 對話環境，支援離線使用與自訂模型。", "datePublished": "2026-03-04", "dateModified": "2026-03-04", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Ollama 一定要有 GPU 才能使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不一定，Ollama 支援 CPU 執行，只是速度較慢。7B 以下模型在 8GB RAM 環境下仍可運行，但建議有 GPU 以獲得流暢體驗。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Open WebUI 如何設定中文介面？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "登入後點擊左下角頭像，進入「Settings」->「General」，找到 Language 選項切換為「繁體中文」即可。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "模型檔案佔用空間過大怎麼辦？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可使用 <code>ollama rm 模型名稱</code> 刪除不需要的模型，或選擇較小的模型版本如 llama3:8b 而非 70b。"
+          }
+        }]
+  }</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>本地 AI 環境搭建：Ollama + Open WebUI...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-04</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>前言：為什麼選擇本地 AI 環境？</h2>
+<p>要在本地搭建 AI 環境，最快速穩定的方案是使用 Ollama 搭配 Open WebUI。Ollama 是開源的本地大型語言模型執行框架，支援多種開源模型；Open WebUI 提供友善的 Web 介面，類似 ChatGPT 的操作體驗。整個安裝過程免費且無需 GPU 也能運行小型模型，適合開發者與 AI 愛好者入門。本地部署可確保資料隱私，離線也能使用，是學習與實驗的最佳選擇。</p>
+
+<h2>一、環境準備與系統需求</h2>
+<p>在開始安裝前，需確認系統符合基本需求。Ollama 支援 Windows、macOS 與 Linux三大平台。硬體方面，建議至少 8GB RAM 才能流暢運行 7B 參數模型；有獨立顯示卡的電腦可獲得更佳效能，Ollama 會自動偵測並使用 GPU 加速。Windows 使用者需啟用 WSL2（Windows 子系統 Linux）或直接使用 Docker 環境。建議先更新系統至最新版本，並確認磁碟空間至少有 20GB 以上用於存放模型檔案。</p>
+
+<h2>二、Ollama 安裝教學</h2>
+<h3>macOS 與 Linux 安裝</h3>
+<p>最簡單的安裝方式是透過終端機執行官方提供的安裝腳本：</p>
+<pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+<p>安裝完成後，輸入 <code>ollama --version</code> 確認版本。安裝預設會建立 ollama 服務，並在開機時自動啟動。若要手動啟動服務，可執行 <code>ollama serve</code>。</p>
+
+<h3>Windows 安裝</h3>
+<p>Windows 使用者有兩種選擇：一是透過 WSL2 安裝 Linux 版 Ollama，二是直接下載 Windows 預覽版。建議技術新手使用 WSL2 方法，可獲得更穩定的相容性。安裝 WSL2 後，在 Ubuntu 環境中執行上述安裝腳本即可。確保 WSL2 整合了 GPU 驅動（需安裝 NVIDIA CUDA 驅動或 AMD ROCm）。</p>
+
+<h2>三、Open WebUI 安裝與設定</h2>
+<p>Open WebUI（原名 Ollama WebUI）是功能完整的 Web 介面，安裝方式相當簡單。若已安裝 Docker，可直接執行以下指令：</p>
+<pre><code>docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main</code></pre>
+<p>安裝完成後，開啟瀏覽器訪問 <code>http://localhost:3000</code> 即可看到登入頁面。首次使用需註冊管理員帳號，建議設定強密碼並妥善保存。Open WebUI 支援多語言介面，包含繁體中文，可在設定中切換語系。</p>
+
+<h2>四、模型下載與基本使用</h2>
+<p>安裝完成後，即可下載心儀的語言模型。常用的開源模型包括 Llama 3、Phi 3、Mistral 等。在終端機輸入以下指令下載模型：</p>
+<pre><code>ollama pull llama3</code></pre>
+<p>下載完成後，可透過 <code>ollama list</code> 查看已安裝的模型。在 Open WebUI 介面中，選擇模型即可開始對話。進階使用者可調整系統提示詞、溫度參數與回應長度，打造個人化的 AI 助理。如需管理多個模型，可在設定中建立不同的對話場景配置。</p>
+
+<h2>五、常見問題與效能優化</h2>
+<p>初次使用常見問題包括模型下載失敗、載入緩慢或記憶體不足。若遇到網路問題，可嘗試設定代理伺服器或使用国内鏡像源。記憶體不足時，可選擇較小的模型（如 phi3:3.8b）或關閉其他應用程式釋放資源。若要進一步優化效能，可參考 Ollama 官方文件調整 NUMA 與 CPU 執行緒設定。定期執行 <code>ollama pull</code> 更新模型，可獲得最新功能與安全修補。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Ollama 一定要有 GPU 才能使用嗎？</h3>
+            <p class="faq-a">不一定，Ollama 支援 CPU 執行，只是速度較慢。7B 以下模型在 8GB RAM 環境下仍可運行，但建議有 GPU 以獲得流暢體驗。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Open WebUI 如何設定中文介面？</h3>
+            <p class="faq-a">登入後點擊左下角頭像，進入「Settings」->「General」，找到 Language 選項切換為「繁體中文」即可。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">模型檔案佔用空間過大怎麼辦？</h3>
+            <p class="faq-a">可使用 <code>ollama rm 模型名稱</code> 刪除不需要的模型，或選擇較小的模型版本如 llama3:8b 而非 70b。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
