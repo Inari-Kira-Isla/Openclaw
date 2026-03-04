@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LangChain 環境配置：從零開始搭建 AI Agent 開發環境 | AI 學習寶庫</title>
+  <meta name="description" content="LangChain 環境配置教學，詳細說明如何從零開始搭建 AI Agent 開發環境。包括 Python 環境設定、LangChain 安裝、相依套件管理及開發工具推薦，幫助開發者快速建立完整的 AI Agent 開發環境。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_langchain-dev-environment.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="LangChain 環境配置：從零開始搭建 AI Agent 開發環境">
+  <meta property="og:description" content="LangChain 環境配置教學，詳細說明如何從零開始搭建 AI Agent 開發環境。包括 Python 環境設定、LangChain 安裝、相依套件管理及開發工具推薦，幫助開發者快速建立完整的 AI Agent 開發環境。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_langchain-dev-environment.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "LangChain 環境配置：從零開始搭建 AI Agent 開發環境", "description": "LangChain 環境配置教學，詳細說明如何從零開始搭建 AI Agent 開發環境。包括 Python 環境設定、LangChain 安裝、相依套件管理及開發工具推薦，幫助開發者快速建立完整的 AI Agent 開發環境。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_langchain-dev-environment.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "LangChain 需要 Python 哪個版本？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LangChain 要求 Python 3.8 以上版本，建議使用 Python 3.10 或 3.11 以獲得最佳相容性和效能支援。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "安裝 LangChain 出現版本衝突怎麼辦？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可嘗試建立新的虛擬環境，或使用 pip install --upgrade 更新相關套件至最新版本，必要时可指定相容版本號。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "沒有 API 金鑰可以測試 LangChain 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以使用本地部署的開源模型，如 Ollama 搭配 LangChain，需先安裝對應的整合套件並配置本地端點。"
+          }
+        }]
+  }</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>LangChain 環境配置：從零開始搭建 AI Agent...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">LangChain 環境配置：從零開始搭建 AI Agent 開發環境</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>要在本地端搭建 LangChain 開發環境進行 AI Agent 開發，需要安裝 Python 3.8 以上版本、建立虛擬環境、安裝 LangChain 核心套件及相關相依套件，並配置 API 金鑰以連接語言模型。本文將帶領讀者逐步完成完整的開發環境建置。</p>
+
+<h2>環境準備與基礎需求</h2>
+<p>在開始安裝 LangChain 之前，需要確認系統滿足基本需求。硬體方面建議至少 8GB RAM 以確保執行順暢，作業系統支援 Windows、macOS 及 Linux。軟體需求包括 Python 3.8 或更高版本、pip 套件管理器，以及建議安裝的 Git 版本控制工具。</p>
+<p>首先開啟終端機或命令提示字元，輸入以下指令確認 Python 版本：</p>
+<pre><code>python --version</code></pre>
+<p>若顯示版本號碼低於 3.8 或顯示找不到指令，需前往 Python 官方網站下載安裝最新版本。建議使用 Python 3.10 或 3.11 以獲得最佳相容性。</p>
+
+<h2>建立 Python 虛擬環境</h2>
+<p>為避免套件版本衝突，建議為每個專案建立獨立的虛擬環境。進入專案目錄後，執行以下指令建立並啟用虛擬環境：</p>
+<pre><code>python -m venv venv
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows</code></pre>
+<p>啟用成功後，終端機提示字元前方會顯示 (venv) 標記，表示目前處於虛擬環境中。此時所有 pip 安裝的套件都會隔離在此環境內，不會影響系統其他 Python 專案。</p>
+
+<h2>LangChain 核心套件安裝</h2>
+<p>虛擬環境啟用後，即可安裝 LangChain 及其相依套件。基礎安裝指令如下：</p>
+<pre><code>pip install langchain langchain-core</code></pre>
+<p>LangChain 支援多種語言模型供應商，需根據使用的模型安裝對應整合套件。以 OpenAI 為例，需額外安裝：</p>
+<pre><code>pip install openai langchain-openai</code></pre>
+<p>若使用 Anthropic 的 Claude 模型，則安裝：</p>
+<pre><code>pip install anthropic langchain-anthropic</code></pre>
+<p>其他常用相依套件包括用於處理文件載入的 langchain-community、對話記憶的 langchain-memory，以及建構 Agent 工具鏈所需的相關模組。</p>
+
+<h2>環境變數與 API 金鑰設定</h2>
+<p>LangChain 連接外部語言模型需要 API 金鑰，建議使用 .env 檔案管理敏感資訊。安裝 python-dotenv 套件：</p>
+<pre><code>pip install python-dotenv</code></pre>
+<p>在專案根目錄建立 .env 檔案，內容如下：</p>
+<pre><code>OPENAI_API_KEY=your-api-key-here
+ANTHROPIC_API_KEY=your-anthropic-key-here</code></pre>
+<p>在 Python 程式碼中載入環境變數：</p>
+<pre><code>from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")</code></pre>
+<p>千萬不要將 .env 檔案提交至版本控制，應在 .gitignore 中排除此檔案。</p>
+
+<h2>第一個 AI Agent 測試驗證</h2>
+<p>環境建置完成後，透過簡單範例驗證運作正常。建立 test_agent.py 檔案：</p>
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain.agents import AgentType, initialize_agent, Tool
+from langchain.tools import DuckDuckGoSearchRun
+
+# 初始化語言模型
+llm = ChatOpenAI(model="gpt-4", temperature=0)
+
+# 建立搜尋工具
+search = DuckDuckGoSearchRun()
+tools = [Tool(name="搜尋", func=search.run, description="用於搜尋最新資訊")]
+
+# 初始化 Agent
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION)
+
+# 測試執行
+result = agent.run("LangChain 是什麼？")
+print(result)</code></pre>
+<p>執行 python test_agent.py，若成功輸出結果，表示環境配置完成。此範例建立了一個具備網路搜尋能力的 AI Agent，可根據使用者問題自動調用工具取得資訊。</p>
+
+<h2>常見問題與解決方案</h2>
+<p>安裝過程可能遇到依賴衝突問題，建議使用 pip 的 --upgrade 參數更新至最新版本。發生版本衝突時，可嘗試建立新的虛擬環境重新開始。若遇到 C++ 編譯器相關錯誤，需安裝對應平台的建構工具，如 Windows 需安裝 Visual Studio Build Tools。</p>
+<p>API 金鑰驗證失敗時，檢查 .env 檔案路徑是否正確，以及金鑰是否有效。環境變數也可直接在系統層級設定，但建議優先使用 .env 檔案管理。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">LangChain 需要 Python 哪個版本？</h3>
+            <p class="faq-a">LangChain 要求 Python 3.8 以上版本，建議使用 Python 3.10 或 3.11 以獲得最佳相容性和效能支援。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">安裝 LangChain 出現版本衝突怎麼辦？</h3>
+            <p class="faq-a">可嘗試建立新的虛擬環境，或使用 pip install --upgrade 更新相關套件至最新版本，必要时可指定相容版本號。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">沒有 API 金鑰可以測試 LangChain 嗎？</h3>
+            <p class="faq-a">可以使用本地部署的開源模型，如 Ollama 搭配 LangChain，需先安裝對應的整合套件並配置本地端點。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
