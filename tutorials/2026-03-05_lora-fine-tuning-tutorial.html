@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型 | AI 學習寶庫</title>
+  <meta name="description" content="本文介紹如何使用 LoRA 技術對小型 LLM 進行 Fine-tuning，實現業務專屬模型訓練。涵蓋 LoRA 原理、優勢、實作步驟及程式碼範例，幫助企業在有限資源下打造個人化 AI 助手。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型">
+  <meta property="og:description" content="本文介紹如何使用 LoRA 技術對小型 LLM 進行 Fine-tuning，實現業務專屬模型訓練。涵蓋 LoRA 原理、優勢、實作步驟及程式碼範例，幫助企業在有限資源下打造個人化 AI 助手。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型", "description": "本文介紹如何使用 LoRA 技術對小型 LLM 進行 Fine-tuning，實現業務專屬模型訓練。涵蓋 LoRA 原理、優勢、實作步驟及程式碼範例，幫助企業在有限資源下打造個人化 AI 助手。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "LoRA 與全參數 Fine-tuning 效果差異大嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "研究顯示 LoRA 在多數任務上可達到全參數 Fine-tuning 的 95% 以上效果，但訓練成本僅需 1/10 至 1/100，非常適合資源受限場景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "LoRA 可以訓練多少資料量？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "理論上任何資料量都可以，但建議至少 100-500 條高品質問答對才能看到明顯效果。資料品質比數量更重要。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何選擇 LoRA 的 rank 值？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般從 r=8 或 r=16 開始嘗試。複雜任務可調高至 r=32-64，但相對記憶體與訓練時間也會增加。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Fine-tuning 小型 LLM：用 LoRA 訓練你的...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是 LoRA？為什麼選擇它來微調 LLM？</h2>
+<p>LoRA（Low-Rank Adaptation）是一種高效的模型微調技術，透過在預訓練模型旁新增可訓練的低秩矩陣，大幅降低訓練參數量。傳統 Fine-tuning 需要調整數十億參數，而 LoRA 只需訓練約 0.1%-1% 的參數就能達到接近全參數微調的效果。</p>
+<p>對於資源有限的企業或個人開發者而言，LoRA 能在消費級 GPU 上完成訓練，記憶體需求也大幅降低。這使得中小型團隊也能打造符合業務需求的專屬 AI 模型。</p>
+
+<h2>LoRA 的核心原理</h2>
+<p>LoRA 的核心思想是假設模型權重的更新可以用低秩矩陣近似表示。具體來說，它在 Transformer 的注意力權重矩陣（如 Wq、Wk、Wv、Wo）旁新增兩個小型矩陣 A 和 B，訓練時只更新這兩個矩陣，原始權重保持不變。</p>
+<p>推理時，可以將 LoRA 權重與原始權重合併，或選擇分開載入切換不同任務。這種設計讓你能夠同時保存多個業務場景的微調版本，大幅提升部署彈性。</p>
+
+<h2>環境準備與必要工具</h2>
+<p>在開始訓練前，你需要準備以下環境：</p>
+<ul>
+<li>Python 3.8 以上</li>
+<li>CUDA 11.8 或更高版本的 GPU</li>
+<li>Transformers 庫（HF生態系）或 PEFT 庫</li>
+<li>足夠的訓練資料（建議至少 100-500 條高品質問答對）</li>
+</ul>
+<p>建議使用虛擬環境管理依賴，避免版本衝突。安裝命令如下：</p>
+<pre><code>pip install transformers peft datasets torch accelerate</code></pre>
+
+<h2>實際演練：使用 LoRA 微調 TinyLlama</h2>
+<p>以下程式碼展示如何使用 PEFT 庫對 TinyLlama（1.1B參數）進行 LoRA 微調：</p>
+<pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+from peft import LoraConfig, get_peft_model, TaskType
+from datasets import Dataset
+import torch
+
+# 載入模型與 tokenizer
+model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name, 
+    torch_dtype=torch.float16, 
+    device_map="auto"
+)
+
+# 設定 LoRA 參數
+lora_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    r=8,
+    lora_alpha=16,
+    lora_dropout=0.05,
+    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
+    bias="none"
+)
+
+# 包裝模型
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+# 輸出：trainable params: 2,097,152 || all params: 1,100,538,240 || trainable%: 0.19
+
+# 訓練參數設定
+training_args = TrainingArguments(
+    output_dir="./lora_tinyllama",
+    per_device_train_batch_size=4,
+    gradient_accumulation_steps=4,
+    num_train_epochs=3,
+    learning_rate=2e-4,
+    fp16=True,
+    logging_steps=10,
+    save_strategy="epoch"
+)
+
+# 開始訓練
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=train_dataset,
+    data_collator=data_collator,
+)
+trainer.train()</code></pre>
+<p>上述程式碼中，r=8 表示 LoRA 的秩 rank 值，數值越大訓練參數越多但可能效果更好。trainable%: 0.19% 說明 LoRA 只用不到 0.2% 的參數就完成了訓練任務。</p>
+
+<h2>如何評估與部署微調後的模型</h2>
+<p>訓練完成後，你需要評估模型在業務場景的表現。常見評估方式包括：</p>
+<ol>
+<li>人工評測：請業務人員評估回答品質</li>
+<li>自動化指標：使用 BLEU、ROUGE 或自訂評分函數</li>
+<li>多元測試集：覆蓋不同主題與edge cases</li>
+</ol>
+<p>部署時可選擇合併權重或保留 LoRA 適配器。合併後的模型可直接用標準推理框架部署，適合延遲敏感的線上服務。若需要動態切換任務，則保留適配器架構更為彈性。</p>
+
+<p>LoRA 技術讓資源有限的團隊也能訓練專屬 AI 模型，是企業落地生成式 AI 的實用起點。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">LoRA 與全參數 Fine-tuning 效果差異大嗎？</h3>
+            <p class="faq-a">研究顯示 LoRA 在多數任務上可達到全參數 Fine-tuning 的 95% 以上效果，但訓練成本僅需 1/10 至 1/100，非常適合資源受限場景。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">LoRA 可以訓練多少資料量？</h3>
+            <p class="faq-a">理論上任何資料量都可以，但建議至少 100-500 條高品質問答對才能看到明顯效果。資料品質比數量更重要。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何選擇 LoRA 的 rank 值？</h3>
+            <p class="faq-a">一般從 r=8 或 r=16 開始嘗試。複雜任務可調高至 r=32-64，但相對記憶體與訓練時間也會增加。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
