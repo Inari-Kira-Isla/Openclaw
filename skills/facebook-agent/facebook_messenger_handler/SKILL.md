@@ -14,7 +14,7 @@ description: Facebook Messenger 訊息處理核心。當粉絲專頁收到 Messe
 ```
 用戶訊息 → Facebook → n8n Webhook → OpenClaw API → AI 處理 → n8n → 回覆用戶
                                                       ↓
-                                               Notion（對話記錄）
+                                               SQLite（對話記錄）
 ```
 
 ## 操作步驟
@@ -56,7 +56,7 @@ description: Facebook Messenger 訊息處理核心。當粉絲專頁收到 Messe
 ## 工具指引
 
 - **n8n Workflow**：Webhook 接收 + Messenger API 發送回覆
-- **Notion API**：對話記錄存儲
+- **SQLite（cs_customers.db）**：對話記錄存儲（透過 cs_customer_db.py）
 - **question_classifier**：訊息分類
 - **faq_auto_reply**：FAQ 自動回覆
 - **handoff_manager**：人工轉接
@@ -66,7 +66,7 @@ description: Facebook Messenger 訊息處理核心。當粉絲專頁收到 Messe
 - `FACEBOOK_PAGE_ACCESS_TOKEN` — 粉絲專頁存取權杖
 - `FACEBOOK_VERIFY_TOKEN` — Webhook 驗證權杖
 - `OPENCLAW_API_URL` — OpenClaw API 端點
-- `NOTION_API_KEY` — Notion API 金鑰
+- `CS_CUSTOMER_DB` — 本地 SQLite 資料庫路徑（~/.openclaw/memory/cs_customers.db）
 
 ## 錯誤處理
 
@@ -76,7 +76,7 @@ description: Facebook Messenger 訊息處理核心。當粉絲專頁收到 Messe
 | Messenger API 回覆失敗 | 重試一次，若仍失敗則記錄錯誤並通知管理員 |
 | AI 回覆生成逾時 | 先送出「正在處理中」訊息，稍後補發完整回覆 |
 | 用戶身份解析失敗 | 以匿名身份處理，但標記需人工確認 |
-| Notion 同步失敗 | 不影響回覆流程，將記錄排入重試佇列 |
+| SQLite 同步失敗 | 不影響回覆流程，將記錄排入重試佇列 |
 
 ## 使用範例
 

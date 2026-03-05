@@ -22,5 +22,35 @@
 
 目前 OpenClaw 在 macOS 本機運行正常，Docker 部署需求待確認。
 
+## 2026-03-05 15:14
+
+**狀態**: 待處理 ⏳ (持續 pending)
+
+### 系統需求檢查
+
+| 項目 | 狀態 | 備註 |
+|------|------|------|
+| Docker | ✅ v29.2.0 | 已安裝 |
+| 運行容器 | ✅ 2個 | chroma, n8n |
+| OpenClaw 原生 | ✅ 正常 | macOS 本機運行 |
+
+### 待辦事項
+
+- [x] 檢查系統需求
+- [ ] 生成 Dockerfile  
+- [ ] 設定容器配置
+- [ ] 準備部署腳本
+
+### 部署選項
+
+**現狀 (選項 A): OpenClaw 原生**
+- ✅ 完整功能、簡易維護
+- ❌ 環境隔離較弱
+
+**選項 B: Docker 部署 OpenClaw**
+- 需解決：host.docker.internal 連線
+- 需配置：port mapping, volume mounts
+- 適用：伺服器環境、CI/CD
+
 ---
-_Updated: 2026-03-02 15:16_
+_Updated: 2026-03-05 15:14_

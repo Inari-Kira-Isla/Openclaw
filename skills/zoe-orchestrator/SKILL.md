@@ -45,7 +45,7 @@ memory_search({ query: "OpenClaw gateway 效能優化 相關" })
 // 2. 組裝 prompt
 const prompt = `
 Context: ${memory_summary}
-Business: ${notion_context}
+Business: ${business_context}
 
 Task: 優化 OpenClaw gateway 效能
 `

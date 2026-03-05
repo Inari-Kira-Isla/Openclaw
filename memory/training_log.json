@@ -1,0 +1,33 @@
+{
+  "tasks": [],
+  "models": [],
+  "training_runs": [
+    {
+      "timestamp": "2026-03-04T21:13:56.482174",
+      "status": "ready",
+      "models": [
+        "qwen2.5:7b                 845dbda0ea48    4.7 GB    7 days ago",
+        "nomic-embed-text:latest    0a109f422b47    274 MB    10 days ago",
+        "deepseek-coder:1.3b        3ddd2d3fc8d2    776 MB    12 days ago",
+        "mistral:latest             6577803aa9a0    4.4 GB    12 days ago",
+        "codellama:latest           8fdf8f752f6e    3.8 GB    12 days ago",
+        "deepseek-coder:latest      3ddd2d3fc8d2    776 MB    12 days ago",
+        "llama3:latest              365c0bd3c000    4.7 GB    13 days ago"
+      ]
+    },
+    {
+      "timestamp": "2026-03-05T09:37:37.000000",
+      "status": "completed",
+      "qa_pairs": 5,
+      "prompts": 5,
+      "topics": [
+        "resource_monitoring",
+        "memory_management",
+        "cross_platform_sync",
+        "gateway_latency",
+        "security_analysis"
+      ],
+      "data_source": "cron tasks 2026-03-05"
+    }
+  ]
+}

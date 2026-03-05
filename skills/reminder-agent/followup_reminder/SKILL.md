@@ -11,12 +11,14 @@ metadata: { "openclaw": { "emoji": "🔔" } }
 ## 操作 / 工作流程
 1. 用 `cron` 每日檢查到期的跟進項目：
    - 每天 09:00：掃描當天到期的跟進事項
-2. 用 Notion API 查詢跟進資料庫：
-   - 篩選「跟進日期 <= 今天」且「狀態 = 待處理」的項目
-   - 取得客戶名稱、上次聯繫日期、原因、建議動作
+2. 用 SQLite 查詢跟進資料庫 (`~/.openclaw/memory/bni.db`)：
+   - `bni_db.get_due_followups('due_today')` + `get_due_followups('overdue')`
+   - 取得客戶名稱、到期日、原因、優先級
 3. 依優先級排序（過期天數越多越優先）
 4. 用 `message` 傳送跟進清單到 Telegram
-5. 用戶完成跟進後，透過 Notion API 更新狀態
+5. 用戶完成跟進後，透過 `bni_db.mark_followup_done()` 更新狀態
+6. 新增跟進：`bni_db.add_followup(client, reason, date)`
+7. 腳本：`bni_reminder.py --type followup`
 
 ## cron 排程
 ```
@@ -50,7 +52,7 @@ metadata: { "openclaw": { "emoji": "🔔" } }
 ## 錯誤處理
 | 錯誤 | 處理 |
 |------|------|
-| Notion 資料庫無回應 | 用 `memory_search` 查詢快取的跟進清單 |
+| SQLite 查詢失敗 | 用 `memory_search` 查詢快取的跟進清單 |
 | 無到期跟進項目 | 發送「今日無需跟進」+ 本週預覽 |
 | 新增格式錯誤 | 回覆格式範例，請用戶重新輸入 |
 

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>向量資料庫入門：從概念到實作的完整學習路徑 | AI 學習寶庫</title>
+  <meta name="description" content="向量資料庫是專門儲存和檢索高維度向量嵌入的資料庫，支援語義搜索和相似性匹配，是 AI 應用的核心基礎設施。本指南帶你從概念到實作完整學習。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="向量資料庫入門：從概念到實作的完整學習路徑">
+  <meta property="og:description" content="向量資料庫是專門儲存和檢索高維度向量嵌入的資料庫，支援語義搜索和相似性匹配，是 AI 應用的核心基礎設施。本指南帶你從概念到實作完整學習。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "向量資料庫入門：從概念到實作的完整學習路徑", "description": "向量資料庫是專門儲存和檢索高維度向量嵌入的資料庫，支援語義搜索和相似性匹配，是 AI 應用的核心基礎設施。本指南帶你從概念到實作完整學習。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "向量資料庫和傳統資料庫有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統資料庫用精確匹配查詢，向量資料庫則透過語義相似度搜尋，能理解「蘋果」在不同上下文中的含義。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "安裝向量資料庫需要什麼環境？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大多數向量資料庫支援 Docker 部署或 Python pip 安裝，Chroma 等輕量級資料庫可在本地快速運行。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "向量資料庫適合哪些應用場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "語義搜尋、推薦系統、圖像相似性檢索、智慧問答系統等需要理解語義的應用都適合使用向量資料庫。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>向量資料庫入門：從概念到實作的完整學習路徑</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">向量資料庫入門：從概念到實作的完整學習路徑</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是向量資料庫？核心定義一次搞懂</h2>
+<p>向量資料庫是一種專門設計用於儲存、索引和檢索高維度向量（embedding）的資料庫系統。與傳統關係型資料庫不同，它不依賴精確匹配，而是透過<strong>語義相似性</strong>來找到最相關的結果。當你輸入「蘋果」時，它能理解你可能指的是水果或科技公司，並根據上下文返回正確的結果。這種能力來自於將文字、圖像或音頻轉換為數值向量的過程，稱為 embedding。</p>
+
+<h2>為什麼現代應用需要向量資料庫？</h2>
+<p>傳統資料庫採用精確關鍵字匹配，無法理解語義差异。舉例來說，搜尋「手機」時，傳統資料庫不會自動找到「行動電話」的相關資料。向量資料庫解決了這個痛點，支援：</p>
+<ul>
+<li><strong>語義搜索</strong>：理解查詢的深層含義</li>
+<li><strong>相似性匹配</strong>：找出最相近的向量</li>
+<li><strong>大規模數據處理</strong>：支援百萬甚至億級向量檢索</li>
+</ul>
+
+<h2>向量資料庫的核心概念詳解</h2>
+<h3>1. Embedding（向量嵌入）</h3>
+<p>Embedding 是將複雜數據（文字、圖像）轉換為固定維度向量（通常 128-2048 維）的技術。例如，「貓」和「狗」的向量會因為語義相似而距離較近，而「貓」和「汽車」的距離則較遠。</p>
+
+<h3>2. 相似性度量</h3>
+<p>向量資料庫使用數學公式計算向量間的相似度，常見方法包括：</p>
+<ul>
+<li><strong>餘弦相似度（Cosine Similarity）</strong>：測量向量夾角</li>
+<li><strong>歐氏距離（Euclidean Distance）</strong>：直線距離</li>
+<li><strong>點積（Dot Product）</strong>：考慮方向和大小</li>
+</ul>
+
+<h3>3. 索引技術</h3>
+<p>為加速搜尋，向量資料庫使用 HNSW、IVF 等索引演算法，在保證結果精確度的同時大幅提升效能。</p>
+
+<h2>實作練習：使用 Python 建立向量資料庫</h2>
+<p>以 Chroma 為例，這是一個輕量級的開源向量資料庫：</p>
+<pre><code># 安裝 Chroma
+pip install chromadb
+
+# 建立向量資料庫
+import chromadb
+
+# 初始化客戶端
+client = chromadb.Client()
+
+# 建立集合（類似資料表）
+collection = client.create_collection(name="articles")
+
+# 新增向量資料
+collection.add(
+    documents=["這是關於 AI 的文章", "這是關於美食的文章"],
+    ids=["doc1", "doc2"],
+    metadatas=[{"category": "科技"}, {"category": "生活"}]
+)
+
+# 語義搜尋
+results = collection.query(
+    query_texts=["人工智慧技術"],
+    n_results=1
+)
+
+print(results)</code></pre>
+
+<h2>主流向量資料庫選擇指南</h2>
+<p>根據不同場景需求，選擇適合的向量資料庫：</p>
+<ol>
+<li><strong>Milvus</strong>：開源、功能完整，適合大規模企業應用</li>
+<li><strong>Pinecone</strong>：托管服務，易於上手，適合快速原型開發</li>
+<li><strong>Weaviate</strong>：支援 GraphQL，適合需要靈活查詢的專案</li>
+<li><strong>Chroma</strong>：輕量級，適合學習和小型專案</li>
+</ol>
+
+<h2>下一步：建立你的向量搜尋系統</h2>
+<p>掌握向量資料庫後，你可以進一步整合大型語言模型（LLM），建立智能問答系統、推薦引擎或圖像搜尋應用。建議從小型專案開始，例如將本地文件轉為向量並實現語義搜尋，逐步累積實戰經驗。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">向量資料庫和傳統資料庫有什麼不同？</h3>
+            <p class="faq-a">傳統資料庫用精確匹配查詢，向量資料庫則透過語義相似度搜尋，能理解「蘋果」在不同上下文中的含義。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">安裝向量資料庫需要什麼環境？</h3>
+            <p class="faq-a">大多數向量資料庫支援 Docker 部署或 Python pip 安裝，Chroma 等輕量級資料庫可在本地快速運行。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">向量資料庫適合哪些應用場景？</h3>
+            <p class="faq-a">語義搜尋、推薦系統、圖像相似性檢索、智慧問答系統等需要理解語義的應用都適合使用向量資料庫。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact"><strong>AI 學習寶庫</strong><br>GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a></address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

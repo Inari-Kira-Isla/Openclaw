@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload File - Knowledge Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YcnS/NPGFbo8JIbMFyOYzE5lg9ON3rUOep7H" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --kh-primary: #4361ee;
+      --kh-bg: #f8f9fc;
+      --kh-card-bg: #ffffff;
+      --kh-text-muted: #6c757d;
+      --kh-border: #dee2e6;
+    }
+
+    body {
+      background: var(--kh-bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .upload-container {
+      max-width: 560px;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .upload-card {
+      background: var(--kh-card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.08);
+      padding: 2.5rem 2rem;
+    }
+
+    .upload-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .upload-header h2 {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .upload-header p {
+      color: var(--kh-text-muted);
+      margin-bottom: 0;
+    }
+
+    .drop-zone {
+      border: 2px dashed var(--kh-border);
+      border-radius: 0.75rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s;
+      margin-bottom: 1.5rem;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: var(--kh-primary);
+      background: rgba(67, 97, 238, 0.04);
+    }
+
+    .drop-zone .icon {
+      font-size: 2.5rem;
+      color: var(--kh-text-muted);
+    }
+
+    .drop-zone p {
+      margin: 0.5rem 0 0;
+      color: var(--kh-text-muted);
+      font-size: 0.9rem;
+    }
+
+    .drop-zone .file-name {
+      margin-top: 0.75rem;
+      font-weight: 600;
+      color: var(--kh-primary);
+      display: none;
+    }
+
+    .progress-section {
+      display: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 4px;
+    }
+
+    .result-message {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-message.success {
+      background: #d1e7dd;
+      color: #0f5132;
+      display: block;
+    }
+
+    .result-message.error {
+      background: #f8d7da;
+      color: #842029;
+      display: block;
+    }
+
+    .btn-upload {
+      background: var(--kh-primary);
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      font-weight: 600;
+      width: 100%;
+      color: #fff;
+      font-size: 1rem;
+      transition: background 0.25s;
+    }
+
+    .btn-upload:hover {
+      background: #3a56d4;
+      color: #fff;
+    }
+
+    .btn-upload:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-container">
+    <div class="upload-card">
+      <div class="upload-header">
+        <h2><i class="bi bi-cloud-arrow-up"></i> Upload File</h2>
+        <p>Add a file to your Knowledge Hub</p>
+      </div>
+
+      <form id="uploadForm">
+        <!-- Project Selector -->
+        <div class="mb-3">
+          <label for="projectSelect" class="form-label fw-semibold">Project</label>
+          <select id="projectSelect" name="project" class="form-select" required>
+            <option value="" disabled selected>Select a project...</option>
+          </select>
+        </div>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="fileTitle" class="form-label fw-semibold">Title</label>
+          <input type="text" id="fileTitle" name="title" class="form-control"
+                 placeholder="Enter file title" required>
+        </div>
+
+        <!-- Tags -->
+        <div class="mb-3">
+          <label for="fileTags" class="form-label fw-semibold">Tags</label>
+          <input type="text" id="fileTags" name="tags" class="form-control"
+                 placeholder="Comma-separated tags (e.g. python, api, tutorial)">
+          <div class="form-text">Separate multiple tags with commas</div>
+        </div>
+
+        <!-- Drop Zone -->
+        <div class="drop-zone" id="dropZone">
+          <div class="icon"><i class="bi bi-file-earmark-arrow-up"></i></div>
+          <p>Drag and drop a file here, or <strong>click to browse</strong></p>
+          <div class="file-name" id="fileName"></div>
+          <input type="file" name="file" id="fileInput" class="d-none">
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section" id="progressSection">
+          <div class="d-flex justify-content-between mb-1">
+            <small class="fw-semibold">Uploading...</small>
+            <small id="progressPercent">0%</small>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-primary" id="progressBar" role="progressbar"
+                 style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <!-- Result Message -->
+        <div class="result-message" id="resultMessage"></div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-upload" id="submitBtn">
+          <i class="bi bi-cloud-upload me-2"></i>Upload File
+        </button>
+      </form>
+
+      <div class="text-center mt-3">
+        <a href="#" onclick="google.script.host.close(); return false;" class="text-muted text-decoration-none">
+          <small><i class="bi bi-arrow-left me-1"></i>Back to Knowledge Hub</small>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var dropZone = document.getElementById('dropZone');
+    var fileInput = document.getElementById('fileInput');
+    var fileNameEl = document.getElementById('fileName');
+    var form = document.getElementById('uploadForm');
+    var submitBtn = document.getElementById('submitBtn');
+    var progressSection = document.getElementById('progressSection');
+    var progressBar = document.getElementById('progressBar');
+    var progressPercent = document.getElementById('progressPercent');
+    var resultMessage = document.getElementById('resultMessage');
+
+    // ── Load projects into selector ──────────────────────────
+    function loadProjects() {
+      google.script.run
+        .withSuccessHandler(function(projects) {
+          var select = document.getElementById('projectSelect');
+          if (projects && projects.length) {
+            projects.forEach(function(p) {
+              var opt = document.createElement('option');
+              opt.value = p.id || p.name;
+              opt.textContent = p.name;
+              select.appendChild(opt);
+            });
+          }
+        })
+        .withFailureHandler(function(err) {
+          console.error('Failed to load projects:', err);
+        })
+        .getProjects();
+    }
+
+    // ── Drop zone interactions ───────────────────────────────
+    dropZone.addEventListener('click', function() {
+      fileInput.click();
+    });
+
+    dropZone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        showFileName(e.dataTransfer.files[0].name);
+      }
+    });
+
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        showFileName(fileInput.files[0].name);
+      }
+    });
+
+    function showFileName(name) {
+      fileNameEl.textContent = name;
+      fileNameEl.style.display = 'block';
+    }
+
+    // ── Simulated progress (GAS doesn't support real progress) ──
+    function simulateProgress(callback) {
+      progressSection.style.display = 'block';
+      resultMessage.style.display = 'none';
+      resultMessage.className = 'result-message';
+      var progress = 0;
+      var interval = setInterval(function() {
+        progress += Math.random() * 15;
+        if (progress > 90) {
+          progress = 90;
+          clearInterval(interval);
+        }
+        updateProgress(Math.round(progress));
+      }, 300);
+      return interval;
+    }
+
+    function updateProgress(value) {
+      progressBar.style.width = value + '%';
+      progressBar.setAttribute('aria-valuenow', value);
+      progressPercent.textContent = value + '%';
+    }
+
+    function completeProgress(interval) {
+      clearInterval(interval);
+      updateProgress(100);
+    }
+
+    // ── Form submission ──────────────────────────────────────
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!fileInput.files || fileInput.files.length === 0) {
+        showResult('error', 'Please select a file to upload.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Uploading...';
+
+      var progressInterval = simulateProgress();
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          completeProgress(progressInterval);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="bi bi-cloud-upload me-2"></i>Upload File';
+
+          if (result && result.success) {
+            showResult('success', 'File uploaded successfully! ' + (result.message || ''));
+            form.reset();
+            fileNameEl.style.display = 'none';
+            setTimeout(function() {
+              progressSection.style.display = 'none';
+            }, 1500);
+          } else {
+            showResult('error', 'Upload failed: ' + (result ? result.message : 'Unknown error'));
+          }
+        })
+        .withFailureHandler(function(err) {
+          completeProgress(progressInterval);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="bi bi-cloud-upload me-2"></i>Upload File';
+          showResult('error', 'Upload failed: ' + (err.message || err));
+        })
+        .uploadFile(form);
+    });
+
+    function showResult(type, message) {
+      resultMessage.className = 'result-message ' + type;
+      resultMessage.innerHTML = (type === 'success'
+        ? '<i class="bi bi-check-circle me-2"></i>'
+        : '<i class="bi bi-exclamation-circle me-2"></i>') + message;
+      resultMessage.style.display = 'block';
+    }
+
+    // ── Init ─────────────────────────────────────────────────
+    loadProjects();
+  </script>
+</body>
+</html>

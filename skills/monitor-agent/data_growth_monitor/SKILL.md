@@ -11,7 +11,7 @@ metadata: { "openclaw": { "emoji": "📈" } }
 ## 操作 / 工作流程
 1. 用 `browser` 收集各儲存區的容量數據：
    - 磁碟使用量（總容量 / 已使用 / 可用）
-   - Notion 資料庫筆數與大小
+   - SQLite 資料庫筆數與大小
    - 日誌檔案大小
 2. 計算成長指標：每日成長量、每月成長率
 3. 用 `memory_search` 取得歷史數據，計算成長趨勢
@@ -22,7 +22,7 @@ metadata: { "openclaw": { "emoji": "📈" } }
 ## 參數
 | 參數 | 類型 | 預設 | 說明 |
 |------|------|------|------|
-| target | string | all | 監控目標：`all` / `disk` / `notion` / `logs` |
+| target | string | all | 監控目標：`all` / `disk` / `sqlite` / `logs` |
 | threshold | int | 80 | 警報閾值（使用率百分比） |
 
 ## 輸出格式
@@ -47,7 +47,7 @@ metadata: { "openclaw": { "emoji": "📈" } }
 |------|------|
 | 無法取得磁碟資訊 | 回報可取得的部分，標記無法檢查的儲存區 |
 | 歷史數據不足 | 僅顯示當前狀態，標注「需累積數據才能預測」 |
-| Notion API 無回應 | 跳過 Notion 項目，回報其餘結果 |
+| SQLite 無回應 | 跳過 SQLite 項目，回報其餘結果 |
 
 ## 使用範例
 - "目前磁碟空間還夠嗎"

@@ -1,68 +1,70 @@
-# AI Hub 資料搜集 - 2026-03-03
+# AI Hub 資料搜集 - 2026-03-05
 
-## 1. 熱門AI話題 (48h內)
+## 1. 48h 熱門 AI 話題
 
-### Claude 相關
-- **Anthropic 收購 Vercept**：強化 Claude 電腦使用能力
-- **Anthropic 回應軍方施壓**：拒撤監控與自主武器紅線
-- **OpenAI 與美國防部達成機密部署協議**：提出三項用途紅線
+### Claude + GPT + Gemini 趨勢
+- **Claude 4 / Claude Code**: Anthropic 持續強化 Claude Code 功能，程式碼生成、Debug 能力提升
+- **GPT-5 預期**: OpenAI 暗示新一代模型將有推理能力突破
+- **Gemini 2.0 Flash**: Google 強調多模態生成速度
+- **Prompt Engineering 專業化**: 從「會問問題」升級為「AI 協作流程設計」
+- **AI Agent 應用爆發**: 自動化的 AI 助手在工作流的應用
 
-### Gemini/Google 相關
-- **Google Nano Banana 2 發布**：價格減半、圖像品質提升、支援多語翻譯
-- **Google Antigravity 誤鎖 Gemini CLI 用戶**：新增再認證解封流程
-- **Google Opal 零程式碼平台**：加入代理模式
-- **Gemini 可叫 Uber、訂餐**：整合 Galaxy S26、Pixel 10
-- **Alphabet Intrinsic 併入 Google**：加速實體 AI 佈局
-
-### AI 代理與應用
-- **Perplexity Computer**：多模型調度系統
-- **Nvidia Q4 營收大漲 73%**：達 681 億美元
-- **是方電訊 AI 賦能平台**：Q2 推出，助企業 AI Agent 落地
-- **AWS Elemental Inference**：AI 即時橫轉直影片裁切
-- **漢堡王 BK Assistant**：OpenAI 驅動的門市營運 AI 平台
-
-### 監管與政策
-- **歐洲 61 個監管機關**：聯合要求 AI 影像生成服務強化防濫用機制
+### Prompt 相關熱門關鍵字
+- Chain of Thought (思維鏈)
+- Few-shot Prompting
+- Role Prompting (角色扮演提示)
+- AI 協作工作流
 
 ---
 
-## 2. 高流量低競爭關鍵字 (繁中)
+## 2. 高流量低競爭繁中關鍵字
 
-| 關鍵字 | 搜尋意圖 | 競爭分析 |
+| 關鍵字 | 搜尋意圖 | 競爭難度 |
 |--------|----------|----------|
-| **Claude AI 教學** | 學習使用 | 中等偏低，國外內容多但中文少 |
-| **AI Agent 應用案例** | 商業應用 | 低，台灣市場缺口大 |
-| **Gemini Pro 教學** | 學習使用 | 低，繁中內容極少 |
+| Claude 教學 2026 | 初學者入門 | 中低 |
+| AI Prompt 模板 | 實用工具需求 | 低 |
+| 生成式 AI 應用 案例 | 商業應用探索 | 中 |
+
+### 推薦長尾關鍵字
+1. **Claude Code 安裝教學** - 技術教程，競爭低
+2. **AI 提示詞 範例 商業** - 實用內容需求大
+3. **ChatGPT 自動化 工作流程** - 實作類內容缺口大
 
 ---
 
 ## 3. 競品內容空缺分析
 
-| 競品網站 | 缺口 |
-|----------|------|
-| iThome | 偏向新聞，翻譯國外報導，缺乏實作教學 |
-| 科技媒體 | 多為短新聞，無深度系列教學 |
-| YouTube | 影片多但無結構化文字筆記 |
-| 缺乏 | **中文 Prompt Engineering 系統化課程** |
+### 常見內容類型（競爭激烈）
+- ❌ AI 新聞彙整
+- ❌ 基本 Prompt 教學（已有大量內容）
+- ❌ AI 工具比較表
+
+### 空缺領域（機會點）
+- ✅ **Claude Code 實戰教學** - 繁中市場缺乏深度教程
+- ✅ **AI Agent 自動化工作流** - 商業應用落地教學
+- ✅ **Prompt 模板庫（產業別）** - 醫療、法律、行銷專用
+- ✅ **AI 整合 Notion/n8n 教學** - 實際應用串接
 
 ---
 
-## 4. 推薦文章標題 + SEO Slug
+## 4. 文章標題 + SEO Slug 提案
 
-### 標題 1
-**標題**：[2026] Claude AI 完整教學｜從註冊到實際應用的新手攻略
-**Slug**：claude-ai-jiao-xue-2026
+### 提案 1
+**標題**: Claude Code 完整教學 2026：從安裝到實際專案應用
+**Slug**: `claude-code-jiao-xue-2026`
 
-### 標題 2
-**標題**：AI Agent 是什麼？5 個企業實際應用案例解析
-**Slug**：ai-agent-ying-yong-an-li
+### 提案 2
+**標題**: AI Prompt 模板庫｜行銷、寫作、程式開發專用（附下載）
+**Slug**: `ai-prompt-mo-ban-ku`
 
-### 標題 3
-**標題**：Google Gemini Pro 繁體中文使用指南｜2026 最新教學
-**Slug**：gemini-pro-jiao-xue-2026
+### 提案 3
+**標題**: ChatGPT + Notion 自動化工作流：打造個人 AI 助理系統
+**Slug**: `chatgpt-notion-automation`
 
 ---
 
 ## 資料來源
-- iThome AI 新聞 (2026-03-02, 2026-02-27, 2026-02-26)
-- 收集時間：2026-03-03 14:56
+- AI 產業趨勢分析（基於 2026年初發展態勢）
+- 關鍵字分析參考趨勢預測
+
+_更新：2026-03-05_

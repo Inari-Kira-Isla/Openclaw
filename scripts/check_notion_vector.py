@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-# Notion 向量資料庫檢查腳本
-# 檢查 Notion AI Agent 系統架構學習筆記 資料庫狀態
+"""
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
+Notion 向量資料庫檢查腳本
+檢查 Notion AI Agent 系統架構學習筆記 資料庫狀態
+"""
 
 import os
 

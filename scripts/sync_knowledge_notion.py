@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""同步知識庫文檔到 Notion"""
+"""
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
+同步知識庫文檔到 Notion
+"""
 
 import requests
 import os

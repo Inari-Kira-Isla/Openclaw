@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Hub</title>
+  <?!= include('Style') ?>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════════
+       NAVBAR
+       ════════════════════════════════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg sticky-top bg-white">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand text-primary" href="#">
+        <i class="bi bi-journal-code me-1"></i>Knowledge Hub
+      </a>
+
+      <div class="d-flex align-items-center order-lg-last gap-2">
+        <!-- Dark mode toggle -->
+        <button class="btn btn-sm btn-outline-secondary rounded-circle" id="darkModeToggle"
+                title="Toggle dark mode" style="width:36px;height:36px;">
+          <i class="bi bi-moon-fill" id="darkModeIcon"></i>
+        </button>
+      </div>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+              data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="mainTabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-tab="projects">
+              <i class="bi bi-kanban me-1"></i>Projects
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="learning">
+              <i class="bi bi-lightbulb me-1"></i>Learning
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="inbox">
+              <i class="bi bi-inbox me-1"></i>Inbox
+              <span class="badge bg-danger rounded-pill ms-1 d-none" id="inboxCount">0</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-tab="upload">
+              <i class="bi bi-cloud-arrow-up me-1"></i>Upload
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ════════════════════════════════════════════════════════ -->
+  <div class="container-fluid px-3 px-lg-4 main-content">
+
+    <!-- ──────────────────────────────────────────────────────
+         PROJECTS VIEW
+         ────────────────────────────────────────────────────── -->
+    <div id="view-projects" class="tab-view">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h4 class="mb-0 fw-bold">Projects</h4>
+        <div class="d-flex gap-2">
+          <select class="form-select form-select-sm" id="projectStatusFilter" style="width:auto;">
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="planning">Planning</option>
+            <option value="on-hold">On Hold</option>
+            <option value="completed">Completed</option>
+            <option value="archived">Archived</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="openModal('addProjectModal')">
+            <i class="bi bi-plus-lg me-1"></i>Add Project
+          </button>
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0" id="projectsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+                <th style="min-width:120px;">Progress</th>
+                <th>Learning Hrs</th>
+              </tr>
+            </thead>
+            <tbody id="projectsBody">
+              <tr>
+                <td colspan="6">
+                  <div class="empty-state">
+                    <i class="bi bi-folder2-open"></i>
+                    <p>No projects yet. Add your first project!</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         LEARNING VIEW
+         ────────────────────────────────────────────────────── -->
+    <div id="view-learning" class="tab-view d-none">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h4 class="mb-0 fw-bold">Learning</h4>
+        <button class="btn btn-primary btn-sm" onclick="openModal('addLearningModal')">
+          <i class="bi bi-plus-lg me-1"></i>Add Learning
+        </button>
+      </div>
+
+      <!-- Filters & Search -->
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+        <div class="filter-btn-group d-flex flex-wrap gap-1" id="categoryFilters">
+          <button class="btn btn-sm btn-outline-secondary active" data-category="">All</button>
+          <button class="btn btn-sm btn-outline-primary" data-category="Tech Insight">Tech Insight</button>
+          <button class="btn btn-sm btn-outline-danger" data-category="Error Log">Error Log</button>
+          <button class="btn btn-sm btn-outline-success" data-category="Tutorial">Tutorial</button>
+          <button class="btn btn-sm btn-outline-secondary" data-category="Concept"
+                  style="--bs-btn-color:#6f42c1;--bs-btn-border-color:#6f42c1;--bs-btn-hover-bg:#6f42c1;--bs-btn-hover-border-color:#6f42c1;--bs-btn-active-bg:#6f42c1;--bs-btn-active-border-color:#6f42c1;">
+            Concept
+          </button>
+          <button class="btn btn-sm btn-outline-warning" data-category="Tool">Tool</button>
+          <button class="btn btn-sm btn-outline-info" data-category="Pattern">Pattern</button>
+        </div>
+        <div class="search-box flex-grow-1" style="max-width:300px;">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control form-control-sm" id="learningSearch"
+                 placeholder="Search cards...">
+        </div>
+      </div>
+
+      <!-- Card Grid -->
+      <div class="row g-3" id="learningGrid">
+        <div class="col-12">
+          <div class="empty-state">
+            <i class="bi bi-lightbulb"></i>
+            <p>No learning cards yet. Start adding knowledge!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         INBOX VIEW
+         ────────────────────────────────────────────────────── -->
+    <div id="view-inbox" class="tab-view d-none">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h4 class="mb-0 fw-bold">Inbox</h4>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-danger btn-sm" id="bulkDeleteBtn" style="display:none;"
+                  onclick="bulkDeleteInbox()">
+            <i class="bi bi-trash me-1"></i>Delete Selected
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="openModal('addInboxModal')">
+            <i class="bi bi-plus-lg me-1"></i>Add Item
+          </button>
+        </div>
+      </div>
+
+      <div class="list-group" id="inboxList">
+        <div class="empty-state">
+          <i class="bi bi-inbox"></i>
+          <p>Inbox is empty. Items from email, webclips, and Telegram will appear here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         UPLOAD VIEW
+         ────────────────────────────────────────────────────── -->
+    <div id="view-upload" class="tab-view d-none">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h4 class="mb-0 fw-bold">Upload</h4>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <form id="uploadForm">
+                <!-- Project Selector -->
+                <div class="mb-3">
+                  <label for="uploadProject" class="form-label fw-semibold">Project</label>
+                  <select id="uploadProject" name="project" class="form-select" required>
+                    <option value="" disabled selected>Select a project...</option>
+                  </select>
+                </div>
+
+                <!-- Title -->
+                <div class="mb-3">
+                  <label for="uploadTitle" class="form-label fw-semibold">Title</label>
+                  <input type="text" id="uploadTitle" name="title" class="form-control"
+                         placeholder="Enter file title" required>
+                </div>
+
+                <!-- Tags -->
+                <div class="mb-3">
+                  <label for="uploadTags" class="form-label fw-semibold">Tags</label>
+                  <input type="text" id="uploadTags" name="tags" class="form-control"
+                         placeholder="Comma-separated tags">
+                  <div class="form-text">Separate multiple tags with commas</div>
+                </div>
+
+                <!-- Drop Zone -->
+                <div class="upload-area mb-3" id="uploadDropZone">
+                  <i class="bi bi-file-earmark-arrow-up"></i>
+                  <p class="mt-2 mb-1 text-muted">Drag and drop a file, or <strong>click to browse</strong></p>
+                  <div class="fw-semibold text-primary d-none" id="uploadFileName"></div>
+                  <input type="file" name="file" id="uploadFileInput" class="d-none">
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary w-100" id="uploadSubmitBtn">
+                  <i class="bi bi-cloud-upload me-2"></i>Upload File
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       FLOATING ACTION BUTTON
+       ════════════════════════════════════════════════════════ -->
+  <div class="fab-menu" id="fabMenu">
+    <div class="fab-menu-item">
+      <span class="fab-label">New Project</span>
+      <button onclick="closeFab(); openModal('addProjectModal')"><i class="bi bi-kanban"></i></button>
+    </div>
+    <div class="fab-menu-item">
+      <span class="fab-label">New Learning</span>
+      <button onclick="closeFab(); openModal('addLearningModal')"><i class="bi bi-lightbulb"></i></button>
+    </div>
+    <div class="fab-menu-item">
+      <span class="fab-label">New Inbox Item</span>
+      <button onclick="closeFab(); openModal('addInboxModal')"><i class="bi bi-inbox"></i></button>
+    </div>
+  </div>
+  <button class="fab" id="fabBtn" title="Quick add">
+    <i class="bi bi-plus-lg" id="fabIcon"></i>
+  </button>
+
+  <!-- ════════════════════════════════════════════════════════
+       MODALS
+       ════════════════════════════════════════════════════════ -->
+
+  <!-- Add Project Modal -->
+  <div class="modal fade" id="addProjectModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-kanban me-2"></i>Add Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addProjectForm">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Project Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="projName" required>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label fw-semibold">Status</label>
+                <select class="form-select" id="projStatus">
+                  <option value="planning">Planning</option>
+                  <option value="active" selected>Active</option>
+                  <option value="on-hold">On Hold</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label fw-semibold">Priority</label>
+                <select class="form-select" id="projPriority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label fw-semibold">Deadline</label>
+                <input type="date" class="form-control" id="projDeadline">
+              </div>
+              <div class="col-6">
+                <label class="form-label fw-semibold">Progress (%)</label>
+                <input type="number" class="form-control" id="projProgress" min="0" max="100" value="0">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Learning Hours</label>
+              <input type="number" class="form-control" id="projHours" min="0" step="0.5" value="0">
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Description</label>
+              <textarea class="form-control" id="projDescription" rows="3"
+                        placeholder="Brief project description..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveProject()">
+            <i class="bi bi-check-lg me-1"></i>Save Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Learning Modal -->
+  <div class="modal fade" id="addLearningModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-lightbulb me-2"></i>Add Learning Card</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addLearningForm">
+            <div class="row g-3 mb-3">
+              <div class="col-md-8">
+                <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="learnTitle" required>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">Category</label>
+                <select class="form-select" id="learnCategory">
+                  <option value="Tech Insight">Tech Insight</option>
+                  <option value="Error Log">Error Log</option>
+                  <option value="Tutorial">Tutorial</option>
+                  <option value="Concept">Concept</option>
+                  <option value="Tool">Tool</option>
+                  <option value="Pattern">Pattern</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Content <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="learnContent" rows="6"
+                        placeholder="What did you learn?" required></textarea>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Tags</label>
+                <input type="text" class="form-control" id="learnTags"
+                       placeholder="Comma-separated tags">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Source URL</label>
+                <input type="url" class="form-control" id="learnSource"
+                       placeholder="https://...">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Review Stage</label>
+              <select class="form-select" id="learnReviewStage">
+                <option value="0">New (not reviewed)</option>
+                <option value="1">Stage 1</option>
+                <option value="2">Stage 2</option>
+                <option value="3">Stage 3</option>
+                <option value="4">Stage 4</option>
+                <option value="5">Mastered</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveLearning()">
+            <i class="bi bi-check-lg me-1"></i>Save Card
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Inbox Modal -->
+  <div class="modal fade" id="addInboxModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-inbox me-2"></i>Add Inbox Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addInboxForm">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="inboxTitle" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Content</label>
+              <textarea class="form-control" id="inboxContent" rows="4"
+                        placeholder="Notes, links, or details..."></textarea>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label fw-semibold">Source</label>
+                <select class="form-select" id="inboxSource">
+                  <option value="manual">Manual</option>
+                  <option value="email">Email</option>
+                  <option value="webclip">Web Clip</option>
+                  <option value="telegram">Telegram</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label fw-semibold">Priority</label>
+                <select class="form-select" id="inboxPriority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveInbox()">
+            <i class="bi bi-check-lg me-1"></i>Add to Inbox
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process Inbox Modal -->
+  <div class="modal fade" id="processInboxModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-arrow-right-circle me-2"></i>Process Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <h6 id="processItemTitle" class="fw-bold"></h6>
+            <p id="processItemContent" class="text-muted small"></p>
+          </div>
+          <hr>
+          <p class="fw-semibold mb-2">Move this item to:</p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary text-start" onclick="processTo('learning')">
+              <i class="bi bi-lightbulb me-2"></i>Learning
+              <small class="d-block text-muted">Create a new learning card from this item</small>
+            </button>
+            <button class="btn btn-outline-success text-start" onclick="processTo('project')">
+              <i class="bi bi-kanban me-2"></i>Project
+              <small class="d-block text-muted">Link to an existing project or create a new one</small>
+            </button>
+            <button class="btn btn-outline-danger text-start" onclick="processTo('delete')">
+              <i class="bi bi-trash me-2"></i>Delete
+              <small class="d-block text-muted">Remove this item from the inbox</small>
+            </button>
+          </div>
+          <input type="hidden" id="processItemId" value="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       LOADING OVERLAY
+       ════════════════════════════════════════════════════════ -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner-box">
+      <div class="spinner-border text-primary" role="status" style="width:3rem;height:3rem;">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p id="loadingText">Loading...</p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       TOAST CONTAINER
+       ════════════════════════════════════════════════════════ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+          crossorigin="anonymous"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════════════════
+       STATE
+       ══════════════════════════════════════════════════════════ */
+    var currentTab = 'projects';
+    var allProjects = [];
+    var allLearning = [];
+    var allInbox = [];
+    var currentProcessItemId = null;
+
+    var CATEGORY_BADGE_MAP = {
+      'Tech Insight': 'badge-tech-insight',
+      'Error Log':    'badge-error-log',
+      'Tutorial':     'badge-tutorial',
+      'Concept':      'badge-concept',
+      'Tool':         'badge-tool',
+      'Pattern':      'badge-pattern'
+    };
+
+    var SOURCE_BADGE_MAP = {
+      'manual':   'badge-source-manual',
+      'email':    'badge-source-email',
+      'webclip':  'badge-source-webclip',
+      'telegram': 'badge-source-telegram'
+    };
+
+    /* ══════════════════════════════════════════════════════════
+       INITIALIZATION
+       ══════════════════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', function() {
+      initTabs();
+      initFab();
+      initDarkMode();
+      initUploadZone();
+      initFilters();
+      loadProjects();
+    });
+
+    /* ══════════════════════════════════════════════════════════
+       TABS
+       ══════════════════════════════════════════════════════════ */
+    function initTabs() {
+      document.querySelectorAll('#mainTabs .nav-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          switchTab(this.getAttribute('data-tab'));
+        });
+      });
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+
+      // Update nav links
+      document.querySelectorAll('#mainTabs .nav-link').forEach(function(l) {
+        l.classList.remove('active');
+      });
+      document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+
+      // Show/hide views
+      document.querySelectorAll('.tab-view').forEach(function(v) {
+        v.classList.add('d-none');
+      });
+      document.getElementById('view-' + tab).classList.remove('d-none');
+
+      // Refresh data
+      switch (tab) {
+        case 'projects': loadProjects(); break;
+        case 'learning': loadLearning(); break;
+        case 'inbox':    loadInbox(); break;
+        case 'upload':   loadProjectsForUpload(); break;
+      }
+
+      // Close mobile nav
+      var navCollapse = document.getElementById('mainNav');
+      var bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+      if (bsCollapse) bsCollapse.hide();
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       DARK MODE
+       ══════════════════════════════════════════════════════════ */
+    function initDarkMode() {
+      var saved = localStorage.getItem('kh-dark-mode');
+      if (saved === 'true') {
+        enableDarkMode();
+      }
+
+      document.getElementById('darkModeToggle').addEventListener('click', function() {
+        var html = document.documentElement;
+        if (html.getAttribute('data-bs-theme') === 'dark') {
+          disableDarkMode();
+        } else {
+          enableDarkMode();
+        }
+      });
+    }
+
+    function enableDarkMode() {
+      document.documentElement.setAttribute('data-bs-theme', 'dark');
+      document.querySelector('.navbar').classList.remove('bg-white');
+      document.getElementById('darkModeIcon').className = 'bi bi-sun-fill';
+      localStorage.setItem('kh-dark-mode', 'true');
+    }
+
+    function disableDarkMode() {
+      document.documentElement.setAttribute('data-bs-theme', 'light');
+      document.querySelector('.navbar').classList.add('bg-white');
+      document.getElementById('darkModeIcon').className = 'bi bi-moon-fill';
+      localStorage.setItem('kh-dark-mode', 'false');
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FAB
+       ══════════════════════════════════════════════════════════ */
+    function initFab() {
+      document.getElementById('fabBtn').addEventListener('click', function() {
+        var menu = document.getElementById('fabMenu');
+        var icon = document.getElementById('fabIcon');
+        if (menu.classList.contains('show')) {
+          closeFab();
+        } else {
+          menu.classList.add('show');
+          icon.className = 'bi bi-x-lg';
+        }
+      });
+
+      // Close FAB when clicking outside
+      document.addEventListener('click', function(e) {
+        var fab = document.getElementById('fabBtn');
+        var menu = document.getElementById('fabMenu');
+        if (!fab.contains(e.target) && !menu.contains(e.target)) {
+          closeFab();
+        }
+      });
+    }
+
+    function closeFab() {
+      document.getElementById('fabMenu').classList.remove('show');
+      document.getElementById('fabIcon').className = 'bi bi-plus-lg';
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UPLOAD ZONE (in Upload tab)
+       ══════════════════════════════════════════════════════════ */
+    function initUploadZone() {
+      var zone = document.getElementById('uploadDropZone');
+      var input = document.getElementById('uploadFileInput');
+      var nameEl = document.getElementById('uploadFileName');
+
+      if (!zone) return;
+
+      zone.addEventListener('click', function() { input.click(); });
+
+      zone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        zone.classList.add('dragover');
+      });
+
+      zone.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+      });
+
+      zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+          input.files = e.dataTransfer.files;
+          nameEl.textContent = e.dataTransfer.files[0].name;
+          nameEl.classList.remove('d-none');
+        }
+      });
+
+      input.addEventListener('change', function() {
+        if (input.files.length > 0) {
+          nameEl.textContent = input.files[0].name;
+          nameEl.classList.remove('d-none');
+        }
+      });
+
+      document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitUpload();
+      });
+    }
+
+    function submitUpload() {
+      var form = document.getElementById('uploadForm');
+      var btn = document.getElementById('uploadSubmitBtn');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Uploading...';
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="bi bi-cloud-upload me-2"></i>Upload File';
+          if (result && result.success) {
+            showToast('success', 'File uploaded successfully!');
+            form.reset();
+            document.getElementById('uploadFileName').classList.add('d-none');
+          } else {
+            showToast('error', 'Upload failed: ' + (result ? result.message : 'Unknown error'));
+          }
+        })
+        .withFailureHandler(function(err) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="bi bi-cloud-upload me-2"></i>Upload File';
+          showToast('error', 'Upload failed: ' + (err.message || err));
+        })
+        .uploadFile(form);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FILTERS
+       ══════════════════════════════════════════════════════════ */
+    function initFilters() {
+      // Project status filter
+      document.getElementById('projectStatusFilter').addEventListener('change', function() {
+        renderProjects(allProjects);
+      });
+
+      // Category filter buttons
+      document.getElementById('categoryFilters').addEventListener('click', function(e) {
+        var btn = e.target.closest('[data-category]');
+        if (!btn) return;
+
+        document.querySelectorAll('#categoryFilters .btn').forEach(function(b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        renderLearning(allLearning);
+      });
+
+      // Search box
+      document.getElementById('learningSearch').addEventListener('input', function() {
+        renderLearning(allLearning);
+      });
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       LOADING / TOAST HELPERS
+       ══════════════════════════════════════════════════════════ */
+    function showLoading(message) {
+      document.getElementById('loadingText').textContent = message || 'Loading...';
+      document.getElementById('loadingOverlay').classList.add('show');
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingOverlay').classList.remove('show');
+    }
+
+    function showToast(type, message) {
+      var container = document.getElementById('toastContainer');
+      var id = 'toast-' + Date.now();
+      var iconMap = {
+        success: 'bi-check-circle-fill text-success',
+        error: 'bi-exclamation-triangle-fill text-danger',
+        info: 'bi-info-circle-fill text-primary',
+        warning: 'bi-exclamation-circle-fill text-warning'
+      };
+
+      var html = '<div id="' + id + '" class="toast" role="alert">' +
+        '<div class="toast-header">' +
+          '<i class="bi ' + (iconMap[type] || iconMap.info) + ' me-2"></i>' +
+          '<strong class="me-auto">' + capitalize(type) + '</strong>' +
+          '<button type="button" class="btn-close" data-bs-dismiss="toast"></button>' +
+        '</div>' +
+        '<div class="toast-body">' + escapeHtml(message) + '</div>' +
+      '</div>';
+
+      container.insertAdjacentHTML('beforeend', html);
+      var toastEl = document.getElementById(id);
+      var bsToast = new bootstrap.Toast(toastEl, { delay: 4000 });
+      bsToast.show();
+      toastEl.addEventListener('hidden.bs.toast', function() { toastEl.remove(); });
+    }
+
+    function openModal(id) {
+      var modal = new bootstrap.Modal(document.getElementById(id));
+      modal.show();
+    }
+
+    function closeModal(id) {
+      var modalEl = document.getElementById(id);
+      var modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PROJECTS
+       ══════════════════════════════════════════════════════════ */
+    function loadProjects() {
+      showLoading('Loading projects...');
+      google.script.run
+        .withSuccessHandler(function(data) {
+          hideLoading();
+          allProjects = data || [];
+          renderProjects(allProjects);
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to load projects: ' + (err.message || err));
+        })
+        .getProjects();
+    }
+
+    function renderProjects(projects) {
+      var tbody = document.getElementById('projectsBody');
+      var filter = document.getElementById('projectStatusFilter').value;
+
+      var filtered = projects;
+      if (filter) {
+        filtered = projects.filter(function(p) { return p.status === filter; });
+      }
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="6">' +
+          '<div class="empty-state">' +
+            '<i class="bi bi-folder2-open"></i>' +
+            '<p>' + (filter ? 'No ' + filter + ' projects found.' : 'No projects yet. Add your first project!') + '</p>' +
+          '</div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(function(p) {
+        var statusClass = 'badge-status-' + (p.status || 'active');
+        var priorityClass = 'badge-priority-' + (p.priority || 'medium');
+        var progress = parseInt(p.progress) || 0;
+        var progressColor = progress >= 75 ? 'bg-success' :
+                            progress >= 40 ? 'bg-primary' :
+                            progress > 0  ? 'bg-warning' : 'bg-secondary';
+        var deadlineStr = p.deadline ? formatDate(p.deadline) : '--';
+
+        return '<tr class="cursor-pointer">' +
+          '<td class="fw-semibold">' + escapeHtml(p.name) + '</td>' +
+          '<td><span class="badge ' + statusClass + '">' + capitalize(p.status || 'active') + '</span></td>' +
+          '<td><span class="badge ' + priorityClass + '">' + capitalize(p.priority || 'medium') + '</span></td>' +
+          '<td>' + deadlineStr + '</td>' +
+          '<td>' +
+            '<div class="d-flex align-items-center gap-2">' +
+              '<div class="progress flex-grow-1"><div class="progress-bar ' + progressColor +
+                (progress > 0 && progress < 100 ? ' active-pulse' : '') +
+                '" style="width:' + progress + '%"></div></div>' +
+              '<small class="text-muted">' + progress + '%</small>' +
+            '</div>' +
+          '</td>' +
+          '<td class="text-center">' + (p.learningHours || 0) + 'h</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function saveProject() {
+      var project = {
+        name:          document.getElementById('projName').value.trim(),
+        status:        document.getElementById('projStatus').value,
+        priority:      document.getElementById('projPriority').value,
+        deadline:      document.getElementById('projDeadline').value,
+        progress:      parseInt(document.getElementById('projProgress').value) || 0,
+        learningHours: parseFloat(document.getElementById('projHours').value) || 0,
+        description:   document.getElementById('projDescription').value.trim()
+      };
+
+      if (!project.name) {
+        showToast('warning', 'Project name is required.');
+        return;
+      }
+
+      showLoading('Saving project...');
+      google.script.run
+        .withSuccessHandler(function() {
+          hideLoading();
+          closeModal('addProjectModal');
+          document.getElementById('addProjectForm').reset();
+          showToast('success', 'Project added successfully!');
+          loadProjects();
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to save project: ' + (err.message || err));
+        })
+        .addProject(project);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       LEARNING
+       ══════════════════════════════════════════════════════════ */
+    function loadLearning() {
+      showLoading('Loading learning cards...');
+      google.script.run
+        .withSuccessHandler(function(data) {
+          hideLoading();
+          allLearning = data || [];
+          renderLearning(allLearning);
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to load learning: ' + (err.message || err));
+        })
+        .getLearning();
+    }
+
+    function renderLearning(items) {
+      var grid = document.getElementById('learningGrid');
+      var categoryFilter = document.querySelector('#categoryFilters .btn.active');
+      var category = categoryFilter ? categoryFilter.getAttribute('data-category') : '';
+      var search = document.getElementById('learningSearch').value.toLowerCase().trim();
+
+      var filtered = items.filter(function(item) {
+        if (category && item.category !== category) return false;
+        if (search) {
+          var haystack = ((item.title || '') + ' ' + (item.content || '') + ' ' +
+                          (item.tags || '')).toLowerCase();
+          return haystack.indexOf(search) !== -1;
+        }
+        return true;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="col-12"><div class="empty-state">' +
+          '<i class="bi bi-lightbulb"></i>' +
+          '<p>' + (category || search ? 'No matching cards found.' : 'No learning cards yet. Start adding knowledge!') + '</p>' +
+        '</div></div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(function(item) {
+        var badgeClass = CATEGORY_BADGE_MAP[item.category] || 'bg-secondary';
+        var reviewStage = parseInt(item.reviewStage) || 0;
+        var tags = (item.tags || '').split(',').filter(function(t) { return t.trim(); });
+
+        var reviewDots = '';
+        for (var i = 0; i < 5; i++) {
+          reviewDots += '<span class="review-dot' + (i < reviewStage ? ' filled' : '') + '"></span>';
+        }
+
+        var tagHtml = tags.map(function(t) {
+          return '<span class="badge bg-light text-dark border">' + escapeHtml(t.trim()) + '</span>';
+        }).join('');
+
+        var sourceLink = item.source
+          ? '<a href="' + escapeHtml(item.source) + '" target="_blank" class="btn btn-sm btn-outline-secondary">' +
+              '<i class="bi bi-box-arrow-up-right"></i></a>'
+          : '';
+
+        return '<div class="col-lg-4 col-md-6 col-12">' +
+          '<div class="card tech-card h-100">' +
+            '<div class="card-body">' +
+              '<div class="d-flex justify-content-between align-items-start mb-2">' +
+                '<span class="badge ' + badgeClass + '">' + escapeHtml(item.category || 'Uncategorized') + '</span>' +
+                sourceLink +
+              '</div>' +
+              '<h6 class="card-title">' + escapeHtml(item.title) + '</h6>' +
+              '<p class="card-text">' + escapeHtml(item.content || '') + '</p>' +
+              (tagHtml ? '<div class="tag-list">' + tagHtml + '</div>' : '') +
+              '<div class="review-stage" title="Review stage: ' + reviewStage + '/5">' + reviewDots + '</div>' +
+            '</div>' +
+            '<div class="card-footer">' +
+              '<small class="text-muted">' + (item.date ? formatDate(item.date) : '') + '</small>' +
+              '<button class="btn btn-sm btn-outline-primary" onclick="markReviewed(\'' +
+                escapeHtml(item.id || '') + '\')">' +
+                '<i class="bi bi-check2 me-1"></i>Reviewed' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function saveLearning() {
+      var card = {
+        title:       document.getElementById('learnTitle').value.trim(),
+        category:    document.getElementById('learnCategory').value,
+        content:     document.getElementById('learnContent').value.trim(),
+        tags:        document.getElementById('learnTags').value.trim(),
+        source:      document.getElementById('learnSource').value.trim(),
+        reviewStage: parseInt(document.getElementById('learnReviewStage').value) || 0
+      };
+
+      if (!card.title || !card.content) {
+        showToast('warning', 'Title and content are required.');
+        return;
+      }
+
+      showLoading('Saving learning card...');
+      google.script.run
+        .withSuccessHandler(function() {
+          hideLoading();
+          closeModal('addLearningModal');
+          document.getElementById('addLearningForm').reset();
+          showToast('success', 'Learning card added!');
+          loadLearning();
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to save: ' + (err.message || err));
+        })
+        .addLearning(card);
+    }
+
+    function markReviewed(id) {
+      if (!id) return;
+      google.script.run
+        .withSuccessHandler(function() {
+          showToast('success', 'Review stage updated!');
+          loadLearning();
+        })
+        .withFailureHandler(function(err) {
+          showToast('error', 'Failed to update: ' + (err.message || err));
+        })
+        .markReviewed(id);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       INBOX
+       ══════════════════════════════════════════════════════════ */
+    function loadInbox() {
+      showLoading('Loading inbox...');
+      google.script.run
+        .withSuccessHandler(function(data) {
+          hideLoading();
+          allInbox = data || [];
+          renderInbox(allInbox);
+          updateInboxCount(allInbox.length);
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to load inbox: ' + (err.message || err));
+        })
+        .getInbox();
+    }
+
+    function renderInbox(items) {
+      var list = document.getElementById('inboxList');
+      var bulkBtn = document.getElementById('bulkDeleteBtn');
+
+      if (!items.length) {
+        list.innerHTML = '<div class="empty-state">' +
+          '<i class="bi bi-inbox"></i>' +
+          '<p>Inbox is empty. Items from email, webclips, and Telegram will appear here.</p>' +
+        '</div>';
+        bulkBtn.style.display = 'none';
+        return;
+      }
+
+      list.innerHTML = items.map(function(item) {
+        var sourceClass = SOURCE_BADGE_MAP[item.source] || 'bg-secondary';
+        var priorityClass = 'priority-' + (item.priority || 'medium');
+
+        return '<div class="list-group-item inbox-item ' + priorityClass + '">' +
+          '<div class="d-flex align-items-start gap-3">' +
+            '<div class="form-check mt-1">' +
+              '<input class="form-check-input inbox-check" type="checkbox" value="' +
+                escapeHtml(item.id || '') + '" onchange="toggleBulkDelete()">' +
+            '</div>' +
+            '<div class="flex-grow-1">' +
+              '<div class="d-flex justify-content-between align-items-center mb-1">' +
+                '<span class="inbox-text fw-semibold">' + escapeHtml(item.title) + '</span>' +
+                '<div class="d-flex gap-2 align-items-center">' +
+                  '<span class="badge ' + sourceClass + '">' + escapeHtml(item.source || 'manual') + '</span>' +
+                  '<span class="badge badge-priority-' + (item.priority || 'medium') + '">' +
+                    capitalize(item.priority || 'medium') + '</span>' +
+                '</div>' +
+              '</div>' +
+              (item.content ? '<p class="mb-1 text-muted small">' + escapeHtml(truncate(item.content, 120)) + '</p>' : '') +
+              '<div class="d-flex gap-2 mt-2">' +
+                '<button class="btn btn-sm btn-outline-primary" onclick="openProcessModal(\'' +
+                  escapeHtml(item.id || '') + '\')">' +
+                  '<i class="bi bi-arrow-right-circle me-1"></i>Process' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function saveInbox() {
+      var item = {
+        title:    document.getElementById('inboxTitle').value.trim(),
+        content:  document.getElementById('inboxContent').value.trim(),
+        source:   document.getElementById('inboxSource').value,
+        priority: document.getElementById('inboxPriority').value
+      };
+
+      if (!item.title) {
+        showToast('warning', 'Title is required.');
+        return;
+      }
+
+      showLoading('Adding to inbox...');
+      google.script.run
+        .withSuccessHandler(function() {
+          hideLoading();
+          closeModal('addInboxModal');
+          document.getElementById('addInboxForm').reset();
+          showToast('success', 'Item added to inbox!');
+          loadInbox();
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to add: ' + (err.message || err));
+        })
+        .addInboxItem(item);
+    }
+
+    function updateInboxCount(count) {
+      var badge = document.getElementById('inboxCount');
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('d-none');
+      } else {
+        badge.classList.add('d-none');
+      }
+    }
+
+    function openProcessModal(id) {
+      currentProcessItemId = id;
+      var item = allInbox.find(function(i) { return i.id === id; });
+      if (!item) return;
+
+      document.getElementById('processItemTitle').textContent = item.title;
+      document.getElementById('processItemContent').textContent = item.content || 'No content';
+      document.getElementById('processItemId').value = id;
+
+      openModal('processInboxModal');
+    }
+
+    function processTo(destination) {
+      var id = currentProcessItemId;
+      if (!id) return;
+
+      showLoading('Processing item...');
+      closeModal('processInboxModal');
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          hideLoading();
+          showToast('success', 'Item processed to ' + destination + '!');
+          loadInbox();
+          // If moved to learning or project, also switch to that tab
+          if (destination === 'learning') {
+            switchTab('learning');
+          } else if (destination === 'project') {
+            switchTab('projects');
+          }
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to process: ' + (err.message || err));
+        })
+        .processInboxItem(id, destination);
+    }
+
+    function toggleBulkDelete() {
+      var checked = document.querySelectorAll('.inbox-check:checked');
+      document.getElementById('bulkDeleteBtn').style.display = checked.length > 0 ? 'inline-block' : 'none';
+    }
+
+    function bulkDeleteInbox() {
+      var checked = document.querySelectorAll('.inbox-check:checked');
+      var ids = Array.from(checked).map(function(cb) { return cb.value; });
+
+      if (!ids.length) return;
+      if (!confirm('Delete ' + ids.length + ' selected item(s)?')) return;
+
+      showLoading('Deleting items...');
+      google.script.run
+        .withSuccessHandler(function() {
+          hideLoading();
+          showToast('success', ids.length + ' item(s) deleted.');
+          loadInbox();
+        })
+        .withFailureHandler(function(err) {
+          hideLoading();
+          showToast('error', 'Failed to delete: ' + (err.message || err));
+        })
+        .bulkDeleteInbox(ids);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UPLOAD — Project Selector
+       ══════════════════════════════════════════════════════════ */
+    function loadProjectsForUpload() {
+      google.script.run
+        .withSuccessHandler(function(projects) {
+          var select = document.getElementById('uploadProject');
+          // Keep only the default option
+          select.innerHTML = '<option value="" disabled selected>Select a project...</option>';
+          if (projects && projects.length) {
+            projects.forEach(function(p) {
+              var opt = document.createElement('option');
+              opt.value = p.id || p.name;
+              opt.textContent = p.name;
+              select.appendChild(opt);
+            });
+          }
+        })
+        .withFailureHandler(function(err) {
+          console.error('Failed to load projects for upload:', err);
+        })
+        .getProjects();
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UTILITY
+       ══════════════════════════════════════════════════════════ */
+    function escapeHtml(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function capitalize(str) {
+      if (!str) return '';
+      return str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, ' ');
+    }
+
+    function truncate(str, len) {
+      if (!str) return '';
+      return str.length > len ? str.substring(0, len) + '...' : str;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      try {
+        var d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr;
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch (e) {
+        return dateStr;
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -28,5 +28,4 @@
 - 經驗總結
 
 ## 存儲
-- 本地：memory/
-- Notion：自動同步
+- 本地：memory/（SQLite）

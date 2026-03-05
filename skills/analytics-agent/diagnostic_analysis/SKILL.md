@@ -76,7 +76,7 @@ Hook 吸引的受眾對產品實際功能無需求，導致點擊後不下載
 
 ## 工具指引
 
-- **Notion API**：業務數據來源
+- **本地資料庫（SQLite）**：業務數據來源
 - **trend_analysis**：趨勢數據輔助診斷
 - **performance_report**：KPI 數據基準
 

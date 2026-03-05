@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
 Notion Vector Sync - 將 Notion 筆記同步到 ChromaDB
 """
 

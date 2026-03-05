@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Notion 筆記向量化腳本"""
+"""
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
+Notion 筆記向量化腳本
+"""
 
 import os
 

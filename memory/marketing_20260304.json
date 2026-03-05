@@ -1,0 +1,41 @@
+{
+  "date": "2026-03-04",
+  "type": "evening_generation",
+  "posts": [
+    {
+      "index": 1,
+      "style": "衝突型Hook",
+      "topic": "AI寫作",
+      "content": "AI寫作: 老實講，結果令我意外，人人都話難免費AI工具已經夠用，但我做到咗",
+      "length": 38
+    },
+    {
+      "index": 2,
+      "style": "衝突型Hook",
+      "topic": "ChatGPT技巧",
+      "content": "ChatGPT技巧: 傳統做法已經過時AI時代已經來臨，新方法效果更好",
+      "length": 35
+    },
+    {
+      "index": 3,
+      "style": "衝突型Hook",
+      "topic": "Midjourney應用",
+      "content": "Midjourney應用: 網上面人人都話錯ChatGPT冇用，但事實證明佢係啱",
+      "length": 40
+    },
+    {
+      "index": 4,
+      "style": "衝突型Hook",
+      "topic": "AI自動化",
+      "content": "AI自動化: 傳統做法已經過時AI會取代人類，新方法效果更好",
+      "length": 30
+    },
+    {
+      "index": 5,
+      "style": "衝突型Hook",
+      "topic": "AI賺錢方法",
+      "content": "AI賺錢方法: 講開呢啲，我最有資格講，人人都話難ChatGPT冇用，但我做到咗",
+      "length": 40
+    }
+  ]
+}

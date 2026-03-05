@@ -1,0 +1,27 @@
+[
+  {
+    "instruction": "點樣監控系統資源？",
+    "output": "我可以幫你解答呢個問題。等我一陣...",
+    "topic": "resource_monitoring"
+  },
+  {
+    "instruction": "點樣處理記憶體過高問題？",
+    "output": "我可以幫你解答呢個問題。等我一陣...",
+    "topic": "memory_management"
+  },
+  {
+    "instruction": "點樣設定跨平台同步？",
+    "output": "我可以幫你解答呢個問題。等我一陣...",
+    "topic": "cross_platform_sync"
+  },
+  {
+    "instruction": "點樣檢查 Gateway 延遲？",
+    "output": "我可以幫你解答呢個問題。等我一陣...",
+    "topic": "gateway_latency"
+  },
+  {
+    "instruction": "點樣分析安全風險？",
+    "output": "我可以幫你解答呢個問題。等我一陣...",
+    "topic": "security_analysis"
+  }
+]

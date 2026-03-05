@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
 每日 Notion 同步腳本 - 完整記憶同步
 """
 

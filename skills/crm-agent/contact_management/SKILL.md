@@ -37,12 +37,12 @@ description: CRM 聯絡人資料管理。當需要新增、查詢、編輯或分
 ### 新增聯絡人
 1. 收集必填欄位：姓名、公司、產業、來源
 2. 確認無重複（姓名 + 公司比對）
-3. 寫入 Notion 聯絡人資料庫
+3. 透過 `cs_customer_db.py` 的 `get_or_create_customer()` 寫入 SQLite（`~/.openclaw/memory/cs_customers.db`）
 4. 回覆新增成功確認
 
 ### 查詢聯絡人
 1. 接收查詢條件（姓名、公司、產業、標籤、來源）
-2. 從 Notion 查詢符合結果
+2. 透過 `cs_customer_db.py` 查詢 `customers` 表格符合結果
 3. 以清單或表格格式回覆
 
 ### 編輯聯絡人
@@ -57,7 +57,11 @@ description: CRM 聯絡人資料管理。當需要新增、查詢、編輯或分
 
 ## 工具指引
 
-- **Notion API**：聯絡人資料庫 CRUD（主要工具）
+- **cs_customer_db.py**：聯絡人 CRUD 主要工具（SQLite `cs_customers.db`）
+  - `get_or_create_customer(platform, platform_user_id, name, brand_id)` — 新增或取得客戶
+  - `get_customer_history(customer_id, limit)` — 查詢互動歷史
+  - `get_vip_candidates(brand_id, min_conversations, min_positive_ratio)` — 查詢 VIP 候選人
+  - `mark_vip(customer_id, is_vip)` — 標記 VIP 狀態
 - **value_scorer**：客戶等級數據來源
 
 ## 錯誤處理
@@ -68,7 +72,7 @@ description: CRM 聯絡人資料管理。當需要新增、查詢、編輯或分
 | 缺少必填欄位 | 逐一詢問：姓名、公司、產業、來源 |
 | 查無結果 | 建議放寬條件或確認拼寫 |
 | 匯入格式錯誤 | 說明正確 CSV 格式，提供範例 |
-| Notion 連線失敗 | 提示稍後重試 |
+| SQLite 連線失敗 | 確認 `~/.openclaw/memory/cs_customers.db` 路徑是否存在，提示稍後重試 |
 
 ## 使用範例
 

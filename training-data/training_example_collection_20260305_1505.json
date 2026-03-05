@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-03-05T15:05:00+08:00",
+  "task_type": "training_data_collection",
+  "trigger": "scheduled_reminder",
+  "workflow": [
+    {
+      "step": 1,
+      "action": "check_existing_training_data",
+      "command": "ls -la ~/.openclaw/workspace/training-data/",
+      "result": "127 files found, organized by date"
+    },
+    {
+      "step": 2,
+      "action": "read_latest_collection",
+      "command": "read training_collection_20260305_1505.json",
+      "result": "resource_monitoring task with 99.7% memory"
+    },
+    {
+      "step": 3,
+      "action": "read_task_patterns",
+      "command": "read simple_task_patterns_20260305.md",
+      "result": "5 main task types documented"
+    },
+    {
+      "step": 4,
+      "action": "generate_training_example",
+      "command": "write training_example with structured JSON",
+      "result": "New training example created"
+    }
+  ],
+  "pattern_identified": "cron_reminder -> check_existing -> read_patterns -> generate_example -> save",
+  "task_categories": [
+    "training_data_collection",
+    "system_health_check", 
+    "error_learning",
+    "memory_monitoring",
+    "token_monitoring"
+  ],
+  "success": true,
+  "training_value": {
+    "description": "Training data collection workflow - demonstrates how to collect and organize training examples from cron jobs",
+    "input": "Scheduled reminder with training collection instructions",
+    "output": "Structured JSON training example saved to training-data/",
+    "complexity": "simple",
+    "automatable": true
+  }
+}

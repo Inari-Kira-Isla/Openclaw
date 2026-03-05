@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>n8n 工作流自動化：AI API 整合完整設定教學 | AI 學習寶庫</title>
+  <meta name="description" content="n8n 工作流自動化完整教學，教你如何配置 AI API 整合，實現自動化任務處理。含詳細設定步驟與程式碼範例。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="n8n 工作流自動化：AI API 整合完整設定教學">
+  <meta property="og:description" content="n8n 工作流自動化完整教學，教你如何配置 AI API 整合，實現自動化任務處理。含詳細設定步驟與程式碼範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "n8n 工作流自動化：AI API 整合完整設定教學", "description": "n8n 工作流自動化完整教學，教你如何配置 AI API 整合，實現自動化任務處理。含詳細設定步驟與程式碼範例。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "n8n 是否支援付費 AI 服務？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，n8n 支援 OpenAI、Anthropic、Google Gemini 等主流 AI 平台的 API 串接。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保 API 金鑰安全？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議使用 n8n 的 Credentials 功能加密儲存，或透過環境變數管理，避免直接暴露在程式碼中。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "n8n 可免費使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "n8n 提供開源免費版，可自行架設部署；也有付費雲端版本提供更完善的管理功能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>n8n 工作流自動化：AI API 整合完整設定教學</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">n8n 工作流自動化：AI API 整合完整設定教學</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>n8n 工作流自動化：AI API 整合完整設定教學</h2>
+
+<p>n8n 是一款強大的開源工作流自動化工具，可透過視覺化介面整合各種 AI API，實現資料處理、文字生成、圖像識別等自動化任務。本教學將帶你從零開始完成 n8n 配置與 AI API 整合設定。</p>
+
+<h2>一、n8n 基礎環境建置</h2>
+
+<p>首先需要在本機或伺服器上部署 n8n 環境。最簡單的方式是使用 Docker 執行，以下是快速啟動指令：</p>
+
+<pre><code>docker run -d --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n n8nio/n8n</code></pre>
+
+<p>啟動後存取 http://localhost:5678 即可進入 n8n 控制台。建議優先建立帳號並設定中文介面，方便後續操作。</p>
+
+<h2>二、AI API 串接前置作業</h2>
+
+<p>在整合 AI API 前，需要完成以下準備工作：</p>
+
+<ul>
+<li><strong>取得 API Key</strong>：註冊 OpenAI、Google Gemini 或其他 AI 服務帳號，產生專屬 API 金鑰</li>
+<li><strong>建立憑證</strong>：在 n8n 左側選單點擊「Credentials」，新增 HTTP Header 驗證</li>
+<li><strong>測試連線</strong>：使用 n8n 的 HTTP Request 節點進行基本連線測試</li>
+</ul>
+
+<h2>三、建立第一個 AI 整合工作流</h2>
+
+<p>以下範例展示如何建立一個簡單的 AI 文字生成工作流：</p>
+
+<ol>
+<li>新增空白工作流，命名為「AI 文字生成」</li>
+<li>新增「Manual Trigger」作為觸發節點</li>
+<li>新增「HTTP Request」節點，設定如下：
+<ul>
+<li>Method: POST</li>
+<li>URL: https://api.openai.com/v1/chat/completions</li>
+<li>Headers: Authorization: Bearer YOUR_API_KEY</li>
+<li>Body Content Type: JSON</li>
+</ul>
+</li>
+<li>在 Body 中輸入 prompt 與模型參數</li>
+<li>執行工作流並檢視輸出結果</li>
+</ol>
+
+<h2>四、進階技巧與錯誤處理</h2>
+
+<p>實際應用中常見的優化技巧包括：</p>
+
+<ul>
+<li><strong>錯誤處理</strong>：使用「Error Trigger」節點捕获 API 請求失敗，並設定重試機制</li>
+<li><strong>速率限制</strong>：在節點間加入「Wait」節點，避免觸發 API 配額限制</li>
+<li><strong>環境變數</strong>：將 API Key 儲存於環境變數，避免直接寫入工作流中</li>
+</ul>
+
+<h2>五、實際應用場景案例</h2>
+
+<p>n8n 結合 AI API 可實現多種自動化場景：自動回覆客戶詢問、批量生成社群貼文、分析用戶回饋情緒、自動化報告生成等。透過設定排程觸發，可讓工作流在指定時間自動執行，大幅提升工作效率。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">n8n 是否支援付費 AI 服務？</h3>
+            <p class="faq-a">是的，n8n 支援 OpenAI、Anthropic、Google Gemini 等主流 AI 平台的 API 串接。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保 API 金鑰安全？</h3>
+            <p class="faq-a">建議使用 n8n 的 Credentials 功能加密儲存，或透過環境變數管理，避免直接暴露在程式碼中。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">n8n 可免費使用嗎？</h3>
+            <p class="faq-a">n8n 提供開源免費版，可自行架設部署；也有付費雲端版本提供更完善的管理功能。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

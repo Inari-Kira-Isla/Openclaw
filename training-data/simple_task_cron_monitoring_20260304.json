@@ -1,0 +1,45 @@
+{
+  "id": "simple_task_cron_monitoring_20260304",
+  "task_type": "定時任務監控",
+  "category": "system_maintenance",
+  "description": "執行定時心跳任務，檢查系統狀態、學習閉環、錯誤記錄",
+  "trigger": "cron job - 每日 03:00-03:10",
+  "steps": [
+    {
+      "order": 1,
+      "action": "讀取 HEARTBEAT.md",
+      "tool": "read",
+      "purpose": "確認當前時段任務"
+    },
+    {
+      "order": 2,
+      "action": "檢查記憶變更",
+      "tool": "exec ls",
+      "purpose": "找出近期更新的記憶檔案"
+    },
+    {
+      "order": 3,
+      "action": "檢查錯誤日誌",
+      "tool": "exec ls",
+      "purpose": "確認無新錯誤"
+    },
+    {
+      "order": 4,
+      "action": "執行學習應用",
+      "tool": "memory_search/read",
+      "purpose": "評估是否需要生成新內容"
+    },
+    {
+      "order": 5,
+      "action": "記錄執行結果",
+      "tool": "write",
+      "purpose": "記錄任務狀態到 memory/"
+    }
+  ],
+  "frequency": "daily",
+  "complexity": "simple",
+  "success_criteria": "所有檢查完成並記錄",
+  "example_output": "✅ 全部任務完成 - 系統運行穩定，無需警報",
+  "collected_at": "2026-03-04 03:05 GMT+8",
+  "status": "completed"
+}

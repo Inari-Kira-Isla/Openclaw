@@ -1,0 +1,91 @@
+{
+  "date": "2026-03-04",
+  "collected_at": "2026-03-04T14:24:00+08:00",
+  "sources": ["Hacker News", "Industry Trends"],
+  "topics": [
+    {
+      "title": "GPT-5.3 Instant Release",
+      "url": "https://openai.com/index/gpt-5-3-instant/",
+      "source": "Hacker News",
+      "score": 318,
+      "search_potential": "high",
+      "category": "AI/LLM",
+      "tags": ["OpenAI", "GPT-5", "LLM", "生成式AI"]
+    },
+    {
+      "title": "AI 軟件驗證誰來把關？",
+      "url": "https://leodemoura.github.io/blog/2026/02/28/when-ai-writes-the-worlds-software.html",
+      "source": "Hacker News",
+      "score": 191,
+      "search_potential": "high",
+      "category": "AI/Software Development",
+      "tags": ["AI驗證", "軟件工程", "AI安全"]
+    },
+    {
+      "title": "Claude's Cycles - Donald Knuth 論文",
+      "url": "https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf",
+      "source": "Hacker News",
+      "score": 560,
+      "search_potential": "high",
+      "category": "AI/Research",
+      "tags": ["Claude", "Knuth", "AI研究", "學術"]
+    },
+    {
+      "title": "Apple M5 Pro/Max MacBook Pro",
+      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+      "source": "Hacker News",
+      "score": 726,
+      "search_potential": "medium",
+      "category": "Hardware",
+      "tags": ["Apple", "M5晶片", "MacBook"]
+    },
+    {
+      "title": "Intel 18A 製程 - 288核心 Xeon",
+      "url": "https://www.tomshardware.com/pc-components/cpus/intels-make-or-break-18a-process-node-debuts-for-data-center-with-288-core-xeon-6-cpu-multi-chip-monster-sports-12-channels-of-ddr5-8000-foveros-direct-3d-packaging-tech",
+      "source": "Hacker News",
+      "score": 270,
+      "search_potential": "medium",
+      "category": "Hardware",
+      "tags": ["Intel", "Xeon", "數據中心", "製程"]
+    },
+    {
+      "title": "Speculative Speculative Decoding (SSD)",
+      "url": "https://arxiv.org/abs/2603.03251",
+      "source": "Hacker News",
+      "score": 24,
+      "search_potential": "high",
+      "category": "AI/Optimization",
+      "tags": ["LLM優化", "推理解碼", "效能提升"]
+    },
+    {
+      "title": "AI Agent 工作流爆發",
+      "url": "https://www.anthropic.com/news/claude-agent",
+      "source": "Industry Trends",
+      "score": 0,
+      "search_potential": "high",
+      "category": "AI/Agents",
+      "tags": ["AI Agent", "工作流", "自動化", "Claude"]
+    },
+    {
+      "title": "多模態 AI 持續熱門",
+      "url": "https://openai.com/multimodal",
+      "source": "Industry Trends",
+      "score": 0,
+      "search_potential": "high",
+      "category": "AI/Multimodal",
+      "tags": ["多模態", "GPT-4V", "視覺AI", "語音AI"]
+    }
+  ],
+  "summary": "AI 主導熱門話題：GPT-5.3 發布、AI 軟件驗證討論、Knuth 關於 Claude 的論文。硬體方面 Apple M5 和 Intel 18A 製程也受關注。AI Agent 工作流和多模態 AI 持續火熱。",
+  "trends": {
+    "rising": ["AI Agent", "多模態AI", "LLM優化"],
+    "stable": ["Apple M5", "Intel Xeon"],
+    "declining": []
+  },
+  "recommendations": [
+    "AI Agent 工作流教學",
+    "GPT-5.3 使用指南",
+    "多模態 AI 應用場景",
+    "LLM 效能優化技巧"
+  ]
+}
