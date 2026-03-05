@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解 | AI 學習寶庫</title>
+  <meta name="description" content="深入解析 AI Agent 三大設計模式：ReAct、Plan-and-Execute、Reflection，透過程式碼範例說明三種模式的原理、優缺點與實作方法，幫助開發者選擇適合的 Agent 架構。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解">
+  <meta property="og:description" content="深入解析 AI Agent 三大設計模式：ReAct、Plan-and-Execute、Reflection，透過程式碼範例說明三種模式的原理、優缺點與實作方法，幫助開發者選擇適合的 Agent 架構。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解", "description": "深入解析 AI Agent 三大設計模式：ReAct、Plan-and-Execute、Reflection，透過程式碼範例說明三種模式的原理、優缺點與實作方法，幫助開發者選擇適合的 Agent 架構。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ReAct 和 Plan-and-Execute 有什麼主要差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ReAct 是邊推理邊行動，適合動態環境；Plan-and-Execute 是先規劃再執行，適合結構明確的任務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Reflection 模式適合用在哪些場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reflection 適合需要高準確性的任務，如程式碼生成、複雜問題解答，可透過自我反思提升輸出品質。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以同時使用多種 Agent 設計模式嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。例如在 Plan-and-Execute 中加入 ReAct 的思考循环，或在執行後加入 Reflection 機制來優化結果。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>AI Agent 設計模式：ReAct、Plan-and-E...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>AI Agent 設計模式詳解：ReAct、Plan-and-Execute、Reflection</h2>
+<p>AI Agent 設計模式是構建智能代理系統的核心框架，主要分為三種：<strong>ReAct（推理與行動）</strong>、<strong>Plan-and-Execute（規劃後執行）</strong>、<strong>Reflection（反思）</strong>。這三種模式各有優勢：ReAct 強調邊推理邊行動，適合動態環境；Plan-and-Execute 適合複雜任務的預先規劃；Reflection 則透過自我反思提升決策質量。以下將深入解析這三種模式的原理與實作。</p>
+
+<h2>什麼是 AI Agent 設計模式？</h2>
+<p>AI Agent 是能夠自主執行任務的智能系統，透過大語言模型（LLM）驅動，具備規劃、工具使用、記憶等能力。設計模式決定了 Agent 如何分解任務、選擇工具、與環境互動。選擇合適的設計模式，能顯著提升 Agent 的效率和準確性。</p>
+
+<h2>ReAct 模式：邊推理邊行動</h2>
+<p>ReAct（Reasoning + Acting）模式讓 Agent 在執行過程中同時進行推理和行動。每一步都會先思考（Thought）、執行動作（Action）、然後觀察結果（Observation），形成一個推理-行動循環。這種模式特別適合需要即時反饋的任務，例如搜尋資訊、對話系統。</p>
+<p><strong>ReAct 的核心流程：</strong></p>
+<ul>
+<li>接收用戶輸入</li>
+<li>進行推理（Thought）</li>
+<li>選擇工具並執行（Action）</li>
+<li>觀察結果（Observation）</li>
+<li>根據觀察更新推理，循環直到完成任務</li>
+</ul>
+
+<h2>Plan-and-Execute 模式：先規劃後執行</h2>
+<p>Plan-and-Execute 模式採用「先規劃後執行」的策略。Agent 先將複雜任務分解為多個子步驟，形成完整計劃後依序執行。這種模式適合任務明確、步驟固定的場景，例如資料處理、自動化流程。</p>
+<p><strong>Plan-and-Execute 的優點：</strong></p>
+<ul>
+<li>任務結構清晰，易於調試</li>
+<li>可以預先評估計劃的可行性</li>
+<li>適合長上下文任務</li>
+</ul>
+
+<h2>Reflection 模式：透過反思優化決策</h2>
+<p>Reflection 模式讓 Agent 在執行任務後進行自我反思，檢討決策的正確性並改進。這種模式透過雙重評估機制（一次執行、一次反思）提升輸出質量，適合需要高準確性的任務，例如程式碼生成、複雜問題解答。</p>
+
+<h2>實作程式碼範例</h2>
+<p>以下以 Python 實作一個簡單的 Plan-and-Execute Agent：</p>
+<pre><code>from typing import List, Dict, Any
+
+class PlanExecuteAgent:
+    def __init__(self, llm):
+        self.llm = llm
+    
+    def plan(self, task: str) -> List[Dict[str, str]]:
+        """規劃階段：將任務分解為子步驟"""
+        prompt = f"將以下任務分解為具體步驟：{task}"
+        response = self.llm.invoke(prompt)
+        # 解析回應為步驟列表
+        steps = self._parse_steps(response)
+        return steps
+    
+    def execute(self, steps: List[Dict[str, str]]) -> str:
+        """執行階段：依序執行每個步驟"""
+        results = []
+        for step in steps:
+            result = self._execute_step(step)
+            results.append(result)
+        return self._summarize(results)
+    
+    def run(self, task: str) -> str:
+        """完整流程：規劃 + 執行"""
+        steps = self.plan(task)
+        return self.execute(steps)
+
+# 使用範例
+agent = PlanExecuteAgent(llm=openai_model)
+result = agent.run("分析本月銷售數據並生成報告")
+print(result)</code></pre>
+
+<h2>如何選擇適合的設計模式？</h2>
+<p>選擇 AI Agent 設計模式需根據任務特性決定：</p>
+<ol>
+<li><strong>選擇 ReAct</strong>：需要即時互動、動態調整的任務，如對話、搜尋</li>
+<li><strong>選擇 Plan-and-Execute</strong>：任務明確、步驟可預測的場景，如資料處理、自動化</li>
+<li><strong>選擇 Reflection</strong>：需要高準確性、可自我改進的任務，如程式碼生成、複雜分析</li>
+</ol>
+<p>實際應用中，也可以混合使用這些模式，例如在 Plan-and-Execute 中加入 Reflection 機制來優化計劃品質。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">ReAct 和 Plan-and-Execute 有什麼主要差異？</h3>
+            <p class="faq-a">ReAct 是邊推理邊行動，適合動態環境；Plan-and-Execute 是先規劃再執行，適合結構明確的任務。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Reflection 模式適合用在哪些場景？</h3>
+            <p class="faq-a">Reflection 適合需要高準確性的任務，如程式碼生成、複雜問題解答，可透過自我反思提升輸出品質。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">可以同時使用多種 Agent 設計模式嗎？</h3>
+            <p class="faq-a">可以。例如在 Plan-and-Execute 中加入 ReAct 的思考循环，或在執行後加入 Reflection 機制來優化結果。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
