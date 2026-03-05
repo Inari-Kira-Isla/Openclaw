@@ -28,27 +28,27 @@ description: BNI 會員資料管理。當需要新增、查詢、修改或分類
 ### 新增會員
 1. 收集必填欄位：姓名、公司、職位、產業類別、會籍到期日
 2. 確認無重複會員（姓名 + 公司比對）
-3. 寫入 Notion 會員資料庫
+3. 用 `bni_db.upsert_member(name, company, title, industry)` 寫入 SQLite
 4. 回覆確認訊息
 
 ### 查詢會員
 1. 接收查詢條件（姓名、產業、標籤等）
-2. 從 Notion 查詢符合結果
+2. 用 `bni_db.find_members(query, industry, status)` 查詢
 3. 以表格格式回覆
 
 ### 編輯會員
 1. 先查詢確認目標會員
 2. 顯示目前資料供使用者確認
-3. 更新指定欄位
+3. 用 `bni_db.update_member(member_id, **fields)` 更新
 4. 回覆更新後的完整資料
 
 ### 會籍提醒
-1. 每月檢查到期日在 30 天內的會員
+1. 用 `bni_db.get_expiring_members(days=30)` 檢查即將到期會員
 2. 發送提醒通知給管理者
 
 ## 工具指引
 
-- **Notion API**：會員資料庫的 CRUD 操作
+- **SQLite** (`~/.openclaw/memory/bni.db`)：`bni_db.py` 會員 CRUD 操作
 - **提醒系統**：會籍到期通知
 
 ## 錯誤處理
@@ -58,7 +58,7 @@ description: BNI 會員資料管理。當需要新增、查詢、修改或分類
 | 重複會員 | 提示已有同名會員，顯示既有資料供比對 |
 | 缺少必填欄位 | 逐一詢問缺少的欄位 |
 | 查無結果 | 建議放寬搜尋條件或確認拼寫 |
-| Notion 連線失敗 | 提示稍後重試 |
+| SQLite 連線失敗 | 提示稍後重試（本地資料庫，極少發生） |
 
 ## 使用範例
 

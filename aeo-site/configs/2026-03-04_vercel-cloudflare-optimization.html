@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel + Cloudflare 靜態網站最佳化配置 | AI 學習寶庫</title>
+  <meta name="description" content="Vercel + Cloudflare 靜態網站最佳化配置教學，涵蓋 DNS 設定、快取策略、SSL 憑證與效能優化。詳細步驟幫助開發者提升網站載入速度與安全性。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Vercel + Cloudflare 靜態網站最佳化配置">
+  <meta property="og:description" content="Vercel + Cloudflare 靜態網站最佳化配置教學，涵蓋 DNS 設定、快取策略、SSL 憑證與效能優化。詳細步驟幫助開發者提升網站載入速度與安全性。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Vercel + Cloudflare 靜態網站最佳化配置", "description": "Vercel + Cloudflare 靜態網站最佳化配置教學，涵蓋 DNS 設定、快取策略、SSL 憑證與效能優化。詳細步驟幫助開發者提升網站載入速度與安全性。", "datePublished": "2026-03-04", "dateModified": "2026-03-04", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Vercel 和 Cloudflare 哪個作為主要 CDN 比較好？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "兩者可同時使用。Vercel 內建 CDN 負責初始部署的全球分發，Cloudflare 则作為 DNS 與額外快取層，提供 DDoS 防護與進階資安功能。建議兩者結合使用以獲得最佳效益。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "使用 Cloudflare 是否會影響 Vercel 的即時部署功能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會造成衝突。Vercel 部署新版本後，Cloudflare 的快取可能需要時間更新。可在 Vercel 設定中配置「Deploy Hooks」，或在 Cloudflare 後台手動清除快取以確保訪客看到最新內容。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何測試 Vercel + Cloudflare 的優化效果？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可使用 GTmetrix、Pingdom 或 Google PageSpeed Insights 測試網站載入速度。同時在 Cloudflare Analytics 中查看快取命中率與流量報告，確認設定是否正確生效。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Vercel + Cloudflare 靜態網站最佳化配置</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Vercel + Cloudflare 靜態網站最佳化配置</h1>
+      <div class="article-info">
+        <span>📅 2026-03-04</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Vercel 與 Cloudflare 整合的核心概念</h2>
+<p>Vercel + Cloudflare 靜態網站最佳化配置的核心答案是：透過 Cloudflare 作為 DNS 與 CDN 層，配合 Vercel 的部署功能，可實現全球快速存取、強化資安與自動化 HTTPS。Vercel 負責建置與部署靜態網站，Cloudflare 則提供 DNS 解析、 DDoS 防護、邊緣快取與 SSL/TLS 加密。這種架構結合了 Vercel 的開發者體驗與 Cloudflare 的網路基礎設施，是現代靜態網站部署的推薦方案。</p>
+
+<p>整合兩者的主要優勢包括：減少 DNS 查詢延遲、啟用 Brotli 壓縮、利用 Cloudflare Page Rules 設定快取規則，以及透過 Always Online 功能確保網站可用性。以下章節將逐步說明具體配置方法。</p>
+
+<h2>第一步：Vercel 專案部署設定</h2>
+<p>在開始 Cloudflare 整合前，需先完成 Vercel 上的專案部署。登入 Vercel Dashboard，選擇「Add New...」並點擊「Project」，匯入你的 GitHub/GitLab/Bitbucket 儲存庫。Vercel 會自動偵測框架（如 Next.js、React、Gatsby 等）並給出建議的建置命令。</p>
+
+<p>確保你的專案設定正確，特別是 Build Output Directory（建置輸出目錄）。對於靜態網站，常見設定如下：</p>
+
+<pre><code>// vercel.json 範例
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "react",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}</code></pre>
+
+<p>部署完成後，Vercel 會提供一個類似 `your-project.vercel.app` 的網域。此時網站已可透過 Vercel 全球 CDN 存取，但我們將加入 Cloudflare 來進一步優化。</p>
+
+<h2>第二步：Cloudflare DNS 設定</h2>
+<p>登入 Cloudflare Dashboard，選擇「Add a site」並輸入你的網域。Cloudflare 會掃描現有 DNS 記錄並匯入。接下來需要設定正確的 DNS 記錄類型：</p>
+
+<ul>
+  <li><strong>A 記錄：</strong>指向 Vercel 的 IP 位址或 CNAME</li>
+  <li><strong>CNAME：</strong>指向你的 Vercel 網域（如 `cname.vercel-dns.com`）</li>
+  <li><strong>AAAA 記錄：</strong>若支援 IPv6，可設定對應的 IP 位址</li>
+</ul>
+
+<p>重要提醒：將 Proxy status 設為「Proxied」（橙色雲朵），如此 DNS 查詢會經過 Cloudflare 而非直接解析到源伺服器，這能啟用 Cloudflare 的所有優化功能。</p>
+
+<h2>第三步：快取與效能優化策略</h2>
+<p>Cloudflare 提供了強大的快取機制，可大幅提升靜態網站的載入速度。進入 Cloudflare Dashboard 的「Caching」設定頁面，進行以下配置：</p>
+
+<ol>
+  <li><strong>快取層級（Cache Level）：</strong>設定為「Cache Everything」，讓所有檔案都被快取</li>
+  <li><strong>瀏覽器快取時間（Browser Cache TTL）：</strong>建議設為「4 hours」或「1 day」</li>
+  <li><strong>邊緣快取時間（Edge Cache TTL）：</strong>靜態資源可設為「1 week」或更長</li>
+</ol>
+
+<p>針對特定檔案類型，可使用 Page Rules 進行進階設定。以下規則可確保 CSS、JS 與圖片獲得最優化的快取：</p>
+
+<pre><code>// Cloudflare Page Rules 範例
+URL: *yourdomain.com/*.css
+Cache Level: Cache Everything
+Edge Cache TTL: 1 week
+Browser Cache TTL: 1 day
+
+URL: *yourdomain.com/*.js
+Cache Level: Cache Everything
+Edge Cache TTL: 1 week
+Browser Cache TTL: 1 day
+
+URL: *yourdomain.com/*.png
+Cache Level: Cache Everything
+Edge Cache TTL: 1 month
+Browser Cache TTL: 1 week</code></pre>
+
+<p>此外，記得在「Speed」設定中啟用「Auto Minify」功能，可自動壓縮 JavaScript、CSS 與 HTML 檔案，進一步減少傳輸大小。</p>
+
+<h2>第四步：SSL/TLS 加密與資安設定</h2>
+<p>Cloudflare 提供免費的 SSL 憑證，並支援多種加密模式。建議將「SSL/TLS 加密模式」設為「Full (strict)」，確保用戶端與 Cloudflare、Cloudflare 與源伺服器之間都使用 HTTPS 加密連線。</p>
+
+<p>若要強制所有訪客使用 HTTPS，可在「Edge Certificates」中啟用「Always Use HTTPS」功能。另有以下推薦設定：</p>
+
+<ul>
+  <li><strong>HTTP Strict Transport Security (HSTS)：</strong>啟用並設為「Enable」</li>
+  <li><strong>Minimum TLS Version：</strong>設為「TLS 1.2」</li>
+  <li><strong>Automatic HTTPS Rewrites：</strong>啟用以避免混合內容問題</li>
+</ul>
+
+<p>針對 WordPress 或其他動態內容網站，可在「Firewall」設定中啟用「Bot Fight Mode」或「I’m Under Attack Mode」來防禦惡意流量。</p>
+
+<h2>第五步：進階功能與監控</h2>
+<p>完成基本設定後，可進一步利用 Cloudflare 的進階功能提升網站表現：</p>
+
+<p><strong>Cloudflare Images：</strong>若你的網站有大量圖片，可使用 Cloudflare Images 服務進行圖片優化與自動格式轉換（WebP、AVIF）。配合 Vercel 的圖片優化功能，形成雙重防護。</p>
+
+<p><strong>Workers：</strong>Cloudflare Workers 可在邊緣執行 JavaScript 程式碼，實現自定義的請求處理邏輯，例如 A/B 測試、地理定位內容或請求重寫。</p>
+
+<p><strong>Analytics：</strong>定期查看 Cloudflare Analytics 監控流量模式、快取命中率和潛在問題。良好的監控習慣有助於持續優化網站效能。</p>
+
+<p>透過以上五個步驟，你的 Vercel 部署網站將擁有全球快速存取、強化資安與高效能快取的完整配置。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Vercel 和 Cloudflare 哪個作為主要 CDN 比較好？</h3>
+            <p class="faq-a">兩者可同時使用。Vercel 內建 CDN 負責初始部署的全球分發，Cloudflare 则作為 DNS 與額外快取層，提供 DDoS 防護與進階資安功能。建議兩者結合使用以獲得最佳效益。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">使用 Cloudflare 是否會影響 Vercel 的即時部署功能？</h3>
+            <p class="faq-a">不會造成衝突。Vercel 部署新版本後，Cloudflare 的快取可能需要時間更新。可在 Vercel 設定中配置「Deploy Hooks」，或在 Cloudflare 後台手動清除快取以確保訪客看到最新內容。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何測試 Vercel + Cloudflare 的優化效果？</h3>
+            <p class="faq-a">可使用 GTmetrix、Pingdom 或 Google PageSpeed Insights 測試網站載入速度。同時在 Cloudflare Analytics 中查看快取命中率與流量報告，確認設定是否正確生效。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact"><strong>AI 學習寶庫</strong><br>GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a></address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

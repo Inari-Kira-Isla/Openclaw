@@ -54,7 +54,7 @@ memory_search({
 
 ### 2. 知識庫
 ```javascript
-// 查詢 Notion 或向量庫
+// 查詢本地資料庫（SQLite）或向量庫
 // 獲取相關技術文檔
 ```
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# [DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
+# 此配置模組不應再被新腳本引用。
 """
 Notion 共用配置模組 - 從 ~/.openclaw/.env 讀取 API Key
 所有 Notion 腳本 import 此模組即可

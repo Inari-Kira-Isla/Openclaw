@@ -1,0 +1,36 @@
+{
+  "errors": [
+    {
+      "id": "err_1772556016602",
+      "timestamp": "2026-03-03T16:40:16.602Z",
+      "type": "validation",
+      "message": "Test error message",
+      "severity": "high"
+    }
+  ],
+  "performance": [
+    {
+      "id": "perf_1772556016746",
+      "timestamp": "2026-03-03T16:40:16.746Z",
+      "metric": "response_time",
+      "value": 250,
+      "agent": "kira"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "fb_1772556016882",
+      "timestamp": "2026-03-03T16:40:16.882Z",
+      "type": "bug",
+      "message": "Test feedback",
+      "sentiment": "negative"
+    }
+  ],
+  "skills": [],
+  "prompts": [],
+  "metadata": {
+    "created": "2026-03-03T16:40:16.599Z",
+    "updated": "2026-03-03T16:40:16.883Z",
+    "version": "1.0.0"
+  }
+}

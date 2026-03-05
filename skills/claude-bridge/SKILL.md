@@ -26,6 +26,6 @@ When the user invokes `/claude <task>`, route the task to Claude Code via ACP.
 
 - `/claude analyze the memory files in ~/.openclaw/memory/`
 - `/claude review the code in ~/openclaw-brain`
-- `/claude write a Python script to backup Notion databases`
+- `/claude write a Python script to backup SQLite databases`
 - `/claude search the web for latest AI agent frameworks`
 - `/claude check system status and summarize`

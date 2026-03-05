@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
 Notion Sync Script v1.5 - 修復重複頁面問題
 - 檢查頁面是否已存在
 - 更新現有頁面而非建立新頁面

@@ -1,3 +1,7 @@
+"""
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
+修補所有 Notion 頁面的空欄位
+"""
 import os
 
 # Load .env
@@ -9,9 +13,6 @@ if os.path.exists(_env_file):
             _k, _v = _l.split("=", 1)
             os.environ.setdefault(_k.strip(), _v.strip())
 #!/usr/bin/env python3
-"""
-修補所有 Notion 頁面的空欄位
-"""
 
 import requests
 

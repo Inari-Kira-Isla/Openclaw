@@ -1,87 +1,105 @@
 {
   "date": "2026-03-03",
-  "hour": "10:00",
-  "sources": ["Hacker News"],
+  "hour": "22:00",
+  "sources": ["Hacker News", "YouTube"],
   "trends": [
     {
       "topic": "Meta AI Smart Glasses Privacy",
-      "title": "Workers behind Meta's smart glasses can see everything",
-      "description": "Data privacy concerns raised by workers who have access to footage from Meta's AI-powered smart glasses",
+      "title": "Meta's AI smart glasses and data privacy concerns - workers say we see everything",
+      "description": "Workers behind Meta's smart glasses can see everything - massive privacy concerns raised about AI-powered smart glasses data access",
       "source": "Hacker News",
-      "votes": 616,
+      "votes": 1226,
       "search_potential": "high",
-      "angles": ["隱私疑慮", "AI 設備監控", "數據安全", "智能穿戴裝置"]
+      "angles": ["Meta 隱私", "智能眼鏡數據", "AI 設備監控", "穿戴裝置風險"]
     },
     {
-      "topic": "Low Latency Voice Agent",
-      "title": "Sub-500ms latency voice agent built from scratch",
-      "description": "A developer built a voice agent with less than 500ms latency, showing real-time AI voice interaction is achievable",
+      "topic": "Ars Technica AI Controversy",
+      "title": "Ars Technica fires reporter after AI controversy involving fabricated quotes",
+      "description": "Media outlet fires reporter over AI-generated fabricated quotes - journalism ethics in AI age",
       "source": "Hacker News",
-      "votes": 187,
+      "votes": 437,
       "search_potential": "high",
-      "angles": ["即時語音 AI", "延遲優化", "Voice AI 技術", "LLM 即時回應"]
+      "angles": ["AI 新聞倫理", "AI 造假", "媒體責任", "生成式 AI 風險"]
     },
     {
-      "topic": "M4 Neural Engine Reverse Engineering",
-      "title": "Inside the M4 Apple Neural Engine - Part 1",
-      "description": "Deep dive into Apple's M4 neural engine architecture through reverse engineering",
+      "topic": "Sub-500ms Voice Agent",
+      "title": "I built a sub-500ms latency voice agent from scratch",
+      "description": "Developer builds voice agent with less than 500ms latency - real-time AI voice interaction breakthrough",
       "source": "Hacker News",
-      "votes": 275,
-      "search_potential": "medium",
-      "angles": ["Apple M4", "Neural Engine", "AI 晶片", "硬體優化"]
-    },
-    {
-      "topic": "Motorola GrapheneOS Partnership",
-      "title": "Motorola announces partnership with GrapheneOS",
-      "description": "Motorola partners with GrapheneOS for secure B2B solutions - huge win for privacy-focused mobile OS",
-      "source": "Hacker News",
-      "votes": 2079,
+      "votes": 489,
       "search_potential": "high",
-      "angles": ["GrapheneOS", "手機安全", "隱私手機", "企業資安"]
+      "angles": ["即時語音 AI", "低延遲語音", "Voice AI 優化", "LLM 即時回應"]
     },
     {
-      "topic": "iPhone 17e Launch",
-      "title": "Apple introduces iPhone 17e",
-      "description": "Apple's latest budget iPhone model announcement",
+      "topic": "Apple MacBook Pro M5",
+      "title": "Apple Introduces MacBook Pro with All-New M5 Pro and M5 Max",
+      "description": "Apple announces new MacBook Pro with M5 Pro/M5 Max chips",
       "source": "Hacker News",
-      "votes": 202,
+      "votes": 119,
       "search_potential": "medium",
-      "angles": ["iPhone 17e", "Apple 新機", "預算 iPhone"]
+      "angles": ["Apple M5", "MacBook Pro 2026", "AI 晶片", "筆電效能"]
     },
     {
-      "topic": "New iPad Air M4",
-      "title": "New iPad Air powered by M4",
-      "description": "Apple launches new iPad Air with M4 chip",
+      "topic": "AI Art Copyright",
+      "title": "AI-generated art can't be copyrighted (Supreme Court declines review)",
+      "description": "Supreme Court declines to review - AI-generated art officially cannot be copyrighted",
       "source": "Hacker News",
-      "votes": 332,
+      "votes": 0,
+      "search_potential": "high",
+      "angles": ["AI 版權", "生成式 AI 法律", "智慧財產權", "創作定義"]
+    },
+    {
+      "topic": "Arm Cortex X925 Desktop Performance",
+      "title": "Arm's Cortex X925: Reaching Desktop Performance",
+      "description": "Arm's new Cortex X925 processor reaches desktop-level performance benchmarks",
+      "source": "Hacker News",
+      "votes": 167,
       "search_potential": "medium",
-      "angles": ["iPad Air M4", "Apple M4", "平板 AI"]
+      "angles": ["Arm X925", "桌機效能", "CPU 發展", "AI 晶片"]
     },
     {
-      "topic": "Build Your Own Quantum Computer",
-      "title": "How to Build Your Own Quantum Computer",
-      "description": "Guide to building quantum computing hardware",
+      "topic": "India Court AI Fake Orders",
+      "title": "India's top court angry after junior judge cites fake AI-generated orders",
+      "description": "Indian Supreme Court addresses AI-generated fake legal orders - government AI concerns",
       "source": "Hacker News",
-      "votes": 35,
+      "votes": 147,
+      "search_potential": "high",
+      "angles": ["AI 造假文件", "司法 AI", "印度 AI 監管", "法律科技"]
+    },
+    {
+      "topic": "Tech Media Google Traffic Loss",
+      "title": "The Internet's Top Tech Publications Lost 58% of Their Google Traffic Since 2024",
+      "description": "Major tech publications see massive traffic decline from Google - SEO crisis",
+      "source": "Hacker News",
+      "votes": 31,
       "search_potential": "medium",
-      "angles": ["量子計算", "DIY 量子電腦", "硬體製作"]
+      "angles": ["媒體危機", "SEO 衰退", "Google 流量", "數位媒體"]
     },
     {
-      "topic": "Programmable Cryptography",
-      "title": "Programmable Cryptography",
-      "description": "Advances in programmable cryptographic systems",
+      "topic": "Privacy-preserving Age Verification",
+      "title": "Privacy-preserving age and identity verification via anonymous credentials",
+      "description": "New cryptographic approach to age verification without revealing identity",
       "source": "Hacker News",
-      "votes": 46,
-      "search_potential": "low",
-      "angles": ["加密技術", "零知識證明"]
+      "votes": 62,
+      "search_potential": "medium",
+      "angles": ["匿名驗證", "零知識證明", "隱私保護", "年齡驗證"]
+    },
+    {
+      "topic": "Launch HN: Cekura Voice AI Testing",
+      "title": "Launch HN: Cekura (YC F24) – Testing and monitoring for voice and chat AI agents",
+      "description": "YC-backed startup launches AI testing/monitoring platform for voice and chat agents",
+      "source": "Hacker News",
+      "votes": 6,
+      "search_potential": "medium",
+      "angles": ["AI 測試", "Voice AI 監控", "YC Startup", "AI QA"]
     }
   ],
   "top_5_picks": [
-    "Meta AI Smart Glasses Privacy - 隱私/AI設備熱門議題",
-    "Motorola GrapheneOS Partnership - 安全手機突破",
-    "Low Latency Voice Agent - 即時語音AI技術",
-    "M4 Neural Engine - Apple AI硬體深度解析",
-    "iPhone 17e - Apple新品發布"
+    "Meta AI Smart Glasses Privacy - 智能穿戴隱私熱門議題🔥",
+    "Ars Technica AI 造假爭議 - 新聞媒體 AI 倫理",
+    "Sub-500ms Voice Agent - 即時語音 AI 技術突破",
+    "AI Art Copyright - 最高法院 AI 創作無法著作權",
+    "India Court AI Fake Orders - AI 造假法律文件"
   ],
-  "generated_at": "2026-03-03T10:53:00+08:00"
+  "generated_at": "2026-03-03T22:41:00+08:00"
 }

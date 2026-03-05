@@ -21,8 +21,24 @@ if os.path.exists(_env_file):
             os.environ.setdefault(_k.strip(), _v.strip())
 
 CONTENT_QUEUE_DIR = os.path.expanduser("~/.openclaw/workspace/content_queue")
-NOTION_DAILY_DB   = os.environ.get("NOTION_DB_DAILY", "30aa1238-f49d-8136-a813-fb759eb30e47")
-NOTION_KEY        = os.environ.get("NOTION_API_KEY", "")
+TG_CHAT_ID = "8399476482"
+
+
+def notify_telegram(msg: str):
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["/usr/local/bin/openclaw", "message", "send",
+             "--channel", "telegram", "--account", "kira",
+             "--target", TG_CHAT_ID, "--message", msg],
+            capture_output=True, text=True, timeout=20
+        )
+        if result.returncode == 0:
+            print(f"[telegram] ✅ 通知已發送")
+        else:
+            print(f"[telegram] ❌ 發送失敗 (exit {result.returncode}): {result.stderr.strip()}")
+    except Exception as e:
+        print(f"[telegram] ❌ 例外: {e}")
 
 
 def _get_hot_topics(brand_id, days=1):
@@ -39,37 +55,6 @@ def _get_hot_topics(brand_id, days=1):
     """, (brand_id,)).fetchall()
     conn.close()
     return [r[0] for r in rows if r[0] not in ("一般詢問", "unknown")]
-
-
-def _push_to_notion(title, content, brand_name, content_type):
-    """推送到 Notion DAILY 索引目錄"""
-    if not NOTION_KEY or NOTION_KEY == "REPLACE_WITH_NEW_KEY":
-        return False
-    import requests
-    headers = {
-        "Authorization":  f"Bearer {NOTION_KEY}",
-        "Notion-Version": "2022-06-28",
-        "Content-Type":   "application/json",
-    }
-    # Split content into Notion blocks (max 1900 chars each)
-    blocks = []
-    for chunk in [content[i:i+1900] for i in range(0, len(content), 1900)][:50]:
-        blocks.append({"paragraph": {"rich_text": [{"text": {"content": chunk}}]}})
-
-    payload = {
-        "parent":     {"database_id": NOTION_DAILY_DB},
-        "properties": {
-            "標題": {"title": [{"text": {"content": title}}]},
-            "類型": {"select": {"name": "品牌文案"}},
-            "標籤": {"multi_select": [{"name": brand_name}, {"name": content_type}]},
-            "建立日期": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
-            "狀態": {"select": {"name": "待發布"}},
-        },
-        "children": blocks,
-    }
-    resp = requests.post("https://api.notion.com/v1/pages",
-                         json=payload, headers=headers, timeout=20)
-    return resp.ok
 
 
 def _save_to_queue(brand_id, content_type, data):
@@ -102,19 +87,7 @@ def generate_for_brand(brand):
                                          topic=topic, hot_topics=hot_topics)
         results[ctype] = content
 
-        if content.get("short") or content.get("long"):
-            # Push to Notion
-            full_text = "\n\n".join(filter(None, [
-                f"【短文】\n{content.get('short','')}",
-                f"【長文】\n{content.get('long','')}",
-                f"【圖說】\n{content.get('caption','')}",
-            ]))
-            today = datetime.now().strftime("%Y-%m-%d")
-            title = f"{today} {brand_name} {ctype} 文案"
-            pushed = _push_to_notion(title, full_text, brand_name, ctype)
-            print(f"  Notion push: {'✅' if pushed else '⚠️ (key not set)'}")
-
-        # Always save locally
+        # Save locally
         _save_to_queue(brand_id, ctype, {
             "brand_id":   brand_id,
             "brand_name": brand_name,
@@ -141,6 +114,21 @@ def run():
             print(f"  [ERROR] {brand.get('brand_id')}: {e}")
 
     print(f"\n[cs_content_generator] Done. Content saved to: {CONTENT_QUEUE_DIR}")
+
+    # Telegram 通知
+    summaries = []
+    for brand in brands:
+        bid = brand.get("brand_id", "?")
+        bname = brand.get("brand_name", bid)
+        summaries.append(f"  · {bname}")
+    if summaries:
+        notify_telegram(
+            f"📝 CS 每日文案已生成\n"
+            f"🏢 {len(brands)} 個品牌\n\n"
+            + "\n".join(summaries[:6])
+            + (f"\n  ...及其他 {len(summaries) - 6} 個" if len(summaries) > 6 else "")
+            + f"\n\n📂 已存入 content_queue/ 待審核"
+        )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,95 @@
+{
+  "date": "2026-03-04",
+  "collected_at": "2026-03-04T23:26:00+08:00",
+  "sources": ["Hacker News"],
+  "topics": [
+    {
+      "id": 1,
+      "title": "Qwen3.5 Fine-Tuning Guide – Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "source": "Hacker News",
+      "points": 61,
+      "category": "AI/LLM",
+      "search_potential": "high",
+      "reason": "Qwen3.5 is a popular open-source LLM, fine-tuning guides have strong demand"
+    },
+    {
+      "id": 2,
+      "title": "Agentic Engineering Patterns",
+      "url": "https://simonwillison.net/guides/agentic-engineering-patterns/",
+      "source": "Hacker News",
+      "points": 318,
+      "category": "AI/Agents",
+      "search_potential": "high",
+      "reason": "Agentic AI is the hottest trend, patterns/d Engineering are highly searchable"
+    },
+    {
+      "id": 3,
+      "title": "Claude's Cycles - Donald Knuth's Paper on Claude AI",
+      "url": "https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf",
+      "source": "Hacker News",
+      "points": 707,
+      "category": "AI/LLM",
+      "search_potential": "very_high",
+      "reason": "Knuth + Claude = viral, extremely high search potential"
+    },
+    {
+      "id": 4,
+      "title": "A CPU that runs entirely on GPU",
+      "url": "https://github.com/robertcprice/nCPU",
+      "source": "Hacker News",
+      "points": 166,
+      "category": "Hardware/Computing",
+      "search_potential": "medium",
+      "reason": "Interesting technical concept, niche but engaging"
+    },
+    {
+      "id": 5,
+      "title": "Apple MacBook Neo Announcement",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "source": "Hacker News",
+      "points": 258,
+      "category": "Hardware",
+      "search_potential": "high",
+      "reason": "Apple product launch, strong consumer interest"
+    },
+    {
+      "id": 6,
+      "title": "Glaze by Raycast - New Mac App",
+      "url": "https://www.glazeapp.com/",
+      "source": "Hacker News",
+      "points": 84,
+      "category": "Mac/Tools",
+      "search_potential": "medium",
+      "reason": "Raycast ecosystem, developer/productivity tool"
+    },
+    {
+      "id": 7,
+      "title": "Better JIT for Postgres",
+      "url": "https://github.com/vladich/pg_jitter",
+      "source": "Hacker News",
+      "points": 111,
+      "category": "Database/Performance",
+      "search_potential": "medium",
+      "reason": "Postgres optimization, technical audience"
+    },
+    {
+      "id": 8,
+      "title": "Nobody Gets Promoted for Simplicity",
+      "url": "https://terriblesoftware.org/2026/03/03/nobody-gets-promoted-for-simplicity/",
+      "source": "Hacker News",
+      "points": 309,
+      "category": "Software Engineering",
+      "search_potential": "high",
+      "reason": "Relatable career/engineering topic, high engagement"
+    }
+  ],
+  "summary": "AI dominates with Claude's Cycles (707 pts), Agentic Engineering Patterns (318 pts), and Qwen3.5 fine-tuning. Hardware also trending (MacBook Neo).",
+  "top_5_for_content": [
+    "Claude's Cycles - Donald Knuth's Paper on Claude AI",
+    "Agentic Engineering Patterns - Simon Willison's Guide",
+    "Qwen3.5 Fine-Tuning with Unsloth",
+    "Nobody Gets Promoted for Simplicity",
+    "Apple MacBook Neo Announcement"
+  ]
+}

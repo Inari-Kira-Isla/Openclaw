@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-03-05T15:05:00+08:00",
+  "task": "training_collection",
+  "type": "simple_repetitive_task",
+  "task_type": "resource_monitoring",
+  "description": "Resource auto-adjustment and memory monitoring - check system resources and log",
+  "commands_used": [
+    "top -l 1 -n 0 | head -20",
+    "curl -s -o /dev/null -w '%{http_code}' http://localhost:18789/",
+    "ps aux | sort -rnk6 | head -15"
+  ],
+  "pattern": "cron_reminder -> resource_check -> memory_check -> log_performance -> complete",
+  "success": true,
+  "data_points": {
+    "system_check": {
+      "gateway_http": 200,
+      "memory_used_mb": 8168,
+      "memory_total_mb": 8192,
+      "memory_percent": 99.7,
+      "cpu_user": 9.6,
+      "cpu_sys": 15.8,
+      "load_avg": "3.03, 2.95, 2.91"
+    },
+    "resource_adjustment_needed": false,
+    "session_count": 1,
+    "status": "stable"
+  }
+}

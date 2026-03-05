@@ -1,0 +1,37 @@
+{
+  "date": "2026-03-04",
+  "time": "01:10",
+  "task_type": "simple_repetitive_task",
+  "task_name": "記憶變更監控",
+  "description": "定時掃描記憶目錄，記錄檔案變更",
+  "pattern": "每小時/定時執行，檢查記憶體變更並記錄",
+  "execution_steps": [
+    {
+      "step": 1,
+      "action": "exec: ls -lt memory/",
+      "purpose": "列出最近記憶檔案"
+    },
+    {
+      "step": 2,
+      "action": "filter: 識別10分鐘內變更的檔案",
+      "purpose": "找出新檔案"
+    },
+    {
+      "step": 3,
+      "action": "categorize: 依類型分組(health/error/learning/memory)",
+      "purpose": "理解變更性質"
+    },
+    {
+      "step": 4,
+      "action": "write: 記錄到training-data/",
+      "purpose": "建立訓練數據"
+    }
+  ],
+  "frequency": "hourly",
+  "automated": true,
+  "input": "memory/目錄的ls輸出",
+  "output": "training_data_collection.json",
+  "success_criteria": "正確識別並分類所有最近變更",
+  "training_example": true,
+  "category": "system_maintenance"
+}

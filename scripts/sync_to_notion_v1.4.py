@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
 Notion Sync v1.4 - 支援向量欄位自動填充
 """
 

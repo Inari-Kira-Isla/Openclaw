@@ -204,8 +204,9 @@ def handle_message(payload):
         )
         _send_telegram(escalate_to, tg_msg)
 
-    # 8. Update conversation record with reply
-    update_reply(conv_id, reply, source)
+    # 8. Update conversation record with reply, confidence, response time
+    ms = int((time.time() - t0) * 1000)
+    update_reply(conv_id, reply, source, confidence, ms)
 
     # 9. Simple sentiment update (positive words → +, negative → -)
     sentiment = 0.0
@@ -218,7 +219,6 @@ def handle_message(payload):
     if sentiment:
         update_sentiment(customer_id, sentiment)
 
-    ms = int((time.time() - t0) * 1000)
     log.info(f"[{brand_id}] {sender_id} → {source} reply in {ms}ms (conf={confidence:.2f})")
 
     return {

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenAI Assistants API 完整教學：打造有記憶的 AI 助理 | AI 學習寶庫</title>
+  <meta name="description" content="探索 OpenAI Assistants API 的完整教學，掌握如何打造具有持久記憶的 AI 助理。本指南涵蓋 Assistant 創建、Thread 對話管理、Function Calling 擴充功能，以及上下文記憶的實現方法，讓你快速構建智能對話系統。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="OpenAI Assistants API 完整教學：打造有記憶的 AI 助理">
+  <meta property="og:description" content="探索 OpenAI Assistants API 的完整教學，掌握如何打造具有持久記憶的 AI 助理。本指南涵蓋 Assistant 創建、Thread 對話管理、Function Calling 擴充功能，以及上下文記憶的實現方法，讓你快速構建智能對話系統。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenAI Assistants API 完整教學：打造有記憶的 AI 助理", "description": "探索 OpenAI Assistants API 的完整教學，掌握如何打造具有持久記憶的 AI 助理。本指南涵蓋 Assistant 創建、Thread 對話管理、Function Calling 擴充功能，以及上下文記憶的實現方法，讓你快速構建智能對話系統。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Assistants API 如何實現對話記憶？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "透過 Thread 機制，每次對話的訊息都會自動儲存在對應的 Thread 中。開發者無需手動管理歷史記錄，Assistant 會自動讀取 Thread 內的所有訊息來產生回覆，實現真正的上下文記憶。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Assistants API 的費用如何計算？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Assistants API 採用 Token 計費模式，收費與一般 GPT-4 API 相同。輸入和輸出 Token 分開計費，另外 Function Calling 執行也會產生費用。詳細費率可參考 OpenAI 官方定價頁面。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Assistants API 適合哪些應用場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合需要多輪對話、上下文記憶的應用，如客服機器人、個人助理、教育輔導、程式開發助手等。如果你只需要簡單的單次問答，一般的 Chat Completions API 就能滿足需求。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>OpenAI Assistants API 完整教學：打造有...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">OpenAI Assistants API 完整教學：打造有記憶的 AI 助理</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p><strong>OpenAI Assistants API</strong> 是一個強大的框架，讓開發者能夠建立具有「記憶能力」的 AI 助理。透過 Thread（執行緒）與 Run（運行）的設計，Assistant 能夠在多輪對話中維持上下文，解決傳統 API 每次請求需重複傳遞歷史訊息的痛點。本教學將帶你從零開始，完整掌握 Assistant 創建、對話管理、Function Calling 擴充等核心技術。</p>
+
+<h2>什麼是 OpenAI Assistants API？</h2>
+<p>傳統的 ChatGPT API 每次請求都需要傳遞完整的對話歷史，當對話越來越長時，不僅浪費 Token，也增加開發者的處理負擔。Assistants API 的核心創新在於<strong>自動化的對話狀態管理</strong>，讓 AI 助理能夠「記住」之前的對話內容。</p>
+<p>Assistants API 包含三個核心概念：</p>
+<ul>
+<li><strong>Assistant</strong>：具有特定指令和能力的 AI 實體，相當於機器人的「大腦」</li>
+<li><strong>Thread</strong>：代表一個對話執行緒，自動保存所有訊息歷史</li>
+<li><strong>Run</strong>：觸發 Assistant 處理 Thread 中訊息的執行過程</li>
+</ul>
+
+<h2>建立第一個 Assistant</h2>
+<p>首先，你需要在 OpenAI 平台上取得 API Key，然後使用 Python 或 Node.js 來創建 Assistant。以下是使用 Python 的基本程式碼：</p>
+<pre><code>from openai import OpenAI
+
+client = OpenAI(api_key="your-api-key")
+
+assistant = client.beta.assistants.create(
+    name="我的助理",
+    instructions="你是一個專業的技術顧問，擅長解答程式開發問題。",
+    model="gpt-4-turbo",
+    tools=[{"type": "code_interpreter"}]
+)
+
+print(f"Assistant ID: {assistant.id}")</code></pre>
+<p>建立完成後，系統會回傳一個唯一的 Assistant ID 後續使用。這裡的 <code>instructions</code> 參數類似於 System Prompt，定義了助理的行為模式和專業領域。</p>
+
+<h2>Thread 與 Run：實現對話記憶</h2>
+<p>Thread 是 Assistants API 實現「記憶」的關鍵。每個 Thread 就像一個獨立的對話空間，自動儲存所有使用者訊息和 Assistant 回覆。你不需要手動管理對話歷史，OpenAI 會自動幫你處理。</p>
+<p>建立 Thread 的方式非常簡單：</p>
+<pre><code># 建立 Thread
+thread = client.beta.threads.create()
+print(f"Thread ID: {thread.id}")
+
+# 傳送訊息到 Thread
+message = client.beta.threads.messages.create(
+    thread_id=thread.id,
+    role="user",
+    content="請幫我解釋什麼是 Python 的裝飾器？"
+)
+
+# 執行 Assistant
+run = client.beta.threads.runs.create(
+    thread_id=thread.id,
+    assistant_id=assistant.id
+)</code></pre>
+<p>執行完成後，你可以透過 <code>client.beta.threads.messages.list</code> 來取得完整的對話歷史。這種設計讓多輪對話變得極為簡單。</p>
+
+<h2>Function Calling：擴展 AI 能力</h2>
+<p>Function Calling 是 Assistants API 最強大的功能之一，讓 AI 能夠呼叫外部工具和 API。你可以定義自訂函數，讓 Assistant 根據使用者的需求執行特定操作，例如查詢天氣、搜尋資料庫、或發送通知。</p>
+<p>以下是如何定義 Function 的範例：</p>
+<pre><code>assistant = client.beta.assistants.create(
+    name="天氣助理",
+    instructions="你可以查詢天氣資訊，請使用提供的工具來獲取數據。",
+    model="gpt-4-turbo",
+    tools=[
+        {
+            "type": "function",
+            "function": {
+                "name": "get_weather",
+                "description": "取得指定城市的天氣資訊",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "city": {"type": "string", "description": "城市名稱"}
+                    },
+                    "required": ["city"]
+                }
+            }
+        }
+    ]
+)</code></pre>
+<p>當 Assistant 判斷需要查詢天氣時，會自動呼叫 <code>get_weather</code> 函數，並將結果整合到回覆中。</p>
+
+<h2>實作應用：打造企業客服助理</h2>
+<p>結合上述功能，你可以建立一個完整的企業客服助理。這個助理可以：</p>
+<ol>
+<li>透過 Thread 維護客戶對話記錄，實現跨會話的持久記憶</li>
+<li>使用 Function Calling 查詢訂單狀態、庫存資訊</li>
+<li>整合內部知識庫，提供準確的產品資訊</li>
+</ol>
+<p>關鍵在於設計清晰的指令（Instructions）和適當的工具（Tools）。良好的設計能讓助理在自動化的同時，保持回覆的準確性和專業度。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Assistants API 如何實現對話記憶？</h3>
+            <p class="faq-a">透過 Thread 機制，每次對話的訊息都會自動儲存在對應的 Thread 中。開發者無需手動管理歷史記錄，Assistant 會自動讀取 Thread 內的所有訊息來產生回覆，實現真正的上下文記憶。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Assistants API 的費用如何計算？</h3>
+            <p class="faq-a">Assistants API 採用 Token 計費模式，收費與一般 GPT-4 API 相同。輸入和輸出 Token 分開計費，另外 Function Calling 執行也會產生費用。詳細費率可參考 OpenAI 官方定價頁面。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Assistants API 適合哪些應用場景？</h3>
+            <p class="faq-a">適合需要多輪對話、上下文記憶的應用，如客服機器人、個人助理、教育輔導、程式開發助手等。如果你只需要簡單的單次問答，一般的 Chat Completions API 就能滿足需求。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact"><strong>AI 學習寶庫</strong><br>GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a></address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

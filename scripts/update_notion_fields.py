@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+[DEPRECATED 2026-03-04] 已被 SQLite 本地方案取代，不再使用 Notion API。
 更新現有 Notion 頁面的向量欄位
 """
 

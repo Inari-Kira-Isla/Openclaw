@@ -40,7 +40,7 @@ description: FAQ 常見問題管理。當需要新增、編輯、分類或審核
 ### 新增 FAQ
 1. 確認問題、答案、分類、關鍵字
 2. 檢查是否與現有 FAQ 重複或高度相似
-3. 以「草稿」狀態寫入 Notion
+3. 以「草稿」狀態寫入本地資料庫（SQLite）
 4. 提示進行審核發布
 
 ### 編輯 FAQ
@@ -62,7 +62,7 @@ description: FAQ 常見問題管理。當需要新增、編輯、分類或審核
 
 ## 工具指引
 
-- **Notion API**：FAQ 資料庫 CRUD（主要工具）
+- **本地資料庫（SQLite）**：FAQ 資料庫 CRUD（主要工具）
 - **faq_auto_reply**：FAQ 的消費端
 - **qa_learning**：新 FAQ 候選來源
 

@@ -1,0 +1,34 @@
+{
+  "date": "2026-03-05",
+  "task_type": "resource_optimization",
+  "description": "資源自動調整任務執行",
+  "input": {
+    "scheduled_trigger": "資源自動調整：1.根據效能數據 2.自動調整資源分配 3.優化Agent優先級 4.記錄調整記錄",
+    "system_metrics": {
+      "cpu_user": "10.62%",
+      "cpu_sys": "15.81%",
+      "memory_used": "7800M",
+      "memory_total": "8192M",
+      "memory_percent": "95%",
+      "load_average": "3.17, 2.67, 2.60",
+      "disk_available": "89GB",
+      "gateway_status": "200 OK",
+      "active_sessions": 1
+    }
+  },
+  "output": {
+    "status": "正常運行",
+    "actions_taken": [
+      "效能數據分析完成",
+      "Memory 95% 持續監控",
+      "Gateway 正常運行",
+      "記錄已保存"
+    ],
+    "files_created": [
+      "resource-adjustment-20260305.md"
+    ]
+  },
+  "outcome": "系統正常運行，Memory 使用率高但不影響效能",
+  "complexity": "simple",
+  "repeatable": true
+}

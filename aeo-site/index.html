@@ -1,89 +1,174 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Hub - AI 學習寶庫</title>
-<meta name="description" content="AI 友善網站 - 提供 AI API、Prompt 一鍵複製、對話記錄分析">
-<meta name="keywords" content="AI, ChatGPT, Claude, API, Prompt, 提示詞">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#2563eb;--green:#10b981;--yellow:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;--bg:#f8fafc;--text:#1e293b}
-body{font-family:-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-.container{max-width:1000px;margin:0 auto;padding:2rem}
-h1{font-size:2.5rem;color:var(--primary);margin-bottom:0.5rem}
-.subtitle{color:#64748b;margin-bottom:2rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s;text-decoration:none;color:inherit;display:block}
-.card:hover{transform:translateY(-4px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
-.card-icon{font-size:2.5rem;margin-bottom:0.5rem}
-.card h2{font-size:1.25rem;margin-bottom:0.5rem}
-.card p{color:#64748b;font-size:0.9rem}
-.tag{display:inline-block;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.8rem;font-weight:600}
-.tag-green{background:#d1fae5;color:#065f46}
-.tag-yellow{background:#fef3c7;color:#92400e}
-.tag-blue{background:#dbeafe;color:#1e40af}
-.tag-purple{background:#ede9fe;color:#5b21b6}
-section{margin-top:3rem}
-section h2{color:var(--primary);margin-bottom:1rem}
-footer{text-align:center;margin-top:3rem;color:#64748b;font-size:0.9rem}
-footer a{color:var(--primary);text-decoration:none}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 學習寶庫 — 提示詞、系統配置、自動化工作流</title>
+  <meta name="description" content="每日分享 AI 提示詞、系統配置、自動化工作流 — 從入門到進階的完整 AI 學習指南。包含 Claude、ChatGPT、Ollama 等工具的實用技巧。">
+  <meta name="keywords" content="AI, ChatGPT, Claude, Prompt, 提示詞, OpenAI, Ollama, 自動化, OpenClaw, MCP">
+  <meta name="author" content="AI Governance System">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI 學習寶庫 — 提示詞、系統配置、自動化工作流">
+  <meta property="og:description" content="每日分享 AI 提示詞、系統配置、自動化工作流。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AI 學習寶庫","description":"每日分享 AI 提示詞、系統配置、自動化工作流，從入門到進階的完整指南","url":"https://inari-kira-isla.github.io/Openclaw"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
 </head>
-<body>
-<div class="container">
-<header>
-<h1>🤖 AI Hub</h1>
-<p class="subtitle">AI 友善網站 - API・Prompt・足跡</p>
-</header>
+<body class="page-wrap">
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
 
-<main class="grid">
-<a href="/ai-hub/api.html" class="card">
-<div class="card-icon">🟢</div>
-<h2>AI API</h2>
-<p>OpenAI / Claude / Gemini API 整合，一鍵複製調用</p>
-<span class="tag tag-green">API</span>
-</a>
+  <main>
+    <div class="hero">
+      <div class="hero-badge">每日更新 · AI 實戰知識庫</div>
+      <h1>掌握 AI，<br>從這裡開始</h1>
+      <p class="hero-sub">提示詞範本、系統配置指南、自動化工作流——涵蓋 Claude、ChatGPT、Ollama 等工具的實用技巧</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">知識分類</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">20+</div><div class="hero-stat-label">深度文章</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">每日</div><div class="hero-stat-label">持續更新</div></div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="container">
+      <div class="section">
+        <div class="section-head"><div class="section-title">📂 知識分類</div></div>
+        <div class="cat-grid">
+          <a href="/Openclaw/prompts/" class="cat-card reveal reveal-d1">
+            <div class="cat-icon">💡</div><h3>提示詞</h3>
+            <p>專業 AI 提示詞範本與設計技巧，讓 AI 充分發揮潛力</p>
+            <div class="cat-count">2+ 篇文章</div>
+          </a>
+          <a href="/Openclaw/configs/" class="cat-card reveal reveal-d2">
+            <div class="cat-icon">⚙️</div><h3>系統配置</h3>
+            <p>AI 工具與系統的完整配置指南，輕鬆搭建最佳開發環境</p>
+            <div class="cat-count">持續更新</div>
+          </a>
+          <a href="/Openclaw/tutorials/" class="cat-card reveal reveal-d3">
+            <div class="cat-icon">📚</div><h3>教學課程</h3>
+            <p>從基礎到進階的詳細教學，逐步掌握 AI 開發技能</p>
+            <div class="cat-count">3+ 篇文章</div>
+          </a>
+          <a href="/Openclaw/workflows/" class="cat-card reveal reveal-d4">
+            <div class="cat-icon">🔄</div><h3>工作流</h3>
+            <p>自動化流程與實際應用案例，大幅提升工作效率</p>
+            <div class="cat-count">持續更新</div>
+          </a>
+          <a href="/Openclaw/articles/" class="cat-card reveal">
+            <div class="cat-icon">📰</div><h3>科技趨勢</h3>
+            <p>最新 AI 科技資訊與深度分析報導，掌握行業脈動</p>
+            <div class="cat-count">5+ 篇文章</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="container">
+      <div class="section">
+        <div class="section-head">
+          <div class="section-title">📝 最新文章</div>
+          <a href="/Openclaw/articles/" class="see-all">查看全部 →</a>
+        </div>
+        <div class="article-grid">
+          <div class="article-card reveal reveal-d1">
+            <div class="article-cat-badge">💡 提示詞</div>
+            <h3><a href="/Openclaw/prompts/2026-03-02_ai-prompt-design-guide.html">AI 提示詞設計完全指南：從基礎到進階的完整教學</a></h3>
+            <p class="excerpt">系統性介紹 AI 提示詞設計原則，涵蓋角色設定、上下文注入、輸出格式控制等核心技巧</p>
+            <div class="article-meta"><span>2026-03-02</span><span class="sep">·</span><span>10 分鐘閱讀</span></div>
+          </div>
+          <div class="article-card reveal reveal-d2">
+            <div class="article-cat-badge">💡 提示詞</div>
+            <h3><a href="/Openclaw/prompts/2026-03-02_結構化提示詞設計完全指南.html">結構化提示詞設計完全指南</a></h3>
+            <p class="excerpt">深入探討結構化提示詞的設計方法，讓 AI 輸出更精確、更符合業務需求</p>
+            <div class="article-meta"><span>2026-03-02</span><span class="sep">·</span><span>8 分鐘閱讀</span></div>
+          </div>
+          <div class="article-card reveal reveal-d3">
+            <div class="article-cat-badge">📚 教學</div>
+            <h3><a href="/Openclaw/tutorials/2026-ai-trends.html">2026 年 AI 趨勢：工作方式的根本轉變</a></h3>
+            <p class="excerpt">分析 2026 年 AI 發展的關鍵趨勢，探討 AI Agent、多模態模型對工作效率的深遠影響</p>
+            <div class="article-meta"><span>2026-03-01</span><span class="sep">·</span><span>12 分鐘閱讀</span></div>
+          </div>
+          <div class="article-card reveal reveal-d1">
+            <div class="article-cat-badge">📰 科技趨勢</div>
+            <h3><a href="/Openclaw/articles/m4-neural-engine.html">M4 Neural Engine 深度分析：Apple AI 晶片的突破</a></h3>
+            <p class="excerpt">透過逆向工程深入解析 M4 神經網路引擎的架構，包含矩陣乘法單元、本地記憶體設計與效能比較</p>
+            <div class="article-meta"><span>2026-02-28</span><span class="sep">·</span><span>15 分鐘閱讀</span></div>
+          </div>
+          <div class="article-card reveal reveal-d2">
+            <div class="article-cat-badge">📰 科技趨勢</div>
+            <h3><a href="/Openclaw/articles/grapheneos-motorola-partnership.html">GrapheneOS 與摩托羅拉合作：安全手機的全新時代</a></h3>
+            <p class="excerpt">探討 GrapheneOS 與摩托羅拉的合作意義，以及這對注重隱私安全的手機用戶代表的機遇</p>
+            <div class="article-meta"><span>2026-02-27</span><span class="sep">·</span><span>8 分鐘閱讀</span></div>
+          </div>
+          <div class="article-card reveal reveal-d3">
+            <div class="article-cat-badge">📰 科技趨勢</div>
+            <h3><a href="/Openclaw/articles/low-latency-voice-agent.html">低延遲語音 Agent 技術解析</a></h3>
+            <p class="excerpt">詳細解析低延遲語音 AI Agent 的技術架構，包含端到端語音處理、串流優化與實際部署方案</p>
+            <div class="article-meta"><span>2026-02-26</span><span class="sep">·</span><span>10 分鐘閱讀</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-<a href="/ai-hub/prompts.html" class="card">
-<div class="card-icon">🟡</div>
-<h2>Prompt 庫</h2>
-<p>精選提示詞範本，一鍵複製，隨時取用</p>
-<span class="tag tag-yellow">Prompt</span>
-</a>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+        <a href="/Openclaw/llms.txt">llms.txt</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
 
-<a href="/ai-hub/footprint.html" class="card">
-<div class="card-icon">🔵</div>
-<h2>AI 足跡</h2>
-<p>記錄 AI 互動歷史，分析使用模式與趨勢</p>
-<span class="tag tag-blue">足跡</span>
-</a>
-
-<a href="/ai-hub/tools.html" class="card">
-<div class="card-icon">🟣</div>
-<h2>工具區</h2>
-<p>API 測試、Prompt 調試、效能分析</p>
-<span class="tag tag-purple">工具</span>
-</a>
-</main>
-
-<section>
-<h2>📚 現有文章</h2>
-<div class="grid">
-<a href="/prompts/" class="card">
-<h2>💡 提示詞文章</h2>
-<p>Chain of Thought、Claude Code 等教學</p>
-</a>
-<a href="/tutorials/" class="card">
-<h2>📚 教學課程</h2>
-<p>AI 輔助開發、Vibe Coding 教學</p>
-</a>
-</div>
-</section>
-
-<footer>
-<p>© 2026 AI Hub | <a href="/feed.xml">RSS 訂閱</a></p>
-</footer>
-</div>
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved;
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>

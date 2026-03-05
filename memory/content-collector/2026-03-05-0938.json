@@ -1,0 +1,82 @@
+{
+  "collected": "2026-03-05 09:38 UTC+8",
+  "source": "Hacker News + Fallback",
+  "ai_tech_topics": [
+    {
+      "rank": 1,
+      "title": "MacBook Neo Released",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "points": 1474,
+      "search_potential": "medium",
+      "category": "hardware",
+      "description": "Apple announces new MacBook Neo with advanced AI capabilities"
+    },
+    {
+      "rank": 2,
+      "title": "Qwen Model Updates",
+      "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+      "points": 488,
+      "search_potential": "high",
+      "category": "ai",
+      "description": "Alibaba's Qwen models receiving significant updates"
+    },
+    {
+      "rank": 3,
+      "title": "Flock Cams Interactive Map",
+      "url": "https://deflock.org/map",
+      "points": 487,
+      "search_potential": "medium",
+      "category": "privacy",
+      "description": "Community-driven map of surveillance cameras"
+    },
+    {
+      "rank": 4,
+      "title": "Qwen3.5 Fine-Tuning Guide",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "points": 257,
+      "search_potential": "high",
+      "category": "ai",
+      "description": "Unsloth releases comprehensive fine-tuning guide for Qwen3.5"
+    },
+    {
+      "rank": 5,
+      "title": "Building a New Flash",
+      "url": "https://bill.newgrounds.com/news/post/1607118",
+      "points": 238,
+      "search_potential": "medium",
+      "category": "web",
+      "description": "Community effort to rebuild Flash technology"
+    },
+    {
+      "rank": 6,
+      "title": "BMW Humanoid Robots",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0455864EN/",
+      "points": 58,
+      "search_potential": "medium",
+      "category": "ai",
+      "description": "BMW Group deploying humanoid robots in manufacturing"
+    },
+    {
+      "rank": 7,
+      "title": "NanoGPT with Limited Data",
+      "url": "https://qlabs.sh/slowrun",
+      "points": 111,
+      "search_potential": "medium",
+      "category": "ai",
+      "description": "Language modeling approach with limited dataset"
+    },
+    {
+      "rank": 8,
+      "title": "Moss Pixel Canvas",
+      "url": "https://moss.town/",
+      "points": 164,
+      "search_potential": "medium",
+      "category": "creative",
+      "description": "Creative tool where brushes are tiny programs"
+    }
+  ],
+  "ai_specific_count": 5,
+  "total_topics": 8,
+  "notes": "Web search unavailable - using recent HN data with enriched metadata",
+  "trending_keywords": ["Qwen", "AI fine-tuning", "MacBook AI", "humanoid robots", "privacy"]
+}

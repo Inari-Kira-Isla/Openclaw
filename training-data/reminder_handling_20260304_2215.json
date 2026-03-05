@@ -1,0 +1,41 @@
+{
+  "task_type": "scheduled_reminder_handling",
+  "timestamp": "2026-03-04T22:15:00+08:00",
+  "trigger": "cron_reminder",
+  "reminder_content": "訓練數據收集 + Token實時監控",
+  "actions": [
+    {
+      "step": 1,
+      "action": "session_status",
+      "purpose": "獲取當前Token使用狀態",
+      "result": {
+        "context_pct": 14,
+        "context_total": 200000,
+        "context_used": 27000,
+        "cost": 0.01,
+        "cache_hit": "98%"
+      }
+    },
+    {
+      "step": 2,
+      "action": "check_threshold",
+      "purpose": "評估是否需要警報",
+      "result": "14% < 閾值(60%)，無需警報"
+    },
+    {
+      "step": 3,
+      "action": "update_token_analysis",
+      "purpose": "記錄Token使用數據到memory/token-analysis.md",
+      "result": "已新增22:15記錄"
+    },
+    {
+      "step": 4,
+      "action": "training_data_collection",
+      "purpose": "記錄此任務為訓練範例",
+      "result": "已儲存到training-data/"
+    }
+  ],
+  "outcome": "success",
+  "token_status": "normal",
+  "alert_triggered": false
+}

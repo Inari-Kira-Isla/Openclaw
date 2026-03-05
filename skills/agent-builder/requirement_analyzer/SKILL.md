@@ -63,4 +63,4 @@ metadata: { "openclaw": { "emoji": "🎯" } }
 
 - "我想建一個專門追蹤 BNI 轉介紹的 agent"
 - "幫我設計一個能自動回覆 Facebook 訊息的 agent"
-- "需要一個每天自動整理 Notion 的 agent"
+- "需要一個每天自動整理本地資料庫的 agent"

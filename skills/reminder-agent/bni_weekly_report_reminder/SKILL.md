@@ -6,19 +6,18 @@ metadata: { "openclaw": { "emoji": "📊" } }
 
 # BNI 每週報告提醒
 
-自動提醒填寫 BNI 每週報告，從 Notion 拉取本週轉介紹數據，協助快速完成報告。
+自動提醒填寫 BNI 每週報告，從 SQLite 拉取本週轉介紹數據，協助快速完成報告。
 
 ## 操作 / 工作流程
 1. 用 `cron` 設定排程：
    - 每週五 17:00：提醒填寫週報 + 附帶本週數據
    - 每週日 12:00：截止提醒（若尚未填寫）
-2. 用 Notion API 查詢本週數據：
-   - 收到的轉介紹數量與來源
-   - 給出的轉介紹數量與對象
-   - 一對一會議次數
-   - 出席紀錄
+2. 用 SQLite 查詢本週數據 (`~/.openclaw/memory/bni.db`)：
+   - `bni_db.get_weekly_report_data()` 取得完整週報數據
+   - 包含：轉介紹統計、新會員、會議出席、跟進完成數
 3. 預填報告模板，讓用戶只需確認或修改
 4. 用 `message` 傳送到 Telegram
+5. 腳本：`bni_reminder.py --type bni_report`
 
 ## cron 排程
 ```
@@ -29,14 +28,14 @@ metadata: { "openclaw": { "emoji": "📊" } }
 ## 參數
 | 參數 | 類型 | 預設 | 說明 |
 |------|------|------|------|
-| auto_fill | bool | true | 是否自動從 Notion 拉取數據預填 |
+| auto_fill | bool | true | 是否自動從 SQLite 拉取數據預填 |
 | week | string | current | 報告週次：`current` / `last` / 指定日期 |
 
 ## 輸出格式
 ```
 📊 BNI 每週報告 — {week_range}
 
-本週數據（已從 Notion 自動帶入）：
+本週數據（已從 SQLite 自動帶入）：
 - 收到轉介紹：{received} 筆
   {referral_details}
 - 給出轉介紹：{given} 筆
@@ -54,7 +53,7 @@ metadata: { "openclaw": { "emoji": "📊" } }
 ## 錯誤處理
 | 錯誤 | 處理 |
 |------|------|
-| Notion 數據為空 | 發送空白模板，提醒手動填寫 |
+| SQLite 數據為空 | 發送空白模板，提醒手動填寫 |
 | 用戶未回覆確認 | 週日 12:00 發送第二次提醒 |
 | 數據不一致 | 標記需確認的欄位，請用戶核實 |
 

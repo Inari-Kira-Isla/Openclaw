@@ -1,0 +1,41 @@
+# Training Example - Hourly System Check
+
+**Date:** 2026-03-04
+**Task Type:** Recurring Monitoring
+**Frequency:** Hourly
+
+## Input
+- Gateway health status
+- Session count and context usage
+- Memory usage metrics
+
+## Process
+1. Check Gateway HTTP status (expect 200)
+2. Query session stats (active count, context %)
+3. Check memory usage
+4. Log results to memory file
+
+## Output
+- Status: HEALTHY / WARNING / CRITICAL
+- Metrics logged to memory
+
+## Decision Tree
+- If Gateway != 200 → Alert, log error
+- If Memory > 90% → Trigger optimization
+- If Context > 80% → Trigger session cleanup
+- Else → Log as healthy
+
+## Example Output
+```json
+{
+  "timestamp": "2026-03-04T12:43:00Z",
+  "gateway_status": 200,
+  "sessions": 455,
+  "context_avg": 14,
+  "memory_percent": 78,
+  "status": "HEALTHY"
+}
+```
+
+---
+*Generated: 2026-03-04 12:44*

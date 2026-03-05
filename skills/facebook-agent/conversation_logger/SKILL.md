@@ -1,13 +1,13 @@
 ---
 name: conversation_logger
-description: Messenger 對話記錄與存儲。當需要記錄、檢索或匯出 Facebook Messenger 對話歷史時觸發，包括：對話存儲至 Notion、用戶檔案建立、對話檢索、資料匯出。
+description: Messenger 對話記錄與存儲。當需要記錄、檢索或匯出 Facebook Messenger 對話歷史時觸發，包括：對話存儲至本地資料庫（SQLite）、用戶檔案建立、對話檢索、資料匯出。
 ---
 
 # Conversation Logger — 對話記錄
 
 ## 功能說明
 
-將所有 Facebook Messenger 對話完整記錄至 Notion 資料庫，建立用戶檔案，並提供多維度檢索與匯出功能。
+將所有 Facebook Messenger 對話完整記錄至本地資料庫（SQLite: cs_customers.db），建立用戶檔案，並提供多維度檢索與匯出功能。
 
 ## 記錄內容
 
@@ -36,24 +36,24 @@ description: Messenger 對話記錄與存儲。當需要記錄、檢索或匯出
 
 ### 記錄對話
 1. 接收新訊息事件（來自 facebook_messenger_handler）
-2. 查詢 Notion 是否已有該用戶的對話串
+2. 查詢本地資料庫（SQLite）是否已有該用戶的對話串
 3. 若無，建立新用戶檔案與對話記錄
 4. 若有，將新訊息追加至既有對話串
 5. 更新對話狀態與分析標籤
 
 ### 檢索對話
 1. 接收檢索條件（用戶、時間、標籤）
-2. 查詢 Notion 資料庫
+2. 查詢本地資料庫（SQLite）
 3. 以摘要格式回覆結果
 
 ### 匯出資料
 1. 確認匯出範圍與格式
-2. 從 Notion 拉取資料
+2. 從本地資料庫（SQLite）拉取資料
 3. 轉換為指定格式（Markdown / JSON / CSV）
 
 ## 工具指引
 
-- **Notion API**：對話資料庫的 CRUD 操作（主要工具）
+- **SQLite（cs_customers.db）**：對話資料庫的 CRUD 操作（主要工具，透過 cs_customer_db.py）
 - **facebook_messenger_handler**：上游訊息來源
 - **question_classifier**：分類標籤來源
 
@@ -61,7 +61,7 @@ description: Messenger 對話記錄與存儲。當需要記錄、檢索或匯出
 
 | 情境 | 處理方式 |
 |------|----------|
-| Notion 寫入失敗 | 將訊息暫存，排入重試佇列，不影響回覆流程 |
+| SQLite 寫入失敗 | 將訊息暫存，排入重試佇列，不影響回覆流程 |
 | 用戶 ID 無法解析 | 以匿名方式記錄，標記「待補充身份」 |
 | 對話串過長 | 自動生成摘要，將舊訊息歸檔 |
 | 匯出資料量過大 | 分批處理，每批最多 100 筆 |

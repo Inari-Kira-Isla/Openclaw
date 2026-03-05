@@ -1700,3 +1700,21 @@ Skills 是「指令、腳本和資源的資料夾」，Claude 會動態載入以
 /Users/ki/.openclaw/workspace/projects/lazy_uni_shop/
 ├── q版_avatars.html              # Q版角色頭像
 
+
+---
+2026-03-03 新增記憶:
+- supply-chain.md (供應鏈相關)
+- red-dot-warning-20260303.md (紅點警告)
+- red-point-warning-20260303.md (紅點預警)
+- emergency.md / emergency-20260303.md (緊急狀況)
+- performance-20260303.md / performance-2026-03-03.md (效能監控)
+- closed-loop.md / closed-loop-execution-20260303-1525.md (閉環執行)
+- agent-rotation.md (Agent 輪換)
+- periodic-tasks-20260303-1527.md (定期任務)
+- system-reminder-20260303-1527.md (系統提醒)
+- supply-chain-20260303.md (供應鏈)
+
+- error-learning-20260303-2233.md (錯誤學習記錄 - nova-fal exec failure)
+- performance-20260303-2230.md (效能監控記錄 - Gateway/sessions/context正常)
+- security-20260303-2230.md (安全報告 - 登入活動正常,無異常)
+- security.md (安全政策)

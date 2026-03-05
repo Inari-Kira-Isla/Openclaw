@@ -1,0 +1,97 @@
+{
+  "date": "2026-03-04",
+  "hour": "22",
+  "collected_at": "2026-03-04T22:32:00+08:00",
+  "sources": ["Hacker News"],
+  "topics": [
+    {
+      "id": 1,
+      "title": "Claude's Cycles (Knuth)",
+      "url": "https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf",
+      "source": "Hacker News",
+      "points": 698,
+      "comments": 291,
+      "category": "AI/LLM",
+      "search_potential": "high",
+      "summary": "Donald Knuth's paper analyzing Claude's reasoning cycles - major academic analysis of AI reasoning"
+    },
+    {
+      "id": 2,
+      "title": "Motorola GrapheneOS devices bootloader unlockable",
+      "url": "https://grapheneos.social/@GrapheneOS/116160393783585567",
+      "source": "Hacker News",
+      "points": 958,
+      "comments": 373,
+      "category": "Security/Mobile",
+      "search_potential": "high",
+      "summary": "Major security/privacy update - GrapheneOS now supports bootloader unlock on Motorola devices"
+    },
+    {
+      "id": 3,
+      "title": "Apple Introduces MacBook Neo",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "source": "Hacker News",
+      "points": 58,
+      "comments": 22,
+      "category": "Hardware",
+      "search_potential": "medium",
+      "summary": "Apple's new MacBook Neo lineup announced"
+    },
+    {
+      "id": 4,
+      "title": "Agentic Engineering Patterns",
+      "url": "https://simonwillison.net/guides/agentic-engineering-patterns/",
+      "source": "Hacker News",
+      "points": 282,
+      "comments": 142,
+      "category": "AI/Agent",
+      "search_potential": "high",
+      "summary": "Simon Willison's comprehensive guide on building agentic AI systems"
+    },
+    {
+      "id": 5,
+      "title": "Nobody Gets Promoted for Simplicity",
+      "url": "https://terriblesoftware.org/2026/03/03/nobody-gets-promoted-for-simplicity/",
+      "source": "Hacker News",
+      "points": 191,
+      "comments": 104,
+      "category": "Software Engineering",
+      "search_potential": "high",
+      "summary": "Thought-provoking article on software engineering career dynamics and simplicity"
+    },
+    {
+      "id": 6,
+      "title": "A CPU that runs entirely on GPU",
+      "url": "https://github.com/robertcprice/nCPU",
+      "source": "Hacker News",
+      "points": 158,
+      "comments": 82,
+      "category": "Hardware",
+      "search_potential": "medium",
+      "summary": "Innovative project running CPU instructions entirely on GPU hardware"
+    },
+    {
+      "id": 7,
+      "title": "RFC 9849: TLS Encrypted Client Hello",
+      "url": "https://www.rfc-editor.org/rfc/rfc9849.html",
+      "source": "Hacker News",
+      "points": 162,
+      "comments": 71,
+      "category": "Security",
+      "search_potential": "medium",
+      "summary": "New RFC for TLS Encrypted Client Hello - important security standard"
+    },
+    {
+      "id": 8,
+      "title": "Qwen3.5 Fine-Tuning Guide",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "source": "Hacker News",
+      "points": 12,
+      "comments": 1,
+      "category": "AI/LLM",
+      "search_potential": "high",
+      "summary": "New fine-tuning guide for Qwen3.5 model on Unsloth"
+    }
+  ],
+  "notes": "Reddit blocked (403). Only HN data collected this hour."
+}

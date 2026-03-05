@@ -243,15 +243,18 @@ def log_conversation(customer_id, brand_id, platform,
             VALUES (?,?,?,?,?,?,?,?,?)
         """, (customer_id, brand_id, platform, message_in, message_out,
               intent, confidence, reply_source, response_time_ms))
-        increment_message_count(customer_id)
+        c.execute("UPDATE customers SET total_messages=total_messages+1 WHERE id=?",
+                  (customer_id,))
         return cur.lastrowid
 
 
-def update_reply(conv_id, message_out, reply_source="ai"):
+def update_reply(conv_id, message_out, reply_source="ai", confidence=0.0, response_time_ms=0):
     """回覆生成後更新 conversation"""
     with _conn() as c:
-        c.execute("UPDATE conversations SET message_out=?, reply_source=? WHERE id=?",
-                  (message_out, reply_source, conv_id))
+        c.execute("""UPDATE conversations
+                     SET message_out=?, reply_source=?, confidence=?, response_time_ms=?
+                     WHERE id=?""",
+                  (message_out, reply_source, confidence, response_time_ms, conv_id))
 
 
 # ─── FAQ Entries ───────────────────────────────────────────────────────────────

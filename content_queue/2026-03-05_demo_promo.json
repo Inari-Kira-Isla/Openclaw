@@ -1,0 +1,11 @@
+{
+  "brand_id": "demo",
+  "brand_name": "Demo Brand",
+  "type": "promo",
+  "hot_topics": ["限時優惠", "新品上市", "折扣活動"],
+  "short": "限時優惠現在開始！",
+  "long": "🎉 特大好消息！ Demo Brand 全新系列產品正式登場！為慶祝新品上市，凡於本週內購買指定產品，即可享 8 折優惠。更有會員專屬禮遇等您來體驗。數量有限，趕快行動吧！",
+  "caption": "🎉 特大好消息！\n\nDemo Brand 全新系列產品正式登場！\n\n本週內購買指定產品享 8 折優惠！\n\n👉 立即選購：demobrand.com\n\n#DemoBrand #新品上市 #限時優惠",
+  "raw": "demo_promo_content_generated",
+  "generated_at": "2026-03-05T07:49:00.000000+00:00"
+}

@@ -1,98 +1,92 @@
 {
   "date": "2026-03-02",
-  "collected_at": "2026-03-03T11:58:00+08:00",
-  "sources": ["Hacker News"],
+  "collected_at": "2026-03-05T04:37:00+08:00",
+  "source": "Hacker News",
   "topics": [
     {
-      "title": "Meta AI Smart Glasses Privacy Concerns",
-      "description": "Workers behind Meta's smart glasses can see everything users see, raising major privacy concerns",
-      "source": "HN",
-      "votes": 707,
-      "url": "https://www.svd.se/a/K8nrV4/metas-ai-smart-glasses-and-data-privacy-concerns-workers-say-we-see-everything",
+      "title": "MacBook Neo 發布",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "points": 1152,
+      "comments": 1493,
+      "category": "hardware",
       "search_potential": "high",
-      "tags": ["AI", "privacy", "wearables", "Meta"]
+      "summary": "Apple 發表新款 MacBook Neo，可能是 AI 運算硬體焦點"
     },
     {
-      "title": "Sub-500ms Latency Voice Agent",
-      "description": "Building a ultra-low latency voice AI agent from scratch",
-      "source": "HN",
-      "votes": 232,
-      "url": "https://www.ntik.me/posts/voice-agent",
+      "title": "Qwen3.5 Fine-Tuning Guide",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "points": 187,
+      "comments": 49,
+      "category": "AI/ML",
       "search_potential": "high",
-      "tags": ["AI", "voice", "latency", "real-time"]
+      "summary": "Qwen3.5 微調指南，開源 LLM 微調熱門話題"
     },
     {
-      "title": "AI Agents Making Money in 2026",
-      "description": "Analysis of whether AI agents are actually generating revenue or just hype",
-      "source": "HN",
-      "votes": 9,
-      "url": "https://www.siliconsnark.com/do-ai-agents-actually-make-money-in-2026-or-is-it-just-mac-minis-and-vibes/",
+      "title": "Something is afoot in the land of Qwen",
+      "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+      "points": 335,
+      "comments": 162,
+      "category": "AI/ML",
       "search_potential": "high",
-      "tags": ["AI", "agents", "business", "2026"]
+      "summary": "阿里 Qwen 模型最新發展動態，開源模型競爭激烈"
     },
     {
-      "title": "Ars Technica Fires Reporter Over AI-Generated Fabricated Quotes",
-      "description": "AI controversy in journalism - reporter fired for AI-generated fake quotes",
-      "source": "HN",
-      "votes": 20,
-      "url": "https://futurism.com/artificial-intelligence/ars-technica-fires-reporter-ai-quotes",
+      "title": "Agentic Engineering Patterns",
+      "url": "https://simonwillison.net/guides/agentic-engineering-patterns/",
+      "points": 442,
+      "comments": 244,
+      "category": "AI/ML",
+      "search_potential": "high",
+      "summary": "AI Agent 工程模式指南，Agent 開發熱門資源"
+    },
+    {
+      "title": "Nobody Gets Promoted for Simplicity",
+      "url": "https://terriblesoftware.org/2026/03/03/nobody-gets-promoted-for-simplicity/",
+      "points": 711,
+      "comments": 415,
+      "category": "software-engineering",
       "search_potential": "medium",
-      "tags": ["AI", "journalism", "ethics", "media"]
+      "summary": "軟體工程簡化議題，技術債與程式碼品質討論"
     },
     {
-      "title": "M4 Apple Neural Engine Reverse Engineering",
-      "description": "Deep dive into Apple's M4 neural engine architecture",
-      "source": "HN",
-      "votes": 283,
-      "url": "https://maderix.substack.com/p/inside-the-m4-apple-neural-engine",
+      "title": "Google AI 產品導致青少年妄想症",
+      "url": "https://www.bbc.com/news/articles/czx44p99457o",
+      "points": 48,
+      "comments": 9,
+      "category": "AI-safety",
+      "search_potential": "high",
+      "summary": "AI 安全議題，Google AI 產品引發的心理健康疑慮"
+    },
+    {
+      "title": "NanoGPT Slowrun - Language Modeling",
+      "url": "https://qlabs.sh/slowrun",
+      "points": 59,
+      "comments": 8,
+      "category": "AI/ML",
       "search_potential": "medium",
-      "tags": ["AI", "Apple", "M4", "hardware", "neural"]
+      "summary": "有限數據無限計算的語言模型實驗"
     },
     {
-      "title": "Motorola Partners with GrapheneOS",
-      "description": "Major phone manufacturer partnering with privacy-focused OS",
-      "source": "HN",
-      "votes": 2093,
-      "url": "https://motorolanews.com/motorola-three-new-b2b-solutions-at-mwc-2026/",
-      "search_potential": "medium",
-      "tags": ["mobile", "privacy", "GrapheneOS", "Android"]
-    },
-    {
-      "title": "New iPad Air with M4 Chip",
-      "description": "Apple announces new iPad Air powered by M4",
-      "source": "HN",
-      "votes": 342,
-      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/",
+      "title": "Moss - Pixel Canvas with Programs",
+      "url": "https://moss.town/",
+      "points": 83,
+      "comments": 10,
+      "category": "creative-tools",
       "search_potential": "low",
-      "tags": ["Apple", "M4", "iPad", "hardware"]
-    },
-    {
-      "title": "iPhone 17e Released",
-      "description": "Apple releases new iPhone 17e model",
-      "source": "HN",
-      "votes": 216,
-      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-iphone-17e/",
-      "search_potential": "low",
-      "tags": ["Apple", "iPhone", "hardware"]
-    },
-    {
-      "title": "Building Your Own Quantum Computer",
-      "description": "Guide to building a quantum computer at home",
-      "source": "HN",
-      "votes": 49,
-      "url": "https://physics.aps.org/articles/v19/24",
-      "search_potential": "medium",
-      "tags": ["quantum", "DIY", "hardware"]
-    },
-    {
-      "title": "In-Utero Stem Cell Therapy for Spina Bifida",
-      "description": "First successful stem cell therapy for fetal spina bifida repair",
-      "source": "HN",
-      "votes": 260,
-      "url": "https://health.ucdavis.edu/news/headlines/first-ever-in-utero-stem-cell-therapy-for-fetal-spina-bifida-repair-is-safe-study-finds/2026/02",
-      "search_potential": "medium",
-      "tags": ["medical", "stem cells", "innovation"]
+      "summary": "像素畫布，每個筆刷都是一個小程式"
     }
   ],
-  "summary": "AI trends: Voice AI latency improvements, AI agent business viability questions, privacy concerns with AI wearables, AI ethics in journalism. Major tech: Apple M4 chip expansion, Motorola-GrapheneOS partnership."
+  "trending_keywords": [
+    "Qwen3.5",
+    "Fine-tuning",
+    "Agentic Engineering",
+    "AI Safety",
+    "MacBook Neo",
+    "Open Source LLM"
+  ],
+  "recommendations": [
+    "Qwen3.5 微調教學 - 開源模型熱門",
+    "AI Agent 開發模式 - 工程師關注",
+    "AI Safety 案例分析 - 時事熱點"
+  ]
 }

@@ -1,0 +1,635 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.26",
+    "lastTouchedAt": "2026-03-02T16:13:25.278Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-28T14:48:02.683Z",
+    "lastRunVersion": "2026.2.26",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "minimax:default": {
+        "provider": "minimax",
+        "mode": "api_key"
+      }
+    }
+  },
+  "acp": {
+    "enabled": true,
+    "dispatch": {
+      "enabled": true
+    },
+    "backend": "acpx",
+    "defaultAgent": "main",
+    "allowedAgents": [
+      "main",
+      "muse-core",
+      "workflow-orchestrator",
+      "claude-bridge",
+      "slime",
+      "team",
+      "evolution",
+      "codex"
+    ],
+    "maxConcurrentSessions": 8
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "minimax": {
+        "baseUrl": "https://api.minimax.io/anthropic",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 15,
+              "output": 60,
+              "cacheRead": 2,
+              "cacheWrite": 10
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "ollama": {
+        "baseUrl": "http://localhost:11434",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "nomic-embed-text",
+            "name": "Nomic Embed Text",
+            "input": [
+              "text"
+            ],
+            "contextWindow": 8192
+          },
+          {
+            "id": "qwen2.5:7b",
+            "name": "Qwen 2.5 7B",
+            "input": [
+              "text"
+            ],
+            "contextWindow": 32768
+          },
+          {
+            "id": "llama3",
+            "name": "Llama 3",
+            "input": [
+              "text"
+            ],
+            "contextWindow": 8192
+          },
+          {
+            "id": "deepseek-coder:latest",
+            "name": "DeepSeek Coder",
+            "input": [
+              "text"
+            ],
+            "contextWindow": 16384
+          }
+        ]
+      },
+      "anthropic": {
+        "baseUrl": "https://api.anthropic.com",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "claude-sonnet-4-20250514",
+            "name": "Claude Sonnet 4",
+            "contextWindow": 200000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "minimax/MiniMax-M2.5",
+        "fallbacks": [
+          "ollama/qwen2.5:7b"
+        ]
+      },
+      "models": {
+        "minimax/MiniMax-M2.5": {
+          "alias": "Minimax"
+        }
+      },
+      "memorySearch": {
+        "enabled": true,
+        "local": {
+          "modelPath": "/Users/ki/.openclaw/models/nomic-embed-text-v1.5.Q8_0.gguf"
+        }
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "subagents": {
+          "allowAgents": [
+            "muse-core",
+            "workflow-orchestrator",
+            "skill-creator",
+            "mcp-builder",
+            "analytics-agent",
+            "knowledge-agent",
+            "governance-agent",
+            "lifeos-agent",
+            "memory-agent",
+            "self-evolve-agent",
+            "skill-slime-agent",
+            "verification-agent",
+            "alice",
+            "bob",
+            "carol",
+            "dave",
+            "eva",
+            "georgia",
+            "isla",
+            "note-taker",
+            "statistics-analyzer",
+            "code-master",
+            "design-master",
+            "writing-master",
+            "evaluator",
+            "cynthia",
+            "agent-builder",
+            "claude-bridge"
+          ]
+        }
+      },
+      {
+        "id": "muse-core",
+        "name": "muse-core",
+        "workspace": "/Users/ki/.openclaw/workspace-muse-core",
+        "agentDir": "/Users/ki/.openclaw/agents/muse-core/agent",
+        "model": "minimax/MiniMax-M2.5"
+      },
+      {
+        "id": "workflow-orchestrator",
+        "name": "workflow-orchestrator",
+        "workspace": "/Users/ki/.openclaw/workspace-workflow-orchestrator",
+        "agentDir": "/Users/ki/.openclaw/agents/workflow-orchestrator/agent"
+      },
+      {
+        "id": "skill-creator",
+        "name": "skill-creator",
+        "workspace": "/Users/ki/.openclaw/workspace-skill-creator",
+        "agentDir": "/Users/ki/.openclaw/agents/skill-creator/agent"
+      },
+      {
+        "id": "mcp-builder",
+        "name": "mcp-builder",
+        "workspace": "/Users/ki/.openclaw/workspace-mcp-builder",
+        "agentDir": "/Users/ki/.openclaw/agents/mcp-builder/agent"
+      },
+      {
+        "id": "analytics-agent",
+        "name": "analytics-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-analytics-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/analytics-agent/agent"
+      },
+      {
+        "id": "knowledge-agent",
+        "name": "knowledge-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-knowledge-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/knowledge-agent/agent",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        }
+      },
+      {
+        "id": "governance-agent",
+        "name": "governance-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-governance-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/governance-agent/agent",
+        "model": "anthropic/claude-sonnet-4-20250514",
+        "identity": {
+          "name": "Nei",
+          "emoji": "⚖️"
+        }
+      },
+      {
+        "id": "lifeos-agent",
+        "name": "lifeos-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-lifeos-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/lifeos-agent/agent"
+      },
+      {
+        "id": "memory-agent",
+        "name": "memory-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-memory-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/memory-agent/agent",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        }
+      },
+      {
+        "id": "self-evolve-agent",
+        "name": "self-evolve-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-self-evolve-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/self-evolve-agent/agent",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        }
+      },
+      {
+        "id": "skill-slime-agent",
+        "name": "skill-slime-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-skill-slime-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/skill-slime-agent/agent"
+      },
+      {
+        "id": "verification-agent",
+        "name": "verification-agent",
+        "workspace": "/Users/ki/.openclaw/workspace-verification-agent",
+        "agentDir": "/Users/ki/.openclaw/agents/verification-agent/agent"
+      },
+      {
+        "id": "alice",
+        "name": "alice",
+        "workspace": "/Users/ki/.openclaw/workspace-alice",
+        "agentDir": "/Users/ki/.openclaw/agents/alice/agent"
+      },
+      {
+        "id": "bob",
+        "name": "bob",
+        "workspace": "/Users/ki/.openclaw/workspace-bob",
+        "agentDir": "/Users/ki/.openclaw/agents/bob/agent"
+      },
+      {
+        "id": "carol",
+        "name": "carol",
+        "workspace": "/Users/ki/.openclaw/workspace-carol",
+        "agentDir": "/Users/ki/.openclaw/agents/carol/agent"
+      },
+      {
+        "id": "dave",
+        "name": "dave",
+        "workspace": "/Users/ki/.openclaw/workspace-dave",
+        "agentDir": "/Users/ki/.openclaw/agents/dave/agent"
+      },
+      {
+        "id": "eva",
+        "name": "eva",
+        "workspace": "/Users/ki/.openclaw/workspace-eva",
+        "agentDir": "/Users/ki/.openclaw/agents/eva/agent"
+      },
+      {
+        "id": "georgia",
+        "name": "georgia",
+        "workspace": "/Users/ki/.openclaw/workspace-georgia",
+        "agentDir": "/Users/ki/.openclaw/agents/georgia/agent"
+      },
+      {
+        "id": "isla",
+        "name": "isla",
+        "workspace": "/Users/ki/.openclaw/workspace-isla",
+        "agentDir": "/Users/ki/.openclaw/agents/isla/agent"
+      },
+      {
+        "id": "note-taker",
+        "name": "note-taker",
+        "workspace": "/Users/ki/.openclaw/workspace-note-taker",
+        "agentDir": "/Users/ki/.openclaw/agents/note-taker/agent"
+      },
+      {
+        "id": "statistics-analyzer",
+        "name": "statistics-analyzer",
+        "workspace": "/Users/ki/.openclaw/workspace-statistics-analyzer",
+        "agentDir": "/Users/ki/.openclaw/agents/statistics-analyzer/agent"
+      },
+      {
+        "id": "code-master",
+        "name": "code-master",
+        "workspace": "/Users/ki/.openclaw/workspace-code-master",
+        "agentDir": "/Users/ki/.openclaw/agents/code-master/agent"
+      },
+      {
+        "id": "design-master",
+        "name": "design-master",
+        "workspace": "/Users/ki/.openclaw/workspace-design-master",
+        "agentDir": "/Users/ki/.openclaw/agents/design-master/agent"
+      },
+      {
+        "id": "writing-master",
+        "name": "writing-master",
+        "workspace": "/Users/ki/.openclaw/workspace-writing-master",
+        "agentDir": "/Users/ki/.openclaw/agents/writing-master/agent"
+      },
+      {
+        "id": "evaluator",
+        "name": "evaluator",
+        "workspace": "/Users/ki/.openclaw/workspace-evaluator",
+        "agentDir": "/Users/ki/.openclaw/agents/evaluator/agent"
+      },
+      {
+        "id": "cynthia",
+        "name": "cynthia",
+        "workspace": "/Users/ki/.openclaw/workspace-cynthia",
+        "agentDir": "/Users/ki/.openclaw/agents/cynthia/agent",
+        "model": "minimax/MiniMax-M2.5"
+      },
+      {
+        "id": "agent-builder",
+        "name": "agent-builder",
+        "workspace": "/Users/ki/.openclaw/workspace-agent-builder",
+        "agentDir": "/Users/ki/.openclaw/agents/agent-builder/agent"
+      },
+      {
+        "id": "slime",
+        "name": "slime",
+        "workspace": "/Users/ki/.openclaw/workspace-slime",
+        "agentDir": "/Users/ki/.openclaw/agents/slime/agent",
+        "model": "minimax/MiniMax-M2.5"
+      },
+      {
+        "id": "team",
+        "name": "team",
+        "workspace": "/Users/ki/.openclaw/workspace-team",
+        "agentDir": "/Users/ki/.openclaw/agents/team/agent",
+        "model": "minimax/MiniMax-M2.5"
+      },
+      {
+        "id": "evolution",
+        "name": "evolution",
+        "workspace": "/Users/ki/.openclaw/workspace-evolution",
+        "agentDir": "/Users/ki/.openclaw/agents/evolution/agent",
+        "model": "minimax/MiniMax-M2.5"
+      },
+      {
+        "id": "claude-bridge",
+        "name": "claude-bridge",
+        "workspace": "/Users/ki/.openclaw/workspace-claude-bridge",
+        "agentDir": "/Users/ki/.openclaw/agents/claude-bridge/agent",
+        "model": "claude-cli/claude-sonnet-4-6",
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        }
+      },
+      {
+        "id": "haruhi",
+        "name": "haruhi",
+        "workspace": "/Users/ki/.openclaw/workspace/haruhi",
+        "agentDir": "/Users/ki/.openclaw/agents/haruhi/agent",
+        "model": "claude-cli/claude-sonnet-4-6"
+      },
+      {
+        "id": "neicheok",
+        "name": "neicheok",
+        "workspace": "/Users/ki/.openclaw/workspace-neicheok",
+        "agentDir": "/Users/ki/.openclaw/agents/neicheok/agent",
+        "model": "claude-cli/claude-sonnet-4-6"
+      },
+      {
+        "id": "sandbox-test",
+        "name": "sandbox-test",
+        "workspace": "/Users/ki/.openclaw/workspace-sandbox/openclaw-test",
+        "agentDir": "/Users/ki/.openclaw/agents/sandbox-test/agent",
+        "model": "minimax/MiniMax-M2.5"
+      }
+    ]
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "gemini",
+        "gemini": {
+          "apiKey": "AIzaSyDaWKpOFphXgQahGELLFRqHFk497it0p-U",
+          "model": "gemini-2.0-flash"
+        }
+      }
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "kira"
+      }
+    },
+    {
+      "agentId": "cynthia",
+      "match": {
+        "channel": "telegram",
+        "accountId": "cynthia"
+      }
+    },
+    {
+      "agentId": "slime",
+      "match": {
+        "channel": "telegram",
+        "accountId": "slime"
+      }
+    },
+    {
+      "agentId": "team",
+      "match": {
+        "channel": "telegram",
+        "accountId": "team"
+      }
+    },
+    {
+      "agentId": "evolution",
+      "match": {
+        "channel": "telegram",
+        "accountId": "evolution"
+      }
+    },
+    {
+      "agentId": "governance-agent",
+      "match": {
+        "channel": "telegram",
+        "accountId": "nei"
+      }
+    },
+    {
+      "agentId": "sandbox-test",
+      "match": {
+        "channel": "telegram",
+        "accountId": "sandbox"
+      }
+    }
+  ],
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "maintenance": {
+      "mode": "enforce",
+      "pruneAfter": "30d",
+      "maxEntries": 500,
+      "rotateBytes": "10mb"
+    }
+  },
+  "cron": {
+    "maxConcurrentRuns": 3
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "streaming": "off",
+      "accounts": {
+        "kira": {
+          "name": "KiraIsla_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8328573670:AAHyDxm8885w9IhsOKlRN6cV3PGLFtEjOc8",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "cynthia": {
+          "name": "CynthiaChoi_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8215009212:AAEVrrOEZZcVEUQ9GWYEn8P69m1WmymbZY0",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "slime": {
+          "name": "Joejoebaby_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8737758037:AAHzMyuHFB-VaDHr8GGthOa4wtv1-OSDTVI",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "team": {
+          "name": "Inarijoe_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8312881124:AAHRd8Z5Br9xd5X55uGb_Av9fKb_OjgewD4",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "evolution": {
+          "name": "GodKiraCheok_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8579217376:AAEEUZEtS3ZgbH0nhUpOjCXq2c01fOL8sqg",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "default": {
+          "dmPolicy": "pairing",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        },
+        "nei": {
+          "name": "Neicheok_bot",
+          "enabled": true,
+          "dmPolicy": "pairing",
+          "botToken": "8189267401:AAG43o6l8_HYClaxoziYNAtkS6iwZA_JPVA",
+          "groups": {
+            "-1003851568140": {
+              "requireMention": true
+            }
+          },
+          "groupPolicy": "allowlist",
+          "streaming": "partial"
+        }
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "4267bd714b23adeba00e1e99ad60c066f29006cc5e84a15e"
+    },
+    "http": {
+      "endpoints": {
+        "responses": {
+          "enabled": true
+        },
+        "chatCompletions": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "acpx": {
+        "enabled": true
+      }
+    }
+  },
+  "skills": {
+    "entries": {
+      "minimax-tts": {
+        "enabled": true,
+        "env": {
+          "MINIMAX_API_KEY": "sk-cp-1-wFmWnKLx_fRluWBNMioYVWka11Qcl1ZFF7bQxLMt-ODc6iTJ8iwU2ZWRknR8UuSQxUHSV82fqP6iyedFUCEvzEIJDHcY89B5sPhgebIvOA-po0hkxdcTg"
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,41 @@
 ---
 name: vector_summary_ollama
-description: 本地 Ollama 向量摘要生成。當需要使用本地模型對 Notion 筆記進行向量化摘要時觸發，包括：文本切分、Ollama 摘要生成、向量化、本地儲存。
+description: 本地 Ollama 向量摘要生成。當需要使用本地模型對記憶筆記進行向量化摘要時觸發，包括：文本切分、Ollama 摘要生成、向量化、本地儲存。
 ---
 
 # 向量摘要（Ollama 版本）
 
 ## 功能說明
 
-使用本地 Ollama（llama3）生成 Notion 筆記的向量摘要，免費且快速。適合日常批次處理及自動化場景。
+使用本地 Ollama（llama3 / qwen2.5）生成本地記憶筆記的向量摘要，免費且快速。適合日常批次處理及自動化場景。
 
 ## 前置條件
 
 - Ollama 已安裝且正在運行（`ollama serve`）
-- llama3 模型已下載（4.7GB）
+- 模型已下載：
+  - llama3（4.7GB）- 英文為主
+  - qwen2.5（2-4GB）- 中文理解能力強
 - Python 3 可用
+
+## 支援模型
+
+| 模型 | 大小 | 語言 | 適用場景 |
+|------|------|------|----------|
+| llama3 | 4.7GB | 英文為主 | 通用任務 |
+| qwen2.5 | 2-4GB | 中文優異 | 中文內容處理 |
+| llama3.3 | 4-5GB | 多語言 | 2026 新模型 |
+
+### Qwen2.5 優勢
+- 強大的中文理解能力
+- 更小的模型體積（適合邊緣部署）
+- Apache 2.0 開源許可證
+- 優異的程式碼生成能力
+
+### Llama 3.3 優勢
+- 2025 年底發布
+- 改進的指令遵循
+- 多語言支援增強
+- Meta 生態系統整合
 
 ## 工作流程
 
@@ -44,23 +66,34 @@ description: 本地 Ollama 向量摘要生成。當需要使用本地模型對 N
 # 確保 Ollama 運行
 ollama serve
 
-# 處理最新 Notion 頁面
+# 下載模型
+ollama pull llama3      # 英文為主
+ollama pull qwen2.5     # 中文優異
+ollama pull llama3.3    # 2026 新模型
+
+# 處理最新本地記憶筆記
 python scripts/vector_summary_ollama.py
 
-# 處理所有頁面
-python scripts/vector_summary_ollama.py --all
+# 指定模型
+python scripts/vector_summary_ollama.py --model qwen2.5
 ```
 
 腳本位置：`scripts/vector_summary_v2.py`
 
 ## 與 MiniMax 版本比較
 
-| 項目 | Ollama | MiniMax |
-|------|--------|---------|
-| 品質 | 中 | 高 |
-| 速度 | 快 | 慢 |
-| 成本 | 免費 | API 按量計費 |
-| 適用 | 日常批次 | 首次高品質處理 |
+| 項目 | Ollama (Qwen2.5) | Ollama (Llama3) | MiniMax |
+|------|------------------|-----------------|---------|
+| 品質 | 中（中文） | 中（英文） | 高 |
+| 速度 | 快 | 快 | 慢 |
+| 成本 | 免費 | 免費 | API 按量計費 |
+| 適用 | 中文日常批次 | 英文日常批次 | 首次高品質處理 |
+| 模型大小 | 2-4GB | 4.7GB | API |
+
+### 模型選擇建議
+- **中文內容**：使用 qwen2.5
+- **英文內容**：使用 llama3 或 llama3.3
+- **多語言混合**：使用 llama3.3
 
 ## 錯誤處理
 
@@ -74,13 +107,13 @@ python scripts/vector_summary_ollama.py --all
 
 ## 使用範例
 
-- 「用 Ollama 處理最新的 Notion 筆記」
+- 「用 Ollama 處理最新的本地記憶筆記」
 - 「批次向量化所有未處理的筆記」
 - 「用本地模型跑一次向量摘要」
 
 ## 護欄
 
-- 不修改 Notion 原始內容，僅生成摘要
+- 不修改原始內容，僅生成摘要
 - 每段摘要不超過 30 字
 - 區塊數量限制 1-11 個
 - 向量維度固定 128 維

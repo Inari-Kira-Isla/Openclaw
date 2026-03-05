@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-OpenClaw CS — Notion 同步
-SQLite cs_customers.db → Notion CS 客戶資料庫 + CS 對話記錄
-每 15 分鐘由 cron 觸發
-v1.0 — 2026-03-03
+[DEPRECATED] OpenClaw CS — Notion 同步
+已被 cs_github_sync.py 取代 (2026-03-04)
+SQLite → GitHub 同步，不再依賴 Notion API。
 """
 
 import os

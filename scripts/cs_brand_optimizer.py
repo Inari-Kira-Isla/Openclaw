@@ -28,8 +28,7 @@ if os.path.exists(_env_file):
 OC_GATEWAY   = os.environ.get("OPENCLAW_GATEWAY_URL", "http://127.0.0.1:18789")
 OC_TOKEN     = os.environ.get("OPENCLAW_TOKEN", "4267bd714b23adeba00e1e99ad60c066f29006cc5e84a15e")
 TG_CHAT_ID   = os.environ.get("TG_ESCALATE_CHAT", "8399476482")
-NOTION_KEY   = os.environ.get("NOTION_API_KEY", "")
-DB_SUCCESS   = os.environ.get("NOTION_DB_SUCCESS", "315a1238-f49d-8149-b67d-f138cc7c7f7c")
+SUCCESS_LOG_DIR = os.path.expanduser("~/.openclaw/workspace/success_log")
 
 
 def _send_telegram(text):
@@ -46,27 +45,20 @@ def _send_telegram(text):
 
 
 def _push_to_success_db(title, content, tags):
-    """存入 OpenClaw success DB (Notion)"""
-    if not NOTION_KEY or NOTION_KEY == "REPLACE_WITH_NEW_KEY":
-        return False
-    headers = {
-        "Authorization":  f"Bearer {NOTION_KEY}",
-        "Notion-Version": "2022-06-28",
-        "Content-Type":   "application/json",
+    """存入本地 success_log/ (取代 Notion)"""
+    os.makedirs(SUCCESS_LOG_DIR, exist_ok=True)
+    today = datetime.now().strftime("%Y-%m-%d")
+    fname = f"{today}_{title[:40].replace(' ','_').replace('/','_')}.json"
+    fpath = os.path.join(SUCCESS_LOG_DIR, fname)
+    data = {
+        "title": title,
+        "content": content,
+        "tags": tags,
+        "created_at": datetime.now(timezone.utc).isoformat(),
     }
-    blocks = [{"paragraph": {"rich_text": [{"text": {"content": content[:1900]}}]}}]
-    payload = {
-        "parent":     {"database_id": DB_SUCCESS},
-        "properties": {
-            "標題": {"title": [{"text": {"content": title}}]},
-            "類型": {"select":  {"name": "客服優化"}},
-            "標籤": {"multi_select": [{"name": t} for t in tags[:5]]},
-        },
-        "children": blocks,
-    }
-    resp = requests.post("https://api.notion.com/v1/pages",
-                         json=payload, headers=headers, timeout=15)
-    return resp.ok
+    with open(fpath, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    return True
 
 
 def build_weekly_report(brand_id=None):

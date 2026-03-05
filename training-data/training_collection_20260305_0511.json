@@ -1,0 +1,43 @@
+{
+  "task_type": "training_data_collection",
+  "timestamp": "2026-03-05T05:11:00+08:00",
+  "simple_repetitive_tasks": [
+    {
+      "task": "cron_health_check",
+      "frequency": "hourly",
+      "description": "定時健康檢查鉤子"
+    },
+    {
+      "task": "memory_monitoring",
+      "frequency": "hourly",
+      "description": "記憶體監控"
+    },
+    {
+      "task": "error_check",
+      "frequency": "hourly",
+      "description": "錯誤記錄檢查"
+    },
+    {
+      "task": "token_monitoring",
+      "frequency": "hourly",
+      "description": "Token 使用監控"
+    }
+  ],
+  "training_examples": [
+    {
+      "id": "scheduled_reminder_handling_20260305_0511",
+      "type": "cron_reminder",
+      "description": "定時提醒處理",
+      "status": "success",
+      "timestamp": "2026-03-05T05:11"
+    }
+  ],
+  "total_examples": 104,
+  "storage_location": "training-data/",
+  "system_state": {
+    "gateway_ms": 21,
+    "sessions": 563,
+    "context_percent": 17,
+    "cache_hit_percent": 83
+  }
+}
