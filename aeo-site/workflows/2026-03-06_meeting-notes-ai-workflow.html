@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定 | AI 學習寶庫</title>
+  <meta name="description" content="會議記錄 AI 工作流教學，透過語音轉文字、摘要生成自動化，整合 Notion 打造高效會議管理系統。立即學會自動化流程！">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_meeting-notes-ai-workflow.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定">
+  <meta property="og:description" content="會議記錄 AI 工作流教學，透過語音轉文字、摘要生成自動化，整合 Notion 打造高效會議管理系統。立即學會自動化流程！">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_meeting-notes-ai-workflow.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定", "description": "會議記錄 AI 工作流教學，透過語音轉文字、摘要生成自動化，整合 Notion 打造高效會議管理系統。立即學會自動化流程！", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_meeting-notes-ai-workflow.html"}, "articleSection": "工作流"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "會議錄音品質不好會影響轉文字準確率嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，錄音品質直接影響轉文字準確率。建議使用品質較好的麥克風，會議時保持環境安靜。若錄音有雜音，可使用音訊降噪工具 preprocessing 後再進行轉寫。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "需要花多少成本建置這套工作流？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whisper API 轉寫每分鐘約 0.006 美金，GPT-4 摘要每次約 0.03 美金，Notion 免費方案即可使用。若每月 20 場會議，月成本約 5-10 美金。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這套工作流支援多人會議嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支援。Whisper API 能處理多人發言的錄音，產生的文字稿會包含所有發言內容。建議在提示詞中指定區分不同發言者，能獲得更清晰的會議記錄。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定</h1>
+      <div class="article-info">
+        <span>📅 2026-03-06</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定</h2>
+
+<p>會議記錄 AI 工作流是一套完整的自動化解決方案，能將會議錄音自動轉換為文字稿，透過 AI 產生結構化摘要，最後一鍵匯入 Notion 進行管理。這套流程可將原本耗時 1 小時的會議記錄工作縮短至 5 分鐘，大幅提升團隊效率。本文將詳細教學如何從零開始建置這套自動化工作流。</p>
+
+<h2>為什麼需要 AI 會議記錄工作流</h2>
+
+<p>傳統會議記錄依賴人工打字，不僅耗時費力，容易遺漏重點，且事後整理耗費大量時間。AI 會議記錄工作流能解決以下痛點：</p>
+
+<ul>
+<li><strong>時間節省</strong>：從 60 分鐘縮短至 5 分鐘完成會議記錄</li>
+<li><strong>內容完整</strong>：100% 保留會議所有細節，不遺漏任何發言</li>
+<li><strong>結構化輸出</strong>：自動生成重點摘要、待辦事項、決策記錄</li>
+<li><strong>統一管理</strong>：所有會議記錄集中儲存於 Notion，方便搜尋與協作</li>
+</ul>
+
+<p>這套工作流特別適合需要頻繁開會的團隊、專案管理者、業務人員，以及需要留下會議紀錄的專業人士。</p>
+
+<h2>語音轉文字工具選擇與設定</h2>
+
+<p>市場上有多種語音轉文字服務可供選擇，以下是三個主流方案的比較：</p>
+
+<ol>
+<li><strong>Whisper API（OpenAI）</strong>：支援超過 50 種語言，準確率高，適合正式會議</li>
+<li><strong>Google Cloud Speech-to-Text</strong>：即時轉寫能力強，適合需要即時字幕的場景</li>
+<li><strong>Zoom 內建轉錄</strong>：如果你使用 Zoom 開會，直接使用內建功能最方便</li>
+</ol>
+
+<p>推薦使用 Whisper API 作為主力工具。以下是 Python 整合範例：</p>
+
+<pre><code>import openai
+
+def transcribe_audio(audio_path):
+    with open(audio_path, "rb") as audio_file:
+        response = openai.Audio.transcribe(
+            model="whisper-1",
+            file=audio_file,
+            response_format="text"
+        )
+    return response["text"]
+
+# 使用範例
+transcript = transcribe_audio("meeting recording.m4a")
+print(f"轉錄完成，共 {len(transcript)} 字")</code></pre>
+
+<h2>AI 摘要生成的關鍵技巧</h2>
+
+<p>單純的文字稿難以閱讀，必須透過 AI 進行摘要生成。建議使用 GPT-4 或 Claude 作為摘要引擎，採用以下提示詞結構：</p>
+
+<ul>
+<li><strong>會議摘要</strong>：請用 200 字摘要本次會議的重點內容</li>
+<li><strong>待辦事項</strong>：列出所有需要執行的任務，標註負責人與期限</li>
+<li><strong>決策記錄</strong>：記錄會議中做出的所有決定</li>
+<li><strong>討論重點</strong>：列出討論過程中的關鍵意見與結論</li>
+</ul>
+
+<p>以下是完整的摘要生成提示詞範例：</p>
+
+<pre><code>def generate_summary(transcript):
+    prompt = f"""請分析以下會議記錄，並產生結構化摘要：
+
+會議記錄：
+{transcript}
+
+請輸出以下格式：
+1. 會議摘要（200字以內）
+2. 待辦事項（包含：任務內容、負責人、期限）
+3. 決策記錄
+4. 下次會議時間建議
+
+請用繁體中文回覆。"""
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content</code></pre>
+
+<h2>Notion 自動化整合實作</h2>
+
+<p>將會議記錄匯入 Notion 是最後一步，也是讓資料發揮價值的關鍵。可以使用 Notion API 建立自動化腳本：</p>
+
+<pre><code>from notion_client import Client
+
+def create_notion_page(meeting_data):
+    notion = Client(auth="your_notion_api_key")
+    database_id = "your_database_id"
+    
+    new_page = notion.pages.create(
+        parent={"database_id": database_id},
+        properties={
+            "名稱": {"title": [{"text": {"content": meeting_data["title"]}}]},
+            "日期": {"date": {"start": meeting_data["date"]}},
+            "摘要": {"rich_text": [{"text": {"content": meeting_data["summary"]}}]},
+            "待辦事項": {"rich_text": [{"text": {"content": meeting_data["todos"]}}]},
+            "與會者": {"multi_select": [{"name": person} for person in meeting_data["attendees"]]}
+        },
+        children=[
+            notion.blocks.children.append(
+                block_id=None,
+                children=[{
+                    "object": "block",
+                    "type": "heading_2",
+                    "heading_2": {"rich_text": [{"text": {"content": "會議全文"}}]}
+                }, {
+                    "object": "block",
+                    "type": "paragraph",
+                    "paragraph": {"rich_text": [{"text": {"content": meeting_data["transcript"]}}]}
+                }]
+            )
+        ]
+    )
+    return new_page</code></pre>
+
+<p>設定完成後，每次開會只需上傳錄音檔，整個流程就會自動運作：錄音 → 轉文字 → AI 摘要 → Notion 建立頁面。</p>
+
+<h2>完整工作流實戰範例</h2>
+
+<p>以下是一個完整的自動化流程實作，使用 Zapier 或 Make（原 Make.com）串接所有工具：</p>
+
+<ol>
+<li><strong>步驟 1</strong>：在 Google Drive 建立資料夾，用於存放會議錄音</li>
+<li><strong>步驟 2</strong>：設定 Zapier/Make 監聽資料夾，當有新檔案時觸發流程</li>
+<li><strong>步驟 3</strong>：呼叫 Whisper API 進行語音轉文字</li>
+<li><strong>步驟 4</strong>：將文字稿傳給 GPT-4 生成摘要</li>
+<li><strong>步驟 5</strong>：使用 Notion API 建立新頁面，自動填入會議標題、日期、摘要與待辦事項</li>
+<li><strong>步驟 6</strong>：傳送通知到 Slack 或 Email 告知團隊會議記錄已完成</li>
+</ol>
+
+<p>這套工作流設定完成後，每次會議結束只需將錄音檔上傳，整個團隊就能在 Notion 中看到結構化的會議記錄，大幅提升資訊傳遞效率。</p>
+
+<h2>結論</h2>
+
+<p>會議記錄 AI 工作流是現代團隊必備的效率工具。透過語音轉文字、AI 摘要與 Notion 自動化的結合，不僅省下大量時間，更能確保會議內容被完整記錄與有效運用。現在就開始建置你的第一個 AI 會議記錄工作流吧！</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">會議錄音品質不好會影響轉文字準確率嗎？</h3>
+            <p class="faq-a">是的，錄音品質直接影響轉文字準確率。建議使用品質較好的麥克風，會議時保持環境安靜。若錄音有雜音，可使用音訊降噪工具 preprocessing 後再進行轉寫。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">需要花多少成本建置這套工作流？</h3>
+            <p class="faq-a">Whisper API 轉寫每分鐘約 0.006 美金，GPT-4 摘要每次約 0.03 美金，Notion 免費方案即可使用。若每月 20 場會議，月成本約 5-10 美金。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">這套工作流支援多人會議嗎？</h3>
+            <p class="faq-a">支援。Whisper API 能處理多人發言的錄音，產生的文字稿會包含所有發言內容。建議在提示詞中指定區分不同發言者，能獲得更清晰的會議記錄。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率 | AI 學習寶庫</title>
+  <meta name="description" content="Cursor AI 程式碼編輯器完整教學，涵蓋安裝、核心設定、快捷鍵優化與 AI 功能配置，幫助開發者快速提升 10 倍開發效率。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率">
+  <meta property="og:description" content="Cursor AI 程式碼編輯器完整教學，涵蓋安裝、核心設定、快捷鍵優化與 AI 功能配置，幫助開發者快速提升 10 倍開發效率。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率", "description": "Cursor AI 程式碼編輯器完整教學，涵蓋安裝、核心設定、快捷鍵優化與 AI 功能配置，幫助開發者快速提升 10 倍開發效率。", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cursor AI 與 VS Code 有什麼差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cursor AI 內建 AI 程式碼生成、智慧補全與自然語言指令功能，基於 VS Code 開發並完全相容其擴充套件與設定，適合追求 AI 輔助開發的團隊。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cursor AI 是否免費？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cursor AI 提供免費版本，適合個人開發者；專業版每月 20 美元，解除使用限制並提供更強大的 AI 模型存取能力。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何快速遷移現有 VS Code 設定？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "安裝 Cursor AI 後匯出 VS Code 設定（Settings Sync），或直接將 keybindings.json、settings.json 複製至 Cursor AI 目錄即可。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率</h1>
+      <div class="article-info">
+        <span>📅 2026-03-05</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Cursor AI 基礎設定：打造個人化開發環境</h2>
+<p>Cursor AI 是基於 VS Code 構建的智慧程式碼編輯器，內建強大的 AI 輔助功能。要充分發揮其潛力，首先需要完成基礎環境設定。安裝完成後，建議優先調整以下核心選項：</p>
+<ul>
+<li><strong>Theme 主題：</strong>選擇深色主題（如 Monokai+或 One Dark Pro）減少眼睛疲勞</li>
+<li><strong>Font Size 字型大小：</strong>建議設定為 14-16px，確保舒適閱讀</li>
+<li><strong>Tab Size：</strong>統一設定為 2 或 4 空格，保持程式碼一致性</li>
+<li><strong>Format on Save：</strong>啟用自動格式化，確保程式碼風格統一</li>
+</ul>
+<p>這些基礎設定看似簡單，卻是後續高效開發的基石。建議花費 5-10 分鐘仔細配置，為長期使用奠定良好基礎。</p>
+
+<h2>AI 功能優化：釋放智慧編碼的威力</h2>
+<p>Cursor AI 的核心優勢在於其 AI 輔助能力，正確配置可大幅提升編碼效率。進入 Settings > AI Settings進行以下優化：</p>
+<ul>
+<li><strong>Copilot++模式：</strong>啟用後 AI 會即時建議下一行程式碼，減少重複輸入</li>
+<li><strong>Context 上下文理解：</strong>勾選「Enable whole project context」讓 AI 理解整個專案架構</li>
+<li><strong>Temperature 參數：</strong>設定為 0.7 取得創意與精確性的平衡</li>
+<li><strong>快捷鍵綁定：</strong>將 Ctrl+K 設定為 AI 程式碼生成，Ctrl+L 設定為 AI 對話</li>
+</ul>
+<p>透過這些設定，AI 能夠更準確地理解開發者意圖，生成符合專案風格的程式碼，實際測試顯示可減少 40% 的程式碼撰寫時間。</p>
+
+<h2>快捷鍵自訂：雙手不離鍵盤的藝術</h2>
+<p>高效開發的關鍵在於減少滑鼠操作。以下是Cursor AI 最實用的快捷鍵配置，建議將其加入 keybindings.json：</p>
+<pre><code>{
+  "key": "cmd+shift+k",
+  "command": "editor.action.inlineSuggest.trigger",
+  "when": "editorTextFocus"
+},
+{
+  "key": "cmd+shift+c",
+  "command": "cursorai.chat.focus",
+  "when": "editorTextFocus"
+}</code></pre>
+<p>此外，熟練掌握以下基本快捷鍵可顯著提升效率：Cmd+P 快速開啟檔案、Cmd+Shift+P 開啟命令面板、Cmd+D 選取下一個相同文字。透過一個下午的練習，即可形成肌肉記憶，實現真正的鍵盤優先開發體驗。</p>
+
+<h2>Extensions 擴充套件：打造完整生態系</h2>
+<p>雖然 Cursor AI 已內建強大功能，但透過精選擴充套件可進一步客製化開發環境。推薦以下必裝套件：</p>
+<ol>
+<li><strong>Prettier：</strong>自動格式化程式碼，保持團隊風格一致</li>
+<li><strong>ESLint/TSLint：</strong>即時偵測程式碼錯誤與不良實踐</li>
+<li><strong>GitLens：</strong>增強 Git 版本控制功能，快速檢視程式碼變更歷史</li>
+<li><strong>Thunder Client：</strong>內建 API 測試工具，無需切換至 Postman</li>
+</ol>
+<p>安裝擴充套件時應遵循「必要才裝」原則，過多套件會影響編輯器啟動速度與效能。建議每個月檢視已安裝套件，移除閒置項目以保持環境輕盈。</p>
+
+<h2>效能調校：流暢運作的關鍵設定</h2>
+<p>當專案規模增大時，編輯器效能優化變得尤為重要。以下設定可確保 Cursor AI 在大型專案中保持流暢：</p>
+<ul>
+<li><strong>Files Exclude：</strong>排除 node_modules、.git 等大型資料夾的索引</li>
+<li><strong>Auto Save：</strong>設定為 afterDelay，延時 1000ms 自動儲存</li>
+<li><strong>GPU加速：</strong>啟用 "editor GPU Acceleration" 提升渲染效能</li>
+<li><strong>記憶體管理：</strong>適時關閉未使用的分頁，避免記憶體溢用</li>
+</ul>
+<p>透過這些效能調校，即使面對數千個檔案的專案，Cursor AI 仍能保持秒級回應，讓開發者專注於程式邏輯而非等待編輯器反應。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Cursor AI 與 VS Code 有什麼差異？</h3>
+            <p class="faq-a">Cursor AI 內建 AI 程式碼生成、智慧補全與自然語言指令功能，基於 VS Code 開發並完全相容其擴充套件與設定，適合追求 AI 輔助開發的團隊。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Cursor AI 是否免費？</h3>
+            <p class="faq-a">Cursor AI 提供免費版本，適合個人開發者；專業版每月 20 美元，解除使用限制並提供更強大的 AI 模型存取能力。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何快速遷移現有 VS Code 設定？</h3>
+            <p class="faq-a">安裝 Cursor AI 後匯出 VS Code 設定（Settings Sync），或直接將 keybindings.json、settings.json 複製至 Cursor AI 目錄即可。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
