@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較 | AI 學習寶庫</title>
+  <meta name="description" content="本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較">
+  <meta property="og:description" content="本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較", "description": "本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "VS Code AI 外掛哪一款最適合初學者？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Codeium 最適合初學者，提供完整免費版本，功能足夠日常使用，且安裝設定簡單，不需要額外付費或複雜配置。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Copilot 需要付費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub Copilot 需付費訂閱，每月約 10 美元，學生與開源專案維護者可申請免費使用。首次申請可獲得 30 天免費試用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tabby 可以完全離線使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，Tabby 作為開源工具，可在本機部署執行，無需網路連線即可使用 AI 程式碼輔助功能，確保程式碼不會離開本地環境。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>VS Code AI 外掛完整配置：Copilot、Code...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較</h2>
+
+<p>在現代軟體開發中，AI 輔助程式設計工具已成為提升效率的必備利器。本文將詳細比較 VS Code 上最受歡迎的三款 AI 程式碼輔助外掛——<strong>GitHub Copilot</strong>、<strong>Codeium</strong> 和 <strong>Tabby</strong>，並提供完整的安裝與配置教學，幫助開發者根據自身需求選擇最適合的工具。</p>
+
+<h2>三款 AI 輔助工具總覽</h2>
+
+<p>在開始配置前，先了解三款工具的基本特性：</p>
+
+<ul>
+<li><strong>GitHub Copilot</strong>：由 GitHub 與 OpenAI 合作開發，採用 GPT-4 模型，支援多種語言與框架，適合專業開發者使用，但需付費訂閱。</li>
+<li><strong>Codeium</strong>：提供免費個人版本，支援 70+ 程式語言，強調高速與隱私保護，適合個人開發者與小型團隊。</li>
+<li><strong>Tabby</strong>：開源且可自架的 AI 程式碼助理，完全離線可用，適合對資料隱私有高度要求的企業與開發者。</li>
+</ul>
+
+<h2>GitHub Copilot 安裝與配置</h2>
+
+<p>Copilot 是目前功能最全面的 AI 程式碼輔助工具，安裝步驟如下：</p>
+
+<ol>
+<li>開啟 VS Code，進入 Extensions  Marketplace</li>
+<li>搜尋「GitHub Copilot」並點擊安裝</li>
+<li>安裝完成後，按下 <code>Ctrl+Shift+P</code> 輸入「Sign in to GitHub」完成登入</li>
+<li>開啟 Copilot Nightly 版本可獲得最新功能</li>
+</ol>
+
+<pre><code># 在 VS Code 設定中調整 Copilot 行為
+{
+  "githubCopilot.advanced": {
+    "notifications": true,
+    "inlineSuggestEnabled": true
+  }
+}</code></pre>
+
+<p>Copilot 支援智慧型程式碼建議、測試生成、語法解釋等功能，適合需要完整 AI 輔助的專業開發環境。</p>
+
+<h2>Codeium 安裝與配置</h2>
+
+<p>Codeium 以免費與高速著稱，是預算有限的開發者首選：</p>
+
+<ol>
+<li>在 VS Code Extensions 中搜尋「Codeium」並安裝</li>
+<li>安裝後點擊左下角 Codeium 圖示進行登入</li>
+<li>可選擇 GitHub 或 Google 帳號登入</li>
+<li>在設定中啟用所需的語言支援</li>
+</ol>
+
+<pre><code># Codeium 設定範例
+{
+  "codeium.enable": true,
+  "codeium.languageOverrides": {
+    "python": {
+      "tabSize": 4
+    },
+    "javascript": {
+      "tabSize": 2
+    }
+  }
+}</code></pre>
+
+<p>Codeium 的優勢在於提供完整的免費方案，且不需要額外硬體資源，雲端運算由 Codeium 伺服器處理。</p>
+
+<h2>Tabby 安裝與配置</h2>
+
+<p>Tabby 是開源解決方案，可完全離線運作：</p>
+
+<ol>
+<li>搜尋並安裝「Tabby」VS Code 擴充套件</li>
+<li>下載並安裝 Tabby 伺服器端程式</li>
+<li>啟動本地伺服器（預設 http://localhost:8080）</li>
+<li>在 VS Code 中連接到本地伺服器</li>
+</ol>
+
+<pre><code># 使用 Docker 啟動 Tabby 伺服器
+docker run -d \
+  --name tabby \
+  -p 8080:8080 \
+  -v ~/.tabby:/data \
+  tabbyml/tabby \
+  serve --model TabbyML/StarCoder-1B</code></pre>
+
+<p>Tabby 完全免費且可自架，適合企業內部使用或對資料隱私有嚴格要求的開發者。</p>
+
+<h2>效能比較與選擇建議</h2>
+
+<p>根據實際測試與社群回饋，三款工具的選擇建議如下：</p>
+
+<ul>
+<li><strong>選擇 Copilot</strong>：適合需要最新 AI 模型、願意付費訂閱的專業開發者，功能最全面。</li>
+<li><strong>選擇 Codeium</strong>：適合預算有限但希望獲得 AI 輔助的個人開發者或小型團隊。</li>
+<li><strong>選擇 Tabby</strong>：適合對隱私有高度要求、需要完全離線可用、或希望自建 AI 服務的企業。</li>
+</ul>
+
+<p>總體而言，三款工具都能顯著提升開發效率，建議先試用免費版本，再根據實際體驗與需求做出最終選擇。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">VS Code AI 外掛哪一款最適合初學者？</h3>
+            <p class="faq-a">Codeium 最適合初學者，提供完整免費版本，功能足夠日常使用，且安裝設定簡單，不需要額外付費或複雜配置。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Copilot 需要付費嗎？</h3>
+            <p class="faq-a">GitHub Copilot 需付費訂閱，每月約 10 美元，學生與開源專案維護者可申請免費使用。首次申請可獲得 30 天免費試用。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Tabby 可以完全離線使用嗎？</h3>
+            <p class="faq-a">可以，Tabby 作為開源工具，可在本機部署執行，無需網路連線即可使用 AI 程式碼輔助功能，確保程式碼不會離開本地環境。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
