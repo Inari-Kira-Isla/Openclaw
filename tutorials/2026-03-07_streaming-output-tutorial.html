@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>串流輸出實作：讓 AI 回覆像打字一樣即時顯示 | AI 學習寶庫</title>
+  <meta name="description" content="串流輸出實作教學，詳細介紹如何讓 AI 回覆像打字一樣即時顯示。涵蓋 Server-Sent Events (SSE) 技術、後端 Python 實作、前端 JavaScript 接收處理，以及完整程式碼範例，幫助開發者快速實現即時串流功能。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_streaming-output-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="串流輸出實作：讓 AI 回覆像打字一樣即時顯示">
+  <meta property="og:description" content="串流輸出實作教學，詳細介紹如何讓 AI 回覆像打字一樣即時顯示。涵蓋 Server-Sent Events (SSE) 技術、後端 Python 實作、前端 JavaScript 接收處理，以及完整程式碼範例，幫助開發者快速實現即時串流功能。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_streaming-output-tutorial.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "串流輸出實作：讓 AI 回覆像打字一樣即時顯示", "description": "串流輸出實作教學，詳細介紹如何讓 AI 回覆像打字一樣即時顯示。涵蓋 Server-Sent Events (SSE) 技術、後端 Python 實作、前端 JavaScript 接收處理，以及完整程式碼範例，幫助開發者快速實現即時串流功能。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_streaming-output-tutorial.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "串流輸出與傳統 API 呼叫有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統 API 需等待伺服器完整運算後才一次性返回結果，使用者只能看到最終畫面。串流輸出則讓伺服器在運算過程中就分塊發送資料，客戶端可以即時看到內容逐步呈現，類似打字效果。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "串流輸出需要特殊的伺服器支援嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大多數現代伺服器都支援 HTTP Chunked Transfer，不需要特殊設定。但要注意 Nginx 預設可能會緩衝回應，建議調整 proxy_buffering 設定；Apache則需啟用 mod_proxy。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何處理串流過程中的網路錯誤？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "前端應實作自動重連機制，可在 onerror 回調中判斷連線狀態，短暂延迟後重新建立連線。同時建議記錄已接收的資料位置，實現斷點續傳功能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>串流輸出實作：讓 AI 回覆像打字一樣即時顯示</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">串流輸出實作：讓 AI 回覆像打字一樣即時顯示</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>串流輸出是什麼？一分鐘搞懂核心概念</h2>
+
+<p>串流輸出（Streaming Output）是一種讓伺服器逐塊發送資料而非一次性返回完整結果的技術。當 AI 回覆使用串流輸出時，使用者可以像看別人打字一樣，即時看到回覆內容逐字出現，大幅提升互動體驗。這項技術的核心關鍵在於<strong>Server-Sent Events（SSE）</strong>或<strong>HTTP Chunked Transfer Encoding</strong>，讓伺服器與客戶端維持一個持續連線，逐步推送內容。</p>
+
+<p>實作串流輸出的基本流程是：客戶端發送請求 → 伺服器建立持續連線 → AI 生成內容時即時分塊傳送 → 客戶端逐塊渲染顯示。這種方式不僅提升使用者感受，還能在生成過程中就開始顯示內容，減少等待時間。</p>
+
+<h2>後端串流輸出實作：Python Flask 範例</h2>
+
+<p>串流輸出最常見的實作方式是使用 Flask 框架搭配 Python。以下範例展示如何建立一個支援串流輸出的 API 端點：</p>
+
+<pre><code>from flask import Flask, Response, stream_with_context
+import time
+
+app = Flask(__name__)
+
+@app.route('/stream-chat')
+def stream_chat():
+    def generate():
+        message = "這是一個串流輸出的範例回覆"
+        for char in message:
+            yield f"data: {char}\n\n"
+            time.sleep(0.05)  # 模擬 AI 生成延遲
+    
+    return Response(
+        stream_with_context(generate()),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive'
+        }
+    )
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)</code></pre>
+
+<p>這段程式碼的關鍵在於使用 <code>stream_with_context</code> 包裝生成器函數，並設置正確的 MIME 類型 <code>text/event-stream</code>。每個資料區塊必須以 <code>data: </code> 開頭，結尾用兩個換行符號 <code>\n\n</code> 標記區塊結束。</p>
+
+<h2>前端接收串流：JavaScript EventSource 實作</h2>
+
+<p>前端接收 SSE 串流非常簡單，瀏覽器原生支援 EventSource API。以下程式碼展示如何即時顯示串流內容：</p>
+
+<pre><code>const outputDiv = document.getElementById('response');
+const eventSource = new EventSource('/stream-chat');
+
+eventSource.onmessage = function(event) {
+    // 將收到的字元追加到顯示區域
+    outputDiv.textContent += event.data;
+};
+
+eventSource.onerror = function(error) {
+    console.error('串流連線錯誤:', error);
+    eventSource.close();
+};</code></pre>
+
+<p>使用 EventSource 的優點是程式碼簡潔，瀏覽器會自動處理連線維持與自動重連。但要注意的是，EventSource 只支援文字格式，若需要傳遞複雜資料結構，建議使用 Fetch API 搭配 ReadableStream。</p>
+
+<h2>進階實作：Fetch API + ReadableStream 處理複雜資料</h2>
+
+<p>當你需要傳遞 JSON 格式或更複雜的資料時，EventSource 就不足夠了。此時可以使用 Fetch API 搭配 ReadableStream：</p>
+
+<pre><code>async function streamChat(messages) {
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages })
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let result = '';
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value);
+        result += chunk;
+        updateDisplay(result);  // 即時更新 UI
+    }
+}</code></pre>
+
+<p>這種方式的彈性更大，你可以自定義資料格式、處理二進制資料，甚至實作更複雜的協議如 Server-Side Events 或 WebSocket。</p>
+
+<h2>常見應用場景與效能優化建議</h2>
+
+<p>串流輸出廣泛應用於 AI 對話、即時搜尋建議、股票報價等場景。實作時有以下幾點建議：</p>
+
+<ul>
+    <li><strong>連線逾時處理</strong>：長時間串流可能會逾時，建議定時發送心跳維持連線</li>
+    <li><strong>錯誤復原機制</strong>：建立自動重連邏輯，避免網路波動時中斷體驗</li>
+    <li><strong>緩衝區優化</strong>：不要每收到一個字元就更新 DOM，建議使用節流（throttle）技術</li>
+    <li><strong>壓縮傳輸</strong>：啟用 gzip 壓縮減少傳輸量，特別是長文本場景</li>
+</ul>
+
+<p>串流輸出能夠顯著提升使用者體驗，讓 AI 回覆更具互動感。透過本文介紹的技術，你可以在任何現代網頁應用中快速實現即時顯示功能。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">串流輸出與傳統 API 呼叫有什麼不同？</h3>
+            <p class="faq-a">傳統 API 需等待伺服器完整運算後才一次性返回結果，使用者只能看到最終畫面。串流輸出則讓伺服器在運算過程中就分塊發送資料，客戶端可以即時看到內容逐步呈現，類似打字效果。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">串流輸出需要特殊的伺服器支援嗎？</h3>
+            <p class="faq-a">大多數現代伺服器都支援 HTTP Chunked Transfer，不需要特殊設定。但要注意 Nginx 預設可能會緩衝回應，建議調整 proxy_buffering 設定；Apache則需啟用 mod_proxy。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何處理串流過程中的網路錯誤？</h3>
+            <p class="faq-a">前端應實作自動重連機制，可在 onerror 回調中判斷連線狀態，短暂延迟後重新建立連線。同時建議記錄已接收的資料位置，實現斷點續傳功能。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
