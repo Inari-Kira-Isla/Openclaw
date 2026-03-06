@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Copilot 進階設定：讓 AI 配對程式設計更高效 | AI 學習寶庫</title>
+  <meta name="description" content="本文詳解 GitHub Copilot 進階設定，包括啟用方式、快捷鍵配置、語言過濾與上下文自訂，提供實用程式碼範例，幫助開發者提升 AI 配對程式設計效率。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="GitHub Copilot 進階設定：讓 AI 配對程式設計更高效">
+  <meta property="og:description" content="本文詳解 GitHub Copilot 進階設定，包括啟用方式、快捷鍵配置、語言過濾與上下文自訂，提供實用程式碼範例，幫助開發者提升 AI 配對程式設計效率。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "GitHub Copilot 進階設定：讓 AI 配對程式設計更高效", "description": "本文詳解 GitHub Copilot 進階設定，包括啟用方式、快捷鍵配置、語言過濾與上下文自訂，提供實用程式碼範例，幫助開發者提升 AI 配對程式設計效率。", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "GitHub Copilot 免費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "個人開發者可免費使用基本功能，團隊和企業用戶需訂閱付費方案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Copilot 支援哪些編輯器？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支援 Visual Studio Code、JetBrains IDEs、Neovim 等主流編輯器。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何關閉特定檔案的 Copilot？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可在設定中針對特定副檔名或語言進行開關控制，例如設定「github.copilot.javascript.enable」為 false。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>GitHub Copilot 進階設定：讓 AI 配對程式設...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">GitHub Copilot 進階設定：讓 AI 配對程式設計更高效</h1>
+      <div class="article-info">
+        <span>📅 2026-03-06</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>GitHub Copilot 進階設定：讓 AI 配對程式設計更高效</h2>
+
+<p>GitHub Copilot 是一款由 AI 驅動的程式碼配對工具，能夠根據上下文自動產生程式碼建議，大幅提升開發效率。透過進階設定，開發者可以自訂建議行為、優化快捷鍵、管理支援的語言，讓 Copilot 更精準地符合個人開發習慣。本文將帶您完整掌握 Copilot 的進階設定技巧。</p>
+
+<h2>啟用 GitHub Copilot 並進行基礎配置</h2>
+
+<p>首先，您需要安裝 Visual Studio Code（或其他支援的編輯器）並安裝 Copilot 擴充功能。安裝完成後，登入您的 GitHub 帳戶即可啟用服務。Copilot 採用訂閱制，個人開發者可免費使用基本功能。</p>
+
+<p>基礎配置包括：</p>
+<ul>
+<li>開啟/關閉 Copilot 自動建議功能</li>
+<li>設定建議顯示方式（內聯或新視窗）</li>
+<li>調整建議接受方式（Tab 鍵或 Enter 鍵）</li>
+</ul>
+
+<h2>快捷鍵自訂與建議管理</h2>
+
+<p>Copilot 提供多個快捷鍵讓您快速控制建議行為。在 VS Code 中，預設快捷鍵包括：</p>
+<ul>
+<li><strong>Ctrl+Enter</strong>：開啟建議面板查看多個選項</li>
+<li><strong>Ctrl+]</strong>：拒絕當前建議</li>
+<li><strong>Alt+]</strong>：接受下一個單字建議</li>
+</ul>
+
+<p>您可以透過「檔案 > 喜好設定 > 鍵盤快捷鍵」自訂這些快捷鍵，找到「copilot」相關指令即可修改。例如，將「接受建議」改為您習慣的按鍵組合。</p>
+
+<h2>語言過濾與上下文自訂</h2>
+
+<p>Copilot 支援多種程式語言，您可以針對特定語言進行精細調整。進入設定頁面，搜尋「github.copilot」即可看到各項選項：</p>
+
+<ul>
+<li><strong>github.copilot.enable</strong>：全域開關</li>
+<li><strong>github.copilot.<語言>.enable</strong>：針對特定語言開關</li>
+<li><strong>github.copilot.advanced</strong>：進階選項</li>
+</ul>
+
+<p>例如，若您只想在 Python 檔案中使用 Copilot，可將預設語言設為關閉，再針對 Python 啟用。這樣可以避免在不希望的檔案類型中出現建議。</p>
+
+<h2>使用範例：自訂函式建議行為</h2>
+
+<p>以下展示如何利用 Copilot 的上下文感知功能產生更精準的建議：</p>
+
+<pre><code># 定義明確的函式文件字串
+def calculate_discount(price: float, discount_rate: float) -> float:
+    """
+    計算折扣後的價格
+    
+    Args:
+        price: 原始價格
+        discount_rate: 折扣率 (0.0-1.0)
+    
+    Returns:
+        折扣後的價格
+    """
+    # Copilot 會根據此文件字串產生正確的實作
+    return price * (1 - discount_rate)
+</code></pre>
+
+<p>透過撰寫完整的文件字串（docstring），您可以引導 Copilot 產生符合預期的程式碼。此外，使用型別提示（type hints）也能顯著提升建議的準確度。</p>
+
+<h2>Copilot 進階技巧與最佳實踐</h2>
+
+<p>以下是幾個提升使用效率的進階技巧：</p>
+
+<ol>
+<li><strong>練習接受和拒絕建議</strong>：快速判斷建議是否符合需求，適時使用 Tab 接受或 Ctrl+] 拒絕。</li>
+<li><strong>利用註解引導產生</strong>：在程式碼中加入中文註解，Copilot 能理解並產生相應的程式碼。</li>
+<li><strong>建立個人程式碼片段</strong>：在設定中建立程式碼片段，讓 Copilot 學習您的常用模式。</li>
+<li><strong>定期查看建議歷史</strong>：了解 Copilot 的建議模式，持續優化使用方式。</li>
+</ol>
+
+<p>透過這些進階設定和技巧，您將能充分發揮 Git Copilot 的潛力，讓 AI 配對程式設計成為提升開發效率的強大助力。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">GitHub Copilot 免費嗎？</h3>
+            <p class="faq-a">個人開發者可免費使用基本功能，團隊和企業用戶需訂閱付費方案。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Copilot 支援哪些編輯器？</h3>
+            <p class="faq-a">支援 Visual Studio Code、JetBrains IDEs、Neovim 等主流編輯器。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何關閉特定檔案的 Copilot？</h3>
+            <p class="faq-a">可在設定中針對特定副檔名或語言進行開關控制，例如設定「github.copilot.javascript.enable」為 false。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

@@ -30,5 +30,10 @@
 ## 更新頻率 (Update Frequency)
 每日自動更新，每天發布 10 篇新文章。
 
+## 相關服務 (Related Services)
+- CloudPipe AI 自動化平台: https://cloudpipe-landing.vercel.app
+- CloudPipe 全球企業目錄 (1.85M businesses): https://directory-swart-xi.vercel.app
+- AEO 健康檢查工具 (免費): https://directory-swart-xi.vercel.app/check.html
+
 ## 聯絡 (Contact)
 GitHub: https://github.com/Inari-Kira-Isla/Openclaw
