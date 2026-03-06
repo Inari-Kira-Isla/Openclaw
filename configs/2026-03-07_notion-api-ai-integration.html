@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notion API 配置指南：連接 AI 打造個人知識管理系統 | AI 學習寶庫</title>
+  <meta name="description" content="完整教學 Notion API 配置方法，透過 API 連接 AI 工具打造個人知識管理系統。包含帳號設定、金鑰取得、整合 ChatGPT 等熱門 AI 的詳細步驟與程式碼範例。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_notion-api-ai-integration.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Notion API 配置指南：連接 AI 打造個人知識管理系統">
+  <meta property="og:description" content="完整教學 Notion API 配置方法，透過 API 連接 AI 工具打造個人知識管理系統。包含帳號設定、金鑰取得、整合 ChatGPT 等熱門 AI 的詳細步驟與程式碼範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_notion-api-ai-integration.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Notion API 配置指南：連接 AI 打造個人知識管理系統", "description": "完整教學 Notion API 配置方法，透過 API 連接 AI 工具打造個人知識管理系統。包含帳號設定、金鑰取得、整合 ChatGPT 等熱門 AI 的詳細步驟與程式碼範例。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_notion-api-ai-integration.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Notion API 需要付費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Notion API 本身免費使用，但有 API 請求頻率限制。個人版每分鐘約 3 個請求，團隊版提高到 5 個請求。如需更高頻率，可考慮升級方案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保 API 連線的安全性？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "請勿將 API 金鑰直接寫在程式碼中，建議使用環境變數或 .env 檔案管理敏感資訊。並定期輪替金鑰，避免安全風險。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以同時連接多個 Notion 頁面嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，一個 Integration 可以授權連接多個頁面或資料庫。在程式碼中指定不同的 page_id 即可分別操作各頁面。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Notion API 配置指南：連接 AI 打造個人知識管理...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Notion API 配置指南：連接 AI 打造個人知識管理系統</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>本文將詳細教您如何配置 Notion API 並連接 AI 工具，從零開始打造個人知識管理系統。透過 API 整合，您可以讓 AI 自動分析、整理和生成筆記內容，大幅提升知識管理效率。</p>
+
+<h2>什麼是 Notion API</h2>
+<p>Notion API 是 Notion 提供的程式介面，允許開發者透過程式碼存取和操作 Notion 中的資料。透過 API，您可以自動化建立頁面、編輯資料庫內容、同步資訊，甚至將 Notion 與 ChatGPT、Claude 等 AI 工具串接，實現智慧化的知識管理體驗。</p>
+
+<h2>建立 Notion Integration</h2>
+<p>首先，您需要建立一個 Notion Integration 來取得 API 存取權限。請依序以下步驟操作：</p>
+<ul>
+<li>前往 <a href="https://www.notion.so/my-integrations" target="_blank">Notion My Integrations</a> 頁面</li>
+<li>點擊「New integration」建立新整合</li>
+<li>填寫名稱（例如：AI Knowledge Assistant）</li>
+<li>選擇適當的權限能力</li>
+<li>點擊「Submit」完成建立</li>
+</ul>
+<p>建立完成後，系統會產生一個「Internal Integration Secret」，這就是您的 API 金鑰，請務必妥善保管，切勿公開分享。</p>
+
+<h2>將 API 連接至 Notion 頁面</h2>
+<p>取得 API 金鑰後，您需要授權 API 存取特定的 Notion 頁面或資料庫：</p>
+<ul>
+<li>開啟您要授權的 Notion 頁面</li>
+<li>點擊頁面右上角的「•••」選單</li>
+<li>選擇「Connect to」並點擊您的 Integration 名稱</li>
+<li>確認連接完成</li>
+</ul>
+
+<h2>使用 Python 連接 Notion API</h2>
+<p>以下是以 Python 語言連接 Notion API 的基本範例：</p>
+<pre><code>from notion_client import Client
+
+# 初始化 Notion 客戶端
+notion = Client(auth="your_integration_secret_here")
+
+# 取得頁面資訊
+page_id = "your_page_id_here"
+page = notion.pages.retrieve(page_id)
+
+# 建立新頁面
+new_page = notion.pages.create(
+    parent={"page_id": page_id},
+    properties={
+        "Name": {
+            "title": [
+                {"text": {"content": "AI 生成的筆記"}}
+            ]
+        }
+    },
+    children=[
+        {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {
+                "text": [{"text": {"content": "這是由 AI 協助建立的知識頁面"}}]
+            }
+        }
+    ]
+)
+
+print("頁面建立成功！")</code></pre>
+
+<h2>整合 AI 打造智慧知識庫</h2>
+<p>將 Notion API 與 AI 工具結合，可以實現多種強大功能：</p>
+<ol>
+<li><strong>自動摘要</strong>：讓 AI 閱讀筆記內容並產生摘要</li>
+<li><strong>標籤分類</strong>：AI 自動分析內容並建議分類標籤</li>
+<li><strong>搜尋增強</strong>：結合向量資料庫實現語意搜尋</li>
+<li><strong>內容生成</strong>：根據現有筆記自動產生關聯內容</li>
+</ol>
+<p>透過這樣的整合，您可以打造一個會學習、會思考的个人 AI 知識助手，大幅提升資訊處理效率。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Notion API 需要付費嗎？</h3>
+            <p class="faq-a">Notion API 本身免費使用，但有 API 請求頻率限制。個人版每分鐘約 3 個請求，團隊版提高到 5 個請求。如需更高頻率，可考慮升級方案。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保 API 連線的安全性？</h3>
+            <p class="faq-a">請勿將 API 金鑰直接寫在程式碼中，建議使用環境變數或 .env 檔案管理敏感資訊。並定期輪替金鑰，避免安全風險。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">可以同時連接多個 Notion 頁面嗎？</h3>
+            <p class="faq-a">可以，一個 Integration 可以授權連接多個頁面或資料庫。在程式碼中指定不同的 page_id 即可分別操作各頁面。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
