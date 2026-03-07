@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學 | AI 學習寶庫</title>
+  <meta name="description" content="本指南詳細介紹 Claude Desktop MCP Server 的完整安裝與配置流程，透過一鍵安裝方式快速啟用 AI 助手功能。涵蓋環境準備、伺服器連接、常見問題排除等教學，幫助使用者輕鬆打造個人化 AI 開發環境。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_claude-desktop-mcp-setup.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學">
+  <meta property="og:description" content="本指南詳細介紹 Claude Desktop MCP Server 的完整安裝與配置流程，透過一鍵安裝方式快速啟用 AI 助手功能。涵蓋環境準備、伺服器連接、常見問題排除等教學，幫助使用者輕鬆打造個人化 AI 開發環境。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_claude-desktop-mcp-setup.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學", "description": "本指南詳細介紹 Claude Desktop MCP Server 的完整安裝與配置流程，透過一鍵安裝方式快速啟用 AI 助手功能。涵蓋環境準備、伺服器連接、常見問題排除等教學，幫助使用者輕鬆打造個人化 AI 開發環境。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_claude-desktop-mcp-setup.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "如何確認 MCP Server 已正確安裝並運作？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 Claude Desktop 中輸入要求讀取設定目錄檔案的指令，若成功回傳檔案列表即表示運作正常。您也可以在終端機執行「npx @modelcontextprotocol/server-filesystem --help」驗證安裝狀態。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "MCP Server 連接失敗該如何處理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "首先檢查 Node.js 版本是否為 18 以上，其次確認設定檔路徑語法正確。若問題持續，嘗試重新啟動 Claude Desktop 或檢查系統防火牆是否阻擋本地連線。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以同時使用多個 MCP Server 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，您只需在設定檔的 mcpServers 物件中新增多個伺服器配置即可。每個伺服器需指定不同的名稱和命令，方便 Claude 依據需求調用相應的資源。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Desktop 完整配置指南：MCP Serv...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是 Claude Desktop 與 MCP Server</h2>
+<p>Claude Desktop 是 Anthropic 公司推出的 AI 桌面應用程式，而 MCP Server（Model Context Protocol Server）是一個開源的伺服器解決方案，讓 Claude Desktop 能夠存取本地檔案系統、執行命令以及與各種開發工具整合。透過 MCP Server，您可以讓 AI 助手直接讀取專案檔案、執行開發指令，大幅提升開發效率。</p>
+<p>簡單來說，MCP Server 就像是 Claude Desktop 與您電腦之間的橋樑，允許 AI 在您授權的範圍內操作本地資源。這種設計兼顧了便利性與安全性，是目前 AI 輔助開發的重要架構。</p>
+
+<h2>安裝前的環境準備</h2>
+<p>在開始安裝 MCP Server 之前，需要確保您的系統符合以下必要條件：</p>
+<ul>
+<li><strong>作業系統：</strong>Windows 10/11、macOS 12 以上或 Linux 系統</li>
+<li><strong>Node.js 版本：</strong>需安裝 Node.js 18.0 以上版本</li>
+<li><strong>Claude Desktop：</strong>需先下載並安裝最新版本的 Claude Desktop 應用程式</li>
+<li><strong>權限要求：</strong>具有系統管理員權限以進行全域安裝</li>
+</ul>
+<p>驗證 Node.js 安裝狀態，請在終端機輸入以下指令：</p>
+<pre><code>node --version
+npm --version</code></pre>
+<p>確認版本號顯示後，即可進入下一階段的 MCP Server 安裝流程。</p>
+
+<h2>MCP Server 一鍵安裝教學</h2>
+<p>以下提供兩種主要的安裝方式，您可以根據需求選擇最適合的方法：</p>
+<h3>方式一：使用 npm 全域安裝（推薦）</h3>
+<p>這是最簡單的一鍵安裝方式，開啟終端機並執行以下指令：</p>
+<pre><code>npm install -g @modelcontextprotocol/server-filesystem</code></pre>
+<p>安裝完成後，您需要設定環境變數。請在 Claude Desktop 的設定檔案中添加以下內容：</p>
+<pre><code>{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/your/project/path"]
+    }
+  }
+}</code></pre>
+<p>將<code>/your/project/path</code>替換為您想要讓 Claude 存取的本機目錄路徑。</p>
+
+<h3>方式二：使用 Docker 部署</h3>
+<p>若您偏好使用容器化方式，可透過 Docker 快速啟動 MCP Server：</p>
+<pre><code>docker run -d -p 3100:3100 \
+  -v /your/project/path:/workspace \
+  ghcr.io/modelcontextprotocol/server-filesystem:latest</code></pre>
+<p>Docker 方式的好處在於環境隔離，適合需要同時管理多個專案的開發者。</p>
+
+<h2>Claude Desktop 連接 MCP Server</h2>
+<p>安裝完成後，按照以下步驟建立 Claude Desktop 與 MCP Server 的連接：</p>
+<ol>
+<li>開啟 Claude Desktop 應用程式</li>
+<li>點擊左上角選單，選擇「Settings」或「設定」</li>
+<li>進入「Developer」選項</li>
+<li>點擊「Edit Config」編輯設定檔</li>
+<li>確認<code>config.json</code>中已正確配置 MCP Server 資訊</li>
+<li>儲存設定並重啟 Claude Desktop</li>
+</ol>
+<p>重新啟動後，您可以嘗試輸入指令測試連接，例如要求 Claude 列出您授權目錄中的檔案。如果成功回應，表示 MCP Server 已正常運作。</p>
+
+<h2>常見問題與解決方案</h2>
+<p>在配置過程中，使用者可能會遇到以下常見問題，這裡提供具體的解決方案：</p>
+<ul>
+<li><strong>連線失敗：</strong>檢查防火牆設定，確保本機連接埠未被封鎖</li>
+<li><strong>權限不足：</strong>確認設定檔中的路徑確實存在，且具有讀取權限</li>
+<li><strong>版本不相容：</strong>更新 Node.js 至最新穩定版本</li>
+</ul>
+<p>若遇到其他問題，可查看 Claude Desktop 官方文件或 GitHub 專案的 Issues 頁面尋求協助。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">如何確認 MCP Server 已正確安裝並運作？</h3>
+            <p class="faq-a">在 Claude Desktop 中輸入要求讀取設定目錄檔案的指令，若成功回傳檔案列表即表示運作正常。您也可以在終端機執行「npx @modelcontextprotocol/server-filesystem --help」驗證安裝狀態。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">MCP Server 連接失敗該如何處理？</h3>
+            <p class="faq-a">首先檢查 Node.js 版本是否為 18 以上，其次確認設定檔路徑語法正確。若問題持續，嘗試重新啟動 Claude Desktop 或檢查系統防火牆是否阻擋本地連線。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">可以同時使用多個 MCP Server 嗎？</h3>
+            <p class="faq-a">可以，您只需在設定檔的 mcpServers 物件中新增多個伺服器配置即可。每個伺服器需指定不同的名稱和命令，方便 Claude 依據需求調用相應的資源。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
