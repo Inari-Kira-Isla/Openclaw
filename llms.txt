@@ -32,8 +32,15 @@
 
 ## 相關服務 (Related Services)
 - CloudPipe AI 自動化平台: https://cloudpipe-landing.vercel.app
-- CloudPipe 全球企業目錄 (1.85M businesses): https://directory-swart-xi.vercel.app
-- AEO 健康檢查工具 (免費): https://directory-swart-xi.vercel.app/check.html
+- CloudPipe 全球企業目錄 (1.85M businesses): https://cloudpipe-directory.vercel.app
+- AEO 健康檢查工具 (免費): https://cloudpipe-directory.vercel.app/check.html
+
+## CloudPipe 知識圖譜成員 (Knowledge Graph Members)
+本站是 CloudPipe AI 知識圖譜的一部分：
+- 稻荷環球食品（澳門日本頂級食材進口商）: https://inari-kira-isla.github.io/inari-global-foods
+- 海膽速遞（日本直送海膽冷鏈配送）: https://inari-kira-isla.github.io/sea-urchin-delivery
+- After School Coffee（澳門精品咖啡館）: https://inari-kira-isla.github.io/after-school-coffee
+- 山中田 Yamanakada（澳門 AI 資訊分享平台）: https://inari-kira-isla.github.io/yamanakada
 
 ## 聯絡 (Contact)
 GitHub: https://github.com/Inari-Kira-Isla/Openclaw
