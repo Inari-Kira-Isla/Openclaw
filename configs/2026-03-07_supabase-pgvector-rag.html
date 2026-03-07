@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supabase + pgvector：向量資料庫配置與 RAG 系統搭建 | AI 學習寶庫</title>
+  <meta name="description" content="本文詳細教學 Supabase 與 pgvector 向量資料庫的配置方法，以及如何搭建完整的 RAG（檢索增強生成）系統，包含 PostgreSQL 擴充功能啟用、向量搜尋語法教學與實際應用範例。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_supabase-pgvector-rag.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Supabase + pgvector：向量資料庫配置與 RAG 系統搭建">
+  <meta property="og:description" content="本文詳細教學 Supabase 與 pgvector 向量資料庫的配置方法，以及如何搭建完整的 RAG（檢索增強生成）系統，包含 PostgreSQL 擴充功能啟用、向量搜尋語法教學與實際應用範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_supabase-pgvector-rag.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Supabase + pgvector：向量資料庫配置與 RAG 系統搭建", "description": "本文詳細教學 Supabase 與 pgvector 向量資料庫的配置方法，以及如何搭建完整的 RAG（檢索增強生成）系統，包含 PostgreSQL 擴充功能啟用、向量搜尋語法教學與實際應用範例。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_supabase-pgvector-rag.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "pgvector 支援哪些向量維度？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "pgvector 支援最多 16,000 維的向量，常用維度包括 OpenAI 的 1536 維與 Cohere 的 4096 維。建立資料表時需明確指定維度，且所有向量必須維度一致。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "向量索引效能如何優化？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議使用 HNSW 索引（適合即時搜尋）或 IVFFlat 索引（適合大量資料建置）。HNSW 可透過調整 m 與 ef_construction 參數平衡搜尋速度與精確度。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Supabase 可以使用哪些距離計算方式？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "pgvector 支援三種距離運算：歐氏距離（<->）、內積（<#>）、餘弦相似度（<=>）。餘弦相似度最常用於語意搜尋場景。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Supabase + pgvector：向量資料庫配置與 R...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Supabase + pgvector：向量資料庫配置與 RAG 系統搭建</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 12 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Supabase + pgvector 向量資料庫配置與 RAG 系統完整教學</h2>
+
+<p>Supabase 結合 pgvector 擴充功能，讓您可以直接在 PostgreSQL 中儲存與搜尋向量資料，實現高效能的 RAG（檢索增強生成）系統。本文將逐步帶您完成向量資料庫配置，並展示如何運用語意搜尋提升 AI 應用的精準度。</p>
+
+<h2>什麼是 pgvector 與為何選擇 Supabase</h2>
+
+<p>pgvector 是 PostgreSQL 的向量搜尋擴充功能，支援向量嵌入（embedding）的儲存、索引建立與相似性搜尋。Supabase 作為開源的 Firebase 替代方案，內建 PostgreSQL 完整功能，可直接啟用 pgvector 擴充，無需額外部署向量資料庫。</p>
+
+<p>使用 Supabase 的優勢包括：統一的資料庫架構、RESTful API 自動生成、Row Level Security 安全性控制，以及與 Edge Functions 的無縫整合。這讓 RAG 系統的開發流程更加簡潔。</p>
+
+<h2>步驟一：啟用 pgvector 擴充功能</h2>
+
+<p>在 Supabase 控制台或透過 SQL 編輯器執行以下指令啟用 pgvector：</p>
+
+<pre><code>-- 建立 pgvector 擴充功能
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- 驗證版本
+SELECT extversion FROM pg_extension WHERE extname = 'vector';</code></pre>
+
+<p>接著建立儲存向量資料的資料表，並指定向量維度（這裡以 OpenAI text-embedding-3-small 的 1536 維為例）：</p>
+
+<pre><code>-- 建立文件資料表
+CREATE TABLE documents (
+  id BIGSERIAL PRIMARY KEY,
+  content TEXT NOT NULL,
+  embedding vector(1536),
+  metadata JSONB,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 建立 HNSW 索引以加速向量搜尋
+CREATE INDEX ON documents 
+USING hnsw (embedding vector_cosine_ops)
+WITH (m = 16, ef_construction = 64);</code></pre>
+
+<h2>步驟二：產生向量嵌入並儲存</h2>
+
+<p>您需要將文字內容轉換為向量嵌入。以下是使用 OpenAI API 產生嵌入的範例程式碼：</p>
+
+<pre><code>import { createClient } from '@supabase/supabase-js';
+import OpenAI from 'openai';
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// 將文字轉為向量嵌入
+async function getEmbedding(text) {
+  const response = await openai.embeddings.create({
+    model: 'text-embedding-3-small',
+    input: text
+  });
+  return response.data[0].embedding;
+}
+
+// 儲存文件與向量
+async function storeDocument(content, metadata = {}) {
+  const embedding = await getEmbedding(content);
+  
+  const { data, error } = await supabase
+    .from('documents')
+    .insert({
+      content,
+      embedding,
+      metadata
+    })
+    .select();
+  
+  if (error) throw error;
+  return data;
+}
+
+// 範例：儲存技術文件
+await storeDocument(
+  'Supabase 是開源的 Firebase 替代方案，支援 PostgreSQL 資料庫',
+  { source: 'tech-docs', category: 'database' }
+);</code></pre>
+
+<h2>步驟三：實現語意相似性搜尋</h2>
+
+<p>向量搜尋的核心是找出與查詢最相似的文件。pgvector 提供三種距離運算方式：歐氏距離（<code>&lt;#&gt;</code>）、內積（<code>&lt;#&gt;</code>）、餘弦相似度（<code>&lt;=&gt;</code>）。以下範例使用餘弦相似度：</p>
+
+<pre><code>-- 語意搜尋函數
+async function semanticSearch(query, topK = 5) {
+  const queryEmbedding = await getEmbedding(query);
+  
+  const { data, error } = await supabase
+    .from('documents')
+    .select('id, content, metadata')
+    .select(
+      'embedding',
+      { count: 'exact', head: false }
+    )
+    .order(
+      'embedding',
+      { ascending: false, queryEmbedding: queryEmbedding }
+    )
+    .limit(topK);
+  
+  if (error) throw error;
+  return data;
+}
+
+// 執行搜尋
+const results = await semanticSearch('什麼是開源的資料庫解決方案？');</code></pre>
+
+<p>Supabase 也支援直接使用 SQL 進行向量搜尋：</p>
+
+<pre><code>-- 直接 SQL 搜尋
+SELECT id, content, 
+  (embedding <=> '[查詢向量]'::vector) AS similarity
+FROM documents
+ORDER BY similarity ASC
+LIMIT 5;</code></pre>
+
+<h2>步驟四：整合 RAG 系統實作</h2>
+
+<p>完整的 RAG 流程是：接收使用者問題 → 向量搜尋相關文件 → 將文件內容作為上下文回饋給 LLM。以下是完整實作：</p>
+
+<pre><code>async function ragQuery(userQuestion) {
+  // 1. 取得問題的向量表示
+  const questionEmbedding = await getEmbedding(userQuestion);
+  
+  // 2. 向量搜尋取得相關文件
+  const { data: documents } = await supabase.rpc(
+    'match_documents',
+    {
+      query_embedding: questionEmbedding,
+      match_threshold: 0.7,
+      match_count: 3
+    }
+  );
+  
+  // 3. 組合上下文
+  const context = documents
+    .map(doc => doc.content)
+    .join('\n\n');
+  
+  // 4. 呼叫 LLM 生成回答
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4',
+    messages: [
+      {
+        role: 'system',
+        content: '請根據以下參考資料回答問題。參考資料：\n' + context
+      },
+      {
+        role: 'user',
+        content: userQuestion
+      }
+    ]
+  });
+  
+  return response.choices[0].message.content;
+}
+
+// 使用 RAG 系統
+const answer = await ragQuery('Supabase 有哪些主要功能？');
+console.log(answer);</code></pre>
+
+<p>其中 <code>match_documents</code> 是透過 Supabase Edge Function 或 PostgreSQL 函數建立的向量搜尋包裝函數，可參考 Supabase 官方提供的 pgvector 教學進行設定。</p>
+
+<h2>總結</h2>
+
+<p>透過 Supabase 與 pgvector 的整合，您可以在單一資料庫中同時管理結構化資料與向量資料，大幅簡化 RAG 系統的架構。關鍵步驟包含：啟用 pgvector 擴充、建立向量欄位與索引、產生文字嵌入、實作語意搜尋，最後將搜尋結果傳入 LLM 生成回答。此架構具有高度擴展性，適合各種 AI 應用場景。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">pgvector 支援哪些向量維度？</h3>
+            <p class="faq-a">pgvector 支援最多 16,000 維的向量，常用維度包括 OpenAI 的 1536 維與 Cohere 的 4096 維。建立資料表時需明確指定維度，且所有向量必須維度一致。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">向量索引效能如何優化？</h3>
+            <p class="faq-a">建議使用 HNSW 索引（適合即時搜尋）或 IVFFlat 索引（適合大量資料建置）。HNSW 可透過調整 m 與 ef_construction 參數平衡搜尋速度與精確度。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Supabase 可以使用哪些距離計算方式？</h3>
+            <p class="faq-a">pgvector 支援三種距離運算：歐氏距離（<->）、內積（<#>）、餘弦相似度（<=>）。餘弦相似度最常用於語意搜尋場景。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
