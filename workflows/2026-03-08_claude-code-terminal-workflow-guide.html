@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code 是 2025 年發布的終端機 AI 編程助手，八個月內超越 Copilot 成為最多人使用的 AI 開發工具。本文介紹 10 個核心工作流，包含 Bug 修復、重構、測試生成、文件撰寫到 MCP 整合。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-code-terminal-workflow-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流">
+  <meta property="og:description" content="Claude Code 是 2025 年發布的終端機 AI 編程助手，八個月內超越 Copilot 成為最多人使用的 AI 開發工具。本文介紹 10 個核心工作流，包含 Bug 修復、重構、測試生成、文件撰寫到 MCP 整合。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-code-terminal-workflow-guide.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流", "description": "Claude Code 是 2025 年發布的終端機 AI 編程助手，八個月內超越 Copilot 成為最多人使用的 AI 開發工具。本文介紹 10 個核心工作流，包含 Bug 修復、重構、測試生成、文件撰寫到 MCP 整合。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-code-terminal-workflow-guide.html"}, "articleSection": "工作流"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Code 與 GitHub Copilot 有何差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code 是終端機工具，支援完整專案分析、語音輸入和多步驟任務，適合深度開發；Copilot 偏重程式碼補全。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "需要多少費用才能使用 Claude Code？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code 提供免費方案，基本功能已足夠日常使用，進階功能則有付費訂閱選項。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "語音模式如何啟用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 CLI 中執行 <code>claude voice</code> 即可啟用語音互動模式，支援口述指令即時生成程式碼。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code 完全上手指南：終端機 AI 編程助手...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p><strong>Claude Code</strong> 是 Anthropic 推出的終端機 AI 編程助手，自 2025 年 5 月發布後僅八個月便超越 GitHub Copilot 與 Cursor，成為全球使用率最高的 AI 開發工具。調查顯示 75% 的中小型企業已將其列為主力工具，78% 的開發者利用 AI 完成超過 50% 的編程任務。透過 Claude Code 的 10 個核心工作流，你可以實現從 Bug 修復到完整網站建置的自動化開發體驗。</p>
+
+<h2>一、安裝與基本設定</h2>
+<p>Claude Code 可透過 npm 全域安裝，或直接下載編譯版本。建議安裝 Claude CLI 後配置環境變數，並啟用語音模式以獲得 3.7 倍的開發效率提升。</p>
+<pre><code>npm install -g @anthropic-ai/claude-code
+claude configure</code></pre>
+<p>設定完成後，可使用 <code>claude --help</code> 查看所有可用指令。</p>
+
+<h2>二、Bug 修復工作流</h2>
+<p>面對 Bug 時，可直接將錯誤訊息貼入 Claude Code，它會自動分析堆疊追蹤、定位問題根源，並生成修復方案。你可以用口述方式描述 Bug 現象，語音輸入可加速工作流程 3.7 倍。</p>
+<pre><code>claude fix "TypeError: Cannot read property 'map' of undefined"</code></pre>
+<p>Claude Code 會分析錯誤上下文，給出具體的修復程式碼並說明原因。</p>
+
+<h2>三、程式碼重構與優化</h2>
+<p>當你需要重構舊程式碼時，只需指定重構目標，Claude Code 會自動識別可優化之處、重構為更易讀的結構，並確保功能不受影響。它能處理從函式提取到架構決策的各種重構需求。</p>
+
+<h2>四、測試生成自動化</h2>
+<p>Claude Code 可根據現有程式碼自動生成單元測試與整合測試。輸入目標檔案，它會分析函式邏輯並產生覆蓋率高的測試案例，大幅減少手寫測試的時間。</p>
+
+<h2>五、文件撰寫與維護</h2>
+<p>從 API 文件到 README，Claude Code 能自動生成結構清晰、技術準確的文件。它會閱讀你的程式碼並產出符合產業標準的文件內容。</p>
+
+<h2>六、MCP 整合應用</h2>
+<p>Claude Code 支援 Model Context Protocol（MCP），可連接各種開發工具與服務。你能整合版本控制系統、專案管理工具，建構完整的 AI 驅動開發環境。</p>
+
+<h2>七、Claude Cowork 網站建置</h2>
+<p>根據 Washington Post 測試報導，Claude Cowork 可在數分鐘內從零建立完整網站。這個功能特別適合快速原型開發，讓開發者能口述需求、立即看到結果。</p>
+
+<h2>結語</h2>
+<p>掌握這 10 個核心工作流後，你將能充分發揮 Claude Code 的潛力，將 AI 整合進日常開發的每個環節。從問題診斷到產品交付，Claude Code 讓開發者能專注於創造性工作，將繁瑣的編碼任務交給 AI 處理。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Code 與 GitHub Copilot 有何差異？</h3>
+            <p class="faq-a">Claude Code 是終端機工具，支援完整專案分析、語音輸入和多步驟任務，適合深度開發；Copilot 偏重程式碼補全。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">需要多少費用才能使用 Claude Code？</h3>
+            <p class="faq-a">Claude Code 提供免費方案，基本功能已足夠日常使用，進階功能則有付費訂閱選項。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">語音模式如何啟用？</h3>
+            <p class="faq-a">在 CLI 中執行 <code>claude voice</code> 即可啟用語音互動模式，支援口述指令即時生成程式碼。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
