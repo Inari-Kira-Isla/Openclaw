@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本 | AI 學習寶庫</title>
+  <meta name="description" content="AI程式碼審查提示詞集是提升程式碼品質的關鍵工具，本文精選10個實用範本，涵蓋錯誤檢測、效能優化、安全性審查等面向，幫助開發者快速掌握AI輔助code review的技巧。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_code-review-prompts.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本">
+  <meta property="og:description" content="AI程式碼審查提示詞集是提升程式碼品質的關鍵工具，本文精選10個實用範本，涵蓋錯誤檢測、效能優化、安全性審查等面向，幫助開發者快速掌握AI輔助code review的技巧。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_code-review-prompts.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本", "description": "AI程式碼審查提示詞集是提升程式碼品質的關鍵工具，本文精選10個實用範本，涵蓋錯誤檢測、效能優化、安全性審查等面向，幫助開發者快速掌握AI輔助code review的技巧。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_code-review-prompts.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI 程式碼審查可以完全取代人工 code review 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能完全取代。AI 擅長快速掃描語法錯誤、效能問題和安全漏洞，但對於業務邏輯驗證、架構決策和團隊特定規範的判斷，仍需要人類專業開發者的介入。建議將 AI 作為人工審查的輔助工具。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "使用 AI 進行程式碼審查會不會有資料外洩風險？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "視選擇的工具而定。建議使用重視隱私的 AI 服務，或在本地部署模型（如 CodeLlama）進行審查。對於機密專案，應避免將未經脫敏的程式碼傳送至外部雲端服務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "哪些程式語言最適合使用 AI 程式碼審查？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主流程式語言如 Python、JavaScript/TypeScript、Java、C++、Go 等都有良好的支援。AI 對這些語言的訓練資料較為豐富，審查品質也較高。較新或較小眾的語言可能需要更精確的提示詞設計。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本</h1>
+      <div class="article-info">
+        <span>📅 2026-03-07</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>AI 程式碼審查提示詞集：直接提升程式碼品質的 10 個範本</h2>
+
+<p>AI 程式碼審查提示詞集是一組結構化的指令模板，透過大型語言模型（LLM）協助開發者自動檢視程式碼中的錯誤、效能瓶頸與安全漏洞。使用這些提示詞範本，可將傳統耗時的 code review 流程從數小時縮短至數分鐘，同時保持高品質的審查標準。以下整理 10 個最實用的提示詞範本，幫助您快速提升開發效率。</p>
+
+<h2>為什麼需要 AI 輔助程式碼審查？</h2>
+
+<p>傳統的人工程式碼審查（code review）雖然有效，但存在諸多痛點：時間成本高、難以發現隱藏問題、主觀性差異大。AI 輔助審查可以快速掃描大量程式碼，識別常見錯誤模式，並提供一致的審查標準。根據實際應用經驗，AI 輔助審查可幫助團隊減少約 40% 的程式碼缺陷，同時讓人類審查者專注於更複雜的架構設計與業務邏輯驗證。</p>
+
+<h2>10 個實用 AI 程式碼審查提示詞範本</h2>
+
+<h3>範本 1：基礎語法與錯誤檢查</h3>
+
+<p>此範本適用於快速掃描程式碼的基本語法錯誤與邏輯問題。</p>
+
+<pre><code>請檢視以下 [程式語言] 程式碼，找出：
+1. 語法錯誤
+2. 類型錯誤
+3. 變數未定義問題
+4. 明顯的邏輯錯誤
+
+程式碼：
+[在此貼上您的程式碼]
+
+請逐行列出問題，並提供修正建議。</code></pre>
+
+<h3>範本 2：效能優化審查</h3>
+
+<p>針對效能敏感的操作，提供具體的優化建議。</p>
+
+<pre><code>分析以下程式碼的效能問題：
+1. 時間複雜度分析
+2. 記憶體使用效率
+3. 資料庫查詢優化可能性
+4. 快取策略建議
+
+程式碼：
+[在此貼上您的程式碼]
+
+請提供具體的效能改進方案，並說明優化後的預期改善。</code></pre>
+
+<h3>範本 3：安全性漏洞掃描</h3>
+
+<p>識別常見的安全風險，是現代開發不可或缺的審查環節。</p>
+
+<pre><code>執行安全審查，找出以下問題：
+1. SQL 注入風險
+2. XSS 跨站腳本攻擊漏洞
+3. 認證與授權問題
+4. 敏感資料暴露風險
+5. 不安全的依賴套件
+
+程式碼：
+[在此貼上您的程式碼]
+
+請針對每個發現的漏洞提供風險等級（高/中/低）和修復建議。</code></pre>
+
+<h3>範本 4：程式碼風格與規範檢查</h3>
+
+<p>確保團隊程式碼的一致性，維持長期可維護性。</p>
+
+<pre><code>根據 [程式語言] 的最佳實踐，檢查以下程式碼：
+1. 命名規範一致性
+2. 函式/方法長度是否適當
+3. 註解品質與完整性
+4. 程式碼重複情況
+
+程式碼：
+[在此貼上您的程式碼]
+
+請列出不符合風格指南的具體位置。</code></pre>
+
+<h3>範本 5：單元測試覆蓋率評估</h3>
+
+<p>檢驗現有測試是否充分，並提供改進建議。</p>
+
+<pre><code>分析以下程式碼的測試覆蓋情況：
+1. 現有測試的有效性
+2. 邊界條件是否被覆蓋
+3. 遺漏的測試場景
+4. Mock 物件使用是否恰當
+
+程式碼：
+[在此貼上您的程式碼]
+
+請提供具體的測試改進建議與新增測試案例。</code></pre>
+
+<h3>範本 6 至 10：進階應用場景</h3>
+
+<p>除了基礎審查，AI 提示詞還可應用於：</p>
+<ul>
+<li><strong>架構審查</strong>：檢查程式碼是否符合設計模式與架構原則</li>
+<li><strong>API 設計評估</strong>：驗證 RESTful API 設計的最佳實踐</li>
+<li><strong>並發問題分析</strong>：識別多執行緒環境下的潛在 race condition</li>
+<li><strong>遷移指南</strong>：協助從舊版 API 或框架升級時的相容性檢查</li>
+<li><strong>文件完整性</strong>：驗證程式碼文件與實際行為的一致性</li>
+</ul>
+
+<h2>如何有效使用這些提示詞範本？</h2>
+
+<p>要充分發揮 AI 程式碼審查的效能，建議遵循以下步驟：</p>
+
+<ol>
+<li><strong>選擇適當的範本</strong>：根據審查目標（錯誤、效能、安全等）選擇對應的提示詞</li>
+<li><strong>提供完整上下文</strong>：除了程式碼本身，應說明技術棧、編譯版本、相關依賴等資訊</li>
+<li><strong>逐步迭代優化</strong>：根據 AI 的回應持續調整提示詞，獲得更精確的結果</li>
+<li><strong>結合人工審查</strong>：AI 輔助不能完全取代人類專業判斷，兩者應相輔相成</li>
+</ol>
+
+<h2>結論</h2>
+
+<p>AI 程式碼審查提示詞集是現代開發者的強大工具，能夠顯著提升 code review 的效率與品質。透過本文提供的 10 個範本，您可以快速建立適合團隊的 AI 輔助審查流程。建議從基礎範本開始嘗試，逐漸擴展至進階應用場景，以最大化發揮 AI 在開發流程中的價值。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">AI 程式碼審查可以完全取代人工 code review 嗎？</h3>
+            <p class="faq-a">不能完全取代。AI 擅長快速掃描語法錯誤、效能問題和安全漏洞，但對於業務邏輯驗證、架構決策和團隊特定規範的判斷，仍需要人類專業開發者的介入。建議將 AI 作為人工審查的輔助工具。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">使用 AI 進行程式碼審查會不會有資料外洩風險？</h3>
+            <p class="faq-a">視選擇的工具而定。建議使用重視隱私的 AI 服務，或在本地部署模型（如 CodeLlama）進行審查。對於機密專案，應避免將未經脫敏的程式碼傳送至外部雲端服務。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">哪些程式語言最適合使用 AI 程式碼審查？</h3>
+            <p class="faq-a">主流程式語言如 Python、JavaScript/TypeScript、Java、C++、Go 等都有良好的支援。AI 對這些語言的訓練資料較為豐富，審查品質也較高。較新或較小眾的語言可能需要更精確的提示詞設計。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
