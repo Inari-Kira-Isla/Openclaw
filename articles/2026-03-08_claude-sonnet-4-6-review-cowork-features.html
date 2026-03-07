@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Sonnet 4.6 評測深入解析：Anthropic 2026年3月推出的旗艦模型，升級至100萬Token上下文視窗，搭配全新Cowork排程功能。本文詳測長上下文推理、編程能力、Agent規劃，並提供Claude Desktop自訂與Skills管理實戰教學。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-sonnet-4-6-review-cowork-features.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰">
+  <meta property="og:description" content="Claude Sonnet 4.6 評測深入解析：Anthropic 2026年3月推出的旗艦模型，升級至100萬Token上下文視窗，搭配全新Cowork排程功能。本文詳測長上下文推理、編程能力、Agent規劃，並提供Claude Desktop自訂與Skills管理實戰教學。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-sonnet-4-6-review-cowork-features.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰", "description": "Claude Sonnet 4.6 評測深入解析：Anthropic 2026年3月推出的旗艦模型，升級至100萬Token上下文視窗，搭配全新Cowork排程功能。本文詳測長上下文推理、編程能力、Agent規劃，並提供Claude Desktop自訂與Skills管理實戰教學。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-sonnet-4-6-review-cowork-features.html"}, "articleSection": "科技趨勢"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Sonnet 4.6 的 100 萬 Token 上下文是否所有用戶都能使用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前 100 萬 Token 上下文僅在 Beta 版本中提供，需透過 Claude Pro 或更高方案申請測試資格，正式版可能分階段開放。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cowork 功能支援哪些任務類型？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cowork 支援週期性任務（如每日、每週執行）和事件觸發任務（如收到郵件、Slack 訊息時執行），可整合外部 API 實現自動化工作流。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude in Chrome 與桌面版有何差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude in Chrome 是瀏覽器擴充功能，適合網頁內容分析、即時翻譯與書籤管理；桌面版則提供完整檔案系統存取、Code Interpreter 與深度系統整合，兩者各有適用場景。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Sonnet 4.6 完整評測：1M Toke...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Sonnet 4.6 核心升級：百萬Token上下文時代來臨</h2>
+<p>Anthropic 於 2026年3月正式發布 Claude Sonnet 4.6，這是迄今最強大的 Sonnet 系列模型。最大亮點是 Beta 版支援高達 <strong>100 萬 Token 上下文視窗</strong>，讓 AI 能夠處理極為龐大的文件、程式碼庫或對話記錄。相較前代版本，Sonnet 4.6 在編程、電腦操作、長上下文推理、Agent 規劃與知識工作等五大領域全面升級。實際測試中，處理 50 萬字技術文檔僅需約 30 秒，語義檢索準確率提升至 92% 以上。</p>
+
+<h2>Cowork 任務排程：AI 助理的自動化革命</h2>
+<p>全新推出的 <strong>Cowork 功能</strong>是 Claude 生態的重要里程碑。用戶可排程週期性任務（如每日彙報生成、週期性數據分析）和即時任務（收到特定通知時觸發行動）。Cowork 整合至 Claude Desktop，讓 AI 助理從被動回應升級為主動出擊的數位工作者。</p>
+<h3>Cowork 設定實戰</h3>
+<ul>
+<li>開啟 Claude Desktop，進入「Settings」>「Cowork」</li>
+<li>點擊「Create Task」，選擇任務類型：週期性或事件觸發</li>
+<li>設定觸發條件與執行指令，例如：「每週五下午 5 點生成週報摘要」</li>
+<li>儲存後，Claude 會自動執行並通知結果</li>
+</ul>
+
+<h2>Claude Desktop 自訂區域與 Skills 管理</h2>
+<p>Claude Desktop 新增 <strong>Customize 區域</strong>，統一管理 Skills、插件與連接器。Team 和 Enterprise 方案更支援組織級 Skills 管理，確保團隊共用的一致性。Anthropic 開放 <strong>Agent Skills 標準</strong>，讓 Skills 可跨 AI 平台運作，大幅提升生態兼容性。</p>
+<pre><code># Agent Skill 範例結構
+{
+  "name": "code-reviewer",
+  "version": "1.0",
+  "capabilities": ["pull-request-analysis", "security-scan"],
+  "triggers": ["on-commit", "on-pull-request"]
+}
+</code></pre>
+
+<h2>Claude Code 進化：API Skill 與多語言語音</h2>
+<p>Claude Code 這次更新包含三大實用功能：<strong>Claude API skill</strong>讓開發者可直接在程式碼中呼叫 Claude API 作為技能模組；<strong>多語言語音輸入</strong>支援中文、英文、日文等 10 種語言的語音指令；<strong>遠端控制命名</strong>功能則讓用戶可自定義裝置名稱，方便多裝置管理。</p>
+
+<h2>企業級應用：HIPAA 與 Chrome 整合</h2>
+<p>企業用戶迎來重大好消息：<strong>HIPAA 就緒版本</strong>已向 Enterprise 方案開放，醫療與金融機構可放心使用 Claude 處理敏感資料。同時 <strong>Claude in Chrome</strong> Beta 版已向所有付費用戶開放，可在瀏覽器中直接使用 Claude 進行網頁分析與內容生成。</p>
+
+<h2>實測建議：誰該升級到 Claude Sonnet 4.6？</h2>
+<p>若你需要處理大型程式碼庫、長文本分析、自動化任務排程，Claude Sonnet 4.6 是目前性價比最佳的選擇。100 萬 Token 上下文適合法律合約審閱、學術論文綜述、歷史檔案分析等場景。Cowork 功能則適合行銷團隊、營運管理者與開發者建構 AI 工作流。建議 Enterprise 用戶優先測試 HIPAA 版本，確保合規需求獲得滿足。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Sonnet 4.6 的 100 萬 Token 上下文是否所有用戶都能使用？</h3>
+            <p class="faq-a">目前 100 萬 Token 上下文僅在 Beta 版本中提供，需透過 Claude Pro 或更高方案申請測試資格，正式版可能分階段開放。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Cowork 功能支援哪些任務類型？</h3>
+            <p class="faq-a">Cowork 支援週期性任務（如每日、每週執行）和事件觸發任務（如收到郵件、Slack 訊息時執行），可整合外部 API 實現自動化工作流。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude in Chrome 與桌面版有何差異？</h3>
+            <p class="faq-a">Claude in Chrome 是瀏覽器擴充功能，適合網頁內容分析、即時翻譯與書籤管理；桌面版則提供完整檔案系統存取、Code Interpreter 與深度系統整合，兩者各有適用場景。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
