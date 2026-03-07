@@ -4,42 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較 | AI 學習寶庫</title>
-  <meta name="description" content="本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。">
+  <meta name="description" content="比較 VS Code 三大 AI 程式碼輔助外掛：Copilot、Codeium、Tabby 的功能、價格、安裝與配置方法，幫助開發者選擇最適合的工具。">
   <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html">
   <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
   <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
   <link rel="stylesheet" href="/Openclaw/style.css">
   <meta property="og:title" content="VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較">
-  <meta property="og:description" content="本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。">
+  <meta property="og:description" content="比較 VS Code 三大 AI 程式碼輔助外掛：Copilot、Codeium、Tabby 的功能、價格、安裝與配置方法，幫助開發者選擇最適合的工具。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較", "description": "本文詳解 VS Code AI 外掛 Copilot、Codeium 與 Tabby 的完整配置教學，比較三者在功能、費用、離線支援等方面的差異，並提供實際安裝步驟與程式碼範例，幫助開發者選擇最適合的 AI 程式碼輔助工具。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較", "description": "比較 VS Code 三大 AI 程式碼輔助外掛：Copilot、Codeium、Tabby 的功能、價格、安裝與配置方法，幫助開發者選擇最適合的工具。", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html"}, "articleSection": "系統配置"}</script>
   <script type="application/ld+json">{
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
         {
           "@type": "Question",
-          "name": "VS Code AI 外掛哪一款最適合初學者？",
+          "name": "Copilot 是否可以免費使用？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Codeium 最適合初學者，提供完整免費版本，功能足夠日常使用，且安裝設定簡單，不需要額外付費或複雜配置。"
+            "text": "學生可透過 GitHub Education 免費申請，其他用戶需付費訂閱。"
           }
         },
         {
           "@type": "Question",
-          "name": "Copilot 需要付費嗎？",
+          "name": "Codeium 與 Copilot 的差異為何？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "GitHub Copilot 需付費訂閱，每月約 10 美元，學生與開源專案維護者可申請免費使用。首次申請可獲得 30 天免費試用。"
+            "text": "Codeium 完全免費但功能較基礎；Copilot 收費但採用更強大的 GPT-4 模型。"
           }
         },
         {
           "@type": "Question",
-          "name": "Tabby 可以完全離線使用嗎？",
+          "name": "Tabby 需要自己訓練模型嗎？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "可以，Tabby 作為開源工具，可在本機部署執行，無需網路連線即可使用 AI 程式碼輔助功能，確保程式碼不會離開本地環境。"
+            "text": "不需要，Tabby 提供預訓練模型可直接下載使用。"
           }
         }]
   }</script>
@@ -87,114 +87,87 @@
 
     <div class="article-body">
       <h2>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較</h2>
+<p>本文針對 VS Code 最受歡迎的三款 AI 程式碼輔助工具進行完整比較與教學。根據功能完整性、價格、安裝難度和隱私保護四大維度，<strong>Codeium 適合免費需求開發者，Copilot 適合追求最高品質的專業團隊，Tabby 則適合需要自建服務的企業用戶</strong>。以下為各工具的詳細配置教學。</p>
 
-<p>在現代軟體開發中，AI 輔助程式設計工具已成為提升效率的必備利器。本文將詳細比較 VS Code 上最受歡迎的三款 AI 程式碼輔助外掛——<strong>GitHub Copilot</strong>、<strong>Codeium</strong> 和 <strong>Tabby</strong>，並提供完整的安裝與配置教學，幫助開發者根據自身需求選擇最適合的工具。</p>
-
-<h2>三款 AI 輔助工具總覽</h2>
-
-<p>在開始配置前，先了解三款工具的基本特性：</p>
-
-<ul>
-<li><strong>GitHub Copilot</strong>：由 GitHub 與 OpenAI 合作開發，採用 GPT-4 模型，支援多種語言與框架，適合專業開發者使用，但需付費訂閱。</li>
-<li><strong>Codeium</strong>：提供免費個人版本，支援 70+ 程式語言，強調高速與隱私保護，適合個人開發者與小型團隊。</li>
-<li><strong>Tabby</strong>：開源且可自架的 AI 程式碼助理，完全離線可用，適合對資料隱私有高度要求的企業與開發者。</li>
-</ul>
-
-<h2>GitHub Copilot 安裝與配置</h2>
-
-<p>Copilot 是目前功能最全面的 AI 程式碼輔助工具，安裝步驟如下：</p>
-
+<h2>GitHub Copilot 配置教學</h2>
+<p>GitHub Copilot 由 Microsoft 與 OpenAI 合作開發，採用 GPT-4 模型，是目前功能最強大的 AI 程式碼輔助工具。</p>
+<p><strong>安裝步驟：</strong></p>
 <ol>
-<li>開啟 VS Code，進入 Extensions  Marketplace</li>
+<li>開啟 VS Code，進入 Extensions 商店</li>
 <li>搜尋「GitHub Copilot」並點擊安裝</li>
-<li>安裝完成後，按下 <code>Ctrl+Shift+P</code> 輸入「Sign in to GitHub」完成登入</li>
-<li>開啟 Copilot Nightly 版本可獲得最新功能</li>
+<li>重新啟動 VS Code</li>
+<li>點擊左下角帳號圖示，登入 GitHub 帳戶</li>
+<li>完成授權後即可使用</li>
 </ol>
-
-<pre><code># 在 VS Code 設定中調整 Copilot 行為
-{
+<p>Copilot 支援多種訂閱方案，個人版每月 10 美元，學生可免費申請。建議在 <code>settings.json</code> 中調整以下設定優化使用體驗：</p>
+<pre><code>{
   "githubCopilot.advanced": {
-    "notifications": true,
-    "inlineSuggestEnabled": true
-  }
+    "anonymousValidation": true
+  },
+  "editor.inlineSuggest.enabled": true,
+  "githubCopilot.experimental.autoSuggest": true
 }</code></pre>
 
-<p>Copilot 支援智慧型程式碼建議、測試生成、語法解釋等功能，適合需要完整 AI 輔助的專業開發環境。</p>
-
-<h2>Codeium 安裝與配置</h2>
-
-<p>Codeium 以免費與高速著稱，是預算有限的開發者首選：</p>
-
-<ol>
-<li>在 VS Code Extensions 中搜尋「Codeium」並安裝</li>
-<li>安裝後點擊左下角 Codeium 圖示進行登入</li>
-<li>可選擇 GitHub 或 Google 帳號登入</li>
-<li>在設定中啟用所需的語言支援</li>
-</ol>
-
-<pre><code># Codeium 設定範例
-{
-  "codeium.enable": true,
-  "codeium.languageOverrides": {
-    "python": {
-      "tabSize": 4
-    },
-    "javascript": {
-      "tabSize": 2
-    }
-  }
-}</code></pre>
-
-<p>Codeium 的優勢在於提供完整的免費方案，且不需要額外硬體資源，雲端運算由 Codeium 伺服器處理。</p>
-
-<h2>Tabby 安裝與配置</h2>
-
-<p>Tabby 是開源解決方案，可完全離線運作：</p>
-
-<ol>
-<li>搜尋並安裝「Tabby」VS Code 擴充套件</li>
-<li>下載並安裝 Tabby 伺服器端程式</li>
-<li>啟動本地伺服器（預設 http://localhost:8080）</li>
-<li>在 VS Code 中連接到本地伺服器</li>
-</ol>
-
-<pre><code># 使用 Docker 啟動 Tabby 伺服器
-docker run -d \
-  --name tabby \
-  -p 8080:8080 \
-  -v ~/.tabby:/data \
-  tabbyml/tabby \
-  serve --model TabbyML/StarCoder-1B</code></pre>
-
-<p>Tabby 完全免費且可自架，適合企業內部使用或對資料隱私有嚴格要求的開發者。</p>
-
-<h2>效能比較與選擇建議</h2>
-
-<p>根據實際測試與社群回饋，三款工具的選擇建議如下：</p>
-
+<h2>Codeium 完全設定指南</h2>
+<p>Codeium 是免費的 AI 程式碼輔助工具，支援 70+ 程式語言，適合預算有限但需要基本 AI 輔助的開發者。</p>
+<p><strong>安裝步驟：</strong></p>
 <ul>
-<li><strong>選擇 Copilot</strong>：適合需要最新 AI 模型、願意付費訂閱的專業開發者，功能最全面。</li>
-<li><strong>選擇 Codeium</strong>：適合預算有限但希望獲得 AI 輔助的個人開發者或小型團隊。</li>
-<li><strong>選擇 Tabby</strong>：適合對隱私有高度要求、需要完全離線可用、或希望自建 AI 服務的企業。</li>
+<li>在 VS Code Extensions 搜尋「Codeium」</li>
+<li>點擊安裝並重啟編輯器</li>
+<li>按 <code>Ctrl+Shift+P</code> 輸入「Codeium: Sign In」</li>
+<li>選擇以 GitHub 或 Google 帳戶登入</li>
+<li>完成驗證即可開始使用</li>
 </ul>
+<p>Codeium 的優勢在於完全免費且無使用次數限制。建議設定快速鍵提升效率：</p>
+<pre><code>{
+  "codeium.enableAutoCompletion": true,
+  "codeium.inlineSuggest.enable": true
+}</code></pre>
 
-<p>總體而言，三款工具都能顯著提升開發效率，建議先試用免費版本，再根據實際體驗與需求做出最終選擇。</p>
+<h2>Tabby 自建 AI 助手教學</h2>
+<p>Tabby 是開源的 AI 程式碼輔助工具，支援自建伺服器，適合對資料隱私有高度要求的企業或開發者。</p>
+<p><strong>本機部署步驟：</strong></p>
+<ol>
+<li>安裝 Docker Desktop</li>
+<li>執行以下指令啟動 Tabby 伺服器：</li>
+</ol>
+<pre><code>docker run -d -p 8080:8080 -v ~/tabby:/data \
+  --name tabby-server \
+  ghcr.io/tabbyml/tabby serve \
+  --model StarCoder-1B</code></ol>
+<li>在 VS Code 安裝 Tabby 擴充</li>
+<li>設定伺服器連線：<code>Ctrl+Shift+P</code> → 「Tabby: Configure Server」</li>
+<li>輸入 <code>http://localhost:8080</code></li>
+</ol>
+
+<h2>三大工具效能比較與選擇建議</h2>
+<p>以下為三款工具的核心比較：</p>
+<ul>
+<li><strong>模型能力</strong>：Copilot (GPT-4) > Codeium ≈ Tabby</li>
+<li><strong>價格</strong>：Codeium (免費) > Tabby (開源) > Copilot (付費)</li>
+<li><strong>隱私保護</strong>：Tabby > Copilot ≈ Codeium</li>
+<li><strong>安裝難度</strong>：Copilot = Codeium < Tabby</li>
+</ul>
+<p><strong>選擇建議：</strong>初學者或個人開發者首選 Codeium；專業開發團隊選擇 Copilot；有隱私需求的企業使用 Tabby 自建服務。</p>
+
+<h2>常見問題與故障排除</h2>
+<p>若遇到 AI 建議不出現，檢查網路連線、重新登入帳戶或更新至最新版本。部分企業網路可能阻擋 AI 服務，建議使用 Tabby 自建伺服器解決。</p>
     </div>
 
     <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
       <h2 style="margin-bottom:1.5rem">常見問題</h2>
       
           <div class="faq-item">
-            <h3 class="faq-q">VS Code AI 外掛哪一款最適合初學者？</h3>
-            <p class="faq-a">Codeium 最適合初學者，提供完整免費版本，功能足夠日常使用，且安裝設定簡單，不需要額外付費或複雜配置。</p>
+            <h3 class="faq-q">Copilot 是否可以免費使用？</h3>
+            <p class="faq-a">學生可透過 GitHub Education 免費申請，其他用戶需付費訂閱。</p>
           </div>
           <div class="faq-item">
-            <h3 class="faq-q">Copilot 需要付費嗎？</h3>
-            <p class="faq-a">GitHub Copilot 需付費訂閱，每月約 10 美元，學生與開源專案維護者可申請免費使用。首次申請可獲得 30 天免費試用。</p>
+            <h3 class="faq-q">Codeium 與 Copilot 的差異為何？</h3>
+            <p class="faq-a">Codeium 完全免費但功能較基礎；Copilot 收費但採用更強大的 GPT-4 模型。</p>
           </div>
           <div class="faq-item">
-            <h3 class="faq-q">Tabby 可以完全離線使用嗎？</h3>
-            <p class="faq-a">可以，Tabby 作為開源工具，可在本機部署執行，無需網路連線即可使用 AI 程式碼輔助功能，確保程式碼不會離開本地環境。</p>
+            <h3 class="faq-q">Tabby 需要自己訓練模型嗎？</h3>
+            <p class="faq-a">不需要，Tabby 提供預訓練模型可直接下載使用。</p>
           </div>
     </section>
 
