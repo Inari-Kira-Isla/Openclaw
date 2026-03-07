@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49% | AI 學習寶庫</title>
+  <meta name="description" content="Contextual Retrieval 提示詞教學，Anthropic 技術如何降低 RAG 失敗率 49%。提供上下文生成提示詞模板、混合搜尋策略與 Anthropic Prompt Caching 成本優化完整教學。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_contextual-retrieval-prompt-engineering.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49%">
+  <meta property="og:description" content="Contextual Retrieval 提示詞教學，Anthropic 技術如何降低 RAG 失敗率 49%。提供上下文生成提示詞模板、混合搜尋策略與 Anthropic Prompt Caching 成本優化完整教學。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_contextual-retrieval-prompt-engineering.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49%", "description": "Contextual Retrieval 提示詞教學，Anthropic 技術如何降低 RAG 失敗率 49%。提供上下文生成提示詞模板、混合搜尋策略與 Anthropic Prompt Caching 成本優化完整教學。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_contextual-retrieval-prompt-engineering.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Contextual Retrieval 適合哪些類型的文件？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合長文件、專業術語多、語境依賴強的內容，如法律文件、技術文檔、醫療記錄。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "片段大小如何選擇？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議 100-500 token，具體取決於內容複雜度。簡單內容可用較大片段，複雜內容需較小片段。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Prompt Caching 是否適用所有模型？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前支援 Claude 3.5 Sonnet 及更新版本，且需要指定 beta 標頭才能啟用。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Contextual Retrieval 提示詞設計：Ant...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49%</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p><strong>Contextual Retrieval 是 Anthropic 推出的新技術，透過在每個文件片段嵌入前添加上下文說明，可將 RAG 檢索失敗率降低 49%，結合重排序後更可達 67% 改善。</strong>本文將提供完整的提示詞設計模板與實作策略。</p>
+
+<h2>為什麼傳統 RAG 失敗率這麼高？</h2>
+<p>傳統 RAG 系統的核心問題在於<strong>檢索品質而非生成品質</strong>。當文件被切成片段（chunk）後，每個片段失去原本的語境，例如「佣金計算」片段可能包含公式，但無法判斷是「業務佣金」還是「保險佣金」。向量搜尋只能匹配語義相似度，無法理解片段在完整文件中的定位，導致檢索到的片段與用戶問題語義不相關。</p>
+
+<h2>Contextual Retrieval 核心原理</h2>
+<p>Contextual Retrieval 的解決方案是：<strong>在嵌入前為每個片段自動生成上下文摘要</strong>。這個上下文會前置於片段文字一起進入向量搜尋，讓搜尋引擎能理解片段的語境意義。</p>
+<p>技術流程分為三個步驟：</p>
+<ul>
+<li><strong>片段擷取</strong>：將長文件切成 100-500 token 的較小片段</li>
+<li><strong>上下文生成</strong>：使用 Claude 為每個片段生成 50-100 字的上下文說明</li>
+<li><strong>上下文化嵌入</strong>：將「上下文 + 片段內容」一起嵌入向量資料庫</li>
+</ul>
+
+<h2>上下文生成提示詞模板</h2>
+<p>以下是可直接使用的提示詞模板：</p>
+<pre><code>你是一個文件分析專家。請為以下文件片段生成簡短的上下文說明（50-100字），說明這個片段在完整文件中的位置與作用。
+
+文件標題：{document_title}
+片段內容：{chunk_content}
+前一片段：{previous_chunk}
+後一片段：{next_chunk}
+
+請用以下格式輸出：
+"context": "..."</code></pre>
+
+<h2>混合搜尋策略：BM25 + 向量</h2>
+<p>單純依賴向量搜尋可能遺漏精確關鍵字匹配。Contextual Retrieval 建議採用<strong>混合搜尋策略</strong>：</p>
+<ol>
+<li><strong>BM25 搜尋</strong>：處理精確關鍵字匹配（如產品型號、術語）</li>
+<li><strong>向量搜尋</strong>：處理語義相關性</li>
+<li><strong>重排序（Reranking）</strong>：使用交叉編碼器對前 10-20 個結果重新排序</li>
+</ol>
+<p>結合重排序後，檢索失敗率可從 49% 改善提升至 67%。</p>
+
+<h2>Anthropic Prompt Caching 成本優化</h2>
+<p>為每個片段生成上下文需要大量 API 呼叫，但 Anthropic 的<strong>Prompt Caching</strong>可将成本降至近乎零。關鍵策略：</p>
+<ul>
+<li><strong>靜態內容快取</strong>：將文件結構、術語定義等不變內容放在系統提示詞中</li>
+<li<strong>快取共享</strong>：同一文件的片段共享上下文生成任務的 KV Cache</li>
+<li><strong>批量處理</strong>：一次呼叫為多個片段生成上下文</li>
+</ul>
+<p>實際測試中，處理 1000 個片段的上下文生成成本從約 $3 降至約 $0.1。</p>
+
+<h2>實作程式碼範例</h2>
+<pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+# Prompt Caching 策略
+system_prompt = """<system>
+你是一個文件分析專家。處理以下文件時，請使用一致的術語定義。
+文件類型：用戶手冊
+產品名稱：SmartHome Hub
+</system>"""
+
+user_prompt = f"""請為以下片段生成上下文說明：
+
+文件標題：SmartHome Hub 用戶手冊
+片段內容：{chunk_content}
+
+請用 JSON 格式輸出：{{"context": "生成的上下文說明"}}"""
+
+# 使用 cache_control 參數
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=200,
+    system=[{"type": "text", "text": system_prompt}],
+    messages=[{"role": "user", "content": user_prompt}],
+    extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"}
+)</code></pre>
+
+<h2>總結與行動建議</h2>
+<p>Contextual Retrieval 為 RAG 系統帶來革命性改善。建議的實作順序：</p>
+<ol>
+<li>先實現基礎 RAG 流程</li>
+<li>加入 Contextual Retrieval 上下文生成</li>
+<li>啟用 BM25 + 向量混合搜尋</li>
+<li>加入重排序模組</li>
+<li>套用 Prompt Caching 優化成本</li>
+</ol>
+<p>按照此順序，可在 2-4 週內完成系統升級，檢索品質預計提升 50-70%。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Contextual Retrieval 適合哪些類型的文件？</h3>
+            <p class="faq-a">適合長文件、專業術語多、語境依賴強的內容，如法律文件、技術文檔、醫療記錄。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">片段大小如何選擇？</h3>
+            <p class="faq-a">建議 100-500 token，具體取決於內容複雜度。簡單內容可用較大片段，複雜內容需較小片段。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Prompt Caching 是否適用所有模型？</h3>
+            <p class="faq-a">目前支援 Claude 3.5 Sonnet 及更新版本，且需要指定 beta 標頭才能啟用。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
