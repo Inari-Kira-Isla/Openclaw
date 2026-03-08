@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題 | AI 學習寶庫</title>
+  <meta name="description" content="RAG-MCP 技術教學：如何用語義檢索解決 LLM 工具選擇的 prompt 膨脹問題，提升 AI 推理效率與品質。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_rag-mcp-semantic-retrieval-tool-selection-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題">
+  <meta property="og:description" content="RAG-MCP 技術教學：如何用語義檢索解決 LLM 工具選擇的 prompt 膨脹問題，提升 AI 推理效率與品質。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_rag-mcp-semantic-retrieval-tool-selection-guide.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題", "description": "RAG-MCP 技術教學：如何用語義檢索解決 LLM 工具選擇的 prompt 膨脹問題，提升 AI 推理效率與品質。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_rag-mcp-semantic-retrieval-tool-selection-guide.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "RAG-MCP 需要特別的 LLM 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要。任何支援 function calling 的 LLM（如 GPT-4、Claude、Gemini）都可以使用 RAG-MCP 架構。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "向量資料庫如何選擇？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可選 ChromaDB、Weaviate、Pinecone 等。需考量工具數量、延遲需求與部署環境（本地或雲端）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RAG-MCP 適合多少工具規模？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議在 20 個以上工具時開始使用，工具越多效果越明顯，可擴展至數百甚至數千個工具。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>RAG-MCP 解決了什麼問題？</h2>
+<p>當 LLM 需要使用大量 MCP（Model Context Protocol）工具時，傳統做法是將所有工具描述全部塞入 prompt。這導致 prompt 長度急劇膨脹，token 消耗暴增，推理成本直線上升，更嚴重的是模型容易被過多資訊干擾，選擇錯誤的工具。</p>
+<p>2026年3月發表的 RAG-MCP 研究論文（arXiv:2505.03275）提出創新架構：<strong>先用語義相似度檢索找出最相關的 MCP 工具，只將這些工具描述傳給 LLM</strong>，大幅縮減 prompt 長度，同時維持工具選擇的準確率。這種「先檢索再決策」的模式，讓 LLM 就像有了縮小版的工具清單，專注處理真正需要的工具。</p>
+
+<h2>RAG-MCP 核心運作原理</h2>
+<p>RAG-MCP 的運作流程可分為三個階段：</p>
+<ol>
+<li><strong>工具向量建庫</strong>：將所有 MCP 工具的描述、功能、參數規格轉換為向量，存入向量資料庫</li>
+<li><strong>語義檢索</strong>：根據使用者的查詢語意，從資料庫中檢索最相似的 Top-K 工具</li>
+<li><strong>精簡 Prompt 組裝</strong>：只將 Top-K 工具描述加入 prompt，交由 LLM 決策執行</li>
+</ol>
+<p>這種方式將「工具發現」與「工具執行」分離，讓 LLM 處理更少的資訊，卻能做更精準的判斷。</p>
+
+<h2>實作：建立 RAG-MCP 工具檢索系統</h2>
+<p>以下示範如何使用 Python 實作基本的 RAG-MCP 架構：</p>
+<pre><code># 安裝必要套件
+pip install chromadb sentence-transformers
+
+from sentence_transformers import SentenceTransformer
+import chromadb
+
+# 初始化向量資料庫與嵌入模型
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+client = chromadb.PersistentClient(path="./mcp_tools_db")
+
+# 假設有以下 MCP 工具描述
+mcp_tools = [
+    {"id": "weather_api", "name": "天氣查詢", "desc": "取得指定城市的天氣資訊"},
+    {"id": "calendar_api", "name": "日曆管理", "desc": "建立、查詢、修改行事曆事件"},
+    {"id": "email_api", "name": "郵件發送", "desc": "發送電子郵件給指定收件人"},
+    {"id": "file_api", "name": "檔案處理", "desc": "讀取、寫入、搜尋檔案系統"},
+]
+
+# 建立向量集合並存入工具描述
+collection = client.get_or_create_collection("mcp_tools")
+for tool in mcp_tools:
+    embedding = model.encode(tool["desc"])
+    collection.add(ids=[tool["id"]], embeddings=[embedding.tolist()], metadatas=[{"name": tool["name"], "desc": tool["desc"]}])
+
+# 語義檢索函式
+def retrieve_tools(query, top_k=2):
+    query_embedding = model.encode(query)
+    results = collection.query(query_embeddings=[query_embedding.tolist()], n_results=top_k)
+    return results
+
+# 測試檢索
+query = "我需要查詢明天台北的天氣"
+results = retrieve_tools(query)
+print("最相關的工具：", results["metadatas"][0])</code></pre>
+<p>這段程式碼展示了如何將 MCP 工具描述向量化並建立檢索系統。實際應用中，你需要將檢索結果組裝成精簡的 prompt 傳給 LLM。</p>
+
+<h2>RAG-MCP 與傳統 MCP 的比較</h2>
+<ul>
+<li><strong>Token 消耗</strong>：傳統方式隨工具數量線性成長；RAG-MCP 固定在 Top-K 工具的描述量</li>
+<li><strong>推理延遲</strong>：傳統方式因 prompt 過長導致生成時間增加；RAG-MCP 檢索時間極短，總延遲降低</li>
+<li><strong>準確率</strong>：傳統方式容易因資訊過多而選錯工具；RAG-MCP 讓 LLM 專注於相關工具</li>
+<li><strong>擴展性</strong>：傳統方式難以應對數百個工具；RAG-MCP 可輕鬆擴展至數千工具</li>
+</ul>
+
+<h2>企業導入建議與未來趨勢</h2>
+<p>隨著企業 MCP server 數量激增，MCP 管理與工具發現已成為 2026 年最重要的工程挑戰之一。Opik MCP server 在 2026年3月完成改版，支援 remote MCP 與改良的 auth 機制，為企業級應用奠定基礎。</p>
+<p>建議企業從以下步驟導入 RAG-MCP：</p>
+<ol>
+<li>盤點現有 MCP 工具，建立標準化的工具描述格式</li>
+<li>選擇適合的向量資料庫與嵌入模型</li>
+<li>設計檢索後的 prompt 模板，確保 LLM 能正確理解工具用途</li>
+<li>建立監控機制，持續優化檢索品質</li>
+</ol>
+<p>RAG-MCP 代表 RAG 與 MCP 不再是獨立模組，而是融合為企業 AI 架構的核心層。<strong>掌握這項技術，將成為 AI 工程師的關鍵競爭力。</strong></p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">RAG-MCP 需要特別的 LLM 嗎？</h3>
+            <p class="faq-a">不需要。任何支援 function calling 的 LLM（如 GPT-4、Claude、Gemini）都可以使用 RAG-MCP 架構。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">向量資料庫如何選擇？</h3>
+            <p class="faq-a">可選 ChromaDB、Weaviate、Pinecone 等。需考量工具數量、延遲需求與部署環境（本地或雲端）。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">RAG-MCP 適合多少工具規模？</h3>
+            <p class="faq-a">建議在 20 個以上工具時開始使用，工具越多效果越明顯，可擴展至數百甚至數千個工具。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
