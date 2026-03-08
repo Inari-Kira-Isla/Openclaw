@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學 | AI 學習寶庫</title>
+  <meta name="description" content="深入教學 Claude Skills 開放標準，幫助開發者掌握跨平台 AI Agent 技能部署。涵蓋組織層級管理、技能目錄整合、MCP 互補架構，配合實際程式碼範例與操作步驟。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-agent-skills-open-standard-deployment-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學">
+  <meta property="og:description" content="深入教學 Claude Skills 開放標準，幫助開發者掌握跨平台 AI Agent 技能部署。涵蓋組織層級管理、技能目錄整合、MCP 互補架構，配合實際程式碼範例與操作步驟。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-agent-skills-open-standard-deployment-guide.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學", "description": "深入教學 Claude Skills 開放標準，幫助開發者掌握跨平台 AI Agent 技能部署。涵蓋組織層級管理、技能目錄整合、MCP 互補架構，配合實際程式碼範例與操作步驟。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-agent-skills-open-standard-deployment-guide.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Skills 與 MCP 有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MCP 處理工具連接與上下文傳遞等基礎設施層功能，Skills 處理高階任務抽象與工作流程封裝。兩者互補：MCP 是「如何做事」的工具層，Skills 是「做什麼事」的任務層。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何開始建立第一個 Skill？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 Claude Desktop 的 Customize 區域點擊「建立新 Skill」，定義名稱、觸發條件與執行邏輯，使用 YAML 格式設定配置參數，即可建立可供團隊使用的技能。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Skills 可以跨平台使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，開放標準讓 Skills 能夠發布到跨平台目錄，不再局限於 Claude 生態系。透過合作夥伴技能目錄，經過認證的技能可讓其他 AI 平台調用。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Skills 開放標準實戰：跨平台 AI Ag...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Skills 開放標準來了：跨平台部署的第一步</h2>
+<p>Claude Skills 開放標準是 Anthropic 在 2026 年 3 月推出的重大更新，讓 AI 技能不再受限於 Claude 生態系，開發者可將自定義技能發布到跨平台目錄，實現真正的跨平台 AI Agent 部署。本文將詳細教學如何建立、部署與管理這些技能。</p>
+
+<h2>理解 Claude Skills 與 MCP 的互補關係</h2>
+<p>Claude Skills 與 MCP 形成互補的架構設計。MCP（Model Context Protocol）專注於處理工具連接與上下文傳遞，例如檔案系統存取、API 調用等基礎設施層功能。Skills 則處理更高階的任務抽象，將複雜的工作流程封裝為可重複使用的技能单元。</p>
+<p>簡單來說：MCP 是「如何做事」的工具層，Skills 是「做什麼事」的任務層。這種分離設計讓開發者能夠專注於業務邏輯，同時保持與各種工具的靈活連接。</p>
+
+<h2>建立第一個 Claude Skill：完整操作教學</h2>
+<p>在 Claude Desktop 中新增了 Customize 區域，整合了 Skills、Plugins 與 Connectors。建立 Skill 的第一步是定義其結構，包括名稱、觸發條件與執行邏輯。</p>
+<pre><code>skill:
+  name: "code-review-assistant"
+  description: "自動化程式碼審查助手"
+  triggers:
+    - "/review"
+  actions:
+    - type: "analyze"
+      framework: "claude-code"
+  config:
+    maxTokens: 4000
+    temperature: 0.7</code></pre>
+<p>建立完成後，Skill 會出現在 Customize 區域中，團隊成員可直接調用。透過這種方式，組織可以標準化常見工作流程，例如程式碼審查、文件生成或測試案例建立。</p>
+
+<h2>組織層級的技能管理與部署策略</h2>
+<p>Team 與 Enterprise 方案的管理員可在組織層級統一部署與控制技能。這項功能讓大型團隊能夠確保所有成員使用一致且經過審核的技能，避免版本混亂或未授權技能的安全風險。</p>
+<p>管理員可以透過管理控制台進行以下操作：統一部署經過驗證的技能、設定成員的技能存取權限、追蹤各技能的使用情況與效能指標。這個功能特別適合需要嚴格合規管理的企業環境。</p>
+
+<h2>發布技能到合作夥伴目錄</h2>
+<p>經過認證的第三方 Skills 可以在合作夥伴技能目錄中發布，讓全球開發者都能夠使用經過驗證的解決方案。發布流程包括提交技能描述、技術文件與使用範例，由 Anthropic 團隊審核認證後才能正式上架。</p>
+<p>這種認證機制確保了目錄中技能的安全性與可靠性，企業用戶可以放心採用經過驗證的技能，無需擔心來路不明的程式碼風險。</p>
+
+<h2>自動化任務排程：/loop 指令與 Cowork 實戰</h2>
+<p>Claude Code 新增的 /loop 指令支援在 session 內以 cron 風格排程重複執行提示詞。這個功能讓開發者能夠設定定期自動執行的任務，例如每日工作摘要、系統監控或資料同步。</p>
+<pre><code>/loop every day at 9am
+分析昨日的系統日誌，產生異常報告並寄送給團隊
+/loop end</code></pre>
+<p>此外，Cowork 功能支援定期與隨需任務排程，團隊可以建立複雜的工作排程，從每小時資料檢查到每週策略回顧，都能夠自動化執行，大幅減少重複性手動作業。</p>
+
+<h2>總結與實踐建議</h2>
+<p>Claude Skills 開放標準為跨平台 AI Agent 部署開啟了新時代。開發者應從理解 Skills 與 MCP 的互補架構開始，掌握組織層級的管理功能，並善用排程自動化提升效率。未來隨著更多第三方 Skills 進入認證目錄，生態系將持續壯大，為 AI 應用開發帶來更多可能性。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Skills 與 MCP 有什麼不同？</h3>
+            <p class="faq-a">MCP 處理工具連接與上下文傳遞等基礎設施層功能，Skills 處理高階任務抽象與工作流程封裝。兩者互補：MCP 是「如何做事」的工具層，Skills 是「做什麼事」的任務層。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何開始建立第一個 Skill？</h3>
+            <p class="faq-a">在 Claude Desktop 的 Customize 區域點擊「建立新 Skill」，定義名稱、觸發條件與執行邏輯，使用 YAML 格式設定配置參數，即可建立可供團隊使用的技能。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Skills 可以跨平台使用嗎？</h3>
+            <p class="faq-a">可以，開放標準讓 Skills 能夠發布到跨平台目錄，不再局限於 Claude 生態系。透過合作夥伴技能目錄，經過認證的技能可讓其他 AI 平台調用。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
