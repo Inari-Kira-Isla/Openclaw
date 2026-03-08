@@ -37,9 +37,10 @@ async function detectAIBot(userAgent) {
   return null;
 }
 
-async function logAIVisit(env, botInfo, request) {
+async function logAIVisit(env, botInfo, request, overridePath) {
   const today = new Date().toISOString().split("T")[0];
   const url = new URL(request.url);
+  const pagePath = overridePath || url.pathname;
 
   // Increment daily counter
   const dayKey = `day:${today}:${botInfo.pattern}`;
@@ -53,8 +54,9 @@ async function logAIVisit(env, botInfo, request) {
     ts: Date.now(),
     bot: botInfo.name,
     ua: (request.headers.get("user-agent") || "").substring(0, 100),
-    path: url.pathname,
+    path: pagePath,
     ref: request.headers.get("referer") || "",
+    src: overridePath ? "pixel" : "proxy",
   });
   if (existing.length > 500) existing.shift();
   await env.AI_FOOTPRINT.put(logKey, JSON.stringify(existing), { expirationTtl: 30 * 86400 });
@@ -68,6 +70,29 @@ async function logAIVisit(env, botInfo, request) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // === Tracking pixel endpoint ===
+    // Receives requests from <img> tags on GitHub Pages, logs AI bot visits,
+    // returns a 1x1 transparent GIF.
+    if (url.pathname === "/track") {
+      const userAgent = request.headers.get("user-agent") || "";
+      const botInfo = await detectAIBot(userAgent);
+      if (botInfo && env.AI_FOOTPRINT) {
+        const page = url.searchParams.get("p") || "/";
+        const trackReq = new Request(request.url, request);
+        // Override pathname for logging so it shows the actual page path
+        ctx.waitUntil(logAIVisit(env, botInfo, trackReq, page));
+      }
+      // 1x1 transparent GIF (43 bytes)
+      const gif = Uint8Array.from(atob("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"), c => c.charCodeAt(0));
+      return new Response(gif, {
+        headers: {
+          "Content-Type": "image/gif",
+          "Cache-Control": "no-store, no-cache, must-revalidate",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    }
 
     // === AI Stats API endpoint ===
     if (url.pathname === "/ai-stats.json") {
