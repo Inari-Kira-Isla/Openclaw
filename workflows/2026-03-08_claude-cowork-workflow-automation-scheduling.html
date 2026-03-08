@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰 | AI 學習寶庫</title>
+  <meta name="description" content="深入解析 Claude Cowork 工作流自動化功能，涵蓋排程任務設定、跨 Agent 協作機制與實際應用場景。從基礎設定到企業級應用，提供具體操作範例與最佳實踐。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-cowork-workflow-automation-scheduling.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰">
+  <meta property="og:description" content="深入解析 Claude Cowork 工作流自動化功能，涵蓋排程任務設定、跨 Agent 協作機制與實際應用場景。從基礎設定到企業級應用，提供具體操作範例與最佳實踐。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-cowork-workflow-automation-scheduling.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰", "description": "深入解析 Claude Cowork 工作流自動化功能，涵蓋排程任務設定、跨 Agent 協作機制與實際應用場景。從基礎設定到企業級應用，提供具體操作範例與最佳實踐。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-cowork-workflow-automation-scheduling.html"}, "articleSection": "工作流"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Cowork 需要付費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Cowork 功能包含在 Claude Pro 和 Enterprise 方案中。企業方案提供更完整的組織管理功能和 Skills 目錄，建議商業用途採用企業方案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何排程即時任務而非週期性任務？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在任務描述中明確指定「立即執行」或設定單次執行時間即可。格式如：「在收到 [特定事件] 時立即執行 X 任務」。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Cowork 與 n8n、Zapier 有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "最大差異在於 Claude Cowork 內建自然語言理解和 AI 推理能力，可處理非結構化資料和複雜判斷邏輯，無需撰寫程式碼即可建立智慧型工作流。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Cowork 工作流自動化：排程任務與跨 Ag...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Cowork 核心概念：從對話式 AI 到工作流引擎</h2>
+<p>Claude Cowork 是 Anthropic 推出的重大功能升級，讓 Claude 從傳統的對話式 AI 進化為可持續運行的<strong>工作流自動化引擎</strong>。這項功能支援建立週期性與即時任務排程，意味著 Claude 可以在指定時間自動執行任務，無需人類持續互動。</p>
+<p>簡單來說，Cowork 讓 Claude 具備了「時間感知」和「自動化執行」的能力。你可以直接告訴 Claude：「每天早上 9 點幫我彙整昨日的銷售數據並生成報告」，Claude 就會自動完成這項任務。這種「設定後忘記」（set and forget）的特性，正是企業級自動化的核心需求。</p>
+
+<h2>Claude Desktop Customize 區域：統一管理介面</h2>
+<p>Claude Desktop 新增的 <strong>Customize 區域</strong>是管理所有擴充功能的樞紐地帶。在這個介面中，你可以統一管理三類關鍵元件：</p>
+<ul>
+<li><strong>Skills</strong>：Agent 的專業能力封裝</li>
+<li><strong>Plugins</strong>：第三方服務連接器</li>
+<li><strong>Connectors</strong>：系統整合橋接器</li>
+</ul>
+<p>這個整合式管理介面的設計理念，是讓使用者不再需要在多個設定頁面間切換。所有與 Claude 能力延伸相關的設定，都集中在 Customize 區域中，大幅降低了學習成本和管理複雜度。</p>
+
+<h2>排程任務設定：實作步驟詳解</h2>
+<p>設定排程任務的核心機制是透過自然語言描述即可完成。以下是建立每日報告生成任務的具體範例：</p>
+<pre><code># 在 Claude Desktop 中設定排程任務
+對話提示：「請建立一個每週一早上 8 點執行的任務，
+名稱是『週報生成』。任務內容是：
+1. 讀取上週的 sales_data.csv 檔案
+2. 計算各產品線的銷售總額
+3. 生成 Markdown 格式的週報
+4. 寄送到 team@company.com」</code></pre>
+<p>Cowork 會解析這個描述，自動建立對應的排程邏輯。關鍵在於使用<strong>清晰的時間表達</strong>和<strong>具體的任務步驟</strong>。建議採用以下格式：</p>
+<ul>
+<li>頻率：每日/每週/每月/自訂 cron 表達式</li>
+<li>執行時間：明確的時間點</li>
+<li>觸發條件：時間驅動或事件驅動</li>
+</ul>
+
+<h2>跨 Agent 協作：Agent Skills 開放標準</h2>
+<p>Cowork 最強大的特性之一是支援<strong>跨 Agent 協作</strong>。結合 Agent Skills 開放標準，不同的 Claude Agent 可以相互呼叫，形成一個協作網絡。這項設計有幾個重要優勢：</p>
+<ol>
+<li><strong>模組化設計</strong>：每個 Agent 專注特定領域，如數據分析、內容生成、系統監控</li>
+<li><strong>標準化介面</strong>：透過統一的 Skills 規範，確保 Agent 間的溝通順暢</li>
+<li><strong>平台無關</strong>：不再被單一廠商綁定，可跨 AI 平台執行</li>
+</ol>
+<p>企業級應用中，這種架構允許建立「Skills 目錄」，讓組織內的不同團隊可以共用和複用最佳實踐。例如，市場團隊的「文案生成 Skill」可以被產品團隊直接調用，無需重新訓練。</p>
+
+<h2>實際應用場景與企業價值</h2>
+<p>Cowork 的應用場景涵蓋多個企業級需求：</p>
+<ul>
+<li><strong>定期資料彙整</strong>：每日、每週自動彙整來自多個來源的數據</li>
+<li><strong>多步驟內容創作管道</strong>：從主題研究到初稿生成到校對的自動化流程</li>
+<li><strong>跨系統資料同步</strong>：保持 CRM、ERP、數據庫之間的資料一致性</li>
+<li><strong>監控與告警</strong>：系統異常時自動偵測並通知相關人員</li>
+</ul>
+<p>配合 Claude Code 的 <strong>Session 管理改善</strong>，長時間運行的工作流現在更容易追蹤和調試。這套功能組合使 Claude 成為企業自動化的核心 AI 協調器，直接挑戰 n8n、Zapier 等傳統自動化平台的市場地位。</p>
+
+<h2>結論：開始使用 Claude Cowork</h2>
+<p>Claude Cowork 代表了 AI 助手從「回應問題」到「主動執行」的關鍵轉變。要開始使用這項功能，只需在 Claude Desktop 中升級至最新版本，然後在 Customize 區域探索可用的 Skills 和連接器。建議從簡單的排程任務開始，例如每日天氣摘要或定時提醒，逐步熟悉後再擴展至複雜的跨 Agent 協作流程。</p>
+<p>對於企業用戶，企業方案提供了組織級的 Skills 目錄管理和合作夥伴預建生態系，是導入 Cowork 的最佳起點。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Cowork 需要付費嗎？</h3>
+            <p class="faq-a">Claude Cowork 功能包含在 Claude Pro 和 Enterprise 方案中。企業方案提供更完整的組織管理功能和 Skills 目錄，建議商業用途採用企業方案。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何排程即時任務而非週期性任務？</h3>
+            <p class="faq-a">在任務描述中明確指定「立即執行」或設定單次執行時間即可。格式如：「在收到 [特定事件] 時立即執行 X 任務」。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Cowork 與 n8n、Zapier 有何不同？</h3>
+            <p class="faq-a">最大差異在於 Claude Cowork 內建自然語言理解和 AI 推理能力，可處理非結構化資料和複雜判斷邏輯，無需撰寫程式碼即可建立智慧型工作流。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
