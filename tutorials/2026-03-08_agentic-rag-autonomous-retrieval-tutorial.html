@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略 | AI 學習寶庫</title>
+  <meta name="description" content="本教學深入介紹 Agentic RAG 實戰技術，解析如何利用 AI Agent 自動規劃與管理知識檢索策略。涵蓋 LangChain/LlamaIndex 實作範例、混合檢索引擎配置及 GraphRAG 整合應用，幫助開發者從零構建智慧知識庫系統。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_agentic-rag-autonomous-retrieval-tutorial.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略">
+  <meta property="og:description" content="本教學深入介紹 Agentic RAG 實戰技術，解析如何利用 AI Agent 自動規劃與管理知識檢索策略。涵蓋 LangChain/LlamaIndex 實作範例、混合檢索引擎配置及 GraphRAG 整合應用，幫助開發者從零構建智慧知識庫系統。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_agentic-rag-autonomous-retrieval-tutorial.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略", "description": "本教學深入介紹 Agentic RAG 實戰技術，解析如何利用 AI Agent 自動規劃與管理知識檢索策略。涵蓋 LangChain/LlamaIndex 實作範例、混合檢索引擎配置及 GraphRAG 整合應用，幫助開發者從零構建智慧知識庫系統。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_agentic-rag-autonomous-retrieval-tutorial.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Agentic RAG 與傳統 RAG 的主要差異是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統 RAG 是固定流程的線性管道，Agentic RAG 則讓 AI Agent 動態管理檢索策略，可根據查詢複雜度自動決定檢索方式、是否需要多跳檢索、以及如何合併多個知識源的結果。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "建構 Agentic RAG 需要哪些技術堆疊？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主要技術堆疊包括：LangChain 或 LlamaIndex 作為開發框架、向量資料庫（如 Pinecone、Weaviate、Chroma）、大型語言模型（如 GPT-4、Claude）、以及可選的知識圖譜資料庫（如 Neo4j）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何評估 Agentic RAG 系統的效能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "評估維度包括：檢索命中率、答案準確率、延遲時間、Agent 決策合理性。可使用 RAGAs、ARES 等評估框架，或建立針對特定領域的評估資料集進行人工評測。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Agentic RAG 實戰教學：讓 AI Agent 自動...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是 Agentic RAG？核心概念詳解</h2>
+<p>Agentic RAG 是 2026 年最重要的 RAG 演進方向，它將自主 AI Agent 嵌入 RAG 管道，利用反思（Reflection）、規劃（Planning）、工具使用（Tool Use）和多 Agent 協作等模式，動態管理檢索策略並適應複雜情境。與傳統 RAG 相比，Agentic RAG 可以根據查詢複雜度自動決定是否需要多跳檢索、何時調用外部工具、如何合併多個知識源。這種設計讓 AI 系統不再只是被動地執行固定檢索流程，而是能夠「思考」檢索策略，針對不同問題選擇最適合的處理方式。</p>
+
+<p>傳統 RAG 管道通常是線性的：接收查詢 → 向量檢索 → 生成回答。但現實企業場景中的問題往往複雜得多，可能需要從多個知識源獲取資訊、反覆驗證事實、或根據初步結果動態調整檢索方向。Agentic RAG 正是為了解決這些挑戰而誕生，它讓 AI Agent 擔任「檢索策略管理器」的角色，根據任務需求動態規劃執行路徑。</p>
+
+<h2>建構 Agentic RAG 系統的四大核心組件</h2>
+<p>一個完整的 Agentic RAG 系統包含四個核心組件：<strong>查詢分析器</strong>負責理解用戶意圖並分解複雜問題；<strong>檢索策略規劃器</strong>決定使用哪些檢索方法、如何組合結果；<strong>工具調度器</strong>管理向量檢索、關鍵字搜索、知識圖譜查詢等各種工具的調用；<strong>結果融合與驗證模組</strong>則負責合併多個檢索結果並進行事實校驗。</p>
+
+<p>混合檢索引擎結合語義搜索與關鍵字搜索，在嘈雜企業數據集中的準確率顯著超過單一方法管道。GraphRAG 結合向量搜索與知識圖譜，在某些場景下搜索精度可達 99%。多模態 RAG 整合圖像、音頻、表格和視頻嵌入，創建更全面的推理能力。A-RAG（分層檢索接口）通過層次化檢索接口大幅提升縱向擴展性，適合處理海量企業文件。</p>
+
+<h3>使用 LangChain 實現基礎 Agentic RAG</h3>
+<p>以下範例展示如何使用 LangChain 建構基本的 Agentic RAG 系統：</p>
+
+<pre><code>from langchain.agents import AgentExecutor, create_openai_functions_agent
+from langchain_openai import ChatOpenAI
+from langchain import hub
+from langchain_community.retrievers import WikipediaRetriever
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import LLMChainExtractor
+
+# 初始化語言模型
+llm = ChatOpenAI(model="gpt-4", temperature=0)
+
+# 定義檢索工具
+def get_retriever_tools(vector_store):
+    """建立檢索工具列表"""
+    return [
+        {
+            "name": "semantic_search",
+            "description": "使用向量語義搜索檢索企業知識庫",
+            "func": lambda q: vector_store.similarity_search(q, k=5)
+        },
+        {
+            "name": "keyword_search",
+            "description": "使用關鍵字精確匹配檢索技術文檔",
+            "func": lambda q: vector_store.similarity_search_with_score(q, k=3, filter={"type": "technical"})
+        }
+    ]
+
+# 建立 Agent
+def build_agentic_rag_agent(vector_store, llm):
+    """建構 Agentic RAG Agent"""
+    tools = get_retriever_tools(vector_store)
+    
+    # 從 Hub 獲取提示模板
+    prompt = hub.pull("hwchase17/openai-functions-agent")
+    
+    # 建立 Agent
+    agent = create_openai_functions_agent(llm, tools, prompt)
+    executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    
+    return executor
+
+# 使用範例
+# executor = build_agentic_rag_agent(vector_store, llm)
+# result = executor.invoke({"input": "請找出關於 Agentic RAG 的最新研究趨勢"})
+</code></pre>
+
+<h2>LlamaIndex 實現方案：動態檢索策略配置</h2>
+<p>LlamaIndex 提供了另一種實現路徑，特別適合需要更細粒度控制的場景。以下展示如何配置動態檢索策略：</p>
+
+<pre><code>from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.core.retrievers import VectorIndexRetriever
+from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core.agent import AgentRunner
+from llama_index.llms.openai import OpenAI
+
+# 載入文件並建立索引
+documents = SimpleDirectoryReader("data/").load_data()
+index = VectorStoreIndex.from_documents(documents)
+
+# 定義自定義檢索策略
+class AdaptiveRetriever:
+    """自適應檢索器：根據查詢複雜度動態選擇檢索策略"""
+    
+    def __init__(self, index):
+        self.index = index
+        self.llm = OpenAI(model="gpt-4")
+    
+    def retrieve(self, query):
+        # 分析查詢複雜度
+        complexity_prompt = f"""分析以下查詢的複雜度：
+        查詢：{query}
+        回答：simple / moderate / complex"""
+        
+        complexity = self.llm.complete(complexity_prompt).text.strip()
+        
+        # 根據複雜度選擇檢索策略
+        if complexity == "simple":
+            # 簡單查詢：單次向量檢索
+            return self.index.as_retriever(similarity_top_k=3).retrieve(query)
+        elif complexity == "moderate":
+            # 中等複雜度：多向量檢索 + 關鍵字過濾
+            retriever = self.index.as_retriever(similarity_top_k=5)
+            return retriever.retrieve(query)
+        else:
+            # 複雜查詢：多跳檢索 + 知識圖譜
+            return self._multi_hop_retrieve(query)
+    
+    def _multi_hop_retrieve(self, query):
+        """多跳檢索：迭代獲取相關資訊"""
+        results = []
+        current_query = query
+        
+        for hop in range(3):  # 最多3跳
+            retriever = self.index.as_retriever(similarity_top_k=3)
+            hop_results = retriever.retrieve(current_query)
+            results.extend(hop_results)
+            
+            # 使用 LLM 生成下一跳查詢
+            if hop < 2:
+                next_prompt = f"基於查詢 '{current_query}' 和已獲取資訊，生成下一個搜索查詢"
+                current_query = self.llm.complete(next_prompt).text.strip()
+        
+        return results
+
+# 使用自適應檢索器
+adaptive_retriever = AdaptiveRetriever(index)
+query_engine = RetrieverQueryEngine.from_args(adaptive_retriever)
+</code></pre>
+
+<h2>企業級部署：混合檢索與 GraphRAG 整合</h2>
+<p>在實際企業環境中，單一檢索方法往往無法滿足需求。推薦採用混合檢索架構，結合向量搜索、關鍵字搜索和知識圖譜。以下是整合要點：</p>
+
+<ul>
+  <li><strong>向量檢索層</strong>：處理語義相似性匹配，適合開放式問題</li>
+  <li><strong>關鍵字檢索層</strong>：處理精確術語匹配，適合技術文件檢索</li>
+  <li><strong>知識圖譜層</strong>：處理實體關係推理，適合複雜關聯查詢</li>
+  <li><strong>結果融合層</strong>：使用重排序模型（Cross-Encoder）合併和排序結果</li>
+</ul>
+
+<p>GraphRAG 的核心優勢在於能夠理解實體之間的關係。當用戶詢問「某公司的供應商提供的產品」這類涉及多跳關係的問題時，知識圖譜可以準確導航關聯路徑，而傳統向量檢索則可能遺漏關鍵資訊。實作時可使用 Neo4j 作為圖資料庫，搭配 LangChain 的 GraphSparqlQAChain 建立問答系統。</p>
+
+<h2>常見挑戰與優化策略</h2>
+<p>部署 Agentic RAG 時常見的挑戰包括：檢索結果品質不穩定、Agent 規劃決策偏離預期、多輪對話上下文丟失等。優化策略包括：</p>
+
+<ol>
+  <li><strong>回饋迴路設計</strong>：讓 Agent 根據生成結果回溯檢索策略</li>
+  <li><strong>快取機制</strong>：快取常見查詢的檢索結果，提升回應速度</li>
+  <li><strong>監控儀表板</strong>：追蹤檢索命中率、Agent 決策路徑、生成品質等指標</li>
+  <li><strong>人機協作</strong>：關鍵決策節點引入人工審核，確保系統可靠性</li>
+</ol>
+
+<p>隨著大型語言模型能力的持續提升，Agentic RAG 的應用場景將更加廣泛。建議開發者從簡單的單一檢索管道開始，逐步加入 Agent 決策層，這樣可以在控制風險的同時逐步探索系統的潛力。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Agentic RAG 與傳統 RAG 的主要差異是什麼？</h3>
+            <p class="faq-a">傳統 RAG 是固定流程的線性管道，Agentic RAG 則讓 AI Agent 動態管理檢索策略，可根據查詢複雜度自動決定檢索方式、是否需要多跳檢索、以及如何合併多個知識源的結果。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">建構 Agentic RAG 需要哪些技術堆疊？</h3>
+            <p class="faq-a">主要技術堆疊包括：LangChain 或 LlamaIndex 作為開發框架、向量資料庫（如 Pinecone、Weaviate、Chroma）、大型語言模型（如 GPT-4、Claude）、以及可選的知識圖譜資料庫（如 Neo4j）。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何評估 Agentic RAG 系統的效能？</h3>
+            <p class="faq-a">評估維度包括：檢索命中率、答案準確率、延遲時間、Agent 決策合理性。可使用 RAGAs、ARES 等評估框架，或建立針對特定領域的評估資料集進行人工評測。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
