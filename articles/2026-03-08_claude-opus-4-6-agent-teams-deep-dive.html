@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Opus 4.6 深度解析：Agent Teams 多 Agent 協作、1M token 上下文、Adaptive Thinking 等新功能完整教學。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-opus-4-6-agent-teams-deep-dive.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代">
+  <meta property="og:description" content="Claude Opus 4.6 深度解析：Agent Teams 多 Agent 協作、1M token 上下文、Adaptive Thinking 等新功能完整教學。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-opus-4-6-agent-teams-deep-dive.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代", "description": "Claude Opus 4.6 深度解析：Agent Teams 多 Agent 協作、1M token 上下文、Adaptive Thinking 等新功能完整教學。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-opus-4-6-agent-teams-deep-dive.html"}, "articleSection": "科技趨勢"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Opus 4.6 的 Agent Teams 是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Agent Teams 允許多個 AI Agent 協作處理大型任務，由協調器統一調度，每個 Agent 負責特定子任務，適合複雜專案開發。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Opus 4.6 的上下文視窗有多大？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Opus 4.6 上下文視窗擴展至 1M token（Beta），輸出 token 從 64K 翻倍至 128K，大幅提升長文檔處理能力。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何使用 Ultrathink 模式？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ultrathink 模式透過 extra_headers 加入 &quot;anthropic-beta: ultrathink-2025-01-01&quot; 標頭，僅限 Max 和 Team 訂閱者使用。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Opus 4.6 Agent Teams 完整...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Opus 4.6 發布：多 Agent 協作新時代來臨</h2>
+<p>Anthropic 於 2026 年 2 月 5 日正式發布 Claude Opus 4.6，這距離 Opus 4.5 僅三個月。這次更新最重磅的新功能是「Agent Teams」——允許多個 Agent 協作拆解大型任務，每個 Agent 負責特定子任務，透過協調器統一調度。這意味著開發者可以設計複雜的工作流程，讓不同專業的 AI Agent 协同工作，實現更高效的任務處理。</p>
+
+<h2>Agent Teams 協作機制詳解</h2>
+<p>Agent Teams 是 Opus 4.6 的核心新功能，採用主從架構設計。一個協調器 Agent 負責統籌調度，將複雜任務拆解為多個子任務，然後指派給專業的執行 Agent。每個 Agent 可以設定不同的角色和權限，例如代碼審查 Agent、測試 Agent、文檔生成 Agent 等。</p>
+<p>這種協作模式特別適合大型專案開發，團隊可以定義多個專業 Agent：</p>
+<ul>
+<li><strong>規劃 Agent</strong>：分析需求，制定技術方案</li>
+<li><strong>編碼 Agent</strong>：負責實際程式碼開發</li>
+<li><strong>測試 Agent</strong>：撰寫和執行測試用例</li>
+<li><strong>審查 Agent</strong>：進行 code review 和優化建議</li>
+</ul>
+
+<h2>技術規格全面升級</h2>
+<p>Opus 4.6 在多項技術指標上都有顯著提升：</p>
+<ul>
+<li><strong>上下文視窗</strong>：擴展至 1M token（Beta 階段）</li>
+<li><strong>輸出長度</strong>：從 64K 翻倍至 128K</li>
+<li><strong>ARC AGI 2 基準</strong>：從 37.6% 跳升至 68.8%</li>
+<li><strong>長上下文檢索（MRCR v2）</strong>：從 18.5% 提升至 76%</li>
+<li><strong>編碼基準</strong>：達到 65.4%</li>
+</ul>
+<p>這些提升使得 Opus 4.6 能夠處理更龐大的文件、進行更深入的分析，並生成更長、更複雜的輸出。
+
+<h2>Adaptive Thinking 與 Ultrathink 模式</h2>
+<p>Opus 4.6 新增 Adaptive Thinking 功能，透過 <code>thinking: {'type': 'adaptive'}</code> 設定，Claude 可以動態決定推理深度，根據任務複雜度自動調整思考策略。</p>
+<p>對於 Max 和 Team 訂閱者，可以使用 <code>'ultrathink'</code> 關鍵字觸發超高推理模式，適用於需要深度思考的複雜問題求解、程式碼除錯或架構設計等場景。</p>
+
+<h2>檔案處理與安全性的重大更新</h2>
+<p>在檔案處理方面，Opus 4.6 原生支援 PowerPoint 和 Excel 讀寫，可直接解析 <code>.pptx</code> 和 <code>.xlsx</code> 檔案。這對於商業分析和報告自動化是重大利好。</p>
+<p>安全性方面，Opus 4.6 在欺騙、諂媚、配合濫用等指標中表現最低，過度拒絕率也是近期 Claude 模型中最低的，展現了更平衡的安全與實用性。</p>
+<p><strong>重要提醒</strong>：Opus 4.6 不再支援 assistant message prefilling，相關請求將返回 400 錯誤。開發者需要更新現有程式碼以適應這個變更。</p>
+
+<pre><code># Claude Opus 4.6 Agent Teams 範例
+from anthropic import Anthropic
+
+client = Anthropic()
+
+# 使用 Adaptive Thinking
+response = client.messages.create(
+    model="claude-opus-4-6-20251111",
+    max_tokens=1024,
+    thinking={"type": "adaptive"},
+    messages=[{"role": "user", "content": "設計一個電商系統架構"}]
+)
+
+# 使用 Ultrathink 模式（Max/Team 訂閱）
+response = client.messages.create(
+    model="claude-opus-4-6-20251111",
+    max_tokens=2048,
+    messages=[{"role": "user", "content": "分析這個複雜的系統問題"}],
+    extra_headers={"anthropic-beta": "ultrathink-2025-01-01"}
+)
+</code></pre>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Opus 4.6 的 Agent Teams 是什麼？</h3>
+            <p class="faq-a">Agent Teams 允許多個 AI Agent 協作處理大型任務，由協調器統一調度，每個 Agent 負責特定子任務，適合複雜專案開發。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Opus 4.6 的上下文視窗有多大？</h3>
+            <p class="faq-a">Opus 4.6 上下文視窗擴展至 1M token（Beta），輸出 token 從 64K 翻倍至 128K，大幅提升長文檔處理能力。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何使用 Ultrathink 模式？</h3>
+            <p class="faq-a">Ultrathink 模式透過 extra_headers 加入 "anthropic-beta: ultrathink-2025-01-01" 標頭，僅限 Max 和 Team 訂閱者使用。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
