@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南 | AI 學習寶庫</title>
+  <meta name="description" content="深入解析 Claude Code 進階配置策略，涵蓋 CLAUDE.md 專案指令設計、Memory 記憶系統運作機制、MCP Server 整合配置，以及 Hooks 與權限模式最佳實踐。提供開發者完整的多專案工作流配置方案與混合使用策略。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-code-advanced-config-claudemd-memory-mcp.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南">
+  <meta property="og:description" content="深入解析 Claude Code 進階配置策略，涵蓋 CLAUDE.md 專案指令設計、Memory 記憶系統運作機制、MCP Server 整合配置，以及 Hooks 與權限模式最佳實踐。提供開發者完整的多專案工作流配置方案與混合使用策略。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-code-advanced-config-claudemd-memory-mcp.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南", "description": "深入解析 Claude Code 進階配置策略，涵蓋 CLAUDE.md 專案指令設計、Memory 記憶系統運作機制、MCP Server 整合配置，以及 Hooks 與權限模式最佳實踐。提供開發者完整的多專案工作流配置方案與混合使用策略。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-code-advanced-config-claudemd-memory-mcp.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "CLAUDE.md 和 .claude 資料夾有什麼差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CLAUDE.md 是專案級別的說明文件，供 Claude Code 理解專案架構與規範；.claude 資料夾則存放應用層級配置，包含 settings.json、MCP 設定、Hooks 等。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何在多個專案間共享相同的 CLAUDE.md 配置？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可建立 Git repository 儲存標準化配置，使用 symlink 或 script 工具將配置同步至各專案根目錄，亦可透過 MCP filesystem server 設定路徑別名。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Code 的 Memory 資料儲存在哪裡？如何清除？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Memory 預設儲存於本機 ~/.claude/memory/ 目錄。使用 <code>Memory clear</code> 指令可清除當前對話記憶，或手動刪除目錄中的對應檔案。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code 深度配置：CLAUDE.md、Mem...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>Claude Code 的深度配置能力是其區別於一般 AI 助手的核心差異。透過 CLAUDE.md 專案上下文定義、Memory 系統的智慧記憶機制，以及 MCP（Model Context Protocol）擴展整合，開發者能夠將 Claude Code 打造成完全符合團隊需求的 AI 開發環境。本文將完整解析這三個核心系統的配置方法與最佳實踐。</p>
+
+<h2>CLAUDE.md 專案指令層次設計</h2>
+<p>CLAUDE.md 是 Claude Code 理解專案結構的關鍵樞紐，位於專案根目錄的此檔案會在每次對話開始時自動載入。優秀的 CLAUDE.md 應該採用層次化設計：首先是專案概述（名稱、技術棧、核心功能），其次是程式碼架構說明（目錄結構、模組關係），最後是團隊特定的開發規範（命名慣例、提交規則、測試要求）。</p>
+<pre><code># CLAUDE.md 範本結構
+
+## 專案概述
+- 名稱：MyProject
+- 技術棧：React 18 + TypeScript + Node.js
+- 主要功能：電商後台管理系統
+
+## 程式碼架構
+- `/src/components` - UI 元件
+- `/src/hooks` - 自訂 Hooks
+- `/src/api` - API 整合層
+
+## 開發規範
+- 使用 functional component + hooks
+- 所有元件需附帶 Storybook stories
+- API 錯誤需記錄至 Sentry
+</code></pre>
+
+<p>對於大型專案，建議將複雜的配置拆分至獨立檔案（如 <code>CLAUDE_DEV.md</code>、<code>CLAUDE_API.md</code>），在主 CLAUDE.md 中透過相對路徑引用，保持文件的可維護性。</p>
+
+<h2>Memory 系統：Auto 與 Manual 模式選擇</h2>
+<p>Claude Code 的 Memory 系統決定了 AI 如何存取和使用對話歷史與專案知識。系統提供兩種運作模式：Auto Memory 會自動擷取重要的程式碼變更、錯誤修復和決策記錄，適合快速迭代的開發情境；Manual Memory 則需要開發者明確使用 <code>Memory write</code> 指令標記需要記憶的內容，適合需要精確控制記憶範圍的場景。</p>
+<p>實際配置時，可透過 <code>.claude/settings.json</code> 調整記憶優先級：</p>
+<pre><code>{
+  "memory": {
+    "mode": "hybrid",
+    "autoCapture": ["fix:", "feat:", "refactor:"],
+    "excludePatterns": ["node_modules/**", "*.log"]
+  }
+}
+</code></pre>
+<p>混合模式（hybrid）結合兩者優點，自動擷取版本控制相關的變更，同時保留手動標記關鍵決策的能力。建議團隊建立 Memory 維護週期，定期審視累積的記憶內容，確保資訊的準確性與時效性。</p>
+
+<h2>MCP Server 全面配置清單</h2>
+<p>MCP（Model Context Protocol）擴展了 Claude Code 的工具能力，常見的伺服器配置包括：</p>
+<ul>
+  <li><strong>filesystem</strong>：檔案系統操作，支援安全的路徑限制與監控</li>
+  <li><strong>git</strong>：Git 操作整合，包含分支管理、差異比較、提交歷史查詢</li>
+  <li><strong>browser</strong>：瀏覽器自動化，適用於網頁測試與資料擷取</li>
+  <li><strong>database</strong>：資料庫查詢與操作，支援 SQL 與 NoSQL 資料庫</li>
+  <li><strong>fetch</strong>：HTTP 請求處理，用於 API 整合與網頁內容擷取</li>
+</ul>
+<p>MCP 伺服器透過 <code>mcp.json</code> 檔案配置，每個伺服器可設定獨立的權限範圍與連線參數。建議為不同專案建立專屬的 MCP 配置，確保開發環境的一致性與安全性。</p>
+
+<h2>Hooks 系統與權限模式實踐</h2>
+<p>Hooks 讓 Claude Code 能在特定事件觸發時執行自訂動作，常見應用場景包括：對話開始時載入額外上下文、檔案變更時自動執行測試、任務完成後產生通知。配置檔案位於 <code>.claude/hooks.json</code>：</p>
+<pre><code>{
+  "hooks": {
+    "onTaskComplete": [
+      {
+        "type": "command",
+        "command": "npm test"
+      }
+    ],
+    "onDiff": [
+      {
+        "type": "notification",
+        "service": "slack",
+        "channel": "#dev-updates"
+      }
+    ]
+  }
+}
+</code></pre>
+<p>權限模式（Permission Mode）是 Claude Code 安全機制的核心，支援四個層級：allow（允許）、deny（拒絕）、ask（詢問）、quiet（安靜模式）。對於危險操作（如刪除檔案、執行 shell 命令），建議設為 <code>ask</code> 模式，確保開發者能即時掌握所有系統變更。</p>
+
+<h2>多專案工作流與混合使用策略</h2>
+<p>管理多個專案時，建議建立專案範本（Project Templates），將通用的 CLAUDE.md、MCP 配置和 Hooks 設定標準化。每個專案可透過 <code>--project</code> 參數指定獨立的工作目錄，實現環境隔離。</p>
+<p>關於 Claude Code 與 VS Code / Cursor 的混合使用策略：VS Code 適合作為主要程式碼編輯器，結合 Claude Code 的 CLI 能力處理複雜重構與除錯；Cursor 則提供了更緊密的 AI 整合體驗。建議根據任務性質選擇工具——日常編輯使用 VS Code/Cursor，需要深度程式碼理解或多輪推理時啟動 Claude Code。</p>
+
+<h2>結語</h2>
+<p>掌握 Claude Code 的深度配置是提升開發效率的關鍵。從 CLAUDE.md 的結構化設計、Memory 系統的模式選擇，到 MCP 擴展與 Hooks 的靈活運用，每個環節都能顯著影響 AI 助手的實際產出。建議開發者從今天開始，逐步建立符合團隊需求的配置框架，讓 Claude Code 成為真正個人化的開發夥伴。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">CLAUDE.md 和 .claude 資料夾有什麼差異？</h3>
+            <p class="faq-a">CLAUDE.md 是專案級別的說明文件，供 Claude Code 理解專案架構與規範；.claude 資料夾則存放應用層級配置，包含 settings.json、MCP 設定、Hooks 等。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何在多個專案間共享相同的 CLAUDE.md 配置？</h3>
+            <p class="faq-a">可建立 Git repository 儲存標準化配置，使用 symlink 或 script 工具將配置同步至各專案根目錄，亦可透過 MCP filesystem server 設定路徑別名。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Code 的 Memory 資料儲存在哪裡？如何清除？</h3>
+            <p class="faq-a">Memory 預設儲存於本機 ~/.claude/memory/ 目錄。使用 <code>Memory clear</code> 指令可清除當前對話記憶，或手動刪除目錄中的對應檔案。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
