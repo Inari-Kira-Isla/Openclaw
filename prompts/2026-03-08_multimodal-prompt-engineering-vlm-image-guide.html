@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt | AI 學習寶庫</title>
+  <meta name="description" content="多模態提示詞設計完整指南，教你如何撰寫讓 VLM 精準理解圖像的 Prompt，涵蓋描述策略任務明確化、多圖像比較技巧與格式控制。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_multimodal-prompt-engineering-vlm-image-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt">
+  <meta property="og:description" content="多模態提示詞設計完整指南，教你如何撰寫讓 VLM 精準理解圖像的 Prompt，涵蓋描述策略任務明確化、多圖像比較技巧與格式控制。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_multimodal-prompt-engineering-vlm-image-guide.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt", "description": "多模態提示詞設計完整指南，教你如何撰寫讓 VLM 精準理解圖像的 Prompt，涵蓋描述策略任務明確化、多圖像比較技巧與格式控制。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_multimodal-prompt-engineering-vlm-image-guide.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "多模態提示詞與文字提示詞有什麼主要差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "多模態提示詞需明確指定「觀察目標」、「任務類型」與「輸出格式」，並可引導模型注意圖像的特定區域。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何提升 VLM 辨識圖像的準確率？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "使用「Few-shot 視覺範例」在 prompt 中附上範例輸出，並明確指定感興趣的圖像區域。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Sonnet 4.6 的 1M token 視窗有什麼優勢？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可支援長文件與大量圖像的同時分析，適合複雜的多模態工作流與企業級應用場景。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 P...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>多模態提示詞的核心設計原則</h2>
+<p>多模態提示詞與純文字 prompt 的最大差異在於「視覺引導」。要讓 Vision-Language Model 精準理解圖像，必須在 prompt 中明確指定三個關鍵要素：<strong>觀察目標</strong>（你要模型看什麼）、<strong>任務類型</strong>（你要模型做什麼）、<strong>輸出格式</strong>（你要模型怎麼回覆）。Claude Sonnet 4.6 的 1M token 上下文視窗支援長文件與多圖像分析，讓複雜的多模態工作流成為可能。</p>
+
+<h2>圖像描述策略：自由解讀 vs 區域引導</h2>
+<p>設計 VLM prompt 時，首先要決定是讓模型自由解讀還是引導其注意特定區域。<strong>開放式描述</strong>適用於探索性分析，例如「描述這張圖片的整體內容與風格」；<strong>區域引導</strong>則適用於需要精確判斷的任務，例如「注意圖片左上角的標籤，讀取其中的文字」。研究顯示，明確指定感興趣區域可提升辨識準確率達 30% 以上。</p>
+
+<h2>任務明確化：五種常見 VLM 任務結構</h2>
+<ul>
+<li><strong>OCR 任務</strong>：「擷取圖片中所有可讀的文字，包含手寫與印刷體」</li>
+<li><strong>分類任務</strong>：「判斷這張產品圖片是否包含以下瑕疵：裂縫、污點、變色」</li>
+<li><strong>比較任務</strong>：「系統性比較這兩張 UI 截圖的差異處」</li>
+<li><strong>說明生成</strong>：「為這張電商商品圖片生成一行吸引人的描述文案」</li>
+<li><strong>異常偵測</strong>：「檢查這張工業製品圖片是否有任何製造缺陷」</li>
+</ul>
+
+<h2>多圖像比較與格式控制技巧</h2>
+<p>當需要分析多張圖像時，prompt 必須引導模型進行<strong>系統性對比</strong>。建議使用表格格式要求輸出，並明確指定比較的維度。以下是結構化輸出的 prompt 範例：</p>
+
+<pre><code>分析這三張產品圖片，按以下格式輸出：
+| 圖片編號 | 主要特徵 | 瑕疵項目 | 品質評級 |
+|---------|---------|---------|---------|
+| 圖1 | [描述] | [列出] | [OK/NG] |
+| 圖2 | [描述] | [列出] | [OK/NG] |
+| 圖3 | [描述] | [列出] | [OK/NG] |</code></pre>
+
+<h2>Few-shot 視覺範例與實際應用場景</h2>
+<p>在 prompt 中附上<strong>範例輸出格式</strong>可以顯著提升模型遵循指令的準確度。實務上，多模態提示詞廣泛應用於：產品圖像品管（找出製造瑕疵）、文件資訊提取（發票、合約 OCR）、UI/UX 截圖分析、醫療影像輔助判讀、以及電商商品描述自動生成。掌握這些設計原則，能讓你的 VLM 發揮最大效益。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">多模態提示詞與文字提示詞有什麼主要差異？</h3>
+            <p class="faq-a">多模態提示詞需明確指定「觀察目標」、「任務類型」與「輸出格式」，並可引導模型注意圖像的特定區域。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何提升 VLM 辨識圖像的準確率？</h3>
+            <p class="faq-a">使用「Few-shot 視覺範例」在 prompt 中附上範例輸出，並明確指定感興趣的圖像區域。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Sonnet 4.6 的 1M token 視窗有什麼優勢？</h3>
+            <p class="faq-a">可支援長文件與大量圖像的同時分析，適合複雜的多模態工作流與企業級應用場景。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
