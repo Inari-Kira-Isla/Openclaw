@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理 | AI 學習寶庫</title>
+  <meta name="description" content="掌握 Claude Opus 4.6 的 Adaptive Thinking 與 ultrathink 提示詞技巧，透過動態思考預算分配，解鎖 AI 最強深度推理能力，適用於複雜程式設計與數學推導。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_claude-adaptive-thinking-ultrathink-prompt-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理">
+  <meta property="og:description" content="掌握 Claude Opus 4.6 的 Adaptive Thinking 與 ultrathink 提示詞技巧，透過動態思考預算分配，解鎖 AI 最強深度推理能力，適用於複雜程式設計與數學推導。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_claude-adaptive-thinking-ultrathink-prompt-guide.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理", "description": "掌握 Claude Opus 4.6 的 Adaptive Thinking 與 ultrathink 提示詞技巧，透過動態思考預算分配，解鎖 AI 最強深度推理能力，適用於複雜程式設計與數學推導。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_claude-adaptive-thinking-ultrathink-prompt-guide.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ultrathink 是否需要訂閱才能使用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，ultrathink 關鍵字目前僅開放給 Max 和 Team 訂閱用戶。Free 用戶可使用標準的 Adaptive Thinking 功能，但無法觸發超高推理預算。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何判斷何時該使用 ultrathink 而非一般的 high effort？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "當任務涉及以下情境時建議使用 ultrathink：多步驟數學證明、複雜系統設計、深度策略分析、需要生成超過 2000 字的技術報告。一般程式開發問題使用 high effort 即可。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Adaptive Thinking 與固定的 thinking budget 有何差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "固定 thinking budget 對所有問題投入相同資源，可能造成簡單問題浪費 token 或複雜問題推理不足。Adaptive Thinking 能動態感知任務複雜度，自動分配最適當的思考資源，實現效率與深度的最佳平衡。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Adaptive Thinking 提示詞設計：用 ultr...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是 Adaptive Thinking？Claude 4.6 的智能推理革命</h2>
+<p>Claude Opus 4.6 引入的 Adaptive Thinking 功能，透過 <code>thinking: {type: 'adaptive'}</code> 參數，讓 Claude 能夠<strong>動態決定何時需要深入思考以及思考深度</strong>。這項技術徹底改變了 AI 推理的方式：系統不再對所有問題都投入相同運算資源，而是根據任務複雜度自動分配。</p>
+<p>在預設的 <code>high effort</code> 層級下，Claude 幾乎始終進入思考模式。這種設計確保複雜問題能獲得充分推理，同時在簡單問答場景中節省 token。根據 Anthropic 數據，ARC AGI 2 基準從 37.6% 躍升至 68.8%，充分顯示深度推理能力的實質突破。</p>
+
+<h2>ultrathink 關鍵字：觸發超高推理預算</h2>
+<p>Max 和 Team 訂閱者可在提示中直接使用 <code>ultrathink</code> 關鍵字，這會觸發下一輪的<strong>超高推理預算</strong>。這不是普通的深度思考，而是專為以下場景設計的極限推理模式：</p>
+<ul>
+<li>複雜的數學推導與證明</li>
+<li>多步驟程式設計問題</li>
+<li>需要深度分析的策略規劃</li>
+<li>長篇技術報告生成</li>
+</ul>
+<p>與固定thinking budget相比，Adaptive Thinking 在速度敏感的場景（簡單問答）節省 token，在複雜場景自動分配更多運算資源，實現真正的智慧資源調度。</p>
+
+<h2>Claude Code 中的 Adaptive Thinking 設定</h2>
+<p>在 Claude Code 中，Opus 4.6 預設對 Max 和 Team 訂閱者採用 <code>medium effort</code> 模式。開發者可通過設定調整思考深度，以下是不同場景的推薦配置：</p>
+<pre><code># 基礎對話 - medium effort
+thinking: { type: 'adaptive', effort: 'medium' }
+
+# 複雜程式碼審查 - high effort  
+thinking: { type: 'adaptive', effort: 'high' }
+
+# 超複雜問題 - 啟動 ultrathink
+thinking: { type: 'adaptive' }
+ultrathink: true</code></pre>
+<p>在 Claude Code 環境中，建議將複雜任務的設定改為 <code>high effort</code>，並在需要時搭配 <code>ultrathink</code> 關鍵字使用。</p>
+
+<h2>最佳實踐：如何設計有效的 Adaptive Thinking 提示詞</h2>
+<p>以下是三個經過驗證的最佳實踐策略：</p>
+<ol>
+<li><strong>為複雜多步驟任務明確使用 ultrathink</strong>：當任務涉及超過 3 個以上的推理步驟時，主動在提示中加入 <code>ultrathink</code> 關鍵字，確保 Claude 投入最大推理資源。</li>
+<li><strong>在系統提示中設定任務複雜度分類</strong>：讓 Claude 根據任務描述自動匹配思考深度。例如：「如果任務涉及演算法設計或數學證明，請自動提升思考層級」。</li>
+<li><strong>搭配 extended output（最高 128K tokens）</strong>：當需要生成完整的推理報告或複雜程式碼時，啟用 extended output 避免輸出被截斷。</li>
+</ol>
+
+<h2>實際應用範例：多步驟程式設計提示詞</h2>
+<p>以下是一個完整的提示詞範例，展示如何有效運用 Adaptive Thinking 進行複雜程式開發：</p>
+<pre><code>請使用 ultrathink 模式幫我設計一個分布式系統的負載均衡器。
+
+需求：
+1. 支援最少連線、加權輪詢、最少響應時間三種演算法
+2. 具備健康檢查機制
+3. 支援動態新增/移除節點
+4. 提供 RESTful API 監控界面
+
+請在思考過程中：
+- 分析每種負載均衡策略的優劣勢
+- 考量並發處理與容錯設計
+- 產出完整可運行的 Python 程式碼
+- 包含單元測試範例</code></pre>
+<p>這個提示詞明確要求使用 <code>ultrathink</code>，並詳細列出需求與思考方向，確保 Claude投入最大推理資源完成複雜的系統設計任務。</p>
+
+<h2>總結：掌握 Adaptive Thinking 的關鍵要點</h2>
+<p>Adaptive Thinking 代表了 AI 推理的重大演進，讓 Claude 能夠像人類一樣「聰明地思考」。關鍵在於：根據任務複雜度選擇適當的思考深度，簡單問題用 medium effort，複雜推理用 high effort，極限挑戰用 ultrathink。搭配 extended output 功能，還能產出高達 128K tokens 的完整推理報告。</p>
+<p>對於需要深度推理的開發者、研究者或分析師而言，掌握這套提示詞設計方法，將能充分發揮 Claude Opus 4.6 的全部潛力，在複雜任務中獲得更準確、更深入的結果。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">ultrathink 是否需要訂閱才能使用？</h3>
+            <p class="faq-a">是的，ultrathink 關鍵字目前僅開放給 Max 和 Team 訂閱用戶。Free 用戶可使用標準的 Adaptive Thinking 功能，但無法觸發超高推理預算。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何判斷何時該使用 ultrathink 而非一般的 high effort？</h3>
+            <p class="faq-a">當任務涉及以下情境時建議使用 ultrathink：多步驟數學證明、複雜系統設計、深度策略分析、需要生成超過 2000 字的技術報告。一般程式開發問題使用 high effort 即可。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Adaptive Thinking 與固定的 thinking budget 有何差異？</h3>
+            <p class="faq-a">固定 thinking budget 對所有問題投入相同資源，可能造成簡單問題浪費 token 或複雜問題推理不足。Adaptive Thinking 能動態感知任務複雜度，自動分配最適當的思考資源，實現效率與深度的最佳平衡。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
