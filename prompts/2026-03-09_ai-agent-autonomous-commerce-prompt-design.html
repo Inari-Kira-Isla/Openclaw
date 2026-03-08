@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計 | AI 學習寶庫</title>
+  <meta name="description" content="AI Agent 自主商務應用提示詞設計教學，涵蓋下單、談判、行銷自動化策略，附具體程式碼範例與安全治理建議。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-09_ai-agent-autonomous-commerce-prompt-design.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計">
+  <meta property="og:description" content="AI Agent 自主商務應用提示詞設計教學，涵蓋下單、談判、行銷自動化策略，附具體程式碼範例與安全治理建議。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-09_ai-agent-autonomous-commerce-prompt-design.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計", "description": "AI Agent 自主商務應用提示詞設計教學，涵蓋下單、談判、行銷自動化策略，附具體程式碼範例與安全治理建議。", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-09_ai-agent-autonomous-commerce-prompt-design.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "建立商務 Agent 需要多長時間？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "從原型開發到正式上線，基礎下單 Agent 約需 2-4 週，包含提示詞設計、測試與安全閘道部署。複雜的談判 Agent 可能需要 2-3 個月。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保 Agent 的決策品質？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "採用「人類在環」（Human-in-the-Loop）機制，設定明確的升級觸發條件，並建立定期審計與回饋優化循環。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型企業適合導入 Agentic Commerce 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議從低風險場景開始，如自動報價回覆、庫存監控與行銷內容生成，逐步擴展到訂單處理與談判場景。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>AI Agent 自主商務應用：讓 Agent 代你下單、談...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計</h1>
+      <div class="article-info">
+        <span>📅 2026-03-09</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>AI Agent 自主商務應用：提示詞設計的核心答案</h2>
+
+<p>AI Agent 自主商務應用是指透過精心設計的提示詞，讓 AI Agent 能代替人類執行下單、談判協商與自動調整行銷策略等商務任務。根據 Google Cloud 發布的 AI Agent 趨勢 2026 報告，Agent 正從工具轉型為「策略性業務夥伴」。設計有效的 Agentic Commerce 提示詞需要掌握五個關鍵要素：任務邊界定義、授權層級設定、異常處理策略、人工確認觸發條件，以及多 Agent 協作時的上下文傳遞規範。本文將提供具體的提示詞設計框架與程式碼範例，幫助你快速建立自主商務 Agent 系統。</p>
+
+<h2>一、理解 Agentic Commerce 與提示詞的角色</h2>
+
+<p>2026 年被稱為 Agentic Commerce 元年，AI Agent 已可代替人類完成複雜的商業決策。從 Samsung Galaxy S26 搭載的 Now Nudge 主動建議功能，到結合 Gemini 和 Perplexity Agent 的升級版 Bixby，消費端已展現 Agentic AI 的實際應用場景。在 B2B 領域，AI Agent 的價值更為顯著——它們可以 24 小時運作、處理大量詢價、並在授權範圍內完成交易。</p>
+
+<p>提示詞在這個生態系統中扮演「任務憲章」的角色，定義 Agent 的職責範圍、決策權限與行為邊界。一個優秀的商務提示詞不僅要告訴 Agent「做什麼」，更要明確規範「做到什麼程度」以及「什麼情況下必須請示人類」。</p>
+
+<h2>二、打造高效下單 Agent 的提示詞框架</h2>
+
+<p>下單是最基礎也是最關鍵的商務自動化場景。設計下單 Agent 時，首要任務是建立清晰的任務邊界與價格授權範圍。</p>
+
+<h3>核心提示詞結構</h3>
+
+<pre><code>你是採購 Agent，負責代表公司執行訂單下達任務。
+
+## 授權範圍
+- 單筆訂單金額低於 NT$50,000：可自行決定
+- 單筆訂單金額 NT$50,000-200,000：需提供三個供應商比價報告
+- 單筆訂單金額超過 NT$200,000：必須經人類主管確認
+
+## 決策標準
+- 優先選擇歷史合作供應商
+- 交期必須在 14 天以內
+- 拒絕任何需要預付款超過 30% 的交易
+
+## 異常處理
+- 庫存不足：立即暫停並回報人類
+- 價格異常波動（超過市價 15%）：標記為需審核
+- 供應商信用評級低於 B：自動排除
+
+## 上下文傳遞
+完成每筆訂單後，輸出結構化摘要包含：供應商、金額、預計交期、風險標記</code></pre>
+
+<p>這段提示詞示範了任務邊界定義與授權層級設定的結合。透過明確的金額閾值，Agent 知道何時可以自主行動，何時需要升級處理。</p>
+
+<h2>三、談判協商 Agent 的提示詞策略</h2>
+
+<p>談判是 AI Agent 最具挑戰性的商務應用場景，涉及複雜的情境判斷與策略調整。成功的談判提示詞需要包含談判目標、底線設定與戰術指引。</p>
+
+<p>設計談判 Agent 時，必須定義三層談判區間：理想目標、可接受範圍與終止底線。同時要建立人性確認觸發條件，例如當對方提出非預期要求、談判陷入僵局或涉及法律條款修改時，Agent 應暫停談判並尋求人類指導。</p>
+
+<p>實務上，建議將談判 Agent 與人類決策者設定為「教練-球員」模式：Agent 負責資訊收集、選項分析與初步接觸，最終決策仍由人類做出。</p>
+
+<h2>四、自動化行銷 Agent 的提示詞設計</h2>
+
+<p>行銷領域的 Agentic AI 應用涵蓋內容生成、受眾分析與動態定價等場景。與下單和談判不同，行銷 Agent 需要更強的創意能力與市場敏感度。</p>
+
+<p>設計行銷 Agent 提示詞時，應包含以下關鍵組件：品牌調性定義、競爭對手分析框架、效果衡量指標與 A/B 測試策略。根據 2026 年趨勢，頂尖的行銷 Agent 已能根據即時市場數據自動調整投放策略，但仍需設定預算上限與品牌安全底線。</p>
+
+<p>實務建議：建立行銷 Agent 的「每日戰報」機制，讓 Agent 每天輸出關鍵指標變化與優化建議，確保人類行銷團隊能持續監控與指導。</p>
+
+<h2>五、安全治理提示詞：防止 Agent 失控</h2>
+
+<p>安全治理是 Agentic Commerce 成敗的關鍵。根據 Google Cloud 報告，高風險操作（涉及財務轉帳、合約簽署、數據刪除）的 Agent 需要特別設計安全閘道。</p>
+
+<h3>安全治理提示詞模板</h3>
+
+<pre><code>## 安全守則（最高優先級）
+
+### 禁止執行的操作
+- 未經人類授權的款項匯出
+- 任何涉及個資或商業機密的外部分享
+- 未經備份的資料修改或刪除
+- 以公司名義對外簽署任何形式的合約
+
+### 人工確認觸發條件
+- 任何單筆支出超過 NT$100,000
+- 任何需要回覆法律相關詢問
+- 任何涉及價格談判的最終確認
+- 任何異常登入或權限異動
+
+### 審計追蹤
+所有操作必須記錄：時間戳、操作用戶、操作類型、輸入輸出摘要
+每月生成安全審計報告</code></pre>
+
+<p>這段提示詞展示了如何建立「紅線」機制，確保 Agent 在授權範圍內運作的同時，保留人類最終審核權。</p>
+
+<h2>結語</h2>
+
+<p>AI Agent 自主商務應用的成功關鍵在於提示詞設計的精細度。從下單、談判到行銷，每個場景都需要明確的任務邊界、授權層級與異常處理機制。2026 年 Agentic Commerce 已從概念走向落地，建議企業從單一場景開始試點，逐步建立完善的 Agent 治理框架。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">建立商務 Agent 需要多長時間？</h3>
+            <p class="faq-a">從原型開發到正式上線，基礎下單 Agent 約需 2-4 週，包含提示詞設計、測試與安全閘道部署。複雜的談判 Agent 可能需要 2-3 個月。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保 Agent 的決策品質？</h3>
+            <p class="faq-a">採用「人類在環」（Human-in-the-Loop）機制，設定明確的升級觸發條件，並建立定期審計與回饋優化循環。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型企業適合導入 Agentic Commerce 嗎？</h3>
+            <p class="faq-a">建議從低風險場景開始，如自動報價回覆、庫存監控與行銷內容生成，逐步擴展到訂單處理與談判場景。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
