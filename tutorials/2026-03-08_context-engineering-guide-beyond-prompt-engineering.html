@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能 | AI 學習寶庫</title>
+  <meta name="description" content="Context Engineering 是2026年AI開發最新關鍵技術，Andrej Karpathy提出的新概念。教你從Prompt Engineering升級到上下文窗口管理、記憶層設計、動態注入等實戰技能。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_context-engineering-guide-beyond-prompt-engineering.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能">
+  <meta property="og:description" content="Context Engineering 是2026年AI開發最新關鍵技術，Andrej Karpathy提出的新概念。教你從Prompt Engineering升級到上下文窗口管理、記憶層設計、動態注入等實戰技能。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_context-engineering-guide-beyond-prompt-engineering.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能", "description": "Context Engineering 是2026年AI開發最新關鍵技術，Andrej Karpathy提出的新概念。教你從Prompt Engineering升級到上下文窗口管理、記憶層設計、動態注入等實戰技能。", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_context-engineering-guide-beyond-prompt-engineering.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Engineering 需要哪些技術基礎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "需要理解LLM工作原理、向量資料庫操作、提示詞設計經驗，以及基本的Python程式能力。重點在於系統性思維，能從整體架構規劃上下文管理策略。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型專案也需要Context Engineering嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "即使是簡單應用，也建議採用基礎的Context Engineering概念，例如：明確的系統提示、簡單的對話歷史管理。這能顯著提升AI回應的穩定性和品質。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何評估Context Engineering的效果？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可透過以下指標：任務完成率、使用者滿意度、上下文相關性評分（可使用LLM評估回應與上下文的相關程度）、回應一致性。建議建立測試案例庫定期評估。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Context Engineering 實戰指南：比 Pro...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能</h1>
+      <div class="article-info">
+        <span>📅 2026-03-08</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Context Engineering 是什麼？為何比 Prompt Engineering 更重要？</h2>
+<p>Context Engineering 是2026年AI開發最受關注的新概念，由Andrej Karpathy等專家提出，強調不只是「寫好提示詞」，而是系統性設計AI的上下文視窗。它涵蓋系統提示、<strong>記憶管理</strong>、工具選擇和RAG召回策略等整體架構。當LLM上下文窗口不斷擴大，從4K到128K甚至更多，如何有效管理這些上下文成為關鍵能力。傳統Prompt Engineering只解決「怎麼說」的問題，而Context Engineering解決的是「讓AI知道什麼」的系統性問題。</p>
+
+<h2>Context Engineering 與 Prompt Engineering 的本質差異</h2>
+<p>Prompt Engineering專注於單次對話的提示詞優化，目標是寫出更好的指令。Context Engineering則是從系統層面設計AI的認知框架，包括：長期記憶如何存取、哪些資訊需要納入上下文、何時觸發工具調用、向量資料庫的召回策略等。簡單比喻：Prompt Engineering是教單一員工如何溝通，Context Engineering是設計整個公司的資訊流和管理系統。根據vibesparking.com的分析，優秀的Context Engineering可以讓同一個LLM發揮200%以上的效能。</p>
+
+<h3>上下文窗口管理策略</h3>
+<p>有效的上下文窗口管理需要遵循「重要性優先」原則。首先，識別任務的核心資訊類型：領域知識、對話歷史、用戶偏好、工具結果。其次，根據LLM的處理能力分配token預算。建議將最重要的系統指令放在上下文開頭，中間放置與當前任務最相關的資訊，結尾可放置參考格式範例。第三，實施「上下文壓縮」技術，將長對話歷史濃縮為關鍵要點，避免無效資訊稀釋重要內容。</p>
+
+<h3>記憶層設計實戰</h3>
+<p>記憶層是Context Engineering的核心組件，分為三個層次：工作記憶（當前對話）、會話記憶（本次會話的歷史摘要）、長期記憶（跨會話的用戶偏好和知識）。設計時需要建立清晰的記憶存取邏輯：</p>
+<ul>
+<li><strong>工作記憶</strong>：保留最近3-5輪對話的完整內容</li>
+<li><strong>會話記憶</strong>：每5輪自動摘要，存儲關鍵決策和資訊點</li>
+<li><strong>長期記憶</strong>：用戶偏好、已知事實、歷史交互模式</li>
+</ul>
+<p>実装時可使用向量資料庫存儲記憶片段，根據相似度動態檢索相關內容注入上下文。</p>
+
+<h3>動態上下文注入技術</h3>
+<p>動態上下文注入是讓AI在正確時機獲得正確資訊的技術。關鍵在於「觸發式檢索」：當用戶提出特定類型問題時，自動從知識庫檢索相關資訊。以下是Python範例：</p>
+<pre><code># 動態上下文注入範例
+def get_relevant_context(query, vector_db, top_k=3):
+    # 根據用戶查詢檢索相關上下文
+    results = vector_db.similarity_search(query, k=top_k)
+    return "\n".join([r.content for r in results])
+
+def build_context_window(user_query, chat_history, vector_db):
+    system_prompt = "你是一位專業助手，根據檢索到的資訊回答問題。"
+    dynamic_context = get_relevant_context(user_query, vector_db)
+    
+    context = f"{system_prompt}\n\n參考資訊：\n{dynamic_context}\n\n對話歷史：\n{chat_history[-5:]}"
+    return context</code></pre>
+<p>這段程式碼展示如何根據用戶查詢動態檢索相關知識，並與對話歷史組合成完整的上下文窗口。</p>
+
+<h3>RAG 召回策略優化</h3>
+<p>RAG（檢索增強生成）的召回品質直接影響Context Engineering的效果。優化策略包括：多層級檢索（先粗檢索再細篩選）、混合搜尋（結合向量相似度和關鍵詞匹配）、重排序模型（使用交叉編碼器對結果重新排序）。建議設定明確的召回閾值，例如相似度低於0.7的結果不注入上下文，避免引入雜訊。定期評估召回品質，根據使用者回饋持續優化檢索策略。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Engineering 需要哪些技術基礎？</h3>
+            <p class="faq-a">需要理解LLM工作原理、向量資料庫操作、提示詞設計經驗，以及基本的Python程式能力。重點在於系統性思維，能從整體架構規劃上下文管理策略。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型專案也需要Context Engineering嗎？</h3>
+            <p class="faq-a">即使是簡單應用，也建議採用基礎的Context Engineering概念，例如：明確的系統提示、簡單的對話歷史管理。這能顯著提升AI回應的穩定性和品質。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何評估Context Engineering的效果？</h3>
+            <p class="faq-a">可透過以下指標：任務完成率、使用者滿意度、上下文相關性評分（可使用LLM評估回應與上下文的相關程度）、回應一致性。建議建立測試案例庫定期評估。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>
