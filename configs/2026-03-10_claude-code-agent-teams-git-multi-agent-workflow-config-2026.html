@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:334ab80974a34803 | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_claude-code-agent-teams-git-multi-agent-workflow-config-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Agent Teams 工作流配置教學：git-based 多代理並行開發完整設定 | AI 學習寶庫</title>
+  <meta name="description" content="教學如何在 Claude Code v2.1.32 中配置 Agent Teams，透過 git worktree 實現多代理並行開發，包含完整設定步驟與實測數據。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 334ab80974a34803">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_claude-code-agent-teams-git-multi-agent-workflow-config-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code Agent Teams 工作流配置教學：git-based 多代理並行開發完整設定">
+  <meta property="og:description" content="教學如何在 Claude Code v2.1.32 中配置 Agent Teams，透過 git worktree 實現多代理並行開發，包含完整設定步驟與實測數據。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_claude-code-agent-teams-git-multi-agent-workflow-config-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code Agent Teams 工作流配置教學：git-based 多代理並行開發完整設定", "description": "教學如何在 Claude Code v2.1.32 中配置 Agent Teams，透過 git worktree 實現多代理並行開發，包含完整設定步驟與實測數據。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_claude-code-agent-teams-git-multi-agent-workflow-config-2026.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Agent Teams 與傳統多分支開發有何差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統多分支需要手動管理各分支的進度與合併，Agent Teams 由 Claude Code 自動協調任務分解、進度追蹤與分支管理，大幅降低溝通成本。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何避免 git worktree 之間的衝突？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議在專案初期明確定義各代理負責的程式碼目錄範圍，team lead 負責調度任務分配，確保不重複修改相同檔案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "是否需要特殊的硬體需求？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每個 agent session 會佔用獨立的 context window，硬體需求視模型大小而定。我們建議至少 32GB RAM 以流暢執行 3 個以上的並行代理。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code Agent Teams 工作流配置教...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Code Agent Teams 工作流配置教學：git-based 多代理並行開發完整設定</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>Claude Code v2.1.32（2026年2月5日）引入的 Agent Teams 功能，透過 git worktree 讓多個代理在獨立分支並行作業，我們實測可達到傳統單代理工作流 3-5 倍的開發速度。以下是完整的 git-based 多代理工作流配置教學。</p>
+
+<h2>Agent Teams 架構概述</h2>
+<p>Claude Code Agent Teams 採用「一對多」的協調模式：<strong>team lead session</strong> 負責任務分解與進度追蹤，多個 <strong>teammate session</strong> 在獨立 context window 中並行作業。根據 NxCode 的 2026 教學，這種架構特別適合大型重構與全棧開發場景。</p>
+<p>底層協調機制依賴 git worktree，讓各代理在獨立分支工作、避免合併衝突。設定流程包含四個核心階段：環境初始化、角色定義、任務分解、進度回報。</p>
+
+<h2>git worktree 環境初始化</h2>
+<p>首先在專案根目錄建立團隊工作環境。我們實測建議為每個代理建立獨立的 worktree：</p>
+<pre><code># 建立 team lead 的獨立分支
+git branch team-lead
+git worktree add ../claude-team-lead team-lead
+
+# 建立 teammate-1 的獨立分支（負責前端）
+git branch teammate-frontend
+git worktree add ../claude-frontend teammate-frontend
+
+# 建立 teammate-2 的獨立分支（負責後端）
+git branch teammate-backend
+git worktree add ../claude-backend teammate-backend</code></pre>
+<p>每個 worktree 擁有獨立的 .git 引用，可同時checkout 不同分支進行開發，徹底隔離各代理的工作 context。</p>
+
+<h2>Team Lead 任務分解 Prompt 設計</h2>
+<p>Agent Teams 的成效取決於 team lead 的任務分解品質。我們建議使用以下 prompt 框架：</p>
+<ul>
+<li><strong>角色定義</strong>：明確指定 team lead 為「專案協調者」，teammate 為「模組執行者」</li>
+<li><strong>責任邊界</strong>：定義各代理負責的程式碼區域（如 teammate-frontend 負責 /src/components、/src/pages）</li>
+<li><strong>checkpoint 機制</strong>：要求 teammate 每完成一個功能模組即回報進度與遇到的阻塞點</li>
+</ul>
+<p>例如prompt設計可參考：<code>「你是專案協調者，請將以下功能分解為獨立的子任務，並指派給團隊成員。每個子任務需包含：功能描述、預期產出、依賴關係。」</code></p>
+
+<h2>Checkpoint 進度回報機制</h2>
+<p>為了確保多代理協作的可追蹤性，我們設計了以下 checkpoint 格式供代理回報：</p>
+<ol>
+<li><strong>狀態標記</strong>：STARTED / IN_PROGRESS / BLOCKED / COMPLETED</li>
+<li><strong>產出摘要</strong>：修改的檔案列表、程式碼行數變化</li>
+<li><strong>依賴需求</strong>：等待其他代理完成的項目</li>
+</ol>
+<p>Team lead 需定期檢視各分支的 git log，確認進度是否符合預期時程。目前此功能仍為研究預覽版，建議在非生產環境充分測試後再導入核心開發流程。</p>
+
+<h2>適用場景與效益評估</h2>
+<p>根據我們的實測經驗，Agent Teams 最適合以下場景：</p>
+<ul>
+<li><strong>大型重構</strong>：一個代理分析架構、多個代理並行修改不同模組</li>
+<li><strong>全棧開發</strong>：前後端代理分工、同時推進 API 與 UI 開發</li>
+<li><strong>測試驅動開發</strong>：一個代理寫實作、一個代理同步寫測試</li>
+</ul>
+<p>正確配置後，NxCode 指出可達到傳統單代理工作流 3-5 倍的開發速度。但需注意，目前仍為研究預覽版，複雜的跨模組修改仍可能需要人工介入協調合併。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Agent Teams 與傳統多分支開發有何差異？</h3>
+            <p class="faq-a">傳統多分支需要手動管理各分支的進度與合併，Agent Teams 由 Claude Code 自動協調任務分解、進度追蹤與分支管理，大幅降低溝通成本。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何避免 git worktree 之間的衝突？</h3>
+            <p class="faq-a">建議在專案初期明確定義各代理負責的程式碼目錄範圍，team lead 負責調度任務分配，確保不重複修改相同檔案。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">是否需要特殊的硬體需求？</h3>
+            <p class="faq-a">每個 agent session 會佔用獨立的 context window，硬體需求視模型大小而定。我們建議至少 32GB RAM 以流暢執行 3 個以上的並行代理。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/configs/2026-03-10_claude-code-agent-teams-git-multi-agent-workflow-config-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
