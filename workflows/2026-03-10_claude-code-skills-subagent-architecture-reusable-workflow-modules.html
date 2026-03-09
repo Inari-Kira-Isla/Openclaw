@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:a5606fea535061a0 | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-code-skills-subagent-architecture-reusable-workflow-modules.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Skills 與 Subagent 架構：打造可復用的 AI 工作流模組 | AI 學習寶庫</title>
+  <meta name="description" content="深入解析 Claude Code 的 Skills 與 Subagent 架構：學習如何透過可復用的指令集與懶加載的工作者模組，打造高效、可維護的 AI 工作流。包含實際程式碼範例與設計模式。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: a5606fea535061a0">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-code-skills-subagent-architecture-reusable-workflow-modules.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code Skills 與 Subagent 架構：打造可復用的 AI 工作流模組">
+  <meta property="og:description" content="深入解析 Claude Code 的 Skills 與 Subagent 架構：學習如何透過可復用的指令集與懶加載的工作者模組，打造高效、可維護的 AI 工作流。包含實際程式碼範例與設計模式。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-code-skills-subagent-architecture-reusable-workflow-modules.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code Skills 與 Subagent 架構：打造可復用的 AI 工作流模組", "description": "深入解析 Claude Code 的 Skills 與 Subagent 架構：學習如何透過可復用的指令集與懶加載的工作者模組，打造高效、可維護的 AI 工作流。包含實際程式碼範例與設計模式。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-code-skills-subagent-architecture-reusable-workflow-modules.html"}, "articleSection": "工作流"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Skills 和 Subagent 有什麼主要差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Skills 是指令集的封裝，代理自動存取；Subagents 是完整的工作者實例，具備獨立執行能力。Skills 像是工具手冊，Subagents 像是專業人員。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何決定何時使用 Subagent 而不是直接處理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "當任務需要深度專業知識、涉及複雜的多步驟流程、或需要隔離上下文避免污染時，適合使用 Subagent。簡單任務可直接處理。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Subagent 數量是否有推薦上限？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議控制在 5-7 個以內，過多的 Subagent 会增加主代理的決策負擔。優先建立高頻、高價值的 Subagent。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code Skills 與 Subagent ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Claude Code Skills 與 Subagent 架構：打造可復用的 AI 工作流模組</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Code Skills 與 Subagent 架構：打造可復用的 AI 工作流模組</h2>
+
+<p><strong>Claude Code 的 Skills 與 Subagent 系統代表了 AI 代理開發從單次提示互動升級為持久化、可復用工作流模組的關鍵架構升級。</strong>透過 Skills，開發者可以將領域知識封裝為可自動喚起的指令集；透過 Subagents，則能實現真正的多代理協作，讓主代理在需要時才喚起專家工作者，避免上下文窗口被過量內容污染。本文將提供端到端的設計模式與真實場景示範，幫助你建構生產級的 AI 工作流。</p>
+
+<h2>Skills：可復用的指令集</h2>
+
+<p>Skills 是 Claude Code 中最基礎的模組化機制。每個 Skill 本質上是一組指令集，當 AI 代理判斷任務相關時會自動存取。開發者只需在專案根目錄建立 <code>.claude/skills/</code> 資料夾，並在裡面放置 <code>skill.md</code> 文件即可啟用。</p>
+
+<p>Skill 的核心價值在於「情境感知喚起」——代理會根據當前任務內容自動判斷是否需要啟用特定技能。這種機制類似於傳統軟體的 decorator 或 middleware，但更靈活且具備自然語言理解能力。</p>
+
+<h3>建立第一個 Skill</h3>
+
+<p>在專案根目執行以下指令即可建立結構：</p>
+
+<pre><code>mkdir -p .claude/skills
+touch .claude/skills/skill.md</code></pre>
+
+<p>編寫 skill.md 內容，範例如下：</p>
+
+<pre><code># Code Review Skill
+
+## 觸發條件
+當用戶要求審查代碼、進行 code review、或提到「檢查錯誤」時觸發。
+
+## 執行步驟
+1. 理解代碼的業務邏輯
+2. 檢查潛在的 bug 和邏輯錯誤
+3. 評估代碼風格一致性
+4. 識別安全漏洞（如 SQL injection、XSS）
+5. 提供具體的改進建議
+
+## 輸出格式
+- 問題清單（嚴重性分級：高/中/低）
+- 具體程式碼位置與建議修改
+- 總體評分與改進優先順序</code></pre>
+
+<p>建立完成後，當你在對話中提到「幫我 review 這段程式碼」時，Claude Code 會自動載入這個 Skill 的指令集，無需手動指定。這種自動化機制大幅提升了開發效率。</p>
+
+<h2>Subagent：懶加載的專家工作者</h2>
+
+<p>Subagents 是 Claude Code 多代理架構的核心組件。與 Skills 不同，Subagents 是完整的工作者實例，具備獨立的思考與執行能力。關鍵設計在於「懶加載」——主代理知道有哪些專家可用，但只在任務真正需要時才啟動對應的子代理。</p>
+
+<p>這種設計有效保護了主上下文窗口不被過量內容污染。在傳統單代理架構中，所有資訊都堆積在同一個上下文窗口，很快就會達到 token 上限。Subagent 架構讓每個工作者在隔離的上下文中運作，只在需要時才交換結果。</p>
+
+<h3>Subagent 註冊與使用</h3>
+
+<p>在 <code>CLAUDE.md</code> 中註冊 Subagent 的語法如下：</p>
+
+<pre><code># Project Context
+
+## Available Subagents
+
+### code-reviewer
+擅長代碼審查與品質優化。當需要深入分析代碼問題時使用。
+
+### security-auditor
+專注於安全漏洞掃描與合規性檢查。處理認證、授權、加密相關任務時喚起。
+
+### documentation-writer
+技術文檔寫作專家。生成 API 文檔、README、架構說明時使用。
+
+## 使用方式
+要喚起某個 Subagent，只需在任務描述中提及其名稱或功能需求，
+主代理會自動判斷並分配任務。</code></pre>
+
+<p>Subagent 的設計理念是「專業分工」——主代理類似團隊負責人，負責規劃與協調；子代理則是各領域專家，專注執行特定任務。這種分工模式與人類組織的團隊運作高度相似。</p>
+
+<h2>Agent Teams：多代理協作實驗</h2>
+
+<p>Claude Code 還提供實驗性的 Agent Teams 功能，允許協調多個 Claude Code 會話共同工作。這種模式適用於需要並行處理的複雜任務。</p>
+
+<p>在 Agent Teams 中，一個會話充當團隊負責人，負責協調工作、分配任務、綜合結果；團隊成員則在各自的上下文窗口中獨立運作。這種架構特別適合大規模程式碼遷移、系統重構等需要多面向專業知識的任務。</p>
+
+<p>多代理系統的核心挑戰在於上下文隔離與資訊共享的平衡。每個代理操作在隔離的上下文窗口中，但共享對持久化規格和檢索工件的訪問。Claude Code 透過 CLAUDE.md 文件、MCP 整合和多代理協作機制，構建了完整的上下文管理解決方案。</p>
+
+<h2>實際應用場景與設計模式</h2>
+
+<p>讓我們透過一個真實場景來展示 Skills + Subagent 的組合威力。假設你需要開發一個 API 服務，包含以下環節：設計介面、實現業務邏輯、撰寫文檔、進行安全審查。</p>
+
+<p>使用傳統單代理方式，代理需要在單一對話中處理所有需求，容易遺漏細節且難以維護。使用 Skills + Subagent 架構的話，流程可以這樣設計：</p>
+
+<ul>
+  <li><strong>主代理</strong>：理解整體需求，規劃任務分配</li>
+  <li><strong>API Designer Subagent</strong>：設計 RESTful 介面與資料模型</li>
+  <li><strong>Security Auditor Subagent</strong>：檢查認證機制與輸入驗證</li>
+  <li><strong>Documentation Writer Subagent</strong>：生成 OpenAPI 規格與使用指南</li>
+</ul>
+
+<p>這種架構的優勢在於每個 Subagent 可以深度聚焦自身領域，同時保持對整體目標的對齊。主代理負責協調，避免了上下文污染問題。</p>
+
+<h2>結論與實踐建議</h2>
+
+<p>Claude Code 的 Skills 與 Subagent 架構為 AI 工作流設計提供了標準化的模組化方案。Skills 適合封裝領域知識與最佳實踐，Subagent 適合處理需要深度專業能力的獨立任務。</p>
+
+<p>實踐上，建議從以下開始：先建立團隊共用的 Skills 庫沈澱常用指令模式；再根據專案需求逐步引入 Subagent 處理複雜流程。記住核心原則——讓每個模組專注单一职责，透過明確的介面協作。這種設計不僅提升當前效率，更為未來的維護與擴展奠定基礎。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Skills 和 Subagent 有什麼主要差異？</h3>
+            <p class="faq-a">Skills 是指令集的封裝，代理自動存取；Subagents 是完整的工作者實例，具備獨立執行能力。Skills 像是工具手冊，Subagents 像是專業人員。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何決定何時使用 Subagent 而不是直接處理？</h3>
+            <p class="faq-a">當任務需要深度專業知識、涉及複雜的多步驟流程、或需要隔離上下文避免污染時，適合使用 Subagent。簡單任務可直接處理。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Subagent 數量是否有推薦上限？</h3>
+            <p class="faq-a">建議控制在 5-7 個以內，過多的 Subagent 会增加主代理的決策負擔。優先建立高頻、高價值的 Subagent。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/workflows/2026-03-10_claude-code-skills-subagent-architecture-reusable-workflow-modules.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
