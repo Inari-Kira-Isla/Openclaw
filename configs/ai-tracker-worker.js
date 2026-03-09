@@ -1,6 +1,6 @@
 // ============================================
 // OpenClaw AI Footprint Tracker
-// Cloudflare Worker
+// Cloudflare Worker — Aggregated KV storage
 // ============================================
 
 const GITHUB_PAGES_URL = "https://inari-kira-isla.github.io/Openclaw";
@@ -48,15 +48,31 @@ async function detectAIBot(userAgent) {
   return null;
 }
 
+// Aggregated stats: 1 KV key instead of 59 individual keys
+const AGG_KEY = "agg-stats";
+
+async function getAgg(env) {
+  try {
+    const raw = await env.AI_FOOTPRINT.get(AGG_KEY);
+    return raw ? JSON.parse(raw) : { _date: "", today: {}, totals: {} };
+  } catch (e) { return { _date: "", today: {}, totals: {} }; }
+}
+
+async function putAgg(env, agg) {
+  await env.AI_FOOTPRINT.put(AGG_KEY, JSON.stringify(agg));
+}
+
 async function logAIVisit(env, botInfo, request, overridePath) {
   const today = new Date().toISOString().split("T")[0];
   const url = new URL(request.url);
   const pagePath = overridePath || url.pathname;
 
-  // Increment daily counter
-  const dayKey = `day:${today}:${botInfo.pattern}`;
-  const current = parseInt((await env.AI_FOOTPRINT.get(dayKey)) || "0");
-  await env.AI_FOOTPRINT.put(dayKey, String(current + 1), { expirationTtl: 30 * 86400 });
+  // Update aggregated blob (1 read + 1 write)
+  const agg = await getAgg(env);
+  if (agg._date !== today) { agg.today = {}; agg._date = today; }
+  agg.today[botInfo.pattern] = (agg.today[botInfo.pattern] || 0) + 1;
+  agg.totals[botInfo.pattern] = (agg.totals[botInfo.pattern] || 0) + 1;
+  await putAgg(env, agg);
 
   // Store visit log
   const logKey = `log:${today}`;
@@ -71,109 +87,149 @@ async function logAIVisit(env, botInfo, request, overridePath) {
   });
   if (existing.length > 500) existing.shift();
   await env.AI_FOOTPRINT.put(logKey, JSON.stringify(existing), { expirationTtl: 30 * 86400 });
-
-  // Update total counter
-  const totalKey = `total:${botInfo.pattern}`;
-  const total = parseInt((await env.AI_FOOTPRINT.get(totalKey)) || "0");
-  await env.AI_FOOTPRINT.put(totalKey, String(total + 1));
 }
 
 async function logGeneralVisit(env, request) {
   const today = new Date().toISOString().split("T")[0];
-  const dayKey = `day:${today}:_human`;
-  const current = parseInt((await env.AI_FOOTPRINT.get(dayKey)) || "0");
-  await env.AI_FOOTPRINT.put(dayKey, String(current + 1), { expirationTtl: 30 * 86400 });
-  const totalKey = `total:_human`;
-  const total = parseInt((await env.AI_FOOTPRINT.get(totalKey)) || "0");
-  await env.AI_FOOTPRINT.put(totalKey, String(total + 1));
+  const agg = await getAgg(env);
+  if (agg._date !== today) { agg.today = {}; agg._date = today; }
+  agg.today["_human"] = (agg.today["_human"] || 0) + 1;
+  agg.totals["_human"] = (agg.totals["_human"] || 0) + 1;
+  await putAgg(env, agg);
 }
 
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
+    try {
+      const url = new URL(request.url);
 
-    // === Tracking pixel endpoint ===
-    // Receives requests from <img> tags on GitHub Pages, logs AI bot visits,
-    // returns a 1x1 transparent GIF.
-    if (url.pathname === "/track") {
+      // === Tracking pixel endpoint ===
+      if (url.pathname === "/track") {
+        const userAgent = request.headers.get("user-agent") || "";
+        const botInfo = await detectAIBot(userAgent);
+        if (botInfo && env.AI_FOOTPRINT) {
+          const page = url.searchParams.get("p") || "/";
+          const trackReq = new Request(request.url, request);
+          ctx.waitUntil(logAIVisit(env, botInfo, trackReq, page));
+        } else if (env.AI_FOOTPRINT) {
+          ctx.waitUntil(logGeneralVisit(env, request));
+        }
+        const gif = Uint8Array.from(atob("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"), c => c.charCodeAt(0));
+        return new Response(gif, {
+          headers: {
+            "Content-Type": "image/gif",
+            "Cache-Control": "no-store, no-cache, must-revalidate",
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+      }
+
+      // === Migrate legacy keys to aggregated blob ===
+      if (url.pathname === "/migrate-agg") {
+        if (!env.AI_FOOTPRINT) return new Response("No KV", { status: 500 });
+        const today = new Date().toISOString().split("T")[0];
+        const agg = { _date: today, today: {}, totals: {} };
+        for (const [pattern] of Object.entries(AI_BOTS)) {
+          try {
+            const tv = await env.AI_FOOTPRINT.get(`total:${pattern}`);
+            if (tv) agg.totals[pattern] = parseInt(tv);
+            const dv = await env.AI_FOOTPRINT.get(`day:${today}:${pattern}`);
+            if (dv) agg.today[pattern] = parseInt(dv);
+          } catch (e) {}
+        }
+        try {
+          const ht = await env.AI_FOOTPRINT.get(`total:_human`);
+          if (ht) agg.totals["_human"] = parseInt(ht);
+          const hd = await env.AI_FOOTPRINT.get(`day:${today}:_human`);
+          if (hd) agg.today["_human"] = parseInt(hd);
+        } catch (e) {}
+        await env.AI_FOOTPRINT.put(AGG_KEY, JSON.stringify(agg));
+        return new Response(JSON.stringify({ migrated: agg }, null, 2), {
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+
+      // === AI Stats API endpoint (cached 900s) ===
+      if (url.pathname === "/ai-stats.json") {
+        const cache = caches.default;
+        const cacheKey = new Request(request.url, { method: "GET" });
+        const cached = await cache.match(cacheKey);
+        if (cached) return cached;
+
+        const today = new Date().toISOString().split("T")[0];
+        const stats = { today: {}, totals: {}, recentVisits: [], generatedAt: new Date().toISOString() };
+
+        if (!env.AI_FOOTPRINT) {
+          return new Response(JSON.stringify(stats, null, 2), {
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*", "Cache-Control": "public, max-age=60" },
+          });
+        }
+
+        try {
+          // 1 KV read for all stats
+          const agg = await getAgg(env);
+          const todayData = (agg._date === today) ? agg.today : {};
+          const totalData = agg.totals || {};
+
+          for (const [pattern, name] of Object.entries(AI_BOTS)) {
+            const dc = todayData[pattern] || 0;
+            const tc = totalData[pattern] || 0;
+            if (dc > 0) stats.today[name] = dc;
+            if (tc > 0) stats.totals[name] = tc;
+          }
+          const ht = todayData["_human"] || 0;
+          const hT = totalData["_human"] || 0;
+          if (ht > 0) stats.today["Human Visitors"] = ht;
+          if (hT > 0) stats.totals["Human Visitors"] = hT;
+
+          // 1 more KV read for recent visits
+          try {
+            const logVal = await env.AI_FOOTPRINT.get(`log:${today}`);
+            stats.recentVisits = JSON.parse(logVal || "[]").slice(-20);
+          } catch (e) {}
+        } catch (e) { stats._error = e.message; }
+
+        const hasData = Object.keys(stats.totals).length > 0;
+        const ttl = hasData ? 900 : 60;
+        const resp = new Response(JSON.stringify(stats, null, 2), {
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*", "Cache-Control": `public, max-age=${ttl}` },
+        });
+        ctx.waitUntil(cache.put(cacheKey, resp.clone()));
+        return resp;
+      }
+
+      // === Proxy to GitHub Pages ===
+      let proxyPath = url.pathname;
+      if (proxyPath === "/Openclaw" || proxyPath.startsWith("/Openclaw/")) {
+        proxyPath = proxyPath.slice(9) || "/";
+      }
+      const targetUrl = GITHUB_PAGES_URL + proxyPath + url.search;
       const userAgent = request.headers.get("user-agent") || "";
       const botInfo = await detectAIBot(userAgent);
+
       if (botInfo && env.AI_FOOTPRINT) {
-        const page = url.searchParams.get("p") || "/";
-        const trackReq = new Request(request.url, request);
-        // Override pathname for logging so it shows the actual page path
-        ctx.waitUntil(logAIVisit(env, botInfo, trackReq, page));
+        ctx.waitUntil(logAIVisit(env, botInfo, request));
       } else if (env.AI_FOOTPRINT) {
         ctx.waitUntil(logGeneralVisit(env, request));
       }
-      // 1x1 transparent GIF (43 bytes)
-      const gif = Uint8Array.from(atob("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"), c => c.charCodeAt(0));
-      return new Response(gif, {
-        headers: {
-          "Content-Type": "image/gif",
-          "Cache-Control": "no-store, no-cache, must-revalidate",
-          "Access-Control-Allow-Origin": "*",
-        },
+
+      const response = await fetch(targetUrl, {
+        method: request.method,
+        headers: { "User-Agent": userAgent },
+      });
+
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set("Access-Control-Allow-Origin", "*");
+
+      return new Response(response.body, {
+        status: response.status,
+        headers: newHeaders,
+      });
+    } catch (e) {
+      return new Response(JSON.stringify({ error: e.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
     }
-
-    // === AI Stats API endpoint ===
-    if (url.pathname === "/ai-stats.json") {
-      const today = new Date().toISOString().split("T")[0];
-      const stats = { today: {}, totals: {}, recentVisits: [], generatedAt: new Date().toISOString() };
-
-      for (const [pattern, name] of Object.entries(AI_BOTS)) {
-        const dayCount = parseInt((await env.AI_FOOTPRINT.get(`day:${today}:${pattern}`)) || "0");
-        const total = parseInt((await env.AI_FOOTPRINT.get(`total:${pattern}`)) || "0");
-        if (dayCount > 0) stats.today[name] = dayCount;
-        if (total > 0) stats.totals[name] = total;
-      }
-      // Human visitor counts
-      const humanToday = parseInt((await env.AI_FOOTPRINT.get(`day:${today}:_human`)) || "0");
-      const humanTotal = parseInt((await env.AI_FOOTPRINT.get(`total:_human`)) || "0");
-      if (humanToday > 0) stats.today["Human Visitors"] = humanToday;
-      if (humanTotal > 0) stats.totals["Human Visitors"] = humanTotal;
-
-      stats.recentVisits = JSON.parse((await env.AI_FOOTPRINT.get(`log:${today}`)) || "[]").slice(-20);
-
-      return new Response(JSON.stringify(stats, null, 2), {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "no-cache",
-        },
-      });
-    }
-
-    // === Proxy to GitHub Pages ===
-    // Strip /Openclaw prefix so links generated by GitHub Pages work correctly
-    // when accessed via this Worker (which serves at root /)
-    let proxyPath = url.pathname;
-    if (proxyPath === "/Openclaw" || proxyPath.startsWith("/Openclaw/")) {
-      proxyPath = proxyPath.slice(9) || "/";
-    }
-    const targetUrl = GITHUB_PAGES_URL + proxyPath + url.search;
-    const userAgent = request.headers.get("user-agent") || "";
-    const botInfo = await detectAIBot(userAgent);
-
-    if (botInfo && env.AI_FOOTPRINT) {
-      ctx.waitUntil(logAIVisit(env, botInfo, request));
-    } else if (env.AI_FOOTPRINT) {
-      ctx.waitUntil(logGeneralVisit(env, request));
-    }
-
-    const response = await fetch(targetUrl, {
-      method: request.method,
-      headers: { "User-Agent": userAgent },
-    });
-
-    // Add CORS and cache headers
-    const newHeaders = new Headers(response.headers);
-    newHeaders.set("Access-Control-Allow-Origin", "*");
-
-    return new Response(response.body, {
-      status: response.status,
-      headers: newHeaders,
-    });
   },
 };
