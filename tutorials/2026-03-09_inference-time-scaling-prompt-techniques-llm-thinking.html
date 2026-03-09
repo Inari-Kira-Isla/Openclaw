@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:cd62036a22346765 | (C) 2026-03-09 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_inference-time-scaling-prompt-techniques-llm-thinking.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>推理時間擴展（Inference-Time Scaling）完全指南：Prompt 技術讓 LLM 思考更深 | AI 學習寶庫</title>
+  <meta name="description" content="推理時間擴展（Inference-Time Scaling）是一種讓 LLM 在推理階段投入更多計算資源來提升輸出品質的技術。透過 Thinking Budget、Step-by-step、Self-verification、Tree of Thought 等 Prompt 技巧，開發者可顯著提升模型表現。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-09 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: cd62036a22346765">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_inference-time-scaling-prompt-techniques-llm-thinking.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="推理時間擴展（Inference-Time Scaling）完全指南：Prompt 技術讓 LLM 思考更深">
+  <meta property="og:description" content="推理時間擴展（Inference-Time Scaling）是一種讓 LLM 在推理階段投入更多計算資源來提升輸出品質的技術。透過 Thinking Budget、Step-by-step、Self-verification、Tree of Thought 等 Prompt 技巧，開發者可顯著提升模型表現。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_inference-time-scaling-prompt-techniques-llm-thinking.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "推理時間擴展（Inference-Time Scaling）完全指南：Prompt 技術讓 LLM 思考更深", "description": "推理時間擴展（Inference-Time Scaling）是一種讓 LLM 在推理階段投入更多計算資源來提升輸出品質的技術。透過 Thinking Budget、Step-by-step、Self-verification、Tree of Thought 等 Prompt 技巧，開發者可顯著提升模型表現。", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_inference-time-scaling-prompt-techniques-llm-thinking.html"}, "articleSection": "教學課程"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "推理時間擴展需要額外付費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "大多數 LLM API 會根據輸出 token 計費，較長的推理會產生更多費用，但在複雜任務上通常能獲得更高品質的結果，整體成本效益仍優於多次重試。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "所有任務都需要很長的推理時間嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不是的。簡單事實查詢或格式化輸出不需要延長推理，只有複雜推理、創意任務或需要多步驟解決的問題才需要較長的 Thinking Budget。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何判斷需要給模型多少推理時間？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議從中等預算（如 1000-2000 token）開始，根據任務複雜度和輸出品質逐步調整。複雜任務可設定 3000-5000 token，簡單任務則 500-1000 token 即可。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>推理時間擴展（Inference-Time Scaling）...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">推理時間擴展（Inference-Time Scaling）完全指南：Prompt 技術讓 LLM 思考更深</h1>
+      <div class="article-info">
+        <span>📅 2026-03-09</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>什麼是推理時間擴展？2026 LLM 突破的關鍵技術</h2>
+<p>推理時間擴展（Inference-Time Scaling）是指在模型推理階段投入更多計算資源，讓模型有更長的「思考時間」來解決複雜問題。2026 年的研究顯示，當前大多數 benchmark 的進步並非來自更大的模型，而是來自推理階段的算力投入——模型被允許「思考更長時間」就能解決更難的問題。</p>
+<p>這解釋了為何 Claude 的 Extended Thinking、GPT-5 的 Deep Research 模式和 Kimi K2 Thinking 能在各項評測中取得高分。對開發者而言，這意味著<strong>不需要更強大的模型，而是需要更好的 Prompt 技術來釋放模型的推理潛力</strong>。</p>
+
+<h2>技巧一：Thinking Budget 設定</h2>
+<p>Thinking Budget 是指定模型消耗多少 token 進行內部推理的技術。這類似於給模型一個「思考配額」，讓它知道應該投入多少資源來解決當前任務。</p>
+<p>在 Claude 中，你可以透過以下方式設定：</p>
+<pre><code>我需要你花費至少 2000 個 token 來思考這個問題。
+在給出最終答案前，請詳細列出你的推理過程、
+假設條件、潛在風險和替代方案。</code></pre>
+<p>研究顯示，設定合理的 Thinking Budget 可使複雜任務的解決率提升 30-50%。</p>
+
+<h2>技巧二：Step-by-Step 分解</h2>
+<p>強迫模型逐步展開推理鏈（Chain of Thought）是另一個強大技術。透過明確指示模型「一步一步來」，可以幫助它避免跳躍性思維和邏輯錯誤。</p>
+<p>實戰 Prompt 模板：</p>
+<pre><code>請按照以下步驟解決這個問題：
+1. 理解問題：先用自己的話重述問題
+2. 拆解任務：將問題分解為 3-5 個子問題
+3. 逐步解決：針對每個子問題進行推理
+4. 整合結論：將各部分結論合併為最終答案
+5. 驗證檢查：確認答案是否符合原始問題</code></pre>
+<p>這種結構化的思考方式特別適合數學推理、程式碼除錯等需要嚴謹邏輯的任務。</p>
+
+<h2>技巧三：Self-Verification 自我驗證</h2>
+<p>讓模型在給出最終答案前進行自我檢查，是提升輸出品質的有效策略。研究顯示，加入驗證步驟可以捕捉高達 40% 的推理錯誤。</p>
+<p>Prompt 範例：</p>
+<pre><code>在完成你的回答後，請額外進行以下驗證：
+- 檢查你的推理過程是否有邏輯漏洞
+- 確認你的結論是否支持你的論點
+- 列出你答案中的 3 個潛在弱點
+- 如果發現問題，請重新修正你的回答</code></pre>
+<p>這個技巧特別適合需要高準確性的任務，如醫療診斷、財務分析、科學計算等。</p>
+
+<h2>技巧四：Tree of Thought 多路徑探索</h2>
+<p>Tree of Thought（ToT）架構引導模型進行多路徑探索，考慮多種可能的解決方案後再選擇最佳路徑。這種技術特別適合需要創意或面臨多種選擇的複雜決策。</p>
+<p>實作方式：</p>
+<pre><code>請用 Tree of Thought 的方式思考這個問題：
+- 分支 1：第一種可能的解決方案是什麼？優缺點？
+- 分支 2：第二種可能的解決方案是什麼？優缺點？
+- 分支 3：第三種可能的解決方案是什麼？優缺點？
+- 比較三個分支，選擇最佳方案並說明理由</code></pre>
+
+<h2>實際成效：從 40% 到 70% 的突破</h2>
+<p>根據 SWE-bench 等工程任務的測試結果，給予模型更長的推理時間可使問題通過率從 40% 提升至 70% 以上。這是因為複雜任務往往需要多步推理，給予足夠的「思考空間」能顯著提升成功率。</p>
+<p>總結來說，<strong>推理時間擴展不是讓模型更聰明，而是讓模型有更好的機會發揮其原有的能力</strong>。透過上述四個 Prompt 技術，開發者可以在不更換模型的情況下，顯著提升輸出品質。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">推理時間擴展需要額外付費嗎？</h3>
+            <p class="faq-a">大多數 LLM API 會根據輸出 token 計費，較長的推理會產生更多費用，但在複雜任務上通常能獲得更高品質的結果，整體成本效益仍優於多次重試。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">所有任務都需要很長的推理時間嗎？</h3>
+            <p class="faq-a">不是的。簡單事實查詢或格式化輸出不需要延長推理，只有複雜推理、創意任務或需要多步驟解決的問題才需要較長的 Thinking Budget。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何判斷需要給模型多少推理時間？</h3>
+            <p class="faq-a">建議從中等預算（如 1000-2000 token）開始，根據任務複雜度和輸出品質逐步調整。複雜任務可設定 3000-5000 token，簡單任務則 500-1000 token 即可。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/tutorials/2026-03-09_inference-time-scaling-prompt-techniques-llm-thinking.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
