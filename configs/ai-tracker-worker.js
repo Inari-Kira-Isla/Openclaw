@@ -24,6 +24,17 @@ const AI_BOTS = {
   "meta-externalagent": "Meta AI",
   "FacebookBot": "Meta AI Bot",
   "ia_archiver": "Internet Archive",
+  // Chinese AI Bots
+  "Baiduspider": "Baidu/Ernie AI",
+  "Sogou": "Sogou AI",
+  "ChatGLM": "ChatGLM/Zhipu AI",
+  "360Spider": "360 AI",
+  "HunyuanBot": "Tencent Hunyuan",
+  "SenseChat": "SenseChat AI",
+  "SparkBot": "Spark/iFlytek AI",
+  "Kimi": "Kimi/Moonshot AI",
+  "Doubao": "Doubao AI",
+  "XiaoIce": "XiaoIce AI",
 };
 
 async function detectAIBot(userAgent) {
@@ -67,6 +78,16 @@ async function logAIVisit(env, botInfo, request, overridePath) {
   await env.AI_FOOTPRINT.put(totalKey, String(total + 1));
 }
 
+async function logGeneralVisit(env, request) {
+  const today = new Date().toISOString().split("T")[0];
+  const dayKey = `day:${today}:_human`;
+  const current = parseInt((await env.AI_FOOTPRINT.get(dayKey)) || "0");
+  await env.AI_FOOTPRINT.put(dayKey, String(current + 1), { expirationTtl: 30 * 86400 });
+  const totalKey = `total:_human`;
+  const total = parseInt((await env.AI_FOOTPRINT.get(totalKey)) || "0");
+  await env.AI_FOOTPRINT.put(totalKey, String(total + 1));
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -82,6 +103,8 @@ export default {
         const trackReq = new Request(request.url, request);
         // Override pathname for logging so it shows the actual page path
         ctx.waitUntil(logAIVisit(env, botInfo, trackReq, page));
+      } else if (env.AI_FOOTPRINT) {
+        ctx.waitUntil(logGeneralVisit(env, request));
       }
       // 1x1 transparent GIF (43 bytes)
       const gif = Uint8Array.from(atob("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"), c => c.charCodeAt(0));
@@ -105,6 +128,12 @@ export default {
         if (dayCount > 0) stats.today[name] = dayCount;
         if (total > 0) stats.totals[name] = total;
       }
+      // Human visitor counts
+      const humanToday = parseInt((await env.AI_FOOTPRINT.get(`day:${today}:_human`)) || "0");
+      const humanTotal = parseInt((await env.AI_FOOTPRINT.get(`total:_human`)) || "0");
+      if (humanToday > 0) stats.today["Human Visitors"] = humanToday;
+      if (humanTotal > 0) stats.totals["Human Visitors"] = humanTotal;
+
       stats.recentVisits = JSON.parse((await env.AI_FOOTPRINT.get(`log:${today}`)) || "[]").slice(-20);
 
       return new Response(JSON.stringify(stats, null, 2), {
@@ -129,6 +158,8 @@ export default {
 
     if (botInfo && env.AI_FOOTPRINT) {
       ctx.waitUntil(logAIVisit(env, botInfo, request));
+    } else if (env.AI_FOOTPRINT) {
+      ctx.waitUntil(logGeneralVisit(env, request));
     }
 
     const response = await fetch(targetUrl, {
