@@ -4,6 +4,832 @@
   <title>AI 學習寶庫</title>
   <description>每日分享 AI 提示詞、系統配置、自動化工作流 - 從入門到進階的完整指南</description>
   <link>https://inari-kira-isla.github.io/Openclaw</link>
+  <language>zh-TW</language>
+  <lastBuildDate>Mon, 09 Mar 2026 08:13:18 +0000</lastBuildDate>
   <atom:link href="https://inari-kira-isla.github.io/Openclaw/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>多 Agent 協作系統實作：從單一 Agent 到微服務架構的進化</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_multi-agent-microservices-architecture-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_multi-agent-microservices-architecture-tutorial.html</guid>
+    <pubDate>Sun, 08 Mar 2026 23:43:10 +0000</pubDate>
+    <category>教學課程</category>
+    <description>多 Agent 協作系統實作：從單一 Agent 到微服務架構的進化 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>World Models 空間 AI 深度解析：超越 LLM 的下一代 AI 架構</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-09_world-models-spatial-ai-next-gen-architecture-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-09_world-models-spatial-ai-next-gen-architecture-2026.html</guid>
+    <pubDate>Sun, 08 Mar 2026 22:41:23 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>World Models 空間 AI 深度解析：超越 LLM 的下一代 AI 架構 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>2026 LLM 推理模型大評測：Kimi K2 vs GPT-5 vs Claude Sonnet 實力比拼</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-09_llm-reasoning-benchmark-comparison-2026-kimi-gpt5-claude.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-09_llm-reasoning-benchmark-comparison-2026-kimi-gpt5-claude.html</guid>
+    <pubDate>Sun, 08 Mar 2026 21:38:08 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>2026 LLM 推理模型大評測：Kimi K2 vs GPT-5 vs Claude Sonnet 實力比拼 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>AI Agent 工作流模式實戰：2026 年企業自動化的 5 種核心架構</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-09_ai-agent-workflow-patterns-enterprise-automation-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-09_ai-agent-workflow-patterns-enterprise-automation-2026.html</guid>
+    <pubDate>Sun, 08 Mar 2026 20:36:07 +0000</pubDate>
+    <category>工作流</category>
+    <description>AI Agent 工作流模式實戰：2026 年企業自動化的 5 種核心架構 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>MCP 生態系 2026：從實驗到生產部署的完整遷移指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_mcp-ecosystem-2026-production-deployment-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-09_mcp-ecosystem-2026-production-deployment-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 19:35:08 +0000</pubDate>
+    <category>教學課程</category>
+    <description>MCP 生態系 2026：從實驗到生產部署的完整遷移指南 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>NotebookLM 2026 深度使用指南：Google AI 筆記神器的隱藏強大功能</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_notebooklm-2026-advanced-guide-hidden-features.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_notebooklm-2026-advanced-guide-hidden-features.html</guid>
+    <pubDate>Sun, 08 Mar 2026 18:34:20 +0000</pubDate>
+    <category>系統配置</category>
+    <description>NotebookLM 2026 深度使用指南：Google AI 筆記神器的隱藏強大功能 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-09_ai-agent-autonomous-commerce-prompt-design.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-09_ai-agent-autonomous-commerce-prompt-design.html</guid>
+    <pubDate>Sun, 08 Mar 2026 17:33:02 +0000</pubDate>
+    <category>提示詞</category>
+    <description>AI Agent 自主商務應用：讓 Agent 代你下單、談判與行銷的提示詞設計 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Agentic 工作流架構設計指南：2026 年企業落地的五大模式</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_agentic-workflow-architecture-patterns-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_agentic-workflow-architecture-patterns-2026.html</guid>
+    <pubDate>Sun, 08 Mar 2026 15:28:47 +0000</pubDate>
+    <category>工作流</category>
+    <description>Agentic 工作流架構設計指南：2026 年企業落地的五大模式 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_agentic-rag-autonomous-retrieval-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_agentic-rag-autonomous-retrieval-tutorial.html</guid>
+    <pubDate>Sun, 08 Mar 2026 14:26:53 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Agentic RAG 實戰教學：讓 AI Agent 自動規劃與管理知識檢索策略 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>TAIDE 台灣本地 LLM 完整指南：部署實作與企業應用場景</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_taide-taiwan-local-llm-deployment-enterprise-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_taide-taiwan-local-llm-deployment-enterprise-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 13:23:41 +0000</pubDate>
+    <category>系統配置</category>
+    <description>TAIDE 台灣本地 LLM 完整指南：部署實作與企業應用場景 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_claude-adaptive-thinking-ultrathink-prompt-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_claude-adaptive-thinking-ultrathink-prompt-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 12:22:46 +0000</pubDate>
+    <category>提示詞</category>
+    <description>Adaptive Thinking 提示詞設計：用 ultrathink 解鎖 Claude 最深推理 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-opus-4-6-agent-teams-deep-dive.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-opus-4-6-agent-teams-deep-dive.html</guid>
+    <pubDate>Sun, 08 Mar 2026 11:21:51 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Claude Opus 4.6 Agent Teams 完整解析：多 Agent 協作新時代 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-cowork-workflow-automation-scheduling.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-cowork-workflow-automation-scheduling.html</guid>
+    <pubDate>Sun, 08 Mar 2026 10:20:06 +0000</pubDate>
+    <category>工作流</category>
+    <description>Claude Cowork 工作流自動化：排程任務與跨 Agent 協作實戰 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>企業 AI Agent 部署實戰：從 Pilot 到生產環境的完整架構指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_enterprise-ai-agent-production-deployment.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_enterprise-ai-agent-production-deployment.html</guid>
+    <pubDate>Sun, 08 Mar 2026 09:19:21 +0000</pubDate>
+    <category>教學課程</category>
+    <description>企業 AI Agent 部署實戰：從 Pilot 到生產環境的完整架構指南 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>A2A 協議完整解析：Google 推動的 AI Agent 通訊新標準</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_a2a-protocol-google-agent-communication-standard.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_a2a-protocol-google-agent-communication-standard.html</guid>
+    <pubDate>Sun, 08 Mar 2026 08:18:34 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>A2A 協議完整解析：Google 推動的 AI Agent 通訊新標準 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-agent-skills-open-standard-deployment-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-agent-skills-open-standard-deployment-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 07:17:51 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Claude Skills 開放標準實戰：跨平台 AI Agent 技能部署完整教學 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_multimodal-prompt-engineering-vlm-image-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_multimodal-prompt-engineering-vlm-image-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 06:16:46 +0000</pubDate>
+    <category>提示詞</category>
+    <description>多模態提示詞設計指南：如何寫出讓 VLM 精準理解圖像的 Prompt — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_rag-mcp-semantic-retrieval-tool-selection-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_rag-mcp-semantic-retrieval-tool-selection-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 05:13:29 +0000</pubDate>
+    <category>教學課程</category>
+    <description>RAG-MCP 技術解析：用語義檢索解決 LLM 工具選擇的 Prompt 膨脹問題 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>MCP 安全漏洞全解析：60 天 30 個 CVE，AI 整合的隱藏風險與防護指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_mcp-security-vulnerabilities-cve-protection-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_mcp-security-vulnerabilities-cve-protection-guide.html</guid>
+    <pubDate>Sun, 08 Mar 2026 04:11:33 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>MCP 安全漏洞全解析：60 天 30 個 CVE，AI 整合的隱藏風險與防護指南 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>多 Agent 協作工作流設計：打造能自主協調的 AI 數位員工系統</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_multi-agent-collaboration-workflow-design.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_multi-agent-collaboration-workflow-design.html</guid>
+    <pubDate>Sun, 08 Mar 2026 03:10:47 +0000</pubDate>
+    <category>工作流</category>
+    <description>多 Agent 協作工作流設計：打造能自主協調的 AI 數位員工系統 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-code-advanced-config-claudemd-memory-mcp.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_claude-code-advanced-config-claudemd-memory-mcp.html</guid>
+    <pubDate>Sun, 08 Mar 2026 02:09:40 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Claude Code 深度配置：CLAUDE.md、Memory 系統與 MCP 整合完全指南 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>元提示詞技術 2026：讓 AI 替你設計最佳提示詞的完整指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_meta-prompting-guide-let-ai-write-your-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_meta-prompting-guide-let-ai-write-your-prompts.html</guid>
+    <pubDate>Sun, 08 Mar 2026 01:08:37 +0000</pubDate>
+    <category>提示詞</category>
+    <description>元提示詞技術 2026：讓 AI 替你設計最佳提示詞的完整指南 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_context-engineering-guide-beyond-prompt-engineering.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_context-engineering-guide-beyond-prompt-engineering.html</guid>
+    <pubDate>Sun, 08 Mar 2026 00:06:23 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Context Engineering 實戰指南：比 Prompt Engineering 更關鍵的 AI 技能 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-sonnet-4-6-review-cowork-features.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_claude-sonnet-4-6-review-cowork-features.html</guid>
+    <pubDate>Sat, 07 Mar 2026 23:05:15 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Claude Sonnet 4.6 完整評測：1M Token 上下文與 Cowork 任務排程實戰 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>MCP 安全漏洞全解析：2026 年 AI 工具最新攻擊面與防禦策略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_mcp-security-vulnerabilities-defense-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-08_mcp-security-vulnerabilities-defense-2026.html</guid>
+    <pubDate>Sat, 07 Mar 2026 22:04:27 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>MCP 安全漏洞全解析：2026 年 AI 工具最新攻擊面與防禦策略 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-code-terminal-workflow-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-08_claude-code-terminal-workflow-guide.html</guid>
+    <pubDate>Sat, 07 Mar 2026 21:03:21 +0000</pubDate>
+    <category>工作流</category>
+    <description>Claude Code 完全上手指南：終端機 AI 編程助手的 10 個核心工作流 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Claude Code 制霸 2026：超越 GitHub Copilot 的 AI 編程工具完全攻略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_claude-code-dominates-coding-tools-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-08_claude-code-dominates-coding-tools-2026.html</guid>
+    <pubDate>Sat, 07 Mar 2026 20:02:26 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Claude Code 制霸 2026：超越 GitHub Copilot 的 AI 編程工具完全攻略 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>MCP Server 從零到一：連接 Claude 與任意外部工具的完整設定指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_mcp-server-setup-complete-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-08_mcp-server-setup-complete-guide.html</guid>
+    <pubDate>Sat, 07 Mar 2026 19:01:32 +0000</pubDate>
+    <category>系統配置</category>
+    <description>MCP Server 從零到一：連接 Claude 與任意外部工具的完整設定指南 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49%</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_contextual-retrieval-prompt-engineering.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-08_contextual-retrieval-prompt-engineering.html</guid>
+    <pubDate>Sat, 07 Mar 2026 17:59:26 +0000</pubDate>
+    <category>提示詞</category>
+    <description>Contextual Retrieval 提示詞設計：Anthropic 最新技術降低 RAG 失敗率 49% — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>OpenAI o3 推理模型：數學和程式競賽的人類水平突破</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_openai-o3-reasoning-model.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_openai-o3-reasoning-model.html</guid>
+    <pubDate>Sat, 07 Mar 2026 15:42:16 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>OpenAI o3 推理模型：數學和程式競賽的人類水平突破 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_code-review-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_code-review-prompts.html</guid>
+    <pubDate>Sat, 07 Mar 2026 02:35:04 +0000</pubDate>
+    <category>提示詞</category>
+    <description>AI 程式碼審查提示詞集：提升程式碼品質的 10 個範本 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Robotics AI 2026：人形機器人走進工廠的關鍵一年</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_humanoid-robot-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_humanoid-robot-2026.html</guid>
+    <pubDate>Sat, 07 Mar 2026 01:32:49 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Robotics AI 2026：人形機器人走進工廠的關鍵一年 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>電話銷售 AI 輔助：即時轉錄 + 話術建議 + 跟進自動化</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-07_sales-call-ai-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-07_sales-call-ai-workflow.html</guid>
+    <pubDate>Sat, 07 Mar 2026 00:31:58 +0000</pubDate>
+    <category>工作流</category>
+    <description>電話銷售 AI 輔助：即時轉錄 + 話術建議 + 跟進自動化 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>串流輸出實作：讓 AI 回覆像打字一樣即時顯示</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_streaming-output-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_streaming-output-tutorial.html</guid>
+    <pubDate>Fri, 06 Mar 2026 23:30:25 +0000</pubDate>
+    <category>教學課程</category>
+    <description>串流輸出實作：讓 AI 回覆像打字一樣即時顯示 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Notion API 配置指南：連接 AI 打造個人知識管理系統</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_notion-api-ai-integration.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_notion-api-ai-integration.html</guid>
+    <pubDate>Fri, 06 Mar 2026 22:29:09 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Notion API 配置指南：連接 AI 打造個人知識管理系統 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>資料分析提示詞設計：讓 AI 成為你的數據科學家</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_data-analysis-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_data-analysis-prompts.html</guid>
+    <pubDate>Fri, 06 Mar 2026 21:28:19 +0000</pubDate>
+    <category>提示詞</category>
+    <description>資料分析提示詞設計：讓 AI 成為你的數據科學家 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>邊緣 AI 崛起：智慧手機本地推論的效能革命</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_edge-ai-smartphone-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-07_edge-ai-smartphone-2026.html</guid>
+    <pubDate>Fri, 06 Mar 2026 20:25:07 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>邊緣 AI 崛起：智慧手機本地推論的效能革命 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>客戶意見分析工作流：自動收集評論並生成洞察報告</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-07_customer-feedback-analysis-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-07_customer-feedback-analysis-workflow.html</guid>
+    <pubDate>Fri, 06 Mar 2026 19:23:53 +0000</pubDate>
+    <category>工作流</category>
+    <description>客戶意見分析工作流：自動收集評論並生成洞察報告 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Hugging Face 模型部署：從下載到推論 API 的完整流程</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_huggingface-model-deployment.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-07_huggingface-model-deployment.html</guid>
+    <pubDate>Fri, 06 Mar 2026 18:21:28 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Hugging Face 模型部署：從下載到推論 API 的完整流程 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-07_vscode-ai-extensions-config.html</guid>
+    <pubDate>Fri, 06 Mar 2026 17:20:37 +0000</pubDate>
+    <category>系統配置</category>
+    <description>VS Code AI 外掛完整配置：Copilot、Codeium、Tabby 比較 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>醫療健康提示詞：症狀分析與健康建議的安全使用指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_medical-health-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-07_medical-health-prompts.html</guid>
+    <pubDate>Fri, 06 Mar 2026 16:19:26 +0000</pubDate>
+    <category>提示詞</category>
+    <description>醫療健康提示詞：症狀分析與健康建議的安全使用指南 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>FastAPI 生產環境配置：AI API 服務的最佳實踐</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_fastapi-production-config.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_fastapi-production-config.html</guid>
+    <pubDate>Fri, 06 Mar 2026 15:17:23 +0000</pubDate>
+    <category>系統配置</category>
+    <description>FastAPI 生產環境配置：AI API 服務的最佳實踐 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>AI 提示詞安全設計：防止越獄與不當輸出的策略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_prompt-safety-design.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_prompt-safety-design.html</guid>
+    <pubDate>Fri, 06 Mar 2026 14:15:53 +0000</pubDate>
+    <category>提示詞</category>
+    <description>AI 提示詞安全設計：防止越獄與不當輸出的策略 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>AI 監管全球圖譜：歐盟 AI Act 實施後各國的跟進策略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_global-ai-regulation-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_global-ai-regulation-2026.html</guid>
+    <pubDate>Fri, 06 Mar 2026 13:14:43 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>AI 監管全球圖譜：歐盟 AI Act 實施後各國的跟進策略 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>供應鏈監控工作流：AI 自動追蹤貨物並預警延誤風險</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_supply-chain-monitoring-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_supply-chain-monitoring-workflow.html</guid>
+    <pubDate>Fri, 06 Mar 2026 12:12:43 +0000</pubDate>
+    <category>工作流</category>
+    <description>供應鏈監控工作流：AI 自動追蹤貨物並預警延誤風險 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>多模態 AI 入門：圖文混合處理的實際應用案例</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_multimodal-ai-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_multimodal-ai-tutorial.html</guid>
+    <pubDate>Fri, 06 Mar 2026 11:11:42 +0000</pubDate>
+    <category>教學課程</category>
+    <description>多模態 AI 入門：圖文混合處理的實際應用案例 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Docker 容器化 AI 應用：最佳實踐與生產環境部署</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_docker-ai-deployment.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_docker-ai-deployment.html</guid>
+    <pubDate>Fri, 06 Mar 2026 10:10:32 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Docker 容器化 AI 應用：最佳實踐與生產環境部署 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>客服回覆提示詞範本：處理投訴、退款、諮詢的標準話術</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_customer-service-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_customer-service-prompts.html</guid>
+    <pubDate>Fri, 06 Mar 2026 09:09:34 +0000</pubDate>
+    <category>提示詞</category>
+    <description>客服回覆提示詞範本：處理投訴、退款、諮詢的標準話術 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Google Gemini 2.0 Ultra 實測：多模態 AI 的新標竿</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_gemini-2-ultra-review.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_gemini-2-ultra-review.html</guid>
+    <pubDate>Fri, 06 Mar 2026 07:04:16 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Google Gemini 2.0 Ultra 實測：多模態 AI 的新標竿 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>全自動內容行銷流水線：AI 從選題到發布的完整自動化</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_content-marketing-automation.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_content-marketing-automation.html</guid>
+    <pubDate>Fri, 06 Mar 2026 06:03:21 +0000</pubDate>
+    <category>工作流</category>
+    <description>全自動內容行銷流水線：AI 從選題到發布的完整自動化 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>AI 工作流 101：n8n 自動化你的日常任務</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_n8n-automation-101.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_n8n-automation-101.html</guid>
+    <pubDate>Fri, 06 Mar 2026 05:02:20 +0000</pubDate>
+    <category>教學課程</category>
+    <description>AI 工作流 101：n8n 自動化你的日常任務 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_claude-desktop-mcp-setup.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_claude-desktop-mcp-setup.html</guid>
+    <pubDate>Fri, 06 Mar 2026 04:00:08 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>ChatGPT 角色扮演提示詞：讓 AI 成為你的專業顧問</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_chatgpt-role-play-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_chatgpt-role-play-prompts.html</guid>
+    <pubDate>Fri, 06 Mar 2026 02:58:57 +0000</pubDate>
+    <category>提示詞</category>
+    <description>ChatGPT 角色扮演提示詞：讓 AI 成為你的專業顧問 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>2026 AI 晶片戰爭：NVIDIA H200 vs AMD MI300X vs Apple M4 Ultra</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_ai-chip-war-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_ai-chip-war-2026.html</guid>
+    <pubDate>Fri, 06 Mar 2026 01:57:47 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>2026 AI 晶片戰爭：NVIDIA H200 vs AMD MI300X vs Apple M4 Ultra — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>社群媒體排程工作流：一鍵發布多平台的 AI 輔助系統</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_social-media-scheduling-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_social-media-scheduling-workflow.html</guid>
+    <pubDate>Fri, 06 Mar 2026 00:56:32 +0000</pubDate>
+    <category>工作流</category>
+    <description>社群媒體排程工作流：一鍵發布多平台的 AI 輔助系統 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Knowledge Graph + LLM：讓 AI 理解複雜關係的新範式</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_knowledge-graph-llm-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_knowledge-graph-llm-tutorial.html</guid>
+    <pubDate>Thu, 05 Mar 2026 23:55:41 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Knowledge Graph + LLM：讓 AI 理解複雜關係的新範式 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Python 虛擬環境最佳實踐：pyenv + venv + pip 完整指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_python-venv-best-practices.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_python-venv-best-practices.html</guid>
+    <pubDate>Thu, 05 Mar 2026 22:54:59 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Python 虛擬環境最佳實踐：pyenv + venv + pip 完整指南 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>電商產品描述提示詞：讓商品文案自動轉化率提升 30%</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_ecommerce-product-description-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_ecommerce-product-description-prompts.html</guid>
+    <pubDate>Thu, 05 Mar 2026 21:53:59 +0000</pubDate>
+    <category>提示詞</category>
+    <description>電商產品描述提示詞：讓商品文案自動轉化率提升 30% — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>中國 AI 追趕戰：文心一言 4.0、通義千問、混元的最新進展</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_china-ai-competition-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-06_china-ai-competition-2026.html</guid>
+    <pubDate>Thu, 05 Mar 2026 20:53:13 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>中國 AI 追趕戰：文心一言 4.0、通義千問、混元的最新進展 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_meeting-notes-ai-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-06_meeting-notes-ai-workflow.html</guid>
+    <pubDate>Thu, 05 Mar 2026 19:52:14 +0000</pubDate>
+    <category>工作流</category>
+    <description>會議記錄 AI 工作流：語音轉文字到摘要到 Notion 一鍵搞定 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Prompt 注入攻擊防護：保護你的 AI 應用不被越獄</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_prompt-injection-defense.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-06_prompt-injection-defense.html</guid>
+    <pubDate>Thu, 05 Mar 2026 18:50:14 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Prompt 注入攻擊防護：保護你的 AI 應用不被越獄 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>GitHub Copilot 進階設定：讓 AI 配對程式設計更高效</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html</guid>
+    <pubDate>Thu, 05 Mar 2026 17:49:08 +0000</pubDate>
+    <category>系統配置</category>
+    <description>GitHub Copilot 進階設定：讓 AI 配對程式設計更高效 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>法律文件提示詞：合約摘要、條款解析的 AI 輔助工具</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_legal-document-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-06_legal-document-prompts.html</guid>
+    <pubDate>Thu, 05 Mar 2026 16:47:04 +0000</pubDate>
+    <category>提示詞</category>
+    <description>法律文件提示詞：合約摘要、條款解析的 AI 輔助工具 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>HR 招募自動化：AI 篩選履歷到安排面試的完整流程</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_hr-recruitment-automation.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_hr-recruitment-automation.html</guid>
+    <pubDate>Thu, 05 Mar 2026 15:46:11 +0000</pubDate>
+    <category>工作流</category>
+    <description>HR 招募自動化：AI 篩選履歷到安排面試的完整流程 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html</guid>
+    <pubDate>Thu, 05 Mar 2026 14:43:06 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html</guid>
+    <pubDate>Thu, 05 Mar 2026 13:42:26 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>多步驟工作提示詞框架：TASK-CONTEXT-OUTPUT 方法</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_task-context-output-framework.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_task-context-output-framework.html</guid>
+    <pubDate>Thu, 05 Mar 2026 12:41:26 +0000</pubDate>
+    <category>提示詞</category>
+    <description>多步驟工作提示詞框架：TASK-CONTEXT-OUTPUT 方法 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>量子計算遇上 AI：IBM Quantum 最新進展對 ML 的意義</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_quantum-computing-ai-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_quantum-computing-ai-2026.html</guid>
+    <pubDate>Thu, 05 Mar 2026 11:40:28 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>量子計算遇上 AI：IBM Quantum 最新進展對 ML 的意義 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>多語言客服自動化：AI 即時翻譯 + 多平台統一收件匣</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_multilingual-support-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_multilingual-support-workflow.html</guid>
+    <pubDate>Thu, 05 Mar 2026 10:39:55 +0000</pubDate>
+    <category>工作流</category>
+    <description>多語言客服自動化：AI 即時翻譯 + 多平台統一收件匣 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>用 Python 打造你的第一個 AI 聊天機器人：完整教學</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_python-chatbot-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_python-chatbot-tutorial.html</guid>
+    <pubDate>Thu, 05 Mar 2026 09:39:07 +0000</pubDate>
+    <category>教學課程</category>
+    <description>用 Python 打造你的第一個 AI 聊天機器人：完整教學 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Mac M 晶片 AI 開發環境優化：充分利用神經網路引擎</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_mac-apple-silicon-ai-dev.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_mac-apple-silicon-ai-dev.html</guid>
+    <pubDate>Thu, 05 Mar 2026 08:38:38 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Mac M 晶片 AI 開發環境優化：充分利用神經網路引擎 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>創意寫作提示詞大全：小說、劇本、詩詞的 AI 創作指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_creative-writing-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_creative-writing-prompts.html</guid>
+    <pubDate>Thu, 05 Mar 2026 07:37:45 +0000</pubDate>
+    <category>提示詞</category>
+    <description>創意寫作提示詞大全：小說、劇本、詩詞的 AI 創作指南 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>DeepSeek R2 技術深度解析：開源模型即將超越 GPT-4o？</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_deepseek-r2-analysis.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_deepseek-r2-analysis.html</guid>
+    <pubDate>Thu, 05 Mar 2026 06:37:03 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>DeepSeek R2 技術深度解析：開源模型即將超越 GPT-4o？ — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>潛在客戶自動培育：AI 郵件序列 + CRM 整合工作流</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_lead-nurturing-ai-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_lead-nurturing-ai-workflow.html</guid>
+    <pubDate>Thu, 05 Mar 2026 05:35:18 +0000</pubDate>
+    <category>工作流</category>
+    <description>潛在客戶自動培育：AI 郵件序列 + CRM 整合工作流 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html</guid>
+    <pubDate>Thu, 05 Mar 2026 04:32:29 +0000</pubDate>
+    <category>教學課程</category>
+    <description>AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>n8n 工作流自動化：AI API 整合完整設定教學</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html</guid>
+    <pubDate>Thu, 05 Mar 2026 03:31:45 +0000</pubDate>
+    <category>系統配置</category>
+    <description>n8n 工作流自動化：AI API 整合完整設定教學 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>財務報告摘要提示詞：讓 AI 幫你讀懂年報與財報</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_financial-report-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_financial-report-prompts.html</guid>
+    <pubDate>Thu, 05 Mar 2026 02:30:48 +0000</pubDate>
+    <category>提示詞</category>
+    <description>財務報告摘要提示詞：讓 AI 幫你讀懂年報與財報 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Perplexity AI 商業化之路：搜尋引擎的 AI 顛覆者</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_perplexity-ai-business-model.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_perplexity-ai-business-model.html</guid>
+    <pubDate>Thu, 05 Mar 2026 01:29:52 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Perplexity AI 商業化之路：搜尋引擎的 AI 顛覆者 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>電商訂單自動化：AI 處理退款、投訴、庫存管理</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_ecommerce-order-automation.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_ecommerce-order-automation.html</guid>
+    <pubDate>Thu, 05 Mar 2026 00:28:40 +0000</pubDate>
+    <category>工作流</category>
+    <description>電商訂單自動化：AI 處理退款、投訴、庫存管理 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>OpenAI Assistants API 完整教學：打造有記憶的 AI 助理</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html</guid>
+    <pubDate>Wed, 04 Mar 2026 23:27:46 +0000</pubDate>
+    <category>教學課程</category>
+    <description>OpenAI Assistants API 完整教學：打造有記憶的 AI 助理 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Supabase + pgvector：向量資料庫配置與 RAG 系統搭建</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_supabase-pgvector-rag.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_supabase-pgvector-rag.html</guid>
+    <pubDate>Wed, 04 Mar 2026 22:26:43 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Supabase + pgvector：向量資料庫配置與 RAG 系統搭建 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>社群媒體提示詞：LinkedIn、Twitter、Instagram 爆款內容生成</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_social-media-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_social-media-prompts.html</guid>
+    <pubDate>Wed, 04 Mar 2026 21:24:54 +0000</pubDate>
+    <category>提示詞</category>
+    <description>社群媒體提示詞：LinkedIn、Twitter、Instagram 爆款內容生成 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Anthropic Claude 4 系列評測：最擅長安全推理的 AI</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_anthropic-claude-4-review.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-05_anthropic-claude-4-review.html</guid>
+    <pubDate>Wed, 04 Mar 2026 20:24:18 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Anthropic Claude 4 系列評測：最擅長安全推理的 AI — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>財務對帳自動化：AI 讀取銀行對帳單並分類記帳</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_financial-reconciliation-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-05_financial-reconciliation-workflow.html</guid>
+    <pubDate>Wed, 04 Mar 2026 19:23:19 +0000</pubDate>
+    <category>工作流</category>
+    <description>財務對帳自動化：AI 讀取銀行對帳單並分類記帳 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>向量資料庫入門：從概念到實作的完整學習路徑</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html</guid>
+    <pubDate>Wed, 04 Mar 2026 18:22:15 +0000</pubDate>
+    <category>教學課程</category>
+    <description>向量資料庫入門：從概念到實作的完整學習路徑 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>LangChain 環境配置：從零開始搭建 AI Agent 開發環境</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_langchain-dev-environment.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-05_langchain-dev-environment.html</guid>
+    <pubDate>Wed, 04 Mar 2026 17:21:15 +0000</pubDate>
+    <category>系統配置</category>
+    <description>LangChain 環境配置：從零開始搭建 AI Agent 開發環境 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>多語言翻譯提示詞：超越 Google 翻譯的 AI 本地化技巧</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_multilingual-translation-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-05_multilingual-translation-prompts.html</guid>
+    <pubDate>Wed, 04 Mar 2026 16:20:23 +0000</pubDate>
+    <category>提示詞</category>
+    <description>多語言翻譯提示詞：超越 Google 翻譯的 AI 本地化技巧 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Claude 系統提示詞設計：打造高效 AI 助理的完整指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_claude-system-prompt-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_claude-system-prompt-guide.html</guid>
+    <pubDate>Wed, 04 Mar 2026 15:19:33 +0000</pubDate>
+    <category>提示詞</category>
+    <description>Claude 系統提示詞設計：打造高效 AI 助理的完整指南 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>AI 在醫療診斷的突破：比醫生更準確的影像識別系統</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_ai-medical-diagnosis-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_ai-medical-diagnosis-2026.html</guid>
+    <pubDate>Wed, 04 Mar 2026 14:18:24 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>AI 在醫療診斷的突破：比醫生更準確的影像識別系統 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>知識庫更新工作流：讓 AI 自動整理並歸檔每日學習內容</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_knowledge-base-update-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_knowledge-base-update-workflow.html</guid>
+    <pubDate>Wed, 04 Mar 2026 13:17:17 +0000</pubDate>
+    <category>工作流</category>
+    <description>知識庫更新工作流：讓 AI 自動整理並歸檔每日學習內容 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>Transformer 架構詳解：不用數學也能理解注意力機制</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_transformer-architecture-explained.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_transformer-architecture-explained.html</guid>
+    <pubDate>Wed, 04 Mar 2026 12:16:00 +0000</pubDate>
+    <category>教學課程</category>
+    <description>Transformer 架構詳解：不用數學也能理解注意力機制 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Vercel + Cloudflare 靜態網站最佳化配置</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html</guid>
+    <pubDate>Wed, 04 Mar 2026 11:15:06 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Vercel + Cloudflare 靜態網站最佳化配置 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>Prompt 工程師必學：零樣本與少樣本提示詞技巧</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html</guid>
+    <pubDate>Wed, 04 Mar 2026 10:14:01 +0000</pubDate>
+    <category>提示詞</category>
+    <description>Prompt 工程師必學：零樣本與少樣本提示詞技巧 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>Meta Llama 4 發布：開源 AI 生態系的新里程碑</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_meta-llama-4-release.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_meta-llama-4-release.html</guid>
+    <pubDate>Wed, 04 Mar 2026 09:13:00 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>Meta Llama 4 發布：開源 AI 生態系的新里程碑 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>AI 評估指標完全指南：BLEU、ROUGE、BERTScore 怎麼用</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_ai-evaluation-metrics-guide.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_ai-evaluation-metrics-guide.html</guid>
+    <pubDate>Wed, 04 Mar 2026 08:12:19 +0000</pubDate>
+    <category>教學課程</category>
+    <description>AI 評估指標完全指南：BLEU、ROUGE、BERTScore 怎麼用 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>Redis 快取配置：AI 應用效能提升的關鍵設定</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_redis-cache-ai-performance.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_redis-cache-ai-performance.html</guid>
+    <pubDate>Wed, 04 Mar 2026 07:11:29 +0000</pubDate>
+    <category>系統配置</category>
+    <description>Redis 快取配置：AI 應用效能提升的關鍵設定 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>思維鏈提示詞進階：讓 AI 一步一步解決複雜問題</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_chain-of-thought-advanced.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_chain-of-thought-advanced.html</guid>
+    <pubDate>Wed, 04 Mar 2026 06:10:42 +0000</pubDate>
+    <category>提示詞</category>
+    <description>思維鏈提示詞進階：讓 AI 一步一步解決複雜問題 — AI 學習寶庫 提示詞 教程</description>
+  </item>
+  <item>
+    <title>AI 版權爭議 2026：紐約時報 vs OpenAI 判決後的影響</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_ai-copyright-lawsuit-2026.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/articles/2026-03-04_ai-copyright-lawsuit-2026.html</guid>
+    <pubDate>Wed, 04 Mar 2026 05:09:39 +0000</pubDate>
+    <category>科技趨勢</category>
+    <description>AI 版權爭議 2026：紐約時報 vs OpenAI 判決後的影響 — AI 學習寶庫 科技趨勢 教程</description>
+  </item>
+  <item>
+    <title>程式碼審查自動化：PR 提交自動觸發 AI 代碼分析</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_code-review-automation-workflow.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_code-review-automation-workflow.html</guid>
+    <pubDate>Wed, 04 Mar 2026 04:08:12 +0000</pubDate>
+    <category>工作流</category>
+    <description>程式碼審查自動化：PR 提交自動觸發 AI 代碼分析 — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>每日 AI 簡報自動化：聚合全球科技新聞推送到 Telegram</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_daily-ai-briefing-automation.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-04_daily-ai-briefing-automation.html</guid>
+    <pubDate>Wed, 04 Mar 2026 04:07:43 +0000</pubDate>
+    <category>工作流</category>
+    <description>每日 AI 簡報自動化：聚合全球科技新聞推送到 Telegram — AI 學習寶庫 工作流 教程</description>
+  </item>
+  <item>
+    <title>RAG 系統進階實作：提升知識庫問答準確率的 5 個技巧</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_rag-advanced-techniques.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-04_rag-advanced-techniques.html</guid>
+    <pubDate>Wed, 04 Mar 2026 02:24:00 +0000</pubDate>
+    <category>教學課程</category>
+    <description>RAG 系統進階實作：提升知識庫問答準確率的 5 個技巧 — AI 學習寶庫 教學課程 教程</description>
+  </item>
+  <item>
+    <title>本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html</guid>
+    <pubDate>Wed, 04 Mar 2026 01:23:07 +0000</pubDate>
+    <category>系統配置</category>
+    <description>本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南 — AI 學習寶庫 系統配置 教程</description>
+  </item>
+  <item>
+    <title>AI 面試準備提示詞：模擬面試官與最佳回答策略</title>
+    <link>https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_interview-preparation-prompts.html</link>
+    <guid isPermaLink="true">https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_interview-preparation-prompts.html</guid>
+    <pubDate>Wed, 04 Mar 2026 00:08:57 +0000</pubDate>
+    <category>提示詞</category>
+    <description>AI 面試準備提示詞：模擬面試官與最佳回答策略 — AI 學習寶庫 提示詞 教程</description>
+  </item>
 </channel>
 </rss>
