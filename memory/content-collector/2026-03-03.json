@@ -1,0 +1,105 @@
+{
+  "date": "2026-03-03",
+  "hour": "22:00",
+  "sources": ["Hacker News", "YouTube"],
+  "trends": [
+    {
+      "topic": "Meta AI Smart Glasses Privacy",
+      "title": "Meta's AI smart glasses and data privacy concerns - workers say we see everything",
+      "description": "Workers behind Meta's smart glasses can see everything - massive privacy concerns raised about AI-powered smart glasses data access",
+      "source": "Hacker News",
+      "votes": 1226,
+      "search_potential": "high",
+      "angles": ["Meta 隱私", "智能眼鏡數據", "AI 設備監控", "穿戴裝置風險"]
+    },
+    {
+      "topic": "Ars Technica AI Controversy",
+      "title": "Ars Technica fires reporter after AI controversy involving fabricated quotes",
+      "description": "Media outlet fires reporter over AI-generated fabricated quotes - journalism ethics in AI age",
+      "source": "Hacker News",
+      "votes": 437,
+      "search_potential": "high",
+      "angles": ["AI 新聞倫理", "AI 造假", "媒體責任", "生成式 AI 風險"]
+    },
+    {
+      "topic": "Sub-500ms Voice Agent",
+      "title": "I built a sub-500ms latency voice agent from scratch",
+      "description": "Developer builds voice agent with less than 500ms latency - real-time AI voice interaction breakthrough",
+      "source": "Hacker News",
+      "votes": 489,
+      "search_potential": "high",
+      "angles": ["即時語音 AI", "低延遲語音", "Voice AI 優化", "LLM 即時回應"]
+    },
+    {
+      "topic": "Apple MacBook Pro M5",
+      "title": "Apple Introduces MacBook Pro with All-New M5 Pro and M5 Max",
+      "description": "Apple announces new MacBook Pro with M5 Pro/M5 Max chips",
+      "source": "Hacker News",
+      "votes": 119,
+      "search_potential": "medium",
+      "angles": ["Apple M5", "MacBook Pro 2026", "AI 晶片", "筆電效能"]
+    },
+    {
+      "topic": "AI Art Copyright",
+      "title": "AI-generated art can't be copyrighted (Supreme Court declines review)",
+      "description": "Supreme Court declines to review - AI-generated art officially cannot be copyrighted",
+      "source": "Hacker News",
+      "votes": 0,
+      "search_potential": "high",
+      "angles": ["AI 版權", "生成式 AI 法律", "智慧財產權", "創作定義"]
+    },
+    {
+      "topic": "Arm Cortex X925 Desktop Performance",
+      "title": "Arm's Cortex X925: Reaching Desktop Performance",
+      "description": "Arm's new Cortex X925 processor reaches desktop-level performance benchmarks",
+      "source": "Hacker News",
+      "votes": 167,
+      "search_potential": "medium",
+      "angles": ["Arm X925", "桌機效能", "CPU 發展", "AI 晶片"]
+    },
+    {
+      "topic": "India Court AI Fake Orders",
+      "title": "India's top court angry after junior judge cites fake AI-generated orders",
+      "description": "Indian Supreme Court addresses AI-generated fake legal orders - government AI concerns",
+      "source": "Hacker News",
+      "votes": 147,
+      "search_potential": "high",
+      "angles": ["AI 造假文件", "司法 AI", "印度 AI 監管", "法律科技"]
+    },
+    {
+      "topic": "Tech Media Google Traffic Loss",
+      "title": "The Internet's Top Tech Publications Lost 58% of Their Google Traffic Since 2024",
+      "description": "Major tech publications see massive traffic decline from Google - SEO crisis",
+      "source": "Hacker News",
+      "votes": 31,
+      "search_potential": "medium",
+      "angles": ["媒體危機", "SEO 衰退", "Google 流量", "數位媒體"]
+    },
+    {
+      "topic": "Privacy-preserving Age Verification",
+      "title": "Privacy-preserving age and identity verification via anonymous credentials",
+      "description": "New cryptographic approach to age verification without revealing identity",
+      "source": "Hacker News",
+      "votes": 62,
+      "search_potential": "medium",
+      "angles": ["匿名驗證", "零知識證明", "隱私保護", "年齡驗證"]
+    },
+    {
+      "topic": "Launch HN: Cekura Voice AI Testing",
+      "title": "Launch HN: Cekura (YC F24) – Testing and monitoring for voice and chat AI agents",
+      "description": "YC-backed startup launches AI testing/monitoring platform for voice and chat agents",
+      "source": "Hacker News",
+      "votes": 6,
+      "search_potential": "medium",
+      "angles": ["AI 測試", "Voice AI 監控", "YC Startup", "AI QA"]
+    }
+  ],
+  "top_5_picks": [
+    "Meta AI Smart Glasses Privacy - 智能穿戴隱私熱門議題🔥",
+    "Ars Technica AI 造假爭議 - 新聞媒體 AI 倫理",
+    "Sub-500ms Voice Agent - 即時語音 AI 技術突破",
+    "AI Art Copyright - 最高法院 AI 創作無法著作權",
+    "India Court AI Fake Orders - AI 造假法律文件"
+  ],
+  "generated_at": "2026-03-03T22:41:00+08:00"
+}

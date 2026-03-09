@@ -1,0 +1,89 @@
+{
+  "collected": "2026-03-05 08:40 UTC+8",
+  "source": "Hacker News + Direct Fetch",
+  "ai_tech_topics": [
+    {
+      "rank": 1,
+      "title": "MacBook Neo",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "points": 1474,
+      "search_potential": "medium",
+      "category": "hardware"
+    },
+    {
+      "rank": 2,
+      "title": "Something is afoot in the land of Qwen",
+      "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+      "points": 488,
+      "search_potential": "high",
+      "category": "ai"
+    },
+    {
+      "rank": 3,
+      "title": "An interactive map of Flock Cams",
+      "url": "https://deflock.org/map",
+      "points": 487,
+      "search_potential": "medium",
+      "category": "privacy"
+    },
+    {
+      "rank": 4,
+      "title": "Qwen3.5 Fine-Tuning Guide – Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "points": 257,
+      "search_potential": "high",
+      "category": "ai"
+    },
+    {
+      "rank": 5,
+      "title": "Building a new Flash",
+      "url": "https://bill.newgrounds.com/news/post/1607118",
+      "points": 238,
+      "search_potential": "medium",
+      "category": "web"
+    },
+    {
+      "rank": 6,
+      "title": "NanoGPT Slowrun: Language Modeling with Limited Data",
+      "url": "https://qlabs.sh/slowrun",
+      "points": 111,
+      "search_potential": "medium",
+      "category": "ai"
+    },
+    {
+      "rank": 7,
+      "title": "Moss is a pixel canvas where every brush is a tiny program",
+      "url": "https://moss.town/",
+      "points": 164,
+      "search_potential": "medium",
+      "category": "creative"
+    },
+    {
+      "rank": 8,
+      "title": "Data Has Weight but Only on SSDs",
+      "url": "https://cubiclenate.com/2026/03/04/data-has-weight-but-only-on-ssds-blathering/",
+      "points": 61,
+      "search_potential": "low",
+      "category": "hardware"
+    },
+    {
+      "rank": 9,
+      "title": "The View from RSS",
+      "url": "https://www.carolinecrampton.com/the-view-from-rss/",
+      "points": 60,
+      "search_potential": "low",
+      "category": "tech"
+    },
+    {
+      "rank": 10,
+      "title": "BMW Group to deploy humanoid robots",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0455864EN/",
+      "points": 58,
+      "search_potential": "medium",
+      "category": "ai"
+    }
+  ],
+  "ai_specific_count": 5,
+  "total_topics": 10,
+  "notes": "Web search API unavailable - used direct HN fetch"
+}

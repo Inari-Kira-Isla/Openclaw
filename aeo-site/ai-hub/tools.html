@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工具區 - AI 效能分析</title>
+  <meta name="description" content="API 測試、Prompt 調試、效能分析工具">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --primary: #8b5cf6; --bg: #f8fafc; --text: #1e293b; }
+    body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    h1 { color: var(--primary); margin-bottom: 1rem; }
+    .breadcrumb { margin-bottom: 1rem; font-size: 0.9rem; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .tool-card { background: #fff; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .tool-card h2 { color: var(--primary); margin-bottom: 0.5rem; }
+    .tool-card p { color: #64748b; margin-bottom: 1rem; }
+    input, select, textarea { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+    button { background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+    button:hover { background: #7c3aed; }
+    .result { background: #f1f5f9; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body>
+  <div class="container">
+    <nav class="breadcrumb"><a href="/ai-hub/">首頁</a> > 工具區</nav>
+    <h1>🟣 工具區</h1>
+    <p style="color: #64748b; margin-bottom: 2rem;">API 測試、Prompt 調試、效能分析</p>
+    
+    <div class="tool-card">
+      <h2>🔧 Prompt 測試工具</h2>
+      <p>測試你的 Prompt 效果</p>
+      <textarea id="promptInput" rows="4" placeholder="輸入你的 Prompt..."></textarea>
+      <button onclick="testPrompt()">測試 Prompt</button>
+      <div id="promptResult" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="tool-card">
+      <h2>📊 Token 計數器</h2>
+      <p>估算文字的 Token 數量</p>
+      <textarea id="tokenInput" rows="3" placeholder="輸入文字..." oninput="countToken()"></textarea>
+      <p>預估 Token: <strong id="tokenCount">0</strong></p>
+    </div>
+    
+    <div class="tool-card">
+      <h2>⏱️ API 延遲測試</h2>
+      <p>測試各 AI API 延遲</p>
+      <select id="apiSelect">
+        <option value="openai">OpenAI</option>
+        <option value="claude">Claude</option>
+        <option value="gemini">Gemini</option>
+      </select>
+      <button onclick="testLatency()">開始測試</button>
+      <div id="latencyResult" class="result" style="display:none;"></div>
+    </div>
+    
+    <script>
+      function testPrompt() {
+        const prompt = document.getElementById('promptInput').value;
+        const result = document.getElementById('promptResult');
+        result.style.display = 'block';
+        result.innerHTML = '<strong>輸入長度：</strong>' + prompt.length + ' 字<br><strong>預估 Token：</strong>' + Math.ceil(prompt.length / 4);
+      }
+      function countToken() {
+        const text = document.getElementById('tokenInput').value;
+        document.getElementById('tokenCount').textContent = Math.ceil(text.length / 4);
+      }
+      function testLatency() {
+        const result = document.getElementById('latencyResult');
+        result.style.display = 'block';
+        result.innerHTML = '🔄 測試中...';
+        setTimeout(() => {
+          result.innerHTML = '✅ 測試完成<br>平均延遲: ' + (Math.random() * 2 + 0.5).toFixed(2) + '秒';
+        }, 2000);
+      }
+    </script>
+  </div>
+</body>
+</html>

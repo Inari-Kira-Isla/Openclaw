@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-03-05T07:44:00+08:00",
+  "task_type": "training_data_collection",
+  "trigger": "scheduled_reminder",
+  "description": "訓練數據收集 - 記錄簡單重複工作並生成訓練範例",
+  "input": {
+    "reminder_content": "訓練數據收集：1.記錄簡單重複工作 2.生成訓練範例 3.建立訓練數據集 4.儲存到 training-data/"
+  },
+  "actions_taken": [
+    {
+      "step": 1,
+      "action": "檢查 training-data 目錄結構",
+      "command": "ls -la ~/.openclaw/workspace/training-data/",
+      "result": "找到 115+ 個現有訓練範例文件"
+    },
+    {
+      "step": 2,
+      "action": "讀取現有模式文檔",
+      "file": "simple_task_patterns_20260305.md",
+      "result": "識別 5 種主要重複工作類型"
+    },
+    {
+      "step": 3,
+      "action": "生成新訓練範例",
+      "format": "JSON",
+      "result": "記錄本次訓練數據收集過程"
+    }
+  ],
+  "identified_patterns": [
+    {
+      "pattern": "定時任務執行",
+      "frequency": "每日/每小時",
+      "examples": ["系統健康檢查", "錯誤學習", "記憶體監控", "Token監控"]
+    },
+    {
+      "pattern": "鉤子觸發",
+      "trigger": "cron_event",
+      "examples": ["趨勢收集", "錯誤記錄", "品質檢查"]
+    },
+    {
+      "pattern": "跨平台同步",
+      "platforms": ["memory", "notion", "github"],
+      "frequency": "每日"
+    }
+  ],
+  "training_examples_count": {
+    "total": 115,
+    "today": 3,
+    "categories": [
+      "cron_reminder_handling",
+      "training_collection",
+      "monitoring_tasks",
+      "error_learning",
+      "memory_optimization"
+    ]
+  },
+  "output_file": "training_data_collection_2026-03-05_0744.json",
+  "status": "completed"
+}

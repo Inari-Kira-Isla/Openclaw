@@ -1,0 +1,68 @@
+{
+  "task_type": "scheduled_reminder",
+  "task_name": "錯誤即時學習與監控",
+  "trigger": "cron: 21:24 daily",
+  "context": "即時錯誤檢測與學習系統，自動分析錯誤並生成優化方案",
+  "steps": [
+    {
+      "step": 1,
+      "action": "錯誤檢查",
+      "details": "檢查最新錯誤日誌，識別錯誤類型與嚴重程度",
+      "commands": [
+        "tail -30 ~/.openclaw/logs/gateway.err.log",
+        "grep -i 'error\\|fail\\|timeout' ~/.openclaw/logs/*.log"
+      ]
+    },
+    {
+      "step": 2,
+      "action": "原因分析",
+      "details": "分析錯誤發生原因，識別根本問題",
+      "analysis_points": [
+        "API Key 狀態 (403/401)",
+        "LLM Timeout 次數與時間",
+        "Session 堆積情況",
+        "系統資源使用"
+      ]
+    },
+    {
+      "step": 3,
+      "action": "優化方案生成",
+      "details": "根據錯誤類型生成對應優化方案",
+      "solutions": {
+        "API_error": "更新 API key 或切換 provider",
+        "LLM_timeout": "增加 timeout 或優化 session 清理",
+        "PATH_error": "使用完整路徑呼叫指令"
+      }
+    },
+    {
+      "step": 4,
+      "action": "執行修復",
+      "details": "執行可自動修復的問題，需手動的記錄待辦",
+      "auto_fixable": ["PATH 問題識別", "記錄錯誤事件"],
+      "manual_fix_needed": ["API key 更換", "Config 更新"]
+    },
+    {
+      "step": 5,
+      "action": "記錄學習",
+      "details": "將錯誤與解決方案記錄到 memory/error-learning-{date}.md",
+      "output_path": "memory/"
+    }
+  ],
+  "real_examples_collected": [
+    {
+      "time": "21:24",
+      "error": "Gemini API 403 - API key leaked",
+      "severity": "high",
+      "action": "記錄並提醒更換 key"
+    },
+    {
+      "time": "13:13-13:16",
+      "error": "MiniMax/Ollama LLM Timeout",
+      "severity": "medium", 
+      "action": "與高 context session 有關"
+    }
+  ],
+  "output": "training-data/error_learning_20260302.json",
+  "status": "completed",
+  "timestamp": "2026-03-02T21:24+08:00"
+}

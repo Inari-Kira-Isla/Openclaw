@@ -1,0 +1,79 @@
+{
+  "collected_at": "2026-03-05T10:40:00+08:00",
+  "sources": ["Hacker News"],
+  "topics": [
+    {
+      "title": "MacBook Neo - Apple Announcement",
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "points": 1582,
+      "comments": 1903,
+      "category": "hardware",
+      "search_potential": "high",
+      "reason": "Major Apple product launch, high engagement"
+    },
+    {
+      "title": "Qwen3.5 Fine-Tuning Guide",
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "points": 284,
+      "comments": 70,
+      "category": "ai-models",
+      "search_potential": "high",
+      "reason": "Popular open-source LLM fine-tuning documentation"
+    },
+    {
+      "title": "Something is afoot in the land of Qwen",
+      "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+      "points": 541,
+      "comments": 251,
+      "category": "ai-models",
+      "search_potential": "high",
+      "reason": "Simon Willison's analysis of Qwen developments"
+    },
+    {
+      "title": "Dario Amodei calls OpenAI's messaging around military deal 'straight up lies'",
+      "url": "https://techcrunch.com/2026/03/04/anthropic-ceo-dario-amodei-calls-openais-messaging-around-military-deal-straight-up-lies-report-says/",
+      "points": 237,
+      "comments": 90,
+      "category": "ai-industry",
+      "search_potential": "high",
+      "reason": "Major AI industry controversy, AI safety concerns"
+    },
+    {
+      "title": "BMW Group to deploy humanoid robots in production in Germany",
+      "url": "https://www.press.bmwgroup.com/global/article/detail/T0455864EN/bmw-group-to-deploy-humanoid-robots-in-production-in-germany-for-the-first-time",
+      "points": 88,
+      "comments": 72,
+      "category": "robotics",
+      "search_potential": "medium",
+      "reason": "Industrial robotics adoption milestone"
+    },
+    {
+      "title": "NanoGPT Slowrun: Language Modeling with Limited Data",
+      "url": "https://qlabs.sh/slowrun",
+      "points": 126,
+      "comments": 26,
+      "category": "ai-research",
+      "search_potential": "medium",
+      "reason": "Interesting approach to language modeling"
+    },
+    {
+      "title": "Google Workspace CLI",
+      "url": "https://github.com/googleworkspace/cli",
+      "points": 113,
+      "comments": 33,
+      "category": "developer-tools",
+      "search_potential": "medium",
+      "reason": "New CLI tool from Google"
+    },
+    {
+      "title": "Moss - pixel canvas where every brush is a tiny program",
+      "url": "https://moss.town/",
+      "points": 186,
+      "comments": 22,
+      "category": "creative-tools",
+      "search_potential": "medium",
+      "reason": "Novel creative coding platform"
+    }
+  ],
+  "summary": "Apple's MacBook Neo leads HN with 1582 points. Qwen AI models continue trending with fine-tuning guides and analysis. AI industry controversy around military deals generating discussion. Industrial robotics advancing with BMW deployment."
+}

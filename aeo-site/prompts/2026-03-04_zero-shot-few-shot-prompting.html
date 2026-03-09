@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt 工程師必學：零樣本與少樣本提示詞技巧 | AI 學習寶庫</title>
+  <meta name="description" content="零樣本與少樣本提示詞是 Prompt 工程師必學的核心技巧，透過正確的提示詞設計，讓 AI 模型無需額外訓練即可完成任務。">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Prompt 工程師必學：零樣本與少樣本提示詞技巧">
+  <meta property="og:description" content="零樣本與少樣本提示詞是 Prompt 工程師必學的核心技巧，透過正確的提示詞設計，讓 AI 模型無需額外訓練即可完成任務。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Prompt 工程師必學：零樣本與少樣本提示詞技巧", "description": "零樣本與少樣本提示詞是 Prompt 工程師必學的核心技巧，透過正確的提示詞設計，讓 AI 模型無需額外訓練即可完成任務。", "datePublished": "2026-03-04", "dateModified": "2026-03-04", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html"}, "articleSection": "提示詞"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "零樣本提示詞適合用在哪些場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合簡單明確的任務，如基礎分類、摘要生成、簡單問答等不需要特殊格式的場景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "少樣本提示詞需要多少範例才夠？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "通常 1-5 個範例即可，過多範例可能降低效率並增加提示詞長度。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何選擇合適的提示詞技巧？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先嘗試零樣本，若輸出不符合預期，再加入少樣本範例逐步優化。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Prompt 工程師必學：零樣本與少樣本提示詞技巧</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Prompt 工程師必學：零樣本與少樣本提示詞技巧</h1>
+      <div class="article-info">
+        <span>📅 2026-03-04</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>零樣本與少樣本提示詞是 Prompt 工程師必須掌握的核心技術，能讓大型語言模型在不進行額外訓練的情況下，透過精心設計的提示詞完成各種任務。零樣本提示詞（Zero-Shot Prompting）是指不提供任何範例，直接要求模型執行任務；少樣本提示詞（Few-Shot Prompting）則是在提示詞中包含少量範例，引導模型理解任務需求。掌握這兩種技巧，能大幅提升提示詞的效果與精確度。</p>
+
+<h2>什麼是零樣本提示詞？</h2>
+<p>零樣本提示詞的核心概念是直接利用模型預訓練階段學到的知識，透過清晰的指令讓模型理解並執行任務。這種方式的最大優勢在於簡單直接，無需耗費額外資源準備範例資料。例如，當你需要模型進行情感分析時，可以直接輸入文本並要求分類。</p>
+<p>零樣本提示詞的關鍵在於指令的清晰度與具體性。指令應該明確說明任務目標、輸出格式，以及任何必要的約束條件。模糊或不完整的指令容易導致模型輸出不符合預期。</p>
+
+<h2>什麼是少樣本提示詞？</h2>
+<p>少樣本提示詞透過在提示詞中加入少量範例（通常 1-5 個），幫助模型理解任務的具體要求與輸出格式。這種方法特別適合任務較為複雜或輸出格式特殊的情況。</p>
+<p>範例的選擇應該具有代表性，能夠涵蓋任務的主要類型與變化。同時，範例的順序也很重要，建議將典型範例放在前面，特殊或邊緣案例放在後面。</p>
+
+<h2>實作技巧與程式碼範例</h2>
+<p>以下展示零樣本與少樣本提示詞的實際應用：</p>
+<pre><code># 零樣本提示詞範例
+zero_shot_prompt = """
+請分析以下評論的情感傾向：
+評論：這款產品品質很差，客服態度也很惡劣
+請輸出：正面、負面或中性
+"""
+
+# 少樣本提示詞範例
+few_shot_prompt = """
+請根據以下範例，判斷評論的情感傾向：
+
+範例1：
+評論：服務非常周到，東西也很好吃
+情感：正面
+
+範例2：
+評論：等了很久才上菜，環境很吵
+情感：負面
+
+請判斷：
+評論：價格合理，品質不錯
+情感：
+"""</code></pre>
+<p>實際應用時，需要根據具體任務調整提示詞的結構與範例數量，以達到最佳效果。</p>
+
+<h2>進階應用與注意事項</h2>
+<p>選擇零樣本或少樣本提示詞時，應考慮任務複雜度、模型能力與資源限制。一般而言，簡單任務適合使用零樣本提示詞，而複雜任務可考慮少樣本提示詞。</p>
+<p>此外，提示詞的設計應保持一致性，避免過度複雜的結構，並定期根據輸出結果進行優化調整。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">零樣本提示詞適合用在哪些場景？</h3>
+            <p class="faq-a">適合簡單明確的任務，如基礎分類、摘要生成、簡單問答等不需要特殊格式的場景。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">少樣本提示詞需要多少範例才夠？</h3>
+            <p class="faq-a">通常 1-5 個範例即可，過多範例可能降低效率並增加提示詞長度。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何選擇合適的提示詞技巧？</h3>
+            <p class="faq-a">先嘗試零樣本，若輸出不符合預期，再加入少樣本範例逐步優化。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact"><strong>AI 學習寶庫</strong><br>GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a></address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+</body>
+</html>

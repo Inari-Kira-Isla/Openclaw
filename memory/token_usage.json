@@ -1,0 +1,11 @@
+{
+  "sessions": [],
+  "daily_usage": {},
+  "budgets": {
+    "minimax": {
+      "daily_limit": 50,
+      "monthly_limit": 1500,
+      "set_at": "2026-03-02T04:17:56.984271"
+    }
+  }
+}

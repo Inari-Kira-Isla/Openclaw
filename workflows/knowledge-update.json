@@ -1,0 +1,81 @@
+{
+  "name": "knowledge-update",
+  "description": "知識更新流程 - 從外部來源獲取最新資訊並更新知識庫",
+  "trigger": {
+    "type": "webhook",
+    "event": "content_updated",
+    "description": "當外部知識源更新時觸發"
+  },
+  "nodes": [
+    {
+      "id": "fetch-rss",
+      "name": "獲取RSS訂閱",
+      "type": "rss",
+      "config": {
+        "feeds": [
+          "https://example.com/feed.xml",
+          "https://news.example.com/rss"
+        ]
+      },
+      "output": "rss_items"
+    },
+    {
+      "id": "fetch-web-content",
+      "name": "獲取網頁內容",
+      "type": "http",
+      "input": "rss_items",
+      "config": {
+        "extract": "article",
+        "maxItems": 10
+      },
+      "output": "web_content"
+    },
+    {
+      "id": "summarize",
+      "name": "生成摘要",
+      "type": "ai",
+      "input": "web_content",
+      "config": {
+        "model": "minimax/MiniMax-M2.5",
+        "prompt": "請為以下內容生成簡潔摘要，保留關鍵資訊："
+      },
+      "output": "summaries"
+    },
+    {
+      "id": "embed",
+      "name": "向量嵌入",
+      "type": "embedding",
+      "input": "summaries",
+      "config": {
+        "model": "text-embedding-3-small",
+        "dimension": 1536
+      },
+      "output": "embeddings"
+    },
+    {
+      "id": "update-vector-db",
+      "name": "更新向量數據庫",
+      "type": "vector-store",
+      "input": "embeddings",
+      "config": {
+        "provider": "qdrant",
+        "collection": "knowledge_base"
+      },
+      "output": "update_result"
+    }
+  ],
+  "output": {
+    "storage": {
+      "type": "vector",
+      "provider": "qdrant",
+      "collection": "knowledge_base"
+    },
+    "notifications": [
+      {
+        "on": "success",
+        "channel": "telegram",
+        "message": "知識庫更新完成，新增 ${new_items} 條內容"
+      }
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教學課程 | AI 學習寶庫</title>
+  <meta name="description" content="從基礎到進階的詳細 AI 教學課程，逐步掌握 Claude、ChatGPT、自動化工作流等 AI 開發技能。">
+  <meta name="keywords" content="AI教學, AI入門, Claude教學, ChatGPT教學, AI開發教程, RAG系統">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="教學課程 | AI 學習寶庫">
+  <meta property="og:description" content="從基礎到進階的 AI 開發教學課程。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link active">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/Openclaw/">首頁</a>
+        <span class="bc-sep">›</span>
+        <span>教學課程</span>
+      </nav>
+    </div>
+
+    <div class="page-header">
+      <div class="container">
+        <div class="page-header-icon">📚</div>
+        <h1>教學課程</h1>
+        <p>從基礎到進階的詳細教學，逐步掌握 AI 開發技能</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <div class="art-list">
+          <a href="/Openclaw/tutorials/2026-03-06_n8n-automation-101.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>AI 工作流 101：n8n 自動化你的日常任務</h3>
+            <p>n8n 是一款強大的開源工作流自動化工具，可幫助你自動執行重複性任務。本文提供完整的 n8n 教學，從基礎設定到 AI 工作流實戰，讓你快速掌握工作流自動化的精髓，提升工作效率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_line-ai-customer-service.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>LINE AI客服怎麼設定？2026企業部署完整教學打造24小時服務</h3>
+            <p>LINE AI客服透過整合ChatGPT等AI模型到LINE官方帳號，實現自動回覆常見問題、處理訂單查詢、24小時不打烊服務。企業只需申請LINE開發者帳號、使用Messaging API建立聊天機器人，並串接AI服務即可上線，平均可節省60%客服人力成本。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_instagram-reels-shopping-tags.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Instagram Reels購物標籤怎麼設定？2026完整攻略提升轉換率</h3>
+            <p>Instagram Reels購物標籤是將產品直接嵌入短影片中，觀眾可點擊購買。設定需先啟用Instagram購物功能，然後在發布Reels時點擊「標記產品」即可。每個Reels最多標記5個產品，平均可提升30%購買轉換率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_private-traffic-strategy.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>私域流量分層運營攻略：如何用20%用戶創造80%營收？2026完整指南</h3>
+            <p>私域流量分層是將用戶按價值分為淺層、中層、深層三個等級，針對不同層級提供差異化服務。根據帕累托法則，20%高價值用戶創造80%營收。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_virtual-anchor-guide.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>虛擬主播入門指南：AI數位人直播怎麼做？2026完整教學</h3>
+            <p>虛擬主播是由AI驅動的數位人物，能即時互動介紹產品、回答觀眾問題，實現24小時不間斷直播帶貨。相較於傳統主播，虛擬主播可大幅降低人力成本。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_knowledge-graph-llm-tutorial.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Knowledge Graph + LLM：讓 AI 理解複雜關係的新範式</h3>
+            <p>深入教學 Knowledge Graph 結合 LLM 的新範式，透過圖結構化知識與語言模型的融合，讓 AI 具備複雜關係理解能力。包含實際程式碼範例與操作步驟。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-06_prompt-injection-defense.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Prompt 注入攻擊防護：保護你的 AI 應用不被越獄</h3>
+            <p>Prompt 注入攻擊是 AI 應用的最大資安威脅之一，攻擊者透過惡意指令操控 AI 輸出敏感資訊或繞過安全機制。本文詳細說明 Prompt 注入的運作原理、常見攻擊手法，並提供程式碼範例與實用防護策略，幫助開發者建立安全的 AI 應用。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-05_lora-fine-tuning-tutorial.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Fine-tuning 小型 LLM：用 LoRA 訓練你的業務專屬模型</h3>
+            <p>本文介紹如何使用 LoRA 技術對小型 LLM 進行 Fine-tuning，實現業務專屬模型訓練。涵蓋 LoRA 原理、優勢、實作步驟及程式碼範例，幫助企業在有限資源下打造個人化 AI 助手。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-05_python-chatbot-tutorial.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>用 Python 打造你的第一個 AI 聊天機器人：完整教學</h3>
+            <p>Python聊天機器人開發入門教學，帶你從零開始使用 Python 和 AI 技術打造智慧對話機器人，包含完整程式碼範例。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-05_ai-agent-design-patterns.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>AI Agent 設計模式：ReAct、Plan-and-Execute、Reflection 詳解</h3>
+            <p>深入解析 AI Agent 三大設計模式：ReAct、Plan-and-Execute、Reflection，透過程式碼範例說明三種模式的原理、優缺點與實作方法，幫助開發者選擇適合的 Agent 架構。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-05_openai-assistants-api-tutorial.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>OpenAI Assistants API 完整教學：打造有記憶的 AI 助理</h3>
+            <p>探索 OpenAI Assistants API 的完整教學，掌握如何打造具有持久記憶的 AI 助理。本指南涵蓋 Assistant 創建、Thread 對話管理、Function Calling 擴充功能，以及上下文記憶的實現方法，讓你快...</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-05_vector-database-tutorial.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>向量資料庫入門：從概念到實作的完整學習路徑</h3>
+            <p>向量資料庫是專門儲存和檢索高維度向量嵌入的資料庫，支援語義搜索和相似性匹配，是 AI 應用的核心基礎設施。本指南帶你從概念到實作完整學習。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-04_transformer-architecture-explained.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Transformer 架構詳解：不用數學也能理解注意力機制</h3>
+            <p>深入淺出解析 Transformer 架構原理，透過生活化比喻說明注意力機制如何運作，無需數學背景也能掌握 AI 自然語言處理的核心理念與實作應用。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-04_ai-evaluation-metrics-guide.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>AI 評估指標完全指南：BLEU、ROUGE、BERTScore 怎麼用</h3>
+            <p>AI評估指標完整教學，詳細介紹BLEU、ROUGE、BERTScore三種主流自然語言處理評估方法的原理、計算方式及Python實作代碼。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/tutorials/2026-03-04_rag-advanced-techniques.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>RAG 系統進階實作：提升知識庫問答準確率的 5 個技巧</h3>
+            <p>本文深入解析 RAG 系統進階實作，提供 5 個實用技巧有效提升知識庫問答準確率，涵蓋向量檢索、分塊策略、混合檢索等關鍵技術。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/tutorials/2026-ai-trends.html" class="art-item reveal">
+            <div class="art-item-badge">年度趨勢</div>
+            <h3>2026 年 AI 趨勢：工作方式的根本轉變</h3>
+            <p>分析 2026 年 AI 發展的關鍵趨勢，探討 AI Agent、多模態模型對工作效率的深遠影響，以及如何在這波浪潮中保持競爭力。</p>
+            <div class="art-item-meta">
+              <span>2026-03-01</span>
+              <span class="sep">·</span>
+              <span>12 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/tutorials/ai-agent-beginners.html" class="art-item reveal reveal-d1">
+            <div class="art-item-badge">入門教學</div>
+            <h3>AI Agent 入門完全指南：從概念到實作</h3>
+            <p>零基礎入門 AI Agent 開發，從理解 Agent 架構到使用 LangChain、AutoGen 等框架構建第一個自主 AI 助理。</p>
+            <div class="art-item-meta">
+              <span>2026-02-24</span>
+              <span class="sep">·</span>
+              <span>20 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/tutorials/rag-system-tutorial.html" class="art-item reveal reveal-d2">
+            <div class="art-item-badge">RAG 系統</div>
+            <h3>RAG 系統實作：讓 AI 擁有專屬知識庫</h3>
+            <p>手把手教你構建 Retrieval-Augmented Generation 系統，包含向量資料庫選型、嵌入模型配置與檢索優化策略。</p>
+            <div class="art-item-meta">
+              <span>2026-02-19</span>
+              <span class="sep">·</span>
+              <span>25 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/tutorials/fine-tuning-guide.html" class="art-item reveal reveal-d3">
+            <div class="art-item-badge">模型微調</div>
+            <h3>小型模型微調實戰：讓 AI 學習你的業務知識</h3>
+            <p>使用 LoRA/QLoRA 技術對小型語言模型進行微調，以較低成本打造符合特定業務場景的專屬 AI 模型。</p>
+            <div class="art-item-meta">
+              <span>2026-02-15</span>
+              <span class="sep">·</span>
+              <span>30 分鐘閱讀</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+        <a href="/Openclaw/llms.txt">llms.txt</a>
+      </nav>
+            <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved;
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{
+  "date": "2026-03-05",
+  "source": "Hacker News",
+  "collected_at": "00:16 UTC+8",
+  "topics": [
+    {
+      "rank": 1,
+      "title": "Motorola GrapheneOS devices will be bootloader unlockable/relockable",
+      "points": 1036,
+      "url": "https://grapheneos.social/@GrapheneOS/116160393783585567",
+      "search_potential": "High",
+      "tags": ["mobile-security", "android", "privacy"]
+    },
+    {
+      "rank": 2,
+      "title": "Apple Introduces MacBook Neo",
+      "points": 416,
+      "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+      "search_potential": "High",
+      "tags": ["hardware", "apple", "laptop"]
+    },
+    {
+      "rank": 3,
+      "title": "Nobody Gets Promoted for Simplicity",
+      "points": 410,
+      "url": "https://terriblesoftware.org/2026/03/03/nobody-gets-promoted-for-simplicity/",
+      "search_potential": "Medium",
+      "tags": ["software-engineering", "career"]
+    },
+    {
+      "rank": 4,
+      "title": "Agentic Engineering Patterns",
+      "points": 341,
+      "url": "https://simonwillison.net/guides/agentic-engineering-patterns/",
+      "search_potential": "High",
+      "tags": ["ai-agents", "engineering", "patterns"]
+    },
+    {
+      "rank": 5,
+      "title": "Glaze by Raycast",
+      "points": 107,
+      "url": "https://www.glazeapp.com/",
+      "search_potential": "Medium",
+      "tags": ["macos", "tools"]
+    },
+    {
+      "rank": 6,
+      "title": "Qwen3.5 Fine-Tuning Guide – Unsloth Documentation",
+      "points": 87,
+      "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+      "search_potential": "High",
+      "tags": ["local-llm", "fine-tuning", "ai"]
+    },
+    {
+      "rank": 7,
+      "title": "A CPU that runs entirely on GPU",
+      "points": 177,
+      "url": "https://github.com/robertcprice/nCPU",
+      "search_potential": "Medium",
+      "tags": ["hardware", "gpu", "innovation"]
+    }
+  ],
+  "ai_related": [
+    "Agentic Engineering Patterns (341 pts)",
+    "Qwen3.5 Fine-Tuning Guide (87 pts)"
+  ],
+  "summary": "Hot topics: GrapheneOS/Motorola security (1036 pts), Apple MacBook Neo (416 pts), Agentic engineering patterns (341 pts)"
+}

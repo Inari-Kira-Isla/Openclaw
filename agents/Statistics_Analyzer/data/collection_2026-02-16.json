@@ -1,0 +1,6 @@
+[
+  {"agent": "Agent_Builder", "skill": "需求分析", "timestamp": "2026-02-16T19:21:00Z", "context": "設計新Agent", "success": true, "rating": 5, "duration_seconds": 180},
+  {"agent": "Agent_Builder", "skill": "身份設計", "timestamp": "2026-02-16T19:25:00Z", "context": "命名Agent", "success": true, "rating": 4, "duration_seconds": 120},
+  {"agent": "Skill_Creator", "skill": "核心技能設計", "timestamp": "2026-02-16T19:30:00Z", "context": "設計技能清單", "success": true, "rating": 5, "duration_seconds": 300},
+  {"agent": "Skill_Creator", "skill": "輔助技能設計", "timestamp": "2026-02-16T19:35:00Z", "context": "設計輔助技能", "success": true, "rating": 4, "duration_seconds": 240}
+]

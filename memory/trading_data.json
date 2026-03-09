@@ -1,0 +1,91 @@
+{
+  "products": [
+    {
+      "id": "prod_1",
+      "name": "\u5317\u6d77\u9053\u6d77\u81bd",
+      "category": "\u6d77\u7522",
+      "unit_price": 500,
+      "supplier": "\u6771\u4eac\u6c34\u7522",
+      "created_at": "2026-02-28T20:47:30.158265"
+    },
+    {
+      "id": "prod_2",
+      "name": "\u9f8d\u8766",
+      "category": "\u6d77\u7522",
+      "unit_price": 800,
+      "supplier": "\u6089\u5c3c\u6d77\u7522",
+      "created_at": "2026-02-28T20:47:30.158723"
+    },
+    {
+      "id": "prod_3",
+      "name": "\u5e1d\u738b\u87f9",
+      "category": "\u6d77\u7522",
+      "unit_price": 1200,
+      "supplier": "\u4fc4\u7f85\u65af\u6f01\u696d",
+      "created_at": "2026-02-28T20:47:30.160902"
+    },
+    {
+      "id": "prod_4",
+      "name": "\u5317\u6d77\u9053\u6d77\u81bd",
+      "category": "\u6d77\u7522",
+      "unit_price": 500,
+      "supplier": "\u6771\u4eac\u6c34\u7522",
+      "created_at": "2026-02-28T20:51:51.843354"
+    },
+    {
+      "id": "prod_5",
+      "name": "\u9f8d\u8766",
+      "category": "\u6d77\u7522",
+      "unit_price": 800,
+      "supplier": "\u6089\u5c3c\u6d77\u7522",
+      "created_at": "2026-02-28T20:51:51.843838"
+    },
+    {
+      "id": "prod_6",
+      "name": "\u5e1d\u738b\u87f9",
+      "category": "\u6d77\u7522",
+      "unit_price": 1200,
+      "supplier": "\u4fc4\u7f85\u65af\u6f01\u696d",
+      "created_at": "2026-02-28T20:51:51.844352"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "sup_1",
+      "name": "\u6771\u4eac\u6c34\u7522",
+      "contact": "info@tokyo-fish.jp",
+      "products": [
+        "\u5317\u6d77\u9053\u6d77\u81bd"
+      ],
+      "created_at": "2026-02-28T20:47:30.161432"
+    },
+    {
+      "id": "sup_2",
+      "name": "\u6089\u5c3c\u6d77\u7522",
+      "contact": "sales@sydney-seafood.com",
+      "products": [
+        "\u9f8d\u8766"
+      ],
+      "created_at": "2026-02-28T20:47:30.162002"
+    },
+    {
+      "id": "sup_3",
+      "name": "\u6771\u4eac\u6c34\u7522",
+      "contact": "info@tokyo-fish.jp",
+      "products": [
+        "\u5317\u6d77\u9053\u6d77\u81bd"
+      ],
+      "created_at": "2026-02-28T20:51:51.844732"
+    },
+    {
+      "id": "sup_4",
+      "name": "\u6089\u5c3c\u6d77\u7522",
+      "contact": "sales@sydney-seafood.com",
+      "products": [
+        "\u9f8d\u8766"
+      ],
+      "created_at": "2026-02-28T20:51:51.845124"
+    }
+  ],
+  "price_history": []
+}

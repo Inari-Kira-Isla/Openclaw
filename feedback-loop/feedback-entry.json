@@ -1,0 +1,57 @@
+{
+  "$schema": "feedback-entry",
+  "description": "反饋條目格式定義",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "唯一識別碼",
+      "example": "fb_1709068800000"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "ISO8601",
+      "description": "建立時間",
+      "example": "2024-02-27T12:00:00.000Z"
+    },
+    "source": {
+      "type": "string",
+      "description": "反饋來源",
+      "enum": ["user", "api", "system", "manual"],
+      "example": "user"
+    },
+    "type": {
+      "type": "string",
+      "description": "反饋類型",
+      "enum": ["bug", "feature", "improvement", "question", "other"],
+      "example": "bug"
+    },
+    "payload": {
+      "type": "object",
+      "description": "反饋內容",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "severity": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "相關版本號",
+      "example": "1.2.0"
+    },
+    "result": {
+      "type": "object",
+      "description": "處理結果",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pending", "resolved", "rejected", "wip"]
+        },
+        "notes": { "type": "string" },
+        "resolvedAt": { "type": "string", "format": "ISO8601" }
+      }
+    }
+  },
+  "required": ["id", "timestamp", "source", "type", "payload", "version"]
+}

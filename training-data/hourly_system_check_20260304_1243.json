@@ -1,0 +1,41 @@
+{
+  "task_type": "hourly_system_check",
+  "timestamp": "2026-03-04T12:43:00+08:00",
+  "description": "Hourly system health monitoring - Gateway, sessions, context usage",
+  "category": "monitoring",
+  "input": {
+    "system_metrics": {
+      "gateway_status": "HTTP 200",
+      "context_usage": "percentage",
+      "session_count": "number",
+      "memory_usage": "MB/percentage"
+    }
+  },
+  "actions_completed": [
+    {
+      "action": "gateway_health_check",
+      "status": "completed",
+      "checks": ["HTTP status", "response_time"]
+    },
+    {
+      "action": "session_monitoring",
+      "status": "completed",
+      "metrics_collected": ["active_sessions", "context_usage", "cache_health"]
+    },
+    {
+      "action": "resource_tracking",
+      "status": "completed",
+      "tracked": ["memory", "CPU", "disk"]
+    }
+  ],
+  "repetition_frequency": "hourly",
+  "complexity": "simple",
+  "automation_level": "high",
+  "decision_points": [
+    "Alert if Gateway != 200",
+    "Alert if context > 90%",
+    "Alert if memory > 95%"
+  ],
+  "outcome": "System正常运行, no alerts triggered",
+  "notes": "This is a standard hourly monitoring task that runs 24/7. It collects system metrics and logs them for trend analysis."
+}

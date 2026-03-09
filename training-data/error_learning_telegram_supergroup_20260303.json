@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-03-03T12:37:00+08:00",
+  "task_type": "error_learning",
+  "context": {
+    "error_source": "telegram",
+    "error_type": "group_upgrade",
+    "error_message": "group chat was upgraded to a supergroup chat"
+  },
+  "analysis": {
+    "root_cause": "Telegram group was upgraded to supergroup, chat ID changed",
+    "impact": "Bot cannot send messages to the old chat ID",
+    "frequency": "happened at 2026-03-03T12:35 and 12:36"
+  },
+  "solution": {
+    "action": "Update bot configuration with new supergroup chat ID",
+    "steps": [
+      "1. Identify the new supergroup chat ID",
+      "2. Update Telegram bot group configuration",
+      "3. Migrate message history if needed",
+      "4. Test bot functionality in new group"
+    ],
+    "prevention": "Monitor for group upgrade events and auto-update configuration"
+  },
+  "training_examples": [
+    {
+      "input": "Telegram bot fails to send message to group",
+      "error": "group chat was upgraded to a supergroup chat",
+      "output": "Update bot configuration with new supergroup chat ID"
+    }
+  ]
+}

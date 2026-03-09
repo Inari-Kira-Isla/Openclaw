@@ -1,0 +1,116 @@
+{
+  "name": "crm-order-flow",
+  "description": "CRM訂單處理流程 - 自動化訂單處理從創建到完成",
+  "trigger": {
+    "type": "webhook",
+    "event": "order.created",
+    "description": "當新訂單創建時觸發"
+  },
+  "nodes": [
+    {
+      "id": "validate-order",
+      "name": "驗證訂單",
+      "type": "validation",
+      "config": {
+        "rules": [
+          {"field": "customer_id", "type": "required"},
+          {"field": "items", "type": "array", "min": 1},
+          {"field": "total", "type": "numeric", "min": 0}
+        ]
+      },
+      "output": "validated_order"
+    },
+    {
+      "id": "check-inventory",
+      "name": "檢查庫存",
+      "type": "database",
+      "input": "validated_order",
+      "config": {
+        "query": "SELECT product_id, quantity FROM inventory WHERE product_id IN (:product_ids)",
+        "connection": "inventory_db"
+      },
+      "output": "inventory_status"
+    },
+    {
+      "id": "reserve-stock",
+      "name": "預留庫存",
+      "type": "database",
+      "input": "inventory_status",
+      "config": {
+        "operation": "update",
+        "query": "UPDATE inventory SET reserved = reserved + :quantity WHERE product_id = :product_id",
+        "connection": "inventory_db"
+      },
+      "output": "reservation_result"
+    },
+    {
+      "id": "process-payment",
+      "name": "處理支付",
+      "type": "payment",
+      "input": "validated_order",
+      "config": {
+        "provider": "stripe",
+        "capture": true
+      },
+      "output": "payment_result"
+    },
+    {
+      "id": "create-invoice",
+      "name": "創建發票",
+      "type": "document",
+      "input": ["validated_order", "payment_result"],
+      "config": {
+        "template": "invoice",
+        "format": "pdf"
+      },
+      "output": "invoice"
+    },
+    {
+      "id": "send-notification",
+      "name": "發送通知",
+      "type": "notification",
+      "input": "validated_order",
+      "config": {
+        "channels": ["email", "telegram"],
+        "template": "order_confirmation"
+      },
+      "output": "notification_result"
+    },
+    {
+      "id": "update-crm",
+      "name": "更新CRM記錄",
+      "type": "database",
+      "input": "payment_result",
+      "config": {
+        "operation": "insert",
+        "table": "orders",
+        "connection": "crm_db"
+      },
+      "output": "crm_update"
+    }
+  ],
+  "output": {
+    "storage": {
+      "type": "database",
+      "table": "orders",
+      "connection": "crm_db"
+    },
+    "notifications": [
+      {
+        "on": "success",
+        "channel": "telegram",
+        "message": "訂單 ${order_id} 處理完成，金額: $${total}"
+      },
+      {
+        "on": "payment_failed",
+        "channel": "telegram",
+        "message": "訂單 ${order_id} 支付失敗: ${error}"
+      },
+      {
+        "on": "out_of_stock",
+        "channel": "telegram",
+        "message": "訂單 ${order_id} 庫存不足: ${missing_items}"
+      }
+    ]
+  }
+}

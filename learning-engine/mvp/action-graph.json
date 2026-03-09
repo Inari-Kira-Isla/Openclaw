@@ -1,0 +1,93 @@
+{
+  "actions": [
+    {
+      "id": "send_message",
+      "name": "發送訊息",
+      "weight": 0.5
+    },
+    {
+      "id": "fetch_data",
+      "name": "獲取數據",
+      "weight": 0.7
+    },
+    {
+      "id": "update_record",
+      "name": "更新記錄",
+      "weight": 0.6
+    },
+    {
+      "id": "analyze_trend",
+      "name": "分析趨勢",
+      "weight": 0.8
+    },
+    {
+      "id": "trigger_workflow",
+      "name": "觸發流程",
+      "weight": 0.4
+    }
+  ],
+  "connections": [
+    {
+      "from": "send_message",
+      "to": "fetch_data",
+      "weight": 0.176,
+      "type": "positive"
+    },
+    {
+      "from": "send_message",
+      "to": "trigger_workflow",
+      "weight": 0.376,
+      "type": "positive"
+    },
+    {
+      "from": "fetch_data",
+      "to": "analyze_trend",
+      "weight": 0.7,
+      "type": "positive"
+    },
+    {
+      "from": "fetch_data",
+      "to": "update_record",
+      "weight": 0.4,
+      "type": "positive"
+    },
+    {
+      "from": "analyze_trend",
+      "to": "trigger_workflow",
+      "weight": 0.2,
+      "type": "positive"
+    },
+    {
+      "from": "update_record",
+      "to": "send_message",
+      "weight": -0.2,
+      "type": "negative"
+    },
+    {
+      "from": "trigger_workflow",
+      "to": "fetch_data",
+      "weight": 0.1,
+      "type": "positive"
+    }
+  ],
+  "learning_log": [
+    {
+      "iteration": 1,
+      "action": "send_message",
+      "reward": -0.76,
+      "timestamp": "2026-02-27T16:29:03.865Z"
+    },
+    {
+      "iteration": 2,
+      "action": "send_message",
+      "reward": -0.5,
+      "timestamp": "2026-02-27T16:29:03.867Z"
+    },
+    {
+      "iteration": 3,
+      "action": "send_message",
+      "reward": 0.02,
+      "timestamp": "2026-02-27T16:29:03.867Z"
+    }
+  ]
+}

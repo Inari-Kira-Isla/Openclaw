@@ -1,0 +1,44 @@
+{
+  "task_type": "memory_monitoring",
+  "timestamp": "2026-03-04T12:43:30+08:00",
+  "description": "Memory usage tracking and optimization triggers",
+  "category": "resource_management",
+  "input": {
+    "memory_metrics": {
+      "used_mb": "current usage in MB",
+      "total_mb": "total available",
+      "percentage": "usage percentage"
+    }
+  },
+  "actions_completed": [
+    {
+      "action": "memory_reading",
+      "status": "completed",
+      "method": "os.totalmem()/os.freemem()"
+    },
+    {
+      "action": "threshold_check",
+      "status": "completed",
+      "thresholds": {
+        "warning": "90%",
+        "critical": "95%"
+      }
+    },
+    {
+      "action": "optimization_trigger",
+      "status": "conditional",
+      "triggered": false,
+      "conditions": ["memory > 95%", "context > 85%", "sessions > 500"]
+    }
+  ],
+  "repetition_frequency": "4-6 times daily",
+  "complexity": "simple",
+  "automation_level": "high",
+  "decision_points": [
+    "If memory > 95%: trigger cleanup",
+    "If context > 85%: compress sessions",
+    "If sessions > 500: notify admin"
+  ],
+  "outcome": "Memory within normal range, no action needed",
+  "notes": "Memory monitoring is triggered throughout the day. Most runs complete without intervention (95% of cases). When thresholds are exceeded, automatic resource adjustment is triggered."
+}

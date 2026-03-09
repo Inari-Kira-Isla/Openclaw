@@ -1,0 +1,11 @@
+{
+  "brand_id": "demo",
+  "brand_name": "Demo Brand",
+  "type": "post",
+  "hot_topics": ["新產品發布", "品牌故事", "顧客體驗"],
+  "short": "創新體驗，從這裡開始 ✨",
+  "long": "我們相信每一次互動都應該是獨特的。 Demo Brand 致力於為您帶來創新且令人難忘的產品體驗。從設計到服務，我們追求每一個細節的完美。感謝每一位支持我們的顧客，你們是我們前進的動力！",
+  "caption": "創新體驗，從這裡開始 ✨\n\n我們相信每一次互動都應該是獨特的。 Demo Brand 致力於為您帶來創新且令人難忘的產品體驗。\n\n#DemoBrand #創新 #品質",
+  "raw": "demo_post_content_generated",
+  "generated_at": "2026-03-05T07:49:00.000000+00:00"
+}

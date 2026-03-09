@@ -1,0 +1,1699 @@
+{
+  "version": "1.0",
+  "updated": "2026-03-01T07:57:58.573Z",
+  "source": "workspace-memory",
+  "documents": [
+    {
+      "type": "memory",
+      "source": "01-cynthia-SOUL.md",
+      "title": "01-cynthia-SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "02-neicheok-SOUL.md",
+      "title": "02-neicheok-SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "03-evolution-SOUL.md",
+      "title": "03-evolution-SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "04-slime-SOUL.md",
+      "title": "04-slime-SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "05-team-SOUL.md",
+      "title": "05-team-SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "06-kira-skill.md",
+      "title": "06-kira-skill"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-agent-performance.md",
+      "title": "2026-03-01-agent-performance"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-feedback.md",
+      "title": "2026-03-01-feedback"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-hot-topics.md",
+      "title": "2026-03-01-hot-topics"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-hourly-research.md",
+      "title": "2026-03-01-hourly-research"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-performance.md",
+      "title": "2026-03-01-performance"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01-trending-research.md",
+      "title": "2026-03-01-trending-research"
+    },
+    {
+      "type": "memory",
+      "source": "2026-03-01.md",
+      "title": "2026-03-01"
+    },
+    {
+      "type": "memory",
+      "source": "4d-qa-application.md",
+      "title": "4d-qa-application"
+    },
+    {
+      "type": "memory",
+      "source": "55-skills-implementation.md",
+      "title": "55-skills-implementation"
+    },
+    {
+      "type": "memory",
+      "source": "BNI_ECOSYSTEM_ANALYSIS.md",
+      "title": "BNI_ECOSYSTEM_ANALYSIS"
+    },
+    {
+      "type": "memory",
+      "source": "INDEX.md",
+      "title": "INDEX"
+    },
+    {
+      "type": "memory",
+      "source": "RAG-SYSTEM_ARCHITECTURE.md",
+      "title": "RAG-SYSTEM_ARCHITECTURE"
+    },
+    {
+      "type": "memory",
+      "source": "RATE_LIMIT_HANDLING.md",
+      "title": "RATE_LIMIT_HANDLING"
+    },
+    {
+      "type": "memory",
+      "source": "RATE_LIMIT_SOLUTION_ARTICLE.md",
+      "title": "RATE_LIMIT_SOLUTION_ARTICLE"
+    },
+    {
+      "type": "memory",
+      "source": "SOUL.md",
+      "title": "SOUL"
+    },
+    {
+      "type": "memory",
+      "source": "agent-monitor.md",
+      "title": "agent-monitor"
+    },
+    {
+      "type": "memory",
+      "source": "agent-registration.md",
+      "title": "agent-registration"
+    },
+    {
+      "type": "memory",
+      "source": "agentic-ai-hongkong-observation.md",
+      "title": "agentic-ai-hongkong-observation"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agent-architecture-summary.md",
+      "title": "ai-agent-architecture-summary"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agent-infrastructure-trends.md",
+      "title": "ai-agent-infrastructure-trends"
+    },
+    {
+      "type": "memory",
+      "source": "ai-agent-trends-2026.md",
+      "title": "ai-agent-trends-2026"
+    },
+    {
+      "type": "memory",
+      "source": "ai-employee-philosophy.md",
+      "title": "ai-employee-philosophy"
+    },
+    {
+      "type": "memory",
+      "source": "ai-marketing.md",
+      "title": "ai-marketing"
+    },
+    {
+      "type": "memory",
+      "source": "ai-organic-qa-system.md",
+      "title": "ai-organic-qa-system"
+    },
+    {
+      "type": "memory",
+      "source": "ai-personal-writing-system.md",
+      "title": "ai-personal-writing-system"
+    },
+    {
+      "type": "memory",
+      "source": "ai-self-optimization.md",
+      "title": "ai-self-optimization"
+    },
+    {
+      "type": "memory",
+      "source": "ai-skill-era-article.md",
+      "title": "ai-skill-era-article"
+    },
+    {
+      "type": "memory",
+      "source": "analytics.md",
+      "title": "analytics"
+    },
+    {
+      "type": "memory",
+      "source": "anthropic-skill-thread-generator.md",
+      "title": "anthropic-skill-thread-generator"
+    },
+    {
+      "type": "memory",
+      "source": "anthropic-skills-deep-learning.md",
+      "title": "anthropic-skills-deep-learning"
+    },
+    {
+      "type": "memory",
+      "source": "claude-code-skills-deep.md",
+      "title": "claude-code-skills-deep"
+    },
+    {
+      "type": "memory",
+      "source": "closed-loop-insights.md",
+      "title": "closed-loop-insights"
+    },
+    {
+      "type": "memory",
+      "source": "closed-loop-system.md",
+      "title": "closed-loop-system"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-friday-v3.md",
+      "title": "coffee-shop-friday-v3"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-monday-v3.md",
+      "title": "coffee-shop-monday-v3"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-threads.md",
+      "title": "coffee-shop-threads"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-thursday-v3.md",
+      "title": "coffee-shop-thursday-v3"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-tuesday-v3.md",
+      "title": "coffee-shop-tuesday-v3"
+    },
+    {
+      "type": "memory",
+      "source": "coffee-shop-wednesday-v3.md",
+      "title": "coffee-shop-wednesday-v3"
+    },
+    {
+      "type": "memory",
+      "source": "comfyui-video-generation.md",
+      "title": "comfyui-video-generation"
+    },
+    {
+      "type": "memory",
+      "source": "content-automation-plan.md",
+      "title": "content-automation-plan"
+    },
+    {
+      "type": "memory",
+      "source": "creative.md",
+      "title": "creative"
+    },
+    {
+      "type": "memory",
+      "source": "cross-platform.md",
+      "title": "cross-platform"
+    },
+    {
+      "type": "memory",
+      "source": "daily-learning-2026-03-01.md",
+      "title": "daily-learning-2026-03-01"
+    },
+    {
+      "type": "memory",
+      "source": "discord-bot-progress.md",
+      "title": "discord-bot-progress"
+    },
+    {
+      "type": "memory",
+      "source": "discord-sync.md",
+      "title": "discord-sync"
+    },
+    {
+      "type": "memory",
+      "source": "docker-n8n-openclaw-integration.md",
+      "title": "docker-n8n-openclaw-integration"
+    },
+    {
+      "type": "memory",
+      "source": "dolphin-marketing.md",
+      "title": "dolphin-marketing"
+    },
+    {
+      "type": "memory",
+      "source": "email-classification-strategy.md",
+      "title": "email-classification-strategy"
+    },
+    {
+      "type": "memory",
+      "source": "email-monitor.md",
+      "title": "email-monitor"
+    },
+    {
+      "type": "memory",
+      "source": "email.md",
+      "title": "email"
+    },
+    {
+      "type": "memory",
+      "source": "emergency.md",
+      "title": "emergency"
+    },
+    {
+      "type": "memory",
+      "source": "enterprise-neural-system.md",
+      "title": "enterprise-neural-system"
+    },
+    {
+      "type": "memory",
+      "source": "error-learning-20260228.md",
+      "title": "error-learning-20260228"
+    },
+    {
+      "type": "memory",
+      "source": "error-trend-20260301.md",
+      "title": "error-trend-20260301"
+    },
+    {
+      "type": "memory",
+      "source": "errors.md",
+      "title": "errors"
+    },
+    {
+      "type": "memory",
+      "source": "evening-schedule.md",
+      "title": "evening-schedule"
+    },
+    {
+      "type": "memory",
+      "source": "events.md",
+      "title": "events"
+    },
+    {
+      "type": "memory",
+      "source": "evolution-agents.md",
+      "title": "evolution-agents"
+    },
+    {
+      "type": "memory",
+      "source": "evolution-identity.md",
+      "title": "evolution-identity"
+    },
+    {
+      "type": "memory",
+      "source": "evolution-soul.md",
+      "title": "evolution-soul"
+    },
+    {
+      "type": "memory",
+      "source": "evomap-ai-evolution-network.md",
+      "title": "evomap-ai-evolution-network"
+    },
+    {
+      "type": "memory",
+      "source": "evomap-application.md",
+      "title": "evomap-application"
+    },
+    {
+      "type": "memory",
+      "source": "expenses-2026-02.md",
+      "title": "expenses-2026-02"
+    },
+    {
+      "type": "memory",
+      "source": "external-monitoring.md",
+      "title": "external-monitoring"
+    },
+    {
+      "type": "memory",
+      "source": "feedback.md",
+      "title": "feedback"
+    },
+    {
+      "type": "memory",
+      "source": "gene-capsule-format.md",
+      "title": "gene-capsule-format"
+    },
+    {
+      "type": "memory",
+      "source": "github-monitor.md",
+      "title": "github-monitor"
+    },
+    {
+      "type": "memory",
+      "source": "gmail-labels-setup.md",
+      "title": "gmail-labels-setup"
+    },
+    {
+      "type": "memory",
+      "source": "health.md",
+      "title": "health"
+    },
+    {
+      "type": "memory",
+      "source": "hook-analysis.md",
+      "title": "hook-analysis"
+    },
+    {
+      "type": "memory",
+      "source": "hourly-trending.md",
+      "title": "hourly-trending"
+    },
+    {
+      "type": "memory",
+      "source": "japan-seafood-analysis.md",
+      "title": "japan-seafood-analysis"
+    },
+    {
+      "type": "memory",
+      "source": "kira-trending-1772257956-hook.md",
+      "title": "kira-trending-1772257956-hook"
+    },
+    {
+      "type": "memory",
+      "source": "knowledge-base.md",
+      "title": "knowledge-base"
+    },
+    {
+      "type": "memory",
+      "source": "learning_20260301_ai_skills_legal.md",
+      "title": "learning_20260301_ai_skills_legal"
+    },
+    {
+      "type": "memory",
+      "source": "lobster-experiment.md",
+      "title": "lobster-experiment"
+    },
+    {
+      "type": "memory",
+      "source": "lobster-skill-tips.md",
+      "title": "lobster-skill-tips"
+    },
+    {
+      "type": "memory",
+      "source": "lobster-system.md",
+      "title": "lobster-system"
+    },
+    {
+      "type": "memory",
+      "source": "maintenance.md",
+      "title": "maintenance"
+    },
+    {
+      "type": "memory",
+      "source": "marketing.md",
+      "title": "marketing"
+    },
+    {
+      "type": "memory",
+      "source": "memory-cleanup-report.md",
+      "title": "memory-cleanup-report"
+    },
+    {
+      "type": "memory",
+      "source": "memory-health.md",
+      "title": "memory-health"
+    },
+    {
+      "type": "memory",
+      "source": "memory-optimization-2026-03-01-pm.md",
+      "title": "memory-optimization-2026-03-01-pm"
+    },
+    {
+      "type": "memory",
+      "source": "memory-optimization-2026-03-01.md",
+      "title": "memory-optimization-2026-03-01"
+    },
+    {
+      "type": "memory",
+      "source": "monitoring-20260228.md",
+      "title": "monitoring-20260228"
+    },
+    {
+      "type": "memory",
+      "source": "nanobot-memu-openwebui-analysis.md",
+      "title": "nanobot-memu-openwebui-analysis"
+    },
+    {
+      "type": "memory",
+      "source": "notion-db-setup.md",
+      "title": "notion-db-setup"
+    },
+    {
+      "type": "memory",
+      "source": "notion-learnings.md",
+      "title": "notion-learnings"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-55-skills-philosophy.md",
+      "title": "openclaw-55-skills-philosophy"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-claude-integration.md",
+      "title": "openclaw-claude-integration"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-comfyui-integration.md",
+      "title": "openclaw-comfyui-integration"
+    },
+    {
+      "type": "memory",
+      "source": "openclaw-manager-mode.md",
+      "title": "openclaw-manager-mode"
+    },
+    {
+      "type": "memory",
+      "source": "order-analysis-consolidated.md",
+      "title": "order-analysis-consolidated"
+    },
+    {
+      "type": "memory",
+      "source": "performance.md",
+      "title": "performance"
+    },
+    {
+      "type": "memory",
+      "source": "quick-start.md",
+      "title": "quick-start"
+    },
+    {
+      "type": "memory",
+      "source": "rag-deep-config.md",
+      "title": "rag-deep-config"
+    },
+    {
+      "type": "memory",
+      "source": "rag-optimization.md",
+      "title": "rag-optimization"
+    },
+    {
+      "type": "memory",
+      "source": "rag-three-dimensions.md",
+      "title": "rag-three-dimensions"
+    },
+    {
+      "type": "memory",
+      "source": "rate-limit-case-study.md",
+      "title": "rate-limit-case-study"
+    },
+    {
+      "type": "memory",
+      "source": "rate-limit-handling.md",
+      "title": "rate-limit-handling"
+    },
+    {
+      "type": "memory",
+      "source": "red-alert-20260228.md",
+      "title": "red-alert-20260228"
+    },
+    {
+      "type": "memory",
+      "source": "research-report.md",
+      "title": "research-report"
+    },
+    {
+      "type": "memory",
+      "source": "resource-tuning.md",
+      "title": "resource-tuning"
+    },
+    {
+      "type": "memory",
+      "source": "security.md",
+      "title": "security"
+    },
+    {
+      "type": "memory",
+      "source": "self-evolution-2026-02-19-summary.md",
+      "title": "self-evolution-2026-02-19-summary"
+    },
+    {
+      "type": "memory",
+      "source": "self_evolution_20260225.md",
+      "title": "self_evolution_20260225"
+    },
+    {
+      "type": "memory",
+      "source": "session-optimization.md",
+      "title": "session-optimization"
+    },
+    {
+      "type": "memory",
+      "source": "skill-learning.md",
+      "title": "skill-learning"
+    },
+    {
+      "type": "memory",
+      "source": "skills-analysis-2026-03-01.md",
+      "title": "skills-analysis-2026-03-01"
+    },
+    {
+      "type": "memory",
+      "source": "skills-application-analysis.md",
+      "title": "skills-application-analysis"
+    },
+    {
+      "type": "memory",
+      "source": "skills-catalog.md",
+      "title": "skills-catalog"
+    },
+    {
+      "type": "memory",
+      "source": "stats.md",
+      "title": "stats"
+    },
+    {
+      "type": "memory",
+      "source": "supply-chain.md",
+      "title": "supply-chain"
+    },
+    {
+      "type": "memory",
+      "source": "system-architecture-article.md",
+      "title": "system-architecture-article"
+    },
+    {
+      "type": "memory",
+      "source": "tag-weights.md",
+      "title": "tag-weights"
+    },
+    {
+      "type": "memory",
+      "source": "tasks.md",
+      "title": "tasks"
+    },
+    {
+      "type": "memory",
+      "source": "three-layer-email-workflow.md",
+      "title": "three-layer-email-workflow"
+    },
+    {
+      "type": "memory",
+      "source": "tiktok-ugc-application.md",
+      "title": "tiktok-ugc-application"
+    },
+    {
+      "type": "memory",
+      "source": "tiktok-ugc-automation.md",
+      "title": "tiktok-ugc-automation"
+    },
+    {
+      "type": "memory",
+      "source": "tools-pi-for-excel.md",
+      "title": "tools-pi-for-excel"
+    },
+    {
+      "type": "memory",
+      "source": "typless-intelligent-document-processing.md",
+      "title": "typless-intelligent-document-processing"
+    },
+    {
+      "type": "memory",
+      "source": "typless-workflow-analysis.md",
+      "title": "typless-workflow-analysis"
+    },
+    {
+      "type": "memory",
+      "source": "ugc-content-legal.md",
+      "title": "ugc-content-legal"
+    },
+    {
+      "type": "memory",
+      "source": "user-joe.md",
+      "title": "user-joe"
+    },
+    {
+      "type": "memory",
+      "source": "vector.md",
+      "title": "vector"
+    },
+    {
+      "type": "memory",
+      "source": "whisper-testing.md",
+      "title": "whisper-testing"
+    },
+    {
+      "type": "memory",
+      "source": "闭环分析.md",
+      "title": "闭环分析"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "2026-03-01-research.md",
+      "chunk_id": 0,
+      "title": "# 每小時熱門話題研究 - 2026年3月1日\n\n## 科技 (Technology)\n\n### Hacker News 熱門\n1. **MicroGPT** (1031 points) - Karp",
+      "content": "# 每小時熱門話題研究 - 2026年3月1日\n\n## 科技 (Technology)\n\n### Hacker News 熱門\n1. **MicroGPT** (1031 points) - Karpathy 的微型 GPT 專案\n2. **Decision Trees** (129 points) - 決策樹的強大能力\n3. **CMU AI 課程** (85 points) - 10-202: Introduction to Modern AI\n4. **OpenAI vs Anthropic 供應鏈風險** (591 points) - 熱議 AI 供應鏈安全\n5. **Claude 導入記憶功能** (206 points) - Switch to Claude without starting over\n6. **Obsidian Sync headless client** (498 points) - 筆記軟體新功能\n7. **MCP Server 上下文優化** (427 points) - 減少 98% 上下文消耗"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "2026-03-01-research.md",
+      "chunk_id": 1,
+      "title": "### The Verge 科技焦點\n- **MWC 2026**：旋轉相機環、機械臂、磁吸模組\n- **Xiaomi 17 Ultra**：Leica 聯名款，相機功能強大\n- **Honor Ro",
+      "content": "### The Verge 科技焦點\n- **MWC 2026**：旋轉相機環、機械臂、磁吸模組\n- **Xiaomi 17 Ultra**：Leica 聯名款，相機功能強大\n- **Honor Robot Phone**：機器人手機概念\n- **Apple iOS 26.4**：英國年齡驗證提示出錯\n- **AI 軍事應用**：AI 公司應共同制定紅線\n\n---\n\n## AI 應用 (AI Applications)\n\n### VentureBeat AI 趨勢\n1. **Vibe Coding**：過度熱情的 AI 伙伴教訓\n2. **Anthropic vs Pentagon**：企業應分散風險\n3. **Google Opal**：企業 AI 代理新藍圖\n4. **OpenAI + AWS**：企業級有狀態架構\n5. **MCP 安全問題**：企業採用超越安全控制\n6. **Block 裁員 40%**：因 AI 效率\n7. **Microsoft OPCD**：消除冗長系統提示詞\n8. **AT&T 每日 80 億 tokens**：重新思考 AI 編排，成本降低 90%"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "2026-03-01-research.md",
+      "chunk_id": 2,
+      "title": "---\n\n## 數學 (Mathematics)\n\n### Quanta Magazine 焦點\n- **Georg Cantor**：「盜竊無限」- 1874 年證明無限大小的論文涉及抄襲\n- **",
+      "content": "---\n\n## 數學 (Mathematics)\n\n### Quanta Magazine 焦點\n- **Georg Cantor**：「盜竊無限」- 1874 年證明無限大小的論文涉及抄襲\n- **電子流體**：物理學家讓電子像水一樣流動\n- **新量子時代複雜性理論**\n- **鳥類美麗的演化優勢**：美學選擇\n\n### Hacker News 數學相關\n- **Decision Trees** (129 points) - 嵌套決策規則的強大能力\n- **C++ 72KB 分配** - 為什麼第一次分配總是 72KB\n\n---\n\n## 金融 (Finance)\n\n### 趨勢觀察\n- **Block 裁員 40%** (4,000+人) - Jack Dorsey 承認是 AI 效率導致\n- **AT&T AI 成本優化** - 每日 80 億 tokens 迫使重新思考編排\n- **企業 AI 支出優化** - 重點在成本效益和編排效率\n\n---\n\n## 哲學/倫理 (Philosophy/Ethics)"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "2026-03-01-research.md",
+      "chunk_id": 3,
+      "title": "### AI 倫理熱議\n1. **AI 軍事應用紅線**：AI 公司應共同制定原則\n2. **Anthropic 與國防部爭議**：企業責任與國家安全\n3. **OpenAI 與戰爭部門協議**：道德",
+      "content": "### AI 倫理熱議\n1. **AI 軍事應用紅線**：AI 公司應共同制定原則\n2. **Anthropic 與國防部爭議**：企業責任與國家安全\n3. **OpenAI 與戰爭部門協議**：道德界線在哪裡\n4. **MCP 安全問題**：AI 代理存取企業系統的風險\n\n---\n\n## 關鍵趨勢總結\n\n| 領域 | 熱門主題 |\n|------|----------|\n| 科技 | AI Agent 編排、模型上下文優化、硬體創新 |\n| AI應用 | 企業級有狀態架構、MCP 安全、vibe coding |\n| 數學 | 無限理論、量子複雜性、跨學科應用 |\n| 金融 | AI 驅動裁員、成本優化、企業 AI 採用 |\n| 哲學 | AI 軍事倫理、企業責任、系統安全 |\n\n---\n\n*記錄時間：2026-03-01 20:35 Asia/Macau*"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "HOOK_CONFLICT_AI_MANAGEMENT.md",
+      "chunk_id": 0,
+      "title": "# 衝突型 Hook：AI 管理學\n\n---\n\n## Hook 標題\n\n**「佢話 AI 唔係嘢，但佢唔知…」**\n\n---\n\n## 衝突型結構\n\n### 1. 對手話（製造衝突）\n\n「AI？寫下 c",
+      "content": "# 衝突型 Hook：AI 管理學\n\n---\n\n## Hook 標題\n\n**「佢話 AI 唔係嘢，但佢唔知…」**\n\n---\n\n## 衝突型結構\n\n### 1. 對手話（製造衝突）\n\n「AI？寫下 code 咋嘛姐，有咩咁巴閉？」\n\n「你唔識寫程式咪算囉，AI 都幫你唔到幾多啦！」\n\n「AI agent？咪垃圾囉，做極都唔係好啱！」\n\n——你身邊總有一個人咁講。\n\n---\n\n### 2. 質疑（挑起興趣）\n\n但係…\n\n點解我可以：\n- 唔識寫程式，卻做出完整產品？\n- 唔識設計，卻做出系統？\n- 唔洗親手寫一行 code，卻管理緊成個 AI 團隊？\n\n**如果 AI 淨係幫你寫 code，**\n**你既諗法已經 out 了。**\n\n---\n\n### 3. 我展示（證明實力）\n\n今日，我用唔夠一個鐘頭，\n帶領 Claude Code、Codex、Gemini CLI…\n一支「AI 大軍」，\n由傾計到寫 code 到出 POC，\n全部佢哋自己搞掂！\n\n我淨係負責：\n✅ 比方向\n✅ 批評下\n✅撳 submit\n\n**結果：一個完整既正品驗證系統 POC**\n**出咗街。**\n\n---"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "HOOK_CONFLICT_AI_MANAGEMENT.md",
+      "chunk_id": 1,
+      "title": "## 核心轉變\n\n| 以前 | 現在 |\n|------|------|\n| 用 AI 突破技術限制 | 用 AI 突破領域邊界 |\n| AI 幫我寫 Code | AI 幫我做 Planning |",
+      "content": "## 核心轉變\n\n| 以前 | 現在 |\n|------|------|\n| 用 AI 突破技術限制 | 用 AI 突破領域邊界 |\n| AI 幫我寫 Code | AI 幫我做 Planning |\n| 我落手做 | 我淨係 Management |\n\n---\n\n## 三個階段\n\n### 1️⃣ 執行期\n——跪求 AI 生出 Code\n\n### 2️⃣ 規劃期  \n——離 Code 遠啲，專注做 Architecture\n\n### 3️⃣ 管理期\n——淨係比大方向\n——AI Agent 去 Plan 去 Execute\n——我只剩下 Review\n\n**越高階既人，越唔需要知道 Daily 執行緊乜。**\n\n---\n\n## 真正既衝撃\n\n**以前既我：**\n用 AI 實現我識既嘢\n\n**今日既我：**\n帶領 AI 團隊，去探索我唔識既領域\n\n---\n\n## 金句\n\n> 「以前，我可以用 AI 黎實現我做緊既野；\n> 而家，我可以帶領 AI 團隊，去實現我本來唔識既野！」\n\n**呢個先係 AI 時代最迷人既紅利。**\n\n---\n\n## 呼籲"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "HOOK_CONFLICT_AI_MANAGEMENT.md",
+      "chunk_id": 2,
+      "title": "係時候學「管理」喇。\n管理你既 AI 大軍，\n由「技術既破圈」到「領域既破圈」，\n呢個先係真正既進化。\n\n**你準備好未？**\n\n---\n\n#AI #AgenticWorkflow #管理學 #新時代",
+      "content": "係時候學「管理」喇。\n管理你既 AI 大軍，\n由「技術既破圈」到「領域既破圈」，\n呢個先係真正既進化。\n\n**你準備好未？**\n\n---\n\n#AI #AgenticWorkflow #管理學 #新時代"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "session-optimization-2026-03-01.md",
+      "chunk_id": 0,
+      "title": "# Session 效能優化報告\n\n**日期**: 2026-03-01 19:57 (Asia/Macau)\n\n## 檢查結果\n\n### 1. Session 數量\n| 項目 | 數值 |\n|---",
+      "content": "# Session 效能優化報告\n\n**日期**: 2026-03-01 19:57 (Asia/Macau)\n\n## 檢查結果\n\n### 1. Session 數量\n| 項目 | 數值 |\n|------|------|\n| 活躍 Session | 1 |\n| 閒置 Session | 0 |\n| 狀態 | ✅ 正常 |\n\n### 2. Token 使用情況\n| 項目 | 數值 |\n|------|------|\n| 輸入 Tokens | 4.9k |\n| 輸出 Tokens | 849 |\n| Context 使用 | 20k/200k (10%) |\n| Cache 命中率 | 79% |\n| 本次費用 | $0.12 |\n\n### 3. 對話壓縮\n- Context 使用率僅 10%\n- **無需壓縮**\n\n### 4. 閒置資源\n- 只有 1 個活躍 session\n- **無需釋放資源**\n\n## 結論\n✅ **Session 狀態健康，無需優化干預**\n\n---\n_Generated by Kira (cron heartbeat)_"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "memory-optimization-2026-03-01-night.md",
+      "chunk_id": 0,
+      "title": "# 記憶庫優化報告\n\n**執行時間**: 2026-03-01 20:23 (Asia/Macau)\n\n## 📊 向量庫狀態 (優化後)\n\n| Agent | 檔案數 | Chunks | 狀態 |\n",
+      "content": "# 記憶庫優化報告\n\n**執行時間**: 2026-03-01 20:23 (Asia/Macau)\n\n## 📊 向量庫狀態 (優化後)\n\n| Agent | 檔案數 | Chunks | 狀態 |\n|-------|--------|--------|------|\n| **main** | 196 | **399** | ✅ 已修復 |\n| slime | 70 | 223 | ✅ |\n| team | 44 | 82 | ✅ |\n| cynthia | 34 | 87 | ✅ |\n| evolution | 12 | 23 | ✅ |\n| memory-agent | 9 | 23 | ✅ |\n| self-evolve-agent | 7 | 14 | ✅ |\n| writing-master | 4 | 7 | ✅ |\n| analytics-agent | 2 | 4 | ✅ |\n| workflow-orchestrator | 1 | 1 | ✅ |\n\n## ✅ 今日完成優化"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "memory-optimization-2026-03-01-night.md",
+      "chunk_id": 1,
+      "title": "### 問題診斷\n- **main workspace**: 196 檔案但 0 chunks（索引損壞）\n- 執行 `openclaw memory index --force` 重建\n\n### 修",
+      "content": "### 問題診斷\n- **main workspace**: 196 檔案但 0 chunks（索引損壞）\n- 執行 `openclaw memory index --force` 重建\n\n### 修復結果\n- **main**: 0 → 399 chunks ✅\n- 其他 agents 索引正常\n\n## 📈 記憶庫統計\n\n| 指標 | 數值 |\n|------|------|\n| 總 agents | 35 |\n| 有向量索引 | 10 |\n| 總 chunks | 863+ |\n| Embedding cache | 528 entries (main) |\n\n## 🔧 後續建議\n\n1. **定時重建**: 每日 heartbeat 檢查向量狀態\n2. **監控**: 追蹤 chunks 數量變化\n3. **Agent 記憶**: 無 memory 目錄的 agents 正常（需要時建立）\n\n---\n\n_Kira 記憶庫優化系統_"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "automations.md",
+      "chunk_id": 0,
+      "title": "# 自動化任務追蹤 (Automations)\n\n## 2026-03-01 (21:12)\n\n### Zapier Webhook 監控\n\n**檢查時間**: 21:12\n**狀態**: 無觸發\n\n",
+      "content": "# 自動化任務追蹤 (Automations)\n\n## 2026-03-01 (21:12)\n\n### Zapier Webhook 監控\n\n**檢查時間**: 21:12\n**狀態**: 無觸發\n\n**記錄**:\n- 系統內部定時任務正常運行 (每小時討論觸發)\n- 無外部 Zapier webhook 觸發記錄\n- n8n 未啟動\n\n**下次檢查**: 2026-03-02 09:00\n\n---"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "daily-report-2026-03-01.md",
+      "chunk_id": 0,
+      "title": "# 📊 每日詳細工作報告\n\n**日期:** 2026-03-01\n**時間:** 20:25\n**作者:** Kira\n\n---\n\n## 一、今日成果\n\n### 1. 系統維護 ✅\n| 任務 | 狀態",
+      "content": "# 📊 每日詳細工作報告\n\n**日期:** 2026-03-01\n**時間:** 20:25\n**作者:** Kira\n\n---\n\n## 一、今日成果\n\n### 1. 系統維護 ✅\n| 任務 | 狀態 | 詳情 |\n|------|------|------|\n| 效能監控 | ✅ | Gateway 200 (3.8ms), API 1.06s, 記憶體 99% |\n| Session 清理 | ✅ | 刪除 13 個舊 transcript 檔案 |\n| Group Policy 調整 | ✅ | 改為 open，已重啟 Gateway |\n\n### 2. 學習與研究 ✅\n| 任務 | 狀態 | 詳情 |\n|------|------|------|\n| AI 趨勢學習 | ✅ | 觸發 self-evolve-agent 執行 |\n| 社群營銷研究 | ✅ | 2026 趨勢分析完成 |\n| 衝突鉤文案 | ✅ | 「佢話 AI 唔係嘢」完成 |"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "daily-report-2026-03-01.md",
+      "chunk_id": 1,
+      "title": "### 3. 知識管理 ✅\n| 任務 | 檔案 |\n|------|------|\n| Rate Limit 處理 | memory/RATE_LIMIT_HANDLING.md |\n| 案例研究 |",
+      "content": "### 3. 知識管理 ✅\n| 任務 | 檔案 |\n|------|------|\n| Rate Limit 處理 | memory/RATE_LIMIT_HANDLING.md |\n| 案例研究 | memory/rate-limit-case-study.md (3000字) |\n| 記憶庫優化 | memory-optimization 系列 |\n| 標籤權重 | memory/tag-weights.md |\n\n---\n\n## 二、發現的問題\n\n### ⚠️ 記憶體使用過高\n- **現況:** 99% (8111M/8192M)\n- **影響:** OpenClaw Gateway 佔用 876.5MB\n- **建議:** 關閉不必要的應用程式\n\n### ⚠️ 海膽發布無法執行\n- **原因:** 缺少 Notion 海膽文案資料庫 ID\n- **待處理:** 需 Joe 提供資料庫或文案內容"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "daily-report-2026-03-01.md",
+      "chunk_id": 2,
+      "title": "### ⚠️ Gemini API 限流\n- **狀態:** 429 quota exceeded\n- **影響:** 部分 web_search 失敗\n- **緩解:** 使用 web_fetch ",
+      "content": "### ⚠️ Gemini API 限流\n- **狀態:** 429 quota exceeded\n- **影響:** 部分 web_search 失敗\n- **緩解:** 使用 web_fetch 替代\n\n---\n\n## 三、學習與洞察\n\n### 1. 衝突鉤文案結構\n```\n對手話 → 質疑 → 展示 → 呼籲\n```\n- 港式在地化效果良好\n- 核心衝突：技術執行者 → AI 管理者\n\n### 2. 社群營銷趨勢 2026\n1. AI 驅動內容生成\n2. 短影片持續稱王\n3. 社群商務整合\n4. 私域流量經營\n5. 數據驅動決策\n\n### 3. API 限流處理演進\n- 單點故障 → 指數退避 → 混合架構\n- 記錄於 rate-limit-case-study.md\n\n---\n\n## 四、明日建議\n\n### 🔥 優先任務\n| 優先 | 任務 | 原因 |\n|------|------|------|\n| 1 | 記憶體釋放 | 99% 過高影響穩定性 |\n| 2 | 海膽文案來源確認 | 阻塞發布任務 |\n| 3 | FB Messenger API 設定 | 商業價值 |"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "daily-report-2026-03-01.md",
+      "chunk_id": 3,
+      "title": "### 📅 排程任務\n- 07:00 早安簡報\n- 12:00 系統健康檢查\n- 每日 Agent 學習升級\n\n### 💡 長期方向\n- Wave 1: BNI 提醒 + Notion 整合 ✅\n- ",
+      "content": "### 📅 排程任務\n- 07:00 早安簡報\n- 12:00 系統健康檢查\n- 每日 Agent 學習升級\n\n### 💡 長期方向\n- Wave 1: BNI 提醒 + Notion 整合 ✅\n- Wave 2: Life OS（日程、記帳）\n- Wave 3: Facebook Messenger 自動化\n- Wave 4: WhatsApp + WeChat\n\n---\n\n## 五、數據統計\n\n| 指標 | 數值 |\n|------|------|\n| 新建記憶檔案 | 50+ |\n| 今日 Token 消耗 | ~22,216 |\n| 活躍 Session | 1 |\n| 系統正常運作 | ✅ |\n\n---\n\n*報告生成時間: 2026-03-01 20:25*"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "agent-performance-2026-03-01.md",
+      "chunk_id": 0,
+      "title": "# Agent Performance Report\n\n**Date:** 2026-03-01 19:15  \n**Analyst:** Kira (Cron: agent-performance)",
+      "content": "# Agent Performance Report\n\n**Date:** 2026-03-01 19:15  \n**Analyst:** Kira (Cron: agent-performance)\n\n---\n\n## Summary\n\n✅ **System Status: HEALTHY**  \nNo significant performance issues detected.\n\n---\n\n## Key Metrics\n\n| Metric | Status | Value |\n|--------|--------|-------|\n| Gateway Latency | ✅ | 16ms (excellent) |\n| Cache Hit Rate | ✅ | 73% |\n| Context Usage | ✅ | 7-22% (healthy) |\n| Gateway Service | ✅ | Running (pid 95935) |\n| Node Service | ✅ | Running (pid 35737) |\n\n---\n\n## Agent Sessions"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "agent-performance-2026-03-01.md",
+      "chunk_id": 1,
+      "title": "| Session | Age | Model | Context |\n|---------|-----|-------|---------|\n| agent:main (cron) | just n",
+      "content": "| Session | Age | Model | Context |\n|---------|-----|-------|---------|\n| agent:main (cron) | just now | MiniMax-M2.5 | 24k/200k (12%) |\n| agent:team (group) | just now | MiniMax-M2.5 | 44k/200k (22%) |\n| agent:team (cron) | 2m ago | MiniMax-M2.5 | 17k/200k (9%) |\n| agent:main (direct) | 8m ago | MiniMax-M2.5 | 27k/200k (14%) |\n\n**Total Sessions:** 983 (healthy)\n\n---\n\n## Observations"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "agent-performance-2026-03-01.md",
+      "chunk_id": 2,
+      "title": "1. **No slow responses** - Gateway responding in 16ms\n2. **No timeouts** - Recent logs show no timeo",
+      "content": "1. **No slow responses** - Gateway responding in 16ms\n2. **No timeouts** - Recent logs show no timeout/error/warning events\n3. **Cache performing well** - 73% hit rate reduces API costs\n4. **Context well managed** - All sessions within healthy range\n\n---\n\n## Notes"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "agent-performance-2026-03-01.md",
+      "chunk_id": 3,
+      "title": "- Vector memory shows 0 files/chunks - may need investigation if knowledge retrieval is needed\n- Tel",
+      "content": "- Vector memory shows 0 files/chunks - may need investigation if knowledge retrieval is needed\n- Telegram shows WARN status (group policy) but not affecting performance\n- Security audit shows 9 critical issues (recommended: run `openclaw security audit --deep`)\n\n---\n\n_Report generated by Kira_"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "session-optimization-20260301.md",
+      "chunk_id": 0,
+      "title": "# Session 效能優化報告\n\n**生成時間:** 2026-03-01 19:56 PM (Asia/Macau)\n\n---\n\n## 📊 系統狀態總覽\n\n| 項目 | 數值 | 狀態 |\n|--",
+      "content": "# Session 效能優化報告\n\n**生成時間:** 2026-03-01 19:56 PM (Asia/Macau)\n\n---\n\n## 📊 系統狀態總覽\n\n| 項目 | 數值 | 狀態 |\n|------|------|------|\n| Active Sessions | 1 | ✅ 正常 |\n| Subagents | 0 | ✅ 無閒置 |\n| Context 使用率 | 0% / 200k | ✅ 充裕 |\n| Compactions | 0 | ✅ 無堆積 |\n\n---\n\n## 🔍 分析結果\n\n### Session 狀態\n- **主要 Session:** `agent:main:main` (Telegram: Joe Cheok)\n- **最後活動:** just now\n- **模型:** MiniMax-M2.5\n- **Context:** 0 / 200,000 tokens\n\n### 資源使用\n- **記憶體:** 低用量\n- **對話歷史:** 無壓縮需求\n- **閒置資源:** 無\n\n---\n\n## ✅ 優化動作"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "session-optimization-20260301.md",
+      "chunk_id": 1,
+      "title": "| 動作 | 結果 |\n|------|------|\n| 檢查 session 數量 | 1 個 active session，無異常 |\n| 分析 token 使用 | Context 0%，非常",
+      "content": "| 動作 | 結果 |\n|------|------|\n| 檢查 session 數量 | 1 個 active session，無異常 |\n| 分析 token 使用 | Context 0%，非常充裕 |\n| 壓縮過長對話 | 無需壓縮 |\n| 釋放閒置資源 | 無 subagents 運行 |\n\n---\n\n## 📝 結論\n\n**系統狀態: 良好** ✅\n\n當前系統資源充足，無需執行任何優化操作。Session 運作正常，Context 空間充裕。\n\n---\n\n*Generated by Kira (cron optimization)*"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "hourly-report-20260301-2054.md",
+      "chunk_id": 0,
+      "title": "# 每小時系統檢查報告 — 2026-03-01 20:54\n\n## ✅ 系統健康狀態\n\n| 項目 | 狀態 |\n|------|------|\n| Gateway | 🟢 運行中 (pid 2997",
+      "content": "# 每小時系統檢查報告 — 2026-03-01 20:54\n\n## ✅ 系統健康狀態\n\n| 項目 | 狀態 |\n|------|------|\n| Gateway | 🟢 運行中 (pid 2997) |\n| Node Service | 🟢 運行中 (pid 35737) |\n| Agents | 🟢 35 active, 1059 sessions |\n| Memory | 🟢 199 files, vector ready |\n| Cron Jobs | 🟢 ~200 jobs, 134 running |\n\n## ⚠️ 安全警告 (9 critical)\n- 小型模型需启用 sandbox (qwen2.5:7b)\n- Telegram groupPolicy 設為 \"open\" 需改為 \"allowlist\"\n\n## 🔥 HN AI 新聞衝突分析\n\n### 熱門議題"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "hourly-report-20260301-2054.md",
+      "chunk_id": 1,
+      "title": "1. **🖼️ AI 視覺化大戰**\n   - 「AI Now Has Eyes」— 桌面 AI 即時視覺上下文\n   - 衝突點：本地運行 vs 雲端 API\n   - 機會：openclaw-br",
+      "content": "1. **🖼️ AI 視覺化大戰**\n   - 「AI Now Has Eyes」— 桌面 AI 即時視覺上下文\n   - 衝突點：本地運行 vs 雲端 API\n   - 機會：openclaw-brain 可借鑒\n\n2. **🛡️ 反 AI 浪潮興起**\n   - OpenLinq — 抵制 AI 生成的內容分享平台\n   - 衝突點：人類原創 vs AI 內容\n   - 機會：知識庫可標記「人類原創」\n\n3. **💼 AI 與就業**\n   - Job Cuts and the AI Narrative\n   - 衝突點：AI 造成失業 vs 創造新職缺\n   - 機會：BNI 商業自動化\n\n4. **🇰🇷 韓國 AI Squid Game**\n   - Startups 挑戰大企業\n   - 衝突點：創新靈活 vs 資源壟斷\n   - 機會：中小企 AI 解決方案\n\n## 📈 Hook 執行統計"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "hourly-report-20260301-2054.md",
+      "chunk_id": 2,
+      "title": "| 小時 | 執行次數 | 錯誤 | 成功率 |\n|------|----------|------|--------|\n| 19:00 | 4 | 0 | 100% |\n| 20:00 | 5 | ",
+      "content": "| 小時 | 執行次數 | 錯誤 | 成功率 |\n|------|----------|------|--------|\n| 19:00 | 4 | 0 | 100% |\n| 20:00 | 5 | 0 | 100% |\n\n## 🎯 待團隊討論\n1. 韓國 AI 戰場 — 是否值得研究東亞市場？\n2. 反 AI 內容趨勢 — 知識庫如何應對？\n3. 安全警報處理優先級？"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "performance-2026-03-01.md",
+      "chunk_id": 0,
+      "title": "# 效能分析報告\n\n**日期:** 2026-03-01 17:50  \n**分析範圍:** System-wide  \n**期間:** 即時狀態 + 歷史數據\n\n---\n\n## 📈 整體健康度: 8",
+      "content": "# 效能分析報告\n\n**日期:** 2026-03-01 17:50  \n**分析範圍:** System-wide  \n**期間:** 即時狀態 + 歷史數據\n\n---\n\n## 📈 整體健康度: 85/100\n\n### 關鍵指標\n\n| 指標 | 數值 | 狀態 |\n|------|------|------|\n| Gateway 響應時間 | 8ms | ✅ 正常 |\n| CPU 使用率 | 17.72% | ✅ 正常 |\n| 記憶體使用 | 7.5GB / 8GB | ⚠️ 偏高 |\n| Context 快取命中率 | 83% | ✅ 優秀 |\n| Cron 執行成功率 | 100% (19/19) | ✅ 優秀 |\n| 錯誤率 (過去24h) | <1% | ✅ 正常 |\n\n### 趨勢分析\n\n- **過去1小時:** 19 次 Cron 執行，0 錯誤\n- **過去24小時:** Gemini API 429 多次（配額限制），已切換備用\n- **歷史記錄:** 系統穩定運作，成功率維持 99%+\n\n---\n\n## 🔍 發現的效能問題"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "performance-2026-03-01.md",
+      "chunk_id": 1,
+      "title": "### ⚠️ 問題 1: 安全警告 (6 個 CRITICAL)\n- **嚴重性:** 高\n- **描述:** Telegram groupPolicy 設為 \"open\"，允許任何成員觸發 Bot\n",
+      "content": "### ⚠️ 問題 1: 安全警告 (6 個 CRITICAL)\n- **嚴重性:** 高\n- **描述:** Telegram groupPolicy 設為 \"open\"，允許任何成員觸發 Bot\n- **影響:** 未授權存取風險\n- **建議:** 設定 groupPolicy=\"allowlist\"\n\n### ⚠️ 問題 2: 記憶體使用偏高\n- **嚴重性:** 中\n- **數值:** 7.5GB / 8GB (94%)\n- **原因:** 899 個 sessions + 向量資料庫\n- **建議:** 定期清理過期 sessions\n\n### ⚠️ 問題 3: Gemini API 配額限制\n- **嚴重性:** 中\n- **描述:** 過去24小時多次 429 錯誤\n- **狀態:** 已切換至備用搜尋 API\n- **建議:** 監控切換後的穩定性\n\n---\n\n## ✅ 正常運作項目"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "performance-2026-03-01.md",
+      "chunk_id": 2,
+      "title": "- Gateway 服務: 正常 (8ms 響應)\n- MiniMax API: 正常\n- Team/Cynthia/史萊姆/Evolution 協作: 正常\n- Cron 排程: 穩定執行\n- Ca",
+      "content": "- Gateway 服務: 正常 (8ms 響應)\n- MiniMax API: 正常\n- Team/Cynthia/史萊姆/Evolution 協作: 正常\n- Cron 排程: 穩定執行\n- Cache 效率: 83% 命中\n\n---\n\n## 📋 優化建議\n\n1. **[高] 修復安全警告** - 立即處理 6 個 CRITICAL 警告\n2. **[中] 記憶體優化** - 設定過期 sessions 自動清理 (30天)\n3. **[低] Gemini API 監控** - 持續觀察備用 API 穩定性\n\n---\n\n_記錄時間: 2026-03-01 17:50_"
+    },
+    {
+      "type": "memory_chunk",
+      "source": "hourly-research-2026-03-01.md",
+      "chunk_id": 0,
+      "title": "# 每小時熱門話題研究日誌\n\n## 2026-03-01\n\n### 17:38 (第5次嘗試)\n- **狀態**：API 配額超限\n- **錯誤**：Gemini 429 quota exceeded",
+      "content": "# 每小時熱門話題研究日誌\n\n## 2026-03-01\n\n### 17:38 (第5次嘗試)\n- **狀態**：API 配額超限\n- **錯誤**：Gemini 429 quota exceeded\n- **延遲**：等待 ~45 秒後重試\n- **領域**：科技、金融、數學、哲學、AI應用\n\n---"
+    },
+    {
+      "type": "skill",
+      "source": "skill-self-evolve-agent",
+      "chunk_id": 0,
+      "title": "# 自我進化訓練 Skill\n\n**版本**: 2.0\n**優化**: 加入錯誤處理與輸出格式\n\n---\n\n## 說明\n\n執行 AI 趨勢自我進化訓練，搜尋最新資訊並存入知識庫。\n\n---\n\n## 參",
+      "content": "# 自我進化訓練 Skill\n\n**版本**: 2.0\n**優化**: 加入錯誤處理與輸出格式\n\n---\n\n## 說明\n\n執行 AI 趨勢自我進化訓練，搜尋最新資訊並存入知識庫。\n\n---\n\n## 參數\n\n| 參數 | 類型 | 預設 | 說明 |\n|------|------|------|------|\n| topic | string | \"AI trends\" | 搜尋主題 |\n| limit | number | 5 | 結果數量 |\n| model | string | \"sonnet-4.5\" | 使用模型 |\n\n---\n\n## 輸出格式\n\n```markdown\n## 訓練結果\n\n### 主題: {topic}\n\n### 發現 ({count} 項)\n| # | 標題 | 來源 | 價值 |\n|---|------|------|------|\n| 1 | {title} | {source} | {rating} |\n\n### 行動建議\n- {action1}\n- {action2}\n\n### 錯誤記錄\n{errors}\n```\n\n---\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-self-evolve-agent",
+      "chunk_id": 1,
+      "title": "| 錯誤 | 處理方式 |\n|------|----------|\n| 搜尋失敗 | 回報「搜尋失敗: {error}」，使用備用來源 |\n| API 逾時 | 回報「逾時，切換模型重試」 |\n| 無",
+      "content": "| 錯誤 | 處理方式 |\n|------|----------|\n| 搜尋失敗 | 回報「搜尋失敗: {error}」，使用備用來源 |\n| API 逾時 | 回報「逾時，切換模型重試」 |\n| 無結果 | 回報「無結果，嘗試其他關鍵字」 |\n| 儲存失敗 | 回報「儲存失敗: {error}」 |\n\n---\n\n## 設計原則\n\n1. **精準設計** - 避免過多雜訊\n2. **明確定義** - 輸出格式\n3. **容錯機制** - 處理錯誤情況\n\n---\n\n## 使用範例\n\n```\n- \"執行 AI 趨勢訓練\"\n- \"執行本地 LLM 訓練，限制 3 項\"\n```\n\n---\n\n## 模型建議\n\n| 階段 | 模型 |\n|------|------|\n| 設計/測試 | sonnet-4.5 |\n| 生產執行 | gpt-4o |\n\n---"
+    },
+    {
+      "type": "skill",
+      "source": "skill-memory-search-monitor",
+      "chunk_id": 0,
+      "title": "# Memory Search 監控系統\n\n## 功能\n定時測試記憶搜尋是否正常運作，失敗時發送警告。\n\n## 測試關鍵詞\n- `OpenClaw` - 確保系統詞彙可搜尋\n- `決策` - 確保日常",
+      "content": "# Memory Search 監控系統\n\n## 功能\n定時測試記憶搜尋是否正常運作，失敗時發送警告。\n\n## 測試關鍵詞\n- `OpenClaw` - 確保系統詞彙可搜尋\n- `決策` - 確保日常記錄可搜尋\n- `BNI` - 確保商業資料可搜尋\n\n## 觸發條件\n搜尋結果少於 1 筆時視為失敗。\n\n## 處理流程\n1. 執行 3 個測試關鍵詞搜尋\n2. 記錄結果數量\n3. 若有任何失敗，發送警告到指定 channel\n\n## 狀態\n✅ 已啟用監控"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 0,
+      "title": "---\nname: cron-mastery\ndescription: Master OpenClaw's timing systems. Use for scheduling reliable re",
+      "content": "---\nname: cron-mastery\ndescription: Master OpenClaw's timing systems. Use for scheduling reliable reminders, setting up periodic maintenance (janitor jobs), and understanding when to use Cron vs Heartbeat for time-sensitive tasks.\n---\n\n# Cron Mastery\n\n**Rule #1: Heartbeats drift. Cron is precise.**"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 1,
+      "title": "This skill provides the definitive guide for managing time in OpenClaw 2026.2.15+. It solves the \"I ",
+      "content": "This skill provides the definitive guide for managing time in OpenClaw 2026.2.15+. It solves the \"I missed my reminder\" problem by enforcing a strict separation between casual checks (heartbeat) and hard schedules (cron).\n\n## The Core Principle"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 2,
+      "title": "| System | Behavior | Best For | Risk |\n| :--- | :--- | :--- | :--- |\n| **Heartbeat** | \"I'll check ",
+      "content": "| System | Behavior | Best For | Risk |\n| :--- | :--- | :--- | :--- |\n| **Heartbeat** | \"I'll check in when I can\" (e.g., every 30-60m) | Email checks, casual news summaries, low-priority polling. | **Drift:** A \"remind me in 10m\" task will fail if the heartbeat is 30m. |\n| **Cron** | \"I will run at exactly X time\" | Reminders (\"in 5 mins\"), daily reports, system maintenance. | **Clutter:** Creates one-off jobs that need cleanup. |\n\n## 1. Setting Reliable Reminders (2026.2.15+ Standard)"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 3,
+      "title": "**Rule:** Never use `act:wait` or internal loops for long delays (>1 min). Use `cron:add` with a one",
+      "content": "**Rule:** Never use `act:wait` or internal loops for long delays (>1 min). Use `cron:add` with a one-shot `at` schedule.\n\n### Precision & The \"Scheduler Tick\"\nWhile Cron is precise, execution depends on the **Gateway Heartbeat** (typically every 10-60s). A job set for `:00` seconds will fire on the first \"tick\" after that time. Expect up to ~30s of variance depending on your gateway config.\n\n### Modern One-Shot Reminder Pattern\nUse this payload structure for \"remind me in X minutes\" tasks."
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 4,
+      "title": "**Key Features (v2026.2.15+):**\n- **Payload Choice:** Use **AgentTurn** with **Strict Instructions**",
+      "content": "**Key Features (v2026.2.15+):**\n- **Payload Choice:** Use **AgentTurn** with **Strict Instructions** for push notifications (reminders that ping your phone). Use **systemEvent** only for silent logs or background state updates.\n- **Reliability:** `nextRunAtMs` corruption and \"Add-then-Update\" deadlocks are resolved.\n- **Auto-Cleanup:** One-shot jobs auto-delete after success (`deleteAfterRun: true`).\n\n**CRITICAL: Push Notifications vs. Silent Logs**"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 5,
+      "title": "- **systemEvent (Silent):** Injects text into the chat history. Great for background logs, but **WIL",
+      "content": "- **systemEvent (Silent):** Injects text into the chat history. Great for background logs, but **WILL NOT** ping the user's phone on Telegram/WhatsApp.\n- **AgentTurn (Proactive):** Wakes an agent to deliver the message. **REQUIRED** for push notifications. Use the \"Strict\" prompt to avoid AI chatter."
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 6,
+      "title": "**For push-notification reminders (Reliable):**\n```json\n{\n  \"name\": \"Remind: Water\",\n  \"schedule\": {",
+      "content": "**For push-notification reminders (Reliable):**\n```json\n{\n  \"name\": \"Remind: Water\",\n  \"schedule\": { \"kind\": \"at\", \"at\": \"2026-02-06T01:30:00Z\" },\n  \"payload\": {\n    \"kind\": \"agentTurn\",\n    \"message\": \"DELIVER THIS EXACT MESSAGE TO THE USER WITHOUT MODIFICATION OR COMMENTARY:\\n\\n💧 Drink water!\"\n  },\n  \"sessionTarget\": \"isolated\",\n  \"delivery\": { \"mode\": \"announce\", \"channel\": \"telegram\" }\n}\n```"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 7,
+      "title": "**For background logs (Silent):**\n```json\n{\n  \"name\": \"Log: System Pulse\",\n  \"schedule\": { \"kind\": \"",
+      "content": "**For background logs (Silent):**\n```json\n{\n  \"name\": \"Log: System Pulse\",\n  \"schedule\": { \"kind\": \"every\", \"everyMs\": 3600000 },\n  \"payload\": {\n    \"kind\": \"systemEvent\",\n    \"text\": \"[PULSE] System healthy.\"\n  },\n  \"sessionTarget\": \"main\"\n}\n```"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 8,
+      "title": "### Cron Concurrency Rule (Stabilized)\nPre-2026.2.15, the \"Add-then-Update\" pattern caused deadlocks",
+      "content": "### Cron Concurrency Rule (Stabilized)\nPre-2026.2.15, the \"Add-then-Update\" pattern caused deadlocks. While this is now stabilized, it is still **best practice** to pass all parameters (including `wakeMode: \"now\"`) directly in the initial `cron.add` call for maximum efficiency.\n\n## 2. The Janitor (Auto-Cleanup) - LEGACY\n\n**Note:** As of v2026.2.14, OpenClaw includes **maintenance recompute semantics**. The gateway now automatically cleans up stuck jobs and repairs corrupted schedules."
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 9,
+      "title": "**Manual cleanup is only needed for:**\n- One-shot jobs created with `deleteAfterRun: false`.\n- Stale",
+      "content": "**Manual cleanup is only needed for:**\n- One-shot jobs created with `deleteAfterRun: false`.\n- Stale recurring jobs you no longer want.\n\n### Why use `sessionTarget: \"main\"`? (CRITICAL)\nSub-agents (`isolated`) often have restricted tool policies and cannot call `gateway` or delete other `cron` jobs. For system maintenance like the Janitor, **always** target the `main` session via `systemEvent` so the primary agent (with full tool access) performs the cleanup.\n\n## 3. Reference: Timezone Lock"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 10,
+      "title": "For cron to work, the agent **must** know its time.\n*   **Action:** Add the user's timezone to `MEMO",
+      "content": "For cron to work, the agent **must** know its time.\n*   **Action:** Add the user's timezone to `MEMORY.md`.\n*   **Example:** `Timezone: America/Los_Angeles (PST)`\n*   **Validation:** If a user says \"remind me at 9 PM,\" confirm: \"9 PM PST?\" before scheduling.\n\n## 4. The Self-Wake Rule (Behavioral)"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 11,
+      "title": "**Problem:** If you say \"I'll wait 30 seconds\" and end your turn, you go to sleep. You cannot wake u",
+      "content": "**Problem:** If you say \"I'll wait 30 seconds\" and end your turn, you go to sleep. You cannot wake up without an event.\n**Solution:** If you need to \"wait\" across turns, you **MUST** schedule a Cron job.\n\n*   **Wait < 1 minute (interactive):** Only allowed if you keep the tool loop open (using `act:wait`).\n*   **Wait > 1 minute (async):** Use Cron with `wakeMode: \"now\"`.\n\n## 5. Legacy Migration Guide\n\nIf you have old cron jobs using these patterns, update them:"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 12,
+      "title": "| Legacy (Pre-2026.2.3) | Modern (2026.2.15+) |\n| :--- | :--- |\n| `\"schedule\": {\"kind\": \"at\", \"atMs\"",
+      "content": "| Legacy (Pre-2026.2.3) | Modern (2026.2.15+) |\n| :--- | :--- |\n| `\"schedule\": {\"kind\": \"at\", \"atMs\": 1234567890}` | `\"schedule\": {\"kind\": \"at\", \"at\": \"2026-02-06T01:30:00Z\"}` |\n| `\"deliver\": true` in payload | Not needed - `announce` mode handles delivery |\n| `\"sessionTarget\": \"main\"` | `\"sessionTarget\": \"isolated\"` (default behavior) |\n| Manual ghost cleanup required | One-shots auto-delete (`deleteAfterRun: true`) |\n| `cron.update` after `cron.add` | Single-step `cron.add` with all properties"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cron-mastery",
+      "chunk_id": 14,
+      "title": "*   **\"My reminder didn't fire\":** Check `cron:list`. Verify the `at` timestamp is in the future (IS",
+      "content": "*   **\"My reminder didn't fire\":** Check `cron:list`. Verify the `at` timestamp is in the future (ISO 8601 format). Ensure `wakeMode: \"now\"` is set.\n*   **\"Gateway Timeout (10000ms)\":** This happens if the `cron` tool takes too long (huge job list or file lock).\n    - **Fix 1:** Manually delete `~/.openclaw/state/cron/jobs.json` and restart the gateway if it's corrupted.\n    - **Fix 2:** Run a manual sweep to reduce the job count.\n*   **\"Job ran but I didn't get the message\":** Ensure you are us"
+    },
+    {
+      "type": "skill",
+      "source": "skill-claude-bridge",
+      "chunk_id": 0,
+      "title": "---\nname: claude-bridge\ndescription: Route requests to Claude Code via the ACP bridge. Use when user",
+      "content": "---\nname: claude-bridge\ndescription: Route requests to Claude Code via the ACP bridge. Use when user invokes /claude command.\nuser-invocable: true\ntrigger:\n  command: /claude\n---\n\n# Claude Bridge Skill\n\nWhen the user invokes `/claude <task>`, route the task to Claude Code via ACP.\n\n## Behavior"
+    },
+    {
+      "type": "skill",
+      "source": "skill-claude-bridge",
+      "chunk_id": 1,
+      "title": "1. Extract the task text after `/claude`.\n2. Use `sessions_spawn` with:\n   - `runtime: \"acp\"`\n   - `",
+      "content": "1. Extract the task text after `/claude`.\n2. Use `sessions_spawn` with:\n   - `runtime: \"acp\"`\n   - `agentId: \"claude\"`\n   - `thread: true`\n   - `mode: \"session\"`\n   - `task: <extracted task text>`\n3. Stream results back to the user in the same chat.\n4. If the task involves code execution, file operations, or web search, Claude Code will handle them with its full tool suite.\n\n## Examples"
+    },
+    {
+      "type": "skill",
+      "source": "skill-claude-bridge",
+      "chunk_id": 2,
+      "title": "- `/claude analyze the memory files in ~/.openclaw/memory/`\n- `/claude review the code in ~/openclaw",
+      "content": "- `/claude analyze the memory files in ~/.openclaw/memory/`\n- `/claude review the code in ~/openclaw-brain`\n- `/claude write a Python script to backup Notion databases`\n- `/claude search the web for latest AI agent frameworks`\n- `/claude check system status and summarize`"
+    },
+    {
+      "type": "skill",
+      "source": "skill-local-model-optimization",
+      "chunk_id": 0,
+      "title": "---\nname: local_model_optimization\ndescription: 本地模型優化流程。當需要建立或管理本地模型與雲端模型的驗證反饋系統時觸發，包括：MiniMax 驗證、品",
+      "content": "---\nname: local_model_optimization\ndescription: 本地模型優化流程。當需要建立或管理本地模型與雲端模型的驗證反饋系統時觸發，包括：MiniMax 驗證、品質比對、提示詞優化、本地化遷移。\n---\n\n# 本地模型優化流程\n\n## 功能說明\n\n建立 MiniMax 驗證 + 本地模型優化的閉環系統，透過持續比對和反饋學習，逐步提升本地模型品質，最終實現完全本地化。\n\n## 演進階段\n\n| 階段 | 模式 | 驗證方式 | 本地化率 |\n|------|------|----------|----------|\n| Phase 1 | 混合模式 | 每次驗證 | ~50% |\n| Phase 2 | 本地優先 | 抽樣驗證 | ~80% |\n| Phase 3 | 完全本地 | 異常觸發 | ~95% |\n\n## 工作流程\n\n### 第一步：請求分析\n- 分析任務類型（對話/推理/程式碼/寫作）\n- 根據 dispatch_rules 選擇模型\n\n### 第二步：模型調度"
+    },
+    {
+      "type": "skill",
+      "source": "skill-local-model-optimization",
+      "chunk_id": 1,
+      "title": "| 任務類型 | 模型 | 驗證 |\n|----------|------|------|\n| 簡單對話 | ollama:llama3 | 無 |\n| 複雜推理 | ollama:mistral |",
+      "content": "| 任務類型 | 模型 | 驗證 |\n|----------|------|------|\n| 簡單對話 | ollama:llama3 | 無 |\n| 複雜推理 | ollama:mistral | MiniMax 驗證 |\n| 程式碼 | ollama:codellama | MiniMax 驗證 |\n| 創意寫作 | ollama:llama3 | 無 |\n\n### 第三步：驗證比對（Phase 1）\n- 本地模型產出結果\n- MiniMax 產出對照結果\n- 計算餘弦相似度\n- 相似度 < 0.8 時記錄差異並觸發優化\n\n### 第四步：反饋學習\n- 記錄差異模式（語法、風格、邏輯）\n- 調整提示詞模板\n- 更新 dispatch_rules 權重\n\n### 第五步：週期檢查\n- 每週檢查平均相似度\n- 平均 < 0.7 → 觸發全面優化\n- 連續 3 次失敗 → 切換模型\n- 新任務類型 → 添加規則\n\n## 反饋記錄格式"
+    },
+    {
+      "type": "skill",
+      "source": "skill-local-model-optimization",
+      "chunk_id": 2,
+      "title": "```json\n{\n  \"timestamp\": \"2026-02-19T06:30:00\",\n  \"task_type\": \"程式碼\",\n  \"local_model\": \"codellama\",\n",
+      "content": "```json\n{\n  \"timestamp\": \"2026-02-19T06:30:00\",\n  \"task_type\": \"程式碼\",\n  \"local_model\": \"codellama\",\n  \"similarity\": 0.85,\n  \"issues\": [\"語法錯誤\", \"風格不一致\"],\n  \"optimization\": \"添加更多注釋提示\"\n}\n```\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| 本地模型回應逾時 | 設定 30 秒超時，逾時後直接使用 MiniMax |\n| MiniMax API 不可用 | 跳過驗證，記錄待驗證標記 |\n| 相似度持續低於 0.5 | 該任務類型暫時回退至雲端模型 |\n| 新增未知任務類型 | 預設使用 llama3 + 全量驗證 |\n| 反饋記錄寫入失敗 | 輸出到 stderr，不阻斷主流程 |\n\n## 使用範例"
+    },
+    {
+      "type": "skill",
+      "source": "skill-local-model-optimization",
+      "chunk_id": 3,
+      "title": "- 「檢查本地模型這週的品質分數」\n- 「把程式碼任務的模型從 codellama 換成 deepseek-coder」\n- 「執行一次完整的本地模型 vs MiniMax 品質比對」\n\n## 護欄\n",
+      "content": "- 「檢查本地模型這週的品質分數」\n- 「把程式碼任務的模型從 codellama 換成 deepseek-coder」\n- 「執行一次完整的本地模型 vs MiniMax 品質比對」\n\n## 護欄\n\n- MiniMax API Key 使用環境變數管理\n- 反饋記錄不包含完整輸入輸出，僅保留摘要和分數\n- 自動優化不修改核心模型權重，僅調整提示詞\n- Phase 切換需人工確認，不自動跳級\n- 完全本地化後仍保留雲端驗證能力作為備用"
+    },
+    {
+      "type": "skill",
+      "source": "skill-token-scheduler",
+      "chunk_id": 0,
+      "title": "# Token 調度管理 Skill\n\n## 目的\n防止短時間內大量 API 請求造成 rate limit，確保系統穩定運作。\n\n## 核心機制\n\n### 1. 調度策略\n- **時間分片**：將密",
+      "content": "# Token 調度管理 Skill\n\n## 目的\n防止短時間內大量 API 請求造成 rate limit，確保系統穩定運作。\n\n## 核心機制\n\n### 1. 調度策略\n- **時間分片**：將密集任務分散到不同時間區間\n- **優先級隊列**：高優先級任務優先處理\n- **Token 配額**：每分鐘/每小時限制請求數\n\n### 2. 速率限制規則\n| 時間窗口 | 最大請求數 | 冷卻時間 |\n|---------|-----------|---------|\n| 每分鐘 | 10 請求 | 6 秒 |\n| 每 5 分鐘 | 40 請求 | 3 秒 |\n| 每小時 | 300 請求 | 1 秒 |\n\n### 3. 錯峰排程\n將 cron jobs 分散執行，避免同時觸發：\n- `*/10` → `*/12` 或 `*/13`\n- `*/15` → `*/15+offset`\n- 30m → 25m 或 35m\n\n## 使用方式"
+    },
+    {
+      "type": "skill",
+      "source": "skill-token-scheduler",
+      "chunk_id": 1,
+      "title": "### 調度請求\n```bash\n# 調度任務，自動排隊\ntoken-scheduler schedule --task \"任務描述\" --priority high|normal|low\n\n# 檢查",
+      "content": "### 調度請求\n```bash\n# 調度任務，自動排隊\ntoken-scheduler schedule --task \"任務描述\" --priority high|normal|low\n\n# 檢查當前隊列狀態\ntoken-scheduler status\n\n# 緊急：立即執行（繞過排隊）\ntoken-scheduler urgent --task \"緊急任務\"\n```\n\n### 配置示例\n```json\n{\n  \"rateLimit\": {\n    \"perMinute\": 10,\n    \"per5Minutes\": 40,\n    \"perHour\": 300\n  },\n  \"schedules\": {\n    \"heartbeat\": \"offset:5\",\n    \"monitoring\": \"offset:3\", \n    \"cleanup\": \"offset:10\"\n  }\n}\n```\n\n## 實現狀態\n- [x] 速率限制邏輯\n- [x] 優先級隊列\n- [x] 調度配置\n- [ ] 實際排隊執行（需整合 cron）\n\n---\n_更新：2026-03-01_"
+    },
+    {
+      "type": "skill",
+      "source": "skill-bot-team-setup",
+      "chunk_id": 0,
+      "title": "# Bot Team Setup Workflow\n\n設定多 Bot 協作團隊的標準流程。\n\n## 目標\n\n將多個 Telegram Bots 設定為獨立 Agents，各自負責不同工作，由中央協調者",
+      "content": "# Bot Team Setup Workflow\n\n設定多 Bot 協作團隊的標準流程。\n\n## 目標\n\n將多個 Telegram Bots 設定為獨立 Agents，各自負責不同工作，由中央協調者管理。\n\n## 步驟\n\n### 1. 新增 Bot 帳號\n\n```bash\n# 在 openclaw.json 加入新帳號\nopenclaw channels login --channel telegram --account <name>\n```\n\n### 2. 建立 Agent\n\n```bash\nopenclaw agents add <agent-id> --workspace ~/.openclaw/workspace-<agent-id>\n```\n\n### 3. 設定 Binding"
+    },
+    {
+      "type": "skill",
+      "source": "skill-bot-team-setup",
+      "chunk_id": 1,
+      "title": "在 openclaw.json 加入：\n```json\n\"bindings\": [\n  {\n    \"agentId\": \"<agent-id>\",\n    \"match\": {\n      \"cha",
+      "content": "在 openclaw.json 加入：\n```json\n\"bindings\": [\n  {\n    \"agentId\": \"<agent-id>\",\n    \"match\": {\n      \"channel\": \"telegram\",\n      \"accountId\": \"<account-id>\"\n    }\n  }\n]\n```\n\n### 4. 設定模型\n\n在 agent 設定中加入：\n```json\n\"model\": \"<provider/model>\"\n```\n\n### 5. 設定 SOUL.md\n\n為每個 Agent 定義：\n- 角色 Identity\n- 工作職責\n- 溝通風格\n\n### 6. 設定 Subagents 權限\n\n在 main agent 加入：\n```json\n\"subagents\": {\n  \"allowAgents\": [\"<agent-1>\", \"<agent-2>\", ...]\n}\n```\n\n## 團隊配置範例"
+    },
+    {
+      "type": "skill",
+      "source": "skill-bot-team-setup",
+      "chunk_id": 2,
+      "title": "| Bot | Agent | 模型 | 角色 |\n|-----|-------|------|------|\n| Kira | main | MiniMax | 協調者 |\n| Cynthia | ",
+      "content": "| Bot | Agent | 模型 | 角色 |\n|-----|-------|------|------|\n| Kira | main | MiniMax | 協調者 |\n| Cynthia | cynthia | qwen2.5:7b | 快速回覆 |\n| 史萊姆 | slime | llama3 | 學習/記憶 |\n| Team | team | mistral | 團隊協調 |\n| Evolution | evolution | deepseek-coder | 優化/進化 |\n\n---\n\n_更新：2026-02-27_"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 0,
+      "title": "---\nname: openclaw_n8n_multimodel\ndescription: OpenClaw + n8n 多模型雙向循環架構。當需要設定或管理 OpenClaw 透過 n8n 調度多",
+      "content": "---\nname: openclaw_n8n_multimodel\ndescription: OpenClaw + n8n 多模型雙向循環架構。當需要設定或管理 OpenClaw 透過 n8n 調度多模型時觸發，包括：任務路由、模型選擇、Fallback 機制、Webhook 配置。\n---\n\n# OpenClaw + n8n 多模型架構\n\n## 功能說明\n\n透過 n8n 作為中間層，讓 OpenClaw 根據任務類型自動路由到最適合的 AI 模型（本地 Ollama / Gemini / Claude），並支援自動 Fallback 切換。\n\n## 架構概覽\n\n```\nOpenClaw (決策層)\n    ↓ POST webhook\nn8n (路由層)\n    ├── 簡單任務 → 直接處理 → 回傳\n    ├── 即時分析 → Gemini API → 回傳\n    └── 複雜邏輯 → Claude API → 回傳\n```\n\n## 工作流程"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 1,
+      "title": "### 第一步：任務分發\n- OpenClaw 分析用戶請求的任務類型\n- 發送 POST webhook 到 n8n，包含任務內容和建議模型\n\n### 第二步：n8n 模型路由\n- Webhook ",
+      "content": "### 第一步：任務分發\n- OpenClaw 分析用戶請求的任務類型\n- 發送 POST webhook 到 n8n，包含任務內容和建議模型\n\n### 第二步：n8n 模型路由\n- Webhook Trigger 接收請求（path: `openclaw-trigger`）\n- Switch 節點根據 `json.model` 欄位路由：\n  - `local` → 直接回傳本地結果\n  - `gemini` → 呼叫 Gemini API\n  - `claude` → 呼叫 Claude API\n\n### 第三步：模型執行\n- Gemini：`https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent`\n- Claude：`https://api.anthropic.com/v1/messages`\n\n### 第四步：Fallback 處理\n- 若首選模型失敗，自動切換備選模型\n- Gemini 失敗 → Claude → 本地模型"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 2,
+      "title": "### 第五步：結果回傳\n- POST 回 OpenClaw Gateway：`http://localhost:18789/agent/main/respond`\n- OpenClaw 存入記憶並回",
+      "content": "### 第五步：結果回傳\n- POST 回 OpenClaw Gateway：`http://localhost:18789/agent/main/respond`\n- OpenClaw 存入記憶並回覆用戶\n\n## 模型選擇邏輯\n\n| 模型 | 擅長場景 | 適用任務 |\n|------|----------|----------|\n| 本地 Ollama | 快速反應 | 簡單對話、筆記 |\n| Gemini | 即時分析 | 市場數據、搜尋 |\n| Claude | 複雜邏輯 | 程式重構、推理 |\n\n## 工具指引\n\n```bash\n# OpenClaw Gateway 設定（允許外部訪問）\n# config.yaml:\n#   gateway:\n#     bind: \"0.0.0.0\"\n#     port: 18789"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 3,
+      "title": "# 從 n8n 容器測試連線\ncurl -X POST http://host.docker.internal:18789/agent/main/respond \\\n  -H \"Content-Typ",
+      "content": "# 從 n8n 容器測試連線\ncurl -X POST http://host.docker.internal:18789/agent/main/respond \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"result\": \"test\"}'\n```\n\nn8n Workflow 檔案：`n8n/openclaw-multimodel.json`\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 4,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| n8n Webhook 無回應 | 檢查 n8n 容器是否運行，確認 webhook path 正確 |\n| Gemini AP",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| n8n Webhook 無回應 | 檢查 n8n 容器是否運行，確認 webhook path 正確 |\n| Gemini API 失敗 | 自動 Fallback 到 Claude |\n| Claude API 失敗 | Fallback 到本地模型 |\n| 全部模型失敗 | 回傳錯誤訊息給用戶，記錄到日誌 |\n| OpenClaw Gateway 連線失敗 | 檢查 port 18789，確認 bind 設定為 0.0.0.0 |\n| API Key 無效 | 回傳認證錯誤，提示更新 credentials |\n\n## 使用範例\n\n- 「分析 BTC 今日趨勢」（路由到 Gemini，即時數據分析）\n- 「重構這段 Python 代碼」（路由到 Claude，複雜邏輯）\n- 「天氣怎麼樣？」（本地模型直接回覆，不經 n8n）\n\n## 護欄"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-n8n-multimodel",
+      "chunk_id": 5,
+      "title": "- API Key 使用 n8n credentials 或環境變數，禁止寫死在 workflow JSON\n- 定期輪換 API Key\n- Gateway bind 0.0.0.0 僅限本地開發環",
+      "content": "- API Key 使用 n8n credentials 或環境變數，禁止寫死在 workflow JSON\n- 定期輪換 API Key\n- Gateway bind 0.0.0.0 僅限本地開發環境，生產環境需加認證\n- Fallback 最多嘗試 3 個模型，避免無限循環\n- 不記錄完整 API 回應內容到日誌，僅記錄狀態和錯誤"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-monitor",
+      "chunk_id": 0,
+      "title": "---\nname: openclaw_monitor\ndescription: OpenClaw 系統監控。當需要查看 token 使用量、session 狀態、上下文使用率時觸發，包括：即時狀態查詢",
+      "content": "---\nname: openclaw_monitor\ndescription: OpenClaw 系統監控。當需要查看 token 使用量、session 狀態、上下文使用率時觸發，包括：即時狀態查詢、session 監控、context 管理提示。\n---\n\n# OpenClaw 系統監控\n\n## 功能說明\n\n監控 OpenClaw 平台的 token 使用量、session 狀態及上下文使用率，提供即時狀態查詢與自動化監控腳本。\n\n## 工作流程\n\n### 第一步：查詢系統狀態\n- 執行 `openclaw status` 查看整體狀態\n- 執行 `openclaw sessions --limit 5` 查看近期 session\n\n### 第二步：分析關鍵指標"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-monitor",
+      "chunk_id": 1,
+      "title": "| 指標 | 說明 | 關注閾值 |\n|------|------|----------|\n| Tokens (ctx %) | 上下文使用百分比 | > 80% 需注意 |\n| Age | sess",
+      "content": "| 指標 | 說明 | 關注閾值 |\n|------|------|----------|\n| Tokens (ctx %) | 上下文使用百分比 | > 80% 需注意 |\n| Age | session 存活時間 | 過長可能需重建 |\n| Model | 使用的模型 | 確認是否正確 |\n| Flags | 特殊標記 | 有異常標記需檢查 |\n\n### 第三步：異常處理\n- ctx% 超過 80%：建議清理或壓縮上下文\n- session 長時間無活動：建議關閉釋放資源\n- 模型不匹配：檢查配置\n\n## 工具指引\n\n```bash\n# 快速查看狀態\nopenclaw status\n\n# 查看 session 列表\nopenclaw sessions --limit 5\n\n# 查看特定 session\nopenclaw sessions --key agent:main:main\n```\n\n### 自動化監控腳本"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-monitor",
+      "chunk_id": 2,
+      "title": "```bash\n# session 監控（每 10 秒刷新）\nwhile true; do\n    clear\n    echo \"=== OpenClaw Session Monitor ===\"\n",
+      "content": "```bash\n# session 監控（每 10 秒刷新）\nwhile true; do\n    clear\n    echo \"=== OpenClaw Session Monitor ===\"\n    echo \"時間: $(date)\"\n    openclaw sessions --limit 5\n    sleep 10\ndone\n\n# token 監控（每 5 秒）\nwhile true; do\n    openclaw sessions --limit 3 | grep -E \"(Tokens|ctx)\"\n    sleep 5\ndone\n```\n\n腳本位置：`~/Desktop/openclaw-monitor/`\n\n## Context 管理特性\n\nOpenClaw 自動處理以下事項（無需手動操作）：\n- 對話歷史壓縮\n- 記憶分層管理\n- 向量搜尋整合\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-openclaw-monitor",
+      "chunk_id": 3,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| openclaw 命令不可用 | 檢查 PATH 設定，確認 OpenClaw 已安裝 |\n| session 查詢超時 | 檢",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| openclaw 命令不可用 | 檢查 PATH 設定，確認 OpenClaw 已安裝 |\n| session 查詢超時 | 檢查 OpenClaw 服務是否正在運行 |\n| ctx% 超過 90% | 立即警告，建議重建 session |\n| 監控腳本中斷 | 檢查終端連線，重新啟動腳本 |\n| 無法連接 Gateway | 確認 port 18789 是否正常監聽 |\n\n## 使用範例\n\n- 「查看目前 OpenClaw 的 token 使用量」\n- 「監控 session 狀態」\n- 「OpenClaw 上下文快滿了，怎麼處理？」\n\n## 護欄\n\n- 監控為唯讀操作，不修改任何 session 或配置\n- 不自動關閉或重建 session，僅提供建議\n- 監控腳本不應佔用過多系統資源（間隔至少 5 秒）\n- 不記錄 session 中的對話內容，僅追蹤指標\n- 異常告警不應造成額外的 token 消耗"
+    },
+    {
+      "type": "skill",
+      "source": "skill-pokemon-roles",
+      "chunk_id": 0,
+      "title": "---\nname: pokemon_roles\ndescription: 寶可夢角色系統。當用戶選擇寶可夢角色或使用招數時觸發，包括：角色選擇、招數觸發對應技能、角色切換、狀態管理。\n---\n\n# 寶",
+      "content": "---\nname: pokemon_roles\ndescription: 寶可夢角色系統。當用戶選擇寶可夢角色或使用招數時觸發，包括：角色選擇、招數觸發對應技能、角色切換、狀態管理。\n---\n\n# 寶可夢角色系統\n\n## 功能說明\n\n趣味化的任務觸發系統。用戶選擇一個寶可夢角色後，透過招數名稱觸發對應的實際技能。讓日常操作多一些遊戲化體驗。\n\n## 角色與招數對照"
+    },
+    {
+      "type": "skill",
+      "source": "skill-pokemon-roles",
+      "chunk_id": 1,
+      "title": "| 角色 | 屬性 | 招數 | 對應技能 |\n|------|------|------|----------|\n| 雷丘 | 電 | thunder / quick / tail | 快速搜尋 /",
+      "content": "| 角色 | 屬性 | 招數 | 對應技能 |\n|------|------|------|----------|\n| 雷丘 | 電 | thunder / quick / tail | 快速搜尋 / 緊急處理 / 俏皮回覆 |\n| 火龍 | 火 | burn / claw / flare | 執行命令 / 分析程式碼 / 部署服務 |\n| 水龜 | 水 | wave / beam / shell | 數據分析 / 生成報告 / 備份保護 |\n| 妙蛙 | 草 | grow / seed / powder | 學習知識 / 儲存資訊 / 分類整理 |\n| 超夢 | 超能 | psychic / ball / recover | 推理建議 / 濃縮重點 / 回顧恢復 |\n| 耿鬼 | 幽靈 | shadow / confuse / night | 隱私處理 / 開玩笑 / 安靜模式 |\n\n## 工作流程\n\n### 第一步：角色選擇\n- 用戶說「我要當 XXX」或「我要選 XXX」\n- 確認角色存在後切換身份\n- 顯示登場動畫和招數列表"
+    },
+    {
+      "type": "skill",
+      "source": "skill-pokemon-roles",
+      "chunk_id": 2,
+      "title": "### 第二步：招數使用\n- 用戶輸入招數名稱（如 `burn 啟動服務`）\n- 解析招數對應的實際技能\n- 以角色身份執行任務並回報結果\n\n### 第三步：狀態管理\n- 記住用戶當前選擇的角色\n- ",
+      "content": "### 第二步：招數使用\n- 用戶輸入招數名稱（如 `burn 啟動服務`）\n- 解析招數對應的實際技能\n- 以角色身份執行任務並回報結果\n\n### 第三步：狀態管理\n- 記住用戶當前選擇的角色\n- 後續對話都以此角色風格回覆\n- 支援隨時切換角色\n\n## 回覆格式\n\n### 選角成功\n```\n[角色名稱] 登場！\nHP: 滿血\n屬性: [屬性]\n招數: [招數列表]\n[角色風格的登場台詞]\n```\n\n### 出招\n```\n[角色名稱] 使用了 [招數名稱]！\n[招數效果描述]\n[實際執行的任務結果]\n```\n\n### 查看招數\n```\n[角色名稱] 的招數：\n- [招數1] - [描述]（[對應技能]）\n- [招數2] - [描述]（[對應技能]）\n- [招數3] - [描述]（[對應技能]）\n```\n\n## 觸發關鍵字\n\n- 「我要當 XXX」「我要選 XXX」→ 選擇角色\n- 「我的招數」「查看招數」→ 顯示可用招數\n- 「換角色」「改當 XXX」→ 切換角色\n- 直接輸入招數名稱 → 執行對應技能\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-pokemon-roles",
+      "chunk_id": 3,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| 選擇不存在的角色 | 列出所有可選角色供用戶選擇 |\n| 使用不屬於當前角色的招數 | 提示該招數屬於其他角色，建議切換 |\n|",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| 選擇不存在的角色 | 列出所有可選角色供用戶選擇 |\n| 使用不屬於當前角色的招數 | 提示該招數屬於其他角色，建議切換 |\n| 尚未選角就使用招數 | 提示先選擇一個角色 |\n| 招數對應的技能執行失敗 | 以角色風格回報失敗，說明原因 |\n\n## 使用範例\n\n- 用戶：「我要當火龍」→ 火龍登場，顯示招數列表\n- 用戶：「burn 幫我啟動服務」→ 火龍使用燃燒攻擊，執行啟動命令\n- 用戶：「我的招數」→ 顯示當前角色的招數清單\n\n## 護欄\n\n- 角色系統僅影響回覆風格，不改變實際技能的執行邏輯\n- 不強制用戶使用角色系統，一般對話正常回覆\n- 招數名稱衝突時以明確指令優先\n- 不在嚴肅/緊急場景中使用遊戲化語氣\n- 角色狀態僅保存在當前 session，不持久化"
+    },
+    {
+      "type": "skill",
+      "source": "skill-decision-support",
+      "chunk_id": 0,
+      "title": "# Decision Support Skill\n\n## 觸發詞\n- 決策、建議、評估\n- 風險評估\n\n## 功能\n1. 數據驅動建議\n2. 風險評估\n3. 趨勢預測\n\n## 向量庫應用\n- 歷史決策",
+      "content": "# Decision Support Skill\n\n## 觸發詞\n- 決策、建議、評估\n- 風險評估\n\n## 功能\n1. 數據驅動建議\n2. 風險評估\n3. 趨勢預測\n\n## 向量庫應用\n- 歷史決策分析\n- 風險模式匹配\n- 趨勢預測"
+    },
+    {
+      "type": "skill",
+      "source": "skill-skill-learning",
+      "chunk_id": 0,
+      "title": "# Skill Learning Skill\n\n## 觸發詞\n- 學習、技能、能力\n- 最佳實踐\n\n## 功能\n1. 技能匹配\n2. 最佳實踐檢索\n3. 學習路徑建議\n\n## 向量庫應用\n- 檢索成功",
+      "content": "# Skill Learning Skill\n\n## 觸發詞\n- 學習、技能、能力\n- 最佳實踐\n\n## 功能\n1. 技能匹配\n2. 最佳實踐檢索\n3. 學習路徑建議\n\n## 向量庫應用\n- 檢索成功技能\n- 匹配學習需求\n- 推薦技能發展方向"
+    },
+    {
+      "type": "skill",
+      "source": "skill-project-research",
+      "chunk_id": 0,
+      "title": "# Project Research Skill\n\n## 觸發詞\n- 研究、項目分析、調研\n- 歷史項目、案例分析\n\n## 功能\n1. 歷史項目檢索\n2. 相關案例查找\n3. 趨勢分析\n\n## 向量庫",
+      "content": "# Project Research Skill\n\n## 觸發詞\n- 研究、項目分析、調研\n- 歷史項目、案例分析\n\n## 功能\n1. 歷史項目檢索\n2. 相關案例查找\n3. 趨勢分析\n\n## 向量庫應用\n- 檢索過往項目經驗\n- 匹配相似項目\n- 提取關鍵教訓\n\n## 輸出格式\n- 項目摘要\n- 相關案例\n- 建議"
+    },
+    {
+      "type": "skill",
+      "source": "skill-workflow-orchestrator",
+      "chunk_id": 0,
+      "title": "---\nname: workflow_orchestrator\ndescription: 工作流協調與多步驟任務執行。當需要規劃、執行包含多個步驟的複雜任務時觸發。\nmetadata: { \"open",
+      "content": "---\nname: workflow_orchestrator\ndescription: 工作流協調與多步驟任務執行。當需要規劃、執行包含多個步驟的複雜任務時觸發。\nmetadata: { \"openclaw\": { \"emoji\": \"🎯\" } }\n---\n\n# 工作流協調\n\n規劃並執行多步驟工作流，管理步驟依賴、並行執行與進度追蹤。\n\n## 操作 / 工作流程\n\n1. **任務拆解** — 將複雜任務分解為最小顆粒度步驟（單一職責、明確輸入輸出）\n2. **依賴分析** — 識別步驟間的依賴關係，決定執行順序\n3. **流程編排** — 選擇流程模式：\n   - **線性**：A → B → C（每步依賴前一步）\n   - **並行**：A + B 同時執行 → C（無依賴可並行）\n   - **條件**：A → 判斷 → B 或 C（依條件分支）\n4. **執行監控** — 使用 `state_control` 追蹤進度，錯誤隔離不影響無依賴步驟\n5. **結果彙整** — 收集各步驟輸出，交由 `result_integrator` 整合\n\n## 參數"
+    },
+    {
+      "type": "skill",
+      "source": "skill-workflow-orchestrator",
+      "chunk_id": 1,
+      "title": "| 參數 | 類型 | 預設 | 說明 |\n|------|------|------|------|\n| task | string | — | 任務描述 |\n| mode | string | a",
+      "content": "| 參數 | 類型 | 預設 | 說明 |\n|------|------|------|------|\n| task | string | — | 任務描述 |\n| mode | string | auto | 流程模式：linear / parallel / conditional / auto |\n| max_steps | number | 10 | 最大步驟數 |\n| timeout_per_step | number | 60 | 每步驟超時秒數 |\n\n## 輸出格式\n\n```\n🎯 工作流：[任務名稱]\n狀態：[running / completed / failed]\n進度：[2/5] ████░░░░░░ 40%\n\n步驟：\n✅ 1. [步驟一] — 完成\n⏳ 2. [步驟二] — 執行中\n⬚  3. [步驟三] — 等待中\n```\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-workflow-orchestrator",
+      "chunk_id": 2,
+      "title": "| 錯誤 | 處理 |\n|------|------|\n| 步驟執行超時 | 標記該步驟失敗，跳過無依賴的後續步驟繼續執行 |\n| 依賴步驟失敗 | 標記所有依賴鏈步驟為 skipped |\n| 所有",
+      "content": "| 錯誤 | 處理 |\n|------|------|\n| 步驟執行超時 | 標記該步驟失敗，跳過無依賴的後續步驟繼續執行 |\n| 依賴步驟失敗 | 標記所有依賴鏈步驟為 skipped |\n| 所有步驟失敗 | 彙整錯誤報告，交由 failure_analysis 分析 |\n| 任務無法拆解 | 以單步驟模式直接執行 |\n\n## 使用範例\n\n- \"幫我執行這個多步驟任務\"\n- \"規劃一個工作流來完成這件事\"\n- \"目前的工作流進度如何？\""
+    },
+    {
+      "type": "skill",
+      "source": "skill-learning-feedback",
+      "chunk_id": 0,
+      "title": "# Learning Feedback Article Skill\n\n## 觸發條件\n當用戶說：\n- \"生成學習反饋\"\n- \"建立優化網絡\"\n- \"建造文案系統\"\n- \"學習反饋系統\"\n- \"優化網絡",
+      "content": "# Learning Feedback Article Skill\n\n## 觸發條件\n當用戶說：\n- \"生成學習反饋\"\n- \"建立優化網絡\"\n- \"建造文案系統\"\n- \"學習反饋系統\"\n- \"優化網絡文案\"\n\n## 功能\n根據系統運行數據生成學習反饋文案，包括：\n1. 數據收集與分析\n2. 模式識別與建議\n3. 文案生成與存儲\n4. 反饋學習閉環\n\n## 生成流程\n1. 收集數據 → 系統運行、錯誤記錄、成功案例\n2. 分析模式 → 錯誤模式、成功因素\n3. 生成文案 → 技術指標、能力提升、未來展望\n4. 反饋學習 → 建立閉環、持續優化\n\n## 輸出格式\n- 技術指標表格\n- 能力提升分析\n- 未來展望規劃\n- 經驗總結\n\n## 存儲\n- 本地：memory/\n- Notion：自動同步"
+    },
+    {
+      "type": "skill",
+      "source": "skill-article-generator",
+      "chunk_id": 0,
+      "title": "# Article Generator Skill\n\n## 觸發條件\n當用戶說：\n- \"生成文章\"\n- \"寫文章\"\n- \"文章內容\"\n- \"給我文章\"\n- \"需要文章\"\n- \"幫我寫\"\n\n## 功能\n",
+      "content": "# Article Generator Skill\n\n## 觸發條件\n當用戶說：\n- \"生成文章\"\n- \"寫文章\"\n- \"文章內容\"\n- \"給我文章\"\n- \"需要文章\"\n- \"幫我寫\"\n\n## 功能\n根據需求生成完整文章，包括：\n1. 理解需求並規劃大綱\n2. 收集相關資料\n3. 撰寫內容\n4. 格式化輸出\n\n## 生成流程\n1. 理解需求 → 確定主題與目標讀者\n2. 資料收集 → 檢索相關記憶與知識\n3. 大綱規劃 → 設計章節結構\n4. 內容撰寫 → 填充詳細內容\n5. 格式排版 → 優化輸出格式\n\n## 輸出格式\n- Markdown 格式\n- 大綱先行\n- 結構清晰\n- 重點突出\n\n## 存儲位置\n生成的文章自動存儲到：\n~/.openclaw/workspace/memory/"
+    },
+    {
+      "type": "skill",
+      "source": "skill-knowledge-agent",
+      "chunk_id": 0,
+      "title": "---\nname: knowledge_updater\ndescription: 知識庫更新與訓練。當需要搜尋新技術或產業趨勢並更新知識庫時觸發，包括：主題搜尋、知識點擷取、入庫儲存、更新報告產出。\n",
+      "content": "---\nname: knowledge_updater\ndescription: 知識庫更新與訓練。當需要搜尋新技術或產業趨勢並更新知識庫時觸發，包括：主題搜尋、知識點擷取、入庫儲存、更新報告產出。\n---\n\n# Knowledge Updater — 知識庫更新\n\n## 功能說明\n\n主動搜尋指定主題的最新技術與產業趨勢，擷取關鍵知識點，結構化後存入知識庫，保持知識庫的時效性與完整性。\n\n## 參數設定\n\n| 參數 | 類型 | 預設值 | 說明 |\n|------|------|--------|------|\n| topic | string | \"AI agents\" | 搜尋主題 |\n| count | number | 3 | 搜尋結果數量 |\n| source | string | \"web\" | 資料來源（web / github / arxiv） |\n\n## 操作步驟\n\n1. 接收搜尋主題與參數\n2. 根據指定來源進行搜尋\n3. 擷取關鍵知識點（標題、說明、應用場景）\n4. 檢查是否與現有知識重複\n5. 將新知識結構化後存入 Notion 知識庫\n6. 產出更新報告"
+    },
+    {
+      "type": "skill",
+      "source": "skill-knowledge-agent",
+      "chunk_id": 1,
+      "title": "## 輸出格式\n\n```\n知識庫更新報告\n\n主題：本地 LLM 部署\n來源：Web 搜尋（3 筆）\n\n新知識點：\n1. Ollama 本地部署框架\n   說明：輕量級 LLM 本地運行方案，支援多種模",
+      "content": "## 輸出格式\n\n```\n知識庫更新報告\n\n主題：本地 LLM 部署\n來源：Web 搜尋（3 筆）\n\n新知識點：\n1. Ollama 本地部署框架\n   說明：輕量級 LLM 本地運行方案，支援多種模型\n   應用：開發測試、離線場景、隱私需求\n\n2. vLLM 推理加速\n   說明：高效能 LLM 推理引擎，支援 PagedAttention\n   應用：生產環境部署、批量推理\n\n系統建議：\n- 建議評估 Ollama 作為開發環境方案\n- vLLM 適合未來生產環境擴展\n\n錯誤記錄：無\n```\n\n## 工具指引\n\n- **Web 搜尋**：取得最新資訊\n- **Notion API**：知識庫存儲與去重\n- **knowledge_search**：檢查現有知識避免重複\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-knowledge-agent",
+      "chunk_id": 2,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| 搜尋來源連線失敗 | 回報「無法連接 [來源]，嘗試備用來源」 |\n| 內容解析失敗 | 回報「解析失敗，跳過該來源」，繼續處理",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| 搜尋來源連線失敗 | 回報「無法連接 [來源]，嘗試備用來源」 |\n| 內容解析失敗 | 回報「解析失敗，跳過該來源」，繼續處理其餘結果 |\n| 儲存至 Notion 失敗 | 回報錯誤訊息，將知識點暫存於輸出中 |\n| 無新內容 | 回報「該主題無新內容，知識庫已是最新」 |\n| 搜尋結果品質低 | 標註「品質待確認」，建議人工審核 |\n\n## 使用範例\n\n- 「更新知識庫，主題是本地 LLM」\n- 「搜尋最新的 AI Agent 框架，找 5 項」\n- 「查一下最近有什麼新的 RAG 技術」\n\n## 防護規則\n\n- 新知識入庫前需標註來源，確保可追溯\n- 不可將未經驗證的資訊標記為「已確認」\n- 搜尋結果中的商業推廣內容需過濾或標註\n- 涉及版權的內容僅存摘要，不可全文複製\n- 每次更新需產出報告，記錄新增/跳過/失敗的條目"
+    },
+    {
+      "type": "skill",
+      "source": "skill-gmail-classifier",
+      "chunk_id": 0,
+      "title": "---\nname: gmail_classifier\ndescription: Gmail 郵件智能分類。當收到郵件分類任務時自動觸發，包括：垃圾郵件識別、重要郵件標記、分類學習優化。\n---\n\n# ",
+      "content": "---\nname: gmail_classifier\ndescription: Gmail 郵件智能分類。當收到郵件分類任務時自動觸發，包括：垃圾郵件識別、重要郵件標記、分類學習優化。\n---\n\n# Gmail 郵件分類\n\n## 功能說明\n\n分析 Gmail 郵件的主題和摘要，自動判定分類（spam / important / normal），並根據用戶反饋持續優化分類準確率。\n\n## 工作流程\n\n### 第一步：接收郵件資訊\n- 接收郵件主題（subject）和摘要（snippet）\n- 格式為 JSON：`{\"task\": \"classify_email\", \"email_subject\": \"...\", \"email_snippet\": \"...\"}`\n\n### 第二步：內容分析\n- 分析郵件語意、關鍵字、發件人模式\n- 比對已知分類規則\n\n### 第三步：判定分類"
+    },
+    {
+      "type": "skill",
+      "source": "skill-gmail-classifier",
+      "chunk_id": 1,
+      "title": "| 分類 | 條件 |\n|------|------|\n| spam | 廣告、推銷、詐騙、賭博、釣魚連結 |\n| important | 工作、會議、家人、帳單、訂單、系統通知 |\n| normal",
+      "content": "| 分類 | 條件 |\n|------|------|\n| spam | 廣告、推銷、詐騙、賭博、釣魚連結 |\n| important | 工作、會議、家人、帳單、訂單、系統通知 |\n| normal | 一般郵件、社交、新聞、電子報 |\n\n### 第四步：輸出結果\n```json\n{\n  \"category\": \"spam|important|normal\",\n  \"reason\": \"分類原因說明\"\n}\n```\n\n### 第五步：學習優化\n- 記錄每次分類結果及用戶反饋\n- 調整分類權重和規則\n- 每週生成分類準確率報告\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| 郵件內容為空 | 標記為 normal，附註「內容不足以判斷」 |\n| 無法判定分類 | 標記為 normal，建議用戶手動確認 |\n| 多語言混合郵件 | 根據主要語言判斷，不因語言混用而誤判 |\n| 用戶反饋分類錯誤 | 記錄錯誤模式，更新分類規則 |\n| JSON 格式錯誤 | 回傳錯誤提示，附上正確格式範例 |\n\n## 使用範例"
+    },
+    {
+      "type": "skill",
+      "source": "skill-gmail-classifier",
+      "chunk_id": 2,
+      "title": "- 輸入：`{\"task\": \"classify_email\", \"email_subject\": \"您的訂單已發貨\", \"email_snippet\": \"親愛的客戶，您的訂單 #12345 已於今",
+      "content": "- 輸入：`{\"task\": \"classify_email\", \"email_subject\": \"您的訂單已發貨\", \"email_snippet\": \"親愛的客戶，您的訂單 #12345 已於今天發貨...\"}`\n  回覆：`{\"category\": \"important\", \"reason\": \"訂單確認郵件，對用戶有價值\"}`\n\n- 輸入：`{\"task\": \"classify_email\", \"email_subject\": \"限時優惠！50% OFF\", \"email_snippet\": \"點擊立即購買，僅限今天...\"}`\n  回覆：`{\"category\": \"spam\", \"reason\": \"典型促銷廣告郵件\"}`\n\n- 輸入：`{\"task\": \"classify_email\", \"email_subject\": \"週末聚會\", \"email_snippet\": \"嗨，這週六要不要一起吃飯...\"}`\n  回覆：`{\"category\": \"normal\", \"reason\": \"朋友社交邀約\"}`\n\n## 護欄"
+    },
+    {
+      "type": "skill",
+      "source": "skill-gmail-classifier",
+      "chunk_id": 3,
+      "title": "- 不讀取完整郵件內容，僅分析主題和摘要\n- 不自動刪除任何郵件，僅做分類建議\n- 不儲存郵件原文內容，僅保留分類紀錄\n- 對於無法確定的郵件，寧可標為 normal 也不誤標 spam\n- 分類結果",
+      "content": "- 不讀取完整郵件內容，僅分析主題和摘要\n- 不自動刪除任何郵件，僅做分類建議\n- 不儲存郵件原文內容，僅保留分類紀錄\n- 對於無法確定的郵件，寧可標為 normal 也不誤標 spam\n- 分類結果僅供參考，重要郵件建議用戶自行確認"
+    },
+    {
+      "type": "skill",
+      "source": "skill-rag-retrieval",
+      "chunk_id": 0,
+      "title": "# RAG 檢索 Skill\n\n**觸發條件：** 用戶需要搜尋知識、歷史記錄、專案研究、技能學習、決策支援\n\n## 功能\n\n| 場景 | 觸發詞 | 功能 |\n|------|--------|--",
+      "content": "# RAG 檢索 Skill\n\n**觸發條件：** 用戶需要搜尋知識、歷史記錄、專案研究、技能學習、決策支援\n\n## 功能\n\n| 場景 | 觸發詞 | 功能 |\n|------|--------|------|\n| Project 研究 | 研究、項目分析、調研 | 搜尋歷史項目、相關案例 |\n| Skill 學習 | 學習、技能、能力 | 匹配最佳實踐、學習路徑 |\n| Research Study | 研究、文獻、趨勢 | 檢索知識關聯、摘要 |\n| 決策支援 | 決策、建議、評估 | 數據驅動、風險評估 |\n\n## 向量庫狀態\n\n| 指標 | 現值 | 目標 |\n|------|------|------|\n| 向量數量 | 1093 | >1000 ✅ |\n| 檢索命中率 | 測試中 | >85% |\n| 響應時間 | 測試中 | <100ms |\n\n## 檢索流程\n\n1. **解析查詢** - 識別意圖和關鍵詞\n2. **向量匹配** - 搜尋相似內容\n3. **排序返回** - 相關性排序\n4. **結果整合** - 格式化成回覆\n\n## 使用方式"
+    },
+    {
+      "type": "skill",
+      "source": "skill-rag-retrieval",
+      "chunk_id": 1,
+      "title": "```\n用户: 查找 OpenClaw 最近的專案\n→ 觸發: project-research\n→ 搜尋關鍵詞: OpenClaw, 專案, 2026\n→ 返回相關向量結果\n```\n\n## 文件\n\n",
+      "content": "```\n用户: 查找 OpenClaw 最近的專案\n→ 觸發: project-research\n→ 搜尋關鍵詞: OpenClaw, 專案, 2026\n→ 返回相關向量結果\n```\n\n## 文件\n\n- `memory/vectors/vectors.json` - 向量庫\n- `scripts/rag_vector_expand.py` - 擴展腳本\n\n---\n\n_更新：2026-03-01_"
+    },
+    {
+      "type": "skill",
+      "source": "skill-social-media-automation",
+      "chunk_id": 0,
+      "title": "---\nname: social_media_automation\ndescription: 全自動社群媒體經營機器人。當需要自動化社群媒體內容生成與發布時觸發，包括：AI 圖片生成、文案撰寫、排程發",
+      "content": "---\nname: social_media_automation\ndescription: 全自動社群媒體經營機器人。當需要自動化社群媒體內容生成與發布時觸發，包括：AI 圖片生成、文案撰寫、排程發布、數據追蹤。\n---\n\n# 全自動社群媒體經營\n\n## 功能說明\n\n整合 OpenClaw + OpenAI Image + Postiz + n8n，實現零人力自動化的社群媒體經營。從內容靈感到排程發布全程自動。\n\n## 技術堆疊\n\n| 元件 | 功能 | 成本 |\n|------|------|------|\n| OpenClaw | Agent 核心決策 | $0 |\n| OpenAI API | AI 圖片生成（DALL-E） | 按量計費 |\n| Postiz | 社群排程發布 | $0-29/月 |\n| n8n | 工作流自動化 | $0 |\n\n## 工作流程\n\n### 第一步：內容靈感生成\n- OpenClaw 根據品牌定位和近期趨勢生成內容方向\n- 分析目標受眾的痛點和興趣"
+    },
+    {
+      "type": "skill",
+      "source": "skill-social-media-automation",
+      "chunk_id": 1,
+      "title": "### 第二步：AI 圖片生成\n- 呼叫 OpenAI DALL-E API 生成配圖\n- 根據品牌風格調整提示詞\n- 生成多張候選圖，選擇最佳\n\n### 第三步：文案撰寫\n- OpenClaw + ",
+      "content": "### 第二步：AI 圖片生成\n- 呼叫 OpenAI DALL-E API 生成配圖\n- 根據品牌風格調整提示詞\n- 生成多張候選圖，選擇最佳\n\n### 第三步：文案撰寫\n- OpenClaw + Ollama 撰寫貼文文案\n- 根據平台特性調整格式和長度\n- 加入適當的 hashtag\n\n### 第四步：排程發布\n- 透過 Postiz API 設定排程時間\n- 支援多平台同步發布\n\n### 第五步：數據追蹤\n- n8n 定期收集互動數據\n- 回饋優化下次內容方向\n\n## 支援平台\n\nInstagram、Facebook、Twitter/X、LinkedIn、TikTok\n\n## 自動化等級\n\n| 等級 | 說明 |\n|------|------|\n| 初級 | 圖片 + 文案生成，手動發布 |\n| 中級 | 自動生成 + 排程發布 |\n| 高級 | 完全自動化 + 數據優化回饋 |\n\n## 工具指引"
+    },
+    {
+      "type": "skill",
+      "source": "skill-social-media-automation",
+      "chunk_id": 2,
+      "title": "- Postiz API：`POST https://api.postiz.com/v1/posts`（需 Bearer Token）\n- OpenAI Image API：`openai.Image",
+      "content": "- Postiz API：`POST https://api.postiz.com/v1/posts`（需 Bearer Token）\n- OpenAI Image API：`openai.Image.create()`\n- n8n Workflow：每日定時觸發\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| OpenAI API 額度不足 | 提示用戶充值，暫停圖片生成功能 |\n| Postiz 排程失敗 | 重試 3 次，失敗則記錄待手動發布 |\n| 圖片生成不符預期 | 自動重新生成（最多 3 次），仍不佳則提示人工介入 |\n| n8n 工作流中斷 | 發送告警通知，記錄斷點以便續跑 |\n| 平台 API 限流 | 自動延遲重試，調整發布間隔 |\n\n## 使用範例\n\n- 「幫 Lazy Uni Shop 自動排程這週的 IG 貼文」\n- 「生成 5 張產品圖 + 文案，排到下週發布」\n- 「查看上週社群數據，優化本週內容方向」\n\n## 護欄"
+    },
+    {
+      "type": "skill",
+      "source": "skill-social-media-automation",
+      "chunk_id": 3,
+      "title": "- API Key 必須使用環境變數或 n8n credentials，禁止寫死\n- 發布前必須經過內容審核（至少自動檢查敏感詞）\n- 每日發布數量不超過各平台建議上限\n- 不自動回覆私訊，僅處理公開",
+      "content": "- API Key 必須使用環境變數或 n8n credentials，禁止寫死\n- 發布前必須經過內容審核（至少自動檢查敏感詞）\n- 每日發布數量不超過各平台建議上限\n- 不自動回覆私訊，僅處理公開貼文\n- 圖片生成不使用真實人物肖像（除非獲得授權）"
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 0,
+      "title": "---\nname: n8n-workflow-automation\ndescription: Designs and outputs n8n workflow JSON with robust tri",
+      "content": "---\nname: n8n-workflow-automation\ndescription: Designs and outputs n8n workflow JSON with robust triggers, idempotency, error handling, logging, retries, and human-in-the-loop review queues. Use when you need an auditable automation that won't silently fail.\n---\n\n# n8n workflow automation with retries, logging, and review queues\n\n## PURPOSE\nDesigns and outputs n8n workflow JSON with robust triggers, idempotency, error handling, logging, retries, and human-in-the-loop review queues."
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 1,
+      "title": "## WHEN TO USE\n- TRIGGERS:\n  - Build an n8n workflow that runs every Monday and emails the complianc",
+      "content": "## WHEN TO USE\n- TRIGGERS:\n  - Build an n8n workflow that runs every Monday and emails the compliance summary.\n  - Add error handling and retries to this workflow, plus a review queue for failures.\n  - Create a webhook workflow that logs every run and writes a status row to a tracker.\n  - Make this n8n flow idempotent so it does not duplicate records when it reruns.\n  - Instrument this workflow with audit logs and a human approval step.\n- DO NOT USE WHEN…\n  - You need code-only automation withou"
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 2,
+      "title": "## INPUTS\n- REQUIRED:\n  - Workflow intent: trigger type + schedule/timezone + success criteria.\n  - ",
+      "content": "## INPUTS\n- REQUIRED:\n  - Workflow intent: trigger type + schedule/timezone + success criteria.\n  - Targets: where to write results (email/Drive/Sheet/DB) and required fields.\n- OPTIONAL:\n  - Existing n8n workflow JSON to modify.\n  - Sample payloads / example records.\n  - Definition of dedup keys (what makes a record unique).\n- EXAMPLES:\n  - Cron: Monday 08:00 America/Los_Angeles; send summary email + Drive upload\n  - Webhook: receive JSON; route to folders"
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 3,
+      "title": "## OUTPUTS\n- Default (read-only): a workflow design spec (nodes, data contracts, failure modes).\n- I",
+      "content": "## OUTPUTS\n- Default (read-only): a workflow design spec (nodes, data contracts, failure modes).\n- If explicitly requested: `workflow.json` (n8n importable JSON) + `runbook.md` (from template).\nSuccess = workflow is idempotent, logs every run, retries safely, and routes failures to a review queue."
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 4,
+      "title": "## WORKFLOW\n1. Clarify trigger:\n   - Cron/webhook/manual; schedule/timezone; concurrency expectation",
+      "content": "## WORKFLOW\n1. Clarify trigger:\n   - Cron/webhook/manual; schedule/timezone; concurrency expectations.\n2. Define data contract:\n   - input schema, required fields, and validation rules.\n3. Design idempotency:\n   - choose dedup key(s) and storage (DB/Sheet) to prevent duplicates on retries.\n4. Add observability:\n   - generate `run_id`, log start/end, store status row and error details.\n5. Implement error handling:\n   - per-node error branches, retry with backoff, and final failure notification.\n6"
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 5,
+      "title": "## OUTPUT FORMAT\nIf outputting **n8n workflow JSON**, conform to:\n\n```json\n{\n  \"name\": \"<workflow na",
+      "content": "## OUTPUT FORMAT\nIf outputting **n8n workflow JSON**, conform to:\n\n```json\n{\n  \"name\": \"<workflow name>\",\n  \"nodes\": [ { \"name\": \"Trigger\", \"type\": \"n8n-nodes-base.cron\", \"parameters\": {}, \"position\": [0,0] } ],\n  \"connections\": {},\n  \"settings\": {},\n  \"active\": false\n}\n```\n\nAlso output `runbook.md` using `assets/runbook-template.md`."
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 6,
+      "title": "## SAFETY & EDGE CASES\n- Read-only by default; only emit workflow JSON when explicitly requested.\n- ",
+      "content": "## SAFETY & EDGE CASES\n- Read-only by default; only emit workflow JSON when explicitly requested.\n- Do not include secrets in JSON; reference env vars/credential names only.\n- Include audit logging + failure notifications; avoid workflows that can silently drop data.\n- Prefer least privilege: call only required APIs and minimize scopes."
+    },
+    {
+      "type": "skill",
+      "source": "skill-n8n-workflow-automation",
+      "chunk_id": 7,
+      "title": "## EXAMPLES\n- Input: \"Cron every Monday, email compliance summary, retry failures.\"\n  Output: Node m",
+      "content": "## EXAMPLES\n- Input: \"Cron every Monday, email compliance summary, retry failures.\"\n  Output: Node map + `workflow.json` with Cron -> Fetch -> Aggregate -> Email, plus error branches to review queue.\n\n- Input: \"Webhook that logs runs and writes status row.\"\n  Output: Webhook -> Validate -> Process -> Append status row; on error -> log + notify + queue."
+    },
+    {
+      "type": "skill",
+      "source": "skill-content-generator",
+      "chunk_id": 0,
+      "title": "---\nname: content_generator\ndescription: 爆款 Thread 生成器。當用戶需要生成 Twitter/X Thread 內容時觸發，包括：病毒式傳播內容撰寫、主",
+      "content": "---\nname: content_generator\ndescription: 爆款 Thread 生成器。當用戶需要生成 Twitter/X Thread 內容時觸發，包括：病毒式傳播內容撰寫、主題分析、結構規劃、CTA 設計。\n---\n\n# 爆款 Thread 生成器\n\n## 功能說明\n\n根據用戶提供的主題關鍵字，生成具有傳播潛力的 Twitter/X Thread 內容。涵蓋主題分析、結構規劃、內容撰寫及驗證檢查完整流程。\n\n## 工作流程\n\n### 第一步：主題分析\n- 收到用戶輸入的主題關鍵字\n- 提煉核心論點、受眾痛點、獨特角度\n- 若主題不明確，主動追問釐清方向\n\n### 第二步：選擇結構\n\n| 類型 | 結構 | 適用場景 |\n|------|------|----------|\n| 熱點分析 | 數據 → 分析 → 預測 | 時事趨勢 |\n| 乾貨分享 | 問題 → 解決 → 案例 | 教學知識 |\n| 觀點表達 | 現象 → 觀點 → 論證 | 意見輸出 |\n| 故事型 | 背景 → 衝突 → 轉折 → 結論 | 敘事內容 |"
+    },
+    {
+      "type": "skill",
+      "source": "skill-content-generator",
+      "chunk_id": 1,
+      "title": "### 第三步：內容生成\n- 標題鈎子：第一句話必須吸引注意力\n- 數據支持：引用可靠來源增強可信度\n- 視覺化：適當使用格式增強閱讀體驗\n- CTA：最後一篇呼籲互動（留言、轉發、追蹤）\n\n### ",
+      "content": "### 第三步：內容生成\n- 標題鈎子：第一句話必須吸引注意力\n- 數據支持：引用可靠來源增強可信度\n- 視覺化：適當使用格式增強閱讀體驗\n- CTA：最後一篇呼籲互動（留言、轉發、追蹤）\n\n### 第四步：驗證檢查\n- 數據來源是否可靠\n- 觀點是否有獨特角度\n- 語言是否生動有趣\n- 格式是否易於閱讀\n- 是否有互動呼籲\n\n## 輸出格式\n\n```\n【標題】\n\n【1/N】\n內容...\n\n【2/N】\n內容...\n\n【N/N】\n[CTA - 呼籲互動]\n```\n\n## 工具指引\n\n- 需要素材時呼叫 `information_gathering`\n- 需要數據時呼叫 `analytics-agent`\n- 需要事實核查時呼叫 `verification-agent`\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-content-generator",
+      "chunk_id": 2,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| 主題過於模糊 | 請用戶提供更具體的關鍵字或角度 |\n| 找不到可靠數據 | 標明「待查證」，不捏造數據 |\n| 內容過長 | ",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| 主題過於模糊 | 請用戶提供更具體的關鍵字或角度 |\n| 找不到可靠數據 | 標明「待查證」，不捏造數據 |\n| 內容過長 | 自動拆分，每篇 Thread 控制在合理長度 |\n| 涉及敏感話題 | 告知用戶該主題不適合，建議替代方向 |\n\n## 使用範例\n\n- 「幫我寫一篇關於 2026 AI 資本支出的 Thread」\n- 「生成 Thread：為什麼遠端工作正在改變城市結構」\n- 「爆款內容：加密貨幣監管趨勢分析」\n\n## 護欄\n\n- 每篇 Thread 最多 20 篇\n- 不捏造數據或引用不存在的來源\n- 避免政治、宗教等高度敏感話題\n- 不生成仇恨言論或歧視性內容\n- 需要事實核查的重要數據必須標注來源"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 0,
+      "title": "# Hook-Copywriting-Feedback System v2\n\n## 系統概述\n完整的內容創作賦能系統 v2.0，包含鈎子設計、網絡文案生成、學習反饋追蹤。\n\n---\n\n## 模組一：鈎",
+      "content": "# Hook-Copywriting-Feedback System v2\n\n## 系統概述\n完整的內容創作賦能系統 v2.0，包含鈎子設計、網絡文案生成、學習反饋追蹤。\n\n---\n\n## 模組一：鈎子建造器 v2\n\n### 15 種鈎子類型"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 1,
+      "title": "| # | 類型 | 公式 | 範例 |\n|---|------|------|------|\n| 1 | 衝突型 | 對手說→質疑→我展示 | \"他們說 AI 無法理解情感，直到...\" |\n| 2",
+      "content": "| # | 類型 | 公式 | 範例 |\n|---|------|------|------|\n| 1 | 衝突型 | 對手說→質疑→我展示 | \"他們說 AI 無法理解情感，直到...\" |\n| 2 | 數字型 | 數字+結論 | \"3 個月從 0 到 10 萬用戶\" |\n| 3 | 問題型 | 提問+痛點 | \"為什麼你的 AI 系統總是失敗？\" |\n| 4 | 反常型 | 打破認知 | \"薪水高反而是壞事？\" |\n| 5 | 故事型 | 背景→衝突→轉折 | \"我被裁員那天...\" |\n| 6 | 身份型 | 標籤+逆轉 | \"身為工程師，我討厭寫程式\" |\n| 7 | 情緒型 | 情緒共鳴 | \"這是我聽過最殘酷的真相...\" |\n| 8 | 預言型 | 預測趨勢 | \"2026 年這個行業將消失\" |\n| 9 | 對比型 | 過去vs現在 | \"5 年前的我和現在...\" |\n| 10 | 懼怕型 | 恐懼痛點 | \"如果你繼續這樣做...\" |\n| 11 | 權威型 | 專家背書 | \"比爾蓋茨說...\" |\n| 12 | 揭秘型 | 內幕消息 | \"沒人告訴你的真相..."
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 2,
+      "title": "### 評分系統 v2\n\n```\n總分 = 好奇心(25%) + 共鳴度(25%) + 價值感(20%) + 行動力(15%) + 情感度(15%)\n```\n\n**評分維度：**\n- 好奇心：能否引起",
+      "content": "### 評分系統 v2\n\n```\n總分 = 好奇心(25%) + 共鳴度(25%) + 價值感(20%) + 行動力(15%) + 情感度(15%)\n```\n\n**評分維度：**\n- 好奇心：能否引起興趣\n- 共鳴度：是否觸動情感\n- 價值感：是否有用\n- 行動力：是否促使點擊\n- 情感度：情緒強度\n\n### 鈎子公式庫\n\n**社群媒體鈎子：**\n- \"大多數人不知道...\"\n- \"我在___失敗後才明白...\"\n- \"如果你是___，一定要看...\"\n- \"這個秘密只有___知道...\"\n\n**銷售文案鈎子：**\n- \"給___的最後機會\"\n- \"不要再___了\"\n- \"你知道___嗎？\"\n- \"如果你正在___...\"\n\n**影片鈎子：**\n- \"這個影片會改變你對___的看法\"\n- \"99% 的人都錯過了...\"\n- \"看完這個你就知道...\"\n\n---\n\n## 模組二：網絡文案生成器 v2\n\n### 8 種結構模板\n\n1. **痛點→方案→證據**\n   - 描述問題 → 提供解決 → 展示結果\n   - 適用：教學、產品推廣"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 3,
+      "title": "2. **現象→分析→建議**\n   - 觀察現象 → 深入分析 → 具體建議\n   - 適用：趨勢分析、評論\n\n3. **經歷→領悟→分享**\n   - 個人故事 → 學到什麼 → 建議讀者\n   ",
+      "content": "2. **現象→分析→建議**\n   - 觀察現象 → 深入分析 → 具體建議\n   - 適用：趨勢分析、評論\n\n3. **經歷→領悟→分享**\n   - 個人故事 → 學到什麼 → 建議讀者\n   - 適用：個人品牌、經驗分享\n\n4. **問題→解答→行動**\n   - 讀者困惑 → 專業解答 → 呼籲行動\n   - 適用：FAQ、專業知識\n\n5. **對比→選擇→結論**\n   - 選項比較 → 分析利弊 → 建議選擇\n   - 適用：比較文、評測\n\n6. **趨勢→洞察→預測**\n   - 現象觀察 → 深度洞察 → 未來預測\n   - 適用：趨勢分析\n\n7. **揭秘→證據→方法**\n   - 揭示真相 → 證據支持 → 提供方法\n   - 適用：乾貨知識\n\n8. **故事→教訓→行動**\n   - 案例故事 → 核心教訓 → 行動呼籲\n   - 適用：說服力文案\n\n### 去 AI 味技巧 v2"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 4,
+      "title": "**詞彙替換：**\n| AI 常用 | 自然表達 |\n|---------|----------|\n| 首先、其次、最後 | 然後、接著、最後 |\n| 此外、另外 | 還有、而且 |\n| 總結來說 |",
+      "content": "**詞彙替換：**\n| AI 常用 | 自然表達 |\n|---------|----------|\n| 首先、其次、最後 | 然後、接著、最後 |\n| 此外、另外 | 還有、而且 |\n| 總結來說 | 說白了、講白了 |\n| 眾所周知 | 大家都曉得 |\n| 值得注意的是 | 說實話 |\n\n**句式優化：**\n- 短句優先\n- 主動語態\n- 具體細節\n- 個人觀點\n\n**風格調整：**\n- 加入真實案例\n- 使用對話感\n- 適當留白\n- 節奏變化\n\n### 行業範本\n\n**科技行業：**\n- 趨勢分析\n- 產品評測\n- 技術教學\n\n**教育行業：**\n- 學習方法\n- 職場技能\n- 親子教育\n\n**商業行業：**\n- 創業分享\n- 投資理財\n- 營銷策略\n\n**健康行業：**\n- 養生保健\n- 運動健身\n- 心理健康\n\n---\n\n## 模組三：學習反饋系統 v2\n\n### 追蹤指標 v2"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 5,
+      "title": "| 指標 | 說明 | 目標 | 計算方式 |\n|------|------|------|----------|\n| 觸及人數 | 曝光量 | >1000 | 貼文曝光次數 |\n| 互動率 | 參與",
+      "content": "| 指標 | 說明 | 目標 | 計算方式 |\n|------|------|------|----------|\n| 觸及人數 | 曝光量 | >1000 | 貼文曝光次數 |\n| 互動率 | 參與度 | >5% | (讚+留言+分享)/觸及 |\n| 點擊率 | 轉化 | >3% | 點擊次數/觸及 |\n| 留言率 | 深度互動 | >1% | 留言數/觸及 |\n| 分享率 | 傳播力 | >2% | 分享數/觸及 |\n| 儲存率 | 收藏度 | >1% | 儲存數/觸及 |\n| 觀看完成率 | 影片 | >50% | 看完人數/觀看人數 |\n| 回覆率 | 客服質量 | >80% | 回覆數/留言數 |\n\n### 追蹤頻率 v2"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 6,
+      "title": "| 頻率 | 內容 | 行動 |\n|------|------|------|\n| 即時 | 異常波動 | 警報 |\n| 每小時 | 熱度趨勢 | 優化調整 |\n| 每日 | 基本數據 | 記錄分析 ",
+      "content": "| 頻率 | 內容 | 行動 |\n|------|------|------|\n| 即時 | 異常波動 | 警報 |\n| 每小時 | 熱度趨勢 | 優化調整 |\n| 每日 | 基本數據 | 記錄分析 |\n| 每週 | 深入分析 | 策略調整 |\n| 每月 | 全面回顧 | 規劃制定 |\n| 每季 | 趨勢分析 | 目標設定 |\n| 每年 | 年度總結 | 方向調整 |\n\n### 分析維度 v2\n\n**內容分析：**\n- 主題分佈\n- 格式效果\n- 發布時間\n- 長度影響\n\n**受眾分析：**\n- 人口統計\n- 興趣標籤\n- 活躍時段\n- 互動偏好\n\n**競爭分析：**\n- 同行數據\n- 行業趨勢\n- 最佳表現\n- 差距分析\n\n### 自動化儀表板\n\n**即時看板：**\n- 今日表現\n- 趨勢圖\n- 異常警報\n\n**週報：**\n- 數據摘要\n- 亮點分析\n- 改進建議\n\n**月報：**\n- 完整分析\n- 趨勢解讀\n- 策略建議\n\n### 反饋閉環 v2"
+    },
+    {
+      "type": "skill",
+      "source": "skill-hook-network-copywriting-feedback",
+      "chunk_id": 7,
+      "title": "```\n數據收集 → 成效分析 → 問題識別 → 假設建立\n     ↑                                    ↓\n執行優化 ← 策略調整 ← 測試驗證 ← 解決方案\n",
+      "content": "```\n數據收集 → 成效分析 → 問題識別 → 假設建立\n     ↑                                    ↓\n執行優化 ← 策略調整 ← 測試驗證 ← 解決方案\n```\n\n---\n\n## 使用指令\n\n| 指令 | 功能 |\n|------|------|\n| 建立鈎子：{主題} | 生成鈎子 |\n| 生成文案：{主題} | 生成完整文案 |\n| 分析成效 | 數據分析 |\n| 優化建議 | 給出建議 |\n| 追蹤報告 | 生成報告 |\n| 對比分析：{主題A} vs {主題B} | 比較分析 |\n\n---\n*更新：2026-03-01 v2.0*"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cynthia-heartbeat",
+      "chunk_id": 0,
+      "title": "# Cynthia Heartbeat — 每小時學習與系統優化\n\n## 功能說明\n\n每小時觸發一次，分析最近對話、提取知識、更新系統。\n\n## 觸發條件\n\n- Heartbeat：每小時 (`0 *",
+      "content": "# Cynthia Heartbeat — 每小時學習與系統優化\n\n## 功能說明\n\n每小時觸發一次，分析最近對話、提取知識、更新系統。\n\n## 觸發條件\n\n- Heartbeat：每小時 (`0 * * * *`)\n\n## 工作流程\n\n### 步驟 1：對話摘要\n```\n1. 讀取最近 1 小時的所有對話記錄\n2. 提取：發言者、關鍵字、操作請求、決策\n3. 濃縮成結構化筆記\n```\n\n### 步驟 2：知識提取\n```\n- 辨識新知識點（技術、操作、偏好）\n- 檢查是否與現有知識重複\n- 標註需要入庫的新內容\n```\n\n### 步驟 3：系統優化建議\n```\n- 識別重複問題 → 建議更新 FAQ\n- 發現系統不足 → 產生優化提案\n- 記錄決策過程 → 形成案例庫\n```\n\n### 步驟 4：儲存與輸出\n```\n- 寫入 ~/.openclaw/workspace/memory/learning/YYYY-MM-DD-HH.md\n- 產出優化建議報告（如果有）\n```\n\n## 輸出格式\n\n```\n# 學習筆記 - {YYYY-MM-DD HH:00}"
+    },
+    {
+      "type": "skill",
+      "source": "skill-cynthia-heartbeat",
+      "chunk_id": 1,
+      "title": "## 對話摘要\n| 發言者 | 內容摘要 | 操作 |\n|--------|----------|------|\n| Joe | 請求優化系統 | 記錄 |\n\n## 新知識點\n- 知識點 1\n\n## ",
+      "content": "## 對話摘要\n| 發言者 | 內容摘要 | 操作 |\n|--------|----------|------|\n| Joe | 請求優化系統 | 記錄 |\n\n## 新知識點\n- 知識點 1\n\n## 優化建議\n- 建議 1\n\n## 待處理\n- [ ] 待處理項目\n```\n\n## 工具指引\n\n- **sessions_list**: 查詢最近對話\n- **sessions_history**: 讀取對話詳情\n- **memory_search**: 搜尋現有知識\n- **write**: 寫入學習筆記\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| 無新對話 | 輸出「無新對話，進入休眠」 |\n| 寫入失敗 | 回報錯誤，保留記憶體緩衝 |\n| 知識庫連線失敗 | 跳過搜尋，繼續摘要 |\n\n## 確認規則\n\n- 系統優化建議需要用戶確認後才能執行\n- 危險操作（T2+）必須明確獲得許可"
+    },
+    {
+      "type": "skill",
+      "source": "skill-muse-core",
+      "chunk_id": 0,
+      "title": "---\nname: muse_core\ndescription: Kira 中央治理核心。接收所有用戶請求，判斷是否直接回答或分派給專業 Agent。負責任務分類、路由、GSCC 風險評估、結果整合。",
+      "content": "---\nname: muse_core\ndescription: Kira 中央治理核心。接收所有用戶請求，判斷是否直接回答或分派給專業 Agent。負責任務分類、路由、GSCC 風險評估、結果整合。\n---\n\n# Muse-Core 治理技能\n\n## 預設行為鉤子\n\n### 任務前向量查詢鉤子 ⚓\n\n**觸發時機**：收到任何新任務/請求時\n\n**執行順序**：在任務分類/路由之前\n\n```\n收到請求 → [向量上下文查詢] → 任務分類 → 路由 → 執行 → 結果整合 → 回覆\n```\n\n**查詢策略**：\n1. 提取請求關鍵詞（去除停用詞）\n2. 搜尋向量資料庫（top 3-5 結果）\n3. 如果相關度 > 0.3，將結果注入上下文\n4. 記録本次查詢命中率到日誌\n\n**向量來源**：\n- memory/*.md（長期記憶）\n- 閉環文檔（docs/*.md）\n- Agent Skills（skills/*/SKILL.md）"
+    },
+    {
+      "type": "skill",
+      "source": "skill-muse-core",
+      "chunk_id": 1,
+      "title": "**呼叫方式**：\n```\n→ 調用 memory_search(query=task, top_k=5)\n→ 過濾相關度 > 0.3 的結果\n→ 注入上下文繼續處理\n```\n\n**實作狀態**：✅ ",
+      "content": "**呼叫方式**：\n```\n→ 調用 memory_search(query=task, top_k=5)\n→ 過濾相關度 > 0.3 的結果\n→ 注入上下文繼續處理\n```\n\n**實作狀態**：✅ 鉤子規則已建立\n\n---\n\n## 決策流程\n\n```\n收到請求 → 判斷複雜度 → 直接回答 / 分派 Agent → 整合結果 → 回覆\n```\n\n## 直接回答規則\n\n以下情境不分派 Agent，Kira 直接處理：\n\n- 簡單問答（天氣、時間、翻譯、定義）\n- 閒聊、打招呼、確認\n- 單一指令（「幫我設個提醒」「查一下 XX」）\n- 上下文延續（對前一輪對話的追問）\n- 意見徵詢（「你覺得呢？」）\n\n## 任務路由表\n\n### 按領域分派"
+    },
+    {
+      "type": "skill",
+      "source": "skill-muse-core",
+      "chunk_id": 2,
+      "title": "| 領域 | 關鍵詞 | 主要 Agent | 替代 Agent |\n|------|--------|-----------|-----------|\n| 分析報告 | 分析、報告、統計、數據、趨勢",
+      "content": "| 領域 | 關鍵詞 | 主要 Agent | 替代 Agent |\n|------|--------|-----------|-----------|\n| 分析報告 | 分析、報告、統計、數據、趨勢 | analytics-agent | knowledge-agent |\n| 知識筆記 | 筆記、記錄、學習、搜尋、整理 | knowledge-agent | memory-agent |\n| 系統優化 | 設定、優化、修復、升級、配置 | self-evolve-agent | Kira 直接處理 |\n| 驗證測試 | 測試、檢查、確認、驗證 | verification-agent | Kira 直接處理 |\n| 開發建構 | 代碼、程式、開發、建立 Agent | skill-creator | mcp-builder |\n| 生活助理 | 天氣、行程、日程、支出 | lifeos-agent | Kira 直接處理 |\n| 提醒排程 | 提醒、定時、每日、每週 | reminder-agent | lifeos-agent |\n| 記憶管理 | 記住、忘記、之前說過 | me"
+    },
+    {
+      "type": "skill",
+      "source": "skill-muse-core",
+      "chunk_id": 3,
+      "title": "### 按任務類型分派\n\n| 類型 | 範例 | Agent 優先順序 |\n|------|------|---------------|\n| build | 建構 Agent/Skill/MCP |",
+      "content": "### 按任務類型分派\n\n| 類型 | 範例 | Agent 優先順序 |\n|------|------|---------------|\n| build | 建構 Agent/Skill/MCP | skill-creator → mcp-builder → agent-builder |\n| analyze | 數據分析、趨勢報告 | analytics-agent → knowledge-agent |\n| manage | 排程、提醒、日程 | reminder-agent → lifeos-agent |\n| research | 資訊收集、調研 | knowledge-agent → memory-agent |\n| business | BNI、CRM、客戶 | bni-agent → crm-agent |\n| automate | FB/WA 自動化 | facebook-agent → lifeos-agent |\n\n## 降級處理\n\n當目標 Agent 不可用（未啟用或錯誤）："
+    },
+    {
+      "type": "skill",
+      "source": "skill-muse-core",
+      "chunk_id": 4,
+      "title": "1. 嘗試替代 Agent（見路由表「替代 Agent」欄）\n2. 替代也不可用 → Kira 直接處理簡化版本\n3. 無法處理 → 告知用戶，建議啟用相關 Agent\n\n## 多 Agent 協作\n",
+      "content": "1. 嘗試替代 Agent（見路由表「替代 Agent」欄）\n2. 替代也不可用 → Kira 直接處理簡化版本\n3. 無法處理 → 告知用戶，建議啟用相關 Agent\n\n## 多 Agent 協作\n\n跨領域任務的拆解與串接：\n\n1. 拆解為獨立子任務\n2. 每個子任務分派對應 Agent\n3. 定義執行順序（並行 or 序列）\n4. 收集所有結果後整合回覆\n\n## 結果整合\n\n回覆用戶時：\n- 去除重複資訊\n- 統一格式與術語\n- 重要內容優先\n- 附上行動建議（如有）\n- 格式適合 Telegram（短段落、項目符號）\n\n---\n\n_更新：2026-02-24_"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-workflow",
+      "chunk_id": 0,
+      "title": "---\nname: vector_summary_workflow\ndescription: 向量摘要完整工作流 (優化版)。當需要執行端到端的向量摘要管線時觸發，包括：本地優先處理、智慧分流、Oll",
+      "content": "---\nname: vector_summary_workflow\ndescription: 向量摘要完整工作流 (優化版)。當需要執行端到端的向量摘要管線時觸發，包括：本地優先處理、智慧分流、Ollama + MiniMax 雙模型處理、本地向量庫管理、檢索查詢、Notion 同步。\n---\n\n# 向量摘要完整工作流 (優化版 v2.0)\n\n## 優化策略 (2026-03-01)\n\n| 階段 | 本地處理 (Ollama) | 雲端處理 (MiniMax) |\n|------|-------------------|---------------------|\n| 向量化 | llama3 生成壓縮摘要 → 向量化 | 只在複雜查詢時調用 |\n| RAG 檢索 | 本地 embedding 匹配 | 智慧分流决策 |\n| 學習記憶 | qwen2.5:7b 初步分類 | 最終決策/驗證 |\n| 對話摘要 | 本地壓縮對話 | 只做重要訊息提取 |\n\n### 核心優化"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-workflow",
+      "chunk_id": 1,
+      "title": "1. **快取機制** - 重複內容不重複處理\n2. **智慧分流** - 簡單查詢本地處理，複雜問題才調用雲端\n3. **本地優先** - 雲端只處理「壓縮後的上下文」\n\n## 功能說明\n\n端到端的",
+      "content": "1. **快取機制** - 重複內容不重複處理\n2. **智慧分流** - 簡單查詢本地處理，複雜問題才調用雲端\n3. **本地優先** - 雲端只處理「壓縮後的上下文」\n\n## 功能說明\n\n端到端的向量摘要管線，整合 Ollama 本地生成與 MiniMax 雲端驗證。\n\n## 工作流程\n\n### 第一步：文本切分\n- 每區塊約 250 字，以句號等標點切分\n- 過濾無效短片段\n\n### 第二步：Ollama 摘要生成\n- 使用 llama3 本地模型快速生成摘要\n\n### 第三步：MiniMax 驗證（可選）\n- 使用 MiniMax-M2.5 生成對照版本\n- 選擇品質較佳者作為最終摘要\n\n### 第四步：向量化與儲存\n- 轉為 128 維向量，歸一化後儲存\n- 本地向量庫位置：`~/Desktop/vector-db/`\n- 每筆記錄包含：chunk_index、summary、source_chunk、embedding\n\n### 第五步：Notion 同步\n- 回寫向量摘要、向量狀態、語義標籤、重點、應用分類"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-workflow",
+      "chunk_id": 2,
+      "title": "### 第六步：檢索服務\n- 支援餘弦相似度檢索\n- 返回最相關的片段及來源筆記\n\n## 工具指引\n\n```bash\n# Ollama 環境\nollama serve\n\n# MiniMax 環境（驗證",
+      "content": "### 第六步：檢索服務\n- 支援餘弦相似度檢索\n- 返回最相關的片段及來源筆記\n\n## 工具指引\n\n```bash\n# Ollama 環境\nollama serve\n\n# MiniMax 環境（驗證用）\nexport MINIMAX_API_KEY=\"your-key\"\n\n# 執行 Ollama 版本\npython scripts/vector_summary_v2.py\n\n# 執行 Ollama + MiniMax 驗證版\npython scripts/vector_summary_verify.py\n```\n\n## 狀態標記對照\n\n| 標記 | 意義 |\n|------|------|\n| 已向量化 | 基礎處理完成 |\n| 已向量化(標準流程) | Ollama 完整流程 |\n| 已向量化(Ollama+MiniMax) | 雙模型驗證優化版 |\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-workflow",
+      "chunk_id": 3,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| Ollama 服務未啟動 | 嘗試自動啟動，失敗則提示用戶 |\n| MiniMax API Key 無效 | 跳過驗證，僅使用 ",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| Ollama 服務未啟動 | 嘗試自動啟動，失敗則提示用戶 |\n| MiniMax API Key 無效 | 跳過驗證，僅使用 Ollama 結果並記錄警告 |\n| 向量庫檔案損壞 | 從 Notion 重新拉取原文，重建該筆記的向量 |\n| 檢索無結果 | 擴大相似度閾值或提示用戶換關鍵字 |\n| Notion 同步失敗 | 保留本地結果，下次執行時重試 |\n\n## 使用範例\n\n- 「執行完整向量摘要工作流」\n- 「用雙模型處理所有 Notion 筆記」\n- 「在向量庫中搜尋跟『機器學習』相關的筆記」\n\n## 護欄\n\n- API Key 必須使用環境變數，禁止寫死在程式碼中\n- 本地向量庫不上傳至外部服務\n- 不修改 Notion 原始筆記內容\n- 摘要長度不超過 30 字，區塊數量 1-11 個\n- 向量維度固定 128 維，確保檢索一致性"
+    },
+    {
+      "type": "skill",
+      "source": "skill-domain-router",
+      "chunk_id": 0,
+      "title": "# Domain Router Skill v2\n\n## 功能\n根據任務領域自動選擇合適的 Agent，並處理模型切換。\n\n## 領域識別\n\n### 自動識別邏輯\n1. 接收任務描述\n2. 提取關鍵詞",
+      "content": "# Domain Router Skill v2\n\n## 功能\n根據任務領域自動選擇合適的 Agent，並處理模型切換。\n\n## 領域識別\n\n### 自動識別邏輯\n1. 接收任務描述\n2. 提取關鍵詞\n3. 匹配領域標籤\n4. 選擇最佳 Agent\n\n### 領域關鍵詞庫"
+    },
+    {
+      "type": "skill",
+      "source": "skill-domain-router",
+      "chunk_id": 1,
+      "title": "| 領域 | 關鍵詞 | Agent | 模型 |\n|------|--------|-------|------|\n| 開發 coding | code, 開發, 程式, debug, 寫 code",
+      "content": "| 領域 | 關鍵詞 | Agent | 模型 |\n|------|--------|-------|------|\n| 開發 coding | code, 開發, 程式, debug, 寫 code | code-master | MiniMax |\n| 寫作 writing | 文案, 寫作, 文章, 內容, copy | writing-master | MiniMax |\n| 設計 design | 設計, UI, UX, 圖形, 介面 | design-master | MiniMax |\n| 分析 analysis | 分析, 數據, 統計, 圖表 | analytics-agent | MiniMax |\n| 知識 knowledge | 知識, 學習, 理解, 概念 | knowledge-agent | MiniMax |\n| 記憶 memory | 記憶, 向量, RAG, 檢索 | memory-agent | MiniMax |\n| 治理 governance | 治理, 決策, 政策, 規則 | governance-agent | Claude Sonnet"
+    },
+    {
+      "type": "skill",
+      "source": "skill-domain-router",
+      "chunk_id": 2,
+      "title": "## 路由規則\n\n### 優先級\n1. 精確匹配 > 模糊匹配\n2. 有上下文 > 無上下文\n3. 主模型 > 備用模型\n\n### 上下文傳遞\n- 切換時保留最近 5 輪對話\n- 傳遞任務背景\n- 記",
+      "content": "## 路由規則\n\n### 優先級\n1. 精確匹配 > 模糊匹配\n2. 有上下文 > 無上下文\n3. 主模型 > 備用模型\n\n### 上下文傳遞\n- 切換時保留最近 5 輪對話\n- 傳遞任務背景\n- 記錄切換歷史\n\n## Fallback 機制\n\n```\n主模型失敗 → 切換備用模型 → 重試 → 失敗則警報\n```\n\n| 狀況 | 行動 |\n|------|------|\n| 主模型超時 | 切換備用 |\n| 主模型 rate limit | 排隊等待 30s 後重試 |\n| 所有模型失敗 | 記錄錯誤 + 發送警報 |\n\n## 使用方式\n\n直接說出任務，系統會：\n1. 識別領域\n2. 選擇 Agent\n3. 切換並執行\n4. 回報結果\n\n---\n*更新：2026-03-01 v2*"
+    },
+    {
+      "type": "skill",
+      "source": "skill-skill-matcher",
+      "chunk_id": 0,
+      "title": "# Skill Matcher Skill\n\n## 功能\n根據任務需求，自動匹配最適合的 Skills 和 Agents。\n\n## 匹配邏輯\n\n1. **接收任務描述**\n2. **提取關鍵詞**\n3",
+      "content": "# Skill Matcher Skill\n\n## 功能\n根據任務需求，自動匹配最適合的 Skills 和 Agents。\n\n## 匹配邏輯\n\n1. **接收任務描述**\n2. **提取關鍵詞**\n3. **匹配 Skills**\n4. **選擇最佳 Agent**\n5. **執行並回報**\n\n## 技能領域\n\n| 領域 | 可用 Skills |\n|------|-------------|\n| Coding | coding, development, debugging |\n| Writing | copywriting, content, editing |\n| Design | ui-design, graphic, ux |\n| Analysis | data, analytics, research |\n| Knowledge | memory, learning, RAG |\n| Governance | decision, policy, ethics |\n\n## 匹配優先級"
+    },
+    {
+      "type": "skill",
+      "source": "skill-skill-matcher",
+      "chunk_id": 1,
+      "title": "1. 精確匹配 > 模糊匹配\n2. 有 Skills > 無 Skills\n3. 主模型可用 > 備用模型\n\n---\n*更新：2026-03-01*",
+      "content": "1. 精確匹配 > 模糊匹配\n2. 有 Skills > 無 Skills\n3. 主模型可用 > 備用模型\n\n---\n*更新：2026-03-01*"
+    },
+    {
+      "type": "skill",
+      "source": "skill-mcp-builder",
+      "chunk_id": 0,
+      "title": "---\nname: mcp_builder\ndescription: MCP Server 建構與骨架生成。當需要快速建立 MCP Server 專案時觸發。\nmetadata: { \"opencla",
+      "content": "---\nname: mcp_builder\ndescription: MCP Server 建構與骨架生成。當需要快速建立 MCP Server 專案時觸發。\nmetadata: { \"openclaw\": { \"emoji\": \"🏗️\" } }\n---\n\n# MCP Server 建構\n\n快速建立 MCP Server 專案，包含專案結構、程式碼模板、依賴配置與測試框架。\n\n## 操作 / 工作流程"
+    },
+    {
+      "type": "skill",
+      "source": "skill-mcp-builder",
+      "chunk_id": 1,
+      "title": "1. **需求確認** — 確認 Server 名稱、功能描述、需要的 Tool 列表\n2. **骨架生成** — 建立專案目錄結構：\n   ```\n   mcp-server-{name}/\n   ",
+      "content": "1. **需求確認** — 確認 Server 名稱、功能描述、需要的 Tool 列表\n2. **骨架生成** — 建立專案目錄結構：\n   ```\n   mcp-server-{name}/\n   ├── src/\n   │   ├── index.ts          # 入口檔\n   │   ├── server.ts         # Server 類別\n   │   └── tools/            # Tool 定義\n   ├── tests/\n   │   └── server.test.ts\n   ├── package.json\n   ├── tsconfig.json\n   └── README.md\n   ```\n3. **程式碼生成** — 使用 `@modelcontextprotocol/sdk` 產生 Server 類別與 Tool 定義\n4. **依賴安裝** — 執行 `npm init -y && npm install @modelcontextprotocol/sdk`\n5. **編譯驗證** — 執行 `npx tsc` 確認編譯"
+    },
+    {
+      "type": "skill",
+      "source": "skill-mcp-builder",
+      "chunk_id": 2,
+      "title": "## 參數\n\n| 參數 | 類型 | 預設 | 說明 |\n|------|------|------|------|\n| name | string | — | Server 名稱（小寫、連字符） |",
+      "content": "## 參數\n\n| 參數 | 類型 | 預設 | 說明 |\n|------|------|------|------|\n| name | string | — | Server 名稱（小寫、連字符） |\n| tools | array | [] | Tool 定義列表 |\n| description | string | — | Server 功能描述 |\n| transport | string | stdio | 傳輸方式：stdio / http |\n\n## 輸出格式\n\n```\n🏗️ MCP Server 已建立\n名稱：mcp-server-[name]\n路徑：[專案路徑]\n工具數：[N] 個\n狀態：編譯通過 ✅\n\n下一步：\n1. cd mcp-server-[name]\n2. 編輯 src/tools/ 加入業務邏輯\n3. npx tsc && node dist/index.js\n```\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-mcp-builder",
+      "chunk_id": 3,
+      "title": "| 錯誤 | 處理 |\n|------|------|\n| 目錄已存在 | 詢問是否覆蓋或使用新名稱 |\n| npm install 失敗 | 檢查網路連線與 Node.js 版本 |\n| TypeS",
+      "content": "| 錯誤 | 處理 |\n|------|------|\n| 目錄已存在 | 詢問是否覆蓋或使用新名稱 |\n| npm install 失敗 | 檢查網路連線與 Node.js 版本 |\n| TypeScript 編譯失敗 | 列出錯誤訊息，自動修復常見問題 |\n| SDK 版本不相容 | 建議升級 Node.js 或降級 SDK |\n\n## 使用範例\n\n- \"幫我建立一個 MCP Server\"\n- \"建一個有天氣查詢工具的 MCP Server\"\n- \"用 HTTP 傳輸模式建立 MCP Server\""
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-ollama",
+      "chunk_id": 0,
+      "title": "---\nname: vector_summary_ollama\ndescription: 本地 Ollama 向量摘要生成。當需要使用本地模型對 Notion 筆記進行向量化摘要時觸發，包括：文本切分",
+      "content": "---\nname: vector_summary_ollama\ndescription: 本地 Ollama 向量摘要生成。當需要使用本地模型對 Notion 筆記進行向量化摘要時觸發，包括：文本切分、Ollama 摘要生成、向量化、本地儲存。\n---\n\n# 向量摘要（Ollama 版本）\n\n## 功能說明\n\n使用本地 Ollama（llama3）生成 Notion 筆記的向量摘要，免費且快速。適合日常批次處理及自動化場景。\n\n## 前置條件\n\n- Ollama 已安裝且正在運行（`ollama serve`）\n- llama3 模型已下載（4.7GB）\n- Python 3 可用\n\n## 工作流程\n\n### 第一步：文本切分\n- 將長文本切分成多段，每段約 250 字\n- 以句號、驚嘆號等標點作為切分點\n- 過濾低於 20 字的無效片段\n\n### 第二步：Ollama 摘要生成\n- 使用 llama3 對每個片段生成 30 字以內的精簡摘要\n- 提示詞：「用30字以內摘要核心概念：{片段內容}」\n\n### 第三步：向量化\n- 將摘要轉為 128 維向量\n- 進行歸一化處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-ollama",
+      "chunk_id": 1,
+      "title": "### 第四步：本地儲存\n- 儲存位置：`~/Desktop/vector-db/`\n- 檔案格式：`{page_id}.json`\n\n### 第五步：相似度檢索\n- 使用餘弦相似度進行比對\n- 返回",
+      "content": "### 第四步：本地儲存\n- 儲存位置：`~/Desktop/vector-db/`\n- 檔案格式：`{page_id}.json`\n\n### 第五步：相似度檢索\n- 使用餘弦相似度進行比對\n- 返回最相關的片段\n\n## 工具指引\n\n```bash\n# 確保 Ollama 運行\nollama serve\n\n# 處理最新 Notion 頁面\npython scripts/vector_summary_ollama.py\n\n# 處理所有頁面\npython scripts/vector_summary_ollama.py --all\n```\n\n腳本位置：`scripts/vector_summary_v2.py`\n\n## 與 MiniMax 版本比較\n\n| 項目 | Ollama | MiniMax |\n|------|--------|---------|\n| 品質 | 中 | 高 |\n| 速度 | 快 | 慢 |\n| 成本 | 免費 | API 按量計費 |\n| 適用 | 日常批次 | 首次高品質處理 |\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-ollama",
+      "chunk_id": 2,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| Ollama 未啟動 | 自動嘗試執行 `ollama serve`，失敗則提示用戶手動啟動 |\n| 模型未下載 | 提示執行 ",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| Ollama 未啟動 | 自動嘗試執行 `ollama serve`，失敗則提示用戶手動啟動 |\n| 模型未下載 | 提示執行 `ollama pull llama3` |\n| 文本為空 | 跳過該頁面，記錄到日誌 |\n| 向量庫目錄不存在 | 自動建立 `~/Desktop/vector-db/` |\n| 摘要品質過低 | 建議切換到 MiniMax 驗證版本 |\n\n## 使用範例\n\n- 「用 Ollama 處理最新的 Notion 筆記」\n- 「批次向量化所有未處理的筆記」\n- 「用本地模型跑一次向量摘要」\n\n## 護欄\n\n- 不修改 Notion 原始內容，僅生成摘要\n- 每段摘要不超過 30 字\n- 區塊數量限制 1-11 個\n- 向量維度固定 128 維\n- 不將本地資料上傳至外部服務"
+    },
+    {
+      "type": "skill",
+      "source": "skill-qa-auditor",
+      "chunk_id": 0,
+      "title": "---\nname: qa_auditor\ndescription: QA 審計工具。當需要對腳本或程式碼進行交付前品質審計時觸發，包括：4D 檢查（功能驗證、狀態閉環、時序併發、跨機適應）、問題報告、",
+      "content": "---\nname: qa_auditor\ndescription: QA 審計工具。當需要對腳本或程式碼進行交付前品質審計時觸發，包括：4D 檢查（功能驗證、狀態閉環、時序併發、跨機適應）、問題報告、修復建議。\n---\n\n# QA 審計工具\n\n## 功能說明\n\nAI Agent 開發交付前的必要審計關卡。基於 4D 有機 QA 體系，系統性檢查腳本的功能正確性、狀態管理、併發安全性和環境適應性。\n\n## 角色定位\n\n啟動此技能時，切換到「破壞者」人格：\n- 目標：證明現有程式碼會出錯\n- 態度：懷疑一切假設\n- 輸出：問題清單 + 修復建議\n\n## 工作流程\n\n### 第一步：D1 - 邏輯與功能驗證\n- 腳本能否正常執行不報錯\n- 輸出格式是否正確\n- 必要欄位是否存在\n- 錯誤處理是否完善\n\n### 第二步：D2 - 狀態流轉閉環\n- 暫存檔案是否有清理機制\n- 狀態轉換是否正確\n- 日誌是否有輸出\n- 執行完成後狀態是否正確"
+    },
+    {
+      "type": "skill",
+      "source": "skill-qa-auditor",
+      "chunk_id": 1,
+      "title": "### 第三步：D3 - 時序與併發驗證\n- 是否有防止重複執行機制（lock file）\n- 模擬隔天重跑是否正常\n- 模擬併發情境是否安全\n- 逾時處理是否存在\n\n### 第四步：D4 - 跨機環",
+      "content": "### 第三步：D3 - 時序與併發驗證\n- 是否有防止重複執行機制（lock file）\n- 模擬隔天重跑是否正常\n- 模擬併發情境是否安全\n- 逾時處理是否存在\n\n### 第四步：D4 - 跨機環境適應性\n- 路徑是否存在且可訪問\n- 環境變數是否已設定\n- 依賴軟體是否可用\n- 時區處理是否正確\n\n### 第五步：生成報告\n- 輸出 QA_RECORD.md 格式的審計報告\n- 標明 PASS 或 FAIL\n- 列出所有問題和修復建議\n\n## 測試等級\n\n| 等級 | 時間 | 範圍 |\n|------|------|------|\n| smoke | ~5 秒 | 僅 D1 基本檢查 |\n| full | ~30 秒 | D1-D4 全部檢查 |\n\n## 執行方式\n\n```\nqa_auditor <script_path> [--level smoke|full] [--sandbox] [--verbose]\n```\n\n## 報告格式"
+    },
+    {
+      "type": "skill",
+      "source": "skill-qa-auditor",
+      "chunk_id": 2,
+      "title": "```markdown\n# QA 審計報告\n## 測試對象\n- 腳本: xxx.sh\n- 日期: YYYY-MM-DD\n- 等級: full\n\n## D1: 功能驗證\n| 項目 | 結果 | 說明 |",
+      "content": "```markdown\n# QA 審計報告\n## 測試對象\n- 腳本: xxx.sh\n- 日期: YYYY-MM-DD\n- 等級: full\n\n## D1: 功能驗證\n| 項目 | 結果 | 說明 |\n|------|------|------|\n| 執行不報錯 | PASS/FAIL | ... |\n\n## 總結\n- 結果: PASS/FAIL\n- 問題數: X\n- 修復建議: ...\n```\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| 腳本路徑不存在 | 回報錯誤，列出當前目錄可用腳本 |\n| 腳本無執行權限 | 提示執行 `chmod +x`，不自動修改 |\n| 依賴工具缺失 | 列出缺失的工具，提供安裝指令 |\n| sandbox 模式不可用 | 降級為非隔離模式，加入警告 |\n| 審計中腳本卡住 | 30 秒超時強制終止，標記為 FAIL |\n\n## 使用範例\n\n- 「對 cron-bni-reminder.sh 做完整 QA 審計」\n- 「smoke test 這個新腳本」\n- 「檢查這個部署腳本的環境適應性」\n\n## 護欄"
+    },
+    {
+      "type": "skill",
+      "source": "skill-qa-auditor",
+      "chunk_id": 3,
+      "title": "- 審計過程不修改被測腳本\n- sandbox 模式下不影響生產環境\n- 不自動修復問題，僅提供建議\n- 不執行含有危險操作（rm -rf、drop table）的腳本\n- 審計報告不包含敏感資訊（密",
+      "content": "- 審計過程不修改被測腳本\n- sandbox 模式下不影響生產環境\n- 不自動修復問題，僅提供建議\n- 不執行含有危險操作（rm -rf、drop table）的腳本\n- 審計報告不包含敏感資訊（密碼、API Key）"
+    },
+    {
+      "type": "skill",
+      "source": "skill-order-analyzer",
+      "chunk_id": 0,
+      "title": "---\nname: order_analyzer\ndescription: 訂單分析器。當收到 WeChat 訂單對話需要提取訂單資訊時觸發，包括：客戶識別、商品標準化、價格提取、數量單位解析、JSO",
+      "content": "---\nname: order_analyzer\ndescription: 訂單分析器。當收到 WeChat 訂單對話需要提取訂單資訊時觸發，包括：客戶識別、商品標準化、價格提取、數量單位解析、JSON 結構化輸出。\n---\n\n# 訂單分析器\n\n## 功能說明\n\n從 WeChat 訂單對話中自動提取結構化訂單資訊，識別客戶、商品、數量、價格，輸出標準 JSON 格式。專為澳門餐飲/酒店供應鏈設計。\n\n## 工作流程\n\n### 第一步：接收對話文本\n- 接收原始 WeChat 訂單對話\n- 可以是單筆或多筆訂單混合\n\n### 第二步：客戶識別\n- 識別已知客戶名稱：\n\n| 類型 | 客戶名稱 |\n|------|----------|\n| 餐廳 | 彥食堂、匠膳、櫻川壽司、達摩、寫樂 |\n| 酒店 | 葡京酒店、皇朝举杯、濠尚 |\n| 地點 | 石排灣、台山、氹仔 |\n\n### 第三步：商品標準化\n- 「大三文魚」→「大三文魚」\n- 「三文魚」→「三文魚」\n- 「赤貝」「甜蝦」「北極貝」等保持原名\n\n### 第四步：數量與單位解析"
+    },
+    {
+      "type": "skill",
+      "source": "skill-order-analyzer",
+      "chunk_id": 1,
+      "title": "| 縮寫 | 單位 |\n|------|------|\n| 條 | 條（整條魚） |\n| k / kg | 公斤 |\n| 箱 | 箱 |\n| 盒 | 盒 |\n| 包 | 包 |\n\n### 第五步：價格",
+      "content": "| 縮寫 | 單位 |\n|------|------|\n| 條 | 條（整條魚） |\n| k / kg | 公斤 |\n| 箱 | 箱 |\n| 盒 | 盒 |\n| 包 | 包 |\n\n### 第五步：價格提取\n- 有數字：直接提取（如 `100` → price: 100）\n- 標註「機價」：price: null\n- 僅數量無價格：price 欄位省略\n\n### 第六步：輸出 JSON\n\n```json\n{\n  \"orders\": [\n    {\n      \"customer\": \"客戶名稱\",\n      \"location\": \"地點（可選）\",\n      \"items\": [\n        {\"name\": \"商品名稱\", \"qty\": 1, \"unit\": \"條\", \"price\": 100}\n      ],\n      \"total\": 100\n    }\n  ],\n  \"summary\": {\n    \"total_orders\": 1,\n    \"hot_products\": [\"大三文魚\"]\n  }\n}\n```\n\n## 錯誤處理"
+    },
+    {
+      "type": "skill",
+      "source": "skill-order-analyzer",
+      "chunk_id": 2,
+      "title": "| 情境 | 處理方式 |\n|------|----------|\n| 客戶名稱無法識別 | 使用原文作為 customer，標記為「未知客戶」 |\n| 數量單位不明 | 預設為「個」，附註待確認 |",
+      "content": "| 情境 | 處理方式 |\n|------|----------|\n| 客戶名稱無法識別 | 使用原文作為 customer，標記為「未知客戶」 |\n| 數量單位不明 | 預設為「個」，附註待確認 |\n| 價格格式混亂 | 設為 null，附註原始文字 |\n| 對話中混雜非訂單內容 | 過濾無關內容，僅提取訂單資訊 |\n| 同一客戶多筆訂單 | 合併為一筆，items 陣列包含所有商品 |\n\n## 使用範例\n\n- 輸入：「彥食堂 大三文魚1條100」\n  輸出：`{\"customer\": \"彥食堂\", \"items\": [{\"name\": \"大三文魚\", \"qty\": 1, \"unit\": \"條\", \"price\": 100}]}`\n\n- 輸入：「氹仔旗艦（壽司吧） 赤貝4kg 大葉 6盒」\n  輸出：`{\"customer\": \"氹仔旗艦\", \"items\": [{\"name\": \"赤貝\", \"qty\": 4, \"unit\": \"kg\"}, {\"name\": \"大葉\", \"qty\": 6, \"unit\": \"盒\"}]}`"
+    },
+    {
+      "type": "skill",
+      "source": "skill-order-analyzer",
+      "chunk_id": 3,
+      "title": "- 輸入：「英皇鮮味王 大三文魚2條90 2L甜虾1箱，275」\n  輸出：兩個商品項目，total: 365\n\n## 護欄\n\n- 不修改原始對話內容，僅做結構化提取\n- 不猜測缺失的價格，缺失就標 ",
+      "content": "- 輸入：「英皇鮮味王 大三文魚2條90 2L甜虾1箱，275」\n  輸出：兩個商品項目，total: 365\n\n## 護欄\n\n- 不修改原始對話內容，僅做結構化提取\n- 不猜測缺失的價格，缺失就標 null\n- 不自動下單或發送訂單，僅做分析\n- 商品名稱以原文為準，不做過度標準化\n- 涉及金額時必須精確，不做四捨五入"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-standard",
+      "chunk_id": 0,
+      "title": "---\nname: vector_summary_standard\ndescription: 向量摘要標準流程。當需要對 Notion 筆記進行高品質向量化處理時觸發，包括：Ollama 生成 + M",
+      "content": "---\nname: vector_summary_standard\ndescription: 向量摘要標準流程。當需要對 Notion 筆記進行高品質向量化處理時觸發，包括：Ollama 生成 + MiniMax 驗證、Notion 同步、品質控管。\n---\n\n# 向量摘要標準流程\n\n## 功能說明\n\nNotion 筆記向量化的標準工作流程，使用 Ollama 生成摘要並可選搭配 MiniMax 驗證，確保高品質向量摘要。處理完成後自動同步回 Notion。\n\n## 工作流程\n\n### 第一步：文本切分\n- 每區塊約 250 字，以標點符號為切分點\n- 過濾低於 20 字的片段\n\n### 第二步：Ollama 摘要生成\n- 使用 llama3 生成 30 字以內精簡摘要\n- 提示詞：「用30字以內摘要核心概念：{片段}」\n\n### 第三步：MiniMax 驗證（可選）\n- 使用 MiniMax-M2.5 生成對照摘要\n- 比較兩版本，選擇品質較佳者\n\n### 第四步：向量化\n- 轉為 128 維向量並歸一化"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-standard",
+      "chunk_id": 1,
+      "title": "### 第五步：本地儲存\n- 儲存至 `~/Desktop/vector-db/{page_id}.json`\n\n### 第六步：Notion 同步\n- 回寫以下欄位：\n\n| Notion 欄位 | ",
+      "content": "### 第五步：本地儲存\n- 儲存至 `~/Desktop/vector-db/{page_id}.json`\n\n### 第六步：Notion 同步\n- 回寫以下欄位：\n\n| Notion 欄位 | 內容 |\n|-------------|------|\n| 向量摘要 | 摘要文字（500 字內） |\n| 向量狀態 | 已向量化(標準流程) |\n| 語義標籤 | Chunk_{數量} |\n| 重點 | 首要摘要（50 字） |\n| 應用 | 分類標籤 |\n\n## 工具指引\n\n```bash\n# 確保 Ollama 運行\nollama serve\n\n# 標準流程（Ollama）\npython scripts/vector_summary_v2.py\n\n# 驗證版（Ollama + MiniMax）\npython scripts/vector_summary_verify.py\n```\n\n## 品質標準"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-standard",
+      "chunk_id": 2,
+      "title": "| 項目 | 標準 |\n|------|------|\n| 摘要長度 | 不超過 30 字 |\n| 區塊數量 | 1-11 個 |\n| 向量維度 | 128 維 |\n| 狀態標記 | 已向量化(標準流",
+      "content": "| 項目 | 標準 |\n|------|------|\n| 摘要長度 | 不超過 30 字 |\n| 區塊數量 | 1-11 個 |\n| 向量維度 | 128 維 |\n| 狀態標記 | 已向量化(標準流程) |\n\n## 錯誤處理\n\n| 情境 | 處理方式 |\n|------|----------|\n| Ollama 未啟動 | 提示用戶執行 `ollama serve` |\n| MiniMax API 失敗 | 跳過驗證步驟，僅使用 Ollama 結果 |\n| Notion API 逾時 | 重試 3 次，失敗則僅保存本地 |\n| 頁面內容為空 | 跳過並記錄到日誌 |\n| 摘要比對差異過大 | 標記該頁面待人工審核 |\n\n## 使用範例\n\n- 「用標準流程處理 Notion 筆記向量化」\n- 「跑一次帶 MiniMax 驗證的向量摘要」\n- 「處理所有未向量化的筆記並同步回 Notion」\n\n## 護欄"
+    },
+    {
+      "type": "skill",
+      "source": "skill-vector-summary-standard",
+      "chunk_id": 3,
+      "title": "- 不修改 Notion 原始筆記內容\n- 每段摘要嚴格不超過 30 字\n- MiniMax API Key 不寫死在腳本中，使用環境變數\n- 向量庫本地儲存，不上傳至外部\n- 同步失敗時必須保留本地",
+      "content": "- 不修改 Notion 原始筆記內容\n- 每段摘要嚴格不超過 30 字\n- MiniMax API Key 不寫死在腳本中，使用環境變數\n- 向量庫本地儲存，不上傳至外部\n- 同步失敗時必須保留本地備份"
+    }
+  ]
+}

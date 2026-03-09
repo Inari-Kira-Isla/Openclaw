@@ -1,0 +1,75 @@
+{
+  "date": "2026-03-05",
+  "hour": "23",
+  "sources": ["Hacker News"],
+  "topics": [
+    {
+      "rank": 1,
+      "title": "The L in 'LLM' Stands for Lying",
+      "url": "https://acko.net/blog/the-l-in-llm-stands-for-lying/",
+      "source": "Hacker News",
+      "points": 469,
+      "comments": 295,
+      "category": "AI/LLM Analysis",
+      "searchPotential": "high",
+      "tags": ["LLM", "AI-criticism", "AI-limitations"]
+    },
+    {
+      "rank": 2,
+      "title": "Something is afoot in the land of Qwen",
+      "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+      "source": "Hacker News",
+      "points": 735,
+      "comments": 318,
+      "category": "AI Models",
+      "searchPotential": "high",
+      "tags": ["Qwen", "Alibaba", "Open-Source-AI", "Model-development"]
+    },
+    {
+      "rank": 3,
+      "title": "Nvidia PersonaPlex 7B on Apple Silicon",
+      "url": "https://blog.ivan.digital/nvidia-personaplex-7b-on-apple-silicon-full-duplex-speech-to-speech-in-native-swift-with-mlx-0aa5276f2e23",
+      "source": "Hacker News",
+      "points": 249,
+      "comments": 77,
+      "category": "AI/Speech",
+      "searchPotential": "medium",
+      "tags": ["Nvidia", "Apple-Silicon", "MLX", "Speech-to-Speech", "Swift"]
+    },
+    {
+      "rank": 4,
+      "title": "Relicensing with AI-Assisted Rewrite",
+      "url": "https://tuananh.net/2026/03/05/relicensing-with-ai-assisted-rewrite/",
+      "source": "Hacker News",
+      "points": 273,
+      "comments": 262,
+      "category": "AI/DevTools",
+      "searchPotential": "medium",
+      "tags": ["AI-code", "Open-source", "Licensing"]
+    },
+    {
+      "rank": 5,
+      "title": "AMD Ryzen AI for Desktop PCs",
+      "url": "https://arstechnica.com/gadgets/2026/03/amd-ryzen-ai-400-cpus-will-bring-upgraded-graphics-to-socket-am5-desktops/",
+      "source": "Hacker News",
+      "points": 155,
+      "comments": 137,
+      "category": "Hardware",
+      "searchPotential": "medium",
+      "tags": ["AMD", "Ryzen-AI", "Desktop-PC", "Hardware"]
+    },
+    {
+      "rank": 6,
+      "title": "Google Workspace CLI",
+      "url": "https://github.com/googleworkspace/cli",
+      "source": "Hacker News",
+      "points": 757,
+      "comments": 249,
+      "category": "DevTools",
+      "searchPotential": "medium",
+      "tags": ["Google", "CLI", "Automation", "Workspace"]
+    }
+  ],
+  "summary": "Top AI/Tech trends from HN: LLM criticism/analysis gaining traction, Qwen (Alibaba) AI model developments heating up, Apple Silicon + MLX for local AI inference emerging, AI-assisted code tools (relicensing) being explored, AMD bringing AI to desktop PCs.",
+  "generatedAt": "2026-03-05T23:34:00+08:00"
+}

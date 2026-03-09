@@ -1,0 +1,31 @@
+{
+  "task_type": "security_monitoring",
+  "task_description": "定時安全檢查鉤子",
+  "trigger": "cron: 04:30 daily",
+  "steps": [
+    {
+      "step": 1,
+      "action": "讀取現有日誌",
+      "details": "檢查 memory/security.md 是否存在，讀取最新記錄"
+    },
+    {
+      "step": 2,
+      "action": "執行安全檢查",
+      "details": "檢查異常登入、權限變更、資料外洩風險"
+    },
+    {
+      "step": 3,
+      "action": "更新日誌",
+      "details": "在 security.md 頂部新增檢查結果"
+    }
+  ],
+  "training_examples": [
+    {
+      "input": "執行安全監控",
+      "expected_output": "✅ 安全監控完成：系統正常，無異常"
+    }
+  ],
+  "collected_at": "2026-03-03T04:32:00+08:00",
+  "source": "cron-event",
+  "status": "completed"
+}

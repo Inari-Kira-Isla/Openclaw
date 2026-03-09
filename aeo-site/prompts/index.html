@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提示詞 | AI 學習寶庫</title>
+  <meta name="description" content="專業 AI 提示詞範本與設計技巧，讓 Claude、ChatGPT、Ollama 等工具充分發揮潛力。">
+  <meta name="keywords" content="AI提示詞, Prompt Engineering, Claude提示詞, ChatGPT提示詞, 系統提示詞">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="提示詞 | AI 學習寶庫">
+  <meta property="og:description" content="專業 AI 提示詞範本與設計技巧。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link active">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/Openclaw/">首頁</a>
+        <span class="bc-sep">›</span>
+        <span>提示詞</span>
+      </nav>
+    </div>
+
+    <div class="page-header">
+      <div class="container">
+        <div class="page-header-icon">💡</div>
+        <h1>提示詞</h1>
+        <p>專業 AI 提示詞範本與設計技巧，讓 AI 充分發揮潛力</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <div class="art-list">
+          <a href="/Openclaw/prompts/2026-03-06_chatgpt-role-play-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>ChatGPT 角色扮演提示詞：讓 AI 成為你的專業顧問</h3>
+            <p>使用 ChatGPT 角色扮演提示詞，讓 AI 成為你的專業顧問。本文詳細教學角色扮演提示詞設計技巧與實際應用範例。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-06_ecommerce-product-description-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>電商產品描述提示詞：讓商品文案自動轉化率提升 30%</h3>
+            <p>電商產品描述提示詞教學，透過AI寫作技巧提升商品文案轉化率30%，包含具體模板與操作步驟。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-06_legal-document-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>法律文件提示詞：合約摘要、條款解析的 AI 輔助工具</h3>
+            <p>法律文件提示詞是幫助 AI 工具進行合約摘要、條款解析的專業指令。透過設計良好的提示詞結構，律師與法務人員可快速提取關鍵資訊、識別風險條款並生成結構化分析報告。本文介紹 AI 合約分析的提示詞設計方法與實際應用。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-05_task-context-output-framework.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>多步驟工作提示詞框架：TASK-CONTEXT-OUTPUT 方法</h3>
+            <p>TASK-CONTEXT-OUTPUT 方法是一套系統化的多步驟工作提示詞框架，幫助使用者精確定義 AI 任務目標、提供充分上下文背景，並規範輸出格式。此框架適用於複雜的 AI 工作流程，能顯著提升提示詞效果與一致性。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-05_creative-writing-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>創意寫作提示詞大全：小說、劇本、詩詞的 AI 創作指南</h3>
+            <p>創意寫作提示詞大全，提供小說、劇本、詩詞的 AI 創作指南，包含實用範例與操作步驟，幫助作者提升創作效率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-05_financial-report-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>財務報告摘要提示詞：讓 AI 幫你讀懂年報與財報</h3>
+            <p>財務報告摘要提示詞教學，教你如何運用 AI 工具自動分析年報與財報重點。包含具體提示詞範例、操作步驟與設計原則，快速掌握 AI 金融分析技巧。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-05_social-media-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>社群媒體提示詞：LinkedIn、Twitter、Instagram 爆款內容生成</h3>
+            <p>學習使用 AI 提示詞在 LinkedIn、Twitter、Instagram 產生爆款內容的完整教學，含具體範例和操作步驟，幫助社群媒體行銷人員提升內容產出效率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-05_multilingual-translation-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>多語言翻譯提示詞：超越 Google 翻譯的 AI 本地化技巧</h3>
+            <p>多語言翻譯提示詞教學，詳細解說如何運用AI技術提升翻譯品質，涵蓋Prompt設計技巧、本地化策略與實際範例。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-04_claude-system-prompt-guide.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Claude 系統提示詞設計：打造高效 AI 助理的完整指南</h3>
+            <p>深入解析 Claude 系統提示詞設計技巧，涵蓋角色定義、輸出格式、工作流程等核心要素，提供實用程式碼範例，幫助您打造高效客製化 AI 助理。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-04_zero-shot-few-shot-prompting.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Prompt 工程師必學：零樣本與少樣本提示詞技巧</h3>
+            <p>零樣本與少樣本提示詞是 Prompt 工程師必學的核心技巧，透過正確的提示詞設計，讓 AI 模型無需額外訓練即可完成任務。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-04_chain-of-thought-advanced.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>思維鏈提示詞進階：讓 AI 一步一步解決複雜問題</h3>
+            <p>掌握思維鏈提示詞進階技巧，讓AI像人類一樣一步步推理，解決複雜問題。本文提供具體範例與操作步驟。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/prompts/2026-03-04_interview-preparation-prompts.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>AI 面試準備提示詞：模擬面試官與最佳回答策略</h3>
+            <p>AI面試準備提示詞教您使用ChatGPT等工具模擬面試官，練習自我介紹、行為問題及技術問題的回答策略，提升求職競爭力。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/prompts/2026-03-02_ai-prompt-design-guide.html" class="art-item reveal">
+            <div class="art-item-badge">入門到進階</div>
+            <h3>AI 提示詞設計完全指南：從基礎到進階的完整教學</h3>
+            <p>系統性介紹 AI 提示詞設計原則，涵蓋角色設定、上下文注入、輸出格式控制等核心技巧。包含 Claude、ChatGPT 實戰範例。</p>
+            <div class="art-item-meta">
+              <span>2026-03-02</span>
+              <span class="sep">·</span>
+              <span>10 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/prompts/2026-03-02_結構化提示詞設計完全指南.html" class="art-item reveal reveal-d1">
+            <div class="art-item-badge">進階技巧</div>
+            <h3>結構化提示詞設計完全指南</h3>
+            <p>深入探討結構化提示詞的設計方法，讓 AI 輸出更精確、更符合業務需求。包含 XML 標籤、JSON 格式輸出、鏈式思考等進階技巧。</p>
+            <div class="art-item-meta">
+              <span>2026-03-02</span>
+              <span class="sep">·</span>
+              <span>8 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/prompts/claude-code-prompts.html" class="art-item reveal reveal-d2">
+            <div class="art-item-badge">Claude Code</div>
+            <h3>Claude Code 實戰提示詞集</h3>
+            <p>專為 Claude Code 設計的高效提示詞合集，涵蓋程式碼審查、架構設計、除錯優化等常見開發場景。</p>
+            <div class="art-item-meta">
+              <span>2026-02-25</span>
+              <span class="sep">·</span>
+              <span>7 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/prompts/system-prompt-design.html" class="art-item reveal reveal-d3">
+            <div class="art-item-badge">系統提示詞</div>
+            <h3>系統提示詞設計：打造高效 AI Agent</h3>
+            <p>深入分析系統提示詞（System Prompt）的設計原則，學習如何為不同場景定制 AI 角色、限制與行為規範。</p>
+            <div class="art-item-meta">
+              <span>2026-02-20</span>
+              <span class="sep">·</span>
+              <span>12 分鐘閱讀</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+        <a href="/Openclaw/llms.txt">llms.txt</a>
+      </nav>
+            <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved;
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

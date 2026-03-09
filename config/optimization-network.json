@@ -1,0 +1,26 @@
+{
+  "name": "優化網絡系統",
+  "components": {
+    "data_collection": {
+      "frequency": "每小時",
+      "sources": ["系統日誌", "錯誤記錄", "成功案例", "用戶反饋"]
+    },
+    "pattern_analysis": {
+      "frequency": "每日",
+      "analysis": ["錯誤模式", "成功因素", "改進建議"]
+    },
+    "article_generation": {
+      "frequency": "每日 05:00",
+      "output": ["技術指標", "能力提升", "未來展望"]
+    },
+    "feedback_loop": {
+      "frequency": "每週",
+      "actions": ["數據分析", "策略調整", "系統優化"]
+    }
+  },
+  "automation": {
+    "notion_sync": true,
+    "auto_save": true,
+    "learning闭环": true
+  }
+}

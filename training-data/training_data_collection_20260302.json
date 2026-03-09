@@ -1,0 +1,46 @@
+{
+  "task_type": "scheduled_reminder",
+  "task_name": "訓練數據收集與系統監控",
+  "trigger": "cron: 18:39 daily",
+  "context": "每日訓練數據收集提醒，記錄簡單重複工作並生成訓練範例",
+  "steps": [
+    {
+      "step": 1,
+      "action": "系統效能檢查",
+      "details": "檢查 OpenClaw Gateway 狀態、記憶體使用、Context/Cache 指標",
+      "commands": [
+        "openclaw status | grep -E '(Gateway|ms|memory|Context|Cache)'",
+        "top -l 1 -n 0 | grep PhysMem"
+      ]
+    },
+    {
+      "step": 2,
+      "action": "數據收集",
+      "details": "檢查 training-data/ 目錄，識別可記錄的重複任務",
+      "commands": [
+        "ls -la training-data/"
+      ]
+    },
+    {
+      "step": 3,
+      "action": "生成訓練範例",
+      "details": "將重複性任務轉換為結構化 JSON 訓練範例",
+      "output_format": "training-data/{task_name}_{date}.json"
+    },
+    {
+      "step": 4,
+      "action": "記錄監控日誌",
+      "details": "將系統指標記錄到 memory/performance-{date}.md",
+      "output_path": "memory/"
+    }
+  ],
+  "collected_examples": [
+    "系統健康檢查",
+    "效能監控記錄",
+    "記憶體使用追蹤",
+    "Cron 執行狀態檢查"
+  ],
+  "output": "training-data/training_data_collection_20260302.json",
+  "status": "completed",
+  "timestamp": "2026-03-02T18:39+08:00"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "vector-summary-minimax",
+  "description": "使用 MiniMax 生成高質量向量摘要",
+  "model": "MiniMax",
+  "prompt": "你是一個專業的文本摘要專家。請用 30 字以內精簡摘要以下內容的核心概念，只返回摘要文字，不要其他說明："
+}

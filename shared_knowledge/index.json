@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "created": "2026-02-16",
+  "description": "Kira & Isla 共享知識庫",
+  "directories": {
+    "discussions": "討論記錄",
+    "knowledge": "知識庫"
+  },
+  "agents": {
+    "kira": {
+      "name": "Kira",
+      "capabilities": ["語音轉文字", "截圖傳送", "檔案操作", "訊息傳送", "TTS"]
+    },
+    "isla": {
+      "name": "Isla", 
+      "capabilities": ["網頁瀏覽", "資料抓取", "Gemini AI", "內容生成"]
+    }
+  }
+}

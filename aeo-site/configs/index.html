@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系統配置 | AI 學習寶庫</title>
+  <meta name="description" content="AI 工具與系統的完整配置指南，輕鬆搭建最佳開發環境。包含 Claude、Ollama、OpenAI API 配置教學。">
+  <meta name="keywords" content="AI配置, Ollama安裝, Claude配置, OpenAI API, 開發環境設置, MCP Server">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="系統配置 | AI 學習寶庫">
+  <meta property="og:description" content="AI 工具與系統的完整配置指南。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
+</head>
+<body class="page-wrap">
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link active">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/Openclaw/">首頁</a>
+        <span class="bc-sep">›</span>
+        <span>系統配置</span>
+      </nav>
+    </div>
+
+    <div class="page-header">
+      <div class="container">
+        <div class="page-header-icon">⚙️</div>
+        <h1>系統配置</h1>
+        <p>AI 工具與系統的完整配置指南，輕鬆搭建最佳開發環境</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <div class="art-list">
+          <a href="/Openclaw/configs/2026-03-06_claude-desktop-mcp-setup.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Claude Desktop 完整配置指南：MCP Server 一鍵安裝教學</h3>
+            <p>Claude Desktop+MCP Server 完整安裝教學，透過一鍵指令快速配置 AI 助理，提升工作效率。含圖文步驟教學。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-06_python-venv-best-practices.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Python 虛擬環境最佳實踐：pyenv + venv + pip 完整指南</h3>
+            <p>本文詳解 Python 虛擬環境最佳實踐，介紹如何整合 pyenv、venv 與 pip 三大工具。透過 pyenv 管理多版本 Python，venv 創建專案隔離環境，pip 處理依賴套件，打造安全且可重現的開發環境。適合初學者至進階開...</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-06_github-copilot-advanced-config.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>GitHub Copilot 進階設定：讓 AI 配對程式設計更高效</h3>
+            <p>本文詳解 GitHub Copilot 進階設定，包括啟用方式、快捷鍵配置、語言過濾與上下文自訂，提供實用程式碼範例，幫助開發者提升 AI 配對程式設計效率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-06</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-05_cursor-ai-editor-config.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Cursor AI 程式碼編輯器最佳設定：提升 10 倍開發效率</h3>
+            <p>Cursor AI 程式碼編輯器完整教學，涵蓋安裝、核心設定、快捷鍵優化與 AI 功能配置，幫助開發者快速提升 10 倍開發效率。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-05_mac-apple-silicon-ai-dev.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Mac M 晶片 AI 開發環境優化：充分利用神經網路引擎</h3>
+            <p>深入解析 Mac M 晶片 AI 開發環境優化策略，包含 Apple Silicon 神經網路引擎架構說明、TensorFlow 與 PyTorch 加速配置、Core ML 整合實作，以及效能監控技巧。提供開發者具體的環境設置步驟和程式碼...</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-05_n8n-ai-api-integration.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>n8n 工作流自動化：AI API 整合完整設定教學</h3>
+            <p>n8n 工作流自動化完整教學，教你如何配置 AI API 整合，實現自動化任務處理。含詳細設定步驟與程式碼範例。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-05_supabase-pgvector-rag.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Supabase + pgvector：向量資料庫配置與 RAG 系統搭建</h3>
+            <p>Supabase + pgvector 向量資料庫配置教學，幫助你快速搭建 RAG 系統，實現語義搜尋與 AI 應用開發。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-05_langchain-dev-environment.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>LangChain 環境配置：從零開始搭建 AI Agent 開發環境</h3>
+            <p>LangChain 環境配置教學，詳細說明如何從零開始搭建 AI Agent 開發環境。包括 Python 環境設定、LangChain 安裝、相依套件管理及開發工具推薦，幫助開發者快速建立完整的 AI Agent 開發環境。</p>
+            <div class="art-item-meta">
+              <span>2026-03-05</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-04_vercel-cloudflare-optimization.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Vercel + Cloudflare 靜態網站最佳化配置</h3>
+            <p>Vercel + Cloudflare 靜態網站最佳化配置教學，涵蓋 DNS 設定、快取策略、SSL 憑證與效能優化。詳細步驟幫助開發者提升網站載入速度與安全性。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-04_redis-cache-ai-performance.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>Redis 快取配置：AI 應用效能提升的關鍵設定</h3>
+            <p>深入探討 Redis 快取配置如何提升 AI 應用效能，涵蓋記憶體管理、資料結構選擇、持久化設定及效能調優實戰，助您充分發揮 Redis 在 AI 系統中的潛力。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+          <a href="/Openclaw/configs/2026-03-04_ollama-open-webui-setup.html" class="art-item reveal">
+            <div class="art-item-badge">最新</div>
+            <h3>本地 AI 環境搭建：Ollama + Open WebUI 完整安裝指南</h3>
+            <p>本文詳解如何在本地電腦安裝 Ollama 與 Open WebUI，打造專屬 AI 對話環境，支援離線使用與自訂模型。</p>
+            <div class="art-item-meta">
+              <span>2026-03-04</span>
+              <span class="sep">·</span>
+              <span>AI 生成</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/configs/ollama-complete-setup.html" class="art-item reveal">
+            <div class="art-item-badge">本地 AI</div>
+            <h3>Ollama 完整安裝配置指南：在本地運行大型語言模型</h3>
+            <p>從安裝到進階配置的完整 Ollama 指南，包含模型管理、API 整合、效能調優，讓您輕鬆在本地運行 Llama、Mistral 等模型。</p>
+            <div class="art-item-meta">
+              <span>2026-03-01</span>
+              <span class="sep">·</span>
+              <span>15 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/configs/claude-code-config.html" class="art-item reveal reveal-d1">
+            <div class="art-item-badge">Claude Code</div>
+            <h3>Claude Code 開發環境最佳配置</h3>
+            <p>詳細介紹 Claude Code 的進階設定，包含 CLAUDE.md 配置、MCP Server 整合、hooks 設定與多 agent 協作工作流。</p>
+            <div class="art-item-meta">
+              <span>2026-02-28</span>
+              <span class="sep">·</span>
+              <span>12 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/configs/openai-api-setup.html" class="art-item reveal reveal-d2">
+            <div class="art-item-badge">OpenAI API</div>
+            <h3>OpenAI API 配置與最佳實踐</h3>
+            <p>完整的 OpenAI API 設定指南，包含 API Key 管理、Rate Limit 處理、成本控制策略，以及與其他工具的整合方式。</p>
+            <div class="art-item-meta">
+              <span>2026-02-22</span>
+              <span class="sep">·</span>
+              <span>10 分鐘閱讀</span>
+            </div>
+          </a>
+
+          <a href="/Openclaw/configs/mcp-server-setup.html" class="art-item reveal reveal-d3">
+            <div class="art-item-badge">MCP</div>
+            <h3>MCP Server 配置與自定義工具開發</h3>
+            <p>深入介紹 Model Context Protocol (MCP) Server 的安裝與配置，學習如何開發自定義工具擴展 AI 能力。</p>
+            <div class="art-item-meta">
+              <span>2026-02-18</span>
+              <span class="sep">·</span>
+              <span>18 分鐘閱讀</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+        <a href="/Openclaw/llms.txt">llms.txt</a>
+      </nav>
+            <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved;
+    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next;
+      localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

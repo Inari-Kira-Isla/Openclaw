@@ -1,0 +1,69 @@
+type: gene_capsule
+version: "1.0"
+id: "gc_20260220_web_search"
+name: "Web 趨勢監控 Prompt"
+description: "用於監控 AI 趨勢的標準化 Prompt"
+
+content:
+  prompt: |
+    執行 Web 趨勢監控：
+    
+    1. 優先使用 smart-search.sh 搜尋關鍵字
+    2. 如果失敗，使用 serper-search.sh
+    3. 監控主題：
+       - AI trends 2026
+       - OpenClaw updates
+       - Local LLM news
+       - Claude Code
+       - Automation tools
+    4. 分析結果
+    5. 如果發現重要資訊，存入知識庫
+    6. 記錄到 logs/web-search-usage.md
+    
+    報告格式：
+    - 搜尋次數
+    - 重要發現
+    - 是否需要行動
+
+  context: |
+    使用 You.com API (100次/日) + Serper API (83次/日)
+    模型: MiniMax-M2.5
+
+  examples:
+    - input: "執行 Web 趨勢監控"
+      output: "報告格式包含搜尋次數、重要發現、行動建議"
+    
+  results:
+    success_rate: 0.9
+    avg_duration: "1m30s"
+
+metadata:
+  created_at: "2026-02-20T12:00:00Z"
+  created_by: "muse-core"
+  tags:
+    - web-search
+    - monitoring
+    - AI-trends
+  success_rate: 0.9
+  usage_count: 5
+  avg_score: 4.5
+  
+  environment:
+    model: "MiniMax-M2.5"
+    context: "cron-job"
+    channel: "telegram"
+
+audit:
+  - action: "created"
+    timestamp: "2026-02-20T12:00:00Z"
+    agent: "muse-core"
+  - action: "used"
+    timestamp: "2026-02-20T04:00:00Z"
+    agent: "cron"
+    result: "success"
+  - action: "used"
+    timestamp: "2026-02-20T08:00:00Z"
+    agent: "cron"
+    result: "success"
+
+status: active

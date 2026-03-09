@@ -1,0 +1,86 @@
+[
+  {
+    "id": "act_001",
+    "name": "search_knowledge",
+    "input": { "query": "天氣預測", "source": "user" },
+    "output": { "result": "澳門今日天氣：晴，25°C", "found": true },
+    "timestamp": "2026-02-27T10:00:00Z"
+  },
+  {
+    "id": "act_002",
+    "name": "add_faq",
+    "input": { "question": "如何更新知識庫？", "answer": "使用 sync 命令" },
+    "output": { "faq_id": "faq_001", "created": true },
+    "timestamp": "2026-02-27T11:00:00Z"
+  },
+  {
+    "id": "act_003",
+    "name": "query_notion",
+    "input": { "database": "tasks", "filter": "status=done" },
+    "output": { "count": 5, "items": [] },
+    "timestamp": "2026-02-27T12:00:00Z"
+  },
+  {
+    "id": "act_004",
+    "name": "send_message",
+    "input": { "channel": "telegram", "message": "測試訊息" },
+    "output": { "message_id": "msg_123", "sent": true },
+    "timestamp": "2026-02-27T13:00:00Z"
+  },
+  {
+    "id": "act_005",
+    "name": "read_file",
+    "input": { "path": "/Users/ki/.openclaw/workspace/knowledge-agent/AGENTS.md" },
+    "output": { "lines": 20, "success": true },
+    "timestamp": "2026-02-27T14:00:00Z"
+  },
+  {
+    "id": "act_006",
+    "name": "web_search",
+    "input": { "query": "強化學習 Q-learning", "count": 5 },
+    "output": { "results": 5, "sources": ["wiki", "medium"] },
+    "timestamp": "2026-02-27T15:00:00Z"
+  },
+  {
+    "id": "act_007",
+    "name": "update_template",
+    "input": { "template": "daily_note", "content": "..." },
+    "output": { "updated": true, "version": 3 },
+    "timestamp": "2026-02-27T16:00:00Z"
+  },
+  {
+    "id": "act_008",
+    "name": "create_reminder",
+    "input": { "title": "開會", "time": "2026-02-28T09:00:00Z" },
+    "output": { "reminder_id": "rem_001", "created": true },
+    "timestamp": "2026-02-27T17:00:00Z"
+  },
+  {
+    "id": "act_009",
+    "name": "analyze_image",
+    "input": { "image_path": "/tmp/screenshot.png" },
+    "output": { "objects": ["person", "desk"], "confidence": 0.92 },
+    "timestamp": "2026-02-27T18:00:00Z"
+  },
+  {
+    "id": "act_010",
+    "name": "text_to_speech",
+    "input": { "text": "天氣晴朗", "voice": "nova" },
+    "output": { "audio_duration": 2.5, "generated": true },
+    "timestamp": "2026-02-27T19:00:00Z"
+  },
+  {
+    "id": "act_011",
+    "name": "weather_query",
+    "input": { "location": "澳門", "forecast": true },
+    "output": { "temp": 25, "condition": "晴天", "humidity": 65 },
+    "timestamp": "2026-02-27T20:00:00Z"
+  },
+  {
+    "id": "act_012",
+    "name": "knowledge_search",
+    "input": { "keywords": ["AI", "強化學習"], "limit": 10 },
+    "output": { "found": 3, "entries": [] },
+    "timestamp": "2026-02-27T21:00:00Z"
+  }
+]

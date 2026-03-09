@@ -1,0 +1,45 @@
+{
+  "task_type": "performance_security_monitoring",
+  "timestamp": "2026-03-03T09:41:00+08:00",
+  "description": "系統效能與安全監控週期性任務",
+  "steps": [
+    {
+      "action": "openclaw_status",
+      "purpose": "獲取系統狀態",
+      "metrics_collected": [
+        "gateway_response_time_ms",
+        "context_usage_percent",
+        "cache_hit_rate",
+        "sessions_count",
+        "memory_files_count"
+      ]
+    },
+    {
+      "action": "security_audit",
+      "purpose": "安全審計",
+      "checks": [
+        "異常登入檢測",
+        "權限變更檢測",
+        "資料外洩風險評估"
+      ]
+    },
+    {
+      "action": "write_memory",
+      "purpose": "記錄監控結果",
+      "files_created": [
+        "memory/performance-2026-03-03.md",
+        "memory/security-2026-03-03.md"
+      ]
+    },
+    {
+      "action": "auto_fix",
+      "purpose": "自動修復問題",
+      "fixes_applied": [
+        "chmod 600 openclaw.json"
+      ]
+    }
+  ],
+  "outcome": "success",
+  "issues_detected": 2,
+  "issues_fixed": 1
+}

@@ -1,0 +1,63 @@
+---
+name: bni_weekly_report_reminder
+description: BNI 每週報告提醒。當用戶說「週報」「BNI 報告」或 cron 排程觸發時啟動。
+metadata: { "openclaw": { "emoji": "📊" } }
+---
+
+# BNI 每週報告提醒
+
+自動提醒填寫 BNI 每週報告，從 SQLite 拉取本週轉介紹數據，協助快速完成報告。
+
+## 操作 / 工作流程
+1. 用 `cron` 設定排程：
+   - 每週五 17:00：提醒填寫週報 + 附帶本週數據
+   - 每週日 12:00：截止提醒（若尚未填寫）
+2. 用 SQLite 查詢本週數據 (`~/.openclaw/memory/bni.db`)：
+   - `bni_db.get_weekly_report_data()` 取得完整週報數據
+   - 包含：轉介紹統計、新會員、會議出席、跟進完成數
+3. 預填報告模板，讓用戶只需確認或修改
+4. 用 `message` 傳送到 Telegram
+5. 腳本：`bni_reminder.py --type bni_report`
+
+## cron 排程
+```
+0 17 * * 5    # 每週五 17:00 — 填寫提醒
+0 12 * * 0    # 每週日 12:00 — 截止提醒
+```
+
+## 參數
+| 參數 | 類型 | 預設 | 說明 |
+|------|------|------|------|
+| auto_fill | bool | true | 是否自動從 SQLite 拉取數據預填 |
+| week | string | current | 報告週次：`current` / `last` / 指定日期 |
+
+## 輸出格式
+```
+📊 BNI 每週報告 — {week_range}
+
+本週數據（已從 SQLite 自動帶入）：
+- 收到轉介紹：{received} 筆
+  {referral_details}
+- 給出轉介紹：{given} 筆
+  {referral_details}
+- 一對一會議：{meetings} 次
+- 出席：{attendance}
+
+💰 成交金額：${amount}
+
+請確認以上數據，回覆「確認」送出或直接修改。
+
+⏰ 截止時間：週日 23:59
+```
+
+## 錯誤處理
+| 錯誤 | 處理 |
+|------|------|
+| SQLite 數據為空 | 發送空白模板，提醒手動填寫 |
+| 用戶未回覆確認 | 週日 12:00 發送第二次提醒 |
+| 數據不一致 | 標記需確認的欄位，請用戶核實 |
+
+## 使用範例
+- "這週的 BNI 報告幫我看一下"
+- "我的轉介紹數據是多少"
+- "提醒我交週報"

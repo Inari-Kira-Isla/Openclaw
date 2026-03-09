@@ -1,0 +1,31 @@
+{
+  "task_type": "heartbeat_monitoring",
+  "timestamp": "2026-03-03T08:00:00+08:00",
+  "description": "每日定時心跳監控",
+  "trigger": "cron-event (08:00)",
+  "steps": [
+    {
+      "action": "read_heartbeat_config",
+      "file": "HEARTBEAT.md"
+    },
+    {
+      "action": "system_health_check",
+      "checks": [
+        "Gateway response time",
+        "Token usage",
+        "Context utilization"
+      ]
+    },
+    {
+      "action": "error_log_review",
+      "purpose": "Identify new errors since last check"
+    },
+    {
+      "action": "learning_record_update",
+      "purpose": "Document findings for future reference"
+    }
+  ],
+  "output": "Memory update + optional user notification",
+  "frequency": "Daily at 08:00",
+  "status": "completed"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Enterprise Neural System Integration",
+  "version": "1.0.0",
+  "updated": "2026-02-28",
+  "modules": {
+    "event-contracts": {
+      "path": "./event-contracts",
+      "type": "standard",
+      "provides": ["event-schema", "validator"],
+      "requires": []
+    },
+    "entity-registry": {
+      "path": "./entity-registry",
+      "type": "data-model",
+      "provides": ["customer-schema", "product-schema", "order-schema"],
+      "requires": []
+    },
+    "workflows": {
+      "path": "./workflows",
+      "type": "automation",
+      "provides": ["data-ingestion", "knowledge-update", "crm-order"],
+      "requires": ["entity-registry"]
+    },
+    "feedback-loop": {
+      "path": "./feedback-loop",
+      "type": "analytics",
+      "provides": ["feedback-storage", "trends-analysis"],
+      "requires": ["event-contracts"]
+    },
+    "knowledge-graph": {
+      "path": "./knowledge-graph",
+      "type": "graph-db",
+      "provides": ["entity-relations", "path-finding", "insights"],
+      "requires": ["entity-registry"]
+    }
+  },
+  "data-flow": {
+    "ingestion": "event-contracts → workflows → entity-registry",
+    "processing": "entity-registry → knowledge-graph → insights",
+    "feedback": "workflows → feedback-loop → knowledge-graph"
+  },
+  "cli": {
+    "feedback-add": "node feedback-loop/add-feedback.js add <type> [source]",
+    "feedback-list": "node feedback-loop/add-feedback.js list [limit]",
+    "feedback-analyze": "node feedback-loop/analyze-trends.js"
+  }
+}

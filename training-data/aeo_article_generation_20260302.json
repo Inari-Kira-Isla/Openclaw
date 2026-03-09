@@ -1,0 +1,52 @@
+{
+  "task_type": "aeo_seo_article_generation",
+  "date": "2026-03-02",
+  "description": "生成符合 AEO/SEO 標準的 AI 評測文章",
+  "steps": [
+    {
+      "step": 1,
+      "action": "主題研究",
+      "details": {
+        "sources": ["Hacker News", "Perplexity", "Google Trends"],
+        "output": "熱門話題列表"
+      }
+    },
+    {
+      "step": 2,
+      "action": "關鍵字規劃",
+      "details": {
+        "primary_keyword": "文章主題",
+        "density": "1-2%",
+        "structure": ["H1", "H2", "H3"]
+      }
+    },
+    {
+      "step": 3,
+      "action": "文章生成",
+      "details": {
+        "required_fields": ["title", "date", "author", "category", "description"],
+        "word_count": "1500+",
+        "format": "Markdown"
+      }
+    },
+    {
+      "step": 4,
+      "action": "SEO 檢查",
+      "details": {
+        "checklist": ["H1 count", "keyword density", "description length", "alt text", "internal/external links"]
+      }
+    },
+    {
+      "step": 5,
+      "action": "發布",
+      "details": {
+        "options": ["GitHub Pages", "WordPress", "Notion"]
+      }
+    }
+  ],
+  "example_input": "Perplexity Computer",
+  "example_output": "~1500字評測文章，含定價表格、市場比較、功能列表",
+  "tags": ["AEO", "SEO", "article", "content generation"],
+  "repeatable": true,
+  "success_rate": "100%"
+}

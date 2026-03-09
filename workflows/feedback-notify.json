@@ -1,0 +1,69 @@
+{
+  "name": "feedback-notify",
+  "description": "反饋通知流程 - 接收用戶反饋並發送 Telegram 通知",
+  "trigger": {
+    "type": "webhook",
+    "path": "/webhook/feedback",
+    "method": "POST",
+    "description": "接收用戶反饋的 Webhook 端點"
+  },
+  "nodes": [
+    {
+      "id": "validate-feedback",
+      "name": "驗證反饋數據",
+      "type": "validation",
+      "input": "trigger.body",
+      "config": {
+        "rules": [
+          {"field": "message", "type": "required"},
+          {"field": "user_id", "type": "required"}
+        ]
+      },
+      "output": "validated_feedback"
+    },
+    {
+      "id": "store-feedback",
+      "name": "記錄反饋到文件",
+      "type": "storage",
+      "input": "validated_feedback",
+      "config": {
+        "type": "json",
+        "path": "~/.openclaw/workspace/workflows/feedback-store.json",
+        "mode": "append",
+        "format": {
+          "timestamp": "${timestamp}",
+          "user_id": "${user_id}",
+          "message": "${message}",
+          "source": "webhook"
+        }
+      },
+      "output": "stored_feedback"
+    },
+    {
+      "id": "send-notification",
+      "name": "發送 Telegram 通知",
+      "type": "notification",
+      "input": "stored_feedback",
+      "config": {
+        "channel": "telegram",
+        "target": "-5138835175",
+        "message": "📥 新反饋通知\n\n👤 用戶: ${user_id}\n💬 訊息: ${message}\n⏰ 時間: ${timestamp}",
+        "parse_mode": "Markdown"
+      },
+      "output": "notification_result"
+    }
+  ],
+  "output": {
+    "storage": {
+      "type": "json",
+      "path": "~/.openclaw/workspace/workflows/feedback-store.json"
+    },
+    "notifications": [
+      {
+        "on": "success",
+        "channel": "telegram",
+        "message": "✅ 反饋已記錄並通知完成"
+      }
+    ]
+  }
+}
