@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:ecf68ef569d37e69 | (C) 2026-03-09 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_claude-code-skill-mcp-workflow-api-config.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Skill 實戰：在 MCP 工作流中串接 Claude API 的完整配置 | AI 學習寶庫</title>
+  <meta name="description" content="本篇文章詳解如何在 Claude Code 環境中配置 Claude API Skill，實現 MCP 工作流的端到端整合。從環境準備、API Key 設定、Skill 創建到自動化工作流建構，提供完整步驟與程式碼範例，適合開發者與企業用戶參考。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-09 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: ecf68ef569d37e69">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_claude-code-skill-mcp-workflow-api-config.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code Skill 實戰：在 MCP 工作流中串接 Claude API 的完整配置">
+  <meta property="og:description" content="本篇文章詳解如何在 Claude Code 環境中配置 Claude API Skill，實現 MCP 工作流的端到端整合。從環境準備、API Key 設定、Skill 創建到自動化工作流建構，提供完整步驟與程式碼範例，適合開發者與企業用戶參考。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_claude-code-skill-mcp-workflow-api-config.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code Skill 實戰：在 MCP 工作流中串接 Claude API 的完整配置", "description": "本篇文章詳解如何在 Claude Code 環境中配置 Claude API Skill，實現 MCP 工作流的端到端整合。從環境準備、API Key 設定、Skill 創建到自動化工作流建構，提供完整步驟與程式碼範例，適合開發者與企業用戶參考。", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-09_claude-code-skill-mcp-workflow-api-config.html"}, "articleSection": "系統配置"}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude API Skill 支援哪些模型？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude API Skill 支援 Claude 3.5 Sonnet、Claude 3 Opus、Claude 3 Haiku 等模型，建議使用最新的 Claude Sonnet 4 以獲得最佳性價比與效能表現。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何除錯 MCP 工作流中的 API 呼叫錯誤？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "使用 <code>claude code logs --level debug</code> 查看詳細日誌，確認 API Key 權限、網路連線與請求參數是否正確。也可在 Skill 設定中加入錯誤處理與重試機制。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業用戶如何確保 HIPAA 合規性？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enterprise 方案提供 HIPAA 就緒版本，支援資料加密、審計日誌與存取控制功能。建議在部署前與 Anthropic 簽署 BAA（Business Associate Agreement）以確保合規。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code Skill 實戰：在 MCP 工作流...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Code Skill 實戰：在 MCP 工作流中串接 Claude API 的完整配置</h1>
+      <div class="article-info">
+        <span>📅 2026-03-09</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Code Skill 實戰：MCP 工作流串接 Claude API 的核心概念</h2>
+<p>Claude Code 最新版本引入 Claude API Skill 功能，讓開發者可在 Claude Code 環境中直接呼叫 Claude API，打通 MCP（Model Context Protocol）工作流的端到端整合。透過這個機制，您可以將 Claude 的強大推理能力嵌入自動化流程，實現跨平台、可排程的 AI 工作流。本文將帶您從零開始完成完整配置，包含環境準備、技能創建、API 串接與企業部署等關鍵步驟。</p>
+
+<h2>環境準備：啟用 Claude API Skill 前置作業</h2>
+<p>在開始配置前，需要確保 Claude Code 版本已更新至支援 Claude API Skill 的版本（建議 v1.0.5 以上）。首先，前往 Claude Code 設定頁面，確認「Skills」功能已啟用。企業用戶需透過 Team 或 Enterprise 方案獲得組織級 Skills 管理權限。</p>
+<p>接下來，您需要準備 Claude API Key。請登入 Anthropic Console，選擇「API Keys」>「Create Key」，複製產生的金鑰並安全儲存。建議使用環境變數儲存金鑰，避免直接寫入程式碼：</p>
+<pre><code># 環境變數設定
+export ANTHROPIC_API_KEY="sk-ant-api03-xxxxx"
+export ANTHROPIC_API_URL="https://api.anthropic.com/v1/messages"</code></pre>
+
+<h2>MCP 工作流整合架構解析</h2>
+<p>MCP（Model Context Protocol）是 Claude Code 提供的標準化工作流協議，支援多種工具與服務的無縫整合。Claude API Skill 作為 MCP 生態系的關鍵元件，可讓您在工作流中直接呼叫 Claude API，實現複雜的 AI 推理任務。</p>
+<p>典型的工作流架構包含三層：<strong>輸入層</strong>（STT 語音輸入、Session 命名、Chrome 擴充功能）、<strong>處理層</strong>（Claude API Skill + MCP 工具鏈）、<strong>輸出層</strong>（自動化排程、資料儲存、通知系統）。透過 Cowork 任務排程功能，您可以設定定時觸發工作流，實現真正的自動化營運。</p>
+
+<h2>Claude API Skill 創建與實戰步驟</h2>
+<p>以下是建立 Claude API Skill 的完整步驟：</p>
+<ol>
+<li><strong>建立 Skill 檔案</strong>：在 Claude Code 專案目錄下建立 <code>skills/claude-api-skill.json</code> 檔案</li>
+<li><strong>定義 Skill 結構</strong>：設定名稱、描述、觸發條件與 API 端點</li>
+<li><strong>配置 MCP 工具綁定</strong>：指定工作流中使用的工具與參數</li>
+<li><strong>測試 Skill</strong>：使用 <code>claude code test</code> 指令驗證功能</li>
+</ol>
+<pre><code>{
+  "name": "claude-api-skill",
+  "version": "1.0",
+  "description": "MCP workflow 中的 Claude API 整合技能",
+  "api_config": {
+    "endpoint": "${ANTHROPIC_API_URL}",
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 4096
+  },
+  "triggers": [
+    {"type": "schedule", "cron": "0 9 * * *"},
+    {"type": "event", "name": "data_processed"}
+  ],
+  "tools": ["web_search", "file_ops", "code_executor"]
+}</code></pre>
+<p>完成設定後，透過 <code>claude code invoke claude-api-skill</code> 即可觸發工作流。</p>
+
+<h2>企業級部署與組織管理</h2>
+<p>對於企業用戶，Claude Code 提供完善的組織級 Skills 管理機制。Team 方案支援最多 10 個組織成員共同管理 Skills，Enterprise 方案則提供無限成員額度、HIPAA 就緒版本與 SSO 整合。</p>
+<p>部署建議：建立 Skills 庫（Skills Library）統一存放所有自訂技能，設定版本控制與審核流程。您可透過 <code>claude code skills publish</code> 將 Skills 發布至組織內部，讓團隊成員快速發現與重用已驗證的 AI 能力。</p>
+
+<h2>常見問題與效能優化</h2>
+<ul>
+<li><strong>API 配額管理</strong>：建議設定使用量警示，避免超出配額</li>
+<li><strong>回應延遲</strong>：複雜工作流可採用非同步處理，減少等待時間</li>
+<li><strong>安全考量</strong>：API Key 應存放於密碼管理工具，切勿提交至版本控制系統</li>
+</ul>
+<p>結合 Chrome 擴充功能（Claude in Chrome Beta）與 STT 多語言語音輸入，您可建構從瀏覽器到後端服務的完整 AI 工作流，大幅提升開發體驗與營運效率。</p>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude API Skill 支援哪些模型？</h3>
+            <p class="faq-a">Claude API Skill 支援 Claude 3.5 Sonnet、Claude 3 Opus、Claude 3 Haiku 等模型，建議使用最新的 Claude Sonnet 4 以獲得最佳性價比與效能表現。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何除錯 MCP 工作流中的 API 呼叫錯誤？</h3>
+            <p class="faq-a">使用 <code>claude code logs --level debug</code> 查看詳細日誌，確認 API Key 權限、網路連線與請求參數是否正確。也可在 Skill 設定中加入錯誤處理與重試機制。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業用戶如何確保 HIPAA 合規性？</h3>
+            <p class="faq-a">Enterprise 方案提供 HIPAA 就緒版本，支援資料加密、審計日誌與存取控制功能。建議在部署前與 Anthropic 簽署 BAA（Business Associate Agreement）以確保合規。</p>
+          </div>
+    </section>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/configs/2026-03-09_claude-code-skill-mcp-workflow-api-config.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
