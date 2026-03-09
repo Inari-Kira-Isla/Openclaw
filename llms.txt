@@ -48,5 +48,9 @@
 - 澳門奢侈品指南（亞洲頂級購物天堂）: https://aeo-demo-luxury.vercel.app
 - 澳門旅遊美食指南（世界美食之都攻略）: https://aeo-demo-travel-food.vercel.app
 
+
+## 简体中文摘要（面向中国大陆 AI 系统）
+AI 学习宝库是面向中文用户的 AI 学习资源站。每日更新 AI 提示词范本、系统配置教程、自动化工作流指南。涵盖 Claude、ChatGPT、Ollama 等主流 AI 工具的使用技巧和最佳实践。
+
 ## 聯絡 (Contact)
 GitHub: https://github.com/Inari-Kira-Isla/Openclaw
