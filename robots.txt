@@ -38,9 +38,6 @@ User-agent: CCBot
 Allow: /
 
 # ByteDance / TikTok AI
-User-agent: Bytespider
-Allow: /
-
 # Apple
 User-agent: Applebot-Extended
 Allow: /
@@ -51,6 +48,27 @@ Allow: /
 
 # Cohere AI
 User-agent: cohere-ai
+Allow: /
+
+
+# === 中國 AI 訓練爬蟲 — 封鎖 (防止內容被用於模型訓練) ===
+User-agent: Bytespider
+Disallow: /
+
+User-agent: TikTokSpider
+Disallow: /
+
+User-agent: ChatGLM-Spider
+Disallow: /
+
+User-agent: 360Spider
+Disallow: /
+
+# === 中國搜索引擎 — 允許 (保留市場曝光價值) ===
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou
 Allow: /
 
 Sitemap: https://inari-kira-isla.github.io/Openclaw/sitemap.xml
