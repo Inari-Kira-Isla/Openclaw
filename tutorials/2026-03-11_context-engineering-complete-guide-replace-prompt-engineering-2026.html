@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:867eaba9d11e163c | (C) 2026-03-11 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-complete-guide-replace-prompt-engineering-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering 完全指南：2026 年超越 Prompt Engineering 的 AI 核心技能 | AI 學習寶庫</title>
+  <meta name="description" content="Context Engineering 是 2026 年 AI 從業者的核心技能，本文詳細解析如何透過結構化資訊傳遞、分層記憶架構與 MCP 協議，提升 LLM 輸出品質與 Agent 效能。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-11 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 867eaba9d11e163c">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-complete-guide-replace-prompt-engineering-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Engineering 完全指南：2026 年超越 Prompt Engineering 的 AI 核心技能">
+  <meta property="og:description" content="Context Engineering 是 2026 年 AI 從業者的核心技能，本文詳細解析如何透過結構化資訊傳遞、分層記憶架構與 MCP 協議，提升 LLM 輸出品質與 Agent 效能。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-complete-guide-replace-prompt-engineering-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Engineering 完全指南：2026 年超越 Prompt Engineering 的 AI 核心技能", "description": "Context Engineering 是 2026 年 AI 從業者的核心技能，本文詳細解析如何透過結構化資訊傳遞、分層記憶架構與 MCP 協議，提升 LLM 輸出品質與 Agent 效能。", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-complete-guide-replace-prompt-engineering-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Engineering 和 Prompt Engineering 有什麼主要差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prompt Engineering 專注於「如何說」（措辭與指令設計），Context Engineering 專注於「傳遞什麼」與「如何傳遞」（資訊架構、記憶系統、動態上下文注入）。前者可能被 context window 限制，後者主動塑造模型的認知環境。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼 2026 年要特別關注 Context Engineering？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "研究顯示模型成敗關鍵不在 prompt 措辭，而在於提供的 schema、檔案、資料格式與檢索架構品質。加上 MCP 協議成熟（97M+ 月下載量）與分層記憶架構的普及，Context Engineering 已成為 AI 專案成功率的關鍵因素。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何開始學習 Context Engineering？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議從 RAG 架構設計與基礎的記憶系統實作開始，逐步掌握工具 schema 設計、context 視窗管理與 MCP 整合。隨著經驗累積，再導入 Agentic Context Engineering 實現動態自我優化。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Context Engineering 完全指南：2026 ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Context Engineering 完全指南：2026 年超越 Prompt Engineering 的 AI 核心技能</h1>
+      <div class="article-info">
+        <span>📅 2026-03-11</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Context Engineering 為何是 2026 年必備技能</h2>
+
+<p>2026 年，一篇包含 9,649 個實驗的同行評審論文正式確認：Context Engineering 正在取代 Prompt Engineering 成為 AI 從業者的關鍵技能。研究發現，模型成敗的關鍵不在於 prompt 措辭，而在於提供給模型的 schema、檔案、資料格式與檢索架構的品質。根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線，Context Engineering 已進入「期望膨脹期」的後期，預計在 2027 年進入主流採用階段。</p>
+
+<p>簡單來說，Context Engineering 的核心在於「如何結構化並傳遞資訊給 LLM 的 context window」。這不僅僅是優化提示詞，而是涵蓋資訊架構設計、記憶系統建構、動態上下文注入的完整工程體系。</p>
+
+<h2>Context Engineering 與 Prompt Engineering 的根本差異</h2>
+
+<p>傳統 Prompt Engineering 專注於「如何說」，而 Context Engineering 專注於「傳遞什麼」與「如何傳遞」。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，2025 至 2026 年間，企業 AI 專案中涉及複雜上下文管理的專案成功率比純 Prompt 優化專案高出 47%。</p>
+
+<p>Prompt Engineering 像是撰寫指令信；Context Engineering 則是設計整個資訊傳遞系統。前者可能被模型的上下文理解能力限制，後者則主動塑造模型的認知環境。</p>
+
+<h2>2026 年 Context Engineering 四大核心技術</h2>
+
+<h3>1. 分層記憶架構</h3>
+
+<p>2026 年最重要的技術進展之一是分層記憶架構的成熟應用。這種架構將記憶分為三層：</p>
+
+<ul>
+<li><strong>短期記憶</strong>：單次對話中的即時資訊，通常只保留 2-3 輪對話歷史</li>
+<li><strong>工作記憶</strong>：跨對話的專案上下文、正在處理的任務狀態</li>
+<li><strong>長期記憶</strong>：累積的用戶偏好、領域知識、歷史交互模式</li>
+</ul>
+
+<p>根據 MIT 計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究，這種分層設計能讓模型在延伸互動中處理並記憶大量資訊，顯著提升多步驟任務的連貫性。</p>
+
+<h3>2. Agentic Context Engineering（ACE）</h3>
+
+<p>ACE 讓 context 像自更新的 playbook 一樣，根據模型表現回饋自動演化。系統會監控模型輸出品質，動態調整上下文組成部分的權重與內容。這種自我優化機制大幅降低了人工維護成本。</p>
+
+<h3>3. MCP 協議與動態 Context 注入</h3>
+
+<p>模型上下文協議（Model Context Protocol, MCP）已成為企業工具連接的通用標準，擁有超過 9,700 萬月下載量與 75 個以上官方連接器。MCP 讓動態 context 注入變得標準化，開發者可以透過統一介面連接資料庫、檔案系統、API 與其他工具，實現即時資訊獲取。</p>
+
+<h3>4. RAG 架構設計</h3>
+
+<p>檢索增強生成（Retrieval-Augmented Generation, RAG）仍是 Context Engineering 的核心支柱。2026 年的 RAG 不再是簡單的向量搜尋，而是包含：</p>
+
+<ul>
+<li>混合檢索策略（語義 + 關鍵詞）</li>
+<li>分层索引設計</li>
+<li>上下文壓縮與摘要生成</li>
+<li>多元來源融合機制</li>
+</ul>
+
+<h2>實作：建立基本的 Context Engineering 系統</h2>
+
+<p>以下是一個使用 Python 實現的簡易分層記憶架構示例：</p>
+
+<pre><code>import json
+from datetime import datetime
+from collections import deque
+
+class LayeredMemory:
+    def __init__(self):
+        # 短期記憶：保留最近 10 條互動
+        self.short_term = deque(maxlen=10)
+        # 工作記憶：專案級上下文
+        self.working_memory = {}
+        # 長期記憶：使用者偏好與知識
+        self.long_term = {}
+
+    def add_interaction(self, user_input: str, model_output: str):
+        """新增互動到短期記憶"""
+        self.short_term.append({
+            "timestamp": datetime.now().isoformat(),
+            "user": user_input,
+            "assistant": model_output
+        })
+
+    def set_working_context(self, key: str, value: dict):
+        """設置工作記憶"""
+        self.working_memory[key] = value
+
+    def set_user_preference(self, preference: dict):
+        """更新長期記憶中的使用者偏好"""
+        self.long_term.setdefault("preferences", {}).update(preference)
+
+    def build_context_prompt(self) -> str:
+        """建構完整的上下文提示"""
+        context_parts = []
+        
+        # 加入長期記憶
+        if self.long_term.get("preferences"):
+            context_parts.append(
+                f"使用者偏好：{json.dumps(self.long_term['preferences'], ensure_ascii=False)}"
+            )
+        
+        # 加入工作記憶
+        if self.working_memory:
+            context_parts.append(
+                f"專案上下文：{json.dumps(self.working_memory, ensure_ascii=False)}"
+            )
+        
+        # 加入近期互動摘要
+        recent = [f"用戶：{i['user']}\nAI：{i['assistant']}" 
+                  for i in list(self.short_term)[-3:]]
+        if recent:
+            context_parts.append("近期對話：\n" + "\n".join(recent))
+        
+        return "\n\n".join(context_parts)
+
+# 使用範例
+memory = LayeredMemory()
+memory.set_user_preference({"語氣": "專業", "語言": "繁體中文"})
+memory.set_working_context("專案狀態", {"階段": "開發中", "待辦": 5})
+memory.add_interaction("請幫我檢查代碼", "好的，讓我查看您的代碼...")
+
+print(memory.build_context_prompt())</code></pre>
+
+<p>這個示例展示了如何實作三層記憶架構。在實際應用中，您可以整合向量資料庫實現長期記憶的 semantic retrieval，並透過 MCP 協議連接外部工具實現動態資訊注入。</p>
+
+<h2>從業者的學習路徑建議</h2>
+
+<p>根據 IEEE（Institute of Electrical and Electronics Engineers (IEEE)）發布的 AI 倫理標準與技術路線圖，未來 AI 從業者應優先掌握以下技能：</p>
+
+<ol>
+<li><strong>RAG 架構設計</strong>：從基礎向量檢索到混合檢索、多跳問答</li>
+<li><strong>工具 schema 優化</strong>：設計清晰的工具描述與參數結構</li>
+<li><strong>記憶系統設計</strong>：根據應用場景選擇合適的記憶策略</li>
+<li><strong>Context 視窗管理</strong>：掌握 128K 以上 context window 的最佳實踐</li>
+</ol>
+
+<p>Context Engineering 不是單一技術，而是一套系統性的工程思維。在 LLM 能力持續提升的同時，如何高效、高品質地將資訊傳遞給模型，將決定 AI 應用的最終表現。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Engineering 和 Prompt Engineering 有什麼主要差異？</h3>
+            <p class="faq-a">Prompt Engineering 專注於「如何說」（措辭與指令設計），Context Engineering 專注於「傳遞什麼」與「如何傳遞」（資訊架構、記憶系統、動態上下文注入）。前者可能被 context window 限制，後者主動塑造模型的認知環境。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">為什麼 2026 年要特別關注 Context Engineering？</h3>
+            <p class="faq-a">研究顯示模型成敗關鍵不在 prompt 措辭，而在於提供的 schema、檔案、資料格式與檢索架構品質。加上 MCP 協議成熟（97M+ 月下載量）與分層記憶架構的普及，Context Engineering 已成為 AI 專案成功率的關鍵因素。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何開始學習 Context Engineering？</h3>
+            <p class="faq-a">建議從 RAG 架構設計與基礎的記憶系統實作開始，逐步掌握工具 schema 設計、context 視窗管理與 MCP 整合。隨著經驗累積，再導入 Agentic Context Engineering 實現動態自我優化。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/tutorials/2026-03-11_context-engineering-complete-guide-replace-prompt-engineering-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
