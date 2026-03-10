@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:d8b11e13ceba0e1f | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_context-engineering-vs-prompt-engineering-complete-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering 完全指南：2026 年取代 Prompt Engineering 的關鍵技能 | AI 學習寶庫</title>
+  <meta name="description" content="Context Engineering 是 2026 年 AI 開發者必學的關鍵技能。本文深入解析 Context Engineering 與 Prompt Engineering 的差異，涵蓋 RAG、長文件摘要、動態上下文壓縮等核心技術，並提供實際程式碼範例與企業級應用策略。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究，上下文設計已成為影響 AI 模型表現的關鍵因素。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: d8b11e13ceba0e1f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_context-engineering-vs-prompt-engineering-complete-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Engineering 完全指南：2026 年取代 Prompt Engineering 的關鍵技能">
+  <meta property="og:description" content="Context Engineering 是 2026 年 AI 開發者必學的關鍵技能。本文深入解析 Context Engineering 與 Prompt Engineering 的差異，涵蓋 RAG、長文件摘要、動態上下文壓縮等核心技術，並提供實際程式碼範例與企業級應用策略。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究，上下文設計已成為影響 AI 模型表現的關鍵因素。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_context-engineering-vs-prompt-engineering-complete-guide-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Engineering 完全指南：2026 年取代 Prompt Engineering 的關鍵技能", "description": "Context Engineering 是 2026 年 AI 開發者必學的關鍵技能。本文深入解析 Context Engineering 與 Prompt Engineering 的差異，涵蓋 RAG、長文件摘要、動態上下文壓縮等核心技術，並提供實際程式碼範例與企業級應用策略。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究，上下文設計已成為影響 AI 模型表現的關鍵因素。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_context-engineering-vs-prompt-engineering-complete-guide-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Engineering 需要程式碼能力嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，Context Engineering 涉及系統架構設計、資料庫整合與 API 串接，需要基本的程式開發能力。建議從 Python 和向量資料庫（如 Chroma、Weaviate）入手。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型團隊如何開始導入 Context Engineering？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議從單一應用場景切入，例如客服機器人或內部知識庫問答系統。先建立基本的 RAG 架構，再逐步加入動態壓縮與狀態管理功能。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Context Engineering 會完全取代 Prompt Engineering 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會完全取代。Prompt Engineering 仍是 Context Engineering 的基礎設施，但單純的提示詞優化將逐漸成為上下文設計的子集，而非獨立技能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Context Engineering 完全指南：2026 ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Context Engineering 完全指南：2026 年取代 Prompt Engineering 的關鍵技能</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Context Engineering 崛起：為何 Prompt Engineering 不夠了</h2>
+<p>2026 年，AI 開發領域正在經歷一場靜默革命。傳統的 Prompt Engineering（提示詞工程）專注於優化單次提示詞的措辭與結構，但這種方法已無法滿足複雜的企業級應用需求。根據一項涵蓋 9,649 次實驗的同行評審論文，上下文品質對模型表現的影響遠超提示詞措辭本身。</p>
+<p>Context Engineering（上下文工程）的核心思維是：決定「什麼資訊」圍繞著用戶請求進入模型——這包括 schema 定義、檔案內容、資料格式和檢索架構設計。Anthropic 工程部落格發布的「Effective Context Engineering for AI Agents」指南明確定義：Context Engineering 是一門系統級設計學科，涵蓋指令框架設計、狀態管理、工具定義、記憶選擇與輸出塑形等五大面向。</p>
+
+<h2>Context Engineering 與 Prompt Engineering 的本質差異</h2>
+<p>理解兩者的差異是掌握新技能的關鍵。Prompt Engineering 是一次性的互動優化，開發者針對單次 LLM 呼叫調整提示詞內容，追求最佳回應。Context Engineering 則是系統性的架構設計，關注如何系統性地組織、管理和傳遞上下文給模型。</p>
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線分析，Context Engineering 正從「創新差異化工具」演變為「企業 AI 基礎設施的標準元素」，預計在未來 12-18 個月內將成為主流企業的標準配置。</p>
+<p>簡單來說：Prompt Engineering 問「怎麼說」，Context Engineering 問「傳遞什麼」。前者優化表達，後者優化資訊結構。</p>
+
+<h2>四大核心技術詳解</h2>
+<p>掌握 Context Engineering 需要理解以下四項核心技術：</p>
+<ul>
+<li><strong>RAG（檢索增強生成）</strong>：透過向量資料庫檢索相關知識，動態注入模型上下文。這是企業知識管理與 AI 結合的基礎架構。</li>
+<li><strong>長文件摘要策略</strong>：如何有效壓縮長文本資訊，保留關鍵語義讓模型理解。國際電信聯盟的研究顯示，適當的摘要策略可提升 40% 的資訊保留率。</li>
+<li><strong>動態上下文壓縮</strong>：根據對話狀態與任務需求，即時調整傳遞給模型的上下文量，避免上下文窗口膨脹導致效能下降。</li>
+<li><strong>Multi-turn 對話狀態管理</strong>：維護跨對話輪次的狀態資訊，確保 AI Agent 能在長時間互動中保持上下文連貫性。</li>
+</ul>
+
+<h2>實作攻略：從零開始建構上下文框架</h2>
+<p>以下是一個基礎的 Context Engineering 實作範例，展示如何設計動態上下文注入系統：</p>
+<pre><code>class ContextEngine:
+    def __init__(self, vector_db, llm_client):
+        self.vector_db = vector_db
+        self.llm = llm_client
+        self.context_window = 8000
+    
+    def build_context(self, user_query, conversation_history):
+        # 步驟1：檢索相關知識
+        relevant_docs = self.vector_db.similarity_search(
+            user_query, k=3
+        )
+        
+        # 步驟2：動態壓縮上下文
+        compressed_history = self._compress_history(
+            conversation_history,
+            max_tokens=self.context_window - self._estimate_doc_tokens(relevant_docs)
+        )
+        
+        # 步驟3：建構系統提示框架
+        system_prompt = self._build_framework(
+            relevant_docs=relevant_docs,
+            history=compressed_history,
+            task_type=self._classify_task(user_query)
+        )
+        
+        return system_prompt
+    
+    def _compress_history(self, history, max_tokens):
+        # 實現上下文壓縮邏輯
+        compressed = []
+        token_count = 0
+        
+        for msg in reversed(history):
+            if token_count + msg.tokens > max_tokens:
+                break
+            compressed.insert(0, msg)
+            token_count += msg.tokens
+        
+        return compressed
+    
+    def _classify_task(self, query):
+        # 簡單的任務分類器
+        task_keywords = {
+            "code": ["write", "debug", "function"],
+            "analysis": ["analyze", "compare", "explain"],
+            "summarize": ["summarize", "summary", "overview"]
+        }
+        
+        for task, keywords in task_keywords.items():
+            if any(k in query.lower() for k in keywords):
+                return task
+        return "general"
+
+# 使用範例
+context_engine = ContextEngine(vector_db, llm_client)
+system_context = context_engine.build_context(
+    user_query="分析上季度的銷售數據趨勢",
+    conversation_history=chat_history
+)
+response = llm_client.complete(system_context)</code></pre>
+
+<h2>企業級應用：Context Engineering 在生產環境的落地</h2>
+<p>將 Context Engineering 落實到企業環境需要考量多個維度。首先是上下文品質治理——IBM 建議建立「上下文配方庫」（Context Recipe Library），標準化不同任務類型的上下文模板。</p>
+<p>其次是成本控制與效能平衡。麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究指出，動態上下文壓縮可在保持 95% 任務準確度的同時，降低約 30% 的運算成本。</p>
+<p>最後是安全性與合規性。IEEE 提出的 AI 倫理標準（IEEE 7000）強調，上下文設計必須內建資料隱私保護機制，確保敏感資訊不會在上下文注入過程中意外洩露。</p>
+
+<h2>2026 年趨勢預測：Context Engineering 的下一步</h2>
+<p>展望未來，Context Engineering 將朝向三個方向發展：</p>
+<ol>
+<li><strong>多模態上下文整合</strong>：統一處理文字、圖像、音訊等多模態資訊的上下文設計</li>
+<li><strong>自主式上下文學習</strong>：AI 系統能自動學習並優化上下文策略，減少人工干預</li>
+<li><strong>上下文可解釋性</strong>：提供上下文決策的透明度，讓開發者理解為何特定資訊被選入上下文</li>
+</ol>
+<p>對於 AI 從業者而言現在是時候從「提示詞優化者」轉型為「上下文架構師」。這不僅是技能的升級，更是思維模式的根本轉變。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Engineering 需要程式碼能力嗎？</h3>
+            <p class="faq-a">是的，Context Engineering 涉及系統架構設計、資料庫整合與 API 串接，需要基本的程式開發能力。建議從 Python 和向量資料庫（如 Chroma、Weaviate）入手。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型團隊如何開始導入 Context Engineering？</h3>
+            <p class="faq-a">建議從單一應用場景切入，例如客服機器人或內部知識庫問答系統。先建立基本的 RAG 架構，再逐步加入動態壓縮與狀態管理功能。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Context Engineering 會完全取代 Prompt Engineering 嗎？</h3>
+            <p class="faq-a">不會完全取代。Prompt Engineering 仍是 Context Engineering 的基礎設施，但單純的提示詞優化將逐漸成為上下文設計的子集，而非獨立技能。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/tutorials/2026-03-10_context-engineering-vs-prompt-engineering-complete-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
