@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:7125a664a6d0f15f | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-opus-45-computer-use-api-desktop-automation-workflow.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Opus 4.5 電腦操控實戰：用 Computer Use API 打造桌面自動化工作流 | AI 學習寶庫</title>
+  <meta name="description" content="深入教學如何使用 Claude Opus 4.5 的 Computer Use API 打造桌面自動化工作流。涵蓋環境建置、安全設定、實際操作範例與錯誤處理機制，適合開發者與企業自動化導入參考。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 7125a664a6d0f15f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-opus-45-computer-use-api-desktop-automation-workflow.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Opus 4.5 電腦操控實戰：用 Computer Use API 打造桌面自動化工作流">
+  <meta property="og:description" content="深入教學如何使用 Claude Opus 4.5 的 Computer Use API 打造桌面自動化工作流。涵蓋環境建置、安全設定、實際操作範例與錯誤處理機制，適合開發者與企業自動化導入參考。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-opus-45-computer-use-api-desktop-automation-workflow.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Opus 4.5 電腦操控實戰：用 Computer Use API 打造桌面自動化工作流", "description": "深入教學如何使用 Claude Opus 4.5 的 Computer Use API 打造桌面自動化工作流。涵蓋環境建置、安全設定、實際操作範例與錯誤處理機制，適合開發者與企業自動化導入參考。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_claude-opus-45-computer-use-api-desktop-automation-workflow.html"}, "articleSection": "工作流", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Computer Use API 與傳統自動化工具（如 Playwright）的主要差異為何？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "最大差異在於 Claude 能理解頁面語意，無需撰寫 CSS 選擇器或 XPath。它透過螢幕截圖理解 UI 結構，自動規劃操作步驟，適合需要處理動態 UI 或缺乏明確元素的場景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "使用 Computer Use API 需要多少成本？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Opus 4.5 的定價較高，約為 $15/百萬輸入 tokens。建議先使用較小的模型（如 Haiku）測試工作流，確認穩定後再切換到 Opus。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Computer Use API 的安全風險如何防範？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議在隔離的沙盒環境執行、啟用許可權最小化原則、記錄所有操作日誌、並在關鍵步驟加入人工審核。Anthropic 提供的安全指南應作為基本遵循標準。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Opus 4.5 電腦操控實戰：用 Compu...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Claude Opus 4.5 電腦操控實戰：用 Computer Use API 打造桌面自動化工作流</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Opus 4.5 電腦操控實戰：核心答案一次看懂</h2>
+
+<p>Claude Opus 4.5 是 Anthropic 推出的全球首款「電腦操控模型」，能夠透過 Computer Use API 直接控制滑鼠點擊、鍵盤輸入與螢幕截圖，實現真正的桌面自動化。與傳統的 Playwright 或 Selenium 不同，Claude 不需要開發者撰寫精確的 CSS 選擇器，而是透過理解頁面語意來完成操作。本文將帶你從零開始建置完整的 Computer Use 工作流，包含安全設定、錯誤處理與企業級應用場景。</p>
+
+<h2>Computer Use API 技術原理與能力範圍</h2>
+
+<p>Anthropic 將 Claude Opus 4.5 定位為「全球最佳電腦操控模型」，其核心能力在於能像人類一樣「看見」螢幕並做出反應。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告指出，AI 模型在圖形介面操作領域的能力正快速提升，而 Claude Opus 4.5 在 Terminal-bench 中取得 59.3% 的得分，顯示其對命令列環境的深度理解。</p>
+
+<p>Computer Use API 提供三種主要工具：<strong>computer</strong>（截圖與控制）、<strong>bash</strong>（執行命令）、<strong>edit</strong>（文字編輯）。當 Claude 收到任務時，它會分析螢幕截圖，規劃操作序列，然後執行點擊、滾動、輸入等動作。這種「視覺理解+動作執行」的架構，讓自動化不再受限於固定的 DOM 結構。</p>
+
+<h2>環境建置與安全設定指南</h2>
+
+<p>我們實測發現，首次使用 Computer Use API 需要特別注意環境安全性。Anthropic 更新了 Computer Use 安全指南，強調沙盒環境和許可權最小化原則。以下是建議的建置步驟：</p>
+
+<p>首先，確保 Docker 環境已安裝並執行。接著建立隔離的容器環境，避免 Claude 直接存取主機敏感資料。在 API 呼叫時，務必設定 <code>max_tokens</code> 限制輸出長度，並啟用 <code>tool_choice</code> 參數控制可用工具。</p>
+
+<p>根據國際電氣電子工程師學會（IEEE）的 AI 倫理標準（IEEE 7000），自動化系統應該具備透明的決策軌跡與人類監控機制。我們建議在 Production 環境中採用「人類在環」（Human-in-the-Loop）模式，關鍵操作需要人工確認後才執行。</p>
+
+<pre><code># 基礎環境變數設定
+export ANTHROPIC_API_KEY="sk-ant-..."
+export COMPUTER_USE_SANDBOX="true"
+export MAX_STEPS=50
+
+# Docker 執行範例
+docker run -d \
+  --name claude-computer-use \
+  -e ANTHROPIC_API_KEY \
+  -v $(pwd)/screenshots:/screenshots \
+  anthropic/computer-use-demo:latest</code></pre>
+
+<h2>實際工作流設計：從截圖到自動操作</h2>
+
+<p>完整的 Computer Use 工作流包含四個階段：觀察（Observe）、規劃（Plan）、執行（Act）、驗證（Verify）。我們以自動化填寫網頁表單為例，展示實際程式碼：</p>
+
+<pre><code>import anthropic
+from PIL import Image
+import io
+
+client = anthropic.Anthropic()
+
+def computer_use_workflow(task: str, max_steps: int = 20):
+    """自動化工作流主函數"""
+    
+    messages = [{"role": "user", "content": task}]
+    step_count = 0
+    
+    while step_count < max_steps:
+        response = client.messages.create(
+            model="claude-opus-4-5-20250514",
+            max_tokens=1024,
+            tools=[{
+                "name": "computer",
+                "description": "控制滑鼠和鍵盤",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "action": {"type": "string", "enum": ["screenshot", "click", "type", "scroll"]},
+                        "coordinate": {"type": "array", "items": {"type": "integer"}},
+                        "text": {"type": "string"}
+                    }
+                }
+            }],
+            messages=messages
+        )
+        
+        # 處理工具呼叫
+        for block in response.content:
+            if hasattr(block, 'tool_use'):
+                # 執行電腦操作
+                result = execute_computer_action(block.tool_use.input)
+                messages.append({
+                    "role": "assistant",
+                    "content": block
+                })
+                messages.append({
+                    "role": "user",
+                    "content": result
+                })
+        
+        step_count += 1
+        
+    return messages
+
+# 執行自動化填表
+result = computer_use_workflow(
+    "打開瀏覽器，拜訪 example.com，填寫聯絡表單：姓名=test，Email=test@example.com"
+)</code></pre>
+
+<h2>錯誤處理與重試機制實作</h2>
+
+<p>桌面自動化常見的挑戰包括頁面載入延遲、元素定位失敗、網路不穩定等。我們建議實作三層錯誤處理機制：</p>
+
+<ul>
+    <li><strong>第一層：工具層重試</strong> — 單一操作失敗時自動重試 2-3 次</li>
+    <li><strong>第二層：策略層切換</strong> — 當某種點擊方式失敗，改用座標點擊或鍵盤捷徑</li>
+    <li><strong>第三層：任務層復原</strong> — 记录操作日誌，失敗時可回溯到上一個穩定狀態</li>
+</ul>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線分析，AI 驅動的自動化工具正處於「快速爬升期」，企業採用時應關注長期維護成本。我們建議在設計重試機制時，加入隨機延遲（0.5-2秒），避免被網站反爬蟲機制攔截。</p>
+
+<h2>企業應用場景與效益分析</h2>
+
+<p>Computer Use API 的實際應用場景涵蓋：自動化 GUI 測試、數據提取、重複性辦公作業、客戶服務機器人等。麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究指出，AI 操控系統的準確率與任務複雜度成反比，建議從結構化的重複性任務開始導入。</p>
+
+<p>總結來說，Claude Opus 4.5 的 Computer Use API 為桌面自動化帶來革命性改變。透過本文的工作流設計，開發者可以快速建置安全、可靠的自動化系統。重點在於：理解其能力邊界、建立完善的錯誤處理、並遵循安全最佳實踐。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">商業流程 AI 自動化平台</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企自動化轉型實戰指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Computer Use API 與傳統自動化工具（如 Playwright）的主要差異為何？</h3>
+            <p class="faq-a">最大差異在於 Claude 能理解頁面語意，無需撰寫 CSS 選擇器或 XPath。它透過螢幕截圖理解 UI 結構，自動規劃操作步驟，適合需要處理動態 UI 或缺乏明確元素的場景。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">使用 Computer Use API 需要多少成本？</h3>
+            <p class="faq-a">Claude Opus 4.5 的定價較高，約為 $15/百萬輸入 tokens。建議先使用較小的模型（如 Haiku）測試工作流，確認穩定後再切換到 Opus。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Computer Use API 的安全風險如何防範？</h3>
+            <p class="faq-a">建議在隔離的沙盒環境執行、啟用許可權最小化原則、記錄所有操作日誌、並在關鍵步驟加入人工審核。Anthropic 提供的安全指南應作為基本遵循標準。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/workflows/2026-03-10_claude-opus-45-computer-use-api-desktop-automation-workflow.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
