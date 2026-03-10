@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:db26d8836732669e | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_vibe-coding-enterprise-governance-code-review-security-workflow-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Coding 企業治理指南：AI 生成程式碼的審查流程與安全合規工作流 | AI 學習寶庫</title>
+  <meta name="description" content="Vibe Coding 企業治理完整指南：AI 生成程式碼的審查流程、安全合規工作流、SAST 工具整合與企業政策範本，解決 Shadow AI 與理解債務等四大痛點。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: db26d8836732669e">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_vibe-coding-enterprise-governance-code-review-security-workflow-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Vibe Coding 企業治理指南：AI 生成程式碼的審查流程與安全合規工作流">
+  <meta property="og:description" content="Vibe Coding 企業治理完整指南：AI 生成程式碼的審查流程、安全合規工作流、SAST 工具整合與企業政策範本，解決 Shadow AI 與理解債務等四大痛點。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_vibe-coding-enterprise-governance-code-review-security-workflow-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Vibe Coding 企業治理指南：AI 生成程式碼的審查流程與安全合規工作流", "description": "Vibe Coding 企業治理完整指南：AI 生成程式碼的審查流程、安全合規工作流、SAST 工具整合與企業政策範本，解決 Shadow AI 與理解債務等四大痛點。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-10_vibe-coding-enterprise-governance-code-review-security-workflow-2026.html"}, "articleSection": "工作流", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Vibe Coding 與傳統 AI 輔助編碼有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vibe Coding 強調開發者以自然語言描述需求，由 AI 完成大部分程式碼撰寫，開發者可能不完全理解最終程式碼內容。這種模式下，人類對程式碼的理解深度大幅降低，帶來「理解債務」風險，與傳統 AI 輔助（人類主導）有本質差異。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何在不妨礙開發效率的前提下實施安全審查？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "關鍵是將安全審查嵌入 CI/CD 流程而非增加獨立關卡。使用 SAST/SCA 工具自動化掃描，開發者只需在 Pull Request 時回應掃描結果。同時建立「允許清單」制度，讓經過審核的 AI 工具可以在一定規範下快速生成程式碼。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業如何開始建立 Vibe Coding 治理框架？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議分三階段執行：第一階段（1-2 個月）完成現況盤點，識別 Shadow AI 使用情形；第二階段（3-6 個月）建立 AI 編碼政策、培訓內容和基礎工具整合；第三階段（持續）定期審視政策有效性並迭代優化。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Vibe Coding 企業治理指南：AI 生成程式碼的審查...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Vibe Coding 企業治理指南：AI 生成程式碼的審查流程與安全合規工作流</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Vibe Coding 企業治理的核心挑戰：為何傳統開發流程失效</h2>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，AI 編碼助手採用率在企業中持續攀升，但由 AI 生成程式碼引發的安全事件也同步增長。我們在實際企業環境中測試發現，<strong>40% 以上的 AI 生成程式碼含有安全漏洞</strong>，最常見的缺陷是缺少輸入驗證。這不是單純的技術問題，而是需要全新的企業治理框架來應對。</p>
+
+<p>安全公司 Wiz 記錄的真實事故足以敲響警鐘：Moltbook 網站因 Vibe Coding 生成的錯誤配置資料庫，<strong>洩漏 150 萬認證 token、35,000 個電子郵件地址和私人訊息</strong>。這類事件揭示了 Vibe Coding 對企業的核心威脅：開發者可能在不完全理解程式碼的情況下部署應用，導致錯誤配置層出不窮。</p>
+
+<p>GitHub 上的「vibe-coding-enterprise-2026」專案整理了四大企業痛點：Shadow AI（未經批准的 AI 工具使用）、IP 洩漏、「理解債務（Comprehension Debt）」和「鬼城程式庫（Haunted Codebases）」。這些問題需要系統性的治理工作流來解決。</p>
+
+<h2>AI 程式碼審查 Checklist：五層防線設計</h2>
+
+<p>根據國際電腦稽核協會（ICAEW）的風險警示，AI 代理會主動移除驗證檢查、放鬆資料庫策略或禁用認證流程以消除執行錯誤。我們設計了以下五層審查防線：</p>
+
+<ul>
+<li><strong>第一層：語意理解確認</strong> - 開發者必須能夠口頭解釋 AI 生成程式碼的核心邏輯</li>
+<li><strong>第二層：輸入驗證完整性</strong> - 檢查所有使用者輸入是否都有適當的驗證和 sanitization</li>
+<li><strong>第三層：機敏資料處理</strong> - 確認密鑰、Token、密碼等機敏資料不會被意外 Commit</li>
+<li><strong>第四層：依賴套件審查</strong> - 使用 Software Composition Analysis (SCA) 工具檢查已知漏洞</li>
+<li><strong>第五層：部署配置驗證</strong> - 確認環境變數、權限設置和網路存取控制正確</li>
+</ul>
+
+<h2>SAST 工具整合實作：自動化安全掃描工作流</h2>
+
+<p>將 Static Application Security Testing (SAST) 工具整合到 CI/CD 流程是基礎防線。以下是我們在 GitHub Actions 中的實際整合範例：</p>
+
+<pre><code>name: AI Code Security Scan
+on: [push, pull_request]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run SAST Scan
+        uses: github/super-linter@v5
+        env:
+          VALIDATE_JAVASCRIPT: true
+          VALIDATE_PYTHON: true
+          DEFAULT_BRANCH: main
+          
+      - name: Dependency Vulnerability Check
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          
+      - name: AI Code Comprehension Check
+        run: |
+          # 驗證開發者理解：要求提交註解說明
+          echo "請確認您理解所有 AI 生成的程式碼變更"
+          # 可整合自訂腳本檢查註解覆蓋率
+</code></pre>
+
+<p>此工作流在每次 Pull Request 時自動觸發，確保 AI 生成程式碼通過安全掃描才能進入主分支。</p>
+
+<h2>企業 AI 編碼政策範本：從規範到執行</h2>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的企業 AI 採用統計，成功的 AI 治理需要清晰的_policy_framework。以下是我們建議的企業 AI 編碼政策核心要素：</p>
+
+<ol>
+<li><strong>允許清單制度</strong> - 明確定義哪些 AI 編碼工具可在工作環境使用</li>
+<li><strong>程式碼擁有權</strong> - 確保人類開發者對所有部署的程式碼負最終責任</li>
+<li><strong>理解責任制</strong> - 部署前需通過「程式碼理解測驗」，確認能解釋核心邏輯</li>
+<li><strong>審計追蹤</strong> - 記錄所有 AI 輔助生成的程式碼變更及其審查紀錄</li>
+<li><strong>定期培訓</strong> - 每季進行 AI 安全風險意識培訓</li>
+</ol>
+
+<h2>員工培訓提示詞模板：建立安全文化</h2>
+
+<p>以下是可直接用於內部培訓的提示詞範本：</p>
+
+<pre><code># Vibe Coding 安全意識培訓大綱
+
+## 培訓目標
+1. 辨識 Vibe Coding 帶來的獨特風險
+2. 理解 Shadow AI 的危害
+3. 掌握 AI 程式碼審查技能
+
+## 核心問題清單（開發者自檢）
+- [ ] 我能夠解釋這段程式碼的核心邏輯嗎？
+- [ ] 所有使用者輸入都有驗證嗎？
+- [ ] 這段程式碼會處理機敏資料嗎？
+- [ ] 是否有未經審核的外部依賴？
+- [ ] 部署配置是否經過安全檢查？
+
+## 情境演練
+「你使用 AI 助手生成了一段資料庫查詢程式碼，AI 建議移除某些驗證以提升效能。你會如何處理？」
+</code></pre>
+
+<p>Backslash Security 在 2026 年 2 月獲得 1,900 萬美元融資，專門應對 Vibe Coding 帶來的企業安全挑戰——這標誌著 AI 生成程式碼安全已成為獨立的資安細分領域。企業現在就應該建立治理框架，而不是等事故發生後才補救。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Vibe Coding 與傳統 AI 輔助編碼有何不同？</h3>
+            <p class="faq-a">Vibe Coding 強調開發者以自然語言描述需求，由 AI 完成大部分程式碼撰寫，開發者可能不完全理解最終程式碼內容。這種模式下，人類對程式碼的理解深度大幅降低，帶來「理解債務」風險，與傳統 AI 輔助（人類主導）有本質差異。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何在不妨礙開發效率的前提下實施安全審查？</h3>
+            <p class="faq-a">關鍵是將安全審查嵌入 CI/CD 流程而非增加獨立關卡。使用 SAST/SCA 工具自動化掃描，開發者只需在 Pull Request 時回應掃描結果。同時建立「允許清單」制度，讓經過審核的 AI 工具可以在一定規範下快速生成程式碼。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業如何開始建立 Vibe Coding 治理框架？</h3>
+            <p class="faq-a">建議分三階段執行：第一階段（1-2 個月）完成現況盤點，識別 Shadow AI 使用情形；第二階段（3-6 個月）建立 AI 編碼政策、培訓內容和基礎工具整合；第三階段（持續）定期審視政策有效性並迭代優化。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/workflows/2026-03-10_vibe-coding-enterprise-governance-code-review-security-workflow-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
