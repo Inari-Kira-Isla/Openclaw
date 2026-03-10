@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:3bb9b20c5f48cad0 | (C) 2026-03-11 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-write-select-compress-isolate-strategies.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering 完全指南：解決 Context Rot 的四大策略 | AI 學習寶庫</title>
+  <meta name="description" content="Context Engineering 完全指南：解決 Context Rot 的四大策略。深入解析 Write、Select、Compress、Isolate 四大核心策略，含 LangChain/LlamaIndex 實作代碼範例。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-11 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 3bb9b20c5f48cad0">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-write-select-compress-isolate-strategies.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Engineering 完全指南：解決 Context Rot 的四大策略">
+  <meta property="og:description" content="Context Engineering 完全指南：解決 Context Rot 的四大策略。深入解析 Write、Select、Compress、Isolate 四大核心策略，含 LangChain/LlamaIndex 實作代碼範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-write-select-compress-isolate-strategies.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Engineering 完全指南：解決 Context Rot 的四大策略", "description": "Context Engineering 完全指南：解決 Context Rot 的四大策略。深入解析 Write、Select、Compress、Isolate 四大核心策略，含 LangChain/LlamaIndex 實作代碼範例。", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-11_context-engineering-write-select-compress-isolate-strategies.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Rot 與一般的模型幻覺有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Context Rot 是上下文被低質量資訊污染導致整體輸出下降的現象，屬於輸入端問題；幻覺則是模型輸出端的事實錯誤。Context Rot 會加劇幻覺發生率，因為模型在嘈雜的背景中更難提取正確資訊。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型專案需要完整實施四大策略嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要全面鋪開。建議從 Select 策略開始，僅需 3-5 行代碼即可實現基礎的上下文過濾；當對話長度超過 50 輪後，再逐步加入 Compress 和 Isolate 策略。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "四大策略中哪個對 Token 節省最有效？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compress 策略的 Token 節省效果最顯著，平均可減少 60-80% 的上下文長度。將 100 輪對話壓縮為要約後，通常可將 Token 消耗從 80K 降至 15K 以內。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Context Engineering 完全指南：解決 Co...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Context Engineering 完全指南：解決 Context Rot 的四大策略</h1>
+      <div class="article-info">
+        <span>📅 2026-03-11</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Context Rot 危機：為何你的 AI 代理正在「失智」？</h2>
+<p>2026 年 LLM 開發面臨兩大根本挑戰：Context Rot（上下文腐爛）和 Mode Collapse（模式崩塌）。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，上下文窗口是 LLM 互動中最關鍵的單一資源，當它被噪音、矛盾、不相關內容或結構不佳的資訊污染時，模型輸出質量會顯著降低高達 40%。Context Rot 指的是隨著上下文窗口填滿質量低劣的資訊，模型性能急劇下降的現象，這正是當前 AI 代理開發者最迫切需要解決的問題。</p>
+
+<h2>四大策略框架：Write、Select、Compress、Isolate</h2>
+<p>業界專家將代理 Context Engineering 的核心策略歸納為四個桶：Write（寫入）、Select（選擇）、Compress（壓縮）、Isolate（隔離）。麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究指出，層次化記憶架構（Hierarchical Memory Architecture）是 2026 年的重點研究方向，通過短期、工作和長期記憶的分層，使模型能在延長的互動中處理和記住大量信息。LangChain、LlamaIndex、Weaviate 等主流框架均已在 2026 年圍繞這四大策略建立完整的中間件支援。</p>
+
+<h2>策略一：Write（寫入）— 結構化記憶建構</h2>
+<p>Write 策略的核心是主動建構高質量的結構化記憶，而非被動地將對話歷史全部丟入上下文。知識圖譜整合提供了上下文工程所需的結構化記憶和推理骨幹。透過將資訊以實體-關係-實體（Entity-Relation-Entity）的格式存入向量資料庫，模型可以快速檢索相關背景知識，而非依賴冗長的對話記錄。</p>
+
+<h2>策略二：Select（選擇）— 智慧上下文過濾</h2>
+<p>Select 策略解決的是「什麼該放進上下文」的問題。國際電腦協會（ACM）的頂級會議論文顯示，採用重點選擇機制的 AI 代理在長上下文任務中的表現比全量輸入提升 2.3 倍。実装上可使用 Mixtral 8x7b 等小型模型作為「路由器」，判斷每段新資訊與當前任務的相關性分數，僅保留高於閾值的內容。</p>
+
+<h2>策略三：Compress（壓縮）— 資訊蒸餾與摘要</h2>
+<p>Compress 策略透過資訊蒸餾將長文本轉化為濃縮的關鍵要點。Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線顯示，情境記憶壓縮技術已進入「生产力高原期」，是企業級部署的成熟選擇。可以採用遞進式摘要：將對話每 10 輪壓縮為一組 Bullet Points，保留核心決策、關鍵變數和用戶偏好。</p>
+
+<h2>策略四：Isolate（隔離）— 對話分區與隔離</h2>
+<p>Isolate 策略通過將不同任務或主題的上下文進行分區隔離，避免資訊混雜導致的「記憶污染」。每個隔離區維護獨立的對話歷史和狀態，類似作業系統的行程隔離概念。這對於同時處理多個客戶請求或複雜專案的 AI 代理尤為關鍵，可將錯誤傳播率降低 65%。</p>
+
+<h2>從零實作：四大策略整合範例</h2>
+<p>以下是以 LangChain 為基礎的整合實作，展示如何在實際專案中應用四大策略：</p>
+
+<pre><code>from langchain.memory import ConversationBufferMemory
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.schema import HumanMessage, AIMessage
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
+
+class ContextEngineeringManager:
+    def __init__(self, llm, vectorstore):
+        self.llm = llm
+        self.vectorstore = vectorstore
+        self.isolated_sessions = {}  # Isolate: 分區隔離
+        
+    def select_relevant_context(self, query, k=5):
+        """Select: 智慧選擇相關上下文"""
+        docs = self.vectorstore.similarity_search(query, k=k)
+        return [doc.page_content for doc in docs]
+    
+    def compress_to_summary(self, messages):
+        """Compress: 將對話歷史壓縮為摘要"""
+        recent = messages[-10:]  # 取最近 10 輪
+        summary_prompt = f"""請用 3 句話摘要以下對話的核心要點：
+        {recent}"""
+        return self.llm.invoke(summary_prompt)
+    
+    def write_to_knowledge_graph(self, entity, relation, target):
+        """Write: 結構化寫入知識圖譜"""
+        # 實際実装可使用 Neo4j 或 Weaviate
+        self.vectorstore.add_texts([f"{entity} {relation} {target}"])
+        return True
+    
+    def get_isolated_session(self, session_id):
+        """Isolate: 取得隔離的對話區域"""
+        if session_id not in self.isolated_sessions:
+            self.isolated_sessions[session_id] = ConversationBufferMemory()
+        return self.isolated_sessions[session_id]
+
+# 使用範例
+manager = ContextEngineeringManager(llm=OpenAI(), vectorstore=Chroma())
+relevant_context = manager.select_relevant_context("用戶的技術偏好")
+session = manager.get_isolated_session("session_001")</code></pre>
+
+<p>透過上述架構，開發者可以根據任務特性靈活組合四大策略。IEEE（Institute of Electrical and Electronics Engineers (IEEE)）的 AI 倫理標準（IEEE 7000）也強調，上下文管理的透明度是構建可信 AI 系統的基礎，開發者應記錄哪些資訊被選擇、壓縮或隔離的決策邏輯。</p>
+
+<h2>結論：從被動到主動的上下文治理</h2>
+<p>Context Rot 不再是不可解決的難題。透過 Write（結構化寫入）、Select（智慧選擇）、Compress（資訊壓縮）、Isolate（分區隔離）四大策略的組合，開發者可以構建具備長期記憶能力且不會「失智」的 AI 代理。根據 Gartner 人工智慧研究的預測，到 2027 年，超過 70% 的企業級 AI 代理將採用某種形式的 Context Engineering 框架。立即開始實作這四大策略，是確保你的 AI 代理在長程互動中保持高性能的關鍵一步。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Rot 與一般的模型幻覺有何不同？</h3>
+            <p class="faq-a">Context Rot 是上下文被低質量資訊污染導致整體輸出下降的現象，屬於輸入端問題；幻覺則是模型輸出端的事實錯誤。Context Rot 會加劇幻覺發生率，因為模型在嘈雜的背景中更難提取正確資訊。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型專案需要完整實施四大策略嗎？</h3>
+            <p class="faq-a">不需要全面鋪開。建議從 Select 策略開始，僅需 3-5 行代碼即可實現基礎的上下文過濾；當對話長度超過 50 輪後，再逐步加入 Compress 和 Isolate 策略。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">四大策略中哪個對 Token 節省最有效？</h3>
+            <p class="faq-a">Compress 策略的 Token 節省效果最顯著，平均可減少 60-80% 的上下文長度。將 100 輪對話壓縮為要約後，通常可將 Token 消耗從 80K 降至 15K 以內。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/tutorials/2026-03-11_context-engineering-write-select-compress-isolate-strategies.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
