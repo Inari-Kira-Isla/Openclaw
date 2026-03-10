@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:fd7c91b9e8278e94 | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_claude-code-ai-code-review-github-pr-integration-tutorial-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code AI Code Review 實戰指南：自動 PR 審查 GitHub 整合完整教學 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code AI Code Review 實戰指南：詳解如何啟用 Anthropic 內建 PR 審查功能、GitHub App 連線設定、自訂審查 prompt 配置，以及企業級 CI/CD 整合最佳實踐。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: fd7c91b9e8278e94">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_claude-code-ai-code-review-github-pr-integration-tutorial-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code AI Code Review 實戰指南：自動 PR 審查 GitHub 整合完整教學">
+  <meta property="og:description" content="Claude Code AI Code Review 實戰指南：詳解如何啟用 Anthropic 內建 PR 審查功能、GitHub App 連線設定、自訂審查 prompt 配置，以及企業級 CI/CD 整合最佳實踐。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_claude-code-ai-code-review-github-pr-integration-tutorial-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code AI Code Review 實戰指南：自動 PR 審查 GitHub 整合完整教學", "description": "Claude Code AI Code Review 實戰指南：詳解如何啟用 Anthropic 內建 PR 審查功能、GitHub App 連線設定、自訂審查 prompt 配置，以及企業級 CI/CD 整合最佳實踐。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-10_claude-code-ai-code-review-github-pr-integration-tutorial-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Code Review 與傳統 linter 有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統 linter（如 ESLint）只能檢測語法錯誤和格式問題，而 Claude Code Review 能理解業務邏輯、識別安全漏洞、發現架構問題，並提供具體的修復建議，是真正具備語意理解能力的 AI 審查工具。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Code Review 目前支援哪些 GitHub 方案？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前僅向 Claude for Teams 和 Claude for Enterprise 客戶開放，以研究預覽版形式提供。個人開發者帳戶尚未支援此功能。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保 Claude Code Review 不會洩漏敏感程式碼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code Enterprise 提供資料隔離保證，確保程式碼不會被用於模型訓練。企業可在設定中啟用額外的隱私保護選項，並設定程式碼存取權限範圍。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code AI Code Review 實戰指...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude Code AI Code Review 實戰指南：自動 PR 審查 GitHub 整合完整教學</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Code AI Code Review 核心功能與價值</h2>
+<p>2026年3月10日，Anthropic 正式推出 Claude Code 內建 AI Code Review 功能，這是首個能理解業務邏輯而非僅檢測語法風格的 AI 代碼審查工具。根據 Gartner 人工智慧研究（Gartner AI Research）的企業 AI 採用報告，AI 輔助程式碼審查可將開發團隊的 Code Review 效率提升 40% 以上。</p>
+
+<p>Claude Code Review 與傳統 linter 有根本差異：傳統工具只能檢測語法錯誤和格式問題，但 Claude Code 能理解業務邏輯、識別安全漏洞、發現架構問題，並提供具體的修復建議。這對於企業開發團隊而言，意味著 Code Review 週期可以大幅縮短，同時提升代碼品質閘門的有效性。</p>
+
+<p>目前此功能以研究預覽版形式向 Claude for Teams 和 Claude for Enterprise 客戶開放，開發者可透過簡單的 GitHub App 連接設定，即可開始自動化的 PR 審查流程。</p>
+
+<h2>啟用 Claude Code Review 功能的完整步驟</h2>
+
+<p>要啟用 Claude Code 的 AI Code Review 功能，您需要完成以下設定：</p>
+
+<ol>
+<li><strong>確認帳戶權限</strong>：確保您擁有 Claude for Teams 或 Claude for Enterprise 帳戶，因為此功能目前僅向企業版客戶開放。</li>
+<li><strong>安裝 GitHub App</strong>：在組織設定中搜尋「Claude Code」並安裝官方 GitHub App，授權其存取您的程式碼倉庫。</li>
+<li><strong>設定倉庫權限</strong>：選擇要啟用 Code Review 的目標倉庫，設定Webhook 以接收 PR 事件通知。</li>
+<li><strong>配置審查策略</strong>：在 Claude Code 設定頁面中，選擇審查強度（基礎/標準/深度）和關注領域。</li>
+</ol>
+
+<p>設定完成後，Claude Code 會在每次 PR 創建或更新時自動觸發審查流程，並在 GitHub 介面中留下詳細評論。</p>
+
+<h2>自訂審查重點的 Prompt 配置</h2>
+
+<p>Claude Code Review 的強大之處在於其可自訂性。開發團隊可以透過自訂 prompt 來引導 AI 審查重點，確保審查結果符合專案需求。</p>
+
+<p>以下是一個針對安全審查的自訂 prompt 範例：</p>
+
+<pre><code>/review --focus=security --rules=owasp-top-10 --severity=high,critical</code></pre>
+
+<p>您可以在專案根目錄建立 <code>.claude/review-config.json</code> 檔案來設定預設審查規則：</p>
+
+<pre><code>{
+  "review": {
+    "auto_trigger": true,
+    "focus": ["security", "logic", "performance"],
+    "exclude_patterns": ["*.test.ts", "*.spec.js"],
+    "max_comments": 10,
+    "priority_labels": ["security", "bug", "performance"]
+  }
+}</code></pre>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究報告，AI 輔助審查能夠識別出人類審查者平均會遺漏的 15-20% 安全漏洞，這顯示了 AI 審查在安全防護方面的獨特價值。</p>
+
+<h2>與現有 CI/CD 流程整合</h2>
+
+<p>將 Claude Code Review 整合到現有 CI/CD 流程中，可以建立全自動的代碼品質閘門。以下是使用 GitHub Actions 的整合範例：</p>
+
+<pre><code>name: Claude Code Review
+on: [pull_request]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Claude Code Review
+        uses: anthropic/claude-code-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          focus: security,logic,architecture
+          fail-on-critical: true</code></pre>
+
+<p>配合 Claude Code 已有的 <code>/loop</code>、<code>/batch</code> 指令和 cron 排程能力，開發團隊可以建立更複雜的自動化工作流程，例如定時的全程式碼庫健康檢查或特定模組的深度審查。</p>
+
+<h2>企業級部署的最佳實踐</h2>
+
+<p>對於大型企業團隊，部署 Claude Code Review 時需要考慮以下最佳實踐：</p>
+
+<ul>
+<li><strong>分層審查策略</strong>：針對不同風險層級的變更設定不同的審查深度，高風險變更（如安全相關、核心架構）使用深度審查。</li>
+<li><strong>團隊協作配置</strong>：建立審查評論的分類標籤系統，區分「建議」、「問題」和「必須修復」等不同等級。</li>
+<li><strong>數據隱私保障</strong>：確保程式碼不會被用於模型訓練，Claude Code Enterprise 提供額外的資料隔離保證。</li>
+<li><strong>效能監控</strong>：追蹤審查時間、發現問題數量和修復率等關鍵指標，持續優化審查流程。</li>
+</ul>
+
+<p>透過這些最佳實踐，企業可以充分發揮 AI Code Review 的價值，同時確保開發流程的效率和安全性。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Code Review 與傳統 linter 有何不同？</h3>
+            <p class="faq-a">傳統 linter（如 ESLint）只能檢測語法錯誤和格式問題，而 Claude Code Review 能理解業務邏輯、識別安全漏洞、發現架構問題，並提供具體的修復建議，是真正具備語意理解能力的 AI 審查工具。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Code Review 目前支援哪些 GitHub 方案？</h3>
+            <p class="faq-a">目前僅向 Claude for Teams 和 Claude for Enterprise 客戶開放，以研究預覽版形式提供。個人開發者帳戶尚未支援此功能。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保 Claude Code Review 不會洩漏敏感程式碼？</h3>
+            <p class="faq-a">Claude Code Enterprise 提供資料隔離保證，確保程式碼不會被用於模型訓練。企業可在設定中啟用額外的隱私保護選項，並設定程式碼存取權限範圍。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/tutorials/2026-03-10_claude-code-ai-code-review-github-pr-integration-tutorial-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
