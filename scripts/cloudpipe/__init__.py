@@ -1,1 +1,0 @@
-# CloudPipe monitoring agents
