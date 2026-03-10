@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:8b8d95789e1df97b | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_mcp-security-enterprise-authentication-prompt-injection-defense-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP 安全防護實戰：企業級部署的認證漏洞與 Prompt Injection 防禦指南 | AI 學習寶庫</title>
+  <meta name="description" content="MCP 安全防護完整指南：解析企業級部署常見認證漏洞與 Prompt Injection 攻擊，提供 OAuth 2.0 整合、白名單配置、沙箱隔離等實戰防禦策略。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 8b8d95789e1df97b">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_mcp-security-enterprise-authentication-prompt-injection-defense-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="MCP 安全防護實戰：企業級部署的認證漏洞與 Prompt Injection 防禦指南">
+  <meta property="og:description" content="MCP 安全防護完整指南：解析企業級部署常見認證漏洞與 Prompt Injection 攻擊，提供 OAuth 2.0 整合、白名單配置、沙箱隔離等實戰防禦策略。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_mcp-security-enterprise-authentication-prompt-injection-defense-2026.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MCP 安全防護實戰：企業級部署的認證漏洞與 Prompt Injection 防禦指南", "description": "MCP 安全防護完整指南：解析企業級部署常見認證漏洞與 Prompt Injection 攻擊，提供 OAuth 2.0 整合、白名單配置、沙箱隔離等實戰防禦策略。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-10_mcp-security-enterprise-authentication-prompt-injection-defense-2026.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "MCP 工具過度授權的具體風險是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "工具過度授權違反最小權限原則，攻擊者可透過惡意工具定義存取企業內部系統、資料庫或 API 金鑰，導致敏感資料洩漏或系統被操控。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何防止 Prompt Injection 攻擊？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "實施輸入驗證與輸出隔離，所有外部輸入需經語義分析與過濾，工具輸出應與主系統邏輯隔離，防止異常指令橫向移動。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業部署 MCP 需要哪些安全配置？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議採用 OAuth 2.0 整合進行認證、實施工具白名單與權限分級、啟用沙箱隔離、配置詳細日誌稽核，並定期進行安全評估。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>MCP 安全防護實戰：企業級部署的認證漏洞與 Prompt ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">MCP 安全防護實戰：企業級部署的認證漏洞與 Prompt Injection 防禦指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>MCP 企業安全風險全景：為何需要立即行動</h2>
+<p>MCP（Model Context Protocol）已成為企業 AI 應用的核心基礎設施，每月 SDK 下載量突破 9,700 萬次，MCP 伺服器數量超過 5,800 個。然而，根據 Mirantis 安全研究報告，MCP 正面臨三大核心風險：工具過度授權（Tool Overexposure）、不受信任伺服器導致的資料洩漏、以及惡意工具冒充造成的認證繞過。這些漏洞若未及時修補，企業可能面臨敏感資料外洩與 AI 系統被操控的嚴重後果。Gartner 人工智慧研究（Gartner AI Research）預測，至 2026 年底將有 40% 企業應用整合任務型 AI 代理，使 MCP 安全配置成為 CTO 們的必修課題。</p>
+
+<h2>風險一：工具過度授權與最小權限原則</h2>
+<p>MCP 工具預設常授予過多權限，違反資安領域的核心原則——最小權限原則（Principle of Least Privilege）。攻擊者可透過惡意工具定義存取企業內部系統、資料庫或 API金鑰。我們建議採用以下策略：</p>
+<ul>
+<li><strong>權限分級配置</strong>：依業務需求將工具權限分為讀取、寫入、管理三個層級</li>
+<li><strong>OAuth 2.0 整合</strong>：為每個 MCP 伺服器配置獨立的 OAuth 客戶端，實施細粒度授權</li>
+<li><strong>定期權限審計</strong>：每季檢視工具權限配置，及時撤銷不必要的存取權限</li>
+</ul>
+
+<h2>風險二：Prompt Injection 攻擊向量分析</h2>
+<p>Prompt Injection 是針對 AI 系統的主要攻擊手法，攻擊者透過在輸入中嵌入惡意指令，操控 AI 模型執行未授權操作。MIT CSAIL（麻省理工學院計算機科學與人工智慧實驗室）的研究指出，這類攻擊在工具調用場景中尤其危險，因為攻擊者可利用模型對工具輸出的信任進行間接注入。</p>
+<p>防禦關鍵在於輸入驗證與輸出隔離：所有來自外部的用戶輸入必須經過嚴格的語義分析與過濾，MCP 工具的輸出應與主系統邏輯隔離，防止異常指令橫向移動。</p>
+
+<h2>實戰部署：四層防護架構</h2>
+<p>以下是我們在企業環境中實施的 MCP 安全配置範例，涵蓋認證、授權、稽核三大環節：</p>
+
+<pre><code># MCP 伺服器安全配置範例
+{
+  "server": {
+    "auth": {
+      "type": "oauth2",
+      "config": {
+        "client_id": "enterprise-mcp-server",
+        "token_endpoint": "https://auth.company.com/oauth/token",
+        "scopes": ["read:resources", "execute:tools"]
+      }
+    },
+    "tools": {
+      "whitelist_enabled": true,
+      "allowed_tools": [
+        "filesystem:read",
+        "database:query",
+        "api:internal"
+      ],
+      "denied_patterns": ["*admin*", "*delete*", "*drop*"]
+    },
+    "sandbox": {
+      "enabled": true,
+      "timeout_ms": 30000,
+      "memory_limit_mb": 512,
+      "network_isolation": true
+    },
+    "audit": {
+      "logging_level": "detailed",
+      "retention_days": 90,
+      "alert_on_anomaly": true
+    }
+  }
+}</code></pre>
+
+<h2>MCP 伺服器稽核與持續監控</h2>
+<p>2025 年 12 月，Anthropic 將 MCP 捐贈給 Linux 基金會旗下的 Agentic AI Foundation（AAIF），OpenAI、AWS、Google、Microsoft 等科技巨頭加入治理委員會，推動安全標準化。企業應建立 MCP 伺服器稽核機制，包括：</p>
+<ol>
+<li><strong>來源驗證</strong>：僅部署來自可信來源的 MCP 伺服器，定期檢查伺服器簽章與更新日誌</li>
+<li><strong>行為監控</strong>：即時記錄工具調用日誌，偵測異常模式（如短時間內大量檔案存取）</li>
+<li><strong>滲透測試</strong>：每半年進行 MCP 安全評估，模擬 Prompt Injection 與權限繞過攻擊</li>
+</ol>
+<p>IEEE（國際電氣電子工程師學會）正在制定 AI 倫理與安全標準，企業在部署 MCP 時應參考 IEEE 7000 等相關規範，確保安全設計與產業最佳實踐接軌。</p>
+
+<h2>結論：建立企業級 MCP 安全文化</h2>
+<p>MCP 安全防護不是單一技術方案，而是涉及組織流程、技術架構與持續監控的綜合議題。企業應從 OAuth 2.0 整合、白名單配置、沙箱隔離、稽核機制四個維度建立縱深防禦，同時培養團隊對 AI 安全威脅的敏感度。隨著企業 AI 應用加速普及，將 MCP 安全納入企業資安策略已是刻不容緩的優先事項。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">MCP 工具過度授權的具體風險是什麼？</h3>
+            <p class="faq-a">工具過度授權違反最小權限原則，攻擊者可透過惡意工具定義存取企業內部系統、資料庫或 API 金鑰，導致敏感資料洩漏或系統被操控。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何防止 Prompt Injection 攻擊？</h3>
+            <p class="faq-a">實施輸入驗證與輸出隔離，所有外部輸入需經語義分析與過濾，工具輸出應與主系統邏輯隔離，防止異常指令橫向移動。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業部署 MCP 需要哪些安全配置？</h3>
+            <p class="faq-a">建議採用 OAuth 2.0 整合進行認證、實施工具白名單與權限分級、啟用沙箱隔離、配置詳細日誌稽核，並定期進行安全評估。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/configs/2026-03-10_mcp-security-enterprise-authentication-prompt-injection-defense-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
