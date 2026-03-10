@@ -1,0 +1,35 @@
+# Cloudflare secrets
+configs/wrangler.toml
+
+# OpenClaw workspace (NEVER commit to public repo)
+scripts/
+memory/
+agents/
+projects/
+n8n/
+config/
+backup/
+backups/
+closed-loop/
+data/
+docs/
+entity-registry/
+errors/
+event-contracts/
+feedback-loop/
+content-collector/
+content_queue/
+performance-insights/
+pipelines/
+workers/
+cron/
+hooks/
+AI-Governance-Project/
+Inari/
+aeo-site/
+
+# Sensitive files
+*.env
+*.key
+*.pem
+*.secret
