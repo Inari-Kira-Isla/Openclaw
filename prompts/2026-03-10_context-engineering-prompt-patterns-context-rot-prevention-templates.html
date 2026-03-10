@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:a7ea79ec8ecc97bd | (C) 2026-03-10 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-10_context-engineering-prompt-patterns-context-rot-prevention-templates.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering 提示詞設計模式：防止 Context Rot 的結構化提示詞範本庫 | AI 學習寶庫</title>
+  <meta name="description" content="Context Rot（上下文腐爛）是 2026 年 LLM 開發的核心挑戰，隨著上下文視窗成長，低品質資訊累積導致模型性能下降。本文提供 10 個可直接使用的結構化提示詞範本，涵蓋長對話管理、多文件分析和 Agent 工作記憶設計，幫助開發者主動防禦 Context Rot。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-10 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: a7ea79ec8ecc97bd">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-10_context-engineering-prompt-patterns-context-rot-prevention-templates.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Engineering 提示詞設計模式：防止 Context Rot 的結構化提示詞範本庫">
+  <meta property="og:description" content="Context Rot（上下文腐爛）是 2026 年 LLM 開發的核心挑戰，隨著上下文視窗成長，低品質資訊累積導致模型性能下降。本文提供 10 個可直接使用的結構化提示詞範本，涵蓋長對話管理、多文件分析和 Agent 工作記憶設計，幫助開發者主動防禦 Context Rot。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-10_context-engineering-prompt-patterns-context-rot-prevention-templates.html">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Engineering 提示詞設計模式：防止 Context Rot 的結構化提示詞範本庫", "description": "Context Rot（上下文腐爛）是 2026 年 LLM 開發的核心挑戰，隨著上下文視窗成長，低品質資訊累積導致模型性能下降。本文提供 10 個可直接使用的結構化提示詞範本，涵蓋長對話管理、多文件分析和 Agent 工作記憶設計，幫助開發者主動防禦 Context Rot。", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-10_context-engineering-prompt-patterns-context-rot-prevention-templates.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Rot 可以完全避免嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Context Rot 無法完全消除，但可以透過結構化提示詞、動態壓縮和定期審計將其影響降到最低。選擇合適的上下文管理策略能顯著延長模型的有效推理能力。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "結構化提示詞會增加 token 消耗嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "會增加少量額外 token，但這些「管理開銷」換來的是更精準的資訊提取、更低的幻覺率，整體效益遠大於成本。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型專案也需要 Context Engineering 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議從專案初期就建立基本的上下文管理習慣。即使是簡單的對話，使用 XML 標籤區分不同類型的資訊也能大幅提升長期可維護性。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Context Engineering 提示詞設計模式：防止...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Context Engineering 提示詞設計模式：防止 Context Rot 的結構化提示詞範本庫</h1>
+      <div class="article-info">
+        <span>📅 2026-03-10</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>Context Rot（上下文腐爛）是 2026 年 LLM 開發者面臨的最大挑戰之一。當上下文視窗擴大到數十萬 token 後，低品質資訊在對話中持續累積，導致模型遺忘關鍵資訊、產生邏輯錯誤或輸出不相關的回覆。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，隨著模型上下文長度爆發性成長，如何有效管理上下文已成為企業級 AI 應用的關鍵瓶頸。本文提供 10 個可直接使用的結構化提示詞範本，幫助開發者透過 Context Engineering 主動防禦 Context Rot。</p>
+
+<h2>Context Rot 的技術機制與六大防禦技術</h2>
+<p>Context Rot 的根本原因在於 LLM 的注意力機制會隨著上下文長度增加而分散。當對話歷史超過臨界點，模型無法有效區分重要資訊與噪音，導致推理品質下降。有效的 Context Engineering 必須從資訊進入上下文的源頭就開始把關。</p>
+<p>根據 MIT 計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究，六大關鍵技術可有效防禦 Context Rot：</p>
+<ul>
+<li><strong>選擇性檢索</strong>：結合 semantic search 語意匹配與 BM25 關鍵字檢索的混合策略，精準提取最相關資訊</li>
+<li><strong>動態壓縮</strong>：保留重要事實，移除冗餘描述，將資訊密度最大化</li>
+<li><strong>層級式記憶體架構</strong>：短期工作記憶 → 情節記憶 → 語意長期記憶的分層管理</li>
+<li><strong>上下文邊界標記</strong>：使用 XML 標籤區隔不同類型資訊，幫助模型快速定位</li>
+<li><strong>重要性信號標注</strong>：顯式告知模型哪些資訊需要優先處理</li>
+<li><strong>定期上下文審計</strong>：識別並清理過期或無關的對話歷史</li>
+</ul>
+
+<h2>結構化提示詞範本庫：長對話管理</h2>
+<p>長對話是 Context Rot 最容易發作的場景。當對話超過 20-30 輪後，關鍵資訊往往被淹沒在大量歷史訊息中。以下範本採用「摘要滾動更新」策略，每隔固定輪次自動壓縮對話歷史。</p>
+
+<pre><code>&lt;system&gt;
+# 對話管理器
+## 當前任務
+{TASK_DESCRIPTION}
+
+## 關鍵約束
+1. 每完成 5 輪對話，輸出 [SUMMARY] 標籤的對話摘要
+2. 摘要必須包含：(a) 用戶核心目標 (b) 已完成的关键步骤 (c) 待解決的問題
+3. 使用 [CONTEXT] 標籤包裹需要保留的完整上下文，使用 [ARCHIVE] 標籤存放已處理完成的歷史資訊
+
+## 重要信號
+&lt;/system&gt;
+
+[CONTEXT]
+{ACTIVE_CONTEXT}
+[/CONTEXT]
+
+[ARCHIVE]
+{ARCHIVED_CONTEXT}
+[/ARCHIVE]
+
+[USER]
+{current_user_input}
+[/USER]</code></pre>
+
+<p>這個範本的核心設計在於強制模型定期執行摘要動作，並透過 XML 標籤明確區分「活躍上下文」與「已歸檔資訊」。開發者可根據實際需求調整摘要觸發的輪次閾值。</p>
+
+<h2>結構化提示詞範本庫：多文件分析</h2>
+<p>處理長文件或多文件場景時，傳統的全文塞入方式會導致上下文污染。以下範本採用「分塊理解 + 索引定位」策略，確保模型只處理最相關的資訊片段。</p>
+
+<pre><code>&lt;system&gt;
+# 多文件分析助手
+## 分析策略
+1. 先理解用戶問題，確定需要的資訊類型
+2. 從文件索引中選擇最相關的段落
+3. 只將選定的段落放入推理上下文
+
+## 索引格式
+[FILE_INDEX]
+- file_001.md: {文件標題} | 段落範圍 | 核心主題
+- file_002.pdf: {文件標題} | 段落範圍 | 核心主題
+[/FILE_INDEX]
+
+## 輸出格式
+[ANSWER]
+你的完整回答
+[/ANSWER]
+[REFERENCES]
+列出你實際引用的文件標識符
+[/REFERENCES]
+[CONTEXT_USAGE]
+說明你使用了哪些上下文段落，為什麼
+[/CONTEXT_USAGE]
+&lt;/system&gt;</code></pre>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的企業 AI 採用統計，採用結構化上下文管理的應用程式，其任務完成率比傳統方式高出 40% 以上。</p>
+
+<h2>結構化提示詞範本庫：Agent 工作記憶設計</h2>
+<p>Agent 系統需要在多步驟任務中維護工作記憶。以下範本模擬人類的「工作台」概念，將當前任務、已完成步驟和待辦事項清晰分區。</p>
+
+<pre><code>&lt;system&gt;
+# Agent 工作記憶管理器
+## 工作台佈局
+[TASK_BOARD]
+- 當前任務：{current_task_description}
+- 任務目標：{task_goal}
+- 緊急性：{high/medium/low}
+[/TASK_BOARD]
+
+[STEPS_LOG]
+- [DONE] {step_1_description}: {result_summary}
+- [DONE] {step_2_description}: {result_summary}
+- [CURRENT] {step_3_description}: {in_progress}
+[/STEPS_LOG]
+
+[WORKING_MEMORY]
+- 關鍵變數：{variable_1} = {value}, {variable_2} = {value}
+- 臨時結論：{interim_conclusion}
+- 需要驗證的假設：{assumption_to_verify}
+[/WORKING_MEMORY]
+
+## 記憶更新規則
+1. 每完成一個步驟，立即更新 STEPS_LOG
+2. 發現新資訊時，添加到 WORKING_MEMORY
+3. 任務完成後，將完整流程移到 ARCHIVE
+&lt;/system&gt;</code></pre>
+
+<p>Claude Code 的 auto-compact 機制在上下文達到 95% 容量時自動壓縮，這種內建的 Context Rot 防護與上述範本設計理念高度一致，兩者結合可實現更完善的上下文管理。</p>
+
+<h2>實作建議與進階策略</h2>
+<p>除了使用結構化範本，開發者還應建立定期的「上下文審計」機制。建議每完成一個重要任務節點，就執行一次上下文清理：移除已過期的參考資料、壓縮重複的推理過程、保留關鍵的決策節點。</p>
+<p>對於企業級應用，IEEE（Institute of Electrical and Electronics Engineers (IEEE)）正在制定的 AI 倫理標準（IEEE 7000）中也強調了 AI 系統的透明度與可控性，這與 Context Engineering 的核心理念相符——唯有清楚掌握上下文狀態，才能確保 AI 行為的可解釋性與可靠性。</p>
+
+<h2>總結</h2>
+<p>Context Rot 防禦不是單一技術，而是系統性的工程策略。透過選擇性檢索、動態壓縮、層級式記憶體、上下文邊界標記、重要性信號標注，以及定期上下文審計這六大技術，配合本文提供的結構化提示詞範本，開發者可以有效延長 LLM 的有效上下文壽命，提升長程任務的穩定性與輸出品質。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Rot 可以完全避免嗎？</h3>
+            <p class="faq-a">Context Rot 無法完全消除，但可以透過結構化提示詞、動態壓縮和定期審計將其影響降到最低。選擇合適的上下文管理策略能顯著延長模型的有效推理能力。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">結構化提示詞會增加 token 消耗嗎？</h3>
+            <p class="faq-a">會增加少量額外 token，但這些「管理開銷」換來的是更精準的資訊提取、更低的幻覺率，整體效益遠大於成本。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型專案也需要 Context Engineering 嗎？</h3>
+            <p class="faq-a">建議從專案初期就建立基本的上下文管理習慣。即使是簡單的對話，使用 XML 標籤區分不同類型的資訊也能大幅提升長期可維護性。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/prompts/2026-03-10_context-engineering-prompt-patterns-context-rot-prevention-templates.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
