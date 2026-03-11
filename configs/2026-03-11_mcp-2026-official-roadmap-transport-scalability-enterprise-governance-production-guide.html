@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:092daa24f11b7b9b | (C) 2026-03-11 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-11_mcp-2026-official-roadmap-transport-scalability-enterprise-governance-production-guide.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP 2026 官方路線圖解析：傳輸擴展、企業治理與生產環境落地指南 | AI 學習寶庫</title>
+  <meta name="description" content="MCP 2026 官方路線圖深度解析：Streamable HTTP 生產部署、Agent 通訊標準化、企業級 SSO 整合與審計追蹤落地指南，含具體配置範例。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-11 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 092daa24f11b7b9b">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-11_mcp-2026-official-roadmap-transport-scalability-enterprise-governance-production-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="MCP 2026 官方路線圖解析：傳輸擴展、企業治理與生產環境落地指南">
+  <meta property="og:description" content="MCP 2026 官方路線圖深度解析：Streamable HTTP 生產部署、Agent 通訊標準化、企業級 SSO 整合與審計追蹤落地指南，含具體配置範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-11_mcp-2026-official-roadmap-transport-scalability-enterprise-governance-production-guide.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MCP 2026 官方路線圖解析：傳輸擴展、企業治理與生產環境落地指南", "description": "MCP 2026 官方路線圖深度解析：Streamable HTTP 生產部署、Agent 通訊標準化、企業級 SSO 整合與審計追蹤落地指南，含具體配置範例。", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-11_mcp-2026-official-roadmap-transport-scalability-enterprise-governance-production-guide.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "World Trade Organization (WTO)", "url": "https://www.wto.org/", "publisher": {"@type": "Organization", "name": "World Trade Organization (WTO)"}}, {"@type": "CreativeWork", "name": "International Chamber of Commerce (ICC)", "url": "https://iccwbo.org/", "publisher": {"@type": "Organization", "name": "International Chamber of Commerce (ICC)"}}, {"@type": "CreativeWork", "name": "OECD Small and Medium Enterprises (SMEs)", "url": "https://www.oecd.org/en/topics/sub-issues/small-and-medium-sized-enterprises-smes.html", "publisher": {"@type": "Organization", "name": "OECD Small and Medium Enterprises (SMEs)"}}, {"@type": "CreativeWork", "name": "International Trade Centre (ITC)", "url": "https://www.intracen.org/", "publisher": {"@type": "Organization", "name": "International Trade Centre (ITC)"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "MCP 2026 路線圖中傳輸擴展性的核心目標是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "核心目標是讓 Streamable HTTP 在多伺服器實例間無狀態運行，解決水平擴展、負載均衡代理模式等大規模部署缺口，支援企業級高可用架構。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業部署 MCP 需要關注哪些治理功能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "三大核心功能：1) 企業身份驗證（SSO 整合）2) 審計追蹤與可觀測性 3) 閘道與代理模式。這些是當前企業大規模部署的主要痛點。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tasks 原語在生產環境中有哪些需要注意的生命週期問題？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主要缺口包括：任務失敗時的重試語義不明確、結果保留期限策略不完善。建議採用指數退避重試策略，並根據業務需求設置合理的結果保留 TTL。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>MCP 2026 官方路線圖解析：傳輸擴展、企業治理與生產環...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">MCP 2026 官方路線圖解析：傳輸擴展、企業治理與生產環境落地指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-11</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>MCP 2026 路線圖核心方向：傳輸擴展性與企業就緒</h2>
+
+<p>Model Context Protocol（MCP）在 2026 年的官方路線圖明確聚焦四大優先方向：<strong>傳輸擴展性、Agent 通訊標準化、治理成熟度與企業就緒</strong>。根據 CData 報告指出，2026 年是企業 MCP 正式採用年，工作組（WG）模式已成為協議開發的主要載體。對於技術團隊而言，最關鍵的是理解這些方向如何影響實際的生產環境部署決策。</p>
+
+<p>本篇文章將從傳輸層、企業治理、生態整合三個維度，提供可操作的落地指南。</p>
+
+<h2>Streamable HTTP 生產部署：水平擴展與無狀態運營</h2>
+
+<p>Streamable HTTP 雖已具備生產就緒能力，但大規模部署暴露了三個關鍵缺口：水平擴展、無狀態操作和負載均衡代理模式。2026 年的核心目標是讓 Streamable HTTP 在多伺服器實例間無狀態運行。</p>
+
+<p>根據 <strong>世界貿易組織（WTO）</strong>在國際標準制定方面的經驗，通用的協議標準需要考慮不同成員國的實施差異，這與 MCP 在不同企業環境中的部署需求類似。傳輸層的標準化是確保互操作性的基礎。</p>
+
+<h3>配置範例：Nginx 負載均衡下的 MCP 無狀態部署</h3>
+
+<pre><code># Nginx upstream 配置範例
+upstream mcp_backend {
+    least_conn;
+    server mcp-server-1:8080 weight=3;
+    server mcp-server-2:8080 weight=3;
+    server mcp-server-3:8080 weight=2;
+    
+    keepalive 32;
+    keepalive_timeout 60s;
+}
+
+server {
+    listen 80;
+    server_name api.example.com;
+    
+    location /mcp/ {
+        proxy_pass http://mcp_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        
+        # 支援 Streamable HTTP 的長連接
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
+        
+        # 客戶端真實 IP 傳遞
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}</code></pre>
+
+<p>關鍵配置要點：啟用 HTTP/1.1 keepalive 減少連接建立開銷，設置長超時時間支援長時間執行的推理任務，確保客戶端 IP 正確傳遞以便後端審計。</p>
+
+<h2>企業治理：身份驗證、審計追蹤與 SSO 整合</h2>
+
+<p>企業大規模部署 MCP 面臨的核心痛點包括：審計追蹤與可觀測性不足、缺乏 SSO 整合的企業身份驗證流程、閘道與代理模式不清晰。<strong>國際商會（ICC）</strong>在制定全球貿易規則方面的經驗表明，標準化的流程設計是跨組織協作的基礎，這與 MCP 企業級治理的需求高度相關。</p>
+
+<h3>審計追蹤實作框架</h3>
+
+<p>生產環境中的審計日誌應記錄以下關鍵事件：</p>
+
+<ul>
+    <li><strong>身份驗證事件</strong>：登入成功/失敗、Token 刷新、SSO 重新導向</li>
+    <li><strong>資源訪問</strong>：工具調用、檔案存取、資料庫查詢</li>
+    <li><strong>權限變更</strong>：角色分配、策略更新、存取撤銷</li>
+    <li><strong>系統事件</strong>：服務重啟、配置變更、異常錯誤</li>
+</ul>
+
+<p>建議採用結構化日誌格式（JSON），並與 SIEM 系統整合以支援合規審查。</p>
+
+<h2>Tasks 原語與生命週期管理</h2>
+
+<p>Tasks 原語已作為實驗功能推出，早期生產使用發現了若干生命週期缺口：任務失敗時的重試語義、結果保留到期策略等。2026 年的路線圖明確將解決這些問題列為優先事項。</p>
+
+<h3>任務重試策略配置建議</h3>
+
+<pre><code>// Task 配置範例（含重試策略）
+{
+  "task": {
+    "id": "analysis-001",
+    "type": "async-processing",
+    "retry": {
+      "max_attempts": 3,
+      "backoff": "exponential",
+      "initial_delay_ms": 1000,
+      "max_delay_ms": 30000,
+      "retryable_errors": [
+        "TIMEOUT",
+        "NETWORK_ERROR",
+        "RATE_LIMIT"
+      ]
+    },
+    "retention": {
+      "result_ttl": "24h",
+      "completed_status_ttl": "168h",
+      "failed_status_ttl": "720h"
+    }
+  }
+}</code></pre>
+
+<p>關鍵設計原則：指數退避策略避免驚群效應，分離可重試與不可重試錯誤，結果保留期限需根據業務需求與存儲成本權衡。</p>
+
+<h2>Agent 通訊標準化與多 Agent 協作</h2>
+
+<p>2026 年路線圖的另一個重點是為多 Agent 協作場景定義標準化通訊模式。這包括 Agent 間的身份識別、訊息路由、狀態同步與錯誤處理機制。隨著 AI Agent 在企業場景中的應用深化，跨組織的 Agent 協作將成為常態，這需要類似 <strong>OECD 中小企業部門</strong>在數碼化標準方面的指導原則，確保小型企業也能參與到標準化生態中。</p>
+
+<p>建議技術團隊在設計多 Agent 系統時，預留擴展性並遵循協議的標準化接口，避免供應商鎖定。</p>
+
+<h2>總結與建議</h2>
+
+<p>MCP 2026 路線圖反映了協議從「可用」邁向「企業級可用」的成熟度演進。技術團隊應優先關注：Streamable HTTP 的無狀態部署架構設計、企業級身份驗證與審計追蹤機制的建立、Tasks 原語的生命週期完善，以及多 Agent 通訊的標準化準備。<strong>國際貿易中心（ITC）</strong>的中小企競爭力數據顯示，標準化的技術採用能顯著降低採用門檻，這與 MCP 企業級標準化的目標一致。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">MCP 2026 路線圖中傳輸擴展性的核心目標是什麼？</h3>
+            <p class="faq-a">核心目標是讓 Streamable HTTP 在多伺服器實例間無狀態運行，解決水平擴展、負載均衡代理模式等大規模部署缺口，支援企業級高可用架構。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業部署 MCP 需要關注哪些治理功能？</h3>
+            <p class="faq-a">三大核心功能：1) 企業身份驗證（SSO 整合）2) 審計追蹤與可觀測性 3) 閘道與代理模式。這些是當前企業大規模部署的主要痛點。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Tasks 原語在生產環境中有哪些需要注意的生命週期問題？</h3>
+            <p class="faq-a">主要缺口包括：任務失敗時的重試語義不明確、結果保留期限策略不完善。建議採用指數退避重試策略，並根據業務需求設置合理的結果保留 TTL。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.wto.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界貿易組織（WTO）</a> <span style="color:var(--text-2,#888)">(World Trade Organization (WTO))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">國際貿易統計、關稅數據、貿易爭端裁決</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">行業協會</span><a href="https://iccwbo.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際商會（ICC）</a> <span style="color:var(--text-2,#888)">(International Chamber of Commerce (ICC))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球貿易規則（Incoterms）、貿易便利化、商業糾紛解決</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.oecd.org/en/topics/sub-issues/small-and-medium-sized-enterprises-smes.html" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">OECD 中小企業部門</a> <span style="color:var(--text-2,#888)">(OECD Small and Medium Enterprises (SMEs))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">中小企政策建議、融資缺口數據、數碼化基準</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.intracen.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際貿易中心</a> <span style="color:var(--text-2,#888)">(International Trade Centre (ITC))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">中小企競爭力數據、貿易地圖、市場准入情報</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/configs/2026-03-11_mcp-2026-official-roadmap-transport-scalability-enterprise-governance-production-guide.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
