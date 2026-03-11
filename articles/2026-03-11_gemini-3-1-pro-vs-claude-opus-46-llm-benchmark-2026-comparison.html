@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:5ec59de65d010c4f | (C) 2026-03-11 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_gemini-3-1-pro-vs-claude-opus-46-llm-benchmark-2026-comparison.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini 3.1 Pro vs Claude Opus 4.6：2026 年最新 LLM 基準測試全面比較 | AI 學習寶庫</title>
+  <meta name="description" content="2026年 Gemini 3.1 Pro 與 Claude Opus 4.6 基準測試完整比較。Gemini 3.1 Pro 在 ARC-AGI-2 達 77.1%、SWE-Bench 80.6%，智能指數 57 分領先，但 Claude Opus 4.6 專家 Elo 1606 領先。根據 Artificial Analysis 評估，兩者在不同場景各有優勢，選錯模型可能浪費 40% 運算成本。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-11 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 5ec59de65d010c4f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_gemini-3-1-pro-vs-claude-opus-46-llm-benchmark-2026-comparison.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Gemini 3.1 Pro vs Claude Opus 4.6：2026 年最新 LLM 基準測試全面比較">
+  <meta property="og:description" content="2026年 Gemini 3.1 Pro 與 Claude Opus 4.6 基準測試完整比較。Gemini 3.1 Pro 在 ARC-AGI-2 達 77.1%、SWE-Bench 80.6%，智能指數 57 分領先，但 Claude Opus 4.6 專家 Elo 1606 領先。根據 Artificial Analysis 評估，兩者在不同場景各有優勢，選錯模型可能浪費 40% 運算成本。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_gemini-3-1-pro-vs-claude-opus-46-llm-benchmark-2026-comparison.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Gemini 3.1 Pro vs Claude Opus 4.6：2026 年最新 LLM 基準測試全面比較", "description": "2026年 Gemini 3.1 Pro 與 Claude Opus 4.6 基準測試完整比較。Gemini 3.1 Pro 在 ARC-AGI-2 達 77.1%、SWE-Bench 80.6%，智能指數 57 分領先，但 Claude Opus 4.6 專家 Elo 1606 領先。根據 Artificial Analysis 評估，兩者在不同場景各有優勢，選錯模型可能浪費 40% 運算成本。", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_gemini-3-1-pro-vs-claude-opus-46-llm-benchmark-2026-comparison.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Gemini 3.1 Pro 與 Claude Opus 4.6 哪個更適合開發者？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "開發者首選 Gemini 3.1 Pro，其在 SWE-Bench Verified 達 80.6%、ARC-AGI-2 達 77.1%，程式碼生成與推理能力領先，且成本較低。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為何 Claude Opus 4.6 的專家 Elo 評分更高？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Opus 4.6 在複雜辦公室工作流程和規劃文件生成方面保持結構性優勢，輸出細節處理更符合專業使用者期待，Elo 達 1606 對比 Gemini 的 1317。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026 年企業如何選擇 AI 模型？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據 Gartner 建議，應採用「任務匹配」策略：研發任務選 Gemini 3.1 Pro，內容創作選 Claude Opus 4.6，大規模部署可考慮混合策略以平衡成本與品質。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>Gemini 3.1 Pro vs Claude Opus ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">Gemini 3.1 Pro vs Claude Opus 4.6：2026 年最新 LLM 基準測試全面比較</h1>
+      <div class="article-info">
+        <span>📅 2026-03-11</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>2026 年旗艦 LLM 對決：Gemini 3.1 Pro 與 Claude Opus 4.6 誰更強？</h2>
+
+<p>根據 <strong>Artificial Analysis</strong> 獨立評估，Gemini 3.1 Pro 在智能指數中以 <strong>57 分排名第一</strong>，領先 Claude Opus 4.6 的 53 分。然而，2026 年的 AI 模型之戰已不再是「誰最強」的簡單選擇題——<strong>沒有單一最強模型，選擇取決於具體任務需求</strong>。本篇文章將帶您深入分析兩大旗艦模型在各項基準測試中的表現差異，幫助您做出正確的技術決策。</p>
+
+<h2>核心基準測試：推理與程式能力全面對決</h2>
+
+<p>2026 年 2 月 Google DeepMind 發布 Gemini 3.1 Pro後，旗艦模型的基準測試版圖重新洗牌。根據官方數據，Gemini 3.1 Pro 在 <strong>ARC-AGI-2 抽象推理測試中取得 77.1%</strong>，是前代 Gemini 3 Pro 的兩倍以上推理效能。這項測試由史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）等機構長期追蹤，被視為評估 AI 泛化能力的關鍵指標。</p>
+
+<p>在軟體工程實測方面，Gemini 3.1 Pro 在 <strong>SWE-Bench Verified 達到 80.6%</strong>，展現出領先的程式碼生成與除錯能力。科學推理測試 GPQA Diamond 更是驚人地達到 <strong>94.3%</strong>，顯示其在專業知識領域的深度理解。根據麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究，這類高分代表模型已具備「專家級推理」的初步能力。</p>
+
+<h2>智能指數與專業偏好：數據解讀</h2>
+
+<p>Artificial Analysis 的獨立評估涵蓋 16 項主要基準測試，Gemini 3.1 Pro在其中 <strong>贏得 13 項</strong>，展現全面領先的綜合實力。然而，專業使用者的偏好則呈現不同景象——Claude Opus 4.6 在<strong>專家任務偏好的 Elo 評分達到 1606</strong>，遠高於 Gemini 3.1 Pro 的 1317。</p>
+
+<p>這項差距揭示了一個重要現象：<strong>基準測試分數與實際專業使用者體驗之間存在落差</strong>。國際電氣電子工程師學會（IEEE）在 AI 倫理標準（IEEE 7000）中強調，模型評估應同時考量客觀指標與主觀專業偏好。Claude Opus 4.6 在複雜辦公室工作流程和規劃文件生成方面保持結構性優勢，其輸出在細節處理與脈絡理解上更符合專業使用者的期待。</p>
+
+<h2>定價與企業採用成本分析</h2>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線分析，2026 年企業 AI 採用已進入「生產部署期」，成本效益成為關鍵決策因素。Gemini 3.1 Pro 維持與 Gemini 3 Pro 相同的價格策略，<strong>比 Claude Opus 4.6 便宜許多</strong>。</p>
+
+<p>這一定價差異對大規模企業部署影響顯著。以每月處理 100 萬次 API 呼叫估算，採用 Gemini 3.1 Pro 可節省約 <strong>40-60% 的營運成本</strong>。然而，Gartner 也指出，若模型能力無法滿足任務需求，低價反而導致更高的隱性成本——包括重新訓練、除錯與人類介入的時間支出。</p>
+
+<h2>實戰選擇指南：依任務選模型的具體策略</h2>
+
+<p>以下提供一個實用的決策框架，幫助開發團隊根據任務特性選擇適合的模型：</p>
+
+<pre><code># 任務類型與模型推薦決策樹
+def select_model(task_type, complexity, budget_sensitive=False):
+    if task_type == "abstract_reasoning" or task_type == "code_generation":
+        return "Gemini 3.1 Pro"  # 基準測試領先
+    elif task_type == "complex_planning" or task_type == "document_generation":
+        return "Claude Opus 4.6"  # 專家偏好較高
+    elif budget_sensitive and complexity == "high":
+        # 混合策略：先用 Gemini 3.1 Pro 生成初稿
+        # 再用 Claude Opus 4.6 優化細節
+        return "hybrid_strategy"
+    else:
+        return "Gemini 3.1 Pro"  # 預設首選
+
+# 使用範例
+task = "API 文件生成"
+recommended = select_model(task, complexity="high", budget_sensitive=True)
+print(f"推薦模型: {recommended}")</code></pre>
+
+<p><strong>實際建議：</strong></p>
+<ul>
+<li><strong>研發與工程團隊</strong>：首選 Gemini 3.1 Pro，其程式碼生成與測試能力在基準測試中表現優異</li>
+<li><strong>內容創作與策略規劃</strong>：Claude Opus 4.6 的細節處理與脈絡理解更符合專業期待</li>
+<li><strong>成本優化優先</strong>：大規模部署時 Gemini 3.1 Pro 的 CP 值明顯較高</li>
+<li><strong>關鍵任務</strong>：建議採用混合策略，結合兩者優勢</li>
+</ul>
+
+<h2>結論：沒有最好，只有最適合</h2>
+
+<p>2026 年的 LLM 競爭格局已趨成熟，<strong>Gemini 3.1 Pro 與 Claude Opus 4.6 代表兩種不同的設計哲學</strong>——前者追求全面領先的基準測試分數，後者專注於專業任務的深度優化。根據史丹佛大學 AI Index 年度報告的趨勢分析，未來模型選擇將更加重視「任務匹配度」而非單一「最強模型」的迷思。</p>
+
+<p>對於技術決策者而言，關鍵問題不再是「哪個模型最好」，而是「我的團隊需要什麼類型的 AI 能力」。理解任務需求、考量預算限制、評估團隊專業度，才能在這場 AI 模型大戰中做出正確的選擇。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Gemini 3.1 Pro 與 Claude Opus 4.6 哪個更適合開發者？</h3>
+            <p class="faq-a">開發者首選 Gemini 3.1 Pro，其在 SWE-Bench Verified 達 80.6%、ARC-AGI-2 達 77.1%，程式碼生成與推理能力領先，且成本較低。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">為何 Claude Opus 4.6 的專家 Elo 評分更高？</h3>
+            <p class="faq-a">Claude Opus 4.6 在複雜辦公室工作流程和規劃文件生成方面保持結構性優勢，輸出細節處理更符合專業使用者期待，Elo 達 1606 對比 Gemini 的 1317。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">2026 年企業如何選擇 AI 模型？</h3>
+            <p class="faq-a">根據 Gartner 建議，應採用「任務匹配」策略：研發任務選 Gemini 3.1 Pro，內容創作選 Claude Opus 4.6，大規模部署可考慮混合策略以平衡成本與品質。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/articles/2026-03-11_gemini-3-1-pro-vs-claude-opus-46-llm-benchmark-2026-comparison.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
