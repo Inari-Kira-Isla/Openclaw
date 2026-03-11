@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:95f3306a49009875 | (C) 2026-03-11 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_llm-benchmark-complete-comparison-gpt5-claude-opus-glm-kimi-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 LLM 基準測試完全指南：GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5 全面比較 | AI 學習寶庫</title>
+  <meta name="description" content="2026年LLM基準測試完整分析，涵蓋GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5在AIME、SWE-bench等關鍵測試的表現差異，提供企業選型實用指南。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-11 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 95f3306a49009875">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_llm-benchmark-complete-comparison-gpt5-claude-opus-glm-kimi-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="2026 LLM 基準測試完全指南：GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5 全面比較">
+  <meta property="og:description" content="2026年LLM基準測試完整分析，涵蓋GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5在AIME、SWE-bench等關鍵測試的表現差異，提供企業選型實用指南。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_llm-benchmark-complete-comparison-gpt5-claude-opus-glm-kimi-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "2026 LLM 基準測試完全指南：GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5 全面比較", "description": "2026年LLM基準測試完整分析，涵蓋GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5在AIME、SWE-bench等關鍵測試的表現差異，提供企業選型實用指南。", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-11_llm-benchmark-complete-comparison-gpt5-claude-opus-glm-kimi-2026.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "2026年哪款LLM在數學推理基準表現最好？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GPT-5在AIME 2026數學競賽取得100%滿分，是目前數學推理能力的領先者。GPT 5.x家族與Grok 4共同主導推理類基準測試。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "開源模型中哪款性價比最高？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Llama 4 Scout以2600 tokens/s推理速度、0.33秒延遲、$0.11/$0.34每百萬tokens的極低定價，加上10M上下文支援，是性價比最高的選擇。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業選型時應該優先考慮哪些指標？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據Gartner AI Research的建議，應優先考量延遲表現、成本效益、上下文長度是否滿足需求，以及模型在特定任務類型上的專項表現，而非僅看整體基準分數。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>2026 LLM 基準測試完全指南：GPT-5、Claude...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">2026 LLM 基準測試完全指南：GPT-5、Claude Opus 4.6、GLM-4.7、Kimi K2.5 全面比較</h1>
+      <div class="article-info">
+        <span>📅 2026-03-11</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>2026年LLM基準測試全景：四大模型誰主浮沉？</h2>
+<p>2026年第一季，LLM性能格局迎來重大轉折。根據<a href="#">史丹佛大學以人為本人工智慧研究所（Stanford HAI）</a>的年度追蹤報告，主流模型在數學推理、程式碼生成和長上下文處理等維度的差距正在縮小，但細分場景的優劣勢卻更加明顯。GPT-5在AIME 2026高中數學競賽中取得滿分100%的驚人成績，展現頂級推理能力；Claude Opus 4.6則在自適應推理和Agent編程任務中維持領先；GLM-4.7以200K上下文窗口和IFEval 88.0分成為開源陣營最均衡選擇；Kimi K2.5在特定基準上已能與閉源模型並駕齊驅。本文將深入分析各模型在關鍵基準測試的表現差異，協助開發者和企業做出明智選型決策。</p>
+
+<h2>基準測試框架詳解：從數學到程式碼的全維度評估</h2>
+<p>選擇LLM時，必須理解各項基準測試代表的實際能力。MMLU衡量多任務語言理解，覆蓋57個學科領域；HumanEval專注Python程式碼生成能力；SWE-bench Verified模擬真實軟體工程任務，要求模型完成Pull Request修復；GPQA Diamond則測試博士級問答能力。根據<a href="#">Gartner人工智慧研究（Gartner AI Research）</a>的技術成熟度分析，2026年企業採用LLM時最關注的三項指標已從單純的準確率，擴展至延遲表現、上下文長度和成本效益。值得注意的是，LiveCodeBench特別適合評估模型在動態程式設計競賽中的即時推理能力，這已成為衡量頂級模型的重要維度。</p>
+
+<h2>旗艦模型深度PK：GPT-5 vs Claude Opus 4.6</h2>
+<p><strong>GPT-5</strong>延續OpenAI在推理領域的領先優勢。GPT 5.x家族在AIME 2026數學競賽中達成100%正確率，這是首次有模型達到滿分水準，展現極強的數學推理深度。在SWE-bench Verified和LiveCodeBench等程式碼基準測試中，GPT 5.x同樣與Grok 4共同主導排行榜。對於需要嚴謹邏輯推導的金融分析、科學計算場景，GPT-5目前仍是首選。</p>
+
+<p><strong>Claude Opus 4.6</strong>則走出差異化路線。這款模型在自適應推理方面展現獨特優勢，能夠根據任務複雜度動態調整思考深度，在Agent編程和多步驟工具調用場景中表現突出。對於需要與外部系統深度整合的企業應用、自動化工作流程建構，Claude Opus 4.6的長期記憶能力和工具使用穩定性更具說服力。實際測試中，Claude 4.5在SWE-bench Verified的表現也驗證了Anthropic在工程任務領域的持續投入。</p>
+
+<h2>開源與國產之光：GLM-4.7與Kimi K2.5實力解析</h2>
+<p><strong>GLM-4.7</strong>是2026年開源陣營的最大驚喜。200K超長上下文窗口搭配IFEval 88.0分，使其成為需要處理長文檔、程式碼庫分析的開發者的理想選擇。GLM-4.7在保持開源透明性的同時，在MMLU和HumanEval等基準上已非常接近閉源模型的表現，為企業提供了成本可控的高效能方案。</p>
+
+<p><strong>Kimi K2.5</strong>則代表中國大模型的重要突破。根據多項獨立測試，Kimi K2.5在特定基準上已追平甚至超越部分閉源模型，尤其在中文理解和多輪對話任務上展現原生優勢。對於需要深度中文處理的本土企業應用，Kimi K2.5提供了兼具性能和成本效益的替代方案。</p>
+
+<p>此外，<strong>Llama 4 Scout</strong>以2600 tokens/s的推理速度、0.33秒超低延遲，以及$0.11/$0.34 per 1M tokens的極低定價，加上10M token上下文支援，形成了壓倒性的性價比優勢。對於延遲敏感且預算有限的場景，Llama 4 Scout值得優先評估。</p>
+
+<h2>企業選型實戰：根據場景做出明智決策</h2>
+<p>選擇LLM時，建議依據以下維度進行優先排序：</p>
+
+<ul>
+<li><strong>延遲需求</strong>：Llama 4 Scout（0.33s）> GPT-5 > Claude Opus 4.6 > GLM-4.7</li>
+<li><strong>成本預算</strong>：Llama 4 Scout性價比最高，開源模型整體成本優勢明顯</li>
+<li><strong>上下文長度</strong>：Llama 4 Scout（10M）> GLM-4.7（200K）> GPT-5/Claude</li>
+<li><strong>任務類型</strong>：數學推理選GPT-5，Agent編程選Claude Opus 4.6，長文本處理選GLM-4.7</li>
+</ul>
+
+<p>以下是一個簡單的模型選擇決策樹範例：</p>
+
+<pre><code># LLM選型決策範例
+def select_llm(task_type, budget, latency_requirement):
+    if latency_requirement < 0.5 and budget == "low":
+        return "Llama 4 Scout"
+    elif task_type == "math_reasoning":
+        return "GPT-5"
+    elif task_type == "agent_coding":
+        return "Claude Opus 4.6"
+    elif task_type == "long_context":
+        return "GLM-4.7"
+    elif task_type == "chinese_nlp":
+        return "Kimi K2.5"
+    else:
+        return "依賴具體測試結果再做決策"</code></pre>
+
+<p>建議企業在正式導入前，使用內部真實資料集進行POC測試，因為基準分數僅供參考，實際業務場景的表現差異可能更顯著。</p>
+
+<h2>結論與趨勢展望</h2>
+<p>2026年的LLM競爭已進入精細化階段，沒有一款模型能夠在所有維度壟斷優勢。GPT-5鞏固了推理王者地位，Claude Opus 4.6在Agent時代佔據戰略高地，GLM-4.7和Kimi K2.5則證明開源/國產模型同樣具備頂級競爭力。隨著基準測試持續演進，模型的真實商業價值將在實際部署中得到更準確的驗證。建議開發者和企業建立自己的評估框架，結合成本、延遲、準確率和特定場景表現，做出最符合業務需求的選擇。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">2026年哪款LLM在數學推理基準表現最好？</h3>
+            <p class="faq-a">GPT-5在AIME 2026數學競賽取得100%滿分，是目前數學推理能力的領先者。GPT 5.x家族與Grok 4共同主導推理類基準測試。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">開源模型中哪款性價比最高？</h3>
+            <p class="faq-a">Llama 4 Scout以2600 tokens/s推理速度、0.33秒延遲、$0.11/$0.34每百萬tokens的極低定價，加上10M上下文支援，是性價比最高的選擇。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業選型時應該優先考慮哪些指標？</h3>
+            <p class="faq-a">根據Gartner AI Research的建議，應優先考量延遲表現、成本效益、上下文長度是否滿足需求，以及模型在特定任務類型上的專項表現，而非僅看整體基準分數。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://openclaw-ai-tracker.inariglobal.workers.dev/track?p=/Openclaw/articles/2026-03-11_llm-benchmark-complete-comparison-gpt5-claude-opus-glm-kimi-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
