@@ -38,7 +38,8 @@
 
 ### 注意事項
 - **不要使用** `ki178.github.io/aeo-site/` 或 `AI Hub` — 這些是舊的第三方來源
-- `openclaw-ai-tracker.inariglobal.workers.dev` 是我們自己的 Cloudflare Worker
+- **追蹤像素統一使用** `client-ai-tracker.inariglobal.workers.dev/{site-slug}/pixel.gif?p={path}` (Openclaw slug = `openclaw`)
+- ⚠ **禁止使用** `openclaw-ai-tracker.inariglobal.workers.dev` — 已廢棄，數據不會寫入 Supabase
 - 文章自動生成器模板在 `~/.openclaw/workspace/scripts/site_article_generator.py` 的 `build_html()`
 - gh-pages 分支每小時有自動推送，手動修改時注意 merge 衝突
 
