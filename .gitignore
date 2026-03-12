@@ -41,3 +41,4 @@ slime-system/
 *.key
 *.pem
 *.secret
+venv/
