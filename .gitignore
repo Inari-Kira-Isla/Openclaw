@@ -28,6 +28,14 @@ AI-Governance-Project/
 Inari/
 aeo-site/
 
+# Python virtual environment
+.venv/
+__pycache__/
+
+# Large non-web directories
+training-data/
+slime-system/
+
 # Sensitive files
 *.env
 *.key
