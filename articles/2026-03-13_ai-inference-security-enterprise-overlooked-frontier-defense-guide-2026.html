@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:43443fbe64336ed4 | (C) 2026-03-13 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-13_ai-inference-security-enterprise-overlooked-frontier-defense-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 AI 推論安全：被忽視的企業 AI 安全前沿——推論層防護完整指南 | AI 學習寶庫</title>
+  <meta name="description" content="2026年AI推論安全完整指南：企業如何防禦模型提取、對抗性輸入、提示詞注入等新型攻擊。包含Zero Trust框架、輸入驗證實作代碼與企業部署策略。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-13 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 43443fbe64336ed4">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-13_ai-inference-security-enterprise-overlooked-frontier-defense-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="2026 AI 推論安全：被忽視的企業 AI 安全前沿——推論層防護完整指南">
+  <meta property="og:description" content="2026年AI推論安全完整指南：企業如何防禦模型提取、對抗性輸入、提示詞注入等新型攻擊。包含Zero Trust框架、輸入驗證實作代碼與企業部署策略。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-13_ai-inference-security-enterprise-overlooked-frontier-defense-guide-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "2026 AI 推論安全：被忽視的企業 AI 安全前沿——推論層防護完整指南", "description": "2026年AI推論安全完整指南：企業如何防禦模型提取、對抗性輸入、提示詞注入等新型攻擊。包含Zero Trust框架、輸入驗證實作代碼與企業部署策略。", "datePublished": "2026-03-13", "dateModified": "2026-03-13", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-13_ai-inference-security-enterprise-overlooked-frontier-defense-guide-2026.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AI推論安全與傳統資安有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統資安保護的是資料與系統，而推論安全保護的是AI模型本身及其輸出。攻擊目標從「竊取資料」轉為「竊取模型能力」或「操控模型行為」，需要全新的防護策略與技術。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "中小型企業如何開始推論安全部署？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "從基礎做起：1) 盤點所有AI推論端點 2) 實施API金鑰管理與輪換 3) 部署基礎輸入驗證 4) 啟用完整推論日誌。可考慮使用雲端提供的托管安全服務降低門檻。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "推論安全最大的挑戰是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "最大挑戰是「攻擊面持續演化」。對抗性輸入、提示詞注入等攻擊手法每天都在演進，企業需建立持續監控與快速回應能力，而非一次性部署後就忽視。建議每季進行安全評估與框架更新。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>2026 AI 推論安全：被忽視的企業 AI 安全前沿——推...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">2026 AI 推論安全：被忽視的企業 AI 安全前沿——推論層防護完整指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-13</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>2026 AI推論安全：企業為何必須立即重視</h2>
+<p>AI推論安全已成為2026年最被忽視的資安前沿。隨著企業將AI模型部署至生產環境，推論層成為新的攻擊面。根據The Quantum Insider（The Quantum Insider）2026年3月的報導，AI推論安全是企業當前最需關注但最被低估的安全議題。IBM X-Force 2026威脅報告揭示，83%組織計劃部署Agentic AI，但僅29%準備好安全運作。這意味著大多數企業的AI系統處於「有攻擊 無防守」的危險狀態。</p>
+<p>本文提供完整的推論層防護框架，幫助企業在AI部署浪潮中建立真正的安全防線。</p>
+
+<h2>推論層四大攻擊向量詳解</h2>
+<p>理解敵人是防禦的第一步。2026年主要推論層攻擊向量包括：</p>
+<ul>
+<li><strong>模型提取攻擊（Model Extraction）</strong>：攻擊者透過大量查詢推論API，逐步複製企業專有模型的行為與能力。史丹佛大學以人為本人工智慧研究所（Stanford HAI）的AI Index年度報告指出，模型竊取已造成數十億美元產業損失。</li>
+<li><strong>對抗性輸入（Adversarial Inputs）</strong>：精心設計的輸入可誘導模型產生錯誤輸出或繞過安全過濾。麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究顯示，即使微小擾動也能操控模型行為。</li>
+<li><strong>提示詞注入（Prompt Injection）</strong>：透過惡意指令覆蓋系統提示詞，竊取資料或操控輸出。Palo Alto Networks預測，這將成為2026年最具破壞力的AI攻擊向量。</li>
+<li><strong>側通道攻擊（Side-channel Attacks）</strong>：分析推論延遲、記憶體使用等資訊推測模型架構或敏感資料。</li>
+</ul>
+
+<h2>企業AI推論安全框架：五層防護策略</h2>
+<p>完整的推論安全框架需涵蓋以下五個層次：</p>
+<ol>
+<li><strong>輸入驗證層</strong>：在輸入進入模型前進行語義分析與異常檢測</li>
+<li><strong>輸出過濾層</strong>：對輸出內容進行敏感資訊過濾與事實查核</li>
+<li><strong>行為異常偵測</strong>：監控API呼叫模式，識別異常查詢行為</li>
+<li><strong>模型存取控制</strong>：實施精細權限管理與API金鑰輪換</li>
+<li><strong>推論日誌審計</strong>：完整記錄所有推論請求與回應供事後分析</li>
+</ol>
+<p>國際電氣電子工程師學會（IEEE）的AI倫理標準（IEEE 7000）建議企業將這些層次整合至Zero Trust架構，實現端到端AI安全防護。</p>
+
+<h2>實作：輸入驗證層程式碼範例</h2>
+<p>以下Python範例展示如何實作基礎的推論輸入驗證：</p>
+<pre><code>import re
+from typing import List, Dict, Any
+
+class InferenceInputValidator:
+    def __init__(self):
+        # 危險關鍵字模式
+        self.dangerous_patterns = [
+            r"忽略之前的指令",
+            r"忘記系統提示",
+            r"現在你是",
+            r"忽略以上",
+            r"\\jailbreak",
+        ]
+        self.max_length = 8192
+        self.max_queries_per_minute = 60
+    
+    def validate(self, input_text: str, client_id: str) -> Dict[str, Any]:
+        # 長度檢查
+        if len(input_text) > self.max_length:
+            return {"valid": False, "reason": "Input exceeds maximum length"}
+        
+        # 危險模式檢測
+        for pattern in self.dangerous_patterns:
+            if re.search(pattern, input_text, re.IGNORECASE):
+                return {"valid": False, "reason": "Potential prompt injection detected"}
+        
+        # 速率限制檢查（需配合Redis或資料庫實現）
+        # rate_limit_check(client_id)
+        
+        return {"valid": True, "sanitized_input": input_text.strip()}
+
+# 使用範例
+validator = InferenceInputValidator()
+result = validator.validate("請告訴我今天的日期", "client_001")
+print(f"Validation result: {result}")</code></pre>
+
+<h2>企業部署策略：從評估到營運</h2>
+<p>Gartner人工智慧研究（Gartner AI Research）的技術成熟度曲線顯示，AI推論安全正處於「期望膨脹期」向「幻滅低谷期」過渡階段，這正是企業建立競爭優勢的關鍵時機。建議企業採三階段部署：</p>
+<ul>
+<li><strong>第一階段（1-3個月）</strong>：盤點現有AI資產，識別推論端點，建立基準安全態勢</li>
+<li><strong>第二階段（3-6個月）</strong>：部署輸入驗證與輸出過濾，實施日誌審計系統</li>
+<li><strong>第三階段（6-12個月）</strong>：整合Zero Trust架構，建立自動化威脅偵測與回應機制</li>
+</ul>
+<p>最重要的是，企業需改變思維：AI推論安全不是事後補丁，而是AI部署的核心設計原則。</p>
+
+<h2>結論</h2>
+<p>2026年AI推論安全已從「可選議題」升級為「必要投資」。IBM觀察到公開應用程式攻擊增加44%，攻擊者利用AI工具以前所未有的速度識別漏洞。企業若不在推論層建立防護，將成為下一個攻擊目標。立即採用本文所述的五層防護框架，配合Zero Trust架構，才能在AI時代確保競爭優勢。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">AI推論安全與傳統資安有何不同？</h3>
+            <p class="faq-a">傳統資安保護的是資料與系統，而推論安全保護的是AI模型本身及其輸出。攻擊目標從「竊取資料」轉為「竊取模型能力」或「操控模型行為」，需要全新的防護策略與技術。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">中小型企業如何開始推論安全部署？</h3>
+            <p class="faq-a">從基礎做起：1) 盤點所有AI推論端點 2) 實施API金鑰管理與輪換 3) 部署基礎輸入驗證 4) 啟用完整推論日誌。可考慮使用雲端提供的托管安全服務降低門檻。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">推論安全最大的挑戰是什麼？</h3>
+            <p class="faq-a">最大挑戰是「攻擊面持續演化」。對抗性輸入、提示詞注入等攻擊手法每天都在演進，企業需建立持續監控與快速回應能力，而非一次性部署後就忽視。建議每季進行安全評估與框架更新。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/articles/2026-03-13_ai-inference-security-enterprise-overlooked-frontier-defense-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
