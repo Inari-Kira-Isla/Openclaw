@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:c6603230452edb42 | (C) 2026-03-13 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-13_claude-cowork-desktop-knowledge-work-agent-tutorial-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Cowork 完整教學：超越 Coding 的桌面 AI 知識工作革命 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Cowork 是 Anthropic 於 2026 年推出的革命性桌面 AI 工具，將完整 Agent 能力帶入知識工作場景。本教學詳細介紹 VM 隔離環境、檔案存取、排程任務等核心功能，幫助非工程師也能輕鬆上手，提升文件撰寫與資料分析效率。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-13 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: c6603230452edb42">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-13_claude-cowork-desktop-knowledge-work-agent-tutorial-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Cowork 完整教學：超越 Coding 的桌面 AI 知識工作革命">
+  <meta property="og:description" content="Claude Cowork 是 Anthropic 於 2026 年推出的革命性桌面 AI 工具，將完整 Agent 能力帶入知識工作場景。本教學詳細介紹 VM 隔離環境、檔案存取、排程任務等核心功能，幫助非工程師也能輕鬆上手，提升文件撰寫與資料分析效率。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-13_claude-cowork-desktop-knowledge-work-agent-tutorial-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Cowork 完整教學：超越 Coding 的桌面 AI 知識工作革命", "description": "Claude Cowork 是 Anthropic 於 2026 年推出的革命性桌面 AI 工具，將完整 Agent 能力帶入知識工作場景。本教學詳細介紹 VM 隔離環境、檔案存取、排程任務等核心功能，幫助非工程師也能輕鬆上手，提升文件撰寫與資料分析效率。", "datePublished": "2026-03-13", "dateModified": "2026-03-13", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-13_claude-cowork-desktop-knowledge-work-agent-tutorial-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Cowork 與 Claude Code 有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code 專注於程式碼開發，提供完整的軟體工程 Agent 能力；Claude Cowork 則瞄準知識工作者，支援文件撰寫、資料分析、研究整合等非技術任務，強調日常工作流程的自動化。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude Cowork 目前支援哪些作業系統？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前 Claude Cowork 處於 macOS Preview 階段，Windows 版本預計在 2026 年下半年推出。Linux 支援仍在評估中。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "VM 隔離會影響 AI 的回應速度嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "VM 隔離會帶來輕微的效能損耗，但在日常使用中通常無法察覺。首次檔案存取可能需要 1-2 秒的初始化時間，後續操作則與直接運行相當。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Cowork 完整教學：超越 Coding 的...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude Cowork 完整教學：超越 Coding 的桌面 AI 知識工作革命</h1>
+      <div class="article-info">
+        <span>📅 2026-03-13</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Cowork 是什麼？2026 年桌面 AI 的重大突破</h2>
+<p>Claude Cowork 是 Anthropic 於 2026 年 3 月正式推出的 Claude Desktop 革命性更新，它將 Claude Code 的完整 Agent 能力帶入日常知識工作場景。與過往專注於程式碼開發的 AI 工具不同，Cowork 瞄準的是文件撰寫、資料分析、研究整合等知識工作任務，讓非工程師也能享受完整的 Agentic AI 能力。</p>
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線，桌面 AI Agent 正處於快速爬升階段，預計在 2027 年進入主流採用期。Cowork 的出現正好填補了這個市場空白——它在你自己的電腦上運行，透過 VM 隔離確保安全性，同時又能直接存取本機檔案、執行系統操作，真正成為你的「數位同事」。</p>
+
+<h2>VM 隔離架構：安全與自由的平衡</h2>
+<p>Cowork 最核心的創新在於它的 VM 隔離架構。Anthropic 選擇讓 AI 運行在一個隔離的虛擬機器環境中，而非直接在主系統上運作。這意味著：</p>
+<ul>
+<li><strong>安全性提升</strong>：AI 的所有檔案存取和系統操作都被限制在隔離環境中</li>
+<li><strong>隱私保障</strong>：敏感資料不會意外流出到未授權的位置</li>
+<li><strong>系統穩定</strong>：即使 AI 操作失誤，也不會影響主系統的正常運作</li>
+</ul>
+<p>這種設計呼應了 IEEE（國際電氣電子工程師學會）提出的 AI 倫理標準中對於「系統隔離」與「可控性」的要求。根據 IEEE 7000 標準，AI 系統應該具備明確的邊界控制和風險緩解機制，Cowork 的 VM 架構正是對此的實踐。</p>
+
+<h2>從安裝到上手：完整設定教學</h2>
+<p>目前 Claude Cowork 處於 macOS Preview 階段，以下是設定步驟：</p>
+<ol>
+<li><strong>更新 Claude Desktop</strong>：確保你的 Claude Desktop 應用已更新至最新版本</li>
+<li><strong>進入 Customize 區段</strong>：在新版介面中點擊「Customize」標籤頁</li>
+<li><strong>啟用 Cowork 功能</strong>：在功能列表中找到「Claude Cowork」並啟用</li>
+<li><strong>VM 環境初始化</strong>：系統會自動下載並配置隔離虛擬機器（需要數分鐘）</li>
+</ol>
+<pre><code># 首次啟動後，你可以通過以下指令測試 VM 環境
+# 在 Claude 對話框中輸入：
+"請列出 /Users 目錄下的所有資料夾"</code></pre>
+<p>值得注意的是，Customize 區段現在統一管理 Skills、Plugins 與 Connectors，這預示著 Claude 生態系正朝向更模組化的架構演進。這個設計與史丹佛大學以人為本人工智慧研究所（Stanford HAI）倡議的「以人為本 AI 介面」理念相符——讓技術複雜度隱藏在直觀介面之下。</p>
+
+<h2>排程任務與隨需執行：真正的數位同事</h2>
+<p>Cowork 支援兩種任務模式，讓 AI 可以主動或被動地協助你工作：</p>
+<ul>
+<li><strong>排程任務（Recurring Tasks）</strong>：你可以設定每天、每週或特定時間自動執行的任務，例如「每天早上 9 點自動整理昨日收到的郵件摘要」或「每週五下午自動生成工作週報」</li>
+<li><strong>隨需執行（On-demand Tasks）</strong>：隨時下達指令，讓 AI 立即處理請求，像是「請分析這份 Excel 報告的趨勢」或「幫我潤飾這份提案文件」</li>
+</ul>
+<p>這種設計顛覆了傳統 AI 工具「你問我答」的互動模式。根據 MIT 計算機科學與人工智慧實驗室（CSAIL）的前沿研究，主動式 AI Agent 是未來五年內最具顛覆性的 AI 技術方向之一。Cowork 的排程任務功能正是這個趨勢的具體實現。</p>
+
+<h2>實際應用場景：知識工作者的新利器</h2>
+<p>讓我們來看幾個具體的應用場景：</p>
+<ul>
+<li><strong>研究整合</strong>：讓 Cowork 每週自動抓取特定領域的最新論文，製作成摘要報告</li>
+<li><strong>文件協作</strong>：設定排程任務，每天下午 5 點自動檢查並標註團隊文件庫中的更新</li>
+<li><strong>資料分析</strong>：上傳 CSV 或 Excel 檔案，讓 AI 進行趨勢分析、異常偵測</li>
+<li><strong>會議準備</strong>：設定自動任務，每天早上自動整理當日行程並生成談話要點</li>
+</ul>
+<p>這些功能讓 Cowork 不僅僅是一個問答工具，而是真正融入了你的工作流程，成為提升生產力的數位幫手。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Cowork 與 Claude Code 有什麼不同？</h3>
+            <p class="faq-a">Claude Code 專注於程式碼開發，提供完整的軟體工程 Agent 能力；Claude Cowork 則瞄準知識工作者，支援文件撰寫、資料分析、研究整合等非技術任務，強調日常工作流程的自動化。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Cowork 目前支援哪些作業系統？</h3>
+            <p class="faq-a">目前 Claude Cowork 處於 macOS Preview 階段，Windows 版本預計在 2026 年下半年推出。Linux 支援仍在評估中。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">VM 隔離會影響 AI 的回應速度嗎？</h3>
+            <p class="faq-a">VM 隔離會帶來輕微的效能損耗，但在日常使用中通常無法察覺。首次檔案存取可能需要 1-2 秒的初始化時間，後續操作則與直接運行相當。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-13_claude-cowork-desktop-knowledge-work-agent-tutorial-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
