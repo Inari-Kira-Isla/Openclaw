@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:79ac84406049062d | (C) 2026-03-15 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-15_claude-interactive-charts-svg-visualization-complete-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 互動圖表全教學：實時生成 SVG 視覺化的完整使用指南（2026 最新功能） | AI 學習寶庫</title>
+  <meta name="description" content="Claude 互動圖表功能全攻略：Anthropic 2026年3月推出的即時 SVG 視覺化功能，支援圖表、流程圖、架構圖生成，無需外部工具即可實現多模態輸出。本教學詳細說明使用技巧與應用場景。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-15 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 79ac84406049062d">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-15_claude-interactive-charts-svg-visualization-complete-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 互動圖表全教學：實時生成 SVG 視覺化的完整使用指南（2026 最新功能）">
+  <meta property="og:description" content="Claude 互動圖表功能全攻略：Anthropic 2026年3月推出的即時 SVG 視覺化功能，支援圖表、流程圖、架構圖生成，無需外部工具即可實現多模態輸出。本教學詳細說明使用技巧與應用場景。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-15_claude-interactive-charts-svg-visualization-complete-guide-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 互動圖表全教學：實時生成 SVG 視覺化的完整使用指南（2026 最新功能）", "description": "Claude 互動圖表功能全攻略：Anthropic 2026年3月推出的即時 SVG 視覺化功能，支援圖表、流程圖、架構圖生成，無需外部工具即可實現多模態輸出。本教學詳細說明使用技巧與應用場景。", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-15_claude-interactive-charts-svg-visualization-complete-guide-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "UNESCO Institute for Statistics (UIS)", "url": "https://uis.unesco.org/", "publisher": {"@type": "Organization", "name": "UNESCO Institute for Statistics (UIS)"}}, {"@type": "CreativeWork", "name": "OECD Education", "url": "https://www.oecd.org/education/", "publisher": {"@type": "Organization", "name": "OECD Education"}}, {"@type": "CreativeWork", "name": "World Economic Forum (WEF) Education", "url": "https://www.weforum.org/topics/education/", "publisher": {"@type": "Organization", "name": "World Economic Forum (WEF) Education"}}, {"@type": "CreativeWork", "name": "HolonIQ", "url": "https://www.holoniq.com/", "publisher": {"@type": "Organization", "name": "HolonIQ"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude 互動圖表功能要收費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不需要。此功能已對所有 Claude 方案開放，包括免費版使用者都能使用，但目前僅支援網頁版與桌面版。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "行動裝置可以使用互動圖表嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前 iOS 與 Android 行動裝置仍以純文字回應呈現，無法顯示互動圖表。建議使用電腦版本以獲得完整體驗。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何讓圖表支援更多互動功能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在提示詞中明確指定互動需求，如「滑鼠懸停顯示詳細數據」、「點擊展開子項目」等，Claude 會根據描述生成相應的互動功能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 互動圖表全教學：實時生成 SVG 視覺化的完整...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude 互動圖表全教學：實時生成 SVG 視覺化的完整使用指南（2026 最新功能）</h1>
+      <div class="article-info">
+        <span>📅 2026-03-15</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude 互動圖表功能：2026 年最大更新</h2>
+<p>Anthropic 於 2026 年 3 月 12 日正式推出 Claude 互動圖表功能（目前為 Beta 版），這是 Claude 邁向「多模態輸出」的重要里程碑。與傳統需要複製程式碼到外部工具（如 D3.js、Chart.js）不同，Claude 現在能直接在對話中生成互動式 SVG 圖表，讓資料視覺化工作流大幅簡化。這項功能已對所有方案開放，包括免費版使用者也能使用。</p>
+
+<h2>功能支援版本與限制</h2>
+<p>目前 Claude 互動圖表功能支援網頁版與桌面版應用程式。根據 Anthropic 官方說明，iOS 與 Android 行動裝置仍以純文字回應呈現，這是因為行動裝置的渲染限制。技術層面使用 HTML 與 SVG 即時渲染，比傳統生成圖片方式更快，且支援滑鼠懸停與點擊互動，使用者可以與圖表進行即時操作。</p>
+
+<h3>支援的圖表類型</h3>
+<ul>
+<li><strong>資料趨勢圖</strong>：季度營收、年度成長率等數據視覺化</li>
+<li><strong>流程圖</strong>：系統架構、業務流程、決策樹</li>
+<li><strong>結構圖</strong>：組織架構、階層關係、分類圖</li>
+<li><strong>互動式儀表板</strong>：多維度資料儀表板</li>
+</ul>
+
+<h2>提示詞設計技巧：如何觸發圖表生成</h2>
+<p>要成功讓 Claude 生成互動圖表，提示詞設計是關鍵。以下是經過測試的有效提示詞結構：</p>
+
+<h3>基本公式</h3>
+<p><code>請用 SVG 圖表呈現 [資料內容]，類型為 [圖表類型]，標題為 [標題]</code></p>
+
+<h3>進階互動設定</h3>
+<p>如需加入互動功能，可明確指定：</p>
+<ul>
+<li>滑鼠懸停顯示詳細數據</li>
+<li>點擊展開子項目</li>
+<li>支援圖例切換顯示/隱藏</li>
+</ul>
+
+<h3>實際範例</h3>
+<pre><code>請用 SVG 互動圖表呈現以下全球教育市場數據：
+- 2025年：4500億美元
+- 2026年：5200億美元  
+- 2027年：6000億美元
+- 2028年：6800億美元
+類型為折線趨勢圖，標題為「全球教育科技市場規模預測」
+加入互動功能：滑鼠懸停顯示年度詳細數據</code></p>
+
+<h2>應用場景與案例</h2>
+<h3>企業營運分析</h3>
+<p>企業主可以直接輸入季度營收資料，請 Claude 生成趨勢圖。根據經濟合作暨發展組織教育部門（OECD Education）的 Education at a Glance 報告，教育投資趨勢數據也可視覺化呈現，幫助决策者快速掌握市場脈動。</p>
+
+<h3>系統架構設計</h3>
+<p>工程師請 Claude 生成系統架構流程圖，支援雲端服務架構、微服務架構等複雜系統的可視化。這種應用大幅縮短技術文件編寫時間。</p>
+
+<h3>教育內容創作</h3>
+<p>教學者可利用互動圖表呈現學習路徑，根據聯合國教科文組織統計研究所（UNESCO Institute for Statistics）的全球教育統計數據，生成各國入學率比較圖表。世界經濟論壇（WEF）教育部門提出的教育 4.0 框架也可透過視覺化方式呈現，讓複雜概念更易理解。</p>
+
+<h2>與外部工具的比較優勢</h2>
+<table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%;">
+<tr><th>特性</th><th>Claude 內建圖表</th><th>傳統外部工具</th></tr>
+<tr><td>學習成本</td><td>低（自然語言驅動）</td><td>高（需學程式碼）</td></tr>
+<tr><td>整合程度</td><td>高（對話內完成）</td><td>低（需切換工具）</td></tr>
+<tr><td>即時互動</td><td>原生支援</td><td>需額外開發</td></tr>
+<tr><td>更新速度</td><td>即時重新生成</td><td>需手動修改</td></tr>
+</table>
+
+<h2>常見問題與解決方案</h2>
+<p><strong>圖表未出現</strong>：確保使用網頁版或桌面版，並檢查提示詞是否明確指定圖表類型。<br>
+<strong>互動功能失效</strong>：部分行動裝置不支援完整互動，建議在電腦上使用。<br>
+<strong>資料量大時卡頓</strong>：建議分批次輸入資料，或簡化圖表結構。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 互動圖表功能要收費嗎？</h3>
+            <p class="faq-a">不需要。此功能已對所有 Claude 方案開放，包括免費版使用者都能使用，但目前僅支援網頁版與桌面版。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">行動裝置可以使用互動圖表嗎？</h3>
+            <p class="faq-a">目前 iOS 與 Android 行動裝置仍以純文字回應呈現，無法顯示互動圖表。建議使用電腦版本以獲得完整體驗。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何讓圖表支援更多互動功能？</h3>
+            <p class="faq-a">在提示詞中明確指定互動需求，如「滑鼠懸停顯示詳細數據」、「點擊展開子項目」等，Claude 會根據描述生成相應的互動功能。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://uis.unesco.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">聯合國教科文組織統計研究所</a> <span style="color:var(--text-2,#888)">(UNESCO Institute for Statistics (UIS))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球教育統計、識字率、各國入學率數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.oecd.org/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">經濟合作暨發展組織教育部門</a> <span style="color:var(--text-2,#888)">(OECD Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">PISA 排名、Education at a Glance 報告、技能前瞻數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.weforum.org/topics/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界經濟論壇教育部門</a> <span style="color:var(--text-2,#888)">(World Economic Forum (WEF) Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">未來就業報告、技能差距分析、教育 4.0 框架</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.holoniq.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">HolonIQ 全球教育智庫</a> <span style="color:var(--text-2,#888)">(HolonIQ)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球 EdTech 市場規模、獨角獸追蹤、教育創新排名</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-15_claude-interactive-charts-svg-visualization-complete-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
