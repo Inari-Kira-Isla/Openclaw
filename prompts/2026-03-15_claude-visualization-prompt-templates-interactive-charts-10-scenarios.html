@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:6dfc33d1ecb764ee | (C) 2026-03-15 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-15_claude-visualization-prompt-templates-interactive-charts-10-scenarios.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 視覺化提示詞模板庫：10 種互動圖表場景 Prompt 設計完整範例 | AI 學習寶庫</title>
+  <meta name="description" content="完整收錄 10 種 Claude 互動圖表 Prompt 模板，涵蓋資料分析圖表、流程架構圖、教學步驟圖、比較矩陣等場景，提供具體指令範例與設計技巧，幫助繁體中文使用者快速上手 Claude SVG 視覺化功能。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-15 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 6dfc33d1ecb764ee">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-15_claude-visualization-prompt-templates-interactive-charts-10-scenarios.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 視覺化提示詞模板庫：10 種互動圖表場景 Prompt 設計完整範例">
+  <meta property="og:description" content="完整收錄 10 種 Claude 互動圖表 Prompt 模板，涵蓋資料分析圖表、流程架構圖、教學步驟圖、比較矩陣等場景，提供具體指令範例與設計技巧，幫助繁體中文使用者快速上手 Claude SVG 視覺化功能。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-15_claude-visualization-prompt-templates-interactive-charts-10-scenarios.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 視覺化提示詞模板庫：10 種互動圖表場景 Prompt 設計完整範例", "description": "完整收錄 10 種 Claude 互動圖表 Prompt 模板，涵蓋資料分析圖表、流程架構圖、教學步驟圖、比較矩陣等場景，提供具體指令範例與設計技巧，幫助繁體中文使用者快速上手 Claude SVG 視覺化功能。", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-15_claude-visualization-prompt-templates-interactive-charts-10-scenarios.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude 圖表功能是否所有版本都支援？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據 9to5google 報導，此功能目前處於 Beta 階段，僅支援網頁版與桌面版應用程式，行動裝置版本尚未開放。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何讓圖表更具互動性？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在 Prompt 中明確加入互動需求描述，如「滑鼠懸停顯示數值」「點擊可篩選」「支援圖例切換」等，Claude 會自動生成對應的互動程式碼。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "生成的圖表可以匯出使用嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "生成的 SVG 程式碼可直接複製嵌入網頁或簡報中，若需編輯可使用向量圖軟體（如 Figma、Illustrator）開啟進行細部調整。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 視覺化提示詞模板庫：10 種互動圖表場景 Pr...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Claude 視覺化提示詞模板庫：10 種互動圖表場景 Prompt 設計完整範例</h1>
+      <div class="article-info">
+        <span>📅 2026-03-15</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude 互動圖表功能概述與觸發機制</h2>
+<p>Claude 於 2026 年 3 月推出互動圖表 Beta 功能，支援 HTML/SVG 即時渲染，會自行判斷何時適合生成圖表。根據 The Decoder 報導，明確的提示詞能大幅提升視覺化品質與互動性。此功能目前僅支援網頁與桌面版（9to5google 指出）。</p>
+<p><strong>核心觸發原則：</strong>提示詞需明確指定圖表類型、資料維度、視覺風格，並說明互動需求（如懸停顯示數值、點擊篩選）。以下為 10 種場景的完整 Prompt 模板。</p>
+
+<h2>資料分析圖表 Prompt 模板（3 種）</h2>
+<h3>1. 折線圖模板 — 營收趨勢分析</h3>
+<pre><code>請生成一個互動式折線圖，展示 [公司名稱] 2023-2025 年各季營收趨勢。
+
+需求：
+- X 軸：季度（Q1 2023 至 Q4 2025）
+- Y 軸：營收金額（單位：百萬美元）
+- 資料：Q1 2023: 12.5, Q2: 14.2, Q3: 13.8, Q4: 16.1, Q1 2024: 15.3, Q2: 17.6, Q3: 18.9, Q4: 21.2, Q1 2025: 19.8, Q2: 22.4, Q3: 24.1, Q4: 27.3
+- 視覺風格：專業商務風，使用品牌色系
+- 互動要求：滑鼠懸停顯示詳細數值與年增率
+- 加入圖例與網格線</code></pre>
+
+<h3>2. 長條圖模板 — 產品銷售比較</h3>
+<pre><code>生成互動式群組長條圖，比較三條產品線在四個地區的銷售額。
+
+參數：
+- 產品線：A 系列、B 系列、C 系列
+- 地區：北區、中區、南區、東區
+- 數值（單位：千美元）：
+  - 北區：A=1250, B=980, C=1420
+  - 中區：A=890, B=1100, C=1250
+  - 南區：A=720, B=850, C=980
+  - 東區：A=560, B=620, C=780
+- 互動：點擊圖例可切換顯示/隱藏特定產品線
+- 配色：使用對比鮮明的色調</code></pre>
+
+<h3>3. 圓餅圖模板 — 市場佔有率分布</h3>
+<pre><code>製作互動式圓餅圖，顯示 2025 年台灣手機市場佔有率。
+
+資料：
+- 品牌 A：32%
+- 品牌 B：28%
+- 品牌 C：18%
+- 品牌 D：12%
+- 其他：10%
+
+要求：
+- 點擊扇區可突出顯示並顯示詳細資訊
+- 加入百分比標籤與圖例
+- 使用立體感配色提升視覺層次
+- 懸停時顯示品牌名稱與確切佔有率</code></pre>
+
+<h2>流程架構圖 Prompt 模板（3 種）</h2>
+<h3>4. 系統架構圖模板 — 雲端服務架構</h3>
+<pre><code>請繪製一個雲端服務系統架構圖，包含以下元件與連接關係：
+
+元件：
+- 用戶端：Web 應用程式、行動 App
+- 負載均衡器：AWS ALB
+- 應用伺服器：3 台 EC2 實例（Auto Scaling Group）
+- 資料庫：RDS PostgreSQL（主從複寫）
+- 快取層：ElastiCache Redis
+- 訊息隊列：SQS
+- 第三方服務：Stripe 支付、SendGrid 郵件
+
+連接線需標註協定（HTTP/HTTPS、TCP、SSL）
+視覺風格：資訊工程標準圖示，清晰的層次結構</code></pre>
+
+<h3>5. 業務流程圖模板 — 訂單處理流程</h3>
+<pre><code>生成 BPMN 風格的業務流程圖，展示電子商務訂單處理流程：
+
+步驟：
+1. 客戶下單 → 2. 系統驗證庫存
+3. 庫存充足：進入付款流程
+4. 庫存不足：發送缺貨通知，回饋庫存更新
+5. 付款成功：生成出貨單 → 通知倉庫揀貨 → 包裝出貨 → 物流配送
+6. 付款失敗：通知客戶重新付款
+7. 客戶收到商品：完成訂單
+
+要求：
+- 使用標準 BPMN 圖示（菱形决策點、矩形流程、橢圓形事件）
+- 清晰的泳道圖分類（客戶、系統、倉庫、物流）
+- 顏色區分不同狀態（待處理、處理中、完成、異常）</code></pre>
+
+<h3>6. 組織結構圖模板 — 企業階層架構</h3>
+<pre><code>繪製公司組織結構圖：
+
+階層：
+- 執行層：CEO
+- 一級主管：財務長、行銷長、技術長、營運長
+- 匯報關係：
+  - 財務長下設：財務部、會計部
+  - 行銷長下設：品牌部、數位行銷部、公關部
+  - 技術長下設：研發部、資安部、DevOps 部門
+  - 營運長下設：客服部、業務部
+
+風格：專業企業版視覺，清晰的階層連線，懸停顯示部門人數與負責人</code></pre>
+
+<h2>教學與比較類 Prompt 模板（4 種）</h2>
+<h3>7. 步驟教學圖模板 — 折紙指南</h3>
+<pre><code>建立互動式折紙步驟視覺指南，教學如何摺一隻紙鶴：
+
+步驟：
+1. 準備正方形色紙，中心對折成三角形
+2. 展開後將兩側向中心折疊
+3. 上下對折形成細長方形
+4. 拉開兩側折出三角形頭部
+5. 壓平形成正方形基礎
+6. 拉開翅膀與尾部
+7. 完成調整
+
+要求：
+- 每個步驟獨立一個圖示區塊
+- 步驟編號清晰
+- 重要折疊線用虛線標註
+- 點擊步驟可展開詳細說明</code></pre>
+
+<h3>8. 比較矩陣圖模板 — 工具功能對比</h3>
+<pre><code>生成功能比較矩陣圖，對比四款專案管理工具：
+
+工具：Notion、Trello、Asana、Jira
+評估維度：
+- 任務管理：★★★★★/★★★★☆/★★★★☆/★★★★★
+- 團隊協作：★★★★★/★★★☆☆/★★★★☆/★★★★☆
+- 自動化：★★★★☆/★★☆☆☆/★★★★☆/★★★★★
+- 價格合理性：★★★★☆/★★★★★/★★★☆☆/★★☆☆☆
+- 學習曲線：★★★★☆/★★★★★/★★★★☆/★★☆☆☆
+
+視覺呈現：
+- 使用星級評分條形圖
+- 顏色熱度圖（綠色高分、紅色低分）
+- 可依維度排序比較</code></pre>
+
+<h3>9. 時間軸模板 — 專案里程碑</h3>
+<pre><code>製作專案時間軸（甘特圖風格），展示產品開發時程：
+
+階段：
+- 需求分析：2025/01/01 - 2025/01/31
+- UI/UX 設計：2025/02/01 - 2025/02/28
+- 前端開發：2025/03/01 - 2025/04/15
+- 後端開發：2025/03/15 - 2025/05/01
+- 整合測試：2025/05/01 - 2025/05/20
+- Beta 測試：2025/05/21 - 2025/06/10
+- 正式上線：2025/06/15
+
+要求：
+- 橫向時間軸顯示月份
+- 彩色長條表示各階段工期
+- 關鍵里程碑用菱形標記
+- 顯示相依關係與緩衝時間</code></pre>
+
+<h3>10. 地理熱力圖模板 — 門市分布分析</h3>
+<pre><code>生成台灣地圖熱力圖，展示全台門市分布密度與營收貢獻：
+
+門市資料（名稱、縣市、營收）：
+- 台北信義店：台北市，營收 850 萬
+- 台中逢甲店：台中市，營收 620 萬
+- 高雄巨蛋店：高雄市，營收 580 萬
+- 桃園中壢店：桃園市，營收 420 萬
+- 台南中西區店：台南市，營收 380 萬
+
+呈現方式：
+- 地圖基礎上疊加熱力圖層
+- 營收越高，熱力點越大且顏色越深
+- 點擊門市顯示詳細資訊卡片
+- 側邊列表可排序篩選</code></pre>
+
+<h2>Prompt 設計關鍵技巧</h2>
+<p>根據 Gartner 人工智慧研究，企業 AI 工具的有效採用需結合明確的使用場景與具體需求。設計高效 Claude 圖表 Prompt 的三大原則：</p>
+<ul>
+<li><strong>資料結構化：</strong>將資料以表格或列表格式提供，避免 Claude 自行猜測數值</li>
+<li><strong>視覺需求具體化：</strong>明確指定配色、互動行為、圖示風格</li>
+<li><strong>輸出格式說明：</strong>告知需要的檔案類型（SVG/HTML）與使用情境</li>
+</ul>
+<p>麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究指出，明確的指令結構能提升 AI 輸出準確度達 40% 以上，這也呼應了有效 Prompt 設計的重要性。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 圖表功能是否所有版本都支援？</h3>
+            <p class="faq-a">根據 9to5google 報導，此功能目前處於 Beta 階段，僅支援網頁版與桌面版應用程式，行動裝置版本尚未開放。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何讓圖表更具互動性？</h3>
+            <p class="faq-a">在 Prompt 中明確加入互動需求描述，如「滑鼠懸停顯示數值」「點擊可篩選」「支援圖例切換」等，Claude 會自動生成對應的互動程式碼。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">生成的圖表可以匯出使用嗎？</h3>
+            <p class="faq-a">生成的 SVG 程式碼可直接複製嵌入網頁或簡報中，若需編輯可使用向量圖軟體（如 Figma、Illustrator）開啟進行細部調整。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-15_claude-visualization-prompt-templates-interactive-charts-10-scenarios.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
