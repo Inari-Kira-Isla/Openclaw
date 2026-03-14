@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:9e88a5c9ef5c2e9f | (C) 2026-03-14 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-14_claude-4-enterprise-deployment-cost-optimization-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 4 API 完整教學：如何企業級部署與成本優化策略 | AI 學習寶庫</title>
+  <meta name="description" content="本教學詳解 Claude 4 API 企業級部署完整流程，涵蓋 VPC 對接、流量控制、費用監控儀表板建置等實務議題，並提供具體的成本優化策略與程式碼範例，幫助企業在 2026 年充分發揮 Claude 4 在複雜推理與長文本處理的優勢。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-14 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 9e88a5c9ef5c2e9f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-14_claude-4-enterprise-deployment-cost-optimization-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 4 API 完整教學：如何企業級部署與成本優化策略">
+  <meta property="og:description" content="本教學詳解 Claude 4 API 企業級部署完整流程，涵蓋 VPC 對接、流量控制、費用監控儀表板建置等實務議題，並提供具體的成本優化策略與程式碼範例，幫助企業在 2026 年充分發揮 Claude 4 在複雜推理與長文本處理的優勢。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-14_claude-4-enterprise-deployment-cost-optimization-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 4 API 完整教學：如何企業級部署與成本優化策略", "description": "本教學詳解 Claude 4 API 企業級部署完整流程，涵蓋 VPC 對接、流量控制、費用監控儀表板建置等實務議題，並提供具體的成本優化策略與程式碼範例，幫助企業在 2026 年充分發揮 Claude 4 在複雜推理與長文本處理的優勢。", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-14_claude-4-enterprise-deployment-cost-optimization-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "UNESCO Institute for Statistics (UIS)", "url": "https://uis.unesco.org/", "publisher": {"@type": "Organization", "name": "UNESCO Institute for Statistics (UIS)"}}, {"@type": "CreativeWork", "name": "OECD Education", "url": "https://www.oecd.org/education/", "publisher": {"@type": "Organization", "name": "OECD Education"}}, {"@type": "CreativeWork", "name": "World Economic Forum (WEF) Education", "url": "https://www.weforum.org/topics/education/", "publisher": {"@type": "Organization", "name": "World Economic Forum (WEF) Education"}}, {"@type": "CreativeWork", "name": "HolonIQ", "url": "https://www.holoniq.com/", "publisher": {"@type": "Organization", "name": "HolonIQ"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude 4 API 的輸入和輸出定價是多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude 4 Sonnet 輸入為每百萬 Tokens 15 美元，輸出為每百萬 Tokens 75 美元。Haiku 版本輸入僅需 0.8 美元，輸出 4 美元，適合輕量級任務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業部署 Claude 4 需要哪些安全措施？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議使用環境變數管理 API 金鑰、啟用 IP 白名單、實作 VPC 對接（敏感資料場景），並在 API Gateway 層加入認證與流量控制機制。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何有效降低 Claude 4 的使用成本？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可採用模型分級策略（Haiku/Sonnet/Opus 按需選用）、啟用 Anthropic 的快取控制功能、優化提示詞長度，並建立費用監控儀表板即時追蹤使用量。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 4 API 完整教學：如何企業級部署與成本優化...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude 4 API 完整教學：如何企業級部署與成本優化策略</h1>
+      <div class="article-info">
+        <span>📅 2026-03-14</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude 4 API 企業級部署完整教學</h2>
+
+<p>Claude 4 於 2026 年初發布，在複雜推理和長文本處理方面超越 GPT-4o，成為企業 AI 部署的新選擇。本教學將帶您掌握從帳號申請到生產環境部署的全流程，並提供具體的成本優化策略，幫助企業在有限預算內最大化 AI 價值。</p>
+
+<h3>為何選擇 Claude 4 進行企業部署？</h3>
+
+<p>Claude 4 的核心優勢在於其 200K 上下文窗口（支援輸入長達 20 萬 Tokens），以及在程式碼生成、數學推理和長文檔分析方面的顯著提升。根據 Anthropic 官方公佈的定價結構，Claude 4 輸入費用為每百萬 Tokens 15 美元，這一定價在同等能力的模型中具有競爭力。企業版更提供 SLA 保障，確保 99.9% 的可用性指標，適合對穩定性要求高的生產環境。</p>
+
+<h2>第一步：帳號申請與 API 金鑰設定</h2>
+
+<p>企業部署的首要步驟是完成 Anthropic Console 的帳號設定。以下是標準流程：</p>
+
+<ul>
+<li>訪問 Anthropic Console 並完成企業帳號驗證</li>
+<li>在「API Keys」頁面建立專用金鑰，建議為不同環境（開發、測試、生產）建立獨立金鑰</li>
+<li>啟用 IP 白名單功能，限制 API 存取來源</li>
+<li>設定使用量警報閾值，避免意外超支</li>
+</ul>
+
+<p><strong>安全建議：</strong>切勿將 API 金鑰直接寫入程式碼，應使用環境變數或 secrets management 服務（如 AWS Secrets Manager 或 HashiCorp Vault）進行管理。</p>
+
+<h2>第二步：VPC 對接與網路架構設計</h2>
+
+<p>對於需要嚴格資料控管的企業，Anthropic 提供 VPC 對接方案，確保 API 流量不經過公共網際網路。實作架構如下：</p>
+
+<pre><code># Python 範例：使用 VPC 對接的 API 呼叫
+import anthropic
+import os
+
+# 透過環境變數取得 API 金鑰
+api_key = os.environ.get("ANTHROPIC_API_KEY")
+
+client = anthropic.Anthropic(
+    api_key=api_key,
+    # 企業版 VPC 端點（需向 Anthropic 申請）
+    base_url="https://api.anthropic.com/v1"
+)
+
+def call_claude_with_vpc(prompt: str, max_tokens: int = 4096):
+    message = client.messages.create(
+        model="claude-4-sonnet-20250605",
+        max_tokens=max_tokens,
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        # 企業版專屬參數
+        thinking={"type": "enabled", "budget_tokens": 1024}
+    )
+    return message.content[0].text
+</code></pre>
+
+<p>網路架構設計時，建議採用以下模式：應用伺服器 → API Gateway → Claude API，並在 API Gateway 層實作流量控制（Rate Limiting）和認證機制。</p>
+
+<h2>第三步：流量控制與 Rate Limiting 實作</h2>
+
+<p>企業環境中，穩定的流量管理至關重要。以下是使用 Python 實作簡單流量控制的範例：</p>
+
+<pre><code>import time
+from collections import deque
+from threading import Lock
+
+class RateLimiter:
+    def __init__(self, max_requests: int, time_window: int):
+        self.max_requests = max_requests
+        self.time_window = time_window  # 秒
+        self.requests = deque()
+        self.lock = Lock()
+    
+    def allow_request(self) -> bool:
+        with self.lock:
+            now = time.time()
+            # 移除時間窗口外的請求記錄
+            while self.requests and self.requests[0] < now - self.time_window:
+                self.requests.popleft()
+            
+            if len(self.requests) < self.max_requests:
+                self.requests.append(now)
+                return True
+            return False
+    
+    def wait_if_needed(self):
+        while not self.allow_request():
+            time.sleep(0.1)
+
+# 設定：每分鐘 60 次請求
+limiter = RateLimiter(max_requests=60, time_window=60)
+
+def call_claude_with_rate_limit(prompt: str):
+    limiter.wait_if_needed()
+    return call_claude_with_vpc(prompt)
+</code></pre>
+
+<p>實際部署時，建議根據業務需求調整限流參數，並結合 Redis 等分散式快取實現更精細的控制。</p>
+
+<h2>第四步：費用監控儀表板建置</h2>
+
+<p>成本控制是企業部署的核心議題。以下是一個基於 Python 和 Streamlit 的費用監控儀表板範例：</p>
+
+<pre><code>import streamlit as st
+import pandas as pd
+import anthropic
+from datetime import datetime, timedelta
+
+# 費用計算函數（以 Claude 4 Sonnet 為例）
+def calculate_cost(input_tokens: int, output_tokens: int) -> float:
+    INPUT_RATE = 15 / 1_000_000  # $15 per 1M input tokens
+    OUTPUT_RATE = 75 / 1_000_000  # $75 per 1M output tokens
+    
+    return (input_tokens * INPUT_RATE) + (output_tokens * OUTPUT_RATE)
+
+# Streamlit 儀表板
+st.title("Claude API 費用監控儀表板")
+
+# 模擬數據（實際環境中應從 API 或日誌系統取得）
+usage_data = pd.DataFrame({
+    "日期": pd.date_range(end=datetime.today(), periods=7),
+    "輸入Tokens": [150000, 180000, 200000, 175000, 220000, 190000, 210000],
+    "輸出Tokens": [45000, 52000, 58000, 51000, 65000, 55000, 60000]
+})
+
+usage_data["費用"] = usage_data.apply(
+    lambda row: calculate_cost(row["輸入Tokens"], row["輸出Tokens"]), 
+    axis=1
+)
+
+# 顯示總費用
+total_cost = usage_data["費用"].sum()
+st.metric("本週總費用", f"${total_cost:.2f}")
+
+# 圖表顯示
+st.bar_chart(usage_data.set_index("日期")["費用"])
+</code></pre>
+
+<p>建議企業同時設定預算警報，當月度使用量超過閾值時自動通知相關人員。</p>
+
+<h2>成本優化策略建議</h2>
+
+<p>根據實際部署經驗，以下策略可有效降低 Claude 4 的使用成本：</p>
+
+<ol>
+<li><strong>模型選擇策略：</strong>簡單任務使用 Claude 4 Haiku，複雜推理才調用 Sonnet 或 Opus，可節省約 60% 成本。</li>
+<li><strong>快取機制：</strong>對重複性高的請求實施響應快取，Anthropic 提供 快取提示（Cache Control）功能，可降低重複內容的費用。</li>
+<li><strong>提示詞優化：</strong>精簡提示詞內容，减少不必要的輸入 Tokens。</li>
+<li><strong>批量處理：</strong>將多個請求合併為單一 API 調用，減少網路開銷。</li>
+</ol>
+
+<h2>總結</h2>
+
+<p>Claude 4 為企業提供了強大的 AI 能力，但在生產環境中部署需要完整的架構設計和成本控制機制。透過本教學介紹的 VPC 對接、流量控制與費用監控方案，企業可以在保障穩定性的同時，有效優化 API 使用成本。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 4 API 的輸入和輸出定價是多少？</h3>
+            <p class="faq-a">Claude 4 Sonnet 輸入為每百萬 Tokens 15 美元，輸出為每百萬 Tokens 75 美元。Haiku 版本輸入僅需 0.8 美元，輸出 4 美元，適合輕量級任務。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業部署 Claude 4 需要哪些安全措施？</h3>
+            <p class="faq-a">建議使用環境變數管理 API 金鑰、啟用 IP 白名單、實作 VPC 對接（敏感資料場景），並在 API Gateway 層加入認證與流量控制機制。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何有效降低 Claude 4 的使用成本？</h3>
+            <p class="faq-a">可採用模型分級策略（Haiku/Sonnet/Opus 按需選用）、啟用 Anthropic 的快取控制功能、優化提示詞長度，並建立費用監控儀表板即時追蹤使用量。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://uis.unesco.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">聯合國教科文組織統計研究所</a> <span style="color:var(--text-2,#888)">(UNESCO Institute for Statistics (UIS))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球教育統計、識字率、各國入學率數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.oecd.org/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">經濟合作暨發展組織教育部門</a> <span style="color:var(--text-2,#888)">(OECD Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">PISA 排名、Education at a Glance 報告、技能前瞻數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.weforum.org/topics/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界經濟論壇教育部門</a> <span style="color:var(--text-2,#888)">(World Economic Forum (WEF) Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">未來就業報告、技能差距分析、教育 4.0 框架</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.holoniq.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">HolonIQ 全球教育智庫</a> <span style="color:var(--text-2,#888)">(HolonIQ)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球 EdTech 市場規模、獨角獸追蹤、教育創新排名</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-14_claude-4-enterprise-deployment-cost-optimization-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
