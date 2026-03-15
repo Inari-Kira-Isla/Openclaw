@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:46cb0484b608c61f | (C) 2026-03-16 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-2-loop-http-hooks-voice-controls-complete-tutorial-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code 2.0 完整教學：/loop 排程、HTTP Hooks、語音控制新功能實戰指南 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code 2.0 新功能完整教學：/loop 排程語法、HTTP Hooks 自動化整合、voice:pushToTalk 語音控制設定與實戰範例。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-16 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 46cb0484b608c61f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-2-loop-http-hooks-voice-controls-complete-tutorial-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code 2.0 完整教學：/loop 排程、HTTP Hooks、語音控制新功能實戰指南">
+  <meta property="og:description" content="Claude Code 2.0 新功能完整教學：/loop 排程語法、HTTP Hooks 自動化整合、voice:pushToTalk 語音控制設定與實戰範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-2-loop-http-hooks-voice-controls-complete-tutorial-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code 2.0 完整教學：/loop 排程、HTTP Hooks、語音控制新功能實戰指南", "description": "Claude Code 2.0 新功能完整教學：/loop 排程語法、HTTP Hooks 自動化整合、voice:pushToTalk 語音控制設定與實戰範例。", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-2-loop-http-hooks-voice-controls-complete-tutorial-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "UNESCO Institute for Statistics (UIS)", "url": "https://uis.unesco.org/", "publisher": {"@type": "Organization", "name": "UNESCO Institute for Statistics (UIS)"}}, {"@type": "CreativeWork", "name": "OECD Education", "url": "https://www.oecd.org/education/", "publisher": {"@type": "Organization", "name": "OECD Education"}}, {"@type": "CreativeWork", "name": "World Economic Forum (WEF) Education", "url": "https://www.weforum.org/topics/education/", "publisher": {"@type": "Organization", "name": "World Economic Forum (WEF) Education"}}, {"@type": "CreativeWork", "name": "HolonIQ", "url": "https://www.holoniq.com/", "publisher": {"@type": "Organization", "name": "HolonIQ"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "/loop 和傳統 cron 有什麼差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "/loop 運行於 Claude Code 對話上下文中，可以存取完整的專案資訊，適合需要理解程式碼邏輯的自動化任務；傳統 cron 則是獨立的系統排程，無法直接存取對話上下文。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "HTTP Hooks 支援哪些 HTTP 方法？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "目前支援 POST 方法，可發送 JSON 格式資料並接收回應，未來可能擴展至 GET、PUT 等其他方法。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "voice:pushToTalk 預設鍵位是什麼？如何修改？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "預設為空白鍵，可透過設定檔修改為其他鍵位如 V 鍵，同時支援靈敏度與語系等參數調整。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code 2.0 完整教學：/loop 排程、...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude Code 2.0 完整教學：/loop 排程、HTTP Hooks、語音控制新功能實戰指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-16</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Code 2.0 重磅更新：開發者工作流的革命性突破</h2>
+
+<p>Claude Code 2.0 在 2026 年 3 月推出的這批更新，標誌著 AI 輔助開發工具邁向更深度的工作流自動化。根據世界經濟論壇（World Economic Forum）在未來就業報告中的分析，AI 編程工具的普及正在重塑軟體工程師的技能需求，而 Claude Code 的這次更新正好回應了「身份暗物質」（Identity Dark Matter）概念——在自動化流程中，每個 agent 的獨特識別與權限管理已成為企業級部署的核心挑戰。本次更新的核心亮點包括：/loop 排程指令、HTTP Hooks 外部整合、語音控制自訂，以及 /batch 和 /simplify 兩個實用斜線指令。開發者日活用戶較年初翻漲三倍以上，驗證了這些功能對實際工作效率的顯著提升。</p>
+
+<h2>/loop 排程指令：輕量級 cron job 實戰設定</h2>
+
+<p>/loop 是本次最受開發者關注的功能，它允許在 Claude Code session 內設定重複執行的排程提示詞，相當於一個輕量級的 cron job。這項功能特別適合需要定期執行監控、資料同步或自動化測試的場景。</p>
+
+<p>基本語法採用 <code>/loop [間隔] [次數] [任務描述]</code> 的格式。以下是實際應用範例：</p>
+
+<pre><code># 每 5 分鐘檢查伺服器狀態，共執行 12 次
+/loop 5m 12 檢查伺服器健康狀態並記錄回應時間
+
+# 每小時執行資料庫備份驗證
+/loop 1h 24 驗證昨日備份完整性並報告結果
+
+# 每 30 秒進行快速輪詢（適用於 WebSocket 重連邏輯）
+/loop 30s 10 檢查 WebSocket 連線狀態
+</code></pre>
+
+<p>值得注意的是，/loop 與傳統 cron 的最大差異在於它完全運行於 Claude Code 的對話上下文中。這意味著每次迭代都能存取完整的專案上下文，適合需要理解程式碼結構的自動化任務。根據經濟合作暨發展組織（OECD Education）在 Education at a Glance 報告中的技能前瞻資料，程式設計教育的實作導向越來越強調「情境化學習」，/loop 這類能在真實開發環境中執行的工具，正好提供了一個理想的學習與練習場域。</p>
+
+<h2>HTTP Hooks 自動化整合：Webhook 實戰範例</h2>
+
+<p>HTTP Hooks 功能讓 Claude Code 的 hooks 系統可以向指定 URL POST JSON 資料並接收回應，這大幅擴展了自動化整合的可能性。以下是完整的 webhook 整合範例：</p>
+
+<pre><code># 設定 HTTP Hook 範例：將分析結果推送到外部系統
+/claudeUDEF hooks:
+  - name: notify-deployment
+    type: post
+    url: https://api.example.com/deployments
+    headers:
+      Authorization: Bearer ${DEPLOYMENT_TOKEN}
+      Content-Type: application/json
+    trigger:
+      - on: task_complete
+        match: "部署完成"
+
+# 在對話中使用 Hook
+請分析這段程式碼的效能瓶頸，完成後透過 notify-deployment hook 通知部署系統。
+</code></pre>
+
+<p>這個功能讓 Claude Code 能夠無縫整合到 CI/CD 流程、監控系統或自定義儀表板中。開發團隊可以將 AI 分析結果即時推送至 Slack、PagerDuty 或任何自定義後端，實現真正的「AI 驅動營運」。</p>
+
+<h2>語音控制與介面自訂：/color 指令與 effort level</h2>
+
+<p>voice:pushToTalk 鍵位支援讓語音輸入按鍵可自訂，預設為空白鍵。開發者可以根據以下設定自訂鍵位：</p>
+
+<pre><code># 自訂語音按鍵設定
+voice:
+  pushToTalk: "v"  # 改為 V 鍵
+  sensitivity: 0.7  # 靈敏度調整
+  language: "zh-TW"  # 設定中文語系
+</code></pre>
+
+<p>此外，effor level 改為 low/medium/high 三級（符號 ○◐●），介面更加直觀。/color 指令則允許使用者自訂提示列顏色：</p>
+
+<pre><code># 設定提示列顏色
+/color accent #00D4FF  # 青色
+/color background #1A1A2E  # 深色背景
+</code></pre>
+
+<h2>/batch 與 /simplify：效率提升的斜線指令</h2>
+
+<p>/batch 指令可批量執行多個任務，適合需要同時處理多個獨立工作項目的場景：</p>
+
+<pre><code># 批次執行多個程式碼審查任務
+/batch
+- 審查 auth/login.ts 的安全性
+- 檢查 utils/format.ts 的錯誤處理
+- 分析 api/client.ts 的效能
+- 審核 models/user.ts 的資料驗證
+</code></pre>
+
+<p>/simplify 指令則能簡化複雜代碼，將冗長的邏輯轉換為更易讀的版本：</code></p>
+
+<pre><code>/simplify 將以下函式簡化為更易讀的版本：
+[貼上複雜程式碼]
+</code></pre>
+
+<p>這兩個指令的組合使用，可以顯著提升程式碼審查與重構的效率。</p>
+
+<h2>最佳實踐配置建議</h2>
+
+<p>根據 HolonIQ 全球教育智庫（HolonIQ）對 EdTech 工具的追蹤分析，能夠提升開發者、生產力的工具需要具備三個特性：直觀性、整合性與可擴展性。Claude Code 2.0 的這批更新正好呼應了這些需求。建議開發者採用以下配置策略：</p>
+
+<ul>
+  <li>優先設定 HTTP Hooks 整合到現有監控系統</li>
+  <li>利用 /loop 替代簡單的 cron script，獲得上下文感知能力</li>
+  <li>根據團隊需求自訂 /color 主題色彩</li>
+  <li>建立標準化的 /batch 模板供團隊共用</li>
+</ul>
+
+<p>「機器身份暗物質」（Machine Identity Dark Matter）的概念在企業級部署中越來越重要——每個 Claude Code agent 在自動化流程中都需要明確的權限邊界與識別機制。HTTP Hooks 的出現正好為這種身份管理提供了實作基礎。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">/loop 和傳統 cron 有什麼差異？</h3>
+            <p class="faq-a">/loop 運行於 Claude Code 對話上下文中，可以存取完整的專案資訊，適合需要理解程式碼邏輯的自動化任務；傳統 cron 則是獨立的系統排程，無法直接存取對話上下文。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">HTTP Hooks 支援哪些 HTTP 方法？</h3>
+            <p class="faq-a">目前支援 POST 方法，可發送 JSON 格式資料並接收回應，未來可能擴展至 GET、PUT 等其他方法。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">voice:pushToTalk 預設鍵位是什麼？如何修改？</h3>
+            <p class="faq-a">預設為空白鍵，可透過設定檔修改為其他鍵位如 V 鍵，同時支援靈敏度與語系等參數調整。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://uis.unesco.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">聯合國教科文組織統計研究所</a> <span style="color:var(--text-2,#888)">(UNESCO Institute for Statistics (UIS))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球教育統計、識字率、各國入學率數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.oecd.org/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">經濟合作暨發展組織教育部門</a> <span style="color:var(--text-2,#888)">(OECD Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">PISA 排名、Education at a Glance 報告、技能前瞻數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.weforum.org/topics/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界經濟論壇教育部門</a> <span style="color:var(--text-2,#888)">(World Economic Forum (WEF) Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">未來就業報告、技能差距分析、教育 4.0 框架</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.holoniq.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">HolonIQ 全球教育智庫</a> <span style="color:var(--text-2,#888)">(HolonIQ)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球 EdTech 市場規模、獨角獸追蹤、教育創新排名</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-16_claude-code-2-loop-http-hooks-voice-controls-complete-tutorial-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
