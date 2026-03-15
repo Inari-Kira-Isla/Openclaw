@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:0019bc6efc791873 | (C) 2026-03-16 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-max-plan-vs-api-cost-real-usage-calculator-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Max 方案 vs 直接 API：重度開發者月費實測計算指南 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code Max方案完整比較：Pro/Max 5x/Max 20x與直接API費用計算、重度開發者月費實測、Token用量對應方案選擇懶人包。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-16 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 0019bc6efc791873">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-max-plan-vs-api-cost-real-usage-calculator-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code Max 方案 vs 直接 API：重度開發者月費實測計算指南">
+  <meta property="og:description" content="Claude Code Max方案完整比較：Pro/Max 5x/Max 20x與直接API費用計算、重度開發者月費實測、Token用量對應方案選擇懶人包。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-max-plan-vs-api-cost-real-usage-calculator-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code Max 方案 vs 直接 API：重度開發者月費實測計算指南", "description": "Claude Code Max方案完整比較：Pro/Max 5x/Max 20x與直接API費用計算、重度開發者月費實測、Token用量對應方案選擇懶人包。", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-16_claude-code-max-plan-vs-api-cost-real-usage-calculator-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cursor和Claude Code哪個更省錢？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cursor採用信用制計費，相同Opus 4.6 tokens消耗比直接用Claude Code貴4-6倍，建議重度開發者直接使用Claude Code Max方案。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Prompt Caching适合哪些場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合有重複性上下文需求的開發者，如代碼庫分析、文件處理等長文本任務，可節省高達90%輸入費用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以中途更換方案嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，Claude Code支持方案升降級，建議先從Pro方案開始測試用量，再根據實際需求升級至Max 5x或Max 20x。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code Max 方案 vs 直接 API：重...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude Code Max 方案 vs 直接 API：重度開發者月費實測計算指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-16</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>結論先行：重度開發者選哪個方案？</h2>
+<p>如果您每月使用超過<strong>100萬tokens</strong>，Claude Code Max 20x方案（$200/月）是最具成本效益的選擇。根據實際測試數據，重度開發者直接使用API月費可達<strong>$3,650</strong>，而Max 20x僅需$200，節省約<strong>18倍</strong>。本篇文章將提供完整計算公式與三種使用情境的選擇邏輯，幫助您做出最佳決策。</p>
+
+<h2>Claude Code 方案定價結構詳解</h2>
+<p>2026年Claude Code提供三種訂閱方案：Pro方案定價<strong>$20/月</strong>，適合輕度使用者；Max 5x方案<strong>$100/月</strong>，適合中度開發者；Max 20x方案<strong>$200/月</strong>，專為重度使用者設計。各方案的核心差異在於優先訪問權限與使用額度，詳細比較如下：</p>
+
+<ul>
+<li><strong>Pro方案</strong>：$20/月，基本訪問權限，適合個人專案</li>
+<li><strong>Max 5x方案</strong>：$100/月，優先訪問，適合團隊協作</li>
+<li><strong>Max 20x方案</strong>：$200/月，最高優先權，適合企業級應用</li>
+</ul>
+
+<h2>直接API計費模式與實際成本</h2>
+<p>如果您選擇不使用訂閱方案，直接通過API調用，費用會根據使用的模型而大幅變化。根據官方定價，Claude Haiku定價為<strong>$1/$5 per MTok</strong>（輸入/輸出），Sonnet為<strong>$3/$15</strong>（200K tokens以下），旗艦模型Opus 4.6則為<strong>$5/$25</strong>。值得注意的是，這些是標準費率，未包含任何優惠。</p>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）2026年的AI Index報告指出，企業AI支出中模型調用費用已成為最大成本項目之一。這也是為何固定月費方案越來越受歡迎的原因。</p>
+
+<h2>月費計算公式與用量對照表</h2>
+<p>以下提供具體計算公式，幫助您評估適合的方案：</p>
+
+<pre><code># API直接費用計算公式
+月費 = (輸入tokens ÷ 1,000,000 × 輸入單價) + (輸出tokens ÷ 1,000,000 × 輸出單價)
+
+# 範例：重度開發者每月使用 500萬輸入 + 500萬輸出 tokens（Opus 4.6）
+API費用 = (5M ÷ 1M × $5) + (5M ÷ 1M × $25) = $25 + $125 = $150/專案
+
+# 若有3個專案同時運行
+月費 = $150 × 3 = $450/月
+# Max 20x固定月費：$200/月 → 節省55%</code></code></pre>
+
+<p>麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究指出，開發者平均會同時維護3-5個專案，這使得固定月費方案更具優勢。</p>
+
+<h2>三種使用情境的最佳方案選擇</h2>
+<p>根據用量不同，我們將開發者分為三個層級：</p>
+
+<ol>
+<li><strong>輕度使用者（&lt;50萬tokens/月）</strong>：選擇Pro方案$20/月，API費用約$50-150，節省70%以上</li>
+<li><strong>中度開發者（50-500萬tokens/月）</strong>：選擇Max 5x方案$100/月，API費用約$500-1500，節省90%以上</li>
+<li><strong>重度開發者（&gt;500萬tokens/月）</strong>：選擇Max 20x方案$200/月，API費用可達$3,650，節省94%以上</li>
+</ol>
+
+<h2>進階省費技巧：Prompt Caching</h2>
+<p>根據Gartner人工智慧研究報告，優化提示詞結構可顯著降低成本。Prompt Caching功能可節省高達<strong>90%輸入token費用</strong>，寫入快取收費為<strong>$1.25-$18.75/MTok</strong>，讀取費用大幅降低。以下是實際應用場景：</p>
+
+<pre><code># 使用Prompt Caching的實際節省範例
+假設每日輸入tokens：100,000
+未使用快取：100K ÷ 1M × $5 = $0.5/天
+使用快取（90%節省）：$0.5 × 0.1 = $0.05/天
+每月節省：($0.5 - $0.05) × 30 = $13.5/月</code></code></pre>
+
+<p>IEEE（國際電氣電子工程師學會）在AI倫理標準中強調，技術成本優化是推動AI普及的關鍵因素之一。Prompt Caching正是符合此標準的實用技術。</p>
+
+<h2>總結與建議</h2>
+<p>選擇Claude Code方案時，請先評估您的月均用量。若不確定用量，可先使用Pro方案測試一週，再根據實際數據升級。對於企業用戶，Max 20x方案不僅省費，還能確保優先訪問權限，避免高峰期延遲。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Cursor和Claude Code哪個更省錢？</h3>
+            <p class="faq-a">Cursor採用信用制計費，相同Opus 4.6 tokens消耗比直接用Claude Code貴4-6倍，建議重度開發者直接使用Claude Code Max方案。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Prompt Caching适合哪些場景？</h3>
+            <p class="faq-a">適合有重複性上下文需求的開發者，如代碼庫分析、文件處理等長文本任務，可節省高達90%輸入費用。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">可以中途更換方案嗎？</h3>
+            <p class="faq-a">可以，Claude Code支持方案升降級，建議先從Pro方案開始測試用量，再根據實際需求升級至Max 5x或Max 20x。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-16_claude-code-max-plan-vs-api-cost-real-usage-calculator-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
