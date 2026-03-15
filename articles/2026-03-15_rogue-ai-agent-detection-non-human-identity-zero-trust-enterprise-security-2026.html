@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:24979953214ee08e | (C) 2026-03-15 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_rogue-ai-agent-detection-non-human-identity-zero-trust-enterprise-security-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業 AI Agent 安全新威脅：Rogue Agent 偵測與非人類身份管理零信任架構 | AI 學習寶庫</title>
+  <meta name="description" content="企業 AI Agent 安全面臨 Rogue Agent 與 Shadow Agent 新型威脅。本文提供非人類身份管理零信任架構、行為異常偵測 Prompt 設計及完整防禦實作指南，協助企業建立 AI 代理安全防線。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-15 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 24979953214ee08e">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_rogue-ai-agent-detection-non-human-identity-zero-trust-enterprise-security-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="企業 AI Agent 安全新威脅：Rogue Agent 偵測與非人類身份管理零信任架構">
+  <meta property="og:description" content="企業 AI Agent 安全面臨 Rogue Agent 與 Shadow Agent 新型威脅。本文提供非人類身份管理零信任架構、行為異常偵測 Prompt 設計及完整防禦實作指南，協助企業建立 AI 代理安全防線。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_rogue-ai-agent-detection-non-human-identity-zero-trust-enterprise-security-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "企業 AI Agent 安全新威脅：Rogue Agent 偵測與非人類身份管理零信任架構", "description": "企業 AI Agent 安全面臨 Rogue Agent 與 Shadow Agent 新型威脅。本文提供非人類身份管理零信任架構、行為異常偵測 Prompt 設計及完整防禦實作指南，協助企業建立 AI 代理安全防線。", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_rogue-ai-agent-detection-non-human-identity-zero-trust-enterprise-security-2026.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "企業如何開始盤點 AI Agent？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "透過網路流量分析與 API 日誌稽核，識別所有與企業系統互動的 AI 代理，再依功能與權限分級建檔。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "靜態 API Key 為何不安全？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "靜態金鑰一旦洩漏難以即時撤銷，攻擊者可長期存取系統資源，缺乏變動性監控與動態驗證機制。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zero-Trust 架構是否適用於所有 AI Agent？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，所有非人類身份都應遵循零信任原則，僅依據即時風險評估授予最低必要權限。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>企業 AI Agent 安全新威脅：Rogue Agent ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">企業 AI Agent 安全新威脅：Rogue Agent 偵測與非人類身份管理零信任架構</h1>
+      <div class="article-info">
+        <span>📅 2026-03-15</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>企業 AI Agent 安全新威脅：為何現在必須採取行動</h2>
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）預測，2026 年將有 40% 的企業應用程式整合 AI 代理功能。然而，企業對 Rogue Agent（流氓代理）的防禦能力嚴重落後於採用速度。研究數據顯示，2024 Q1 至 2025 Q2 間，多代理系統查詢量暴增 1,445%，但多數企業仍沿用傳統 API 金鑰管理靜態憑證，缺乏動態身份驗證機制。這種安全缺口使企業暴露於未經授權的 Shadow Agent 擴散風險中。本文將提供可立即部署的非人類身份治理框架與零信任代理架構實作方案。</p>
+
+<h2>Rogue Agent 威脅類型與企業風險評估</h2>
+<p>當前企業面臨的 AI Agent 安全威脅可分為三類：</p>
+<ul>
+<li><strong>Shadow Agent 自主擴散</strong>：未經 IT 部門核准的 AI 代理在企業內部網路中自行部署，形成隱蔽的攻擊面。</li>
+<li><strong>代理間通訊缺乏稽核</strong>：多個 AI Agent 協作時，訊息傳遞缺乏加密與完整性驗證，易被攔截或篡改。</li>
+<li><strong>MCP 過度授權問題</strong>：Model Context Protocol 整合中，任何人均可建立 MCP Connector，大幅擴展攻擊向量。</li>
+</ul>
+<p>MIT 計算機科學與人工智慧實驗室（MIT CSAIL）的研究指出，前沿語言模型在自主任務執行能力上的快速進展，使非人類身份管理從「可選優化」變成「必要基礎設施」。</p>
+
+<h2>非人類身份管理（Non-Human Identity）治理框架</h2>
+<p>有效的 NHI 治理需建立四層防護機制：</p>
+<ol>
+<li><strong>身份盤點與分類</strong>：建立所有 AI Agent 的完整清單，標記其權限等級與資料存取範圍。</li>
+<li><strong>動態憑證管理</strong>：棄用靜態 API Key，改用 OAuth 2.0 或 OIDC 實現即時撤銷與輪換。</li>
+<li><strong>最小權限原則</strong>：每個 Agent 僅授予完成特定任務所需的最低權限。</li>
+<li><strong>持續監控與稽核</strong>：記錄所有 Agent 行為，異常活動立即觸發告警。</li>
+</ol>
+<p>IEEE 人工智慧倫理標準（IEEE 7000 系列）強調，自動化系統的身份管理必須具備透明性與可問責性，這與零信任架構的核心原則高度契合。</p>
+
+<h2>零信任代理架構實作指南</h2>
+<p>零信任的核心原則是「永不信任，永續驗證」。針對 AI Agent 環境，實作要點如下：</p>
+<pre><code># 零信任 Agent 身份驗證配置範例
+agent_config = {
+    "identity": {
+        "type": "non_human",
+        "auth_method": "dynamic_oauth",  # 廢除靜態 API Key
+        "token_ttl": 300,  # 5分鐘最短生命週期
+        "mfa_required": True
+    },
+    "trust_level": "contextual",
+    "risk_signals": [
+        "unusual_data_access_pattern",
+        "cross_agent_communication_anomaly",
+        "privilege_escalation_attempt"
+    ]
+}
+
+# 異常行為偵測閾值
+anomaly_thresholds = {
+    "api_call_frequency": 1000,  # 每分鐘上限
+    "data_volume_mb": 50,
+    "cross_boundary_attempts": 0
+}</code></pre>
+<p>此配置確保每個 AI Agent 每次操作前都需通過即時身份驗證，並依據風險信號動態調整信任等級。</p>
+
+<h2>Agent 行為異常偵測 Prompt 設計</h2>
+<p>有效的行為偵測 Prompt 需包含以下要素，以引導 AI 系統即時識別可疑活動：</p>
+<ul>
+<li><strong>角色定義</strong>：明確指定 AI 為安全監控角色。</li>
+<li><strong>基線行為描述</strong>：定義正常操作的預期模式。</li>
+<li><strong>異常指標清單</strong>：列出須觸發告警的行為特徵。</li>
+<li><strong>回應動作</strong>：指定偵測到異常時的自動化處置流程。</li>
+</ul>
+<p>史丹佛大學以人為本人工智慧研究所（Stanford HAI）強調，AI 系統的行為監控需結合可解釋性技術，使安全團隊能理解偵測邏輯並進行調優。</p>
+
+<h2>企業級防禦策略 Roadmap</h2>
+<p>建議企業依序實施以下階段性方案：</p>
+<ol>
+<li><strong>短期（1-3 個月）</strong>：完成現有 AI Agent 盤點，建立靜態 API Key 廢除計畫。</li>
+<li><strong>中期（3-6 個月）</strong>：部署動態身份驗證機制，實施 MCP Connector 存取審查。</li>
+<li><strong>長期（6-12 個月）</strong>：建立完整的 NHI 治理框架，實現零信任代理架構。</li>
+</ol>
+<p>在 AI 採用高速成長的背景下，主動建構非人類身份安全防線將成為企業維持競爭力的關鍵基礎設施。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">企業如何開始盤點 AI Agent？</h3>
+            <p class="faq-a">透過網路流量分析與 API 日誌稽核，識別所有與企業系統互動的 AI 代理，再依功能與權限分級建檔。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">靜態 API Key 為何不安全？</h3>
+            <p class="faq-a">靜態金鑰一旦洩漏難以即時撤銷，攻擊者可長期存取系統資源，缺乏變動性監控與動態驗證機制。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Zero-Trust 架構是否適用於所有 AI Agent？</h3>
+            <p class="faq-a">是的，所有非人類身份都應遵循零信任原則，僅依據即時風險評估授予最低必要權限。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/articles/2026-03-15_rogue-ai-agent-detection-non-human-identity-zero-trust-enterprise-security-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
