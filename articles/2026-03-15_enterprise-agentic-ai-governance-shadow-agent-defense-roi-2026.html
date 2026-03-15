@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:29d68415cc53c683 | (C) 2026-03-15 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_enterprise-agentic-ai-governance-shadow-agent-defense-roi-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業 Agentic AI 治理框架 2026：Shadow Agent 防禦、ROI 實測與自動化監控配置 | AI 學習寶庫</title>
+  <meta name="description" content="企業 Agentic AI 治理迫在眉睫！Shadow Agent 資安風險飆升，本文提供Shadow Agent偵測技術、ROI計算公式與Prometheus/Grafana監控配置，協助企業建立完善治理框架。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-15 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 29d68415cc53c683">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_enterprise-agentic-ai-governance-shadow-agent-defense-roi-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="企業 Agentic AI 治理框架 2026：Shadow Agent 防禦、ROI 實測與自動化監控配置">
+  <meta property="og:description" content="企業 Agentic AI 治理迫在眉睫！Shadow Agent 資安風險飆升，本文提供Shadow Agent偵測技術、ROI計算公式與Prometheus/Grafana監控配置，協助企業建立完善治理框架。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_enterprise-agentic-ai-governance-shadow-agent-defense-roi-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "企業 Agentic AI 治理框架 2026：Shadow Agent 防禦、ROI 實測與自動化監控配置", "description": "企業 Agentic AI 治理迫在眉睫！Shadow Agent 資安風險飆升，本文提供Shadow Agent偵測技術、ROI計算公式與Prometheus/Grafana監控配置，協助企業建立完善治理框架。", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-15_enterprise-agentic-ai-governance-shadow-agent-defense-roi-2026.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Shadow Agent 與傳統 Shadow IT 有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shadow Agent 風險更高，因為 AI Agent 可自主執行操作、存取系統並做出決策，不像傳統軟體需要人工操作。Boston Institute of Analytics 報告指出 Agent 間協作攻擊已出現真實案例。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業如何開始建立 AI Agent 治理框架？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議分三階段：1) 部署流量分析與行為偵測工具識別現有 Shadow Agent  2) 建立 Agent 註冊審批制度 3) 實施 Prometheus/Grafana 持續監控。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何計算 AI Agent 投資的 ROI？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "使用公式：ROI = (年度成本節省 - Agent部署維護成本) / Agent部署維護成本 × 100%。G2 數據顯示客服場景中位成本可降低 40%。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>企業 Agentic AI 治理框架 2026：Shadow...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">企業 Agentic AI 治理框架 2026：Shadow Agent 防禦、ROI 實測與自動化監控配置</h1>
+      <div class="article-info">
+        <span>📅 2026-03-15</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>為什麼企業需要 Agentic AI 治理框架？</h2>
+<p>根據 Gartner AI Research 的技術成熟度分析，Agentic AI 正在快速滲透企業營運場景。IDC 預測到 2026 年底，AI Copilot 將嵌入近 80% 的企業應用程式，而 Agentic AI 市場更以 46% 以上的複合年增長率快速擴張。然而，McKinsey 估計 AI Agent 每年可為各業務場景新增 2.6-4.4 兆美元的價值，卻只有五分之一的企業擁有成熟的自主 AI Agent 治理模型。Deloitte 將 Agentic AI Strategy 列為 2026 年頭號科技趨勢，並指出缺乏治理框架的企業比有框架的企業 ROI 低 60%。</p>
+<p>「身份暗物質」與「Shadow Agent」問題已成為企業資安新盲點——員工未經 IT 審批自行部署的 AI Agent 可自主執行操作、存取系統，風險比傳統 Shadow IT 更高。Boston Institute of Analytics 3月最新報告指出，Agent 間協作攻擊（rogue agent swarms）已出現真實案例，企業必須立即建立治理防線。</p>
+
+<h2>Shadow Agent 偵測技術方案</h2>
+<p>Shadow Agent 的核心問題在於：傳統資安工具難以識別具有自主行動能力的 AI Agent。以下是三層偵測架構：</p>
+<ul>
+<li><strong>流量分析層</strong>：監控 API 呼叫模式，識別異常的自動化行為（高頻率、非工作時間、跨系統存取）</li>
+<li><strong>行為指紋層</strong>：建立 Agent 行為基準線，偵測偏離正常模式的操作（如未授權的資料寫入）</li>
+<li><strong>身份驗證層</strong>：實施 AI Agent 註冊制度，所有 Agent 必須具備唯一身份標識（類似 MIT CSAIL 提出的數位身份框架）</li>
+</ul>
+<pre><code># Shadow Agent 偵測規則範例 (Prometheus 規則)
+groups:
+- name: shadow_agent_detection
+  rules:
+  - alert: HighFrequencyAPICalls
+    expr: rate(api_calls_total[5m]) > 1000
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "檢測到異常高頻 API 呼叫，可能為未授權 Agent"
+      
+  - alert: UnusualSystemAccess
+    expr: changes(system_access_count[1h]) > 50
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "檢測到異常系統存取行為"</code></pre>
+
+<h2>企業 AI Agent 治理政策模板</h2>
+<p>完整的治理框架需涵蓋以下政策要素：</p>
+<ol>
+<li><strong>Agent 註冊與審批</strong>：所有部署的 AI Agent 必須向 IT 部門註冊，經過資安評估後才能上線</li>
+<li><strong>權限最小化原則</strong>：Agent 僅能存取完成任務所需的最低權限系統</li>
+<li><strong>操作日誌留存</strong>：所有 Agent 行為必須完整記錄，至少保留 90 天</li>
+<li><strong>定期審計機制</strong>：每季進行 Agent 行為審計，識別偏離預期的異常</li>
+<li><strong>緊急停止機制</strong>：一鍵停止所有 Agent 運行的能力</li>
+</ol>
+<p>根據 IEEE 7000 AI 倫理標準，治理政策還應包含 AI 透明度與問責機制，確保每個 Agent 的決策可追溯、可解釋。</p>
+
+<h2>ROI 計算框架與實測數據</h2>
+<p>G2 數據顯示，在客服場景中 AI Agent 讓中位成本降低 40%、80% 事件封堵率。以下是企業 ROI 計算公式：</p>
+<pre><code># AI Agent ROI 計算公式
+ROI = (年度成本節省 - Agent部署與維護成本) / Agent部署與維護成本 × 100%
+
+其中：
+年度成本節省 = (傳統處理成本 - Agent處理成本) × 年處理量 + 人力重新配置價值
+         + 營運中斷避免成本 + 合規罰款避免成本</code></pre>
+<p><strong>靜態月費計算（固定輸入量假設）</strong>：</p>
+<table border="1" cellpadding="5">
+<tr><th>場景</th><th>傳統方案月費</th><th>AI Agent方案月費</th><th>月省成本</th></tr>
+<tr><td>客服場景（10000對話/月）</td><td>$8,000</td><td>$4,800</td><td>$3,200（40%）</td></tr>
+<tr><td>資料處理（50000筆/月）</td><td>$5,000</td><td>$1,200</td><td>$3,800（76%）</td></tr>
+<tr><td>流程自動化（1000流程/月）</td><td>$12,000</td><td>$3,500</td><td>$8,500（71%）</td></tr>
+</table>
+
+<h2>Prometheus/Grafana 監控配置範例</h2>
+<p>以下是企業級 AI Agent 監控儀表板的關鍵配置：</p>
+<pre><code># prometheus.yml 片段
+scrape_configs:
+  - job_name: 'ai_agent_metrics'
+    static_configs:
+      - targets: ['agent-monitor:9090']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+# Grafana Dashboard JSON 關鍵指標
+{
+  "panels": [
+    {
+      "title": "Agent 響應時間 P95",
+      "targets": [{"expr": "histogram_quantile(0.95, rate(agent_response_time_seconds_bucket[5m]))"}]
+    },
+    {
+      "title": "Shadow Agent 偵測警報",
+      "targets": [{"expr": "sum(shadow_agent_alerts_total)"}]
+    },
+    {
+      "title": "Agent 任務成功率",
+      "targets": [{"expr": "rate(agent_tasks_success_total[5m]) / rate(agent_tasks_total[5m])"}]
+    }
+  ]
+}</code></pre>
+<p>監控儀表板應包含：Agent 效能指標、Shadow Agent 偵測狀態、任務成功率和異常行為警報四大核心視圖。</p>
+
+<h2>結論與行動建議</h2>
+<p>企業建立 Agentic AI 治理框架的優先順序應為：首先實施 Shadow Agent 偵測機制防止資安漏洞，接著建立政策模板與註冊制度，最後部署自動化監控系統持續優化。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究，透明度與問責機制是 AI 治理的基石。企業應立即採取行動，避免在這波 AI Agent 浪潮中落後。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Shadow Agent 與傳統 Shadow IT 有何不同？</h3>
+            <p class="faq-a">Shadow Agent 風險更高，因為 AI Agent 可自主執行操作、存取系統並做出決策，不像傳統軟體需要人工操作。Boston Institute of Analytics 報告指出 Agent 間協作攻擊已出現真實案例。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業如何開始建立 AI Agent 治理框架？</h3>
+            <p class="faq-a">建議分三階段：1) 部署流量分析與行為偵測工具識別現有 Shadow Agent  2) 建立 Agent 註冊審批制度 3) 實施 Prometheus/Grafana 持續監控。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何計算 AI Agent 投資的 ROI？</h3>
+            <p class="faq-a">使用公式：ROI = (年度成本節省 - Agent部署維護成本) / Agent部署維護成本 × 100%。G2 數據顯示客服場景中位成本可降低 40%。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/articles/2026-03-15_enterprise-agentic-ai-governance-shadow-agent-defense-roi-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
