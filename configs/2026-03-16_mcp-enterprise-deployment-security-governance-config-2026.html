@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:45835d00ace9bcd4 | (C) 2026-03-16 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-16_mcp-enterprise-deployment-security-governance-config-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP 企業部署安全配置指南：40-60% 提速背後的風險管控與治理框架 | AI 學習寶庫</title>
+  <meta name="description" content="MCP企業部署安全配置指南：掌握40-60%部署提速的風險管控與治理框架，涵蓋最小權限原則、沙箱化執行、審計日誌等最佳實踐。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-16 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 45835d00ace9bcd4">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-16_mcp-enterprise-deployment-security-governance-config-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="MCP 企業部署安全配置指南：40-60% 提速背後的風險管控與治理框架">
+  <meta property="og:description" content="MCP企業部署安全配置指南：掌握40-60%部署提速的風險管控與治理框架，涵蓋最小權限原則、沙箱化執行、審計日誌等最佳實踐。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-16_mcp-enterprise-deployment-security-governance-config-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MCP 企業部署安全配置指南：40-60% 提速背後的風險管控與治理框架", "description": "MCP企業部署安全配置指南：掌握40-60%部署提速的風險管控與治理框架，涵蓋最小權限原則、沙箱化執行、審計日誌等最佳實踐。", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-16_mcp-enterprise-deployment-security-governance-config-2026.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "MCP 部署需要哪些基本安全配置？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "至少需啟用工具白名單、沙箱隔離環境、輸入驗證、速率限制（60req/min）、詳細審計日誌，並定期進行權限審查。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何防止 MCP 工具過度暴露？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "採用最小權限原則，建立工具白名單機制，為不同 Agent 配置獨立 Scope，定期審計並移除閒置連接器權限。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "MCP 安全事件發生時如何快速響應？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "依賴詳細審計日誌進行溯源，啟用敏感資料遮罩，配置異常行為偵測閾值，建立 AI 治理委員會制定應變流程。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>MCP 企業部署安全配置指南：40-60% 提速背後的風險管...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">MCP 企業部署安全配置指南：40-60% 提速背後的風險管控與治理框架</h1>
+      <div class="article-info">
+        <span>📅 2026-03-16</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>MCP 企業部署的核心價值與安全挑戰</h2>
+<p>Model Context Protocol（MCP）已成為企業 AI Agent 連接工具的通用標準，2026 年月下載量達 9,700 萬次，75+ 官方連接器，Salesforce、ServiceNow、Workday 等 50+ 合作夥伴全面部署。企業實施 MCP 後平均代理部署時間縮短 40-60%，Gartner 人工智慧研究（Gartner AI Research）預測 2026 年底 40% 的企業應用將包含任務專屬 AI 代理。</p>
+<p>然而，快速採用伴隨重大安全風險。Mirantis 指出缺乏預設安全控制加上高速採用速度，組織應預期會發生安全事件。史丹佛大學以人為本人工智慧研究所（Stanford HAI）的研究也強調，AI 系統的「身份暗物質」治理——即非人類行為者的數位身份管理——已成為企業安全的核心議題。工具過度暴露（tool overexposure）、context window 限制、開放治理問題構成三大核心風險。</p>
+
+<h2>最小權限工具暴露配置</h2>
+<p>最小權限原則是 MCP 安全部署的基石。預設情況下，MCP 連接器可能暴露過多工具權限，導致攻擊面擴大。建議採用以下配置策略：</p>
+<ul>
+<li><strong>工具白名單機制</strong>：僅啟用業務必需的連接器，關閉未使用的預設工具</li>
+<li><strong>Scope 隔離</strong>：為不同 Agent 分配獨立權限範圍，避免跨環境存取</li>
+<li><strong>定期權限審查</strong>：依據 IEEE AI 倫理標準建立權限生命週期管理流程</li>
+</ul>
+
+<h2>輸入驗證與沙箱化執行環境</h2>
+<p>MCP 的工具執行環境必須與主系統隔離，防止惡意指令滲透。以下是安全的沙箱配置範例：</p>
+<pre><code class="language-yaml"># mcp-server-config.yaml
+security:
+  sandbox:
+    enabled: true
+    isolation_level: "container"
+    memory_limit: "512MB"
+    timeout_seconds: 30
+  input_validation:
+    max_token_length: 8192
+    disallowed_patterns:
+      - "exec|eval|system"
+      - "rm -rf"
+    rate_limit:
+      requests_per_minute: 60
+      burst: 10
+  audit:
+    log_level: "detailed"
+    retention_days: 90
+    sensitive_data_masking: true</code></pre>
+
+<h2>審計日誌與合規治理框架</h2>
+<p>完整的審計日誌是安全事件溯源與合規審查的關鍵。MCP 部署應記錄以下事件：</p>
+<ol>
+<li><strong>工具調用日誌</strong>：記錄每次工具執行的輸入、輸出、執行時間</li>
+<li><strong>身份驗證事件</strong>：追蹤 API Key 存取與權限變更</li>
+<li><strong>異常行為偵測</strong>：標記短時間內的大量請求或異常模式</li>
+</ol>
+<p>根據 MIT CSAIL 的 AI 安全研究建議，企業應建立 AI 治理委員會，負責制定 MCP 使用政策、審批新連接器部署、定期進行安全評估。</p>
+
+<h2>速率限制與 Context Window 管理</h2>
+<p>Context window 限制與 API 濫用是常見的安全風險。建議配置多層次速率限制：</p>
+<pre><code class="language-python"># rate_limiter.py
+from collections import defaultdict
+import time
+
+class MCP RateLimiter:
+    def __init__(self, requests_per_minute=60, burst=10):
+        self.rpm = requests_per_minute
+        self.burst = burst
+        self.requests = defaultdict(list)
+    
+    def check_limit(self, agent_id: str) -> bool:
+        now = time.time()
+        self.requests[agent_id] = [
+            t for t in self.requests[agent_id] 
+            if now - t < 60
+        ]
+        
+        if len(self.requests[agent_id]) >= self.rpm:
+            return False
+            
+        if len(self.requests[agent_id]) >= self.burst:
+            # 觸發平滑降級
+            time.sleep(0.1)
+            
+        self.requests[agent_id].append(now)
+        return True</code></pre>
+<p>此配置可防止 API 濫用，同時確保合法流量不受影響。結合輸入長度限制，可有效管理 context window 消耗。</p>
+
+<h2>結論：安全與效率的平衡藝術</h2>
+<p>MCP 為企業帶來 40-60% 的部署提速，但安全配置不可妥協。透過最小權限、沙箱化、審計日誌、速率限制四層防護，組織可在享受 AI 代理效率提升的同時，有效管控「身份暗物質」帶來的數位風險。2025 年 12 月 Anthropic 將 MCP 捐贈給 Linux Foundation 下新成立的 Agentic AI Foundation（AAIF），OpenAI、AWS、Google、Microsoft 等巨頭共同推動開放治理，這意味著企業必須同步建立內部安全治理框架，以應對快速演進的 AI 代理生態系統。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">MCP 部署需要哪些基本安全配置？</h3>
+            <p class="faq-a">至少需啟用工具白名單、沙箱隔離環境、輸入驗證、速率限制（60req/min）、詳細審計日誌，並定期進行權限審查。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何防止 MCP 工具過度暴露？</h3>
+            <p class="faq-a">採用最小權限原則，建立工具白名單機制，為不同 Agent 配置獨立 Scope，定期審計並移除閒置連接器權限。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">MCP 安全事件發生時如何快速響應？</h3>
+            <p class="faq-a">依賴詳細審計日誌進行溯源，啟用敏感資料遮罩，配置異常行為偵測閾值，建立 AI 治理委員會制定應變流程。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/configs/2026-03-16_mcp-enterprise-deployment-security-governance-config-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
