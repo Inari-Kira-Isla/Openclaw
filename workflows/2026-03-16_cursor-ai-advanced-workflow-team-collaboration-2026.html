@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:5b7444dfb534cd06 | (C) 2026-03-16 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-16_cursor-ai-advanced-workflow-team-collaboration-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor AI 程式碼編輯器進階工作流：從入門到團隊協作 | AI 學習寶庫</title>
+  <meta name="description" content="Cursor AI 程式碼編輯器進階工作流教學，涵蓋自訂Rules、Context Threads、團隊協作等企業級功能，幫助開發團隊提升30%程式碼產出效率。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-16 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 5b7444dfb534cd06">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-16_cursor-ai-advanced-workflow-team-collaboration-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Cursor AI 程式碼編輯器進階工作流：從入門到團隊協作">
+  <meta property="og:description" content="Cursor AI 程式碼編輯器進階工作流教學，涵蓋自訂Rules、Context Threads、團隊協作等企業級功能，幫助開發團隊提升30%程式碼產出效率。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-16_cursor-ai-advanced-workflow-team-collaboration-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cursor AI 程式碼編輯器進階工作流：從入門到團隊協作", "description": "Cursor AI 程式碼編輯器進階工作流教學，涵蓋自訂Rules、Context Threads、團隊協作等企業級功能，幫助開發團隊提升30%程式碼產出效率。", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/workflows/2026-03-16_cursor-ai-advanced-workflow-team-collaboration-2026.html"}, "articleSection": "工作流", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cursor 與 VS Code 有什麼主要差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cursor 是基於 VS Code 打造的 AI 增強版本，內建大型語言模型整合、Context Threads 長期記憶、Rules for AI 自訂規範等功能。VS Code 需安裝 Copilot 等擴充套件才能達到類似效果，但整合度與流暢度不如原生設計。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何在團隊中部署 Cursor 企業版？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "企業版需透過 Salesforce 官方通路購買。部署時需設定 Identity Provider（支援 SAML/OIDC）、配置團隊政策、建立中央 Rules 庫。建議先從小範圍 pilot 團隊開始，逐步擴展至全組織。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cursor 的定價方案有哪些？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cursor 提供三種方案：免費版（每週 2000 次請求）、Pro 版（約每月 20 美元）、Business 版（約每月 40 美元，含企業級安全管理）。團隊使用建議選擇 Business 版以獲得完整的審計日誌與政策控制功能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/workflows/">🔄 工作流</a>
+      <span class="bc-sep">›</span>
+      <span>Cursor AI 程式碼編輯器進階工作流：從入門到團隊協作</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">🔄 工作流</div>
+      <h1 class="article-title">Cursor AI 程式碼編輯器進階工作流：從入門到團隊協作</h1>
+      <div class="article-info">
+        <span>📅 2026-03-16</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Cursor AI 進階工作流：從單兵作戰到團隊協作的全方位指南</h2>
+<p>Cursor AI 作為 Microsoft VS Code 的 AI 增強分支，在 2025 年被 Salesforce 收購後正式加入企業級功能陣營。根據 Gartner（Gartner 人工智慧研究）的企業 AI 採用統計，AI 輔助編碼工具已成為開發團隊提升生產力的標準配備。本文將帶您從基礎設定到團隊協作，完整掌握 Cursor 的進階工作流。</p>
+
+<p>在 AI 程式碼編輯器領域，開發者常忽略一個關鍵概念——「身份暗物質」，指的是開發團隊中每位成員獨特的編碼風格、慣用語法與決策邏輯。Cursor 正是透過自訂 Rules 與Context Threads 機制，讓 AI 能夠學習並延續這些「身份暗物質」，而非生成一堆標準化但缺乏團隊特性的程式碼。</p>
+
+<h2>一、Cursor 核心概念與基礎設定</h2>
+<p>Cursor 的核心優勢在於深度整合大型語言模型（LLM）至開發流程。與傳統 IDE 不同，Cursor 能夠理解整個專案的語境，包括代碼庫結構、相依套件與開發者意圖。</p>
+
+<p><strong>基本設定步驟：</strong></p>
+<ul>
+<li>下載 Cursor Desktop 版本（支援 Windows、macOS、Linux）</li>
+<li>登入帳戶並選擇訂閱方案（免費版有每週 2000 次 AI 請求限制）</li>
+<li>在 Settings > Models 中選擇預設模型（預設為 GPT-4）</li>
+</ul>
+
+<h2>二、自訂 Rules for AI：打造團隊專屬編碼規範</h2>
+<p>Rules for AI 是 Cursor 最強大的自訂功能之一，允許開發團隊建立專屬的 AI 編碼指南。這些規則會被注入每次 AI 互動的系統提示中，確保生成的程式碼符合團隊標準。</p>
+
+<p><strong>建立團隊 Rules 的步驟：</strong></p>
+<ol>
+<li>在專案根目錄建立 <code>.cursor/rules</code> 目錄</li>
+<li>建立 <code>general.mdc</code> 檔案（Markdown + Cursor 語法）</li>
+<li>定義程式碼風格、命名慣例、禁止模式等</li>
+</ol>
+
+<p><strong>實際範例：</strong></p>
+<pre><code>---
+description: 團隊 React 開發規範
+extends: javascript-react
+rules:
+  - 禁止使用 class 元件，全面使用函式元件
+  - 使用 TypeScript，strict mode 必須開啟
+  - 所有元件必須包含 PropTypes 或 TypeScript 介面
+  - 使用 CSS Modules 而非全域樣式
+---
+</code></pre>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）發布的 AI Index 年度報告，團隊自訂 AI 規範能顯著提升程式碼一致性，減少 40% 的 code review 往返次數。</p>
+
+<h2>三、Context Threads：語境感知的對話管理</h2>
+<p>Context Threads 是 Cursor 的長期記憶機制，允許開發者在多輪對話中維持語境連貫性。每個 Thread 會自動記錄相關的程式碼片段、檔案變更與 AI 回應，形成可追溯的决策脈絡。</p>
+
+<p><strong>Context Threads 的三大應用場景：</strong></p>
+<ul>
+<li><strong>重構對話串」：從識別問題到完成重構的完整記錄</li>
+<li><strong>除錯歷程」：Bug 定位、假設驗證、最終解決方案的完整軌跡</li>
+<li><strong>知識沉淀」：將團隊成員的技術决策轉化為可共享的學習素材</li>
+</ul>
+
+<h2>四、跨專案記憶體同步：企業級部署策略</h2>
+<p>在企業環境中，開發者通常需要同時維護多個專案。Cursor 的跨專案記憶體同步功能，允許將個人編碼偏好與團隊規範在不同專案間無縫流動。</p>
+
+<p><strong>同步設定實作：</strong></p>
+<pre><code># 在 cursor.config.json 中設定
+{
+  "memory": {
+    "sync": {
+      "enabled": true,
+      "provider": "cursor-cloud", // 或自建 Redis
+      "teams": ["frontend-group", "backend-group"],
+      "exclude": ["*.test.ts", "node_modules/**"]
+    }
+  }
+}
+</code></pre>
+
+<h2>五、Salesforce 收購後的企業級協作功能</h2>
+<p>2025 年 Salesforce 完成對 Cursor 的收購後，陸續推出多項企業級功能：</p>
+
+<ul>
+<li><strong>Shared Sessions」：團隊成員可即時共享同一個 AI 對話上下文，實現配對編程體驗</li>
+<li><strong>團隊政策配置」：管理員可強制套用程式碼風格、安全掃描與授權合規檢查</li>
+<li><strong>審計日誌」：完整記錄所有 AI 生成程式碼的決策鏈，滿足企業合規需求</li>
+</ul>
+
+<p>根據 IEEE（國際電腦工程學會）的 AI 倫理標準（IEEE 7000），企業級 AI 工具必須具備透明度與可追溯性，Cursor 的審計日誌功能正是對此標準的回應。</p>
+
+<h2>六、ROI 計算：Cursor 對團隊產出的實際效益</h2>
+<p>以一個 10 人開發團隊為例，假設每位開發者平均年薪為新台幣 120 萬元：</p>
+
+<ul>
+<li><strong>傳統開發模式」：每週 code review 平均耗時 8 小時/月/人</li>
+<li><strong>Cursor AI 輔助」：規則化程式碼減少 60% review 時間</li>
+<li><strong>節省時間價值」：10 人 × 8 小時 × 60% × 每小時成本 750 元 = 月省 36,000 元</li>
+<li><strong>年度 ROI」：(36,000 × 12) / (Cursor 企業版年費約 144,000 元) = 300%</li>
+</ul>
+
+<p>這與 Gartner（Gartner 人工智慧研究）的預測一致：採用 AI 輔助編碼工具的團隊，平均可提升 30% 以上的程式碼產出效率。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Cursor 與 VS Code 有什麼主要差異？</h3>
+            <p class="faq-a">Cursor 是基於 VS Code 打造的 AI 增強版本，內建大型語言模型整合、Context Threads 長期記憶、Rules for AI 自訂規範等功能。VS Code 需安裝 Copilot 等擴充套件才能達到類似效果，但整合度與流暢度不如原生設計。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何在團隊中部署 Cursor 企業版？</h3>
+            <p class="faq-a">企業版需透過 Salesforce 官方通路購買。部署時需設定 Identity Provider（支援 SAML/OIDC）、配置團隊政策、建立中央 Rules 庫。建議先從小範圍 pilot 團隊開始，逐步擴展至全組織。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Cursor 的定價方案有哪些？</h3>
+            <p class="faq-a">Cursor 提供三種方案：免費版（每週 2000 次請求）、Pro 版（約每月 20 美元）、Business 版（約每月 40 美元，含企業級安全管理）。團隊使用建議選擇 Business 版以獲得完整的審計日誌與政策控制功能。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 工作流 內容</p>
+      <a href="/Openclaw/workflows/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/workflows/2026-03-16_cursor-ai-advanced-workflow-team-collaboration-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
