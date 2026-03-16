@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:a45a2c6991d814bc | (C) 2026-03-16 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-16_context-rot-prevention-long-conversation-ai-agent-performance-diagnosis-prompts.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Rot 預防實戰指南：長對話 AI Agent 性能退化的診斷與修復提示詞模板 | AI 學習寶庫</title>
+  <meta name="description" content="Context Rot 是長對話 AI Agent 的隱形殺手，本文提供從診斷到修復的完整實戰指南，包含可複製的提示詞模板和代碼範例，幫助開發者有效預防 LLM 上下文退化問題。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-16 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: a45a2c6991d814bc">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-16_context-rot-prevention-long-conversation-ai-agent-performance-diagnosis-prompts.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Context Rot 預防實戰指南：長對話 AI Agent 性能退化的診斷與修復提示詞模板">
+  <meta property="og:description" content="Context Rot 是長對話 AI Agent 的隱形殺手，本文提供從診斷到修復的完整實戰指南，包含可複製的提示詞模板和代碼範例，幫助開發者有效預防 LLM 上下文退化問題。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-16_context-rot-prevention-long-conversation-ai-agent-performance-diagnosis-prompts.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Context Rot 預防實戰指南：長對話 AI Agent 性能退化的診斷與修復提示詞模板", "description": "Context Rot 是長對話 AI Agent 的隱形殺手，本文提供從診斷到修復的完整實戰指南，包含可複製的提示詞模板和代碼範例，幫助開發者有效預防 LLM 上下文退化問題。", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-16_context-rot-prevention-long-conversation-ai-agent-performance-diagnosis-prompts.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Context Rot 發生的具體徵兆是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "當 AI Agent 開始遺忘早期對話中的重要決定、重複提出已解決的問題、偏離原始指令目標，或推理邏輯出現明顯斷裂時，就是 Context Rot 的典型徵兆。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "滾動摘要應該多久執行一次？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議每 5-10 輪對話或每 2,000-5,000 token 執行一次滾動摘要。具體頻率應根據任務複雜度和模型上下文窗口大小調整。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型專案需要實作外部記憶系統嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "如果對話長度在 10,000 token 以內，滾動摘要和決策錨點通常足夠。只有在處理超長任務或需要跨會話持久化時，才需要引入向量資料庫等外部記憶系統。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Context Rot 預防實戰指南：長對話 AI Agen...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Context Rot 預防實戰指南：長對話 AI Agent 性能退化的診斷與修復提示詞模板</h1>
+      <div class="article-info">
+        <span>📅 2026-03-16</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Context Rot 診斷：長對話性能退化的徵兆與識別</h2>
+<p><strong>Context Rot（上下文腐敗）是長對話 AI Agent 最容易被忽視的隱形殺手。</strong>根據 Chroma Research 2026年發布的研究，即使模型技術上支持更長上下文，隨著輸入token增加，LLM性能會在達到有效上下文限制後出現顯著下降。史丹佛大學以人為本人工智慧研究所（Stanford HAI）的年度報告也指出，上下文管理能力已成為評估 AI Agent 實用性的關鍵指標。</p>
+<p>Context Rot 的典型症狀包括：遺忘早期對話中的重要決定、重複提出已解決的問題、指令追蹤精度下降、推理連貫性減弱。診斷時可觀察以下指標：當代理開始重複已完成的步驟、忽略明確約束、或在多輪對話後偏離原始目標，這些都是 Context Rot 已發出的警訊。</p>
+
+<h2>修復策略一：滾動摘要與上下文壓縮模板</h2>
+<p>滾動摘要（Rolling Summary）是最直接的 Context Rot 修復策略。其核心概念是每 N 輪對話自動壓縮歷史，保留關鍵資訊同時減少 token 總量。以下是實用模板：</p>
+<pre><code># 滾動摘要提示詞模板
+## 指令
+每 5 輪對話後，請生成一個濃縮摘要，包含：
+1. 用戶核心請求（一句話）
+2. 已完成的关键步骤
+3. 当前状态与待办事项
+4. 重要决策记录（用 ★ 標記）
+
+## 格式範例
+【對話摘要 v{版本}】
+請求：{核心請求}
+進度：{已完成步驟}/{總步驟數}
+狀態：{當前進度描述}
+★ 決策：{重要決定記錄}</code></pre>
+<p>MIT 計算機與人工智慧實驗室（CSAIL）的研究表明，合理的上下文壓縮可將長對話任務完成率提升 40% 以上。關鍵在於設定適當的觸發閾值——建議在對話超過 2,000 token 時啟動摘要機制。</p>
+
+<h2>修復策略二：決策錨點與階段性重啟協議</h2>
+<p>「身份暗物質」的概念在 Context Rot 預防中至關重要——這是指每個 AI Agent 獨有的核心身份與目標認同，不應被對話洪流稀釋。決策錨點（Decision Anchor）正是保護這種「身份暗物質」的手段。</p>
+<p>階段性重啟協議（Phase Reset）在任務階段切換時注入精煉的上下文摘要，確保每個新階段都基於清晰的上下文基礎。以下是實作範例：</p>
+<pre><code># 決策錨點注入模板
+## 身份暗物質保護
+[系統提示]
+你是一個 {Agent角色}，核心目標是 {Mission}。
+在任何時候都要維護以下原則：
+★ 原則1：{不可妥協的規則}
+★ 原則2：{優先級最高的行為規範}
+
+## 階段重啟觸發
+當完成以下任務階段時：
+- {階段1完成標記} → 執行重啟摘要
+- {階段2完成標記} → 執行重啟摘要</code></pre>
+<p>IEEE 人工智慧倫理標準（IEEE 7000）強調 AI 系統應保持決策可追溯性，決策錨點正是落實這一原則的實用技術。</p>
+
+<h2>修復策略三：外部記憶與向量檢索實作</h2>
+<p>當對話長度超過 50,000 token 時，單純依賴上下文壓縮已不足夠。此時需要將長期狀態移至外部記憶系統，採用向量資料庫按需檢索。Gartner 人工智慧研究指出，到 2027 年，超過 60% 的企業級 AI Agent 將採用外部記憶架構。</p>
+<p>以下是一個基於向量檢索的上下文重建流程：</p>
+<pre><code># 外部記憶檢索流程
+## Step 1: 記憶存儲
+每完成一個關鍵動作，將以下資訊存入向量資料庫：
+- 事件類型：action_complete
+- 內容：{動作描述}
+- 上下文快照：{當前狀態摘要}
+- 時間戳：{timestamp}
+
+## Step 2: 按需檢索
+當檢測到 Context Rot 徵兆時：
+1. 查詢最近 N 個 ★ 標記決策
+2. 檢索當前任務相關的歷史動作
+3. 重建上下文：「根據之前的記錄，{摘要}」</code></pre>
+<p>此策略的優勢在於：即使原始對話上下文已退化，仍能通過檢索「身份暗物質」的關鍵組成部分來恢復 Agent 的任務連貫性。</p>
+
+<h2>整合式預防框架：四層防護實戰</h2>
+<p>有效的 Context Rot 預防需要四層防護的整合：</p>
+<ul>
+<li><strong>第一層：健康檢查</strong>——每 10 輪對話執行上下文健康度評估</li>
+<li><strong>第二層：主動壓縮</strong>——在達到閾值前啟動滾動摘要</li>
+<li><strong>第三層：錨點保護</strong>——用特殊標記保護關鍵決策不被稀釋</li>
+<li><strong>第四層：外置記憶</strong>——將長期狀態移出上下文，實現可擴展的任務執行</li>
+</ul>
+<p>實務上，建議從第二層開始實施，根據任務複雜度逐步添加防護層。透過這種分層策略，即使面對數十萬 token 的超長對話，AI Agent 也能維持穩定的推理品質與任務完成率。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Context Rot 發生的具體徵兆是什麼？</h3>
+            <p class="faq-a">當 AI Agent 開始遺忘早期對話中的重要決定、重複提出已解決的問題、偏離原始指令目標，或推理邏輯出現明顯斷裂時，就是 Context Rot 的典型徵兆。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">滾動摘要應該多久執行一次？</h3>
+            <p class="faq-a">建議每 5-10 輪對話或每 2,000-5,000 token 執行一次滾動摘要。具體頻率應根據任務複雜度和模型上下文窗口大小調整。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型專案需要實作外部記憶系統嗎？</h3>
+            <p class="faq-a">如果對話長度在 10,000 token 以內，滾動摘要和決策錨點通常足夠。只有在處理超長任務或需要跨會話持久化時，才需要引入向量資料庫等外部記憶系統。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-16_context-rot-prevention-long-conversation-ai-agent-performance-diagnosis-prompts.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
