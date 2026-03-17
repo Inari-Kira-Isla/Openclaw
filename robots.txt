@@ -72,3 +72,5 @@ User-agent: XiaoIce
 Allow: /
 
 Sitemap: https://inari-kira-isla.github.io/Openclaw/sitemap.xml
+
+# IndexNow Key: 570eb046f71cfbe946a687fcfc6d050e
