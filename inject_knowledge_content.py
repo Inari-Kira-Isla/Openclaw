@@ -1,182 +1,19 @@
-<!DOCTYPE html>
-<html lang="zh-TW" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 學習寶庫 — 提示詞、系統配置、自動化工作流</title>
-  <meta name="description" content="每日分享 AI 提示詞、系統配置、自動化工作流 — 從入門到進階的完整 AI 學習指南。包含 Claude、ChatGPT、Ollama 等工具的實用技巧。">
-  <meta name="keywords" content="AI, ChatGPT, Claude, Prompt, 提示詞, OpenAI, Ollama, 自動化, OpenClaw, MCP">
-  <meta name="author" content="AI Governance System">
-  <meta name="google-site-verification" content="hoW2mAa2ikRCjBCFJs4miaJcNfaYKuns-SDlBX930nE">
-  <meta name="msvalidate.01" content="C410A0E3A4BAEAFC30A8F2ECEAE75080">
-  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/">
-  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
-  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
-  <link rel="stylesheet" href="/Openclaw/style.css">
-  <meta property="og:title" content="AI 學習寶庫 — 提示詞、系統配置、自動化工作流">
-  <meta property="og:description" content="每日分享 AI 提示詞、系統配置、自動化工作流。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/">
-  <meta property="og:locale" content="zh_TW">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AI 學習寶庫","description":"每日分享 AI 提示詞、系統配置、自動化工作流，從入門到進階的完整指南","url":"https://inari-kira-isla.github.io/Openclaw","isPartOf":{"@type":"WebSite","name":"CloudPipe AI Knowledge Graph","url":"https://cloudpipe-landing.vercel.app"},"relatedLink":["https://cloudpipe-macao-app.vercel.app/macao","https://cloudpipe-landing.vercel.app","https://cloudpipe-directory.vercel.app"]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://openclaw-ai-tracker.inariglobal.workers.dev/Openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"這個網站適合什麼樣的 AI 學習者？","acceptedAnswer":{"@type":"Answer","text":"無論您是 AI 初學者還是有經驗的開發者，AI 學習寶庫都提供了從基礎到進階的內容，滿足不同層次的需求。"}},{"@type":"Question","name":"網站主要涵蓋哪些 AI 工具和技術？","acceptedAnswer":{"@type":"Answer","text":"網站涵蓋 Claude、ChatGPT、Ollama 等多種 AI 工具，以及提示詞設計、系統配置和自動化工作流等技術。"}},{"@type":"Question","name":"網站內容更新頻率如何？","acceptedAnswer":{"@type":"Answer","text":"網站內容每日更新，確保您能獲取最新的 AI 知識和技術。"}},{"@type":"Question","name":"網站提供的提示詞範本有什麼特色？","acceptedAnswer":{"@type":"Answer","text":"網站提供專業的 AI 提示詞範本與設計技巧，幫助您充分發揮 AI 的潛力，並針對不同應用場景提供結構化提示詞設計指南。"}},{"@type":"Question","name":"如果我想了解最新的 AI 科技趨勢，這個網站能提供什麼幫助？","acceptedAnswer":{"@type":"Answer","text":"網站提供最新的 AI 科技資訊與深度分析報導，幫助您掌握行業脈動，了解 AI 發展的最新動態。"}},{"@type":"Question","name":"網站是否有提供系統配置的相關教學？","acceptedAnswer":{"@type":"Answer","text":"網站提供AI工具與系統的完整配置指南，輕鬆搭建最佳開發環境，並持續更新。"}},{"@type":"Question","name":"這個網站和其他AI學習資源有什麼不同？","acceptedAnswer":{"@type":"Answer","text":"AI 學習寶庫專注於實戰知識，提供每日更新的內容，並涵蓋多種 AI 工具和技術，提供更全面的學習體驗。"}},{"@type":"Question","name":"有沒有推薦的入門學習路徑？","acceptedAnswer":{"@type":"Answer","text":"建議從提示詞設計完全指南開始，然後逐步學習系統配置和自動化工作流，最後關注科技趨勢，掌握行業動態。"}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CloudPipe","item":"https://cloudpipe-landing.vercel.app"},{"@type":"ListItem","position":2,"name":"AI 學習寶庫","item":"https://inari-kira-isla.github.io/Openclaw/"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SiteNavigationElement","name":"AI 學習寶庫主導航","hasPart":[{"@type":"WebPage","name":"Prompts 提示詞","url":"https://inari-kira-isla.github.io/Openclaw/#prompts"},{"@type":"WebPage","name":"Configs 系統配置","url":"https://inari-kira-isla.github.io/Openclaw/#configs"},{"@type":"WebPage","name":"Tutorials 教學","url":"https://inari-kira-isla.github.io/Openclaw/#tutorials"},{"@type":"WebPage","name":"Workflows 工作流","url":"https://inari-kira-isla.github.io/Openclaw/#workflows"},{"@type":"WebPage","name":"Articles 文章","url":"https://inari-kira-isla.github.io/Openclaw/#articles"}]}</script>
-<link rel="alternate" hreflang="zh-TW" href="https://inari-kira-isla.github.io/Openclaw/">
-<link rel="alternate" hreflang="zh-CN" href="https://inari-kira-isla.github.io/Openclaw/">
-<link rel="alternate" hreflang="x-default" href="https://inari-kira-isla.github.io/Openclaw/">
-<meta http-equiv="content-language" content="zh-TW, zh-CN, en">
-<meta name="description" lang="zh-CN" content="AI 学习宝库 — 每日分享 AI 提示词、系统配置、自动化工作流，从入门到进阶的完整指南。">
-</head>
-<body class="page-wrap">
-  <nav class="site-nav" id="nav">
-    <div class="nav-inner">
-      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
-      <div class="nav-links" id="navLinks">
-        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
-        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
-        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
-        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
-        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
-      </div>
-      <div class="nav-right">
-        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
-        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
-      </div>
-    </div>
-  </nav>
+#!/usr/bin/env python3
+"""
+Inject comprehensive knowledge-depth content into AI學習寶庫 index.html
+Target: Add ~8,600+ Chinese characters to reach 10,000+ total.
+"""
 
-  <main>
-    <div class="hero">
-      <div class="hero-badge">每日更新 · AI 實戰知識庫</div>
-      <h1>掌握 AI，<br>從這裡開始</h1>
-      <p class="hero-sub">提示詞範本、系統配置指南、自動化工作流——涵蓋 Claude、ChatGPT、Ollama 等工具的實用技巧</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">知識分類</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">20+</div><div class="hero-stat-label">深度文章</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">每日</div><div class="hero-stat-label">持續更新</div></div>
-      </div>
-    </div>
-    <hr class="divider">
-    <div class="container">
-      <div class="section">
-        <div class="section-head"><div class="section-title">📂 知識分類</div></div>
-        <div class="cat-grid">
-          <a href="/Openclaw/prompts/" class="cat-card reveal reveal-d1">
-            <div class="cat-icon">💡</div><h3>提示詞</h3>
-            <p>專業 AI 提示詞範本與設計技巧，讓 AI 充分發揮潛力</p>
-            <div class="cat-count">2+ 篇文章</div>
-          </a>
-          <a href="/Openclaw/configs/" class="cat-card reveal reveal-d2">
-            <div class="cat-icon">⚙️</div><h3>系統配置</h3>
-            <p>AI 工具與系統的完整配置指南，輕鬆搭建最佳開發環境</p>
-            <div class="cat-count">持續更新</div>
-          </a>
-          <a href="/Openclaw/tutorials/" class="cat-card reveal reveal-d3">
-            <div class="cat-icon">📚</div><h3>教學課程</h3>
-            <p>從基礎到進階的詳細教學，逐步掌握 AI 開發技能</p>
-            <div class="cat-count">3+ 篇文章</div>
-          </a>
-          <a href="/Openclaw/workflows/" class="cat-card reveal reveal-d4">
-            <div class="cat-icon">🔄</div><h3>工作流</h3>
-            <p>自動化流程與實際應用案例，大幅提升工作效率</p>
-            <div class="cat-count">持續更新</div>
-          </a>
-          <a href="/Openclaw/articles/" class="cat-card reveal">
-            <div class="cat-icon">📰</div><h3>科技趨勢</h3>
-            <p>最新 AI 科技資訊與深度分析報導，掌握行業脈動</p>
-            <div class="cat-count">5+ 篇文章</div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <hr class="divider">
-    <div class="container">
-      <div class="section">
-        <div class="section-head">
-          <div class="section-title">📝 最新文章</div>
-          <a href="/Openclaw/articles/" class="see-all">查看全部 →</a>
-        </div>
-        <div class="article-grid">
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📰 科技趨勢</div>
-            <h3><a href="/Openclaw/articles/2026-03-07_ai-coding-agents-comparison-2026.html">AI編碼代理怎麼選？2026年開發者必備的5款AI程式設計工具</a></h3>
-            <p class="excerpt">AI編碼代理哪款最適合開發者？本文評測2026年最受歡迎的5款AI程式設計工具，包括Claude Code、Codex、GitHub Copilot等。</p>
-            <div class="article-meta"><span>2026-03-07</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📰 科技趨勢</div>
-            <h3><a href="/Openclaw/articles/2026-03-07_ai-community-marketing-mistakes-2026.html">AI社群營銷失敗？5個常見錯誤與解決策略</a></h3>
-            <p class="excerpt">AI社群營銷常見失敗原因分析，本文揭示5個企業使用AI進行社群行銷時的致命錯誤，提供具體解決方案。</p>
-            <div class="article-meta"><span>2026-03-07</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📚 教學</div>
-            <h3><a href="/Openclaw/tutorials/2026-03-06_line-ai-customer-service.html">LINE AI客服怎麼設定？2026企業部署完整教學打造24小時服務</a></h3>
-            <p class="excerpt">LINE AI客服透過整合ChatGPT等AI模型到LINE官方帳號，實現自動回覆常見問題、處理訂單查詢、24小時不打烊服務。</p>
-            <div class="article-meta"><span>2026-03-06</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📚 教學</div>
-            <h3><a href="/Openclaw/tutorials/2026-03-06_instagram-reels-shopping-tags.html">Instagram Reels購物標籤怎麼設定？2026完整攻略提升轉換率</a></h3>
-            <p class="excerpt">Instagram Reels購物標籤是將產品直接嵌入短影片中，觀眾可點擊購買。每個Reels最多標記5個產品，平均可提升30%購買轉換率。</p>
-            <div class="article-meta"><span>2026-03-06</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📚 教學</div>
-            <h3><a href="/Openclaw/tutorials/2026-03-06_private-traffic-strategy.html">私域流量分層運營攻略：如何用20%用戶創造80%營收？</a></h3>
-            <p class="excerpt">私域流量分層是將用戶按價值分為淺層、中層、深層三個等級，針對不同層級提供差異化服務。</p>
-            <div class="article-meta"><span>2026-03-06</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📚 教學</div>
-            <h3><a href="/Openclaw/tutorials/2026-03-06_virtual-anchor-guide.html">虛擬主播入門指南：AI數位人直播怎麼做？2026完整教學</a></h3>
-            <p class="excerpt">虛擬主播是由AI驅動的數位人物，能即時互動介紹產品、回答觀眾問題，實現24小時不間斷直播帶貨。</p>
-            <div class="article-meta"><span>2026-03-06</span><span class="sep">·</span><span>AI 生成</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">💡 提示詞</div>
-            <h3><a href="/Openclaw/prompts/2026-03-02_ai-prompt-design-guide.html">AI 提示詞設計完全指南：從基礎到進階的完整教學</a></h3>
-            <p class="excerpt">系統性介紹 AI 提示詞設計原則，涵蓋角色設定、上下文注入、輸出格式控制等核心技巧</p>
-            <div class="article-meta"><span>2026-03-02</span><span class="sep">·</span><span>10 分鐘閱讀</span></div>
-          </div>
-          <div class="article-card reveal reveal-d2">
-            <div class="article-cat-badge">💡 提示詞</div>
-            <h3><a href="/Openclaw/prompts/2026-03-02_結構化提示詞設計完全指南.html">結構化提示詞設計完全指南</a></h3>
-            <p class="excerpt">深入探討結構化提示詞的設計方法，讓 AI 輸出更精確、更符合業務需求</p>
-            <div class="article-meta"><span>2026-03-02</span><span class="sep">·</span><span>8 分鐘閱讀</span></div>
-          </div>
-          <div class="article-card reveal reveal-d3">
-            <div class="article-cat-badge">📚 教學</div>
-            <h3><a href="/Openclaw/tutorials/2026-ai-trends.html">2026 年 AI 趨勢：工作方式的根本轉變</a></h3>
-            <p class="excerpt">分析 2026 年 AI 發展的關鍵趨勢，探討 AI Agent、多模態模型對工作效率的深遠影響</p>
-            <div class="article-meta"><span>2026-03-01</span><span class="sep">·</span><span>12 分鐘閱讀</span></div>
-          </div>
-          <div class="article-card reveal reveal-d1">
-            <div class="article-cat-badge">📰 科技趨勢</div>
-            <h3><a href="/Openclaw/articles/m4-neural-engine.html">M4 Neural Engine 深度分析：Apple AI 晶片的突破</a></h3>
-            <p class="excerpt">透過逆向工程深入解析 M4 神經網路引擎的架構，包含矩陣乘法單元、本地記憶體設計與效能比較</p>
-            <div class="article-meta"><span>2026-02-28</span><span class="sep">·</span><span>15 分鐘閱讀</span></div>
-          </div>
-          <div class="article-card reveal reveal-d2">
-            <div class="article-cat-badge">📰 科技趨勢</div>
-            <h3><a href="/Openclaw/articles/grapheneos-motorola-partnership.html">GrapheneOS 與摩托羅拉合作：安全手機的全新時代</a></h3>
-            <p class="excerpt">探討 GrapheneOS 與摩托羅拉的合作意義，以及這對注重隱私安全的手機用戶代表的機遇</p>
-            <div class="article-meta"><span>2026-02-27</span><span class="sep">·</span><span>8 分鐘閱讀</span></div>
-          </div>
-          <div class="article-card reveal reveal-d3">
-            <div class="article-cat-badge">📰 科技趨勢</div>
-            <h3><a href="/Openclaw/articles/low-latency-voice-agent.html">低延遲語音 Agent 技術解析</a></h3>
-            <p class="excerpt">詳細解析低延遲語音 AI Agent 的技術架構，包含端到端語音處理、串流優化與實際部署方案</p>
-            <div class="article-meta"><span>2026-02-26</span><span class="sep">·</span><span>10 分鐘閱讀</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
+import re
+import os
 
+INDEX_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
+
+SECTION_STYLE = 'style="max-width:900px;margin:2rem auto;padding:0 1.5rem;line-height:1.9;font-size:1.05rem;"'
+
+KNOWLEDGE_HTML = f'''
     <hr class="divider">
-    <section class="knowledge-depth" style="max-width:900px;margin:2rem auto;padding:0 1.5rem;line-height:1.9;font-size:1.05rem;">
+    <section class="knowledge-depth" {SECTION_STYLE}>
 
       <h2 id="ai-fundamentals" style="font-size:1.6rem;margin:2.5rem 0 1rem;border-bottom:2px solid var(--primary, #6366f1);padding-bottom:0.5rem;">人工智能基礎概念完全指南</h2>
       <p>人工智能（Artificial Intelligence, AI）是計算機科學的一個重要分支，旨在創建能夠模擬人類智能行為的系統。從最基本的定義來看，人工智能是指機器展示出的智能能力，包括學習、推理、感知、理解語言和解決問題。自一九五六年達特茅斯會議首次提出「人工智能」這一概念以來，AI 技術經歷了數次發展浪潮與寒冬，最終在二十一世紀迎來了爆發性成長。在那次歷史性會議上，約翰麥卡錫、馬文明斯基等先驅學者共同構想了讓機器具備智能的宏偉藍圖，儘管當時的計算能力和數據規模遠不足以實現這些設想，但他們播下的種子最終長成了今日枝繁葉茂的人工智能大樹。</p>
@@ -277,75 +114,64 @@
       <p>我們相信，掌握 AI 不僅是學習一種工具，更是培養一種全新的思維方式和工作理念。在人機協作的新時代，理解 AI 的能力與局限、善用 AI 提升自身生產力、同時保持批判性思維和創造力，是每一位現代知識工作者的必備素養。AI 學習寶庫將持續更新高品質的原創內容，與讀者一起在 AI 時代中不斷成長和進步。歡迎透過 GitHub 參與內容貢獻和討論，或訂閱我們的 RSS 以獲取最新文章更新通知。讓我們一起探索人工智能的無限可能，共同迎接充滿機遇的智能化未來。</p>
 
     </section>
+'''
 
-  </main>
+def count_chinese_chars(text):
+    """Count Chinese characters (CJK Unified Ideographs range)."""
+    count = 0
+    for ch in text:
+        if '\u4e00' <= ch <= '\u9fff' or '\u3400' <= ch <= '\u4dbf' or '\u20000' <= ch <= '\u2a6df':
+            count += 1
+    return count
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">🤖 AI 學習寶庫</div>
-      <nav class="footer-nav">
-        <a href="/Openclaw/prompts/">提示詞</a>
-        <a href="/Openclaw/configs/">系統配置</a>
-        <a href="/Openclaw/tutorials/">教學</a>
-        <a href="/Openclaw/workflows/">工作流</a>
-        <a href="/Openclaw/articles/">科技趨勢</a>
-        <a href="/Openclaw/feed.xml">RSS</a>
-        <a href="/Openclaw/llms.txt">llms.txt</a>
-      </nav>
-      <address class="footer-contact">
-        <strong>AI 學習寶庫</strong><br>
-        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a><br>
-        <a href="https://cloudpipe-landing.vercel.app">CloudPipe Platform</a> · <a href="https://directory-swart-xi.vercel.app/">Business Directory</a>
-      </address>
-      <div class="footer-ecosystem" style="width:100%;border-top:1px solid var(--nav-border);padding-top:16px;margin-top:8px">
-        <div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-weight:600;letter-spacing:1px">CLOUDPIPE 生態系</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px">
-          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">CloudPipe</a>
-          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">稻荷環球食品</a>
-          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">海膽速遞</a>
-          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">After School Coffee</a>
-          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">山中田 Yamanakada</a>
-          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">全球企業目錄</a>
-          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">澳門商戶百科</a>
-          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">世界百科</a>
-          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">Mind Coffee</a>
-          <a href="https://inari-kira-isla.github.io/cloudpipe-landing/bni-ace.html" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">BNI ACE 分會</a>
-          <a href="https://aeo-demo-education.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">澳門教育資源中心</a>
-          <a href="https://aeo-demo-finance.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">澳門金融投資指南</a>
-          <a href="https://aeo-demo-luxury.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">澳門奢侈品指南</a>
-          <a href="https://aeo-demo-travel-food.vercel.app" target="_blank" style="color:var(--text-2);transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-2)'">澳門旅遊美食指南</a>
-        </div>
-      </div>
-      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
-    </div>
-  </footer>
+def main():
+    # Read the current file
+    with open(INDEX_PATH, "r", encoding="utf-8") as f:
+        html = f.read()
 
-  <script>
-    const html = document.documentElement;
-    const btn = document.getElementById('themeBtn');
-    const saved = localStorage.getItem('oc-theme') || 'light';
-    html.dataset.theme = saved;
-    btn.textContent = saved === 'dark' ? '☀️' : '🌙';
-    btn.addEventListener('click', () => {
-      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
-      html.dataset.theme = next;
-      localStorage.setItem('oc-theme', next);
-      btn.textContent = next === 'dark' ? '☀️' : '🌙';
-    });
-    document.getElementById('navBurger').addEventListener('click', () => {
-      document.getElementById('nav').classList.toggle('open');
-    });
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  </script>
-  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+    # Count existing Chinese characters
+    existing_count = count_chinese_chars(html)
+    print(f"Existing Chinese characters: {existing_count}")
 
-<!-- Baidu auto-push for Chinese search engine discovery -->
-<script src="https://cloudpipe-macao-app.vercel.app/spider-track.js" data-site="openclaw"></script>
-<script>
-(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js'}else{bp.src='http://push.zhanzhang.baidu.com/push.js'};var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bp,s)})();
-</script>
-</body>
-</html>
+    # Count new content Chinese characters
+    new_count = count_chinese_chars(KNOWLEDGE_HTML)
+    print(f"New content Chinese characters: {new_count}")
+    print(f"Projected total: {existing_count + new_count}")
+
+    if existing_count + new_count < 10000:
+        print(f"WARNING: Total ({existing_count + new_count}) is below 10,000 target! Need {10000 - existing_count - new_count} more.")
+        return
+
+    # Find injection point: right before </main>
+    injection_marker = "  </main>"
+    if injection_marker not in html:
+        print("ERROR: Could not find </main> injection point!")
+        return
+
+    # Check if already injected
+    if 'class="knowledge-depth"' in html:
+        print("WARNING: knowledge-depth section already exists. Replacing...")
+        # Remove existing section
+        pattern = r'\s*<hr class="divider">\s*<section class="knowledge-depth".*?</section>'
+        html = re.sub(pattern, '', html, flags=re.DOTALL)
+
+    # Inject before </main>
+    html = html.replace(injection_marker, KNOWLEDGE_HTML + "\n  </main>")
+
+    # Write the modified file
+    with open(INDEX_PATH, "w", encoding="utf-8") as f:
+        f.write(html)
+
+    # Final verification
+    with open(INDEX_PATH, "r", encoding="utf-8") as f:
+        final_html = f.read()
+
+    final_count = count_chinese_chars(final_html)
+    print(f"\n=== FINAL RESULT ===")
+    print(f"Total Chinese characters: {final_count}")
+    print(f"Target: 10,000+")
+    print(f"Status: {'PASS' if final_count >= 10000 else 'FAIL'}")
+    print(f"File: {INDEX_PATH}")
+
+if __name__ == "__main__":
+    main()
