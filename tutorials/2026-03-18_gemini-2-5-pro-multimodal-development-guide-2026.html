@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:08fad06d2e25e68f | (C) 2026-03-18 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-18_gemini-2-5-pro-multimodal-development-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini 2.5 Pro API實戰：多模態應用開發完整指南 | AI 學習寶庫</title>
+  <meta name="description" content="Gemini 2.5 Pro API完整教學，涵蓋100萬Tokens上下文與原生音訊理解能力。深入解析Vision API整合、Streaming即時回應、Function Calling with Media實戰技巧，提供Node.js/Python雙語言範例，協助開發者快速掌握Google最新多模態AI開發能力。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-18 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 08fad06d2e25e68f">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-18_gemini-2-5-pro-multimodal-development-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Gemini 2.5 Pro API實戰：多模態應用開發完整指南">
+  <meta property="og:description" content="Gemini 2.5 Pro API完整教學，涵蓋100萬Tokens上下文與原生音訊理解能力。深入解析Vision API整合、Streaming即時回應、Function Calling with Media實戰技巧，提供Node.js/Python雙語言範例，協助開發者快速掌握Google最新多模態AI開發能力。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-18_gemini-2-5-pro-multimodal-development-guide-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Gemini 2.5 Pro API實戰：多模態應用開發完整指南", "description": "Gemini 2.5 Pro API完整教學，涵蓋100萬Tokens上下文與原生音訊理解能力。深入解析Vision API整合、Streaming即時回應、Function Calling with Media實戰技巧，提供Node.js/Python雙語言範例，協助開發者快速掌握Google最新多模態AI開發能力。", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-18_gemini-2-5-pro-multimodal-development-guide-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Gemini 2.5 Pro 與 GPT-4o 相比的優勢為何？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gemini 2.5 Pro 支援 100萬 Tokens 上下文（GPT-4o 僅 12.8萬），圖像理解準確率超越 GPT-4o 約 15%，並具備原生音訊理解能力，無需預處理即可直接處理音訊輸入。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何降低 API 使用成本？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可透過三種方式最佳化成本：(1) 啟用上下文快取節省最高 75% 費用；(2) 精簡 system prompt 減少 tokens 數量；(3) 非即時任務使用批次處理替代即時請求。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vertex AI 部署適合哪些企業場景？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vertex AI 適合需要 GDPR 合規、VPC 網路隔離、區域性資料落地、或需要 30+ 全球區域低延遲部署的企業應用，提供完整的地端化與安全控制。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Gemini 2.5 Pro API實戰：多模態應用開發完整...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Gemini 2.5 Pro API實戰：多模態應用開發完整指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-18</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Gemini 2.5 Pro API 完整教學：多模態應用開發实战指南</h2>
+
+<p><strong>Gemini 2.5 Pro</strong> 是 Google 最新旗艦多模態 AI 模型，支援<strong>100萬Tokens上下文</strong>與原生音訊理解，圖像理解準確率<strong>超越 GPT-4o 高達 15%</strong>。本教學將帶您完整掌握從環境建置到企業級部署的全流程開發能力。</p>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告指出，多模態模型已成為企業 AI 採用的主流趨勢，2024 年採用率較前年增長 47%。本教學將涵蓋 Vision API 整合、Streaming 即時回應、Function Calling with Media、Vertex AI 企業部署等核心主題，提供 Node.js 與 Python 雙語言範例程式碼。</p>
+
+<h2>一、模型能力概述與環境建置</h2>
+
+<p>Gemini 2.5 Pro 採用 Google 最新架構設計，支援以下核心能力：</p>
+
+<ul>
+<li><strong>100萬 Tokens 上下文窗口</strong>：可處理完整書籍、大型代碼庫或數小時音訊</li>
+<li><strong>原生音訊理解</strong>：直接輸入音訊檔案，無需預處理轉文字</li>
+<li><strong>領先圖像理解</strong>：在多項基準測試中超越 GPT-4o 15%</li>
+<li><strong>強大推理能力</strong>：複雜數學與程式碼任務表現優異</li>
+</ul>
+
+<p>首先安裝 Python SDK：</p>
+
+<pre><code>pip install google-generativeai</code></pre>
+
+<p>Node.js 安裝方式：</p>
+
+<pre><code>npm install @google/generative-ai</code></pre>
+
+<p>初始化客戶端需要取得 API Key，可從 Google AI Studio 免費取得。麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究指出，多模態 AI 的發展關鍵在於統一的 token 化機制，這正是 Gemini 架構的核心優勢。</p>
+
+<h2>二、Vision API 整合：圖像理解實戰</h2>
+
+<p>Gemini 2.5 Pro 的 Vision API 支援直接輸入圖像進行分析，無需額外的圖像識別模型。以下是 Python 實作範例：</p>
+
+<pre><code>import google.generativeai as genai
+import PIL.Image
+
+# 初始化客戶端
+genai.configure(api_key="YOUR_API_KEY")
+
+# 載入圖像
+image = PIL.Image.open("sample.jpg")
+
+# 建立模型
+model = genai.GenerativeModel("gemini-2.0-pro-exp-02-05")
+
+# 圖像分析請求
+response = model.generate_content([
+    image,
+    "分析這張圖片中的主要物件與場景，並描述圖片風格"
+])
+
+print(response.text)</code></pre>
+
+<p>Node.js 版本：</p>
+
+<pre><code>const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fs = require("fs");
+
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+
+async function analyzeImage() {
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-pro-exp-02-05" });
+  
+  const imagePart = {
+    inlineData: {
+      data: fs.readFileSync("sample.jpg").toString("base64"),
+      mimeType: "image/jpeg"
+    }
+  };
+
+  const result = await model.generateContent([imagePart, "描述這張圖片"]);
+  console.log(result.response.text());
+}
+
+analyzeImage();</code></pre>
+
+<p>此功能適用於產品檢測、醫療影像分析、內容審核等企業應用場景。根據 IEEE 發布的 AI 倫理標準（IEEE 7000），影像識別系統需要具備可解釋性，Gemini 的自然語言輸出特性正好滿足此要求。</p>
+
+<h2>三、Streaming 即時回應實作</h2>
+
+<p>對於需要即時互動的應用，Streaming 模式可大幅降低延遲。以下實作聊天室場景：</p>
+
+<pre><code># Python Streaming 範例
+model = genai.GenerativeModel("gemini-2.0-pro-exp-02-05")
+
+# 產生串流回應
+response = model.generate_content(
+    "解釋量子計算的基本原理",
+    stream=True
+)
+
+for chunk in response:
+    print(chunk.text, end="")</code></pre>
+
+<p>Streaming 模式適用於客服機器人、互動式教學、即時翻譯等場景。響應時間可控制在 500ms 以內，提供流暢的使用者體驗。</p>
+
+<h2>四、Function Calling with Media 進階應用</h2>
+
+<p>Gemini 2.5 Pro 支援 Function Calling，可結合外部工具與多媒體處理：</p>
+
+<pre><code># 定義可呼叫的函數
+tools = [{
+    "function_declarations": [{
+        "name": "extract_product_info",
+        "description": "從產品圖片中提取資訊",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "image_data": {"type": "string", "description": "Base64 編碼的圖像"}
+            },
+            "required": ["image_data"]
+        }
+    }]
+}]
+
+model = genai.GenerativeModel(
+    "gemini-2.0-pro-exp-02-02",
+    tools=tools
+)
+
+# 請求模型呼叫函數
+response = model.generate_content([
+    {"text": "從這張產品圖片中提取價格與名稱"},
+    {"inline_data": {"mime_type": "image/jpeg", "data": image_base64}}
+])</code></pre>
+
+<p>此功能可串接庫存管理系統、價格資料庫或 CRM 系統，打造完整的自動化业务流程。</p>
+
+<h2>五、Vertex AI 企業部署策略</h2>
+
+<p>對於需要企業級安全與合規的部署，Google Vertex AI 提供完整解決方案：</p>
+
+<ul>
+<li><strong>資料落地</strong>：支援區域性資料儲存，滿足 GDPR 合規需求</li>
+<li><strong>企業級安全</strong>：VPC 網路隔離、 IAM 權限管理</li>
+<li><strong>在地化推理</strong>：全球 30+ 區域，低延遲部署</li>
+<li><strong>成本優化</strong>依用量計費，支援 Commitment Use 折扣</li>
+</ul>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的報告，企業 AI 採用面臨的首要挑戰是部署複雜度與成本控制，Vertex AI 的全託管服務可有效降低這些障礙。部署定價方面，輸入約 $1.25/1M tokens，輸出約 $5.00/1M tokens，適合中高用量企業應用。</p>
+
+<p>部署程式碼範例：</p>
+
+<pre><code>from vertexai import vertexai
+
+# 初始化 Vertex AI
+vertexai.init(project="YOUR_PROJECT", location="us-central1")
+
+# 部署模型
+model = GenerativeModel("gemini-2.0-pro-exp-02-05")
+
+# 企業級安全設定
+safety_settings = {
+    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_ONLY_HIGH
+}
+
+response = model.generate_content(
+    prompt,
+    safety_settings=safety_settings
+)</code></pre>
+
+<h2>總結與效能優化建議</h2>
+
+<p>Gemini 2.5 Pro API 為開發者提供了強大的多模態 AI 開發基礎。建議開發者關注以下優化要點：</p>
+
+<ol>
+<li><strong>上下文快取</strong>：重複內容可啟用快取節省最高 75% 成本</li>
+<li><strong>系統指令優化</strong>：精簡 system prompt 減少 tokens 消耗</li>
+<li><strong>批次處理</strong>：離峰時段批次處理非即時任務</li>
+<li><strong>Streaming 優先</strong>：即時應用首選 Streaming 模式</li>
+</ol>
+
+<p>透過本教學的範例程式碼與企業部署策略，開發者可快速建構，生產級多模態 AI 應用。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Gemini 2.5 Pro 與 GPT-4o 相比的優勢為何？</h3>
+            <p class="faq-a">Gemini 2.5 Pro 支援 100萬 Tokens 上下文（GPT-4o 僅 12.8萬），圖像理解準確率超越 GPT-4o 約 15%，並具備原生音訊理解能力，無需預處理即可直接處理音訊輸入。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何降低 API 使用成本？</h3>
+            <p class="faq-a">可透過三種方式最佳化成本：(1) 啟用上下文快取節省最高 75% 費用；(2) 精簡 system prompt 減少 tokens 數量；(3) 非即時任務使用批次處理替代即時請求。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Vertex AI 部署適合哪些企業場景？</h3>
+            <p class="faq-a">Vertex AI 適合需要 GDPR 合規、VPC 網路隔離、區域性資料落地、或需要 30+ 全球區域低延遲部署的企業應用，提供完整的地端化與安全控制。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-18_gemini-2-5-pro-multimodal-development-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
