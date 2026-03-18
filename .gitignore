@@ -30,6 +30,7 @@ aeo-site/
 
 # Python virtual environment
 .venv/
+venv/
 __pycache__/
 
 # Large non-web directories
@@ -41,4 +42,3 @@ slime-system/
 *.key
 *.pem
 *.secret
-venv/
