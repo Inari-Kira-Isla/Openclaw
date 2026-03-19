@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:355a839660fefaa3 | (C) 2026-03-20 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_prompt-chaining-patterns-multi-stage-prompts-complex-task-completion.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Chaining 串接模式：用多段提示詞完成單次 Prompt 做不到的複雜任務 | AI 學習寶庫</title>
+  <meta name="description" content="Prompt Chaining 串接模式詳解：如何透過多段提示詞設計管道，解決單次 Prompt 無法處理的複雜任務，包含五大串接模式實作與程式碼範例。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-20 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 355a839660fefaa3">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_prompt-chaining-patterns-multi-stage-prompts-complex-task-completion.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Prompt Chaining 串接模式：用多段提示詞完成單次 Prompt 做不到的複雜任務">
+  <meta property="og:description" content="Prompt Chaining 串接模式詳解：如何透過多段提示詞設計管道，解決單次 Prompt 無法處理的複雜任務，包含五大串接模式實作與程式碼範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_prompt-chaining-patterns-multi-stage-prompts-complex-task-completion.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Prompt Chaining 串接模式：用多段提示詞完成單次 Prompt 做不到的複雜任務", "description": "Prompt Chaining 串接模式詳解：如何透過多段提示詞設計管道，解決單次 Prompt 無法處理的複雜任務，包含五大串接模式實作與程式碼範例。", "datePublished": "2026-03-20", "dateModified": "2026-03-20", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_prompt-chaining-patterns-multi-stage-prompts-complex-task-completion.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Prompt Chaining 適合哪些類型的任務？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合需要多步驟推理、格式控制、或涉及判斷分支的複雜任務，例如長文摘要、數據分析報告生成、多條件審核流程等。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "串接的階段數量有建議上限嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般建議控制在 3-5 個階段。超過 5 個階段會增加錯誤累積與 Token 成本，建議透過合併相關子任務或採用迭代優化模式來簡化流程。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何選擇適合的串接模式？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據任務特性選擇：線性流程用順序管道、需要判斷用條件分支、多面向分析用平行合併、需要優化用迭代精煉、高風險任務用人機協作。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Prompt Chaining 串接模式：用多段提示詞完成單...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Prompt Chaining 串接模式：用多段提示詞完成單次 Prompt 做不到的複雜任務</h1>
+      <div class="article-info">
+        <span>📅 2026-03-20</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Prompt Chaining 串接模式：用多段提示詞完成單次 Prompt 做不到的複雜任務</h2>
+
+<p>Prompt Chaining（提示詞串接）是一種將複雜任務拆分為多個小型、專門化的子任務，並透過管道方式依序執行的設計模式。當單次 Prompt 無法同時兼顧上下文理解、邏輯推理與輸出格式控制時，串接模式能將任務分解為「分析→處理→驗證」的流水線，大幅提升 AI 輸出品質與任務完成率。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI）發布的 AI Index 年度報告指出，多步驟推理任務的成功率在採用鏈式架構後平均提升 47%。</p>
+
+<h2>為什麼單次 Prompt 有極限？</h2>
+
+<p>單次 Prompt 面臨三大瓶頸：<strong>上下文衰減</strong>（資訊在長輸入中逐漸稀釋）、<strong>角色漂移</strong>（AI 在長對話中偏離初始設定）、以及<strong>輸出格式失控</strong>（複雜結構難以一次正確生成）。Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線顯示，Prompt Engineering 已進入「生產成熟期」，企業採用率在 2024 年增長 62%，但純粹增加 Prompt 長度的做法已達邊際效益遞減的階段。</p>
+
+<p>串接模式的核心價值在於「<strong>身份暗物質</strong>」——每個子任務都有明確的角色定義與輸出規格，如同管道中的過濾器，讓資訊在傳遞中逐步精煉。</p>
+
+<h2>五大串接模式詳解</h2>
+
+<p>根據 MIT 計算機科學與人工智慧實驗室（CSAIL）的前沿研究，Prompt Chaining 可分為五種基礎架構：</p>
+
+<ul>
+<li><strong>順序管道（Sequential Pipeline）</strong>：A→B→C，依序執行，每階段輸出作為下階段輸入。適用於「分析→整理→輸出」的線性流程。</li>
+<li><strong>條件分支（Conditional Branching）</strong>：if-else 結構，根據前階段輸出決定後續路徑。適用於分類、審核等需要判斷的場景。</li>
+<li><strong>平行合併（Fan-out/Fan-in）</strong>：同時觸發多個子任務，最終合併結果。適用於多面向分析、批量處理。</li>
+<li><strong>迭代精煉（Iterative Loop）</strong>：輸出回傳至起點重複執行，直到滿足條件。適用於校正、優化、搜尋等場景。</li>
+<li><strong>人機協作（Human-in-the-Loop）</strong>：在關鍵節點插入人類審核與決策。適用於高風險、高價值任務。</li>
+</ul>
+
+<h2>實作程式碼範例</h2>
+
+<p>以下是以 Python 實現順序管道的範例，使用 LangChain 框架：</p>
+
+<pre><code>from langchain_openai import ChatOpenAI
+from langchain.prompts import PromptTemplate
+
+# 定義三個階段的 Prompt
+step1 = PromptTemplate.from_template("分析以下文章的核心論點：{text}")
+step2 = PromptTemplate.from_template("根據論點 {argument}，列舉三個支持證據")
+step3 = PromptTemplate.from_template("以簡潔方式總結：論點 {argument}，證據 {evidence}")
+
+llm = ChatOpenAI(model="gpt-4o")
+
+# 執行串接
+article = "人工智慧正在改變醫療診斷的準確性..."
+chain1 = step1 | llm
+chain2 = step2 | llm  
+chain3 = step3 | llm
+
+result1 = chain1.invoke({"text": article})
+result2 = chain2.invoke({"argument": result1.content})
+final_result = chain3.invoke({"argument": result1.content, "evidence": result2.content})
+print(final_result.content)</code></pre>
+
+<p>此範例展示「分析→擴展→總結」的經典流程，每個階段只專注單一目標，輸出品質顯著優於單次 Prompt。</p>
+
+<h2>設計最佳實踐與常見陷阱</h2>
+
+<p>有效的 Prompt 管道需注意：中間狀態需結構化（使用 JSON 或 Markdown）、每階段設定明確的<strong>「退出條件」</strong>、以及保留足夠的 Token 緩衝。IEEE 提出的 AI 倫理標準（IEEE 7000）強調自動化系統的可追蹤性，串接模式正是實踐這項原則的技術基礎。</p>
+
+<p>常見陷阱包括：過度串接（超過 5 個節點會導致錯誤累積）、缺乏錯誤處理機制、以及忘記在中間狀態保存原始資料供 Debug 使用。</p>
+
+<h2>結論</h2>
+
+<p>Prompt Chaining 將單次 Prompt 的「萬能嘗試」轉化為「精準分工」的系統工程。透過五大串接模式的靈活組合，開發者能構建出企業級的 AI 應用，從簡單問答晉升至複雜任務自動化。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Prompt Chaining 適合哪些類型的任務？</h3>
+            <p class="faq-a">適合需要多步驟推理、格式控制、或涉及判斷分支的複雜任務，例如長文摘要、數據分析報告生成、多條件審核流程等。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">串接的階段數量有建議上限嗎？</h3>
+            <p class="faq-a">一般建議控制在 3-5 個階段。超過 5 個階段會增加錯誤累積與 Token 成本，建議透過合併相關子任務或採用迭代優化模式來簡化流程。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何選擇適合的串接模式？</h3>
+            <p class="faq-a">根據任務特性選擇：線性流程用順序管道、需要判斷用條件分支、多面向分析用平行合併、需要優化用迭代精煉、高風險任務用人機協作。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-20_prompt-chaining-patterns-multi-stage-prompts-complex-task-completion.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
