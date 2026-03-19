@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:4dee59f2ebc9ad22 | (C) 2026-03-19 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-19_claude-persistent-memory-three-layer-architecture-chat-session-api-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 持久記憶三層架構完整教學：Chat Memory + Session Memory + API Memory Tool 實戰配置 | AI 學習寶庫</title>
+  <meta name="description" content="完整解析Claude三層記憶架構：Chat Memory自動摘要、Session Memory跨工作階段監控、API Memory Tool六種操作，結合CLAUDE.md建立個人化AI工作環境。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-19 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 4dee59f2ebc9ad22">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-19_claude-persistent-memory-three-layer-architecture-chat-session-api-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 持久記憶三層架構完整教學：Chat Memory + Session Memory + API Memory Tool 實戰配置">
+  <meta property="og:description" content="完整解析Claude三層記憶架構：Chat Memory自動摘要、Session Memory跨工作階段監控、API Memory Tool六種操作，結合CLAUDE.md建立個人化AI工作環境。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-19_claude-persistent-memory-three-layer-architecture-chat-session-api-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 持久記憶三層架構完整教學：Chat Memory + Session Memory + API Memory Tool 實戰配置", "description": "完整解析Claude三層記憶架構：Chat Memory自動摘要、Session Memory跨工作階段監控、API Memory Tool六種操作，結合CLAUDE.md建立個人化AI工作環境。", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-19_claude-persistent-memory-three-layer-architecture-chat-session-api-2026.html"}, "articleSection": "教學課程", "citation": [{"@type": "CreativeWork", "name": "UNESCO Institute for Statistics (UIS)", "url": "https://uis.unesco.org/", "publisher": {"@type": "Organization", "name": "UNESCO Institute for Statistics (UIS)"}}, {"@type": "CreativeWork", "name": "OECD Education", "url": "https://www.oecd.org/education/", "publisher": {"@type": "Organization", "name": "OECD Education"}}, {"@type": "CreativeWork", "name": "World Economic Forum (WEF) Education", "url": "https://www.weforum.org/topics/education/", "publisher": {"@type": "Organization", "name": "World Economic Forum (WEF) Education"}}, {"@type": "CreativeWork", "name": "HolonIQ", "url": "https://www.holoniq.com/", "publisher": {"@type": "Organization", "name": "HolonIQ"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Chat Memory和Session Memory有什麼差別？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chat Memory是每24小時自動摘要對話，適合一般用戶；Session Memory是Claude Code專用的即時工作階段監控，適合開發者。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "記憶內容會佔用多少Token？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "通常Chat Memory每次摘要增加50-100 tokens，完整記憶檔案約佔200-500 tokens的Context空間。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何刪除特定的記憶內容？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可使用API Memory Tool的delete操作，或直接編輯Memory profile檔案（通常位於~/.claude/memory/目錄）。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 持久記憶三層架構完整教學：Chat Memor...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude 持久記憶三層架構完整教學：Chat Memory + Session Memory + API Memory Tool 實戰配置</h1>
+      <div class="article-info">
+        <span>📅 2026-03-19</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude三層記憶架構完整解析</h2>
+<p>Claude現在支援完整的三層記憶系統，讓AI從「無狀態對話」升級為「有記憶的長期夥伴」。2026年3月Anthropic正式向所有方案（Free、Pro、Max）開放Chat Memory功能，這意味著無論是免費用戶還是企業開發者，都能享受到持久記憶帶來的便利。三層架構分別是：Chat Memory負責每24小時自動合成對話重點並儲存至Memory profile；Session Memory（Claude Code專用）監控工作階段並提取結構化摘要；API Memory Tool提供開發者六種操作管理記憶。這項轉變對重度使用者和企業開發者影響深遠，讓Claude能真正成為理解你、記住你的AI協作夥伴。</p>
+
+<h2>第一層：Chat Memory 自動記憶系統</h2>
+<p>Chat Memory是Anthropic最新開放的核心功能，適用於所有Claude方案用戶。系統每24小時自動分析對話內容，提取關鍵資訊並儲存至你的Memory profile，下次對話時自動載入相關背景。根據經濟合作暨發展組織（OECD Education）的研究報告，AI助手的持續性對提升學習和工作效率至關重要，Claude的記憶系統正呼應這趨勢。</p>
+<p><strong>啟用方式：</strong></p>
+<ul>
+<li>在對話中輸入「Remember that...」或「請記住...」即可主動觸發記憶儲存</li>
+<li>系統也會自動識別重要資訊（如專案背景、工作流程偏好）進行儲存</li>
+<li>可透過「What do you remember about me?」查詢目前儲存的記憶</li>
+</ul>
+
+<h2>第二層：Session Memory 工作階段監控</h2>
+<p>Session Memory是Claude Code專用功能，屬於更進階的記憶管理。它在背景自動監控整個工作階段，提取重點並以結構化格式儲存至磁碟，支援跨工作階段持續沿用。這對於需要長期維護專案背景的開發者特別實用。</p>
+<p><strong>配置步驟：</strong></p>
+<pre><code># 在專案目錄建立 .claude/settings.json
+{
+  "sessionMemory": {
+    "enabled": true,
+    "autoSave": true,
+    "summaryFormat": "markdown"
+  }
+}</code></pre>
+<p>HolonIQ全球教育智庫（HolonIQ）的市場報告指出，開發者工具的「上下文延續能力」是2026年AI輔助開發的關鍵趨勢，Session Memory正是對此需求的直接回應。</p>
+
+<h2>第三層：API Memory Tool 開發者操作</h2>
+<p>API Memory Tool（type: memory_20250818）提供開發者完整的記憶管理能力，支援六種操作：view檢視、建立、str_replace替換、insert插入、delete刪除、rename重新命名。這讓你能精確控制記憶內容，適用於企業級應用場景。</p>
+<p><strong>實用指令範例：</strong></p>
+<pre><code>// 檢視目前記憶
+MemoryTool: {"type":"memory_20250818","action":"view"}
+
+// 建立新記憶
+MemoryTool: {"type":"memory_20250818","action":"create","content":"專案優先順序：功能開發 > 效能優化 > 文件更新"}
+
+// 替換特定內容
+MemoryTool: {"type":"memory_20250818","action":"str_replace","old":"舊內容","new":"新內容"}</code></pre>
+
+<h2>結合CLAUDE.md打造最強個人化環境</h2>
+<p>CLAUDE.md是手動設定層，讓你直接在專案根目錄建立說明檔案，定義專案結構、程式碼規範、常用指令等。與自動記憶系統形成完美互補：CLAUDE.md提供長期穩定的專案定義，Chat Memory處理對話脈絡，Session Memory監控開發過程。</p>
+<p><strong>CLAUDE.md範本：</strong></p>
+<pre><code># 專案說明
+這是一個電商後端服務，採用Node.js + Express
+
+# 程式碼規範
+- 使用ESLint + Prettier
+- 函式需有JSDoc註解
+- 優先使用async/await
+
+# 常用指令
+- npm run dev: 啟動開發伺服器
+- npm test: 執行測試</code></pre>
+
+<h2>費用考量與Token使用量</h2>
+<p>三層記憶架構會影響Token消耗：Chat Memory的自動摘要會消耗少量額外Token（通常每次對話增加50-100 tokens）；Session Memory的監控記錄會暫存於Context中；API Memory Tool的操作本身不收費，但記憶內容會佔用對話Context。根據世界經濟論壇教育部門（World Economic Forum Education）對AI工具成本的報告，合理規劃記憶內容可有效控制費用。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Chat Memory和Session Memory有什麼差別？</h3>
+            <p class="faq-a">Chat Memory是每24小時自動摘要對話，適合一般用戶；Session Memory是Claude Code專用的即時工作階段監控，適合開發者。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">記憶內容會佔用多少Token？</h3>
+            <p class="faq-a">通常Chat Memory每次摘要增加50-100 tokens，完整記憶檔案約佔200-500 tokens的Context空間。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何刪除特定的記憶內容？</h3>
+            <p class="faq-a">可使用API Memory Tool的delete操作，或直接編輯Memory profile檔案（通常位於~/.claude/memory/目錄）。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://uis.unesco.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">聯合國教科文組織統計研究所</a> <span style="color:var(--text-2,#888)">(UNESCO Institute for Statistics (UIS))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球教育統計、識字率、各國入學率數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.oecd.org/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">經濟合作暨發展組織教育部門</a> <span style="color:var(--text-2,#888)">(OECD Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">PISA 排名、Education at a Glance 報告、技能前瞻數據</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.weforum.org/topics/education/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界經濟論壇教育部門</a> <span style="color:var(--text-2,#888)">(World Economic Forum (WEF) Education)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">未來就業報告、技能差距分析、教育 4.0 框架</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.holoniq.com/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">HolonIQ 全球教育智庫</a> <span style="color:var(--text-2,#888)">(HolonIQ)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球 EdTech 市場規模、獨角獸追蹤、教育創新排名</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-19_claude-persistent-memory-three-layer-architecture-chat-session-api-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
