@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:e76b4e5d17462407 | (C) 2026-03-19 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-19_claude-code-cli-advanced-config-commands-memory-claudemd-team-rules.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code CLI 進階配置：自訂指令、Memory、專案 CLAUDE.md 與團隊規範 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code CLI進階配置教學：自訂Slash Command、CLAUDE.md寫法、Memory持久化設定與團隊共享規範完整攻略。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-19 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: e76b4e5d17462407">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-19_claude-code-cli-advanced-config-commands-memory-claudemd-team-rules.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code CLI 進階配置：自訂指令、Memory、專案 CLAUDE.md 與團隊規範">
+  <meta property="og:description" content="Claude Code CLI進階配置教學：自訂Slash Command、CLAUDE.md寫法、Memory持久化設定與團隊共享規範完整攻略。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-19_claude-code-cli-advanced-config-commands-memory-claudemd-team-rules.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code CLI 進階配置：自訂指令、Memory、專案 CLAUDE.md 與團隊規範", "description": "Claude Code CLI進階配置教學：自訂Slash Command、CLAUDE.md寫法、Memory持久化設定與團隊共享規範完整攻略。", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-19_claude-code-cli-advanced-config-commands-memory-claudemd-team-rules.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "如何在多個專案間快速切換不同的 Claude Code 配置？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "使用 <code>--project</code> 參數指定專案路徑，或在 <code>~/.claude/projects/</code> 建立各專案的獨立配置目錄。Claude Code 會自動偵測專案根目錄的 <code>.claude</code> 設定檔。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "CLAUDE.md 與一般註解檔案有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CLAUDE.md 是專門設計給 AI 閱讀的規範檔案，採用結構化格式定義專案風格、常務與限制。它會在每次對話開頭自動載入，而普通註解僅在特定程式碼區塊中作用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保團隊成員的個人設定不會覆蓋團隊共享規範？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "將團隊規範放在 Repo 的 <code>.claude/CLAUDE.md</code>，並在 <code>.gitignore</code> 中排除 <code>settings.local.json</code>。個人偏好應存於本機 <code>~/.claude/settings.json</code>，而非專案目錄。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code CLI 進階配置：自訂指令、Memo...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Claude Code CLI 進階配置：自訂指令、Memory、專案 CLAUDE.md 與團隊規範</h1>
+      <div class="article-info">
+        <span>📅 2026-03-19</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>Claude Code CLI 的進階配置能讓開發團隊將 AI 輔助工具深度整合到工作流程中，透過自訂指令、專案 CLAUDE.md 檔案與 Memory 持久化機制，可實現個人化與團隊標準化的雙重目標。根據 Gartner（Gartner AI Research）的企業 AI 採用報告顯示，正確配置 AI CLI 工具可提升開發效率達 30% 以上。</p>
+
+<h2>一、.claude 目錄結構與基礎設定</h2>
+<p>Claude Code 的所有進階設定都集中於專案根目錄的 <code>.claude</code> 目錄。這個隱藏目錄承載了自訂指令、專案規範與個人化記憶的核心配置。首次使用時，系統會自動建立基本結構，但理解其完整架構是進階應用的前提。</p>
+
+<p>標準的 <code>.claude</code> 目錄包含以下子目錄與檔案：</p>
+<ul>
+<li><code>settings.json</code> - 全域偏好設定</li>
+<li><code>commands/</code> - 自訂 Slash Command 存放處</li>
+<li><code>CLAUDE.md</code> - 專案層級的 AI 行為規範</li>
+<li><code>memory/</code> - 對話記憶持久化資料</li>
+</ul>
+
+<p>建議團隊在專案初始化時就建立此目錄結構，並透過版本控制共享團隊規範。這種「身份暗物質」式的配置方式，讓每個專案都有獨立的 AI 行為特徵。</p>
+
+<h2>二、CLAUDE.md 專案指令檔案撰寫</h2>
+<p>CLAUDE.md 是 Claude Code 最強大的專案定制功能之一，它允許團隊定義 AI 在該專案中的行為準則、程式碼風格與開發慣例。這個檔案會在每次與 Claude Code 互動時自動載入，確保 AI 理解團隊的特殊需求。</p>
+
+<p>一個有效的 CLAUDE.md 應該包含以下區塊：</p>
+
+<pre><code># 專案開發規範
+
+## 程式碼風格
+- 使用 TypeScript strict mode
+- 縮排使用 2 個空格
+- 函式命名使用 camelCase
+
+## 提交規範
+- commit message 格式：type(scope): description
+- 必須包含關聯的 issue 編號
+
+## 測試要求
+- 單元測試覆蓋率需達 80% 以上
+- 每個 PR 需要至少一個 review approval
+</code></pre>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，清晰定義的開發規範能顯著減少團隊溝通成本，AI 輔助工具的有效性與規範的清晰度呈正相關。</p>
+
+<h2>三、自訂 Slash Command 開發</h2>
+<p>Slash Command 是 Claude Code 快速執行自訂任務的機制。開發團隊可以將常見的開發任務封裝成可重複使用的指令，大幅提升工作效率。</p>
+
+<p>建立自訂指令的步驟如下：</p>
+
+<ol>
+<li>在 <code>.claude/commands/</code> 目錄建立新檔案，副檔名為 <code>.md</code></li>
+<li>檔案開頭使用 <code># Command: /your-command</code> 定義指令名稱</li>
+<li>撰寫指令說明與執行邏輯</li>
+</ol>
+
+<pre><code># Command: /test
+# Description: 執行專案測試並產生覆蓋率報告
+# Category: Development
+
+執行以下命令：
+1. npm test -- --coverage
+2. 檢查覆蓋率是否達標
+3. 產出測試報告摘要
+</code></pre>
+
+<p>建立完成後，輸入 <code>/test</code> 即可觸發自訂測試流程。IEEE（Institute of Electrical and Electronics Engineers (IEEE)）的 AI 倫理標準強調技術工具的可擴充性與客製化能力，自訂指令正是這一原則的實踐。</p>
+
+<h2>四、Memory 持久化設定與應用</h2>
+<p>Claude Code 的 Memory 功能讓 AI 能夠跨對話記住重要的上下文資訊，這對於長期專案維護與個人化工作流程特別有价值。Memory 設定包含三種模式：session（對話記憶）、project（專案記憶）與 global（全域記憶）。</p>
+
+<p>配置 Memory 的方式是在 <code>.claude/settings.json</code> 中設定：</p>
+
+<pre><code>{
+  "memory": {
+    "enabled": true,
+    "project": {
+      "enabled": true,
+      "autoSave": true,
+      "contextTypes": ["decisions", "patterns", "preferences"]
+    },
+    "global": {
+      "enabled": true,
+      "path": "~/.claude/memory/"
+    }
+  }
+}
+</code></pre>
+
+<p>實務上，建議將重要的設計決策與重構模式存入 project memory，讓後續的 AI 互動能夠延續上下文。這種機制類似 MIT 計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）研究中提到的「上下文保持」技術，可顯著提升長期任務的執行品質。</p>
+
+<h2>五、團隊共享 Rules 與安全限制</h2>
+<p>企業環境中，團隊需要一致的 AI 使用規範同時兼顧安全需求。Claude Code 支援透過 <code>.claude/</code> 目錄的團隊共享配置，確保所有成員遵循相同的開發標準。</p>
+
+<p>建立團隊 Rules 的最佳實踐：</p>
+<ul>
+<li>將 <code>CLAUDE.md</code> 納入版本控制，確保團隊同步</li>
+<li>使用 <code>.claude/settings.local.json</code> 存放個人偏好，避免提交到 Repo</li>
+<li>定義明確的安全紅線：禁止生成的程式碼類型、敏感資訊處理原則</li>
+</ul>
+
+<p>安全限制可在 <code>settings.json</code> 中設定：</p>
+
+<pre><code>{
+  "security": {
+    "allowExternalCommands": false,
+    "allowedPaths": ["./src", "./tests"],
+    "blockedPatterns": ["*.env", "*.pem", "id_rsa*"]
+  }
+}
+</code></pre>
+
+<p>透過這些機制，團隊能在享受 AI 輔助生產力的同時，維持對資訊安全與程式碼品質的完全控制。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">如何在多個專案間快速切換不同的 Claude Code 配置？</h3>
+            <p class="faq-a">使用 <code>--project</code> 參數指定專案路徑，或在 <code>~/.claude/projects/</code> 建立各專案的獨立配置目錄。Claude Code 會自動偵測專案根目錄的 <code>.claude</code> 設定檔。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">CLAUDE.md 與一般註解檔案有何不同？</h3>
+            <p class="faq-a">CLAUDE.md 是專門設計給 AI 閱讀的規範檔案，採用結構化格式定義專案風格、常務與限制。它會在每次對話開頭自動載入，而普通註解僅在特定程式碼區塊中作用。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保團隊成員的個人設定不會覆蓋團隊共享規範？</h3>
+            <p class="faq-a">將團隊規範放在 Repo 的 <code>.claude/CLAUDE.md</code>，並在 <code>.gitignore</code> 中排除 <code>settings.local.json</code>。個人偏好應存於本機 <code>~/.claude/settings.json</code>，而非專案目錄。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/configs/2026-03-19_claude-code-cli-advanced-config-commands-memory-claudemd-team-rules.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
