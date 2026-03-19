@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:10a221b825d48767 | (C) 2026-03-20 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_code-generation-prompt-best-practices-production-ready-framework.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>程式碼生成提示詞最佳實踐：讓 AI 寫出 Production-Ready 程式碼的提示詞框架 | AI 學習寶庫</title>
+  <meta name="description" content="深入解析程式碼生成提示詞的SPECR框架，包含Specification/Patterns/Edge-cases/Constraints/Review五大要素，提供Python、TypeScript、Rust語言特定模板，並揭露測試驅動提示詞與安全漏洞自動檢查的實戰技巧，協助開發者產出Production-Ready高品質程式碼。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-20 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 10a221b825d48767">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_code-generation-prompt-best-practices-production-ready-framework.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="程式碼生成提示詞最佳實踐：讓 AI 寫出 Production-Ready 程式碼的提示詞框架">
+  <meta property="og:description" content="深入解析程式碼生成提示詞的SPECR框架，包含Specification/Patterns/Edge-cases/Constraints/Review五大要素，提供Python、TypeScript、Rust語言特定模板，並揭露測試驅動提示詞與安全漏洞自動檢查的實戰技巧，協助開發者產出Production-Ready高品質程式碼。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_code-generation-prompt-best-practices-production-ready-framework.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "程式碼生成提示詞最佳實踐：讓 AI 寫出 Production-Ready 程式碼的提示詞框架", "description": "深入解析程式碼生成提示詞的SPECR框架，包含Specification/Patterns/Edge-cases/Constraints/Review五大要素，提供Python、TypeScript、Rust語言特定模板，並揭露測試驅動提示詞與安全漏洞自動檢查的實戰技巧，協助開發者產出Production-Ready高品質程式碼。", "datePublished": "2026-03-20", "dateModified": "2026-03-20", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-20_code-generation-prompt-best-practices-production-ready-framework.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "SPECR 框架中最重要的是哪個要素？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每個要素都不可或缺，但 Specification（規格）是最基礎的起點。沒有明確的規格定義，其他要素（Patterns、Edge-cases、Constraints、Review）都無法正確執行。建議在提示詞中優先確保規格描述的完整性。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "提示詞應該包含多少邊界情況才夠？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "邊界情況的数量取决于功能复杂度。基本原则是覆盖零值、空集合、極限數值、類型邊界、並發狀態等典型場景。對於關鍵業務邏輯，建議額外考慮時間邊界（閏年、 時區）和業務規則邊界（餘額為零、庫存不足）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何驗證 AI 生成的程式碼確實是 Production-Ready？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可透過三層驗證：(1) 靜態分析：使用 linter 與 type checker；(2) 測試執行：運行完整的單元測試與整合測試；(3) 人工審查：確認程式碼邏輯符合業務需求且易於維護。IEEE 7000 標準強調可追溯性與可解釋性，這些都是驗證時的重要指標。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>程式碼生成提示詞最佳實踐：讓 AI 寫出 Productio...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">程式碼生成提示詞最佳實踐：讓 AI 寫出 Production-Ready 程式碼的提示詞框架</h1>
+      <div class="article-info">
+        <span>📅 2026-03-20</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p>要讓 AI 生成 Production-Ready 程式碼，關鍵在於使用 <strong>SPECR 提示詞框架</strong>（Specification/Patterns/Edge-cases/Constraints/Review）。透過明確的規格定義、程式碼模式引用、邊界條件考量、約束條件設定與審查機制，AI 能產出具備錯誤處理、測試覆蓋與完整文件的商用級程式碼，而非僅有功能骨架的實驗性程式碼。</p>
+
+<h2>SPECR 框架：程式碼生成的五大支柱</h2>
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）發布的 AI Index 年度報告指出，AI 生成的程式碼在真實場景中的採用率持續上升，但品質參差不齊的主因在於提示詞缺乏結構化設計。SPECR 框架正是為解決此問題而誕生：</p>
+<ul>
+  <li><strong>Specification（規格）</strong>：明確定義輸入輸出、資料結構與預期行為</li>
+  <li><strong>Patterns（模式）</strong>：引用該語言的推薦架構與設計模式</li>
+  <li><strong>Edge-cases（邊界）</strong>：列舉極端情況與錯誤狀態</li>
+  <li><strong>Constraints（約束）</strong>：指定效能、安全性與相容性要求</li>
+  <li><strong>Review（審查）</strong>：要求 AI 自我檢視程式碼並說明決策理由</li>
+</ul>
+<p>此框架的核心理念是：將人類開發者的思考流程結構化，使 AI 能模擬完整的軟體工程決策。</p>
+
+<h2>語言特定提示詞模板實戰</h2>
+<p>不同程式語言有不同的慣例與最佳實踐，提示詞必須針對目標語言進行優化。以下是三種主流語言的模板範例：</p>
+
+<h3>Python 提示詞模板</h3>
+<pre><code>撰寫一個 Python 函數 [功能描述]，需滿足以下條件：
+1. 使用 type hints 標註所有參數與回傳類型
+2. 遵循 PEP 8 程式碼風格
+3. 實作完整的錯誤處理，使用自定義 Exception 類別
+4. 包含 docstring，格式遵從 Google style
+5. 處理以下邊界情況：[列出邊界]
+6. 效能約束：[如需要]</code></pre>
+
+<h3>TypeScript 提示詞模板</h3>
+<pre><code>建立一個 TypeScript 類別 [類別名稱]，需符合以下規範：
+1. 完整定義介面與類型，包含泛型支援
+2. 使用 strict mode 相容的語法
+3. 實作錯誤處理與驗證邏輯
+4. 包含 JSDoc 註解
+5. 邊界情況：[列出]
+6. 確保 null-safety</code></pre>
+
+<h3>Rust 提示詞模板</h3>
+<pre><code>撰寫 Rust 程式碼 [功能描述]，要求：
+1. 使用 Result 與 Option 處理錯誤與空值
+2. 遵守 Rustacean 慣例與借用檢查規則
+3. 包含完整的單元測試（#[cfg(test)]）
+4. 處理邊界情況：[列出]
+5. 效能優化：[如需要]</code></pre>
+<p>麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的研究表明，針對特定語言優化的提示詞能顯著提升生成程式碼的正確性與可維護性。</p>
+
+<h2>測試驅動提示詞策略</h2>
+<p>國際電氣電子工程師學會（IEEE）在 AI 倫理標準（IEEE 7000）中強調，AI 生成系統應具備可驗證性。將測試納入提示詞流程是確保程式碼品質的關鍵策略：</p>
+<ol>
+  <li><strong>測試優先</strong>：在提示詞中先要求生成測試案例，再要求實現</li>
+  <li><strong>覆蓋率要求</strong>：明確指定邊界條件測試、錯誤情況測試</li>
+  <li><strong>測試框架指定</strong>：如 pytest、Vitest、criterion 等</li>
+</ol>
+<p>實務上，可在提示詞末尾附加：「請同時生成對應的單元測試，覆蓋正常路徑、邊界情況與錯誤處理，並說明測試邏輯。」</p>
+
+<h2>安全漏洞自動檢查提示詞</h2>
+<p>Gartner 人工智慧研究（Gartner AI Research）的企業 AI 採用統計顯示，安全是企業導入 AI 生成程式碼的最大顧慮。建議在提示詞中加入安全檢查清單：</p>
+<pre><code>[基本功能要求]...
+
+請在生成程式碼後進行以下安全檢查：
+1. SQL Injection：所有資料庫查詢使用參數化查詢
+2. XSS：輸出進行適當編碼
+3. 敏感性資料：確保密碼、API Key 不會暴露
+4. 依賴套件：檢查是否有已知 CVE 漏洞
+5. 權限控制：驗證權限檢查是否完整
+
+若發現安全問題，請重新生成修正後的程式碼。</code></pre>
+<p>此提示詞策略能有效減少常見的 OWASP Top 10 漏洞，確保生成的程式碼符合企業安全標準。</p>
+
+<h2>結論：從實驗到生產的橋樑</h2>
+<p>透過 SPECR 框架、語言特定模板、測試驅動策略與安全檢查機制的組合，開發者能顯著提升 AI 生成程式碼的品質。關鍵在於將軟體工程的最佳實踐結構化為提示詞指令，讓 AI 理解的不僅是「做什麼」，更是「如何正確地做」。隨著大型語言模型能力的持續提升，結合這些提示詞策略將成為開發團隊維持競爭力的必備技能。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">SPECR 框架中最重要的是哪個要素？</h3>
+            <p class="faq-a">每個要素都不可或缺，但 Specification（規格）是最基礎的起點。沒有明確的規格定義，其他要素（Patterns、Edge-cases、Constraints、Review）都無法正確執行。建議在提示詞中優先確保規格描述的完整性。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">提示詞應該包含多少邊界情況才夠？</h3>
+            <p class="faq-a">邊界情況的数量取决于功能复杂度。基本原则是覆盖零值、空集合、極限數值、類型邊界、並發狀態等典型場景。對於關鍵業務邏輯，建議額外考慮時間邊界（閏年、 時區）和業務規則邊界（餘額為零、庫存不足）。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何驗證 AI 生成的程式碼確實是 Production-Ready？</h3>
+            <p class="faq-a">可透過三層驗證：(1) 靜態分析：使用 linter 與 type checker；(2) 測試執行：運行完整的單元測試與整合測試；(3) 人工審查：確認程式碼邏輯符合業務需求且易於維護。IEEE 7000 標準強調可追溯性與可解釋性，這些都是驗證時的重要指標。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-20_code-generation-prompt-best-practices-production-ready-framework.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
