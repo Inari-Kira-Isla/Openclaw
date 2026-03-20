@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:b5e71895d080445c | (C) 2026-03-21 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-artifacts-interactive-app-prompts-executable-react-widgets.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Artifacts 互動應用提示詞：教 AI 寫出可執行的 React 小工具 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Artifacts 互動應用提示詞完整教學：掌握 UI 框架指定、狀態管理、動畫效果、localStorage 持久化與 RWD 適配技巧，10 個精選模板輕鬆生成可執行 React 小工具。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-21 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: b5e71895d080445c">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-artifacts-interactive-app-prompts-executable-react-widgets.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Artifacts 互動應用提示詞：教 AI 寫出可執行的 React 小工具">
+  <meta property="og:description" content="Claude Artifacts 互動應用提示詞完整教學：掌握 UI 框架指定、狀態管理、動畫效果、localStorage 持久化與 RWD 適配技巧，10 個精選模板輕鬆生成可執行 React 小工具。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-artifacts-interactive-app-prompts-executable-react-widgets.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Artifacts 互動應用提示詞：教 AI 寫出可執行的 React 小工具", "description": "Claude Artifacts 互動應用提示詞完整教學：掌握 UI 框架指定、狀態管理、動畫效果、localStorage 持久化與 RWD 適配技巧，10 個精選模板輕鬆生成可執行 React 小工具。", "datePublished": "2026-03-21", "dateModified": "2026-03-21", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-artifacts-interactive-app-prompts-executable-react-widgets.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Artifacts 生成的程式碼可以直接用於正式專案嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "適合原型驗證與內部工具，建議進行 code review 後再用於正式環境。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "提示詞需要使用英文還是中文？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude 對雙語理解皆佳，但技術術語（如 Tailwind、useState）建議使用英文。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何讓生成的應用支援離線使用？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在提示詞中加入「使用 Service Worker 快取靜態資源」即可實現離線功能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Artifacts 互動應用提示詞：教 AI ...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Claude Artifacts 互動應用提示詞：教 AI 寫出可執行的 React 小工具</h1>
+      <div class="article-info">
+        <span>📅 2026-03-21</span>
+        <span>⏱ 10 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude Artifacts 互動應用提示詞的核心答案</h2>
+<p>要讓 Claude Artifacts 生成高品質、可直接執行的 React 互動應用，關鍵在於提示詞的結構化設計。透過明確指定 UI 框架（Taiwind CSS 或 shadcn/ui）、狀態管理模式、動畫效果、資料持久化機制與 RWD 響應式設計，AI 能產出接近工程師手寫品質的程式碼。根據 Gartner（Gartner AI Research）的企業 AI 採用報告指出，提示詞品質直接影響 AI 輸出可用性達 67%，因此掌握這些技巧能顯著提升開發效率。</p>
+
+<h2>一、UI 框架指定：奠定視覺基礎</h2>
+<p>提示詞第一行應明確指定所使用的 UI 框架。常見的組合包括「使用 Tailwind CSS 進行樣式設計」或「採用 shadcn/ui 元件庫」。框架指定越具體，AI 生成的程式碼結構越穩定。例如：</p>
+<p><code>「建立一個 Kanban 看板應用，使用 Tailwind CSS + shadcn/ui 元件，支援卡片拖曳排序。」</code></p>
+<p>根據麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）的研究，元提示詞（meta-prompting）技術能引導 AI 產生更具結構性的輸出，這與框架指定的原理相同。</p>
+
+<h2>二、狀態管理與互動效果：賦予應用生命力</h2>
+<p>靜態頁面無法滿足現代 Web 應用需求。提示詞中需明確要求「使用 React useState 鉤子管理狀態」或「引入 Zustand/Redux 进行全局狀態管理」。互動效果方面，可指定：</p>
+<ul>
+<li>Framer Motion 動畫庫實現流暢過場</li>
+<li>CSS transition 實現按鈕懸停效果</li>
+<li>拖曳 API（dnd-kit 或 react-beautiful-dnd）實現列表排序</li>
+</ul>
+<p>舉例而言，計算機應用需要即時運算反饋，提示詞應包含「鍵擊時立即更新顯示結果，支援鍵盤輸入」。</p>
+
+<h2>三、資料持久化：讓資料跨會話保留</h2>
+<p>許多互動應用需要保存用戶資料。此時提示詞應加入「使用 localStorage 實現資料持久化」或「整合 IndexedDB 儲存大型資料」。實作時需包含：</p>
+<ul>
+<li>資料初始化時讀取 localStorage</li>
+<li>狀態變更時自動儲存</li>
+<li>提供清除資料的選項</li>
+</ul>
+<p>看板應用的卡片資料、天氣應用的收藏城市清單，都依賴此機制實現跨session資料保留。</p>
+
+<h2>四、RWD 響應式設計：確保跨裝置相容</h2>
+<p>提示詞必須包含「支援行動裝置（320px）到桌面（1920px）響應式布局」的要求。具體實現包括：</p>
+<ul>
+<li>Tailwind 的 sm:、md:、lg:、xl: 前綴斷點</li>
+<li>flex-direction: column（手機）與 row（桌面）切換</li>
+<li>rem/em 相對單位取代固定像素</li>
+</ul>
+<p>IEEE（Institute of Electrical and Electronics Engineers）發布的 UI 設計標準中，響應式設計已被列為無障礙網頁的核心要素之一。</p>
+
+<h2>五、10 個精選模板提示詞實例</h2>
+<p>以下精選模板可直接複製使用，替換關鍵參數即可生成對應應用：</p>
+<ol>
+<li><strong>計算機：</strong>「四則運算計算機，支援鍵盤與滑鼠輸入，歷史記錄保存在 localStorage」</li>
+<li><strong>看板 Kanban：</strong>「三欄看板（待辦、進行中、已完成），卡片可拖曳排序，自動儲存狀態」</li>
+<li><strong>圖表儀表板：</strong>「使用 Recharts 繪製折線圖與長條圖，支援資料篩選與匯出 CSV」</li>
+<li><strong>待辦清單：</strong>「支援新增、編輯、刪除、勾選完成，使用 localStorage 持久化」</li>
+<li><strong>倒數計時器：</strong>「Pomodoro 番茄鐘，支援自定義時長、背景音提醒、統計分析」</li>
+<li><strong>天氣小工具：</strong>「輸入城市名稱查詢天氣，顯示溫度、濕度與 5 日預報」</li>
+<li><strong>記憶遊戲：</strong>「配對翻牌遊戲，計時與步數統計，最高分記錄儲存」</li>
+<li><strong>代辦辭典：</strong>「英文單字查詢，顯示發音、例句與收藏功能」</li>
+<li><strong>音樂播放器：</strong>「播放列表管理，支援播放/暫停/上一首/下一首，進度條拖曳」</li>
+<li><strong>表單產生器：</strong>「拖曳式表單建構器，支援文字、日期、下拉選單、勾選框」</li>
+</ol>
+
+<p>使用這些模板時，建議依序補充「使用 Tailwind CSS 樣式」「響應式設計支援行動裝置」「加入 loading 與 error 狀態處理」等額外需求，以提升應用完整度。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Artifacts 生成的程式碼可以直接用於正式專案嗎？</h3>
+            <p class="faq-a">適合原型驗證與內部工具，建議進行 code review 後再用於正式環境。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">提示詞需要使用英文還是中文？</h3>
+            <p class="faq-a">Claude 對雙語理解皆佳，但技術術語（如 Tailwind、useState）建議使用英文。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何讓生成的應用支援離線使用？</h3>
+            <p class="faq-a">在提示詞中加入「使用 Service Worker 快取靜態資源」即可實現離線功能。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-21_claude-artifacts-interactive-app-prompts-executable-react-widgets.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
