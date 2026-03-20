@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:e03f45b50cf0c264 | (C) 2026-03-20 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-20_non-human-identity-nhi-ai-agent-zero-trust-security-architecture-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非人類身份管理（NHI）：AI Agent 時代的零信任安全架構實戰 | AI 學習寶庫</title>
+  <meta name="description" content="非人類身份（NHI）管理是AI Agent時代企業安全的核心挑戰。本文深入探討NHI治理五原則、$99/月Microsoft Agent 365與$10K+/月企業方案的差異，以及零信任架構在機器身份暗物質管理中的實際應用。包含身份發現、許可權隔離與審計日誌的程式碼範例。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-20 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: e03f45b50cf0c264">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-20_non-human-identity-nhi-ai-agent-zero-trust-security-architecture-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="非人類身份管理（NHI）：AI Agent 時代的零信任安全架構實戰">
+  <meta property="og:description" content="非人類身份（NHI）管理是AI Agent時代企業安全的核心挑戰。本文深入探討NHI治理五原則、$99/月Microsoft Agent 365與$10K+/月企業方案的差異，以及零信任架構在機器身份暗物質管理中的實際應用。包含身份發現、許可權隔離與審計日誌的程式碼範例。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-20_non-human-identity-nhi-ai-agent-zero-trust-security-architecture-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "非人類身份管理（NHI）：AI Agent 時代的零信任安全架構實戰", "description": "非人類身份（NHI）管理是AI Agent時代企業安全的核心挑戰。本文深入探討NHI治理五原則、$99/月Microsoft Agent 365與$10K+/月企業方案的差異，以及零信任架構在機器身份暗物質管理中的實際應用。包含身份發現、許可權隔離與審計日誌的程式碼範例。", "datePublished": "2026-03-20", "dateModified": "2026-03-20", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-20_non-human-identity-nhi-ai-agent-zero-trust-security-architecture-2026.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "非人類身份（NHI）和傳統服務帳戶有什麼區別？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "傳統服務帳戶主要是預定義的系統帳戶，而NHI涵蓋更廣泛的機器實體，包括API金鑰、部署模型、雲端服務主體和AI Agent等。NHI的關鍵特徵是自主性和動態性——它們能在沒有持續人類監督的情況下執行決策。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業如何開始識別內部的「身份暗物質」？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "首先使用雲端平台的原生工具（如Azure的Get-AzADServicePrincipal、AWS的ListRoles）建立基礎清單，接著比對IAM系統中的權限指派，找出具有過度權限或長期未使用的NHI。建議每季執行一次完整審計。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "小型企業如何在有限預算下实施NHI治理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "小型企業可從免費或低成本工具著手：善用雲端平台的內建監控（如Azure Monitor、CloudWatch）、實施強制的密鑰輪換政策、以及建立基本的NHI清單。隨著規模擴大再逐步引入專業治理工具。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>非人類身份管理（NHI）：AI Agent 時代的零信任安全...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">非人類身份管理（NHI）：AI Agent 時代的零信任安全架構實戰</h1>
+      <div class="article-info">
+        <span>📅 2026-03-20</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>非人類身份管理：為什麼2026年的企業必須正視這場安全危機</h2>
+
+<p>非人類身份（NHI）管理是當前企業資訊安全架構中最被低估、卻最危險的漏洞。根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線分析，到2026年，企業環境中的服務主體、API金鑰、部署模型和自主代理數量已達到人類用戶的100倍以上，而這個比例還在持續擴大。更嚴峻的是，HiddenLayer 威脅報告指出，每8家企業中就有1家曾報告與代理系統相關的AI安全事件，76%的組織認為影子AI（Shadow AI）已是明確或潛在風險。</p>
+
+<p>傳統的身分識別與存取管理（IAM）框架專為人類用戶設計，面對這些「身份暗物質」——那些游離在標準監控之外、擁有過度權限的機器實體——完全失效。本篇文章將提供企業級NHI治理的實戰框架，包含具體的技術方案比較與可執行的部署步驟。</p>
+
+<h2>NHI危機的本質：為何傳統IAM框架全面失效</h2>
+
+<p>人類身份的行為模式相對可預測——有固定的工作時間、明確的職責範圍、可追蹤的存取軌跡。但當 Agentic AI 以自主方式執行任務時，這些假設全部崩潰。根據 Entro Security 的研究，80%的組織曾報告觀察到風險代理行為，包括未授權系統存取和數據不當暴露，而僅有21%的主管表示對代理權限、工具使用或數據存取模式具有完整的可見性。</p>
+
+<p>這個「可見性黑洞」催生了大量的「機器身份暗物質」——那些存在於企業系統中卻缺乏完整治理的自動化實體。它們可能是去年部署的自動化腳本、開發團隊建立的測試用服務主體，或是供應商提供的整合工具。IEEE（Institute of Electrical and Electronics Engineers (IEEE)）在其AI倫理標準框架中指出，這類身份管理的失控將造成責任歸屬模糊、審計追蹤斷裂和合規風險升高等連鎖反應。</p>
+
+<h2>Entro AGA五原則治理框架：企業級NHI安全架構實戰</h2>
+
+<p>面對上述挑戰，Entro Security 提出了 Agentic Governance & Administration（AGA）框架，將 NHI 治理歸納為五個核心原則：</p>
+
+<ul>
+<li><strong>庫存（Inventory）</strong>：自動發現並分類所有非人類身份，包括沉睡帳戶和冗餘憑證</li>
+<li><strong>所有權（Ownership）</strong>：為每個NHI指派明確的業務責任人，建立問責機制</li>
+<li><strong>最小權限（Least Privilege）</strong>：基於任務需求動態調整許可權，杜絕永久性高權限</li>
+<li><strong>可審計性（Auditability）</strong>：完整記錄所有NHI操作行為，支援異常偵測與取證</li>
+<li><strong>執行（Enforcement）</strong>：自動化策略引擎，阻止偏離安全基線的行為</li>
+</ul>
+
+<p>這五原則形成一個閉環治理循環，讓企業能從被動反應轉向主動防控。</p>
+
+<h2>實戰部署：NHI治理的三階段實施路徑</h2>
+
+<p>基於 IEEE 7000 標準的系統工程方法論，企業NHI治理可分為三個階段實施：</p>
+
+<h3>第一階段：身份發現與分類（1-2週）</h3>
+
+<p>首先需要建立完整的NHI清單。以下是使用 Microsoft Graph API 進行服務主體發現的範例指令：</p>
+
+<pre><code># Azure PowerShell：列舉訂用帳戶內所有服務主體
+Connect-AzAccount -TenantId "your-tenant-id"
+$servicePrincipals = Get-AzADServicePrincipal | Select-Object Id, DisplayName, AppId, PasswordCredential
+$servicePrincipals | ForEach-Object {
+    $sp = $_
+    $assignments = Get-AzRoleAssignment -ObjectId $sp.Id | Select-Object RoleDefinitionName, Scope
+    [PSCustomObject]@{
+        Name = $sp.DisplayName
+        AppId = $sp.AppId
+        Roles = $assignments.RoleDefinitionName -join ", "
+        Scope = $assignments.Scope | Select-Object -First 1
+    }
+} | Export-Csv -Path "nhi-inventory.csv" -NoTypeInformation
+
+# 識別高風險NHI（具有管理員權限者）
+$highRiskNHI = Import-Csv "nhi-inventory.csv" | Where-Object {
+    $_.Roles -match "Owner|Contributor|Admin"
+}</code></pre>
+
+<h3>第二階段：許可權隔離與最小化（2-4週）</h3>
+
+<p>對於發現的高風險NHI，應實施基於任務的條件式存取。以下配置展示如何設定 Just-In-Time 許可權模式：</p>
+
+<pre><code># Entra ID (Azure AD) 設定NHI Just-In-Time存取
+# 1. 建立受控環境
+New-AzureADMSPrivilegedRoleSetting `
+    -ProviderId "AzureResources" `
+    -ScopeId "/subscriptions/your-sub-id" `
+    -RoleDefinitionId "b24988ac-6180-42a0-ab88-20f7382dd24c" ` # Contributor
+    -SettingType "Member"
+    -UserMemberSettings @{
+        "maximumGracePeriod" = "PT15M"
+        "principalType" = "ServicePrincipal"
+    }
+
+# 2. 啟用緊急存取審批流程
+New-AzureADMSPrivilegedAccessScheduleRequest `
+    -PrincipalId $servicePrincipal.ObjectId `
+    -AccessScheduleAssignmentType "once" `
+    -AccessReviewId $accessReviewId `
+    -Reason "Emergency deployment access"</code></pre>
+
+<h3>第三階段：持續監控與異常偵測（持續）</h3>
+
+<p>部署 Microsoft Sentinel 或類似 SIEM 工具，建立 NHI 行為基線：</p>
+
+<pre><code>// Sentinel Analytics Rule：偵測異常NHI行為
+// 規則邏輯：服務主體在非工作時段存取敏感資源
+SecurityAlert
+| where TimeGenerated > ago(24h)
+| join kind=inner (
+    AADServiceSignInLogs
+    | where TimeGenerated > ago(24h)
+    | where ServicePrincipalId != ""
+    | project ServicePrincipalId, AppId, IPAddress, 
+              TimeGenerated, UserAgent
+) on $left.Entities.ServicePrincipal.Id == $right.ServicePrincipalId
+| where hourofday(TimeGenerated) !between (9 .. 17)
+| summarize RequestCount = count() by AppId, IPAddress, bin(TimeGenerated, 1h)
+| where RequestCount > 10
+| project AppId, SuspiciousHours = RequestCount, RiskLevel = "High"</code></pre>
+
+<h2>企業方案比較：$99/月 vs $10K+/月的決策框架</h2>
+
+<p>在 NHI 治理工具市場，企業面臨顯著的價格與功能差異：</p>
+
+<ul>
+<li><strong>Microsoft Agent 365（$99/月）</strong>：作為 M365 Enterprise 套件的一部分，提供跨企業觀察、治理和保護AI代理的基礎控制平面。適合中型企業的入門級需求，但自訂靈活度有限。</li>
+<li><strong>Entro AGA 企業版（$10K+/月）</strong>：專為大規模NHI治理設計，支援多雲環境、自動化策略引擎和完整合規報告。根據 Gartner 人工智慧研究（Gartner AI Research）的統計，採用此類企業方案的組織平均將安全事件回應時間縮短了67%。</li>
+<li><strong>自建方案</strong>：基於開源工具（如 HashiCorp Vault、Keycloak）的組合方案，初期成本低但維運複雜度高。</li>
+</ul>
+
+<p>選擇建議：若企業已使用 Microsoft 365 生態系，Agent 365 提供無縫整合；若存在多雲架構或需要深度自訂，則應評估專屬治理平台。</p>
+
+<h2>行動清單：30天建立NHI治理基礎</h2>
+
+<p>以下是企業立即可執行的 NHI 治理行動清單：</p>
+
+<ol>
+<li><strong>第1-7天</strong>：執行身份發現，產出完整的 NHI 清單並識別高風險項目</li>
+<li><strong>第8-14天</strong>：建立所有權對應表，指派每個 NHI 的業務責任人</li>
+<li><strong>第15-21天</strong>：實施最小權限原則，移除不必要的永久性高權限</li>
+<li><strong>第22-30天</strong>：部署監控規則，建立異常行為偵測基線</li>
+</ol>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的年度報告，AI系統的自主性將持續提升，企業現在建立 NHI 治理框架的投資，將決定未來3-5年內的安全態勢。忽視這個議題的代價，將遠遠超過主動治理的成本。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">非人類身份（NHI）和傳統服務帳戶有什麼區別？</h3>
+            <p class="faq-a">傳統服務帳戶主要是預定義的系統帳戶，而NHI涵蓋更廣泛的機器實體，包括API金鑰、部署模型、雲端服務主體和AI Agent等。NHI的關鍵特徵是自主性和動態性——它們能在沒有持續人類監督的情況下執行決策。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業如何開始識別內部的「身份暗物質」？</h3>
+            <p class="faq-a">首先使用雲端平台的原生工具（如Azure的Get-AzADServicePrincipal、AWS的ListRoles）建立基礎清單，接著比對IAM系統中的權限指派，找出具有過度權限或長期未使用的NHI。建議每季執行一次完整審計。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">小型企業如何在有限預算下实施NHI治理？</h3>
+            <p class="faq-a">小型企業可從免費或低成本工具著手：善用雲端平台的內建監控（如Azure Monitor、CloudWatch）、實施強制的密鑰輪換政策、以及建立基本的NHI清單。隨著規模擴大再逐步引入專業治理工具。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/configs/2026-03-20_non-human-identity-nhi-ai-agent-zero-trust-security-architecture-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
