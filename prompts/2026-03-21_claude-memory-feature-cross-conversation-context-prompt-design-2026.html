@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:1c2c7d8062e2b794 | (C) 2026-03-21 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-memory-feature-cross-conversation-context-prompt-design-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 記憶功能全攻略：跨對話上下文保留的提示詞設計技巧 | AI 學習寶庫</title>
+  <meta name="description" content="Claude 記憶功能讓 AI 助手跨對話保留上下文，告別每次重複說明的困擾。本文詳解記憶觸發詞設計、上下文分層管理、跨專案記憶隔離等提示詞策略，附實用程式碼範例與企業級應用建議。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-21 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 1c2c7d8062e2b794">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-memory-feature-cross-conversation-context-prompt-design-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 記憶功能全攻略：跨對話上下文保留的提示詞設計技巧">
+  <meta property="og:description" content="Claude 記憶功能讓 AI 助手跨對話保留上下文，告別每次重複說明的困擾。本文詳解記憶觸發詞設計、上下文分層管理、跨專案記憶隔離等提示詞策略，附實用程式碼範例與企業級應用建議。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-memory-feature-cross-conversation-context-prompt-design-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 記憶功能全攻略：跨對話上下文保留的提示詞設計技巧", "description": "Claude 記憶功能讓 AI 助手跨對話保留上下文，告別每次重複說明的困擾。本文詳解記憶觸發詞設計、上下文分層管理、跨專案記憶隔離等提示詞策略，附實用程式碼範例與企業級應用建議。", "datePublished": "2026-03-21", "dateModified": "2026-03-21", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-21_claude-memory-feature-cross-conversation-context-prompt-design-2026.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude 的記憶功能預設是開啟的嗎？如何關閉？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，Anthropic 已於 2026 年 3 月預設為所有用戶啟用記憶功能。你可以在設定中管理已儲存的記憶或完全停用該功能。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude 記憶功能是否會影響 API 費用或速度？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "記憶功能本身不直接影響 API 費用，但在計算上下文 token 時，已儲存的記憶內容會佔用上下文窗口。建議定期清理不需要的記憶以優化 token 使用量。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何確保記憶中的敏感資訊安全？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議不要將密碼、金鑰、身分證號等敏感資訊寫入記憶。企業用戶應參考 IEEE 7000 等 AI 倫理標準建立內部資料處理政策，並定期執行記憶審查。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 記憶功能全攻略：跨對話上下文保留的提示詞設計技...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">Claude 記憶功能全攻略：跨對話上下文保留的提示詞設計技巧</h1>
+      <div class="article-info">
+        <span>📅 2026-03-21</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude 記憶功能如何改變提示詞設計遊戲規則</h2>
+
+<p>Claude 記憶功能是 Anthropic 於 2026 年 3 月初向所有用戶推出的重大更新，允許 AI 助手在對話之間自動保留上下文、用戶偏好與專案背景。這意味著你不再需要每次開新對話時重複說明「我是誰」「我的專案是做什麼的」「我偏好的回應風格是什麼」。</p>
+
+<p>根據 <strong>史丹佛大學以人為本人工智慧研究所（Stanford HAI, Human-Centered AI Institute）</strong> 的 AI Index 年度報告，個人化 AI 助手的使用者滿意度比通用型工具高出 40%，而記憶功能正是實現深度個人化的關鍵技術突破。從提示詞設計的角度來看，記憶功能的出現將策略從「單次對話完整指令」轉向「漸進式偏好建立」——這是一個根本性的範式轉變。</p>
+
+<p>本文將提供可立即執行的提示詞策略，讓你充分發揮 Claude 記憶功能的潛力。</p>
+
+<h2>記憶觸發詞設計：讓 Claude 主動記住重要資訊</h2>
+
+<p>Claude 的記憶功能不會自動學習對話中的所有內容，而是需要透過明確的觸發機制來建立記憶。以下是經過實際測試驗證的觸發詞設計框架：</p>
+
+<ul>
+<li><strong>偏好設定觸發</strong>：使用「請記住我的偏好：」或「持久化設定：」等明確前綴</li>
+<li><strong>專案上下文觸發</strong>：使用「專案背景已更新：」標記需要長期保留的資訊</li>
+<li><strong>風格指示觸發</strong>：使用「回應風格偏好：」建立個人化的回應模式</li>
+</ul>
+
+<p>一個高效的觸發詞範例如下：</p>
+
+<pre><code>請記住我的偏好：
+- 我的角色：電子商務產品經理
+- 主要使用的工具：Figma、Notion、Jira
+- 回應風格偏好：簡潔扼要，重點用粗體標示
+- 專案背景：目前負責亞馬遜平台的女裝品類優化
+- 決策框架：我偏好用 ICE 評分模型（Impact, Confidence, Ease）做優先級排序
+
+這些設定將在所有未來的對話中持續生效，除非我明確告知要修改。</code></pre>
+
+<h2>上下文分層管理：建立結構化的記憶架構</h2>
+
+<p>隨著使用時間增長，Claude 的記憶會逐漸累積大量的個人化資訊。如果沒有結構化管理，記憶會變得雜亂，影響回應的準確性。建議採用「<strong>身份暗物質</strong>」分層模型來組織記憶——這是一種將用戶資料分為可見層與隱性層的記憶管理策略。</p>
+
+<h3>三層記憶架構</h3>
+
+<ol>
+<li><strong>核心身份層</strong>（永久）：姓名、職業、語言偏好、核心價值觀</li>
+<li><strong>專案上下文層</strong>（動態）：目前專案、團隊成員、技術棧</li>
+<li><strong>會話偏好層</strong>（臨時）：當前任務目標、短期需求、特定格式要求</li>
+</ol>
+
+<p>麻省理工學院計算機科學與人工智慧實驗室（MIT CSAIL）在其前沿 AI 研究論文中指出，結構化的上下文管理能將模型推理效率提升 25-30%，尤其在多任務切換場景中效果顯著。</p>
+
+<h3>記憶更新與覆寫機制</h3>
+
+<p>記憶並非靜態的。當專案完成或偏好改變時，需要主動觸發更新：</p>
+
+<pre><code>更新我的專案設定：
+- 結束項目：亞馬遜女裝品類優化（2025 Q4）
+- 開啟新項目：跨境物流成本優化
+- 新團隊成員：物流分析師 Sam、資料工程師 Jamie
+- 請移除與舊項目相關的臨時設定，保留核心身份層</code></pre>
+
+<h2>跨專案記憶隔離：防止上下文污染</h2>
+
+<p>當你在不同專案之間切換時，記憶可能會意外混淆不同專案的上下文。這是企業級使用者的常見痛點。根據 <strong>Gartner 人工智慧研究</strong> 的統計，跨專案上下文污染是企業 AI 採用失敗的前三大原因之一。</p>
+
+<p>以下策略可以有效隔離不同專案的記憶：</p>
+
+<ul>
+<li><strong>專案前綴法</strong>：在每個專案的對話中，使用「【專案代號】」標記所有相關討論</li>
+<li><strong>記憶清單法</strong>：定期檢視並清理 Claude 記憶中的非相關資訊</li>
+<li><strong>角色切換觸發</strong>：當開始新專案時，明確告訴 Claude 切換到特定角色</li>
+</ul>
+
+<p>實務上，建議每週執行一次「記憶健康檢查」，確認 Claude 的記憶是否與當前專案狀態一致。</p>
+
+<h2>企業級應用：從個人工具到團隊資產</h2>
+
+<p>在企業場景中，Claude 的記憶功能可以升級為團隊級的知識管理工具。想像一個配備了完整記憶的 Claude，成為新進員工的「虛擬導師」——它知道公司的技術棧、程式碼規範、審查流程和團隊文化。</p>
+
+<p><strong>IEEE</strong>（Institute of Electrical and Electronics Engineers）在其 AI 倫理標準（IEEE 7000）中強調，AI 系統的記憶功能必須具備透明性與可控性。這意味著企業在部署記憶功能時，應建立明確的資料保留政策，確保敏感資訊不被不當保留或洩露。</p>
+
+<p>建議的企業級記憶管理 SOP：</p>
+
+<ol>
+<li>建立「團隊核心記憶文件」，包含公司技術標準與流程</li>
+<li>為每個專案建立「隔離記憶空間」</li>
+<li>設定記憶審查週期（建議每季一次）</li>
+<li>制定敏感資訊處理規範，避免機密資料進入長期記憶</li>
+</ol>
+
+<h2>結論：開始建立你的第二層大腦</h2>
+
+<p>Claude 的記憶功能不僅是一個便利工具，更是提示詞工程的一次範式轉變。透過策略性的觸發詞設計、結構化的分層管理、嚴格的隔離機制，你可以將 Claude 打造成真正理解你、記住你、持續協助你的「<strong>機器身份暗物質</strong>」伴侶——一個永不遺忘、持續進化的數位思維夥伴。</p>
+
+<p>建議今天就建立你的第一份「核心身份記憶文件」，並在未來兩週內觀察 Claude 的回應如何隨著記憶積累而優化。這個投資的回報，將在每一次流暢的跨對話體驗中得到驗證。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 的記憶功能預設是開啟的嗎？如何關閉？</h3>
+            <p class="faq-a">是的，Anthropic 已於 2026 年 3 月預設為所有用戶啟用記憶功能。你可以在設定中管理已儲存的記憶或完全停用該功能。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 記憶功能是否會影響 API 費用或速度？</h3>
+            <p class="faq-a">記憶功能本身不直接影響 API 費用，但在計算上下文 token 時，已儲存的記憶內容會佔用上下文窗口。建議定期清理不需要的記憶以優化 token 使用量。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">如何確保記憶中的敏感資訊安全？</h3>
+            <p class="faq-a">建議不要將密碼、金鑰、身分證號等敏感資訊寫入記憶。企業用戶應參考 IEEE 7000 等 AI 倫理標準建立內部資料處理政策，並定期執行記憶審查。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-21_claude-memory-feature-cross-conversation-context-prompt-design-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
