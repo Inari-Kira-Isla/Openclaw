@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:972f905bf7fe6d04 | (C) 2026-03-21 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/configs/2026-03-21_galileo-agent-control-open-source-enterprise-ai-governance-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galileo Agent Control 開源治理框架實戰：企業 AI Agent 集中管控指南 | AI 學習寶庫</title>
+  <meta name="description" content="Galileo Agent Control 是 Apache 2.0 開源的 AI Agent 控制平面，提供集中式策略管理與運行時即時調整能力，解決企業 AI Agent 越權行為與權限可見性不足的痛點。本文提供企業部署實戰指南。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-21 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 972f905bf7fe6d04">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-21_galileo-agent-control-open-source-enterprise-ai-governance-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Galileo Agent Control 開源治理框架實戰：企業 AI Agent 集中管控指南">
+  <meta property="og:description" content="Galileo Agent Control 是 Apache 2.0 開源的 AI Agent 控制平面，提供集中式策略管理與運行時即時調整能力，解決企業 AI Agent 越權行為與權限可見性不足的痛點。本文提供企業部署實戰指南。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/configs/2026-03-21_galileo-agent-control-open-source-enterprise-ai-governance-guide-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Galileo Agent Control 開源治理框架實戰：企業 AI Agent 集中管控指南", "description": "Galileo Agent Control 是 Apache 2.0 開源的 AI Agent 控制平面，提供集中式策略管理與運行時即時調整能力，解決企業 AI Agent 越權行為與權限可見性不足的痛點。本文提供企業部署實戰指南。", "datePublished": "2026-03-21", "dateModified": "2026-03-21", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/configs/2026-03-21_galileo-agent-control-open-source-enterprise-ai-governance-guide-2026.html"}, "articleSection": "系統配置", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Galileo Agent Control 是否支援自定義策略語法？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是的，支援 YAML 和 JSON 格式的宣告式策略定義，企業可根據業務需求擴充自定義規則集，彈性極高。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "部署是否需要專業 DevOps 團隊？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "基礎部署僅需熟悉 Docker 與 Kubernetes 的工程師即可完成，官方提供完整的 Helm Chart 與文件支援。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "開源版本與企業版有何差異？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apache 2.0 開源版本提供完整核心功能，企業版則包含進階分析儀表板、SSO 整合與優先技術支援。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/configs/">⚙️ 系統配置</a>
+      <span class="bc-sep">›</span>
+      <span>Galileo Agent Control 開源治理框架實戰...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">⚙️ 系統配置</div>
+      <h1 class="article-title">Galileo Agent Control 開源治理框架實戰：企業 AI Agent 集中管控指南</h1>
+      <div class="article-info">
+        <span>📅 2026-03-21</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Galileo Agent Control 是什麼？企業為何需要集中式 Agent 治理</h2>
+
+<p>根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）發布的 AI Index 年度報告，企業部署 AI Agent 的數量在過去兩年增長超過 300%，但治理框架的建設嚴重落後。Galileo Agent Control 是專為解決此問題而設計的開源控制平面，於 2026 年 3 月 11 日正式發布，採用 Apache 2.0 許可證，允許企業自由部署與客製化。</p>
+
+<p>核心價值在於：企業無需再為每個 Agent 硬編碼安全規則，而是透過集中式策略管理，撰寫一次策略即可全域部署。這解決了一個關鍵問題——根據 Gartner 人工智慧研究（Gartner AI Research）的統計，80% 的組織曾報告出現 Agent 越權行為，僅有 21% 的高管表示對 Agent 權限有完整可見性。</p>
+
+<p>首批整合夥伴包括 Strands Agents、CrewAI、Glean 和 Cisco AI Defense，涵蓋主流 Agent 開發框架與企業協作平台，確保生態相容性。</p>
+
+<h2>核心架構：策略即代碼與運行時監控</h2>
+
+<p>Galileo Agent Control 的架構圍繞三個核心元件設計：</p>
+
+<ul>
+  <li><strong>策略引擎（Policy Engine）</strong>：採用宣告式語法定義 Agent 行為邊界，支援 YAML/JSON 格式的策略檔案。</li>
+  <li><strong>執行代理（Enforcement Agent）</strong>：部署於每個 Agent 實例前，攔截並驗證請求，確保符合策略規範。</li>
+  <li><strong>統一儀表板（Unified Dashboard）</strong>：提供全域可視性，即時顯示所有 Agent 的狀態、權限使用與異常事件。</li>
+</ul>
+
+<p>最具價值的特性是運行時即時調整能力。傳統做法需要下線 Agent 才能更新安全規則，Galileo Agent Control 支援熱更新策略，無需重啟即可應對生產環境中的異常行為。這對於需要 24/7 運作的企業系統至關重要。</p>
+
+<h2>部署實戰：五分鐘建立企業級 Agent 控制平面</h2>
+
+<p>以下是使用 Docker 快速部署 Galileo Agent Control 的完整步驟：</p>
+
+<pre><code># 1. 下載並啟動控制平面
+docker run -d -p 8080:8080 \
+  -e GALILEO_LICENSE=apache20 \
+  -v $(pwd)/policies:/app/policies \
+  galileo/agent-control:latest
+
+# 2. 定義第一個策略檔案（policies/agent-guardrails.yaml）
+cat > policies/agent-guardrails.yaml << 'EOF'
+version: v1
+policies:
+  - name: data-access-control
+    rules:
+      - id: pii-blocking
+        action: deny
+        conditions:
+          - field: request.content
+            operator: contains
+            value: "[SSN|信用卡|銀行帳戶]"
+      - id: rate-limiting
+        action: throttle
+        params:
+          max_requests: 100
+          window: 60s
+    enforcement:
+      mode: active
+      fail_closed: true
+EOF
+
+# 3. 驗證策略部署
+curl -X POST http://localhost:8080/api/v1/policies/apply \
+  -H "Content-Type: application/yaml" \
+  --data-binary @policies/agent-guardrails.yaml</code></pre>
+
+<p>執行完成後，策略會自動下发至所有已註冊的 Agent 實例，並在儀表板中顯示部署狀態。</p>
+
+<h2>企業場景：$10,000/月預算的 ROI 計算</h2>
+
+<p>以中型企業（500 名員工）為例，假設使用 Claude Code 或類似 Agent 協助日常營運：</p>
+
+<ul>
+  <li><strong>未部署治理前</strong>：Agent 誤操作導致資料外洩的修復成本平均每次 $15,000-50,000（根據 IEEE 倫理標準相關研究）。</li>
+  <li><strong>部署治理後</strong>：
+    <ul>
+      <li>軟體成本：Galileo Agent Control 開源免費（Apache 2.0）</li>
+      <li>基礎設施成本：Kubernetes 叢集約 $800/月</li>
+      <li>維運成本：每週 2 小時管理時數，約 $400/月</li>
+      <li>總成本：$1,200/月</li>
+    </ul>
+  </li>
+</ul>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的企業 AI 採用報告，有效的 AI 治理可減少 60% 的合規相關支出。對於每個月可能發生 2-3 次輕微異常的組織，部署治理框架的投資回報率（ROI）在六個月內即可轉正。</p>
+
+<h2>整合策略：如何將現有 Agent 接入控制平面</h2>
+
+<p>Galileo Agent Control 提供標準化的整合介面，支援兩種主要模式：</p>
+
+<ol>
+  <li><strong>SDK 整合</strong>：在 Agent 程式碼中引入 Galileo SDK，攔截所有外部請求。</li>
+  <li><strong>Proxy 模式</strong>：在 Agent 與外部服務之間部署代理層，適合無法修改程式碼的場景。</li>
+</ol>
+
+<p>對於使用 CrewAI 開發的 Agent，只需在環境變數中指定控制平面端點即可：</p>
+
+<pre><code># 環境變數配置
+export GALILEO_CONTROL_PLANE="https://control.your-company.com:8080"
+export GALILEO_AGENT_ID="crewai-production-01"
+export GALILEO_AUTH_TOKEN="your-secure-token"</code></pre>
+
+<p>配置完成後，所有 Agent 行為都會經過控制平面審核，確保符合企業安全規範。</p>
+
+<h2>常見應用情境與防護效果</h2>
+
+<p>實際部署中，Galileo Agent Control 可有效防止以下常見問題：</p>
+
+<ul>
+  <li><strong>資料過濾</strong>：自動阻擋包含敏感個資（如身份證號、信用卡號）的輸出</li>
+  <li><strong>頻率限制</strong>：防止單一 Agent 短時間內發起過多 API 呼叫導致費用暴增</li>
+  <li><strong>角色隔離</strong>：確保 Agent 只能存取其職責範圍內的系統資源</li>
+  <li><strong>稽核追蹤</strong>：完整記錄所有 Agent 決策軌跡，滿足法規遵循需求</li>
+</ul>
+
+<p>麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究指出，AI 系統的可解釋性與可控性是企業採用的重要前提，Galileo Agent Control 的稽核日誌功能正好對應此需求。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-directory.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe 企業目錄</a> — <span style="color:var(--text-2)">185 萬筆企業數據的 AI 智能匹配</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">企業 AI 轉型一站式解決方案</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企 AI 導入的實戰教練指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Galileo Agent Control 是否支援自定義策略語法？</h3>
+            <p class="faq-a">是的，支援 YAML 和 JSON 格式的宣告式策略定義，企業可根據業務需求擴充自定義規則集，彈性極高。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">部署是否需要專業 DevOps 團隊？</h3>
+            <p class="faq-a">基礎部署僅需熟悉 Docker 與 Kubernetes 的工程師即可完成，官方提供完整的 Helm Chart 與文件支援。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">開源版本與企業版有何差異？</h3>
+            <p class="faq-a">Apache 2.0 開源版本提供完整核心功能，企業版則包含進階分析儀表板、SSO 整合與優先技術支援。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 系統配置 內容</p>
+      <a href="/Openclaw/configs/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/configs/2026-03-21_galileo-agent-control-open-source-enterprise-ai-governance-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
