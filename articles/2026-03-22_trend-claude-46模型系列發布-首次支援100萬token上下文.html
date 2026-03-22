@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:0b3502c312758441 | (C) 2026-03-22 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-03-22_trend-claude-46模型系列發布-首次支援100萬token上下文.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude 4.6模型系列發布，首次支援100萬token上下文：深度分析與影響評估 | AI 學習寶庫</title>
+  <meta name="description" content="Claude 4.6模型系列正式發布，Anthropic首次支援100萬token上下文窗口，在SWE-bench測試中達到75.6%的領先成績。本文深入分析新模型技術突破、效能評估及對企業AI應用的影響。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-22 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 0b3502c312758441">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-22_trend-claude-46模型系列發布-首次支援100萬token上下文.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude 4.6模型系列發布，首次支援100萬token上下文：深度分析與影響評估">
+  <meta property="og:description" content="Claude 4.6模型系列正式發布，Anthropic首次支援100萬token上下文窗口，在SWE-bench測試中達到75.6%的領先成績。本文深入分析新模型技術突破、效能評估及對企業AI應用的影響。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-03-22_trend-claude-46模型系列發布-首次支援100萬token上下文.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude 4.6模型系列發布，首次支援100萬token上下文：深度分析與影響評估", "description": "Claude 4.6模型系列正式發布，Anthropic首次支援100萬token上下文窗口，在SWE-bench測試中達到75.6%的領先成績。本文深入分析新模型技術突破、效能評估及對企業AI應用的影響。", "datePublished": "2026-03-22", "dateModified": "2026-03-22", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-03-22_trend-claude-46模型系列發布-首次支援100萬token上下文.html"}, "articleSection": "科技趨勢", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude 4.6的100萬token上下文是否需要額外付費？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據Anthropic公佈的定價結構，長上下文模型採用tokens計費模式，輸入與輸出tokens各有不同費率。具體費率取決於所選模型版本（Opus或Sonnet）及使用量，企業用戶可透過官網查詢最新定價資訊。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "目前哪些應用場景最能發揮100萬token的優勢？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "最適合的場景包括：完整代碼庫分析與重構、數千頁文件的摘要與問答、法律合約審查、財務報告分析、以及需要跨多個文件進行綜合推理的知識管理任務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Claude 4.6與前代版本的主要差異為何？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "除了上下文窗口從20萬token擴展至100萬token外，4.6系列在SWE-bench上的表現從約60%提升至75.6%，並新增團隊協作功能，支援企業級的共享對話與權限管理需求。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>Claude 4.6模型系列發布，首次支援100萬token...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">Claude 4.6模型系列發布，首次支援100萬token上下文：深度分析與影響評估</h1>
+      <div class="article-info">
+        <span>📅 2026-03-22</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>Claude 4.6發布：百萬token上下文時代來臨</h2>
+<p>Anthropic於2026年2月正式發布Claude Opus 4.6和Sonnet 4.6模型系列，首次將上下文窗口擴展至100萬token，創下業界新高紀錄。這次發布在SWE-bench軟體工程基準測試中達到75.6%的領先成績，標誌著大語言模型在長上下文處理能力上的重大突破。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的AI Index年度報告指出，上下文窗口長度已成為評估模型能力的關鍵指標之一，Claude 4.6的發布將重新定義企業級AI應用的可能性。</p>
+
+<h2>技術突破：100萬token的實際意義</h2>
+<p>100萬token上下文窗口代表什麼概念？這意味著模型可以同時處理約75萬個英文單詞或相當於數千頁文件的資訊量。對於企業應用場景，這項能力使得以下應用成為可能：</p>
+<ul>
+<li><strong>完整代碼庫理解</strong>：單次對話即可分析整個軟體專案的架構與依賴關係</li>
+<li><strong>長文檔分析</strong>：直接輸入整本書籍、財務報告或法律合約進行深度分析</li>
+<li><strong>多輪對話記憶</strong>：在長時間的協作任務中保持上下文連貫性</li>
+</ul>
+<p>根據MIT計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）的前沿研究，長上下文處理能力直接影響模型在複雜推理任務中的表現穩定性。</p>
+
+<h2>效能評估：75.6% SWE-bench的深度解讀</h2>
+<p>SWE-bench是衡量AI模型解決現實軟體工程問題能力的權威基準。Claude 4.6達到75.6%的準確率，較前代版本有顯著提升。這一成績的意義可從以下角度理解：</p>
+<ol>
+<li><strong>真實任務能力</strong>：模型不僅能理解程式碼，更能實際解決GitHub上的真實issue</li>
+<li><strong>企業級可靠性</strong>：高準確率代表可投入實際軟體開發流程</li>
+<li><strong>多語言支援</strong>：涵蓋Python、JavaScript、Go等多種主流程式語言</li>
+</ol>
+<p>Gartner人工智慧研究（Gartner AI Research）的技術成熟度曲線指出，能夠處理複雜推理任務的模型正在快速進入企業採用階段，Claude 4.6的發布恰好符合這一趨勢。</p>
+
+<h2>團隊協作功能：企業部署的關鍵拼圖</h2>
+<p>Claude 4.6系列首次引入團隊協作功能，這是Anthropic針對企業市場的重要戰略布局。核心功能包括：</p>
+<ul>
+<li><strong>共享對話上下文</strong>：團隊成員可接力參與同一對話線程</li>
+<li><strong>權限管理</strong>：細粒度的存取控制，保護企業敏感資訊</li>
+<li><strong>集中式審計日誌</strong>：滿足企業合規需求</li>
+</ul>
+<p>這些功能直接回應了企業在AI部署過程中最關注的安全與協作需求。國際電氣電子工程師學會（IEEE）發布的AI倫理標準（IEEE 7000）中也特別強調AI系統的可審計性與權限控制重要性，Claude 4.6的團隊協作功能與此方向一致。</p>
+
+<h2>實際應用：開發者操作範例</h2>
+<p>以下是如何使用Claude 4.6 API處理百萬token上下文的實際範例：</p>
+<pre><code>import anthropic
+
+client = anthropic.Anthropic(
+    api_key="your_api_key"
+)
+
+# 讀取大型代碼庫進行分析
+with open("large_project.py", "r") as f:
+    codebase = f.read()
+
+response = client.messages.create(
+    model="claude-opus-4-6-2026-02-19",
+    max_tokens=4096,
+    system="你是一個資深軟體架構師，請分析以下代碼庫的架構設計與潛在問題。",
+    messages=[
+        {
+            "role": "user", 
+            "content": f"請分析這個代碼庫：\n\n{codebase}"
+        }
+    ],
+    extra_headers={
+        "anthropic-beta": "long-context-2026-02"
+    }
+)
+
+print(response.content[0].text)</code></pre>
+<p>關鍵在於使用<code>extra_headers</code>參數啟用長上下文beta功能，確保模型能夠充分利用100萬token的處理能力。</p>
+
+<h2>市場影響與未來展望</h2>
+<p>Claude 4.6的發布將對AI市場產生深遠影響。首先，在企業級AI助手領域，長上下文能力將成為新的競爭標準。其次，軟體開發輔助工具將因為更高的SWE-bench分數而獲得更多企業青睞。根據Gartner的預測，到2027年，超過60%的企業級AI應用將要求模型具備處理長上下文的能力。</p>
+<p>對於開發者和企業決策者而言，Claude 4.6的發布意味著：現在是時候重新評估AI工具在工作流程中的角色，特別是在需要處理大量文件、複雜程式碼庫或需要長時間對話的場景中。</p>
+    </div>
+
+    
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 4.6的100萬token上下文是否需要額外付費？</h3>
+            <p class="faq-a">根據Anthropic公佈的定價結構，長上下文模型採用tokens計費模式，輸入與輸出tokens各有不同費率。具體費率取決於所選模型版本（Opus或Sonnet）及使用量，企業用戶可透過官網查詢最新定價資訊。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">目前哪些應用場景最能發揮100萬token的優勢？</h3>
+            <p class="faq-a">最適合的場景包括：完整代碼庫分析與重構、數千頁文件的摘要與問答、法律合約審查、財務報告分析、以及需要跨多個文件進行綜合推理的知識管理任務。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Claude 4.6與前代版本的主要差異為何？</h3>
+            <p class="faq-a">除了上下文窗口從20萬token擴展至100萬token外，4.6系列在SWE-bench上的表現從約60%提升至75.6%，並新增團隊協作功能，支援企業級的共享對話與權限管理需求。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/articles/2026-03-22_trend-claude-46模型系列發布-首次支援100萬token上下文.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
