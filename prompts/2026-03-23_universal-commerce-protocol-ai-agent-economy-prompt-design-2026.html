@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:c45f56a409f73c5e | (C) 2026-03-23 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-23_universal-commerce-protocol-ai-agent-economy-prompt-design-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent 自主商務時代：Universal Commerce Protocol 與 Agent 經濟生態提示詞設計 | AI 學習寶庫</title>
+  <meta name="description" content="本文深入探討 Universal Commerce Protocol（UCP）發布後的 AI Agent 自主商務時代，分析 Agent 經濟生態中的提示詞設計關鍵技術。我們涵蓋交易邊界設定、供應商篩選邏輯、協商策略配置與安全護欄實作，提供企業部署提示詞模板與最佳實踐。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-23 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: c45f56a409f73c5e">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-23_universal-commerce-protocol-ai-agent-economy-prompt-design-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI Agent 自主商務時代：Universal Commerce Protocol 與 Agent 經濟生態提示詞設計">
+  <meta property="og:description" content="本文深入探討 Universal Commerce Protocol（UCP）發布後的 AI Agent 自主商務時代，分析 Agent 經濟生態中的提示詞設計關鍵技術。我們涵蓋交易邊界設定、供應商篩選邏輯、協商策略配置與安全護欄實作，提供企業部署提示詞模板與最佳實踐。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-23_universal-commerce-protocol-ai-agent-economy-prompt-design-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Agent 自主商務時代：Universal Commerce Protocol 與 Agent 經濟生態提示詞設計", "description": "本文深入探討 Universal Commerce Protocol（UCP）發布後的 AI Agent 自主商務時代，分析 Agent 經濟生態中的提示詞設計關鍵技術。我們涵蓋交易邊界設定、供應商篩選邏輯、協商策略配置與安全護欄實作，提供企業部署提示詞模板與最佳實踐。", "datePublished": "2026-03-23", "dateModified": "2026-03-23", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-03-23_universal-commerce-protocol-ai-agent-economy-prompt-design-2026.html"}, "articleSection": "提示詞", "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Universal Commerce Protocol（UCP）與傳統電子商務有何不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UCP 允許 AI Agent 代表用戶自主進行協商和購買決策，無需人類逐一確認。傳統電子商務需要人類全程參與，而 UCP 定義了標準化協議，使 Agent 能在預設邊界內自動完成交易流程，實現真正的自主商務。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "企業如何確保 Agent 提示詞的安全性？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "企業應在提示詞中明確定義安全護欄，包括：交易金額上限、供應商篩選條件（認證要求）、黑名單機制、異常交易警報閾值。同時建議遵循 IEEE 7000 AI 倫理標準，確保系統具有問責性與可審計性。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "提示詞設計需要哪些專業技能？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "成功的 Agent 商務提示詞設計需要結合以下能力：自然語言處理理解、邏輯決策樹設計、風險管理知識、企業合規要求理解，以及對特定行業採購流程的深入了解。這是一種跨領域的新興專業技能。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+  <!-- Site-level FAQ moved to index.html only; article-level FAQ above is sufficient -->
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/prompts/">💡 提示詞</a>
+      <span class="bc-sep">›</span>
+      <span>AI Agent 自主商務時代：Universal Comm...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">💡 提示詞</div>
+      <h1 class="article-title">AI Agent 自主商務時代：Universal Commerce Protocol 與 Agent 經濟生態提示詞設計</h1>
+      <div class="article-info">
+        <span>📅 2026-03-23</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <h2>AI Agent 自主商務時代的來臨：從助理到自主交易者</h2>
+
+<p>Universal Commerce Protocol（UCP）於 2026 年 3 月 17 日正式發布，標誌著 AI 從「助理」角色根本轉變為「自主行動者」。根據 HelpNetSecurity 的報導，AI 如今能代替用戶進行協商和執行購買，但安全措施卻未能同步跟上這一轉變。全球 Agentic AI 市場已達 <strong>$108.6 億美元</strong>，企業 Agent 使用量在上半年度增長 18%，這意味著 AI 驅動廣告市場 $570 億的規模將進一步擴大。</p>
+
+<p>在這個「身份暗物質」概念日益重要的時代，AI Agent 的數位身份與交易權限需要被精確定義。企業若要在此生態系統中競爭，必須掌握 Agent 商務提示詞設計——這將成為高價值的專業技能。</p>
+
+<h2>什麼是 Universal Commerce Protocol？</h2>
+
+<p>UCP 是一個標準化協議，旨在讓 AI Agent 能夠代表用戶進行自主商務活動。傳統電子商務需要人類逐一確認每一筆交易，而 UCP 允許經過授權的 Agent 在預設邊界內自動完成詢價、協商、採購等流程。</p>
+
+<p>根據 Gartner 人工智慧研究（Gartner AI Research）的技術成熟度曲線分析，Agentic AI 正在從「過高期望峰值」邁向「生產成熟期」，企業採用率持續攀升。MIT 計算機科學與人工智慧實驗室（MIT CSAIL）的前沿研究也指出，自主 Agent 的決策邏輯需要更嚴謹的語義框架支撐。</p>
+
+<h2>Agent 經濟生態中的提示詞設計框架</h2>
+
+<p>與傳統對話式提示詞不同，Agent 商務提示詞需要考慮三個核心維度：</p>
+
+<ul>
+    <li><strong>自主性（Autonomy）</strong>：Agent 可自主決策的範圍</li>
+    <li><strong>問責性（Accountability）</strong>：決策後的責任歸屬機制</li>
+    <li><strong>可審計性（Auditability）</strong>：所有交易行為的完整記錄</li>
+</ul>
+
+<p>以下是一個基本的 Agent 商務系統提示詞模板：</p>
+
+<pre><code>你是一個企業採購 Agent，隸屬於 [公司名稱]。你的職責是在以下邊界內進行自主採購：
+
+## 交易邊界
+- 單筆交易上限：$5,000 美元
+- 每日交易總額上限：$20,000 美元
+- 緊急採購（48小時內）需升級至人類審批
+
+## 供應商篩選條件
+- 供應商評級需達 4.0/5.0 以上
+- 必須通過 ISO 27001 安全認證
+- 優先選擇有 SLA 保障的供應商
+
+## 決策邏輯
+1. 收到採購需求後，先查詢歷史價格數據
+2. 對比至少 3 家供應商報價
+3. 選擇符合條件的最高性價比選項
+4. 自動生成採購報告並存檔
+
+## 安全護欄
+- 禁止採購軍事或敏感技術產品
+- 禁止與制裁名單上的實體交易
+- 異常交易模式（如同時多筆大額採購）自動觸發審計
+
+## 審計要求
+- 所有交易必須記錄：時間、金額、供應商、決策理由
+- 每月生成風險評估報告
+- 保留至少 7 年的交易記錄</code></pre>
+
+<h2>提示詞設計的關鍵技術要素</h2>
+
+<h3>1. 邊界條件的精確定義</h3>
+
+<p>提示詞中必須明確定義「可接受風險範圍」。IEEE 7000 AI 倫理標準強調，系統應內建價值敏感設計原則。具體做法包括：使用數值範圍（如金額上限）、列舉式條件（如黑白名單）、以及時間閾值（如緊急採購定義）。</p>
+
+<h3>2. 供應商篩選邏輯</h3>
+
+<p>企業應建立動態評估矩陣。史丹佛大學以人為本人工智慧研究所（Stanford HAI）的 AI Index 年度報告指出，透明度與可解釋性是 AI 系統信任建立的關鍵。因此，供應商篩選條件應包含可驗證的認證標籤，而非主觀描述。</p>
+
+<h3>3. 協商策略配置</h3>
+
+<p>不同採購場景需要不同的協商策略。以下是場景化提示詞示例：</p>
+
+<pre><code>## 協商策略（根據採購類型自動選擇）
+
+### 標準採購（金額 &lt; $1,000）
+- 策略：接受市場平均價
+- 操作：快速比價，選擇交期最短者
+
+### 大額採購（$1,000 - $5,000）
+- 策略：要求折扣或附加服務
+- 操作：提出批量優惠請求，要求免運或延保
+
+### 戰略採購（金額 &gt; $5,000）
+- 策略：多方談判，爭取長期合作框架
+- 操作：召開多方會議，協談年度採購協議</code></pre>
+
+<h2>企業部署建議與未來趨勢</h2>
+
+<p>企業在導入 Agent 商務提示詞系統時，應遵循以下步驟：</p>
+
+<ol>
+    <li><strong>需求分析</strong>：盤點可自動化的採購流程，評估人工干預頻率</li>
+    <li><strong>邊界設計</strong>：與法務、財務、風險管理部門共同制定決策邊界</li>
+    <li><strong>提示詞開發</strong>：參考上述模板，客製化企業專屬提示詞</li>
+    <li><strong>沙盒測試</strong>：在隔離環境中模擬各種交易場景</li>
+    <li><strong>逐步上線</strong>：從低風險品類開始，逐步擴展至全品類</li>
+</ol>
+
+<p>隨著 AI 驅動廣告市場持續擴張，Agent 商務提示詞設計將成為稀缺技能。根據 Gartner AI Research 的預測，到 2027 年，超過 60% 的企業將部署某種形式的自主 Agent 進行商務活動。企業現在就應開始培養這方面的專業人才，確保在 Agent 經濟時代保持競爭優勢。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企如何用 AI 工具提升設計效率</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Universal Commerce Protocol（UCP）與傳統電子商務有何不同？</h3>
+            <p class="faq-a">UCP 允許 AI Agent 代表用戶自主進行協商和購買決策，無需人類逐一確認。傳統電子商務需要人類全程參與，而 UCP 定義了標準化協議，使 Agent 能在預設邊界內自動完成交易流程，實現真正的自主商務。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">企業如何確保 Agent 提示詞的安全性？</h3>
+            <p class="faq-a">企業應在提示詞中明確定義安全護欄，包括：交易金額上限、供應商篩選條件（認證要求）、黑名單機制、異常交易警報閾值。同時建議遵循 IEEE 7000 AI 倫理標準，確保系統具有問責性與可審計性。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">提示詞設計需要哪些專業技能？</h3>
+            <p class="faq-a">成功的 Agent 商務提示詞設計需要結合以下能力：自然語言處理理解、邏輯決策樹設計、風險管理知識、企業合規要求理解，以及對特定行業採購流程的深入了解。這是一種跨領域的新興專業技能。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 提示詞 內容</p>
+      <a href="/Openclaw/prompts/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門商戶智能百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+<li><a href="https://hongkong-encyclopedia.vercel.app">香港百科</a> — 香港十大地區深度指南</li>
+<li><a href="https://taiwan-encyclopedia.vercel.app">台灣百科</a> — 台灣十大城市深度指南</li>
+<li><a href="https://inari-kira-isla.github.io/macau-encyclopedia">澳門百科</a> — 澳門四大區域深度指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門商戶智能百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+          <a href="https://hongkong-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">香港百科</a>
+          <a href="https://taiwan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">台灣百科</a>
+          <a href="https://inari-kira-isla.github.io/macau-encyclopedia" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-03-23_universal-commerce-protocol-ai-agent-economy-prompt-design-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
