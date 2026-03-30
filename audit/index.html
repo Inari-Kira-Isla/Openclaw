@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 審計看板 — CloudPipe</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e0e0e0;padding:12px}
+  .container{max-width:1000px;margin:0 auto}
+  h1{color:#d4a574;font-size:1.4em;margin-bottom:4px}
+  h2{color:#e0e0e0;margin:20px 0 8px;font-size:1em;border-bottom:1px solid #2a2d37;padding-bottom:6px}
+  .sub{color:#888;font-size:0.8em;margin-bottom:16px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:16px}
+  .stat-card{background:#1a1d27;border:1px solid #2a2d37;border-radius:8px;padding:12px;text-align:center}
+  .stat-num{font-size:1.6em;font-weight:700;color:#d4a574}
+  .stat-label{font-size:0.7em;color:#888;margin-top:2px}
+  .bar{display:flex;height:20px;border-radius:5px;overflow:hidden;margin:8px 0 16px}
+  .bar-high{background:#16a34a}.bar-medium{background:#d97706}.bar-low{background:#dc2626}
+  table{width:100%;border-collapse:collapse;font-size:0.75em;margin-bottom:16px}
+  th{background:#1a1d27;color:#d4a574;padding:8px 6px;text-align:left;position:sticky;top:0}
+  td{padding:6px;border-bottom:1px solid #1a1d2788;vertical-align:top}
+  tr:hover{background:#1a1d2766}
+  code{background:#2a2d37;padding:1px 4px;border-radius:3px;font-size:0.85em}
+  .badge{padding:2px 6px;border-radius:8px;font-size:0.7em;font-weight:600}
+  .conf-high .badge,.badge.conf-high{background:#16a34a33;color:#4ade80}
+  .conf-medium .badge,.badge.conf-medium{background:#d9770633;color:#fbbf24}
+  .conf-low .badge,.badge.conf-low{background:#dc262633;color:#f87171}
+  .reasoning{max-width:250px;font-size:0.75em;color:#aaa;word-break:break-all}
+  .alert{background:#dc262620;border:1px solid #dc2626;border-radius:8px;padding:12px;margin-bottom:16px}
+  .alert h3{color:#f87171;font-size:0.95em}
+  .legend{display:flex;gap:12px;font-size:0.75em;color:#888;margin:4px 0 12px}
+  .legend span{display:flex;align-items:center;gap:4px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .dot-h{background:#16a34a}.dot-m{background:#d97706}.dot-l{background:#dc2626}
+  @media(max-width:600px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    table{font-size:0.65em}
+    .reasoning{max-width:150px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>AI 審計看板</h1>
+  <p class="sub">CloudPipe 自動化決策透明化 | 更新: 2026-03-31 04:19</p>
+
+  <div class="stats">
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">總決策</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#4ade80">1</div><div class="stat-label">Auto (High)</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#fbbf24">1</div><div class="stat-label">Notify (Med)</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#f87171">1</div><div class="stat-label">Pending (Low)</div></div>
+  </div>
+
+  <div class="bar">
+    <div class="bar-high" style="width:33%"></div>
+    <div class="bar-medium" style="width:33%"></div>
+    <div class="bar-low" style="width:33%"></div>
+  </div>
+  <div class="legend">
+    <span><span class="dot dot-h"></span>High: 自動執行</span>
+    <span><span class="dot dot-m"></span>Medium: 執行+通知</span>
+    <span><span class="dot dot-l"></span>Low: 暫停待審</span>
+  </div>
+
+  <div class="alert"><h3>1 項待人工審核</h3></div>
+
+  <h2>待審核 (1)</h2><table><tr><th>ID</th><th>Target</th><th>Score</th><th>Reasoning</th><th>Status</th></tr><tr>
+        <td>3</td><td><code>macau-heritage-walk</code></td>
+        <td>12.0</td><td class="reasoning"><b>geo_match</b>: 商戶在澳門半島, insight 含澳門<br><b>category_match</b>: renovation → attractions? (極弱匹配)<br><b>risk</b>: 裝修公司不應連結到遺產步行文章</td>
+        <td><span class="badge conf-low">待審核</span></td>
+    </tr></table>
+
+  <h2>操作分佈</h2>
+  <div class="stats"><div class="stat-card"><div class="stat-num">3</div><div class="stat-label">relink_test</div></div></div>
+
+  <h2>批次摘要</h2>
+  <table>
+    <tr><th>時間</th><th>操作</th><th>總數</th><th>Auto</th><th>Notify</th><th>Hold</th><th>Avg</th></tr>
+    <tr>
+        <td>2026-03-30 19:58</td><td>relink_test</td><td>3</td>
+        <td>1</td><td>1</td><td>1</td>
+        <td>40.7</td>
+    </tr>
+  </table>
+
+  <h2>最近決策 (50)</h2>
+  <table>
+    <tr><th>時間</th><th>Action</th><th>Target</th><th>Score</th><th>Conf</th><th>Decision</th><th>Reasoning</th></tr>
+    <tr class="conf-high">
+        <td>2026-03-30 19:58</td><td>relink_test</td>
+        <td><code>macau-dining-seafood-guide</code></td>
+        <td>75.0</td>
+        <td><span class="badge conf-high">high</span></td>
+        <td>auto_execute</td>
+        <td class="reasoning">{"geo_match": "商戶在路氹城, insight 標題含路氹海鮮", "category_match": "商戶分類=seafood, insight 含海鮮", "word_count_</td>
+    </tr><tr class="conf-medium">
+        <td>2026-03-30 19:58</td><td>relink_test</td>
+        <td><code>macau-shopping-guide</code></td>
+        <td>35.0</td>
+        <td><span class="badge conf-medium">medium</span></td>
+        <td>notify</td>
+        <td class="reasoning">{"geo_match": "商戶在澳門半島, insight 含澳門", "category_match": "商戶分類=drugstore → remap shopping (弱匹配)", "ri</td>
+    </tr><tr class="conf-low">
+        <td>2026-03-30 19:58</td><td>relink_test</td>
+        <td><code>macau-heritage-walk</code></td>
+        <td>12.0</td>
+        <td><span class="badge conf-low">low</span></td>
+        <td>hold_for_review</td>
+        <td class="reasoning">{"geo_match": "商戶在澳門半島, insight 含澳門", "category_match": "renovation → attractions? (極弱匹配)", "risk": </td>
+    </tr>
+  </table>
+
+  <p style="text-align:center;color:#555;margin-top:30px;font-size:0.7em">
+    CloudPipe AI Audit Dashboard | 每小時自動更新 | CC BY 4.0
+  </p>
+</div>
+</body>
+</html>
