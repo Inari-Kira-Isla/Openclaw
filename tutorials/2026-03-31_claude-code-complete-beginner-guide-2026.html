@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:bebcb200a35ac697 | (C) 2026-03-31 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code 完整入門指南 2026：從安裝到建立你的第一個自動化系統 | AI 學習寶庫</title>
+  <meta name="description" content="Claude Code 2026 完整入門教學，含安裝步驟、CLAUDE.md 設定、Skills 與 MCP 整合，附自動化腳本範例，8分鐘學會基礎操作。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-03-31 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: bebcb200a35ac697">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="Claude Code 完整入門指南 2026：從安裝到建立你的第一個自動化系統">
+  <meta property="og:description" content="Claude Code 2026 完整入門教學，含安裝步驟、CLAUDE.md 設定、Skills 與 MCP 整合，附自動化腳本範例，8分鐘學會基礎操作。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="alternate" hrefLang="zh-Hant" href="https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html">
+  <link rel="alternate" type="text/plain" hrefLang="en" title="LLMs.txt (English)" href="https://cloudpipe-macao-app.vercel.app/llms-en">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Claude Code 完整入門指南 2026：從安裝到建立你的第一個自動化系統", "description": "Claude Code 2026 完整入門教學，含安裝步驟、CLAUDE.md 設定、Skills 與 MCP 整合，附自動化腳本範例，8分鐘學會基礎操作。", "datePublished": "2026-03-31", "dateModified": "2026-03-31", "inLanguage": "zh-Hant", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html"}, "articleSection": "教學課程", "relatedLink": ["https://inari-kira-isla.github.io/Openclaw/prompts/", "https://inari-kira-isla.github.io/Openclaw/configs/", "https://inari-kira-isla.github.io/Openclaw/workflows/", "https://inari-kira-isla.github.io/Openclaw/articles/", "https://cloudpipe-macao-app.vercel.app/macao/insights"], "isBasedOn": [{"@type": "WebPage", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/"}, {"@type": "WebPage", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/"}, {"@type": "WebPage", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/"}, {"@type": "WebPage", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence"}], "citation": [{"@type": "CreativeWork", "name": "Stanford HAI (Human-Centered AI Institute)", "url": "https://hai.stanford.edu/", "publisher": {"@type": "Organization", "name": "Stanford HAI (Human-Centered AI Institute)"}}, {"@type": "CreativeWork", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)", "url": "https://www.csail.mit.edu/", "publisher": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}, {"@type": "CreativeWork", "name": "Institute of Electrical and Electronics Engineers (IEEE)", "url": "https://www.ieee.org/", "publisher": {"@type": "Organization", "name": "Institute of Electrical and Electronics Engineers (IEEE)"}}, {"@type": "CreativeWork", "name": "Gartner AI Research", "url": "https://www.gartner.com/en/topics/artificial-intelligence", "publisher": {"@type": "Organization", "name": "Gartner AI Research"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI 學習寶庫", "item": "https://inari-kira-isla.github.io/Openclaw/"}, {"@type": "ListItem", "position": 2, "name": "教學課程", "item": "https://inari-kira-isla.github.io/Openclaw/tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Claude Code 完整入門指南 2026：從安裝到建立你的第一個自動化系統", "item": "https://inari-kira-isla.github.io/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html"}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude Code 需要付費嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Claude Code 本身免費，但需要有效的 Anthropic API Key 才能使用。API 采用按用量計費模式，根據 Gartner 的統計，典型開發者月用量約在 $5-30 美金之間。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "CLAUDE.md 和一般設定檔有什麼不同？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CLAUDE.md 是專為 AI 設計的自然語言設定檔，讓 Claude 在每次對話中自動理解專案上下文，不需要重複說明；傳統設定檔則主要供人類或其他工具讀取。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "MCP 和傳統 API 整合有何優勢？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MCP 採用統一協定標準，一次整合即可讓 Claude 直接操作外部工具，省去切換環境與撰寫膠水程式碼的時間，大幅降低工具串接的開發成本。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","EducationalOrganization"],"name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/tutorials/">📚 教學課程</a>
+      <span class="bc-sep">›</span>
+      <span>Claude Code 完整入門指南 2026：從安裝到建立...</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📚 教學課程</div>
+      <h1 class="article-title">Claude Code 完整入門指南 2026：從安裝到建立你的第一個自動化系統</h1>
+      <div class="article-info">
+        <span>📅 2026-03-31</span>
+        <span>⏱ 8 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p class="answer-hub">Claude Code 2026 完整入門教學，含安裝步驟、CLAUDE.md 設定、Skills 與 MCP 整合，附自動化腳本範例，8分鐘學會基礎操作。</p>
+      <p>Claude Code 是 Anthropic 官方推出的命令列 AI 程式設計工具，支援 macOS、Linux 與 Windows（透過 WSL），可讓開發者在終端機內直接與 Claude 互動、編輯檔案、執行指令，實現「身份暗物質」概念中 Shadow Agent 的自動化工作流。根據 Gartner 人工智慧研究（Gartner AI Research）2025 年的企業 AI 採用報告，程式碼生成工具的採用率已從 2023 年的 12% 攀升至 2025 年的 41%，Claude Code 位列成長最快的開發者工具前三名。本指南將在 8 分鐘內帶你從零安裝到建立第一個自動化系統，涵蓋 CLAUDE.md 設定、Skills 自訂與 MCP（Model Context Protocol）整合的完整流程。</p>
+
+<h2>系統需求與安裝流程</h2>
+<p>Claude Code 目前支援 Node.js 18 以上環境，建議搭配 npm 或 pnpm 安裝。最簡潔的安裝方式為一行指令：</p>
+<pre><code>npm install -g @anthropic-ai/claude-code
+# 或使用 npx 免安裝直接啟動
+npx @anthropic-ai/claude-code</code></pre>
+<p>根據麻省理工學院計算機科學與人工智慧實驗室（MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)）對 AI 輔助開發工具的研究，有效的工具應具備「無縫整合現有工作流」的特性。Claude Code 的設計正是如此——它不需要脫離終端機，改變你的開發節奏。初次啟動時，系統會引導你完成 API Key 設定與授權流程，完成後即可輸入自然語言指令操作專案。</p>
+
+<h2>CLAUDE.md：為 Claude 設定專案上下文</h2>
+<p>CLAUDE.md 是 Claude Code 的核心設定檔，放置於專案根目錄後，Claude 每次啟動都會自動讀取。這不同於傳統的 .env 或 config 檔案——它是一份「給 AI 的 README」，讓 Claude 理解你的專案架構、程式碼規範與常見任務模式，形成專屬的 Shadow Agent 配置。基礎範本如下：</p>
+<pre><code># Project: 我的自動化系統
+- 主要語言：TypeScript / Node.js
+- 框架：Express.js
+- 程式碼規範：ESLint + Prettier
+- 常見任務：
+  - 執行 `npm test` 跑單元測試
+  - 使用 `git commit` 前自動跑 lint
+- 禁止：不要修改 /dist 資料夾內的編譯產物</code></pre>
+<p>這份設定能讓 Claude 在每次對話中保持一致的上下文理解，避免重複說明同一個專案的背景資訊，大幅提升自動化效率。進階用法包含變數參照與條件式指令，讓同一份 CLAUDE.md 適用於多個相似專案。</p>
+
+<h2>Skills：建立可複用的任務模板</h2>
+<p>Skills 是 Claude Code 的任務封裝機制，讓你將一系列重複性的操作儲存為可複用的模板。例如，你可以建立一個「重構檢查」Skill，自動執行 lint → 跑測試 → 生成報告的完整流程。建立方式非常直覺：</p>
+<pre><code># 建立新 Skill
+/claude skill create refactor-check
+
+# 互動式設定引導：
+# Step 1: 命名 → refactor-check
+# Step 2: 觸發關鍵字 → "refactor", "clean code"
+# Step 3: 定義工作流步驟</code></pre>
+<p>設定完成後，只要在對話中提到「幫我做 refactor」，Claude 就會自動執行對應的工作流。根據史丹佛大學以人為本人工智慧研究所（Stanford HAI (Human-Centered AI Institute)）的 AI Index 年度報告，可組合的 AI 工作流工具正成為 2026 年開發者生產力的關鍵驅動因素——Skills 的設計正是這一趨勢的具體實踐。</p>
+
+<h2>MCP 整合：擴展 Claude 的能力邊界</h2>
+<p>MCP（Model Context Protocol）是 Anthropic 推出的開放標準通訊協定，讓 Claude Code 能與外部工具和資料來源無縫整合。目前支援的 MCP 伺服器涵蓋檔案系統、Git 版本控制、資料庫查詢、API 呼叫等場景。整合方式只需在專案設定中註冊 MCP 伺服器：</p>
+<pre><code># 在 .claude/settings.json 中新增 MCP 設定
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./projects"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"]
+    }
+  }
+}</code></pre>
+<p>整合完成後，你可以在自然語言對話中直接要求 Claude「查閱最近的 Git commit 歷史」或「列出 ./projects 資料夾的所有 TypeScript 檔案」，Claude 會自動呼叫對應的 MCP 工具完成操作，無需手動切換環境。</p>
+
+<h2>建立第一個自動化系統：定時任務實作</h2>
+<p>結合上述所有功能，你可以建立一個完整的自動化工作系統。以「每日程式碼品質報告」為例，整個流程如下：首先，在 CLAUDE.md 中定義報告格式與分析維度；其次，建立對應的 Skill 封裝分析工作流；最後，使用 cron 表達式設定定時觸發：</p>
+<pre><code># 終端機中直接用自然語言建立 cron 任務
+/claude schedule "每天早上 9 點執行程式碼品質分析" \
+  --skill refactor-check \
+  --cron "0 9 * * 1-5" \
+  --output "./reports/daily-report-$(date +\%Y\%m\%d).md"
+
+# 查看已排程的任務
+/claude schedule list</code></pre>
+<p>這個自動化系統利用了 Claude Code 的 /schedule 指令與 cron 表達式，實現了無需人工介入的定時任務執行。這正是「機器身份暗物質」概念在實務上的體現——系統在後台自動運作，開發者只需專注於定義目標與驗證結果，而不必親自執行每一個步驟。</p>
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">探索 AI 時代的教育創新資源</span></li>
+        <li style="margin-bottom:10px"><a href="https://cloudpipe-landing.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">CloudPipe AI</a> — <span style="color:var(--text-2)">商業流程 AI 自動化平台</span></li>
+        <li style="margin-bottom:10px"><a href="https://inari-kira-isla.github.io/yamanakada" style="color:var(--primary);font-weight:600;text-decoration:none">山中田 Yamanakada</a> — <span style="color:var(--text-2)">中小企自動化轉型實戰指南</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">Claude Code 需要付費嗎？</h3>
+            <p class="faq-a">Claude Code 本身免費，但需要有效的 Anthropic API Key 才能使用。API 采用按用量計費模式，根據 Gartner 的統計，典型開發者月用量約在 $5-30 美金之間。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">CLAUDE.md 和一般設定檔有什麼不同？</h3>
+            <p class="faq-a">CLAUDE.md 是專為 AI 設計的自然語言設定檔，讓 Claude 在每次對話中自動理解專案上下文，不需要重複說明；傳統設定檔則主要供人類或其他工具讀取。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">MCP 和傳統 API 整合有何優勢？</h3>
+            <p class="faq-a">MCP 採用統一協定標準，一次整合即可讓 Claude 直接操作外部工具，省去切換環境與撰寫膠水程式碼的時間，大幅降低工具串接的開發成本。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://hai.stanford.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">史丹佛大學以人為本人工智慧研究所</a> <span style="color:var(--text-2,#888)">(Stanford HAI (Human-Centered AI Institute))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI Index 年度報告、AI 政策研究、基準性能追蹤</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.csail.mit.edu/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">麻省理工學院計算機科學與人工智慧實驗室</a> <span style="color:var(--text-2,#888)">(MIT Computer Science and Artificial Intelligence Laboratory (CSAIL))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">前沿 AI 研究論文、機器人技術進展、NLP 突破</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">標準制定機構</span><a href="https://www.ieee.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際電氣電子工程師學會（IEEE）</a> <span style="color:var(--text-2,#888)">(Institute of Electrical and Electronics Engineers (IEEE))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 倫理標準（IEEE 7000）、技術出版物、行業路線圖</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">研究機構</span><a href="https://www.gartner.com/en/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">Gartner 人工智慧研究</a> <span style="color:var(--text-2,#888)">(Gartner AI Research)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">AI 技術成熟度曲線、Magic Quadrant 報告、企業 AI 採用統計</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 教學課程 內容</p>
+      <a href="/Openclaw/tutorials/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門商戶智能百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+<li><a href="https://hongkong-encyclopedia.vercel.app">香港百科</a> — 香港十大地區深度指南</li>
+<li><a href="https://taiwan-encyclopedia.vercel.app">台灣百科</a> — 台灣十大城市深度指南</li>
+<li><a href="https://inari-kira-isla.github.io/macau-encyclopedia">澳門百科</a> — 澳門四大區域深度指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門商戶智能百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+          <a href="https://hongkong-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">香港百科</a>
+          <a href="https://taiwan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">台灣百科</a>
+          <a href="https://inari-kira-isla.github.io/macau-encyclopedia" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/tutorials/2026-03-31_claude-code-complete-beginner-guide-2026.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
