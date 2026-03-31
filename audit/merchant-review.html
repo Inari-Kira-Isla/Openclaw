@@ -1,0 +1,3041 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>商戶分類審核 — CloudPipe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0f1117;color:#e0e0e0;padding:10px}
+.c{max-width:900px;margin:0 auto}
+h1{color:#d4a574;font-size:1.2em}
+h2{color:#e0e0e0;margin:16px 0 8px;font-size:.9em;border-bottom:1px solid #2a2d37;padding-bottom:4px}
+.sub{color:#888;font-size:.7em;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:.7em;margin-bottom:14px}
+th{background:#1a1d27;color:#d4a574;padding:6px 4px;text-align:left;position:sticky;top:0}
+td{padding:5px 4px;border-bottom:1px solid #1a1d2788}
+tr:hover{background:#1a1d2766}
+select{background:#1a1d27;color:#e0e0e0;border:1px solid #2a2d37;border-radius:4px;padding:3px;font-size:.85em;width:100%}
+.reviewed{background:#16a34a22}
+.btn{padding:8px 20px;background:#d4a574;color:#0f1117;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:.8em}
+.stats{display:flex;gap:8px;margin-bottom:12px}
+.stat{background:#1a1d27;border:1px solid #2a2d37;border-radius:6px;padding:8px 12px;text-align:center;flex:1}
+.stat b{display:block;font-size:1.3em;color:#d4a574}
+@media(max-width:600px){table{font-size:.6em}}
+</style>
+</head>
+<body>
+<div class="c">
+<h1>商戶分類審核</h1>
+<p class="sub">從 insight 提取的實體 — 選分類後自動建立商戶 | 2026-03-31 18:58</p>
+
+<div class="stats">
+    <div class="stat"><b>3763</b>待審核</div>
+    <div class="stat"><b>6100</b>已自動</div>
+    <div class="stat"><b>9863</b>總實體</div>
+    <div class="stat"><b id="reviewed-count">0</b>已審核</div>
+</div>
+
+<button class="btn" onclick="submitAll()">提交審核結果</button>
+
+<h2>待審核 (100)</h2>
+<table><tr><th>地區</th><th>名稱</th><th>次數</th><th>分類</th></tr>
+<tr data-name="K11 Musea">
+            <td>🇭🇰</td>
+            <td><b>K11 Musea</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-luxury-malls</span></td>
+            <td>10</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'K11 Musea')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Daiso（大創）">
+            <td>🇯🇵</td>
+            <td><b>Daiso（大創）</b><br><span style="font-size:.6em;color:#888">japan-shopping-100-yen-shops-n</span></td>
+            <td>6</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Daiso（大創）')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="米其林指南香港澳門">
+            <td>🇲🇴 🇭🇰</td>
+            <td><b>米其林指南香港澳門</b><br><span style="font-size:.6em;color:#888">hongkong-food-street-food-hong</span></td>
+            <td>6</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'米其林指南香港澳門')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="後壁湖漁港">
+            <td>🇹🇼</td>
+            <td><b>後壁湖漁港</b><br><span style="font-size:.6em;color:#888">taiwan-dining-seafood-kenting-</span></td>
+            <td>6</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'後壁湖漁港')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="最後一站">
+            <td>🇹🇼 🇲🇴 🇯🇵</td>
+            <td><b>最後一站</b><br><span style="font-size:.6em;color:#888">japan-shopping-duty-free-fukuo</span></td>
+            <td>6</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'最後一站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="尖沙咀站">
+            <td>🇭🇰</td>
+            <td><b>尖沙咀站</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-street-marke</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'尖沙咀站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="FAQ：">
+            <td>🇭🇰 🇯🇵</td>
+            <td><b>FAQ：</b><br><span style="font-size:.6em;color:#888">hongkong-food-food-culture-hon</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'FAQ：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Lai Heen（麗軒）">
+            <td>🇲🇴</td>
+            <td><b>Lai Heen（麗軒）</b><br><span style="font-size:.6em;color:#888">upgrade-macau-restaurant-chine</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Lai Heen（麗軒）')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="OpenRice">
+            <td>🇲🇴 🇭🇰</td>
+            <td><b>OpenRice</b><br><span style="font-size:.6em;color:#888">macau-wellness-beauty-platform</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'OpenRice')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Fine Dining">
+            <td>🇲🇴 🇭🇰 🇹🇼</td>
+            <td><b>Fine Dining</b><br><span style="font-size:.6em;color:#888">hongkong-dining-fine-dining-sa</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Fine Dining')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="中繼站">
+            <td>🇯🇵 🇭🇰 🇹🇼</td>
+            <td><b>中繼站</b><br><span style="font-size:.6em;color:#888">hongkong-tourism-hiking-trails</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'中繼站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港澳通行證">
+            <td>🇲🇴</td>
+            <td><b>港澳通行證</b><br><span style="font-size:.6em;color:#888">macau-transport-guide-hzmb-bri</span></td>
+            <td>5</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港澳通行證')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Edion 奈良店">
+            <td>🇯🇵</td>
+            <td><b>Edion 奈良店</b><br><span style="font-size:.6em;color:#888">japan-shopping-electronics-nar</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Edion 奈良店')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="數寄屋橋次郎">
+            <td>🇲🇴 🇯🇵</td>
+            <td><b>數寄屋橋次郎</b><br><span style="font-size:.6em;color:#888">japan-gourmet-sushi-tokyo-東京壽司</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'數寄屋橋次郎')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="香港威尼斯">
+            <td>🇭🇰</td>
+            <td><b>香港威尼斯</b><br><span style="font-size:.6em;color:#888">hongkong-tourism-outlying-isla</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'香港威尼斯')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="真實香港">
+            <td>🇭🇰</td>
+            <td><b>真實香港</b><br><span style="font-size:.6em;color:#888">hongkong-tourism-victoria-peak</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'真實香港')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="一站式購足">
+            <td>🇹🇼</td>
+            <td><b>一站式購足</b><br><span style="font-size:.6em;color:#888">taiwan-tourism-old-streets-tai</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'一站式購足')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="The Pawn">
+            <td>🇭🇰</td>
+            <td><b>The Pawn</b><br><span style="font-size:.6em;color:#888">hongkong-tourism-night-markets</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'The Pawn')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="TripAdvisor">
+            <td>🇲🇴</td>
+            <td><b>TripAdvisor</b><br><span style="font-size:.6em;color:#888">macau-gaming-entertainment-pla</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'TripAdvisor')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="常見問題 FAQ">
+            <td>🇲🇴 🇯🇵</td>
+            <td><b>常見問題 FAQ</b><br><span style="font-size:.6em;color:#888">upgrade-macau-restaurant-hotpo</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'常見問題 FAQ')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Japow">
+            <td>🇯🇵</td>
+            <td><b>Japow</b><br><span style="font-size:.6em;color:#888">japan-tourism-ski-resorts-hokk</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Japow')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="鹽埕埔站">
+            <td>🇹🇼</td>
+            <td><b>鹽埕埔站</b><br><span style="font-size:.6em;color:#888">taiwan-attractions-city-guide-</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'鹽埕埔站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="仙台站">
+            <td>🇯🇵</td>
+            <td><b>仙台站</b><br><span style="font-size:.6em;color:#888">japan-entertainment-gaming-arc</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'仙台站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="米芝蓮指南香港澳門">
+            <td>🇲🇴 🇭🇰</td>
+            <td><b>米芝蓮指南香港澳門</b><br><span style="font-size:.6em;color:#888">aeo-kw-澳門美食推薦</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'米芝蓮指南香港澳門')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Agoda">
+            <td>🇲🇴</td>
+            <td><b>Agoda</b><br><span style="font-size:.6em;color:#888">upgrade-macau-hotel-budget-sta</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Agoda')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港幣（HKD）：">
+            <td>🇲🇴</td>
+            <td><b>港幣（HKD）：</b><br><span style="font-size:.6em;color:#888">upgrade-macau-shopping-luxury-</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港幣（HKD）：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="南方澳漁港">
+            <td>🇹🇼</td>
+            <td><b>南方澳漁港</b><br><span style="font-size:.6em;color:#888">taiwan-tourism-whale-watching-</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'南方澳漁港')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="澳門巴士報站APP">
+            <td>🇲🇴</td>
+            <td><b>澳門巴士報站APP</b><br><span style="font-size:.6em;color:#888">macau-transport-guide-bus-rout</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'澳門巴士報站APP')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="推薦路線">
+            <td>🇲🇴 🇭🇰 🇯🇵</td>
+            <td><b>推薦路線</b><br><span style="font-size:.6em;color:#888">japan-dining-beverages-japan-日</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'推薦路線')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="從香港出發：">
+            <td>🇲🇴</td>
+            <td><b>從香港出發：</b><br><span style="font-size:.6em;color:#888">upgrade-macau-dining-answer-eg</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'從香港出發：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="[Merchant Name]">
+            <td>🇭🇰 🇹🇼</td>
+            <td><b>[Merchant Name]</b><br><span style="font-size:.6em;color:#888">taiwan-dining-seafood-hualien-</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'[Merchant Name]')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="路氹東站">
+            <td>🇲🇴</td>
+            <td><b>路氹東站</b><br><span style="font-size:.6em;color:#888">macau-lrt-complete-guide-2026</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'路氹東站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Open Mic Night">
+            <td>🇭🇰 🇹🇼</td>
+            <td><b>Open Mic Night</b><br><span style="font-size:.6em;color:#888">hongkong-entertainment-live-mu</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Open Mic Night')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Klook">
+            <td>🇲🇴</td>
+            <td><b>Klook</b><br><span style="font-size:.6em;color:#888">macau-shopping-retail-platform</span></td>
+            <td>4</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Klook')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="DAISO（大創）">
+            <td>🇯🇵</td>
+            <td><b>DAISO（大創）</b><br><span style="font-size:.6em;color:#888">japan-shopping-100-yen-shops-k</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'DAISO（大創）')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="北港春捲">
+            <td>🇹🇼</td>
+            <td><b>北港春捲</b><br><span style="font-size:.6em;color:#888">taiwan-shopping-souvenir-gifts</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'北港春捲')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="大町站">
+            <td>🇯🇵</td>
+            <td><b>大町站</b><br><span style="font-size:.6em;color:#888">japan-tourism-garden-parks-sen</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'大町站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Revolver">
+            <td>🇹🇼</td>
+            <td><b>Revolver</b><br><span style="font-size:.6em;color:#888">taiwan-entertainment-live-hous</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Revolver')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Suica">
+            <td>🇯🇵</td>
+            <td><b>Suica</b><br><span style="font-size:.6em;color:#888">japan-shopping-souvenir-omiyag</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Suica')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="左營站">
+            <td>🇹🇼</td>
+            <td><b>左營站</b><br><span style="font-size:.6em;color:#888">tw-kenting-guide</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'左營站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="香港仔熟食中心">
+            <td>🇭🇰</td>
+            <td><b>香港仔熟食中心</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-street-marke</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'香港仔熟食中心')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Instagram">
+            <td>🇲🇴</td>
+            <td><b>Instagram</b><br><span style="font-size:.6em;color:#888">macau-wellness-beauty-platform</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Instagram')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="38 Lounge">
+            <td>🇲🇴</td>
+            <td><b>38 Lounge</b><br><span style="font-size:.6em;color:#888">mo-nightlife-2026</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'38 Lounge')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="一站式購物體驗">
+            <td>🇲🇴 🇯🇵</td>
+            <td><b>一站式購物體驗</b><br><span style="font-size:.6em;color:#888">macau-hotel-boutique-picks-col</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'一站式購物體驗')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="輕軌氹仔線">
+            <td>🇲🇴</td>
+            <td><b>輕軌氹仔線</b><br><span style="font-size:.6em;color:#888">macau-transport-guide-daily-bu</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'輕軌氹仔線')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Wing Lei（永利軒）">
+            <td>🇲🇴</td>
+            <td><b>Wing Lei（永利軒）</b><br><span style="font-size:.6em;color:#888">gap-restaurant-coverage</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Wing Lei（永利軒）')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="YouBike">
+            <td>🇹🇼</td>
+            <td><b>YouBike</b><br><span style="font-size:.6em;color:#888">taiwan-transport-scooter-renta</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'YouBike')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="香港藝術中心">
+            <td>🇭🇰</td>
+            <td><b>香港藝術中心</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-antiques-tsi</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'香港藝術中心')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港車北上">
+            <td>🇭🇰</td>
+            <td><b>港車北上</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-street-marke</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港車北上')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="北門站">
+            <td>🇹🇼</td>
+            <td><b>北門站</b><br><span style="font-size:.6em;color:#888">taiwan-tourism-old-streets-tai</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'北門站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港澳居民來往內地通行證">
+            <td>🇲🇴 🇭🇰</td>
+            <td><b>港澳居民來往內地通行證</b><br><span style="font-size:.6em;color:#888">hongkong-transport-cross-borde</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港澳居民來往內地通行證')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="橋咀洲">
+            <td>🇭🇰</td>
+            <td><b>橋咀洲</b><br><span style="font-size:.6em;color:#888">hongkong-tourism-outlying-isla</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'橋咀洲')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Demo Night">
+            <td>🇭🇰</td>
+            <td><b>Demo Night</b><br><span style="font-size:.6em;color:#888">hongkong-entertainment-live-mu</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Demo Night')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港都歷史">
+            <td>🇯🇵 🇹🇼</td>
+            <td><b>港都歷史</b><br><span style="font-size:.6em;color:#888">taiwan-shopping-souvenir-gifts</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港都歷史')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Sky 21">
+            <td>🇲🇴</td>
+            <td><b>Sky 21</b><br><span style="font-size:.6em;color:#888">macau-entertainment-nightlife-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Sky 21')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="澳門幣（MOP）：">
+            <td>🇲🇴</td>
+            <td><b>澳門幣（MOP）：</b><br><span style="font-size:.6em;color:#888">upgrade-macau-shopping-luxury-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'澳門幣（MOP）：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="MACAU">
+            <td>🇲🇴</td>
+            <td><b>MACAU</b><br><span style="font-size:.6em;color:#888">upgrade-macau-entertainment-fe</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'MACAU')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Google評分：">
+            <td>🇲🇴</td>
+            <td><b>Google評分：</b><br><span style="font-size:.6em;color:#888">upgrade-macau-attraction-guide</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Google評分：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="The Kitchen 大廚">
+            <td>🇲🇴</td>
+            <td><b>The Kitchen 大廚</b><br><span style="font-size:.6em;color:#888">upgrade-macau-dining-fine-dini</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'The Kitchen 大廚')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Cotai">
+            <td>🇲🇴</td>
+            <td><b>Cotai</b><br><span style="font-size:.6em;color:#888">upgrade-macau-transport-guide-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Cotai')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Uchi Café">
+            <td>🇲🇴 🇯🇵</td>
+            <td><b>Uchi Café</b><br><span style="font-size:.6em;color:#888">japan-shopping-convenience-sto</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Uchi Café')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="交通路線">
+            <td>🇯🇵 🇹🇼</td>
+            <td><b>交通路線</b><br><span style="font-size:.6em;color:#888">taiwan-tourism-temples-taipei-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'交通路線')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="CP值極高">
+            <td>🇲🇴 🇹🇼</td>
+            <td><b>CP值極高</b><br><span style="font-size:.6em;color:#888">taiwan-shopping-souvenir-gifts</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'CP值極高')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="實用APP：">
+            <td>🇲🇴</td>
+            <td><b>實用APP：</b><br><span style="font-size:.6em;color:#888">macau-tourism-temples-churches</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'實用APP：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="9Hours">
+            <td>🇯🇵</td>
+            <td><b>9Hours</b><br><span style="font-size:.6em;color:#888">japan-accommodation-minshuku-k</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'9Hours')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="榮町站">
+            <td>🇯🇵</td>
+            <td><b>榮町站</b><br><span style="font-size:.6em;color:#888">japan-transport-metro-systems-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'榮町站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="第一站">
+            <td>🇲🇴</td>
+            <td><b>第一站</b><br><span style="font-size:.6em;color:#888">macau-attraction-guide-family-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'第一站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="26A">
+            <td>🇲🇴</td>
+            <td><b>26A</b><br><span style="font-size:.6em;color:#888">mo-coloane-guide</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'26A')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="香港：">
+            <td>🇲🇴 🇭🇰</td>
+            <td><b>香港：</b><br><span style="font-size:.6em;color:#888">upgrade-macau-shopping-bakery-</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'香港：')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="香港味道">
+            <td>🇭🇰</td>
+            <td><b>香港味道</b><br><span style="font-size:.6em;color:#888">hongkong-attractions-local-mar</span></td>
+            <td>3</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'香港味道')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="納涼クルーズ">
+            <td>🇯🇵</td>
+            <td><b>納涼クルーズ</b><br><span style="font-size:.6em;color:#888">japan-transport-ferries-kobe</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'納涼クルーズ')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="新神戶站周邊">
+            <td>🇯🇵</td>
+            <td><b>新神戶站周邊</b><br><span style="font-size:.6em;color:#888">japan-gourmet-wagyu-kobe-神戶和牛原</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'新神戶站周邊')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="奈良站前藥妝店電子產品區">
+            <td>🇯🇵</td>
+            <td><b>奈良站前藥妝店電子產品區</b><br><span style="font-size:.6em;color:#888">japan-shopping-electronics-nar</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'奈良站前藥妝店電子產品區')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Bic Camera 奈良店">
+            <td>🇯🇵</td>
+            <td><b>Bic Camera 奈良店</b><br><span style="font-size:.6em;color:#888">japan-shopping-electronics-nar</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Bic Camera 奈良店')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Sofmap 奈良店">
+            <td>🇯🇵</td>
+            <td><b>Sofmap 奈良店</b><br><span style="font-size:.6em;color:#888">japan-shopping-electronics-nar</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Sofmap 奈良店')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="港式下午茶">
+            <td>🇭🇰</td>
+            <td><b>港式下午茶</b><br><span style="font-size:.6em;color:#888">hongkong-dining-milk-tea-aberd</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'港式下午茶')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Sushi Kade">
+            <td>🇭🇰</td>
+            <td><b>Sushi Kade</b><br><span style="font-size:.6em;color:#888">hongkong-dining-fine-dining-ts</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Sushi Kade')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="ひらがなマーケット">
+            <td>🇯🇵</td>
+            <td><b>ひらがなマーケット</b><br><span style="font-size:.6em;color:#888">japan-shopping-department-stor</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'ひらがなマーケット')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Priority Pass">
+            <td>🇯🇵</td>
+            <td><b>Priority Pass</b><br><span style="font-size:.6em;color:#888">japan-shopping-department-stor</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Priority Pass')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="銀座站">
+            <td>🇯🇵</td>
+            <td><b>銀座站</b><br><span style="font-size:.6em;color:#888">japan-accommodation-business-h</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'銀座站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="細味港式飲食哲學">
+            <td>🇭🇰</td>
+            <td><b>細味港式飲食哲學</b><br><span style="font-size:.6em;color:#888">hongkong-dining-dai-pai-dong-w</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'細味港式飲食哲學')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="適應港式溝通風格">
+            <td>🇭🇰</td>
+            <td><b>適應港式溝通風格</b><br><span style="font-size:.6em;color:#888">hongkong-dining-dai-pai-dong-w</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'適應港式溝通風格')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="豐水薄野站">
+            <td>🇯🇵</td>
+            <td><b>豐水薄野站</b><br><span style="font-size:.6em;color:#888">japan-entertainment-festivals-</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'豐水薄野站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Lucy's Bar">
+            <td>🇭🇰</td>
+            <td><b>Lucy's Bar</b><br><span style="font-size:.6em;color:#888">hongkong-entertainment-theme-p</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Lucy's Bar')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="蓮池潭站">
+            <td>🇹🇼</td>
+            <td><b>蓮池潭站</b><br><span style="font-size:.6em;color:#888">taiwan-dining-vegetarian-buddh</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'蓮池潭站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="初賣セール">
+            <td>🇯🇵</td>
+            <td><b>初賣セール</b><br><span style="font-size:.6em;color:#888">japan-shopping-department-stor</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'初賣セール')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Nine Hours">
+            <td>🇯🇵</td>
+            <td><b>Nine Hours</b><br><span style="font-size:.6em;color:#888">japan-accommodation-capsule-ho</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Nine Hours')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="蚵仔寮漁港">
+            <td>🇹🇼</td>
+            <td><b>蚵仔寮漁港</b><br><span style="font-size:.6em;color:#888">taiwan-dining-seafood-kaohsiun</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'蚵仔寮漁港')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="規劃跨境購物路線">
+            <td>🇭🇰</td>
+            <td><b>規劃跨境購物路線</b><br><span style="font-size:.6em;color:#888">hongkong-shopping-wet-markets-</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'規劃跨境購物路線')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="交通與購物動線最佳化">
+            <td>🇯🇵</td>
+            <td><b>交通與購物動線最佳化</b><br><span style="font-size:.6em;color:#888">japan-shopping-souvenir-omiyag</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'交通與購物動線最佳化')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="最後防線">
+            <td>🇯🇵</td>
+            <td><b>最後防線</b><br><span style="font-size:.6em;color:#888">japan-shopping-souvenir-omiyag</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'最後防線')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Canal City 博多">
+            <td>🇯🇵</td>
+            <td><b>Canal City 博多</b><br><span style="font-size:.6em;color:#888">japan-shopping-vintage-thrift-</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Canal City 博多')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="M+戲院">
+            <td>🇭🇰</td>
+            <td><b>M+戲院</b><br><span style="font-size:.6em;color:#888">hongkong-attractions-arts-cult</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'M+戲院')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Taipa">
+            <td>🇲🇴</td>
+            <td><b>Taipa</b><br><span style="font-size:.6em;color:#888">upgrade-macau-hotel-budget-sta</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Taipa')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="北四番丁站">
+            <td>🇯🇵</td>
+            <td><b>北四番丁站</b><br><span style="font-size:.6em;color:#888">japan-tourism-garden-parks-sen</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'北四番丁站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="五橋站">
+            <td>🇯🇵</td>
+            <td><b>五橋站</b><br><span style="font-size:.6em;color:#888">japan-tourism-garden-parks-sen</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'五橋站')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="實用App與資源">
+            <td>🇲🇴</td>
+            <td><b>實用App與資源</b><br><span style="font-size:.6em;color:#888">upgrade-macau-shopping-luxury-</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'實用App與資源')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="Answer Hub">
+            <td>🇭🇰</td>
+            <td><b>Answer Hub</b><br><span style="font-size:.6em;color:#888">hongkong-dining-egg-waffles-sa</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'Answer Hub')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="ハーバーランド駅">
+            <td>🇯🇵</td>
+            <td><b>ハーバーランド駅</b><br><span style="font-size:.6em;color:#888">japan-transport-ferries-kobe-2</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'ハーバーランド駅')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr><tr data-name="大阪港駅">
+            <td>🇯🇵</td>
+            <td><b>大阪港駅</b><br><span style="font-size:.6em;color:#888">japan-transport-ferries-osaka</span></td>
+            <td>2</td>
+            <td>
+                <select class="cat-select" onchange="markReviewed(this,'大阪港駅')">
+                    <option value="">— 選分類 —</option>
+                    <option value="restaurant">restaurant</option>
+<option value="cafe">cafe</option>
+<option value="bar">bar</option>
+<option value="hotel">hotel</option>
+<option value="shopping-mall">shopping-mall</option>
+<option value="electronics">electronics</option>
+<option value="supermarket">supermarket</option>
+<option value="temple">temple</option>
+<option value="museum">museum</option>
+<option value="park">park</option>
+<option value="landmark">landmark</option>
+<option value="tourism">tourism</option>
+<option value="street-food">street-food</option>
+<option value="bus">bus</option>
+<option value="spa">spa</option>
+<option value="university">university</option>
+<option value="hospital">hospital</option>
+<option value="entertainment">entertainment</option>
+<option value="exclude">exclude</option>
+                </select>
+            </td>
+        </tr>
+</table>
+
+<h2>已自動分類 (Top 50)</h2>
+<table><tr><th>地區</th><th>名稱</th><th>次數</th><th>分類</th></tr>
+<tr>
+            <td>🇲🇴</td><td>Lorcha</td><td>18</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>奢侈品市場</td><td>14</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇯🇵</td><td>Can Do</td><td>11</td>
+            <td><span style="color:#4ade80">shopping-mall</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>旱溪夜市</td><td>9</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>Boa Mesa</td><td>8</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>一中街夜市</td><td>8</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>PMQ 元創方</td><td>7</td>
+            <td><span style="color:#4ade80">tourism</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>香港後花園</td><td>7</td>
+            <td><span style="color:#4ade80">park</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>Encanto</td><td>7</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>葡國餐廳</td><td>7</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>東薈城名店倉</td><td>6</td>
+            <td><span style="color:#4ade80">landmark</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>中央公園站</td><td>6</td>
+            <td><span style="color:#4ade80">park</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>西貢天后廟</td><td>6</td>
+            <td><span style="color:#4ade80">temple</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>置地廣場</td><td>5</td>
+            <td><span style="color:#4ade80">shopping-mall</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>主題公園</td><td>5</td>
+            <td><span style="color:#4ade80">park</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>熊貓館（石排灣郊野公園）</td><td>5</td>
+            <td><span style="color:#4ade80">park</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>香港仔魚類批發市場</td><td>5</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>博物館化</td><td>5</td>
+            <td><span style="color:#4ade80">museum</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>澳葡料理</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>從澳門國際機場出發：</td><td>4</td>
+            <td><span style="color:#4ade80">bus</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>海洋公園</td><td>4</td>
+            <td><span style="color:#4ade80">park</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>路環碼頭海鮮檔</td><td>4</td>
+            <td><span style="color:#4ade80">bus</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>東大門夜市</td><td>4</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>榮記茶餐廳</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>餐廳分佈</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>金記茶餐廳</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>茴香戀戀溫泉會館</td><td>4</td>
+            <td><span style="color:#4ade80">spa</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>恆春夜市</td><td>4</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>4. 澳葡茶餐廳</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>推薦商場</td><td>4</td>
+            <td><span style="color:#4ade80">shopping-mall</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>澳門銀河酒店（路氹城）</td><td>4</td>
+            <td><span style="color:#4ade80">hotel</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>溫泉餐飲</td><td>4</td>
+            <td><span style="color:#4ade80">spa</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>苓雅夜市</td><td>4</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>龍環葡韻博物館區</td><td>4</td>
+            <td><span style="color:#4ade80">museum</span></td>
+        </tr><tr>
+            <td>🇲🇴 🇭🇰</td><td>橋記咖啡</td><td>4</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>忠孝路夜市</td><td>4</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>苓雅市場</td><td>4</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>視博廣場</td><td>4</td>
+            <td><span style="color:#4ade80">shopping-mall</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>聖安多尼教堂</td><td>4</td>
+            <td><span style="color:#4ade80">temple</span></td>
+        </tr><tr>
+            <td>🇯🇵</td><td>百貨公司與精品免稅</td><td>3</td>
+            <td><span style="color:#4ade80">shopping-mall</span></td>
+        </tr><tr>
+            <td>🇯🇵</td><td>全部留到機場</td><td>3</td>
+            <td><span style="color:#4ade80">bus</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>南濱夜市</td><td>3</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇯🇵</td><td>首裡城</td><td>3</td>
+            <td><span style="color:#4ade80">landmark</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>龍山寺</td><td>3</td>
+            <td><span style="color:#4ade80">temple</span></td>
+        </tr><tr>
+            <td>🇹🇼</td><td>羅東夜市商圈</td><td>3</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>赤柱卜公碼頭</td><td>3</td>
+            <td><span style="color:#4ade80">bus</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>長洲渡輪碼頭</td><td>3</td>
+            <td><span style="color:#4ade80">bus</span></td>
+        </tr><tr>
+            <td>🇭🇰</td><td>成記茶餐廳</td><td>3</td>
+            <td><span style="color:#4ade80">restaurant</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>葡京人酒店</td><td>3</td>
+            <td><span style="color:#4ade80">hotel</span></td>
+        </tr><tr>
+            <td>🇲🇴</td><td>市場增長</td><td>3</td>
+            <td><span style="color:#4ade80">street-food</span></td>
+        </tr>
+</table>
+</div>
+
+<script>
+let reviewed = {};
+function markReviewed(sel, name) {
+    if (sel.value) {
+        reviewed[name] = sel.value;
+        sel.closest('tr').classList.add('reviewed');
+    } else {
+        delete reviewed[name];
+        sel.closest('tr').classList.remove('reviewed');
+    }
+    document.getElementById('reviewed-count').textContent = Object.keys(reviewed).length;
+}
+
+async function submitAll() {
+    if (Object.keys(reviewed).length === 0) { alert('請先選擇分類'); return; }
+    try {
+        const r = await fetch('https://cloudpipe-macao-app.vercel.app/api/v1/audit-review', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                secret: 'cloudpipe-audit-2026',
+                item_id: 0,
+                action: 'merchant_category_review',
+                target_slug: JSON.stringify(reviewed),
+                reviewer: 'kira'
+            })
+        });
+        const d = await r.json();
+        alert('已提交 ' + Object.keys(reviewed).length + ' 個分類');
+    } catch(e) {
+        // Save locally as fallback
+        const blob = new Blob([JSON.stringify(reviewed, null, 2)], {type: 'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'merchant_review_' + new Date().toISOString().slice(0,10) + '.json';
+        a.click();
+        alert('已下載 JSON 檔案，請傳給 Claude 處理');
+    }
+}
+</script>
+</body></html>
