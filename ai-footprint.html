@@ -105,7 +105,8 @@ footer a{color:var(--blue);text-decoration:none}
 </div>
 
 <script>
-const WORKER = "https://openclaw-ai-tracker.inariglobal.workers.dev";
+// Switched to Supabase-backed API (Cloudflare KV tracker deprecated)
+const WORKER = "https://cloudpipe-macao-app.vercel.app/api/v1/crawler-stats?token=cloudpipe2026";
 
 const BOT_META = {
   "OpenAI GPT": {cls:"b-openai", label:"OpenAI"},
@@ -130,11 +131,21 @@ const BOT_META = {
 
 async function loadStats() {
   try {
-    const r = await fetch(WORKER + "/ai-stats.json");
-    if (!r.ok) throw new Error("fetch failed");
-    const d = await r.json();
+    const r = await fetch(WORKER + "&view=summary&days=30");
+    if (!r.ok) throw new Error("fetch failed: " + r.status);
+    const raw = await r.json();
 
-    const now = new Date(d.generatedAt);
+    // Transform Supabase format to dashboard format
+    const d = { today: {}, totals: {}, generatedAt: new Date().toISOString() };
+    const bots = raw.bots || {};
+    for (const [name, info] of Object.entries(bots)) {
+      const owner = info.owner || name;
+      d.totals[owner] = (d.totals[owner] || 0) + (info.count || 0);
+    }
+    // Today's data from total (approximate — Supabase summary doesn't split by day in this view)
+    d.today = Object.fromEntries(Object.entries(d.totals).map(([k,v]) => [k, Math.round(v/30)]));
+
+    const now = new Date();
     document.getElementById("last-update").textContent =
       "更新：" + now.toLocaleTimeString("zh-TW") + " (" + now.toLocaleDateString("zh-TW") + ")";
 
