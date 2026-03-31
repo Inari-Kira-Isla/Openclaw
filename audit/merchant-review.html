@@ -8,7 +8,30 @@ td{padding:4px;border-bottom:1px solid #1a1d2744}select{background:#1a1d27;color
 .stats{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}.stat{background:#1a1d27;border:1px solid #2a2d37;border-radius:6px;padding:5px 8px;text-align:center;flex:1;min-width:55px}
 .stat b{display:block;font-size:1.1em;color:#d4a574}.stat span{font-size:.55em;color:#888}
 .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#16a34a;color:white;padding:8px 16px;border-radius:8px;display:none;z-index:99;font-size:.8em}
-</style></head><body><div class="c">
+</style></head><body>
+<div id="password-gate" style="display:flex;justify-content:center;align-items:center;min-height:100vh;background:#0f1117;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999">
+<div style="background:#1a1d27;padding:30px;border-radius:12px;text-align:center;border:1px solid #2a2d37">
+<h2 style="color:#d4a574;margin-bottom:16px">🔒 Internal Access</h2>
+<input id="pw-input" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()"
+  style="padding:8px 12px;border:1px solid #2a2d37;border-radius:6px;background:#0f1117;color:#e0e0e0;font-size:14px;width:200px;margin-bottom:10px"><br>
+<button onclick="checkPw()" style="padding:8px 20px;background:#d4a574;color:#0f1117;border:none;border-radius:6px;cursor:pointer;font-weight:700">Enter</button>
+<p id="pw-err" style="color:#dc2626;font-size:12px;margin-top:8px;display:none">Wrong password</p>
+</div>
+</div>
+<script>
+function checkPw(){
+  if(document.getElementById('pw-input').value==='cloudpipe2026'){
+    document.getElementById('password-gate').style.display='none';
+    sessionStorage.setItem('audit_auth','ok');
+  } else {
+    document.getElementById('pw-err').style.display='block';
+  }
+}
+if(sessionStorage.getItem('audit_auth')==='ok'){
+  document.getElementById('password-gate').style.display='none';
+}
+</script>
+<div class="c">
 <h1>AI 預分類 — 有錯請改</h1>
 <p class="sub">AI 已初步分類 | 你只需改錯的 | 2026-03-31 20:42</p>
 <div class="stats">
