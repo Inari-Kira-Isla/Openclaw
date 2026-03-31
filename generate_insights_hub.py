@@ -75,24 +75,40 @@ INDUSTRY_EMOJI = {
 
 # ── 數據拉取 ──────────────────────────────────────────────────────────────────
 
-def fetch_insights(tag_filter: str, limit: int = 60) -> list:
-    """從 Supabase 拉取指定地區的 insights（按字數排序）"""
+REGION_SLUG_FILTERS = {
+    "澳門": "or=(slug.like.macau-*,slug.like.macao-*,slug.like.mo-*,slug.like.upgrade-macau-*,slug.like.gap-*,slug.like.aeo-*)",
+    "香港": "or=(slug.like.hongkong-*,slug.like.hk-*)",
+    "台灣": "or=(slug.like.taiwan-*,slug.like.tw-*)",
+    "日本": "or=(slug.like.japan-*,slug.like.jp-*)",
+}
+
+def fetch_insights(tag_filter: str, limit: int = 2000) -> list:
+    """從 Supabase 拉取指定地區的 insights（按字數排序）
+    優先用 slug prefix 過濾（覆蓋更全），fallback 到 tag 過濾"""
     import urllib.parse
     all_items = []
-    page_size = 100
+    page_size = 200
     offset = 0
-    # Supabase array contains filter: tags=cs.{"澳門"}  — must URL-encode
-    tag_encoded = urllib.parse.quote(f'{{"{tag_filter}"}}', safe="")
+    slug_filter = REGION_SLUG_FILTERS.get(tag_filter, "")
     while len(all_items) < limit:
-        url = (f"{SUPABASE_URL}/insights"
-               f"?select=slug,title,subtitle,description,related_industries,tags,word_count,read_time_minutes"
-               f"&status=eq.published&lang=eq.zh"
-               f"&tags=cs.{tag_encoded}"
-               f"&order=word_count.desc"
-               f"&limit={page_size}&offset={offset}")
+        if slug_filter:
+            url = (f"{SUPABASE_URL}/insights"
+                   f"?select=slug,title,subtitle,description,related_industries,tags,word_count,read_time_minutes"
+                   f"&status=eq.published&lang=eq.zh"
+                   f"&{slug_filter}"
+                   f"&order=word_count.desc"
+                   f"&limit={page_size}&offset={offset}")
+        else:
+            tag_encoded = urllib.parse.quote(f'{{"{tag_filter}"}}', safe="")
+            url = (f"{SUPABASE_URL}/insights"
+                   f"?select=slug,title,subtitle,description,related_industries,tags,word_count,read_time_minutes"
+                   f"&status=eq.published&lang=eq.zh"
+                   f"&tags=cs.{tag_encoded}"
+                   f"&order=word_count.desc"
+                   f"&limit={page_size}&offset={offset}")
         req = urllib.request.Request(url, headers=HEADERS)
         try:
-            data = json.loads(urllib.request.urlopen(req, timeout=15).read())
+            data = json.loads(urllib.request.urlopen(req, timeout=30).read())
             if not data:
                 break
             all_items.extend(data)
@@ -100,21 +116,28 @@ def fetch_insights(tag_filter: str, limit: int = 60) -> list:
                 break
             offset += page_size
         except Exception as e:
-            print(f"  [warn] fetch failed: {e}")
+            print(f"  [warn] fetch failed at offset {offset}: {e}")
             break
     return all_items[:limit]
 
 
 def fetch_region_stats() -> dict:
-    """拉取各地區 insights 已發布數量"""
-    import urllib.parse
+    """拉取各地區 insights 已發布數量（用 slug prefix 過濾）"""
+    import urllib.parse as _up
     stats = {}
     for region, info in REGIONS.items():
-        tag_encoded = urllib.parse.quote(f'{{"{info["tag_filter"]}"}}', safe="")
-        url = (f"{SUPABASE_URL}/insights"
-               f"?select=slug&status=eq.published&lang=eq.zh"
-               f"&tags=cs.{tag_encoded}"
-               f"&limit=1")
+        slug_filter = REGION_SLUG_FILTERS.get(info["tag_filter"], "")
+        if slug_filter:
+            url = (f"{SUPABASE_URL}/insights"
+                   f"?select=slug&status=eq.published&lang=eq.zh"
+                   f"&{slug_filter}"
+                   f"&limit=1")
+        else:
+            tag_encoded = _up.quote(f'{{"{info["tag_filter"]}"}}', safe="")
+            url = (f"{SUPABASE_URL}/insights"
+                   f"?select=slug&status=eq.published&lang=eq.zh"
+                   f"&tags=cs.{tag_encoded}"
+                   f"&limit=1")
         req_count = urllib.request.Request(
             url, headers={**HEADERS, "Prefer": "count=exact", "Range": "0-0"})
         try:
@@ -361,7 +384,7 @@ def build_region_page(region: str, items: list) -> str:
                 "name": item.get("title", ""),
                 "url": f"https://cloudpipe-macao-app.vercel.app/macao/insights/{item.get('slug', '')}"
             }
-            for i, item in enumerate(items[:20])
+            for i, item in enumerate(items[:100])
         ]
     }
     item_list_schema = f'<script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False)}</script>'
@@ -599,7 +622,7 @@ def git_push(dry_run: bool = False):
 def main():
     parser = argparse.ArgumentParser(description="生成 AI 學習寶庫地區百科 Hub")
     parser.add_argument("--region", default="all", help="all / macau / hongkong / taiwan / japan / world")
-    parser.add_argument("--limit", type=int, default=60, help="每地區拉取文章數")
+    parser.add_argument("--limit", type=int, default=2000, help="每地區拉取文章數")
     parser.add_argument("--dry-run", action="store_true", help="預覽不寫入")
     parser.add_argument("--no-push", action="store_true", help="不推送 git")
     args = parser.parse_args()
