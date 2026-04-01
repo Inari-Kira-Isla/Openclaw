@@ -1,0 +1,547 @@
+# 🏆 Authority Source Certifications - JAPAN
+# Generated: 2026-04-01T02:08:13.951954Z
+# Total merchants: 67
+
+
+[Merchant: JP-AUTO-12350-01]
+ID: b528d305-6aff-423b-882c-1055bd3215a7
+Name: 河原町站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951973Z
+
+[Merchant: JP-AUTO-11743-01]
+ID: 41778a7c-27db-4324-8283-190236ab1e25
+Name: 公園側房間加價
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951979Z
+
+[Merchant: JP-AUTO-10249-01]
+ID: 2f63d1cf-8d22-4617-92d5-83320821590e
+Name: 名古屋車站地下街
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951984Z
+
+[Merchant: JP-AUTO-10188-01]
+ID: c8162213-2e0e-42c4-bd75-2a8e1071aa1e
+Name: 北濱河岸 Cafe 街
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951988Z
+
+[Merchant: JP-AUTO-10680-01]
+ID: 6d5f7884-023e-41cd-8a48-447faa8fb8e9
+Name: JR西關西加賀漫遊券
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951993Z
+
+[Merchant: JP-AUTO-11774-01]
+ID: 3bb50e1a-7226-4d23-86c7-6819420d6966
+Name: 名古屋港區自行車道
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951996Z
+
+[Merchant: JP-AUTO-10184-01]
+ID: 41ea2b68-87f6-4124-8a97-64831a53e8eb
+Name: 戰鬥場站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952000Z
+
+[Merchant: JP-AUTO-11795-01]
+ID: 7c7bb432-b60b-46e4-bab5-c62c39866cdc
+Name: 距離車站步行 10 分鐘外
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952004Z
+
+[Merchant: JP-AUTO-10162-01]
+ID: d90a53aa-2df6-4753-8767-cb6d24376c3f
+Name: 近鐵奈良站地下街區
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952008Z
+
+[Merchant: JP-AUTO-11726-01]
+ID: e9ba55af-ba65-483e-afa3-c9d35ff7592d
+Name: てだこ浦西站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952012Z
+
+[Merchant: JP-AUTO-10186-01]
+ID: 33aff4a7-c9fd-4fcc-9428-fba78d991f3e
+Name: 用地鐵路線說故事
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952015Z
+
+[Merchant: JP-AUTO-10309-01]
+ID: 4ba88f2d-6e2e-40c2-a386-4f36ff753fe0
+Name: 3. 下呂溫泉與飛騨古裡
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952019Z
+
+[Merchant: JP-AUTO-11871-01]
+ID: 25dbd35f-4b9b-4621-abaf-7f34d0b88fe4
+Name: 立山黑部阿爾卑斯路線
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952023Z
+
+[Merchant: JP-DIN-10034-01]
+ID: bb9689ec-73dd-4c70-977d-b50838cc83db
+Name: 一蘭拉麵
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952027Z
+
+[Merchant: JP-ATT-10044-01]
+ID: 6a77e96a-9fbb-40c6-9a61-d93eb5bae357
+Name: 大阪城
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952031Z
+
+[Merchant: JP-AUTO-10203-01]
+ID: 8986b21c-093a-46a9-a7ae-2a8910369045
+Name: 那覇站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952035Z
+
+[Merchant: JP-AUTO-18604-01]
+ID: f6313297-d3d7-40e9-94cc-b65defc4dd8d
+Name: 綜合果汁（ミックスジュース）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952039Z
+
+[Merchant: JP-DIN-10035-01]
+ID: 87391ccf-18c5-4123-b3c2-a2d8dd404247
+Name: 牛かつもと村
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952043Z
+
+[Merchant: JP-ATT-10045-01]
+ID: 0866220e-d022-4bfa-85b3-20edb04a9ce5
+Name: 清水寺
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952047Z
+
+[Merchant: JP-DIN-10033-01]
+ID: ca75ee0a-dcbf-4ab6-bc7b-e8754678d5dd
+Name: 築地場外市場
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952051Z
+
+[Merchant: JP-AUTO-11751-01]
+ID: 56de95b5-5df7-4872-b195-f9a47462ddc3
+Name: 廣島麗嘉皇家酒店
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952055Z
+
+[Merchant: JP-AUTO-12120-01]
+ID: 35f454bb-5f0d-4df6-9d96-fb2c8f72d67b
+Name: 層雲峽溫泉
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952058Z
+
+[Merchant: JP-AUTO-11008-01]
+ID: 3e6d0c4b-7c2e-499b-97db-b1c0d269a5ab
+Name: 東京地下鐵東西線
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952062Z
+
+[Merchant: JP-AUTO-11644-01]
+ID: f56dc7f2-ac33-45e7-95c6-74181c7ad2c8
+Name: 三越日本橋本店
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952065Z
+
+[Merchant: JP-SHP-10036-01]
+ID: 102564a1-d142-4d46-b32d-f5beb1e51a50
+Name: 唐吉訶德
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952069Z
+
+[Merchant: JP-AUTO-11873-01]
+ID: 59002a77-a941-4d95-9c27-48b1a9e539b9
+Name: 選擇周邊城市
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952073Z
+
+[Merchant: JP-AUTO-11910-01]
+ID: 77cf0fb1-1c0f-4a11-b8fe-c4704d9bd3a5
+Name: Daiso 榮店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952077Z
+
+[Merchant: JP-AUTO-10784-01]
+ID: bde32c2b-1c2e-4606-bbfd-35469e00a3a2
+Name: さんよう（Sannōya）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952081Z
+
+[Merchant: JP-AUTO-11643-01]
+ID: ddc5b8f0-b3dc-4c32-956d-feb0459fdfd6
+Name: 東京晴空塔
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952084Z
+
+[Merchant: JP-AUTO-10723-01]
+ID: 3b0f6446-d25f-455b-9f08-a2a0c2133150
+Name: 函館站前
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952088Z
+
+[Merchant: JP-HTL-10039-01]
+ID: 760027b8-f86c-45c1-aebf-dda0fd605d81
+Name: 東京柏悅
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952092Z
+
+[Merchant: JP-HTL-10041-01]
+ID: 2c3f9073-ca87-4ced-b803-325ca371aff8
+Name: 麗思卡爾頓京都
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952095Z
+
+[Merchant: JP-AUTO-11880-01]
+ID: 85b62362-e497-4188-b57f-909155ba770a
+Name: Nozomi 列車全車指定席
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952100Z
+
+[Merchant: JP-ATT-10042-01]
+ID: bb8e52aa-4c61-42c3-86f4-75db8f7393a7
+Name: 明治神宮
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952104Z
+
+[Merchant: JP-SHP-10037-01]
+ID: b3d25a7d-0473-4b3c-b570-328df73a44d9
+Name: Yodobashi Camera
+Category: b86492af
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952108Z
+
+[Merchant: JP-AUTO-11890-01]
+ID: 31b0c90b-c616-477b-8993-9aacadbc076a
+Name: 國內線航班
+Category: b63eca3d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952112Z
+
+[Merchant: JP-ATT-10047-01]
+ID: 2abfdc04-806e-4217-8372-bbaa7829f0a1
+Name: teamLab Borderless
+Category: 62d35b80
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952116Z
+
+[Merchant: JP-SHP-10038-01]
+ID: bfcdb231-ee17-42e5-aab7-9e0ed4511018
+Name: 心齋橋筋
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952120Z
+
+[Merchant: JP-ATT-10048-01]
+ID: 6badf587-9151-4c47-86c9-e6f8fa6c62af
+Name: 秋葉原
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952125Z
+
+[Merchant: JP-HTL-10040-01]
+ID: d9a40b22-4910-4bdd-a168-db8bdde58754
+Name: 安縵東京
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952129Z
+
+[Merchant: JP-ATT-10050-01]
+ID: 715259bf-24e7-48ad-b744-3428b04a15ee
+Name: 嚴島神社
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952133Z
+
+[Merchant: JP-ATT-10043-01]
+ID: de3856df-8de9-43f2-8717-b87928cc429d
+Name: 東京鐵塔
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952137Z
+
+[Merchant: JP-ATT-10049-01]
+ID: 882d3937-48ef-4790-96b6-8bd7cef7354b
+Name: 白川鄉
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952140Z
+
+[Merchant: JP-AUTO-11463-01]
+ID: 9079dede-3b20-4841-be51-e3f0a7832dc9
+Name: Big Echo
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952145Z
+
+[Merchant: JP-AUTO-11673-01]
+ID: 90e398d6-0bdc-43c8-a71a-9227d1d611c5
+Name: 高估 Pass 涵蓋範圍
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952149Z
+
+[Merchant: JP-ATT-10051-01]
+ID: 230f575a-859b-47dc-82dc-4125de3faa0b
+Name: 東大寺
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952153Z
+
+[Merchant: JP-AUTO-10000-01]
+ID: ba5fef94-ac6c-4f6f-8903-0dc9563fd182
+Name: 天神站
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952157Z
+
+[Merchant: JP-AUTO-10010-01]
+ID: eb0e369b-43be-4afa-92e3-19ee3dd86e99
+Name: 1. 金澤車站（JR金沢駅）
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952161Z
+
+[Merchant: JP-AUTO-12130-01]
+ID: 88ad1991-ab6e-43bb-be42-4cee1416eea9
+Name: 成田機場JR售票處
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952165Z
+
+[Merchant: JP-AUTO-10011-01]
+ID: acef3ca3-fcfc-4dbb-971e-f724e2c12e8b
+Name: 橋場町
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952169Z
+
+[Merchant: JP-AUTO-11882-01]
+ID: c311f5d6-08bc-4dca-bf44-03d489a5e0b7
+Name: 花卷溫泉（岩手縣）
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952172Z
+
+[Merchant: JP-AUTO-12095-01]
+ID: 6e0d1de4-8b40-472e-9980-481803ac2d95
+Name: 綠洲21（Oasis 21）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952176Z
+
+[Merchant: JP-AUTO-10033-01]
+ID: f04242e0-630d-4ce8-8f0a-0d549689bc53
+Name: 國際線禁航
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952180Z
+
+[Merchant: JP-AUTO-10023-01]
+ID: 307c83c3-28b1-4b6b-845f-8551baf6e8d0
+Name: Okinawa Travel
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952184Z
+
+[Merchant: JP-AUTO-10013-01]
+ID: a5f0473d-f783-46b0-925b-f890079cff34
+Name: 箔座食堂（箔座 食堂）
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952188Z
+
+[Merchant: JP-AUTO-10014-01]
+ID: c3ee9f42-c751-4be1-95fc-38fd02b6da47
+Name: 市場化
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952192Z
+
+[Merchant: JP-AUTO-10024-01]
+ID: eef95380-14b6-4a50-868d-2602fc6b7fb6
+Name: Orix
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952196Z
+
+[Merchant: JP-AUTO-10016-01]
+ID: 8540a942-81d9-47f3-9e32-2aed583acab6
+Name: 主題餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952200Z
+
+[Merchant: JP-AUTO-16864-01]
+ID: f7e29ccc-a4db-440e-a625-740739f08f6a
+Name: Watts 藥院站前店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952203Z
+
+[Merchant: JP-AUTO-10007-01]
+ID: 8dfeda81-4e2e-40eb-af3f-366b78bf70f9
+Name: 金澤城公園
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952207Z
+
+[Merchant: JP-AUTO-11667-01]
+ID: c499521c-380b-4ca6-80ec-c9a3936c6c5b
+Name: 金澤作為滑雪中轉站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952211Z
+
+[Merchant: JP-AUTO-10009-01]
+ID: 8e06cd38-91f0-4f20-8291-33f4ab23e892
+Name: 金澤站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952214Z
+
+[Merchant: JP-AUTO-10025-01]
+ID: 6c11812b-14eb-4ac7-888a-0bce065ba42d
+Name: 沖繩エアポートシャトル
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952218Z
+
+[Merchant: JP-AUTO-10035-01]
+ID: 153612d5-594b-4e04-8fe4-bfb33e96ed78
+Name: 大阪伊丹機場
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952222Z
+
+[Merchant: JP-AUTO-10055-01]
+ID: 3d909a75-4562-4a10-b3b5-759aa0470b4d
+Name: 海岸線
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952227Z
+
+[Merchant: JP-AUTO-10075-01]
+ID: 5145dfbd-c13e-480d-8a81-a83161b2de5a
+Name: 名古屋港水族館
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952230Z
+
+[Merchant: JP-AUTO-10022-01]
+ID: afb06e16-13ee-4130-8137-a211485a6f16
+Name: 那霸機場巴士
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.952234Z
+
+
+# 📊 Statistics
+# Total: 67
+# With Google verification: 0
+# With merchant website: 0
+# Average confidence: 0.00

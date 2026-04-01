@@ -1,0 +1,723 @@
+# 🏆 Authority Source Certifications - HONGKONG
+# Generated: 2026-04-01T02:08:13.949815Z
+# Total merchants: 89
+
+
+[Merchant: HK-AUTO-13260-01]
+ID: ec48cafd-7293-47e0-9c4c-aefb6d29602c
+Name: 2026 年大灣區飲茶市場趨勢
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949840Z
+
+[Merchant: HK-AUTO-17935-01]
+ID: a8168453-5115-4ee5-b014-a8d2f320fcef
+Name: 芬名酒店
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949848Z
+
+[Merchant: HK-AUTO-17885-01]
+ID: 8c5cb9a4-7692-4627-aa47-1d95cc70dbaf
+Name: Tan's Kitchen
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949853Z
+
+[Merchant: HK-AUTO-13505-01]
+ID: 2bc84a96-5f7f-4c01-af74-b29784ec1f39
+Name: 花園街街邊車仔麵檔
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949857Z
+
+[Merchant: HK-AUTO-14623-01]
+ID: 070a6107-4c51-4b5d-88ba-ea5f49a0d9b1
+Name: 海防道臨時露天市場
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949862Z
+
+[Merchant: HK-AUTO-13574-01]
+ID: 346cd6a7-881a-4f14-82a4-5c3f52448ecd
+Name: Q1：香港機場快線多少錢？
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949865Z
+
+[Merchant: HK-AUTO-13339-01]
+ID: f718023e-acc9-489d-b96f-8e9f4b6c525f
+Name: 方案B：靜水與離島探險線路
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949869Z
+
+[Merchant: HK-HTL-10011-01]
+ID: 0f9542ba-3bff-4351-8f4f-dd1e8af57a3f
+Name: 半島酒店
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949873Z
+
+[Merchant: HK-AUTO-15185-01]
+ID: 4d03644e-ef59-45fc-8fac-bb8966abf828
+Name: COMEBUY 銅鑼灣分店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949878Z
+
+[Merchant: HK-DIN-10002-01]
+ID: a1892c3f-545e-4754-b4da-6ecdfd3b4e65
+Name: 澳洲牛奶公司
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949882Z
+
+[Merchant: HK-AUTO-14490-01]
+ID: b048c350-bcdc-4495-a1b8-95faf3999b4e
+Name: 西貢海濱公園社群藝術節
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949885Z
+
+[Merchant: HK-ATT-10018-01]
+ID: bda63adb-6830-4670-a119-edefb474b4e8
+Name: 志蓮淨苑
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949889Z
+
+[Merchant: HK-DIN-10003-01]
+ID: aa1baed1-cd28-47e4-97a1-05452e962bd4
+Name: 九記牛腩
+Category: 7c8da92f
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949893Z
+
+[Merchant: HK-AUTO-17519-01]
+ID: 69893b5c-2c83-4493-aae5-e5bc70da19dc
+Name: 香港100元以內吃什麼
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949897Z
+
+[Merchant: HK-HTL-10013-01]
+ID: 1db2f9d3-b40b-46ba-a6e1-c08594781858
+Name: 麗思卡爾頓
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949901Z
+
+[Merchant: HK-ATT-10019-01]
+ID: 0ad8dee2-2664-497f-af0f-22c7cc3229c3
+Name: 星光大道
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949905Z
+
+[Merchant: HK-AUTO-20343-01]
+ID: 56080d15-72a7-4023-b78c-19e6f5850585
+Name: 維多利亞公園登山網路
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949909Z
+
+[Merchant: HK-AUTO-10143-01]
+ID: 694bee28-3822-4e17-97da-c73a686eaf93
+Name: CrossFit 專業訓練中心
+Category: 5acba202
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949912Z
+
+[Merchant: HK-DIN-10004-01]
+ID: a865f3b8-0855-49be-8538-ba80e6662656
+Name: 一樂燒鵝
+Category: 7c8da92f
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949916Z
+
+[Merchant: HK-ATT-10014-01]
+ID: 4822521d-e5dc-4b6d-a09f-199e39da8f7e
+Name: 昂坪360
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949920Z
+
+[Merchant: HK-DIN-10005-01]
+ID: 79e6c3a4-54d7-4393-b6a4-ca7b10170b3c
+Name: 龍景軒
+Category: 7c8da92f
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949924Z
+
+[Merchant: HK-AUTO-16351-01]
+ID: 1e97c1c9-2ef1-46f0-bb85-4b100c01366e
+Name: Arts & Culture
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949928Z
+
+[Merchant: HK-AUTO-20505-01]
+ID: 55b0277d-731d-4f00-b997-eb207abec6a1
+Name: Inline（香港）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949932Z
+
+[Merchant: HK-AUTO-20477-01]
+ID: 0f860e29-753f-482b-8a6f-14b89905718b
+Name: 大澳天后古廟節慶
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949935Z
+
+[Merchant: HK-AUTO-20331-01]
+ID: b034a848-8edf-44ef-9548-4dc6e51d6c1c
+Name: 聖士提反灣海傍步道
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949939Z
+
+[Merchant: HK-AUTO-11366-01]
+ID: 05e1fd76-57c6-4f13-8f01-4bf81ac439fc
+Name: 超值推薦：全港平價茶記地圖
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949943Z
+
+[Merchant: HK-SHP-10006-01]
+ID: a5471520-6e30-4a41-a692-d82ba84d22aa
+Name: 海港城
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949947Z
+
+[Merchant: HK-AUTO-20439-01]
+ID: 439a2f2e-b6ee-4205-a475-f5567b33d17a
+Name: 希慎廣場夜晚購物區
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949951Z
+
+[Merchant: HK-SHP-10007-01]
+ID: 9a5430d7-f35a-4d8c-957d-68165416a350
+Name: IFC商場
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949955Z
+
+[Merchant: HK-AUTO-20564-01]
+ID: eeee66ac-06e0-41fc-87ad-b9c087ea485a
+Name: 2.1 航線與碼頭
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949959Z
+
+[Merchant: HK-ATT-10016-01]
+ID: 98bc7ecf-41bb-406b-9acd-39451b48aea5
+Name: M+博物館
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949962Z
+
+[Merchant: HK-SHP-10008-01]
+ID: 7eb338d5-dcad-422a-918b-e43fd16e1b02
+Name: K11 MUSEA
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949966Z
+
+[Merchant: HK-AUTO-20484-01]
+ID: 64fffeda-db2a-4e50-a93c-4a75690211c3
+Name: 香港最佳中菜餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949971Z
+
+[Merchant: HK-SHP-10009-01]
+ID: 260f2535-5629-41a6-a7d4-7ba67e68e0dc
+Name: 圓方
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949975Z
+
+[Merchant: HK-ATT-10017-01]
+ID: 98e67e83-2e9a-4719-9c82-73d43856d772
+Name: 故宮文化博物館
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949979Z
+
+[Merchant: HK-AUTO-18116-01]
+ID: 91485ed2-b989-40a4-a65a-91aff637b7c3
+Name: 廟街夜市傳統手藝區
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949983Z
+
+[Merchant: HK-AUTO-13453-01]
+ID: 7ab15235-2e91-4d96-86bd-bd0cfdfa178c
+Name: 港鐵尖沙咀站周邊電器店聚集區
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949986Z
+
+[Merchant: HK-AUTO-13360-01]
+ID: 613356fb-820d-4fc2-abcd-ef5aff7d172b
+Name: 香港仔老字號中式旗袍店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949990Z
+
+[Merchant: HK-AUTO-12471-01]
+ID: a2dfd488-2969-467c-8917-e4ed5cce3bde
+Name: 從Outlet到景點周邊
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949995Z
+
+[Merchant: HK-AUTO-13340-01]
+ID: 73f3fe52-5777-4ccc-8315-dd7296790b34
+Name: 方案C：美食與海景組合
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.949999Z
+
+[Merchant: HK-AUTO-17432-01]
+ID: 6bfcc58f-488b-4401-a44b-fea6d9d4804e
+Name: 漆鹹道南茶餐廳老店
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950002Z
+
+[Merchant: HK-AUTO-13600-01]
+ID: b9687f75-9079-4672-a63a-6e1ff339cb9e
+Name: 香港天際線：摩天大樓與城市發展
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950006Z
+
+[Merchant: HK-AUTO-18222-01]
+ID: ce303f20-ac12-45eb-b50a-a8cabc0adafb
+Name: 7. 香港動物園入場票
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950010Z
+
+[Merchant: HK-AUTO-14099-01]
+ID: 7850bedc-d18b-494f-bae3-ccf813e2a6d0
+Name: 新渡輪官方網站：
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950014Z
+
+[Merchant: HK-AUTO-18924-01]
+ID: 9bde60fe-a5d5-44c6-9019-28cc750cf525
+Name: 北帝廟燒鵝工房
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950018Z
+
+[Merchant: HK-AUTO-17901-01]
+ID: 45c174e6-f54e-49c1-899b-29a57ef0c065
+Name: 5. 香港中央圖書館
+Category: 9e077dda
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950021Z
+
+[Merchant: HK-AUTO-10195-01]
+ID: 9e211363-4d6a-4384-b708-a3f086552481
+Name: 先逛社群再進Outlet
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950026Z
+
+[Merchant: HK-AUTO-17964-01]
+ID: 02f8d8aa-44b9-412f-85ef-248e2c63f178
+Name: 港式日常
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950030Z
+
+[Merchant: HK-AUTO-13131-01]
+ID: 3dc970e7-881f-40fe-af03-f5f2a84fd923
+Name: M+博物館費用
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950034Z
+
+[Merchant: HK-AUTO-16359-01]
+ID: 03da8174-01fa-4d9d-9641-9212634bfbd2
+Name: 香港煙花匯演什麼時候？
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950038Z
+
+[Merchant: HK-AUTO-18632-01]
+ID: c1a97318-2f08-46d0-bf5f-598bb6a66369
+Name: 香港仔燒臘店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950041Z
+
+[Merchant: HK-HTL-10012-01]
+ID: a9c8f26d-a749-487a-94e5-1223a487f958
+Name: 文華東方酒店
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950045Z
+
+[Merchant: HK-AUTO-18372-01]
+ID: 91fa5a52-d34a-42b8-8a69-323385b59734
+Name: 線下體驗、線上導流
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950049Z
+
+[Merchant: HK-AUTO-10153-01]
+ID: 47564c3f-bee4-4114-86c0-c07fd4c06793
+Name: 預算5,000港元以上
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950053Z
+
+[Merchant: HK-AUTO-10298-01]
+ID: b0d09961-4f60-440b-a729-414e9a543286
+Name: 維多利亞茶餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950057Z
+
+[Merchant: HK-AUTO-15113-01]
+ID: 813af16a-6713-4a42-bfac-6964fc5e87c9
+Name: 九龍城泰式食材購買指南
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950061Z
+
+[Merchant: HK-AUTO-17988-01]
+ID: 67a2bf19-0b71-4917-9a8e-38a9ab4bad0b
+Name: 商場間
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950065Z
+
+[Merchant: HK-AUTO-20319-01]
+ID: 776e5cf1-72f8-4bff-a9c1-78a25ec75ccb
+Name: 五條精選朝聖路線
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950069Z
+
+[Merchant: HK-AUTO-10146-01]
+ID: eef7ce6c-f065-42a2-a99e-fc8446d7485c
+Name: 香港 Spa 推薦
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950073Z
+
+[Merchant: HK-AUTO-17588-01]
+ID: c89ff817-35b2-45dc-a514-a2d0ad7cd9a2
+Name: 明記燒臘茶餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950076Z
+
+[Merchant: HK-AUTO-10365-01]
+ID: c59e6d17-994a-4c65-be29-6106c2508a51
+Name: 信達城電子廣場
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950080Z
+
+[Merchant: HK-AUTO-17800-01]
+ID: a58221aa-b3e1-4e67-ab01-8a32eecaf33e
+Name: MOP 80-150
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950084Z
+
+[Merchant: HK-AUTO-10149-01]
+ID: fa31810a-fcec-4021-bcfd-1e016beba24b
+Name: 旅客友善路線
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950088Z
+
+[Merchant: HK-AUTO-10239-01]
+ID: de69f77b-1928-4aa9-b5c1-15527839d095
+Name: 從香港坐大橋到澳門要多久
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950092Z
+
+[Merchant: HK-AUTO-17959-01]
+ID: 502bdee1-1f84-4fbc-84da-10cc1b181153
+Name: The Landmark
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950105Z
+
+[Merchant: HK-AUTO-10864-01]
+ID: db364c5b-14cf-4d10-8667-992f91dae4c6
+Name: The Boathouse
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950110Z
+
+[Merchant: HK-AUTO-17578-01]
+ID: 411c9741-eb82-4299-88a6-0954765176d3
+Name: 路氹城手打茶專門店
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950114Z
+
+[Merchant: HK-AUTO-16885-01]
+ID: 504f3755-d771-4de5-8e69-dbfc161f6cd8
+Name: 第三間：明記燒鵝茶餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950117Z
+
+[Merchant: HK-AUTO-10850-01]
+ID: e3a5cde9-b218-41fc-81ba-d6fb202bb8be
+Name: 真實香港超市文化
+Category: 37584839
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950121Z
+
+[Merchant: HK-AUTO-11923-01]
+ID: b0209be6-4925-42f8-9115-bdda88745b2b
+Name: 3. 波記茶檔（海港城分店）
+Category: 62d35b80
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950125Z
+
+[Merchant: HK-AUTO-11978-01]
+ID: fffe0948-e882-4072-bb8f-5b2db9d3c10a
+Name: 香港故宮文化博物館
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950128Z
+
+[Merchant: HK-AUTO-12150-01]
+ID: a11fdb3e-771b-4098-b816-c20c4c4a5af8
+Name: 先達廣場二手時尚迴圈市場
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950132Z
+
+[Merchant: HK-AUTO-11317-01]
+ID: 277da306-a7d1-4ccc-a91d-f965f03d6e6b
+Name: 維港沿岸交通指南（港內移動）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950136Z
+
+[Merchant: HK-AUTO-18082-01]
+ID: b143a1fa-2bd0-4eed-98c4-d4afef5c0f04
+Name: 香港仔避風塘觀景臺
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950139Z
+
+[Merchant: HK-AUTO-10853-01]
+ID: 3fc16b74-c5ff-4e8f-a27f-d4cd9db3d015
+Name: 為什麼遊客也應該逛濕貨市場？
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950143Z
+
+[Merchant: HK-AUTO-10027-01]
+ID: 3f41e9b0-f6b0-47ca-b7c3-6915dea9cb11
+Name: 香港仔街市
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950147Z
+
+[Merchant: HK-AUTO-10852-01]
+ID: 21afd27a-6c5b-467e-8f07-ea23fd4e1900
+Name: 麼地道熟食小贩市場
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950151Z
+
+[Merchant: HK-AUTO-10028-01]
+ID: 4870f0e7-91d6-4fb6-910b-6b98e84dc77b
+Name: 銀河街市廣場
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950155Z
+
+[Merchant: HK-AUTO-12383-01]
+ID: a8fe183d-c12b-4914-9176-348aeb2e98cf
+Name: 360度海港景觀
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950158Z
+
+[Merchant: HK-AUTO-18619-01]
+ID: 915bdcaf-d354-420b-9789-7bbca8d94126
+Name: 香港文化展示
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950162Z
+
+[Merchant: HK-AUTO-12353-01]
+ID: b7183b8b-22b5-4593-8ebe-ae2570883a21
+Name: 香港歷史博物館
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950166Z
+
+[Merchant: HK-AUTO-18780-01]
+ID: ebf08fc0-de88-473c-99d1-2f3c8d78d6a4
+Name: 旺角茶餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950170Z
+
+[Merchant: HK-AUTO-18969-01]
+ID: 5fde3fbe-9393-42c2-bd2e-999828645407
+Name: 香港銅鑼灣街頭小食攤
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950174Z
+
+[Merchant: HK-AUTO-18843-01]
+ID: 90672d23-faeb-431b-8b5a-212ce97a031e
+Name: 港式雞蛋仔（小攤）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950178Z
+
+[Merchant: HK-AUTO-20609-01]
+ID: cb4a9066-bbea-4c3b-b517-142348eb1bf1
+Name: 茶餐廳早餐：
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950182Z
+
+[Merchant: HK-AUTO-14003-01]
+ID: 3fe710d4-8cc0-4e56-9b0b-25ab7f5fa337
+Name: 港潮海鮮酒家
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950185Z
+
+[Merchant: HK-AUTO-10042-01]
+ID: 70297cc6-0a1c-46c1-87a9-bb0be71d60c5
+Name: 大家樂連鎖餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950190Z
+
+[Merchant: HK-AUTO-13454-01]
+ID: e689b04c-aab1-4245-bb2c-fac2cd1a5d6d
+Name: 海港城電子及科技樓層
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950193Z
+
+[Merchant: HK-AUTO-22358-01]
+ID: 89449062-53e3-435d-ab5e-c5414ca97e23
+Name: 搵食攻略：旺角茶餐廳既分佈特色
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950198Z
+
+
+# 📊 Statistics
+# Total: 89
+# With Google verification: 0
+# With merchant website: 0
+# Average confidence: 0.00

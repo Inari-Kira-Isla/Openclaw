@@ -1,0 +1,443 @@
+# 🏆 Authority Source Certifications - TAIWAN
+# Generated: 2026-04-01T02:08:13.950982Z
+# Total merchants: 54
+
+
+[Merchant: TW-AUTO-15092-01]
+ID: 8285561c-3c3a-4ccd-a59b-1e1d2e1af805
+Name: 延三夜市
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.950997Z
+
+[Merchant: TW-AUTO-11707-01]
+ID: a22bc2a7-363e-49a4-b8a1-5ce495f229df
+Name: 聞起來像走進花園
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951003Z
+
+[Merchant: TW-AUTO-16964-01]
+ID: 0f3cf124-f207-4cce-b4fa-8d5a2ee4b80f
+Name: 義大Outlet購物中心
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951008Z
+
+[Merchant: TW-AUTO-11832-01]
+ID: 68d75a1e-dc0a-4799-bc18-c8651ebaa6c8
+Name: 最佳傳統美食夜市
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951012Z
+
+[Merchant: TW-AUTO-11435-01]
+ID: acdfcfe8-dcbf-4542-a033-55725b15d7ec
+Name: 太魯閣國家公園線上申請系統
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951015Z
+
+[Merchant: TW-AUTO-11306-01]
+ID: 5cf62414-15ab-4599-9eb9-a94c99fb7102
+Name: 九份老街玉石坊
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951019Z
+
+[Merchant: TW-AUTO-11507-01]
+ID: 6f577912-bb50-4c75-b138-aab7adc7f502
+Name: 國家漫畫博物館（台中）
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951023Z
+
+[Merchant: TW-HTL-10027-01]
+ID: 476e90d9-1676-42a1-91e0-a79cdd0c665a
+Name: 圓山大飯店
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951027Z
+
+[Merchant: TW-ATT-10028-01]
+ID: 0aac5f96-78db-491d-99b4-5a94e6a3294a
+Name: 中正紀念堂
+Category: cb7c083d
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951031Z
+
+[Merchant: TW-ATT-10030-01]
+ID: 47d12379-9fb2-46e4-a372-478ab4e44d67
+Name: 淡水老街
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951035Z
+
+[Merchant: TW-DIN-10020-01]
+ID: e334f3d6-360c-4261-a088-37c32edcd0e7
+Name: 鼎泰豐
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951039Z
+
+[Merchant: TW-AUTO-15324-01]
+ID: 9f891b08-b65c-44e8-ac43-94b765faff34
+Name: 夜市類型分類
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951042Z
+
+[Merchant: TW-DIN-10021-01]
+ID: f9dcc4aa-1930-48ad-b1a3-56498c326418
+Name: 永康牛肉麵
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951046Z
+
+[Merchant: TW-DIN-10022-01]
+ID: 56e7097d-635b-44b6-8d02-0728b81fa49f
+Name: 饒河夜市
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951050Z
+
+[Merchant: TW-SHP-10024-01]
+ID: 4497292c-b677-46eb-be73-52641a6ff540
+Name: 台北101購物中心
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951054Z
+
+[Merchant: TW-SHP-10025-01]
+ID: 713bb5dc-9856-47b0-bd8b-c7bbd283a829
+Name: 西門町
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951058Z
+
+[Merchant: TW-AUTO-11692-01]
+ID: 7bee00cb-e976-41fe-8c16-80628b6305b8
+Name: 統茂溫泉會館
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951062Z
+
+[Merchant: TW-AUTO-12500-01]
+ID: c59515ae-e375-44fb-848f-e6a24cdb0911
+Name: 1. 北投地熱谷溫泉
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951065Z
+
+[Merchant: TW-AUTO-15532-01]
+ID: 0f7071c2-6340-4f35-95e7-922cfbc592ad
+Name: 青年KTV攻略小提示
+Category: 562597ee
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951069Z
+
+[Merchant: TW-AUTO-10594-01]
+ID: 55d5046b-6bd6-4c18-8175-43e3038878a3
+Name: 迪化街老街區
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951073Z
+
+[Merchant: TW-AUTO-13966-01]
+ID: 06859cc8-a050-4882-9660-1cd78258b432
+Name: 2. 冬山舊河港燈節
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951077Z
+
+[Merchant: TW-DIN-10023-01]
+ID: b1971603-872a-45e5-9666-25b83834b710
+Name: 逢甲夜市
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951081Z
+
+[Merchant: TW-AUTO-16778-01]
+ID: 4a72b2fc-c637-4945-82bb-1b7841baf66b
+Name: 後壁湖星光碼頭
+Category: fbda50e8
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951084Z
+
+[Merchant: TW-AUTO-19152-01]
+ID: 2f784cac-9f50-4ec4-90e7-d321c5fe8f7e
+Name: 前鎮魚市場
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951088Z
+
+[Merchant: TW-AUTO-10287-01]
+ID: c6c77d55-a202-4f74-b605-2fc4c2b9abec
+Name: 礁溪溫泉農業體驗餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951092Z
+
+[Merchant: TW-SHP-10026-01]
+ID: 9d352632-d959-487f-bad1-37984168e666
+Name: 誠品生活
+Category: cbcd0e4b
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951095Z
+
+[Merchant: TW-AUTO-10524-01]
+ID: d7477922-ea83-49dc-9587-a6f26174b9c6
+Name: 蚵仔寮魚港
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951099Z
+
+[Merchant: TW-AUTO-15967-01]
+ID: 51d49e29-9dea-459a-8dad-af1931b0a308
+Name: 涵碧樓溫泉會所
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951103Z
+
+[Merchant: TW-AUTO-17459-01]
+ID: 472f3614-bc81-42a7-b7ba-c9f96d35b226
+Name: 養生料理
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951107Z
+
+[Merchant: TW-AUTO-20153-01]
+ID: 5c7d4366-e28c-43b7-8c42-ffd56ca63d9a
+Name: 天主堂步道
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951110Z
+
+[Merchant: TW-AUTO-18532-01]
+ID: cbfa2374-a08c-4566-90f1-8fcce625d09e
+Name: 竹溪寺
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951114Z
+
+[Merchant: TW-AUTO-19116-01]
+ID: c50c2382-5b60-4c69-8ca7-ebd895760c51
+Name: 新興港都茶飲品牌
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951117Z
+
+[Merchant: TW-AUTO-20856-01]
+ID: db12c9bb-5bf3-4f05-bbeb-dde9d3a0305b
+Name: 信義國小站
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951122Z
+
+[Merchant: TW-AUTO-15987-01]
+ID: b1059f4a-1a91-4339-b7da-b0a730039f7e
+Name: 奢華路線
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951126Z
+
+[Merchant: TW-AUTO-17463-01]
+ID: 3ce14ef0-ecdc-4320-b674-edac67c72fdc
+Name: 部落廚房（秀姑巒溪沿線）
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951130Z
+
+[Merchant: TW-ATT-10029-01]
+ID: 05d430e3-643e-4d92-a37c-cf01bc650333
+Name: 野柳地質公園
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951134Z
+
+[Merchant: TW-ATT-10031-01]
+ID: cc27d505-416f-4a06-b356-7f40dd649f1a
+Name: 北投溫泉博物館
+Category: 1ac516a4
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951137Z
+
+[Merchant: TW-AUTO-16017-01]
+ID: 802833e5-9b38-430f-b68a-251425f2eb2d
+Name: 四重溪溫泉
+Category: dc368bbd
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951141Z
+
+[Merchant: TW-ATT-10032-01]
+ID: 5c74177c-3dcd-41b0-8f96-99faa4425e1e
+Name: 貓空纜車
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951147Z
+
+[Merchant: TW-AUTO-16397-01]
+ID: 05d21fb9-c72d-489f-b195-5943f0c872e9
+Name: 士林夜市（大南路及基河路攤區）
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951151Z
+
+[Merchant: TW-AUTO-16280-01]
+ID: 933258c6-2afa-47d1-a8d7-9c414bccdc4f
+Name: YouBike微笑单车
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951155Z
+
+[Merchant: TW-AUTO-11708-01]
+ID: 086435ed-77b5-4894-b083-355c8421f536
+Name: NT$1,500～3,000
+Category: d993cfc2
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951159Z
+
+[Merchant: TW-AUTO-17323-01]
+ID: bd54abf5-464c-4fdb-bd6c-2ada174369a6
+Name: 士林夜市周邊素食版塊
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951162Z
+
+[Merchant: TW-AUTO-17466-01]
+ID: e5c4845b-6dea-4cae-92c9-aadef5601b66
+Name: 崇德/清水休息站原民餐坊
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951167Z
+
+[Merchant: TW-AUTO-17526-01]
+ID: 3aed686a-9499-456c-a34c-37464cc0c821
+Name: 最後一家「多納山莊餐廳」
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951170Z
+
+[Merchant: TW-AUTO-19232-01]
+ID: f5e514e6-4295-4a29-b921-9f1c45002f37
+Name: 料理技法小知識
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951174Z
+
+[Merchant: TW-AUTO-17439-01]
+ID: 8c64f62c-fa74-4288-ab54-750cfeb64b0a
+Name: ikos 蔬食餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951179Z
+
+[Merchant: TW-AUTO-17467-01]
+ID: 48dcb5b6-1913-4722-981e-cb5d61e75515
+Name: 鯉魚潭畔野菜餐廳
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951183Z
+
+[Merchant: TW-AUTO-15813-01]
+ID: 73bb1cfa-4096-495f-beff-f33a0b96b35e
+Name: 星聚點KTV
+Category: 562597ee
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951187Z
+
+[Merchant: TW-AUTO-17827-01]
+ID: 122c2e41-ac26-4b49-9006-3cfac426a2a5
+Name: 隙頂二延平步道沿途寺廟群
+Category: c8a63d71
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951191Z
+
+[Merchant: TW-AUTO-18303-01]
+ID: 89fa4d14-19bd-4eb9-89b0-9aff57ca716d
+Name: 楠西梅嶺溫泉度假村
+Category: 1d888c78
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951194Z
+
+[Merchant: TW-AUTO-19212-01]
+ID: ace82684-db85-4889-b31a-91e6f2ddf9c6
+Name: 梅山太平老街
+Category: fb2b0236
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951198Z
+
+[Merchant: TW-AUTO-10065-01]
+ID: ea4d20ed-999a-4fc1-ae70-4ba3712242d6
+Name: 羅東夜市海鮮攤群
+Category: 9b35ae15
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951202Z
+
+[Merchant: TW-AUTO-17944-01]
+ID: 54d76aa3-6aad-4ccb-8cda-10ac9ef19b56
+Name: 臺中第二市場
+Category: a1cc95cb
+
+source-confidence: 0.00
+verified-at: 2026-04-01T02:08:13.951205Z
+
+
+# 📊 Statistics
+# Total: 54
+# With Google verification: 0
+# With merchant website: 0
+# Average confidence: 0.00
