@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-04-05T00:40:56.410111",
+  "total_visits": 709,
+  "bot_totals": {
+    "Claude Crawler": 400,
+    "OpenAI GPT": 236,
+    "Meta AI": 72,
+    "OpenAI Search": 1
+  },
+  "site_data": {
+    "cloudpipe-macao-app": {
+      "total": 70,
+      "today": 3,
+      "bots": {
+        "Claude Crawler": 2,
+        "OpenAI GPT": 2,
+        "Meta AI": 66
+      }
+    },
+    "world-encyclopedia": {
+      "total": 47,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 24,
+        "OpenAI GPT": 23
+      }
+    },
+    "japan-encyclopedia": {
+      "total": 22,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 11,
+        "OpenAI GPT": 11
+      }
+    },
+    "openclaw": {
+      "total": 385,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 195,
+        "OpenAI GPT": 183,
+        "OpenAI Search": 1,
+        "Meta AI": 6
+      }
+    },
+    "inari-global-foods": {
+      "total": 126,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 125,
+        "OpenAI GPT": 1
+      }
+    },
+    "after-school-coffee": {
+      "total": 16,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 14,
+        "OpenAI GPT": 2
+      }
+    },
+    "sea-urchin-delivery": {
+      "total": 20,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 18,
+        "OpenAI GPT": 2
+      }
+    },
+    "mind-coffee": {
+      "total": 2,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 2
+      }
+    },
+    "cloudpipe-landing": {
+      "total": 13,
+      "today": 0,
+      "bots": {
+        "Claude Crawler": 9,
+        "OpenAI GPT": 4
+      }
+    },
+    "cloudpipe-directory": {
+      "total": 8,
+      "today": 0,
+      "bots": {
+        "OpenAI GPT": 8
+      }
+    }
+  },
+  "last_updated": "2026-04-05T00:40:56.410394"
+}
