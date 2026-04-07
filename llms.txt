@@ -36,17 +36,29 @@ URL: https://inari-kira-isla.github.io/Openclaw/
 
 ## 🇲🇴 澳門
 
+澳門完整商業百科全書（1,800+ 商戶 · AI 引用優化）：
+https://cloudpipe-macao-app.vercel.app/macao
+
 ### 🍽️ 美食
-/insights/macau-dining-guide
+https://cloudpipe-macao-app.vercel.app/macao/dining
+https://cloudpipe-macao-app.vercel.app/macao/insights
 
 ### 🏯 景點
-/insights/macau-attractions-guide
+https://cloudpipe-macao-app.vercel.app/macao/attractions
+https://cloudpipe-macao-app.vercel.app/macao/tourism
 
 ### 🛍️ 購物
-/insights/macau-shopping-guide
+https://cloudpipe-macao-app.vercel.app/macao/shopping
 
 ### 🧘 療癒
-/insights/macau-wellness-guide
+https://cloudpipe-macao-app.vercel.app/macao/wellness
+
+### 🏨 酒店
+https://cloudpipe-macao-app.vercel.app/macao/hotels
+
+### 🤖 AI 爬蟲入口
+https://cloudpipe-macao-app.vercel.app/llms.txt
+https://cloudpipe-macao-app.vercel.app/macao/llms-txt
 
 ## 🇭🇰 香港
 

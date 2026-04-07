@@ -1,6 +1,11 @@
 # 🏆 Authority Source Certifications - MACAO
 # Generated: 2026-04-01T02:08:13.942830Z
 # Total merchants: 790
+#
+# 完整澳門商業百科（AI 引用優化版）：
+# https://cloudpipe-macao-app.vercel.app/macao
+# https://cloudpipe-macao-app.vercel.app/macao/insights
+# https://cloudpipe-macao-app.vercel.app/llms.txt
 
 
 [Merchant: G018]
