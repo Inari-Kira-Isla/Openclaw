@@ -1,0 +1,309 @@
+{
+  "version": "1.0",
+  "source": "Google Gemini for Workspace Prompting Guide 101",
+  "source_url": "https://services.google.com/fh/files/misc/gemini_for_workspace_prompt_guide_october_2024_digital_final.pdf",
+  "categories": {
+    "administrative": {
+      "name": "行政支援",
+      "name_en": "Administrative Support",
+      "description": "幫助行政助理和管理人員提高效率的 Prompt",
+      "icon": "📋",
+      "prompts": [
+        {
+          "id": "admin_001",
+          "title": "規劃會議議程",
+          "prompt": "我是一位團隊總監的行政助理。我們的新團隊由行銷人員組成，將在華盛頓特區進行為期三天的異地辦公。請為每一天規劃活動，包含團隊凝聚活動與深度策略工作時間，並為我建立一個議程範例。",
+          "category": "Administrative Support",
+          "use_case": "規劃異地工作會議、團隊建築活動、議程安排",
+          "variables": [
+            "團隊組成",
+            "地點",
+            "天數"
+          ]
+        },
+        {
+          "id": "admin_002",
+          "title": "腦力激盪破冰活動",
+          "prompt": "建議三種不同的破冰活動，鼓勵員工了解彼此的工作風格、強項與目標。確保活動吸引人，且 25 人的團體可在 30 分鐘內完成。",
+          "category": "Administrative Support",
+          "use_case": "團隊建築、員工融合、會議破冰",
+          "variables": [
+            "團隊人數",
+            "時間限制"
+          ]
+        },
+        {
+          "id": "admin_003",
+          "title": "整理與格式化議程",
+          "prompt": "將此議程整理成表格格式，並在每一天中加入你建議的一項破冰活動。",
+          "category": "Administrative Support",
+          "use_case": "會議文檔整理、議程格式化",
+          "variables": [
+            "議程內容"
+          ]
+        },
+        {
+          "id": "admin_004",
+          "title": "結合文件摘要",
+          "prompt": "使用 @[2024 H2 Team Vision] 文件，為這份議程第一天的開幕致詞生成一段摘要。",
+          "category": "Administrative Support",
+          "use_case": "文件整合、開幕致詞撰寫",
+          "variables": [
+            "文件名稱",
+            "致詞焦點"
+          ]
+        },
+        {
+          "id": "admin_005",
+          "title": "管理收件匣",
+          "prompt": "摘要過去一週來自 [主管姓名] 的所有電子郵件。",
+          "category": "Administrative Support",
+          "use_case": "郵件整理、摘要、優先級排序",
+          "variables": [
+            "主管姓名",
+            "時間範圍"
+          ]
+        },
+        {
+          "id": "admin_006",
+          "title": "待辦事項提取",
+          "prompt": "摘要此郵件對話串，並列出所有的待辦事項 (Action Items) 與截止日期。",
+          "category": "Administrative Support",
+          "use_case": "郵件對話分析、任務提取、截止日期追蹤",
+          "variables": [
+            "郵件對話"
+          ]
+        }
+      ]
+    },
+    "communications": {
+      "name": "溝通協作",
+      "name_en": "Communications",
+      "description": "撰寫和整理各類溝通文件的 Prompt",
+      "icon": "💬",
+      "prompts": [
+        {
+          "id": "comm_001",
+          "title": "撰寫感謝信",
+          "prompt": "草擬一封感謝信給演講嘉賓 [姓名]，感謝他在我們 [會議名稱] 上的分享，特別提到他關於 [主題] 的見解。",
+          "category": "Communications",
+          "use_case": "感謝信、公關郵件、關係維護",
+          "variables": [
+            "嘉賓姓名",
+            "會議名稱",
+            "演講主題"
+          ]
+        },
+        {
+          "id": "comm_002",
+          "title": "撰寫公告郵件",
+          "prompt": "寫一封電子郵件向全公司宣佈 [新專案名稱] 正式啟動，強調其對公司 [目標] 的重要性，並邀請大家參加下週的說明會。",
+          "category": "Communications",
+          "use_case": "公司公告、專案啟動、員工溝通",
+          "variables": [
+            "專案名稱",
+            "公司目標",
+            "會議時間"
+          ]
+        },
+        {
+          "id": "comm_003",
+          "title": "會議記錄摘要",
+          "prompt": "根據這份 @[會議錄音逐字稿]，提取關鍵決策、討論要點，並以條列式列出每位成員的分配任務。",
+          "category": "Communications",
+          "use_case": "會議記錄、決策追蹤、任務分配",
+          "variables": [
+            "會議記錄"
+          ]
+        }
+      ]
+    },
+    "customer_service": {
+      "name": "客戶服務",
+      "name_en": "Customer Service",
+      "description": "提升客戶服務品質和效率的 Prompt",
+      "icon": "🎯",
+      "prompts": [
+        {
+          "id": "cs_001",
+          "title": "撰寫同理心回覆",
+          "prompt": "我是一位客服代表，需要回覆一位收到損壞耳機的客戶投訴。客戶已提供照片。我已提出更換新品，但他們要求平時不提供的特快配送。請撰寫一封同理心的回覆，包含一段安撫情緒的話，以及三個潛在解決方案的清單。",
+          "category": "Customer Service",
+          "use_case": "客戶投訴回覆、問題解決、關係修復",
+          "variables": [
+            "產品名稱",
+            "問題描述"
+          ]
+        },
+        {
+          "id": "cs_002",
+          "title": "尋找替代方案",
+          "prompt": "除了特快配送，請建議 10 種其他的替代方案來解決客戶因收到損壞包裹而產生的不滿。",
+          "category": "Customer Service",
+          "use_case": "解決方案創意、客戶滿意度改善",
+          "variables": [
+            "問題類型"
+          ]
+        },
+        {
+          "id": "cs_003",
+          "title": "產品資訊摘要",
+          "prompt": "摘要關於 [產品名稱] 的資訊，包含其特定的 [退貨政策]、[成分] 與 [認證]。",
+          "category": "Customer Service",
+          "use_case": "客戶教育、FAQ、產品資訊整理",
+          "variables": [
+            "產品名稱",
+            "政策類型"
+          ]
+        },
+        {
+          "id": "cs_004",
+          "title": "標準化溝通框架",
+          "prompt": "為三種不同類型的客戶溝通起草模板：道歉信、訂單確認信、以及給忠實客戶的感謝信。每份模板保持一段長度，語氣友善。",
+          "category": "Customer Service",
+          "use_case": "溝通模板標準化、品牌一致性",
+          "variables": [
+            "公司風格",
+            "行業類型"
+          ]
+        },
+        {
+          "id": "cs_005",
+          "title": "分析客戶反饋",
+          "prompt": "使用附加的試算表，識別 [時間段] 內 [類別] 的客戶反饋趨勢。找出客戶聯繫顯著增加的領域並調查原因。",
+          "category": "Customer Service",
+          "use_case": "反饋分析、趨勢識別、改善重點",
+          "variables": [
+            "時間段",
+            "反饋類別"
+          ]
+        }
+      ]
+    },
+    "executives": {
+      "name": "高階主管",
+      "name_en": "Executives",
+      "description": "為決策者和高層提供支援的 Prompt",
+      "icon": "👔",
+      "prompts": [
+        {
+          "id": "exec_001",
+          "title": "郵件優先順序摘要",
+          "prompt": "我是 [公司/部門] 的負責人。請摘要我過去 24 小時內收到的郵件。列出需要我立即關注的 3 個最重要的事項，並針對每一項提供簡短的背景資訊。",
+          "category": "Executives",
+          "use_case": "每日優先級摘要、決策支持、時間管理",
+          "variables": [
+            "公司名稱",
+            "時間範圍"
+          ]
+        },
+        {
+          "id": "exec_002",
+          "title": "準備高層簡報",
+          "prompt": "使用 @[Q3 業績報告] 與 @[市場趨勢分析]，為董事會準備一個 5 頁投影片的大綱。重點放在我們的競爭優勢以及未來半年的成長機會。",
+          "category": "Executives",
+          "use_case": "董事會簡報、策略規劃、競爭分析",
+          "variables": [
+            "報告文件",
+            "時間範圍"
+          ]
+        },
+        {
+          "id": "exec_003",
+          "title": "撰寫思想領袖文章",
+          "prompt": "根據我在 @[會議記錄] 中提到的觀點，寫一篇約 500 字的 LinkedIn 貼文，探討 [特定行業趨勢] 對中小企業的影響。語氣要專業且具備前瞻性。",
+          "category": "Executives",
+          "use_case": "思想領袖建設、品牌聲譽、行業影響力",
+          "variables": [
+            "行業趨勢",
+            "目標受眾"
+          ]
+        }
+      ]
+    },
+    "frontline_management": {
+      "name": "前線管理",
+      "name_en": "Frontline Management",
+      "description": "幫助團隊領導者協調和管理的 Prompt",
+      "icon": "⚙️",
+      "prompts": [
+        {
+          "id": "fm_001",
+          "title": "工作排班與協調",
+          "prompt": "我正在為下個月的團隊輪值做準備。請根據 @[員工請假申請] 與我們的 @[營運時段表]，建立一個初步的排班表，確保每天至少有 3 名資深員工在場。",
+          "category": "Frontline Management",
+          "use_case": "排班管理、人力資源規劃、營運協調",
+          "variables": [
+            "請假申請",
+            "營運需求"
+          ]
+        },
+        {
+          "id": "fm_002",
+          "title": "撰寫每日營運簡報",
+          "prompt": "根據 @[每日銷售數據] 與 @[現場回報紀錄]，寫一段給全體員工的簡短公告，總結昨天的表現，並列出今天需要重點關注的兩個服務環節。",
+          "category": "Frontline Management",
+          "use_case": "每日團隊溝通、績效分享、重點提醒",
+          "variables": [
+            "銷售數據",
+            "現場回報"
+          ]
+        },
+        {
+          "id": "fm_003",
+          "title": "現場問題解決",
+          "prompt": "我們最近在 [特定營運環節，如：貨物清點] 遇到延遲。請分析可能的瓶頸，並提供 5 個可以立即實施的改進方案。",
+          "category": "Frontline Management",
+          "use_case": "問題診斷、流程改善、效率提升",
+          "variables": [
+            "營運環節",
+            "時間框架"
+          ]
+        }
+      ]
+    },
+    "marketing_sales_pm": {
+      "name": "行銷/銷售/PM",
+      "name_en": "Marketing/Sales/Project Management",
+      "description": "支援市場推廣、業務發展和項目管理的 Prompt",
+      "icon": "📈",
+      "prompts": [
+        {
+          "id": "mkt_001",
+          "title": "社群媒體貼文規劃",
+          "prompt": "我正在為 [產品名稱] 策劃發布活動。請針對 Instagram、Facebook 和 LinkedIn 分別撰寫三篇不同的貼文文案，內容需強調 [產品核心賣點]，並加入吸引人的 Call-to-Action (CTA)。",
+          "category": "Marketing",
+          "use_case": "社群媒體行銷、產品發布、內容創意",
+          "variables": [
+            "產品名稱",
+            "賣點",
+            "目標受眾"
+          ]
+        },
+        {
+          "id": "sales_001",
+          "title": "個性化開發郵件",
+          "prompt": "我正在開發 [公司名稱] 的 [職稱]。根據他們的官網描述 @[官網內容]，撰寫一封個性化的開發信，說明我們的 [解決方案] 如何能解決他們目前在 [領域] 可能遇到的痛點。",
+          "category": "Sales",
+          "use_case": "B2B 開發、冷郵件、客戶研究",
+          "variables": [
+            "公司名稱",
+            "職位",
+            "解決方案"
+          ]
+        },
+        {
+          "id": "pm_001",
+          "title": "專案計畫書擬定",
+          "prompt": "我正在啟動一個 [專案名稱]。請幫我寫一份專案計畫書大綱，包含專案目標、關鍵里程碑、專案範圍、假設條件以及主要利益相關者清單。",
+          "category": "Project Management",
+          "use_case": "專案規劃、利益相關者管理、範圍定義",
+          "variables": [
+            "專案名稱",
+            "時間框架"
+          ]
+        }
+      ]
+    }
+  }
+}

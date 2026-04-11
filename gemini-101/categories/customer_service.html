@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客戶服務 Prompts - Gemini 147 Prompts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .category-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .category-header p {
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .prompts-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .prompt-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .prompt-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .prompt-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .prompt-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .meta-tag {
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #666;
+        }
+
+        .prompt-text {
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .prompt-text code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .use-case {
+            margin-bottom: 15px;
+        }
+
+        .use-case label {
+            display: block;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .use-case p {
+            color: #666;
+            line-height: 1.5;
+            padding-left: 10px;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            color: #666;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .category-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .prompt-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">← 返回首頁</a>
+
+        <div class="category-header" id="header"></div>
+
+        <div class="prompts-grid" id="prompts-container"></div>
+
+        <div class="footer">
+            <p>💡 提示：複製 Prompt，把括號 <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">[...]</code> 改成你的實際情況，貼給 Gemini</p>
+            <p style="margin-top: 15px;">
+                <a href="../index.html">完整 Prompt 列表</a> |
+                <a href="https://gemini.google.com" target="_blank">Gemini Advanced</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const category = 'customer_service';
+
+        fetch('../prompt-data.json')
+            .then(response => response.json())
+            .then(data => {
+                const cat = data.categories[category];
+
+                const headerDiv = document.getElementById('header');
+                headerDiv.innerHTML = `
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">${cat.icon}</div>
+                    <h1>${cat.name}</h1>
+                    <p>${cat.name_en}</p>
+                    <p style="margin-top: 15px; opacity: 0.9;">${cat.description}</p>
+                `;
+
+                const container = document.getElementById('prompts-container');
+                cat.prompts.forEach((prompt, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'prompt-card';
+
+                    const variablesHTML = prompt.variables.length > 0
+                        ? `<span class="meta-tag">📝 變數: ${prompt.variables.join(', ')}</span>`
+                        : '';
+
+                    card.innerHTML = `
+                        <h3>${index + 1}. ${prompt.title}</h3>
+                        <div class="prompt-meta">
+                            <span class="meta-tag">ID: ${prompt.id}</span>
+                            ${variablesHTML}
+                        </div>
+
+                        <div class="use-case">
+                            <label>📌 應用場景</label>
+                            <p>${prompt.use_case}</p>
+                        </div>
+
+                        <div class="prompt-text">${prompt.prompt.split('\n').join('<br>')}</div>
+
+                        <button class="copy-btn" data-prompt="${prompt.prompt.replace(/"/g, '&quot;')}">
+                            📋 複製 Prompt
+                        </button>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+                document.querySelectorAll('.copy-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const text = this.dataset.prompt;
+                        navigator.clipboard.writeText(text).then(() => {
+                            this.textContent = '✅ 已複製';
+                            this.classList.add('copied');
+                            setTimeout(() => {
+                                this.textContent = '📋 複製 Prompt';
+                                this.classList.remove('copied');
+                            }, 2000);
+                        });
+                    });
+                });
+            });
+    </script>
+</body>
+</html>

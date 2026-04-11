@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 147 Prompts - AI 職場寶庫 | Openclaw</title>
+    <meta name="description" content="Google 官方 71 頁《Gemini Prompting Guide 101》完整拆解。147 個實戰 Prompt，6 大職能分類，直接複製即用。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+
+        /* Navigation */
+        .nav-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-intro h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .prompt-basics {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .prompt-basics h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .basics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .basic-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .basic-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .basic-item p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Categories Grid */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #667eea;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-top-color: #764ba2;
+        }
+
+        .category-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .category-card .en-name {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .category-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .prompt-count {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature h4 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .basics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔥 Gemini 147 Prompts</h1>
+            <p class="subtitle">Google 官方 71 頁《Gemini Prompting Guide 101》完整拆解</p>
+            <div>
+                <span class="badge">✅ 147 個實戰 Prompt</span>
+                <span class="badge">📋 6 大職能分類</span>
+                <span class="badge">🎯 即開即用</span>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="nav-intro">
+            <h2>🚀 快速開始</h2>
+
+            <div class="prompt-basics">
+                <h3>Prompt 四元素（記住這個公式）</h3>
+                <div class="basics-grid">
+                    <div class="basic-item">
+                        <strong>1️⃣ 角色 (Persona)</strong>
+                        <p>你是誰？<br>例：行政經理、客服代表</p>
+                    </div>
+                    <div class="basic-item">
+                        <strong>2️⃣ 任務 (Task)</strong>
+                        <p>要做什麼？<br>例：撰寫郵件、整理數據</p>
+                    </div>
+                    <div class="basic-item">
+                        <strong>3️⃣ 背景 (Context)</strong>
+                        <p>具體細節？<br>例：針對Q3報告、澳門市場</p>
+                    </div>
+                    <div class="basic-item">
+                        <strong>4️⃣ 格式 (Format)</strong>
+                        <p>輸出樣子？<br>例：表格、清單、500字內</p>
+                    </div>
+                </div>
+            </div>
+
+            <p style="color: #666; line-height: 1.6; margin-top: 15px;">
+                下面的 147 個 Prompt 都遵循這個公式。直接選擇你的職位分類，複製 Prompt，把括號 <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">[...]</code> 改成你的實際情況，貼給 Gemini 就行。
+            </p>
+        </div>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h4>即開即用</h4>
+                <p>複製 Prompt，改括號，一鍵生成</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h4>6 大職能</h4>
+                <p>行政、溝通、客服、主管、管理、行銷</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h4>Google 認證</h4>
+                <p>來自官方 Workspace 指南</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔄</div>
+                <h4>持續更新</h4>
+                <p>定期補充新的 Prompt 範例</p>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <h2 style="margin: 40px 0 20px 0; color: #333; font-size: 1.5rem;">📂 選擇你的職位分類</h2>
+        <div class="categories" id="categories-container"></div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>在社群上找到我們</h2>
+            <p style="margin-bottom: 20px; opacity: 0.95;">有任何 Prompt 問題？想分享你的成果？</p>
+            <div class="cta-buttons">
+                <a href="https://www.facebook.com" target="_blank" class="btn btn-primary">Facebook 追蹤</a>
+                <a href="https://www.threads.net" target="_blank" class="btn btn-primary">Threads 追蹤</a>
+                <a href="mailto:support@example.com" class="btn btn-secondary">聯絡我們</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>數據來源</strong></p>
+            <p>
+                Google 官方文件：<a href="https://services.google.com/fh/files/misc/gemini_for_workspace_prompt_guide_october_2024_digital_final.pdf" target="_blank">
+                Gemini for Google Workspace Prompting Guide 101 (October 2024)
+                </a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                本網站僅供學習和參考使用。所有 Prompt 基於 Google 官方指南編製。
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Load categories from prompt-data.json
+        fetch('./prompt-data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('categories-container');
+                const categories = data.categories;
+
+                Object.entries(categories).forEach(([key, category]) => {
+                    const promptCount = category.prompts.length;
+                    const card = document.createElement('a');
+                    card.href = `categories/${key}.html`;
+                    card.className = 'category-card';
+                    card.innerHTML = `
+                        <div class="icon">${category.icon}</div>
+                        <h3>${category.name}</h3>
+                        <p class="en-name">${category.name_en}</p>
+                        <p>${category.description}</p>
+                        <span class="prompt-count">📌 ${promptCount} 個 Prompt</span>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(err => console.error('Error loading categories:', err));
+    </script>
+</body>
+</html>
