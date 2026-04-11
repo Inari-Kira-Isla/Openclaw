@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思維鏈提示詞 — Chain-of-Thought 推理完全指南 | AI 學習寶庫</title>
+    <meta name="description" content="掌握 Chain-of-Thought 提示詞：讓 Claude 展示推理步驟，大幅提升複雜問題的準確度。含 6 個實戰案例和進階技巧。">
+    <meta name="keywords" content="Chain-of-Thought, 思維鏈, 推理提示詞, 複雜問題, Claude, LLM">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="思維鏈提示詞">
+    <meta property="og:description" content="提升複雜推理準確度的 Chain-of-Thought 完全指南">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_chain-of-thought-prompting.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_chain-of-thought-prompting.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "思維鏈提示詞 — Chain-of-Thought 推理完全指南",
+        "description": "掌握 Chain-of-Thought 提示詞：讓 Claude 展示推理步驟，大幅提升複雜問題的準確度。含 6 個實戰案例和進階技巧。",
+        "datePublished": "2026-04-11T11:00:00+00:00",
+        "dateModified": "2026-04-11T11:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_chain-of-thought-prompting.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>思維鏈提示詞</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>思維鏈提示詞 — Chain-of-Thought 推理完全指南</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：11 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p><strong>Chain-of-Thought（CoT）提示詞</strong是最強大的提升推理能力的技巧。通過鼓勵 Claude 逐步展示思考過程，而不是直接跳到答案，你可以大幅提升複雜問題的準確度。本指南涵蓋 CoT 的核心原理、何時使用、如何設計，以及六個實戰案例。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. Chain-of-Thought 的威力：數據證據</h2>
+
+                <p><strong>關鍵研究</strong>（Wei et al., 2022）：在複雜推理任務中，CoT 提升準確度 40-80%。</p>
+
+                <table class="impact-table">
+                    <thead>
+                        <tr>
+                            <th>任務類型</th>
+                            <th>無 CoT</th>
+                            <th>有 CoT</th>
+                            <th>改進</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>算術推理</td>
+                            <td>47%</td>
+                            <td>78%</td>
+                            <td>+66%</td>
+                        </tr>
+                        <tr>
+                            <td>常識推理</td>
+                            <td>58%</td>
+                            <td>79%</td>
+                            <td>+36%</td>
+                        </tr>
+                        <tr>
+                            <td>符號推理</td>
+                            <td>35%</td>
+                            <td>88%</td>
+                            <td>+151%</td>
+                        </tr>
+                        <tr>
+                            <td>閱讀理解</td>
+                            <td>71%</td>
+                            <td>82%</td>
+                            <td>+15%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>結論：</strong>複雜問題越難，CoT 的收益越大。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 什麼時候使用 Chain-of-Thought？</h2>
+
+                <p>CoT 不是萬靈丹。了解何時使用至關重要：</p>
+
+                <div class="code-block">
+                    <div class="code-header">何時使用 CoT</div>
+                    <pre><code>✓ 當任務涉及多步推理時
+  - 數學問題
+  - 邏輯謎題
+  - 因果關係分析
+  - 決策推理
+  - 複雜的規則應用
+
+✓ 當答案不明顯時
+  - 「為什麼 X 比 Y 更好？」
+  - 「在這種情況下應該怎麼做？」
+  - 「什麼原因導致這個結果？」
+
+✗ 當任務簡單時（CoT 無幫助或反而降低效率）
+  - 單純分類
+  - 直接查找
+  - 簡單的事實問題
+  - 創意寫作（可能太冗長）
+
+✗ 當需要極快回應時
+  - CoT 增加 tokens，變慢
+  - 但準確度提升值得</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>3. CoT 提示詞的三種策略</h2>
+
+                <h3>策略 1：明確要求逐步思考</h3>
+                <div class="code-block">
+                    <div class="code-header">直接 CoT 提示</div>
+                    <pre><code>Problem: [problem statement]
+
+Before giving your final answer, think through this step by step:
+1. [Step 1 description]
+2. [Step 2 description]
+3. [Step 3 description]
+
+Then provide your final answer.
+
+優點：簡單、直接
+缺點：有時 Claude 的步驟不夠深入</code></pre>
+                </div>
+
+                <h3>策略 2：展示 CoT 範例（Few-Shot CoT）</h3>
+                <div class="code-block">
+                    <div class="code-header">Few-Shot Chain-of-Thought</div>
+                    <pre><code>Example:
+Question: 艾莉絲有 5 個蘋果。她買了 3 個更多。然後她給了貝託 2 個。她現在有多少個？
+
+Thinking:
+1. 艾莉絲開始有 5 個蘋果
+2. 她買了 3 個，所以現在有 5 + 3 = 8 個
+3. 她給了貝託 2 個，所以現在有 8 - 2 = 6 個
+4. 答案：6 個蘋果
+
+Answer: 6
+
+---
+
+Now solve this:
+Question: [你的問題]
+
+Thinking: [Claude 會遵循相同格式]</code></pre>
+                </div>
+
+                <h3>策略 3：隱性 CoT（Self-Consistency）</h3>
+                <div class="code-block">
+                    <div class="code-header">多路徑推理</div>
+                    <pre><code>方法：
+1. 提出相同問題 3-5 次，但提示詞略有不同
+2. 讓 Claude 提供不同的推理路徑
+3. 多數投票選出答案
+
+實例：
+提示詞 1：「一步步思考…」
+提示詞 2：「列出所有可能…」
+提示詞 3：「從不同角度分析…」
+
+好處：增加可靠性，即使單個推理有誤也能發現</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 高效 CoT 的關鍵原則</h2>
+
+                <h3>原則 1：分解複雜問題</h3>
+                <div class="code-block">
+                    <div class="code-header">✗ 不好的分解</div>
+                    <pre><code>Think step by step:
+1. 分析情況
+2. 做出決定
+
+（太寬泛，無法引導具體思考）</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">✓ 好的分解</div>
+                    <pre><code>Think step by step:
+1. 列出約束條件（預算、時間、人力）
+2. 對每個制約評估影響
+3. 列出 3-5 個可能的選項
+4. 比較每個選項的優缺點
+5. 推薦最平衡的選項</code></pre>
+                </div>
+
+                <h3>原則 2：明確中間結論</h3>
+                <p>鼓勵 Claude 在每一步後總結：「所以…」</p>
+
+                <div class="code-block">
+                    <pre><code>✓ 推薦格式：
+Step 1: [做什麼] → [結果] → So [中間結論]
+Step 2: [做什麼] → [結果] → So [中間結論]
+...
+Final Answer: [綜合所有步驟]
+
+這種「So」結構確保每步都有具體產出。</code></pre>
+                </div>
+
+                <h3>原則 3：鼓勵自我質疑</h3>
+                <div class="code-block">
+                    <pre><code>包含這樣的提示：
+「在每一步，質疑自己的假設。這是否合理？」
+「有沒有其他解釋這個結果的方式？」
+「什麼可能讓我的推理出錯？」
+
+這增加了 Claude 的批判性思維。</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 六個實戰案例</h2>
+
+                <h3>案例 1：商業決策</h3>
+                <div class="code-block">
+                    <pre><code>Question: 我們應該進入日本市場嗎？已有 $2M 預算，團隊 5 人。
+
+Thinking steps:
+1. Identify market constraints
+2. Assess team capabilities
+3. Evaluate financial risk
+4. Estimate time-to-revenue
+5. Compare with alternative markets
+6. Make recommendation
+
+Example response (CoT):
+Step 1: Market constraints
+- 日本市場語言障礙
+- 競爭激烈（本地和國際）
+- 規監複雜
+- 進入費用 $500K-1M
+→ So: 高投入成本
+
+Step 2: Team assessment
+- 無日語或日本商業經驗
+- 需要當地夥伴
+- 5 人無法同時進行兩個市場
+→ So: 需要當地團隊投資
+
+Step 3: Financial risk
+- $2M 預算足以測試
+- 但如果失敗，損失重
+→ So: 高風險
+
+Final assessment: 不推薦立即進入。建議先與日本合作夥伴試點。</code></pre>
+                </div>
+
+                <h3>案例 2：數學和邏輯推理</h3>
+                <div class="code-block">
+                    <pre><code>Question: 一列火車從 A 城出發，時速 60 km/h。另一列從 B 城出發，時速 80 km/h。
+兩城相距 350 km。如果兩列同時出發相向而行，何時相遇？
+
+CoT format:
+Step 1: Define variables
+- Train A speed: 60 km/h
+- Train B speed: 80 km/h
+- Distance: 350 km
+- They move toward each other
+
+Step 2: Determine combined approach speed
+- When moving toward each other, speeds add
+- Combined speed = 60 + 80 = 140 km/h
+
+Step 3: Calculate time using formula
+- Time = Distance / Combined Speed
+- Time = 350 km / 140 km/h = 2.5 hours
+
+Step 4: Verify
+- Distance covered by A: 60 × 2.5 = 150 km
+- Distance covered by B: 80 × 2.5 = 200 km
+- Total: 150 + 200 = 350 km ✓
+
+Answer: 2.5 hours (or 2 hours 30 minutes)</code></pre>
+                </div>
+
+                <h3>案例 3：因果分析</h3>
+                <div class="code-block">
+                    <pre><code>Question: 我們的用戶留存率上個月從 45% 下降到 35%。可能的原因是什麼？
+
+CoT approach:
+Step 1: Time correlation analysis
+- When did the drop start?
+- Was there any product change around that time?
+- Any external events (competitor, press)?
+
+Step 2: Segment analysis
+- Did all user segments drop equally?
+- Or specific cohorts (new users, paid, free)?
+
+Step 3: User feedback review
+- Check support tickets for complaints
+- Review NPS comments
+- Look for patterns
+
+Step 4: Hypothesis ranking
+- Most likely: [cause A with evidence]
+- Second: [cause B with evidence]
+- Unlikely: [cause C, ruled out because]
+
+Final recommendation:
+Investigate [top cause] immediately with qualitative interviews.</code></pre>
+                </div>
+
+                <h3>案例 4：倫理困境</h3>
+                <div class="code-block">
+                    <pre><code>Question: 我們發現一個重要的安全漏洞。修復需要 3 週，但競品可能已經知道。
+應該馬上透露還是先修復？
+
+CoT thinking:
+Step 1: Stakeholder impact
+- Users at risk if we wait
+- Company reputation if we disclose early
+- Competitors advantage if they know
+
+Step 2: Ethical obligations
+- Transparency vs. protection
+- Legal requirements
+- Industry standards
+
+Step 3: Practical timeline
+- Can we push the fix to 1 week?
+- Can we deploy a temporary mitigation?
+
+Step 4: Scenario comparison
+- Scenario A (Disclose now): Build trust, legal protection, user protection
+- Scenario B (Wait 3 weeks): Risk exposure, reputation damage
+
+Recommendation:
+Disclose to affected users immediately with mitigation plan,
+offer timeline to full fix.</code></pre>
+                </div>
+
+                <h3>案例 5：複雜問題診斷</h3>
+                <div class="code-block">
+                    <pre><code>Question: API 端點間歇性出現 500 錯誤，但日誌沒有明顯錯誤。可能是什麼？
+
+CoT diagnostic approach:
+Step 1: Identify timing patterns
+- When does it happen? (peak hours, specific endpoints, etc.)
+- How often? (1/100 requests, 1/1000?)
+
+Step 2: Review infrastructure
+- Server memory/CPU during errors?
+- Database connection pool saturation?
+- Network timeouts?
+
+Step 3: Check dependencies
+- Third-party API failures?
+- Cache invalidation issues?
+- Race conditions under load?
+
+Step 4: Hypothesis ranking
+- Most likely: Connection pool exhaustion (common symptom)
+- Second: Timeout on slow third-party calls
+- Investigation: Add detailed logging to catch next error
+
+Next steps: Deploy enhanced logging, monitor for 24 hours.</code></pre>
+                </div>
+
+                <h3>案例 6：創意決策</h3>
+                <div class="code-block">
+                    <pre><code>Question: 我們的新功能採用率低於預期（5% vs 20% 目標）。
+應該改進功能還是改進上市策略？
+
+CoT reasoning:
+Step 1: Data interpretation
+- Users who find the feature love it (high retention)
+- But discovery is the problem
+- This suggests: marketing/UX issue, not product issue
+
+Step 2: User behavior analysis
+- Where do users discover features?
+- Are we promoting it in right places?
+- Is onboarding mentioning it?
+
+Step 3: Effort vs impact
+- Improving feature: 2 weeks, maybe +5% adoption
+- Improving onboarding: 1 week, could be +15%
+- Marketing push: 3 days, might gain +8%
+
+Step 4: Recommendation hierarchy
+1. Fast win: Improve onboarding (3 days)
+2. Follow up: Marketing push (concurrent)
+3. Later: Feature improvements based on feedback
+
+Expected outcome: 20% adoption within 4 weeks.</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>6. CoT 的常見陷阱</h2>
+
+                <table class="cot-pitfalls">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>症狀</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>步驟太寬泛</td>
+                            <td>「分析情況」無法具體引導思考</td>
+                            <td>具體化每一步（列出 X、評估 Y、比較 Z）</td>
+                        </tr>
+                        <tr>
+                            <td>步驟太多</td>
+                            <td>Claude 迷失，質量下降</td>
+                            <td>5-7 步最佳，複雜問題最多 10 步</td>
+                        </tr>
+                        <tr>
+                            <td>虛假推理</td>
+                            <td>步驟看起來有理但結論不對</td>
+                            <td>要求驗證每一步，加入「為什麼」</td>
+                        </tr>
+                        <tr>
+                            <td>成本過高</td>
+                            <td>輸出太長，token 費用翻倍</td>
+                            <td>對簡單問題不用 CoT，或要求簡潔回答</td>
+                        </tr>
+                        <tr>
+                            <td>推理循環</td>
+                            <td>Claude 重複相同步驟，無進展</td>
+                            <td>明確要求新視角或對立觀點</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>7. 進階：Meta-CoT 和反思</h2>
+
+                <p>更強大的技巧：讓 Claude 反思自己的推理過程。</p>
+
+                <div class="code-block">
+                    <div class="code-header">Meta-CoT 提示詞</div>
+                    <pre><code>After completing your step-by-step reasoning:
+
+1. Review your logic: Is each step logically sound?
+2. Check for bias: Did you favor one option unfairly?
+3. Identify assumptions: What did you assume to be true?
+4. Stress test: What would break your conclusion?
+5. Confidence level: How confident are you (0-100%)?
+6. Alternative explanation: Could another interpretation fit the data?
+
+This adds self-awareness and reduces overconfidence.</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ Chain-of-Thought 在複雜推理上可提升 40-80% 準確度</li>
+                    <li>✅ 複雜問題越難，CoT 效果越明顯</li>
+                    <li>✅ 明確、分解的步驟比籠統要求更有效</li>
+                    <li>✅ Few-Shot CoT（展示範例）通常比直接要求更有效</li>
+                    <li>✅ 5-7 步是甜蜜點，太多反而降質量</li>
+                    <li>✅ Meta-CoT（自我反思）進一步提升可靠性</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_few-shot-learning-techniques.html">少量範例學習提示詞</a> — Few-Shot CoT 結合威力強大</li>
+                    <li><a href="2026-04-11_claude-system-prompt-best-practices.html">Claude 系統提示詞最佳實踐</a> — 構建 CoT 的基礎框架</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 深入 AI 推理系統</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_chain-of-thought-prompting.html" alt="" style="display:none;">
+</body>
+</html>

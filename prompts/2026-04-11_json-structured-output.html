@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 結構化輸出提示詞 — 精準控制 Claude 輸出格式 | AI 學習寶庫</title>
+    <meta name="description" content="掌握如何讓 Claude 輸出精準的 JSON 格式。含 JSON Schema、驗證規則、常見陷阱和 5 個實戰範本。">
+    <meta name="keywords" content="JSON 輸出, 結構化數據, 提示詞工程, Claude API, LLM">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="JSON 結構化輸出提示詞">
+    <meta property="og:description" content="讓 Claude 輸出精準 JSON 格式的完全指南">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_json-structured-output.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_json-structured-output.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "JSON 結構化輸出提示詞 — 精準控制 Claude 輸出格式",
+        "description": "掌握如何讓 Claude 輸出精準的 JSON 格式。含 JSON Schema、驗證規則、常見陷阱和 5 個實戰範本。",
+        "datePublished": "2026-04-11T12:00:00+00:00",
+        "dateModified": "2026-04-11T12:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_json-structured-output.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>JSON 結構化輸出提示詞</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>JSON 結構化輸出提示詞 — 精準控制 Claude 輸出格式</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：10 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p>當 Claude 輸出可編程的 JSON 時，你才能真正整合 AI 到自動化流程中。但讓 LLM 輸出<strong>可靠的、有效的 JSON</strong>並非易事。本指南涵蓋如何設計 JSON schema、驗證規則、處理邊界情況，以及五個實戰案例。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. 為什麼 JSON 輸出很難？</h2>
+
+                <p>Claude 是文本生成器，不是 JSON 序列化器。常見的問題：</p>
+
+                <ul>
+                    <li><strong>語法錯誤</strong>：缺少逗號、雙引號、括號不匹配</li>
+                    <li><strong>類型錯誤</strong>：字符串當數字、數組當對象</li>
+                    <li><strong>格式不一致</strong>：有時是 snake_case，有時 camelCase</li>
+                    <li><strong>包含雜亂文本</strong>：JSON 前後有「讓我幫你」之類的文字</li>
+                    <li><strong>字段遺漏</strong>：無法確認所有必需字段都存在</li>
+                </ul>
+
+                <p><strong>解決方案的層次：</strong></p>
+                <ol>
+                    <li>明確定義 schema（第 1 級）</li>
+                    <li>提供 JSON 範例（第 2 級）</li>
+                    <li>明確驗證規則（第 3 級）</li>
+                    <li>Post-processing 驗證（第 4 級）</li>
+                </ol>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 第一級：明確 JSON Schema</h2>
+
+                <div class="code-block">
+                    <div class="code-header">❌ 含糊的指令</div>
+                    <pre><code>Return the data as JSON with relevant fields.</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">✓ 明確的 Schema</div>
+                    <pre><code>Return a JSON object with this exact structure:
+{
+  "name": "string (required, 1-100 chars)",
+  "email": "string (required, valid email format)",
+  "age": "number (optional, must be 0-150)",
+  "tags": "array of strings (optional, max 5 items)",
+  "verified": "boolean (required)",
+  "joined_date": "ISO 8601 date string (required)"
+}</code></pre>
+                </div>
+
+                <p><strong>Schema 必須包含：</strong></p>
+                <ul>
+                    <li>字段名稱（使用一致的命名：snake_case 或 camelCase，不混合）</li>
+                    <li>數據類型（string, number, boolean, array, object）</li>
+                    <li>必需/可選標記</li>
+                    <li>約束條件（長度、範圍、格式）</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>3. 第二級：提供有效的 JSON 範例</h2>
+
+                <div class="code-block">
+                    <div class="code-header">完整的 JSON 輸出範本</div>
+                    <pre><code>Return your answer as valid JSON matching this schema:
+
+Schema:
+{
+  "product_name": "string",
+  "price_usd": "number",
+  "in_stock": "boolean",
+  "reviews": "array of strings",
+  "last_updated": "ISO date string"
+}
+
+Example:
+{
+  "product_name": "Wireless Headphones",
+  "price_usd": 79.99,
+  "in_stock": true,
+  "reviews": ["Great sound", "Comfortable fit", "Good battery"],
+  "last_updated": "2026-04-11T12:00:00Z"
+}
+
+Now, analyze [input] and return your response in the same JSON format.</code></pre>
+                </div>
+
+                <p><strong>好的範例有：</strong></p>
+                <ul>
+                    <li>完整、合法的 JSON（可用 JSON.parse 解析）</li>
+                    <li>代表性的數據（顯示所有可能的字段和類型）</li>
+                    <li>邊界情況（空陣列、null 值、最小/最大值）</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 第三級：驗證規則和邊界情況</h2>
+
+                <div class="code-block">
+                    <div class="code-header">完整的 JSON 輸出提示詞</div>
+                    <pre><code>Return valid JSON with this schema:
+{
+  "decision": "approved | rejected | pending",
+  "confidence": "number 0-100",
+  "reason": "string",
+  "conditions": "array of strings"
+}
+
+Validation rules:
+1. "decision" must be one of the three options (enum)
+2. "confidence" must be an integer between 0 and 100
+3. "reason" must not be empty (min length 5 chars)
+4. "conditions" must be an array (can be empty)
+5. All four fields must be present (no optional fields)
+
+Example valid response:
+{"decision": "approved", "confidence": 95, "reason": "All criteria met", "conditions": []}
+
+Example invalid (don't do this):
+{decision: approved, confidence: "95"}  ← 缺少引號，字符串值
+
+Critical: Return ONLY valid JSON, no other text.</code></pre>
+                </div>
+
+                <p><strong>驗證規則的要點：</strong></p>
+                <ul>
+                    <li><strong>Enum 值</strong>：明確列出允許的值</li>
+                    <li><strong>數值範圍</strong>：指定最小/最大</li>
+                    <li><strong>字符串長度</strong>：指定 min/max</li>
+                    <li><strong>數組限制</strong>：最多/最少元素數</li>
+                    <li><strong>必需 vs 可選</strong>：明確哪些字段必須存在</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 常見 JSON 陷阱和解決方案</h2>
+
+                <table class="pitfalls-table">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>原因</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>JSON 前有文本</td>
+                            <td>Claude 習慣性地先說話</td>
+                            <td>「Return ONLY valid JSON, no explanation」</td>
+                        </tr>
+                        <tr>
+                            <td>Markdown 代碼塊</td>
+                            <td>Claude 用 ```json ... ``` 包裝</td>
+                            <td>「Return raw JSON, not markdown」</td>
+                        </tr>
+                        <tr>
+                            <td>缺少引號</td>
+                            <td>Claude 用了單引號或無引號</td>
+                            <td>範例明確使用雙引號，驗證規則提及</td>
+                        </tr>
+                        <tr>
+                            <td>類型混淆</td>
+                            <td>Claude 混淆 string vs number</td>
+                            <td>範例展示每個類型，驗證規則明確</td>
+                        </tr>
+                        <tr>
+                            <td>陣列當物件</td>
+                            <td>Claude 用 {} 代替 []</td>
+                            <td>範例明確展示，說「must be an array」</td>
+                        </tr>
+                        <tr>
+                            <td>多餘欄位</td>
+                            <td>Claude 添加了未要求的欄位</td>
+                            <td>「Return ONLY these fields」+驗證檢查</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>6. 五個實戰案例</h2>
+
+                <h3>案例 1：內容分類系統</h3>
+                <div class="code-block">
+                    <pre><code>Task: Classify a blog article
+
+Schema:
+{
+  "title": "string",
+  "category": "tech | business | lifestyle | other",
+  "subcategory": "string",
+  "confidence": "0-100",
+  "keywords": "array of 3-5 strings",
+  "should_recommend": "boolean"
+}
+
+Example:
+{
+  "title": "5 AI Prompting Techniques",
+  "category": "tech",
+  "subcategory": "artificial intelligence",
+  "confidence": 95,
+  "keywords": ["AI", "prompting", "LLM", "techniques"],
+  "should_recommend": true
+}
+
+Important validation:
+- category must be one of the 4 values
+- confidence must be integer 0-100
+- keywords must have 3-5 items
+- Return ONLY this JSON, no explanation</code></pre>
+                </div>
+
+                <h3>案例 2：API 響應聚合</h3>
+                <div class="code-block">
+                    <pre><code>Task: Extract and structure API response data
+
+Schema:
+{
+  "status": "success | error | timeout",
+  "data": {
+    "users": "array of {id, name, email}",
+    "total_count": "number",
+    "page": "number (1-based)"
+  },
+  "error_message": "string or null",
+  "timestamp": "ISO 8601 date"
+}
+
+Example for success:
+{
+  "status": "success",
+  "data": {
+    "users": [
+      {"id": 1, "name": "Alice", "email": "alice@example.com"},
+      {"id": 2, "name": "Bob", "email": "bob@example.com"}
+    ],
+    "total_count": 2,
+    "page": 1
+  },
+  "error_message": null,
+  "timestamp": "2026-04-11T12:00:00Z"
+}
+
+Example for error:
+{
+  "status": "error",
+  "data": null,
+  "error_message": "Authentication failed",
+  "timestamp": "2026-04-11T12:00:01Z"
+}</code></pre>
+                </div>
+
+                <h3>案例 3：客戶評分和反饋</h3>
+                <div class="code-block">
+                    <pre><code>Task: Analyze customer feedback
+
+Schema:
+{
+  "overall_sentiment": "very_negative | negative | neutral | positive | very_positive",
+  "rating_1_5": "1 | 2 | 3 | 4 | 5",
+  "main_issues": "array of strings (max 3)",
+  "compliments": "array of strings (max 3)",
+  "recommendation": "yes | no | maybe",
+  "actionable_next_steps": "array of strings (1-5 items)"
+}
+
+Example:
+{
+  "overall_sentiment": "positive",
+  "rating_1_5": 4,
+  "main_issues": ["slow shipping", "packaging could be better"],
+  "compliments": ["great quality", "friendly customer service"],
+  "recommendation": "yes",
+  "actionable_next_steps": [
+    "Improve shipping speed",
+    "Redesign packaging for durability",
+    "Ask for written reviews from 5-star customers"
+  ]
+}</code></pre>
+                </div>
+
+                <h3>案例 4：資料驗證和清理</h3>
+                <div class="code-block">
+                    <pre><code>Task: Validate data quality
+
+Schema:
+{
+  "is_valid": "boolean",
+  "score": "0-100",
+  "issues": "array of {field, severity, description}",
+  "cleaned_data": "object with corrected values or null if invalid"
+}
+
+Example for valid data:
+{
+  "is_valid": true,
+  "score": 95,
+  "issues": [],
+  "cleaned_data": {"name": "John Doe", "email": "john@example.com"}
+}
+
+Example for invalid data:
+{
+  "is_valid": false,
+  "score": 40,
+  "issues": [
+    {"field": "email", "severity": "critical", "description": "Invalid email format"},
+    {"field": "age", "severity": "warning", "description": "Age seems unrealistic (500)"}
+  ],
+  "cleaned_data": null
+}</code></pre>
+                </div>
+
+                <h3>案例 5：決策樹輸出</h3>
+                <div class="code-block">
+                    <pre><code>Task: Decision making with reasoning
+
+Schema:
+{
+  "final_decision": "approved | rejected | needs_review",
+  "decision_path": "array of strings describing the logic",
+  "confidence_score": "0-100",
+  "risks": "array of strings",
+  "recommendations": "array of strings",
+  "requires_human_review": "boolean"
+}
+
+Example:
+{
+  "final_decision": "approved",
+  "decision_path": [
+    "Budget check: $50K available, request is $45K - PASS",
+    "Timeline check: 3 months available, task needs 2 months - PASS",
+    "Team capacity: 4 engineers available, need 3 - PASS",
+    "All criteria met"
+  ],
+  "confidence_score": 88,
+  "risks": [
+    "One engineer is new, may slow down initial progress",
+    "Tight timeline for Q2 launch"
+  ],
+  "recommendations": [
+    "Pair new engineer with experienced one",
+    "Schedule weekly progress reviews"
+  ],
+  "requires_human_review": false
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>7. 第四級：Post-Processing 驗證</h2>
+
+                <p>即使使用了所有最佳實踐，仍應驗證輸出：</p>
+
+                <div class="code-block">
+                    <div class="code-header">Python 驗證範例</div>
+                    <pre><code>import json
+from typing import Dict, Any
+
+def validate_json_output(response: str, required_fields: list) -> Dict[str, Any]:
+    """
+    1. Parse JSON
+    2. Check required fields
+    3. Validate types
+    4. Return or raise error
+    """
+    try:
+        # Remove markdown wrapping if present
+        if response.startswith("```json"):
+            response = response[7:-3]
+        elif response.startswith("```"):
+            response = response[3:-3]
+
+        data = json.loads(response.strip())
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON: {e}")
+
+    # Check required fields
+    for field in required_fields:
+        if field not in data:
+            raise ValueError(f"Missing required field: {field}")
+
+    return data</code></pre>
+                </div>
+
+                <p><strong>驗證清單：</strong></p>
+                <ul>
+                    <li>✓ JSON 是否能被解析？</li>
+                    <li>✓ 所有必需字段是否存在？</li>
+                    <li>✓ 字段類型是否正確？</li>
+                    <li>✓ 值是否在允許的範圍內？</li>
+                    <li>✓ 枚舉值是否在允許的列表中？</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>8. 常見提示詞模板</h2>
+
+                <div class="code-block">
+                    <div class="code-header">通用 JSON 提示詞模板</div>
+                    <pre><code>Your task: [describe what to do]
+
+Return ONLY valid JSON matching this schema:
+{
+  "field_1": "type (required/optional)",
+  "field_2": "type (constraints)"
+}
+
+Validation rules:
+- [rule 1]
+- [rule 2]
+- [rule 3]
+
+Example:
+[valid JSON example]
+
+Important:
+- Return ONLY JSON, no explanation or markdown
+- All required fields must be present
+- Follow the exact field names and types
+- Do not add extra fields
+
+Now process: [input]</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ 明確 schema 是第一步（類型、約束、必需字段）</li>
+                    <li>✅ 提供有效的 JSON 範例大幅提升一致性</li>
+                    <li>✅ 明確驗證規則：enum、範圍、格式</li>
+                    <li>✅ 「Return ONLY JSON」的提示至關重要</li>
+                    <li>✅ 後端驗證永遠需要（Claude 不是 100% 可靠）</li>
+                    <li>✅ Markdown 包裝常見，需要在後處理中移除</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_chain-of-thought-prompting.html">思維鏈提示詞</a> — 在結構化輸出前先展示推理</li>
+                    <li><a href="2026-04-11_few-shot-learning-techniques.html">少量範例學習提示詞</a> — 使用範例改進格式一致性</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 深入學習 API 整合</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_json-structured-output.html" alt="" style="display:none;">
+</body>
+</html>

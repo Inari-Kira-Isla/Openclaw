@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多語言提示詞技巧 — 用 Claude 處理全球語言 | AI 學習寶庫</title>
+    <meta name="description" content="掌握跨越語言邊界的提示詞設計：包括語言配置、上下文注入、文化敏感性和 7 個多語言實戰案例。">
+    <meta name="keywords" content="多語言, 國際化, i18n, 提示詞工程, Claude, LLM 翻譯">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="多語言提示詞技巧">
+    <meta property="og:description" content="用 Claude 跨越語言邊界的完全指南">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_multilingual-prompting-techniques.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_multilingual-prompting-techniques.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "多語言提示詞技巧 — 用 Claude 處理全球語言",
+        "description": "掌握跨越語言邊界的提示詞設計：包括語言配置、上下文注入、文化敏感性和 7 個多語言實戰案例。",
+        "datePublished": "2026-04-11T13:00:00+00:00",
+        "dateModified": "2026-04-11T13:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_multilingual-prompting-techniques.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>多語言提示詞技巧</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>多語言提示詞技巧 — 用 Claude 處理全球語言</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：10 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p>Claude 支持 50+ 種語言，但用提示詞<strong>正確配置多語言工作流</strong>比你想的更複雜。本指南涵蓋語言設定最佳實踐、上下文注入、文化敏感性、常見陷阱，以及七個真實案例。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. 多語言工作的挑戰</h2>
+
+                <p>多語言處理之所以難，是因為：</p>
+
+                <ul>
+                    <li><strong>語言不是「一次性設定」</strong>：同一次對話可能涉及多種語言</li>
+                    <li><strong>文化差異</strong>：禮貌程度、性別、宗教等概念因文化而異</li>
+                    <li><strong>語法複雜性</strong>：某些概念在一種語言中簡單，在另一種中很複雜</li>
+                    <li><strong>上下文依賴</strong>：同一個詞在不同語言中的意思可能截然不同</li>
+                    <li><strong>質量差異</strong>：Claude 對某些語言的理解比其他語言好得多</li>
+                </ul>
+
+                <p><strong>語言品質排序（Claude 3.5）：</strong></p>
+                <ol>
+                    <li>英語（最佳）</li>
+                    <li>主要歐洲語言（法、德、西班牙、意大利）</li>
+                    <li>亞洲主要語言（中文、日文、韓文）</li>
+                    <li>其他語言（質量可變）</li>
+                </ol>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 語言配置的三層結構</h2>
+
+                <h3>第 1 層：系統級語言設定</h3>
+                <div class="code-block">
+                    <div class="code-header">系統提示詞中的語言聲明</div>
+                    <pre><code># 直接方式
+You are a helpful assistant. Always respond in [TARGET_LANGUAGE].
+
+# 更具體的方式
+You are a helpful assistant operating in a [LANGUAGE] context.
+- Use [LANGUAGE] for all responses
+- Adapt to [LANGUAGE] cultural norms
+- When translating, prioritize meaning over literal word choice
+- When technical terms don't exist in [LANGUAGE], use established conventions</code></pre>
+                </div>
+
+                <h3>第 2 層：用戶請求級語言設定</h3>
+                <div class="code-block">
+                    <div class="code-header">根據用戶輸入動態設定語言</div>
+                    <pre><code>User says: "請幫我翻譯這段英文"
+
+System should:
+1. 檢測用戶說話的語言（中文）
+2. 推斷目標語言（英文，基於「翻譯」前的語言）
+3. 設定輸出語言為目標語言
+4. 在 system prompt 中明確「respond in English」</code></pre>
+                </div>
+
+                <h3>第 3 層：上下文級語言處理</h3>
+                <div class="code-block">
+                    <div class="code-header">處理混合語言內容</div>
+                    <pre><code>Content: "The report from 市場調查 shows 很有希望的結果..."
+
+Handling:
+1. 保留原始語言分佈
+2. 不強行統一
+3. 在輸出時保持相同的混合比例
+4. 明確標記每段落的語言</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>3. 多語言提示詞設計原則</h2>
+
+                <table class="principles-table">
+                    <thead>
+                        <tr>
+                            <th>原則</th>
+                            <th>說明</th>
+                            <th>例子</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>明確聲明</td>
+                            <td>總是明確說明期望的語言</td>
+                            <td>「Respond in Simplified Chinese」比「respond in Chinese」更精準</td>
+                        </tr>
+                        <tr>
+                            <td>語言變種區分</td>
+                            <td>區分方言、地區變種</td>
+                            <td>Traditional Chinese (Taiwan) ≠ Simplified Chinese (Mainland)</td>
+                        </tr>
+                        <tr>
+                            <td>文化敏感性</td>
+                            <td>為不同語言/文化調整語氣</td>
+                            <td>日文需要更多敬語形式</td>
+                        </tr>
+                        <tr>
+                            <td>避免中間翻譯</td>
+                            <td>不要先翻譯成英文再翻譯</td>
+                            <td>直接用目標語言提示，而非「Translate to [lang]」</td>
+                        </tr>
+                        <tr>
+                            <td>專業術語</td>
+                            <td>建立領域術語字典</td>
+                            <td>「Machine Learning」在不同語言中的正確術語</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 翻譯 vs 本地化</h2>
+
+                <p>重要區分：</p>
+
+                <div class="code-block">
+                    <div class="code-header">翻譯（Translation）vs 本地化（Localization）</div>
+                    <pre><code>翻譯（逐字對應）：
+English: "This feature is amazing!"
+Literal translation to Japanese: この機能は素晴らしい！
+✗ 自然度低，有點不自然
+
+本地化（文化和上下文適應）：
+English: "This feature is amazing!"
+Localized for Japanese: この機能は本当に優れています
+✓ 更自然，符合日文說話習慣
+
+提示詞區別：
+❌「Translate this to Japanese」
+✓「Localize this to Japanese, adapting for cultural context」</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 術語管理和詞彙表</h2>
+
+                <p>多語言工作的關鍵：建立<strong>術語詞彙表</strong>。</p>
+
+                <div class="code-block">
+                    <div class="code-header">多語言術語詞彙表</div>
+                    <pre><code>術語詞彙表：
+
+Technical | English | Simplified Chinese | Traditional Chinese | Japanese
+-----------|---------|-------------------|-------------------|----------
+API | API | 應用程序接口 | 應用程式介面 | API（アプリケーション・プログラミング・インターフェース）
+Database | Database | 數據庫 | 資料庫 | データベース
+Cache | Cache | 緩存 | 快取 | キャッシュ
+Authentication | Authentication | 身份驗證 | 身份認證 | 認証
+
+在提示詞中使用：
+「When translating technical terms, use this terminology table:
+[TABLE]
+
+This ensures consistency across languages.」</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>6. 七個多語言實戰案例</h2>
+
+                <h3>案例 1：多語言客戶支援機器人</h3>
+                <div class="code-block">
+                    <pre><code>System Prompt:
+You are a customer support assistant. Based on the user's message:
+1. Detect their language
+2. Respond in that language
+3. Maintain professionalism appropriate to that culture
+
+Special considerations:
+- For Chinese users: More formal than English, avoid directness
+- For Japanese users: Use appropriate politeness level
+- For European languages: Vary tone based on culture
+- For Spanish: Regional differences (Spain vs Latin America)
+
+User message (in Chinese): "你們的產品有問題，我很不滿意"
+Response should:
+- Acknowledge frustration respectfully
+- Apologize genuinely (important in Chinese business culture)
+- Offer concrete next steps
+- Use appropriate formal tone</code></pre>
+                </div>
+
+                <h3>案例 2：國際 SEO 內容生成</h3>
+                <div class="code-block">
+                    <pre><code>Task: Generate product description for [PRODUCT]
+Target markets: US (English), Japan (日本語), Korea (한국어)
+
+For each language:
+{
+  "language": "target_language",
+  "description": "product description tailored to market",
+  "keywords": "localized keywords",
+  "tone": "culturally appropriate tone",
+  "cultural_adaptation": "market-specific considerations"
+}
+
+Example for Japan:
+{
+  "language": "Japanese",
+  "description": "このプロダクトは高品質で、信頼できるブランドです。",
+  "keywords": ["高品質", "信頼性", "日本製"],
+  "tone": "Polite, emphasizing quality and reliability",
+  "cultural_adaptation": "Japanese customers value craftsmanship (職人技) and long-term reliability"
+}</code></pre>
+                </div>
+
+                <h3>案例 3：文本分類（多語言）</h3>
+                <div class="code-block">
+                    <pre><code>Task: Classify text and provide language-appropriate response
+
+Schema:
+{
+  "original_language": "detected language",
+  "category": "sentiment | topic | intent",
+  "classification": "result",
+  "confidence": "0-100",
+  "language_specific_notes": "any language-specific context"
+}
+
+Example for Chinese text:
+Input: "產品質量不錯，但價格太高了"
+Output: {
+  "original_language": "Simplified Chinese",
+  "category": "sentiment",
+  "classification": "mixed (positive product, negative price)",
+  "confidence": 92,
+  "language_specific_notes": "Chinese directly contrasts quality vs price (但 = but/however)"
+}
+
+Important: Don't normalize the meaning across languages.
+Each language conveys nuance differently.</code></pre>
+                </div>
+
+                <h3>案例 4：多語言文檔翻譯</h3>
+                <div class="code-block">
+                    <pre><code>Task: Translate document to [TARGET_LANGUAGE], not just text
+
+Configuration:
+{
+  "source_language": "English",
+  "target_language": "Traditional Chinese (Taiwan)",
+  "context": "business contract",
+  "formality_level": "high",
+  "regional_preferences": "Taiwan usage"
+}
+
+Special considerations:
+- Legal terms must match Taiwan legal system
+- Use Taiwan-specific formatting (date format, address format)
+- Honorifics appropriate to business culture
+- Currency: NTD (新台幣) not other Asian currencies
+
+Output includes:
+1. Translated content
+2. Notes on culturally-specific adaptations
+3. Terms that may need local legal review</code></pre>
+                </div>
+
+                <h3>案例 5：多語言數據驗證</h3>
+                <div class="code-block">
+                    <pre><code>Task: Validate data with language awareness
+
+Example - Name validation:
+{
+  "name": "王小明",
+  "detected_language": "Chinese",
+  "validations": {
+    "is_valid_format": true,
+    "common_order": "Family name first (王) then given name (小明)",
+    "cultural_context": "Chinese naming convention respected"
+  }
+}
+
+Example - Date validation:
+Input (Chinese): "2026年4月11日"
+Output: {
+  "date": "2026-04-11",
+  "format": "Chinese format (year-month-day)",
+  "converted_to_ISO": "2026-04-11",
+  "note": "Chinese uses same year-first order as ISO, unlike English"
+}</code></pre>
+                </div>
+
+                <h3>案例 6：語言學習助手</h3>
+                <div class="code-block">
+                    <pre><code>Task: Help user learn [TARGET_LANGUAGE]
+
+Configuration:
+{
+  "user_native_language": "English",
+  "learning_language": "Japanese",
+  "level": "beginner",
+  "focus": "grammar"
+}
+
+Response format:
+{
+  "explanation": "in English (user's native language)",
+  "grammar_rule": "in simple language",
+  "examples": [
+    {
+      "japanese": "私は学生です",
+      "romaji": "watashi wa gakusei desu",
+      "english": "I am a student",
+      "grammar_note": "Topic marker は (wa) marks the subject"
+    }
+  ],
+  "cultural_context": "Why this grammar matters in Japanese culture/business"
+}</code></pre>
+                </div>
+
+                <h3>案例 7：文化敏感性檢查</h3>
+                <div class="code-block">
+                    <pre><code>Task: Check content for cultural sensitivity across languages
+
+Input: Marketing message in English
+Target markets: China, Japan, Middle East, Latin America
+
+Output:
+{
+  "message": "original English message",
+  "cultural_analysis": {
+    "china": {
+      "issues": "none detected",
+      "adaptations_needed": []
+    },
+    "japan": {
+      "issues": "message too direct, not polite enough",
+      "adaptations_needed": ["Add honorific language", "Soften assertions"]
+    },
+    "middle_east": {
+      "issues": "potential religious sensitivity",
+      "adaptations_needed": ["Review religious references"]
+    },
+    "latin_america": {
+      "issues": "none detected",
+      "adaptations_needed": []
+    }
+  },
+  "overall_recommendation": "Adapt for Japan; localize Spanish version"
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>7. 多語言陷阱和解決方案</h2>
+
+                <table class="pitfalls">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>症狀</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>語言混亂</td>
+                            <td>輸出用了錯的語言或混合多種語言</td>
+                            <td>明確在 system prompt 中聲明目標語言</td>
+                        </tr>
+                        <tr>
+                            <td>方言混淆</td>
+                            <td>混合簡體中文和繁體中文</td>
+                            <td>明確指定「Simplified Chinese」或「Traditional Chinese」</td>
+                        </tr>
+                        <tr>
+                            <td>中間翻譯</td>
+                            <td>質量低，透露英文思維</td>
+                            <td>直接用目標語言提示</td>
+                        </tr>
+                        <tr>
+                            <td>術語不一致</td>
+                            <td>技術術語在文檔中不同</td>
+                            <td>提供術語詞彙表</td>
+                        </tr>
+                        <tr>
+                            <td>文化不敏感</td>
+                            <td>冒犯性的語言或概念</td>
+                            <td>加入文化指引，例如「Be aware of [cultural context]」</td>
+                        </tr>
+                        <tr>
+                            <td>過度翻譯</td>
+                            <td>生硬、不自然的語言</td>
+                            <td>要求本地化而非翻譯</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>8. 多語言最佳實踐清單</h2>
+
+                <div class="code-block">
+                    <div class="code-header">多語言項目檢查清單</div>
+                    <pre><code>□ 明確指定目標語言（不要假設）
+□ 區分方言和地區變種
+□ 建立技術術語詞彙表
+□ 確定文化適應需求
+□ 提供語言特定範例
+□ 測試輸出是否自然
+□ 避免中間翻譯
+□ 本地化（而非僅翻譯）內容
+□ 考慮格式差異（日期、時間、地址）
+□ 審查文化敏感性
+□ 監控 Claude 輸出質量（按語言）</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ 多語言工作需要明確的語言聲明，不是默認</li>
+                    <li>✅ 區分翻譯（逐字）和本地化（文化適應）</li>
+                    <li>✅ 建立術語詞彙表確保一致性</li>
+                    <li>✅ 直接用目標語言提示，避免中間翻譯</li>
+                    <li>✅ Claude 對不同語言的質量有差異</li>
+                    <li>✅ 文化敏感性是多語言工作的關鍵</li>
+                    <li>✅ 始終驗證輸出是否自然和適當</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_json-structured-output.html">JSON 結構化輸出提示詞</a> — 為多語言数据添加結構化格式</li>
+                    <li><a href="2026-04-11_claude-system-prompt-best-practices.html">Claude 系統提示詞最佳實踐</a> — 系統級語言配置基礎</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 深入學習 AI 技能</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_multilingual-prompting-techniques.html" alt="" style="display:none;">
+</body>
+</html>

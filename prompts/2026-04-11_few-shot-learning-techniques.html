@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>少量範例學習提示詞 — Few-Shot Learning 完全指南 | AI 學習寶庫</title>
+    <meta name="description" content="掌握 Few-Shot Learning 的精妙之處：通過 3-5 個精心設計的範例大幅提升 Claude 的準確度和一致性。含 7 個實戰案例。">
+    <meta name="keywords" content="Few-Shot Learning, 少量範例學習, 提示詞工程, Claude, LLM, In-context Learning">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="少量範例學習提示詞">
+    <meta property="og:description" content="通過範例提升 LLM 準確度的完整指南">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_few-shot-learning-techniques.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_few-shot-learning-techniques.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "少量範例學習提示詞 — Few-Shot Learning 完全指南",
+        "description": "掌握 Few-Shot Learning 的精妙之處：通過 3-5 個精心設計的範例大幅提升 Claude 的準確度和一致性。含 7 個實戰案例。",
+        "datePublished": "2026-04-11T10:00:00+00:00",
+        "dateModified": "2026-04-11T10:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_few-shot-learning-techniques.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>少量範例學習提示詞</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>少量範例學習提示詞 — Few-Shot Learning 完全指南</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：10 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p><strong>Few-Shot Learning</strong是最被低估但最實用的提示詞技巧。通過提供 3-5 個精心設計的範例，你可以大幅改善 Claude 的準確度、一致性和輸出風格，而無需微調或 API 呼叫。本指南涵蓋如何選擇範例、安排順序、避免陷阱，以及七個實戰案例。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. Few-Shot vs Zero-Shot：效果對比</h2>
+
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>方面</th>
+                            <th>Zero-Shot（無範例）</th>
+                            <th>Few-Shot（3-5 範例）</th>
+                            <th>改進幅度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>準確度</td>
+                            <td>72-82%</td>
+                            <td>85-95%</td>
+                            <td>+15-20%</td>
+                        </tr>
+                        <tr>
+                            <td>格式一致性</td>
+                            <td>低</td>
+                            <td>高</td>
+                            <td>+80%</td>
+                        </tr>
+                        <tr>
+                            <td>風格一致</td>
+                            <td>可變</td>
+                            <td>穩定</td>
+                            <td>+60%</td>
+                        </tr>
+                        <tr>
+                            <td>邊界情況處理</td>
+                            <td>弱</td>
+                            <td>強</td>
+                            <td>+40%</td>
+                        </tr>
+                        <tr>
+                            <td>Token 成本</td>
+                            <td>低</td>
+                            <td>中</td>
+                            <td>+200 tokens</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>關鍵發現：<strong>Few-Shot 的 token 成本遠低於微調，但效果接近</strong>。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 高效 Few-Shot 範例的五大特徵</h2>
+
+                <h3>特徵 1：代表性</h3>
+                <p>範例必須覆蓋你期望 Claude 處理的不同情況。</p>
+                <div class="code-block">
+                    <div class="code-header">✗ 差勁的範例集合</div>
+                    <pre><code># 任務：分類客戶反饋
+
+Example 1: "產品太好用了！" → POSITIVE
+Example 2: "非常棒的服務！" → POSITIVE
+Example 3: "我喜歡它！" → POSITIVE
+
+問題：全是短、正面的反饋。無法處理複雜或負面反饋。</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">✓ 優秀的範例集合</div>
+                    <pre><code># 任務：分類客戶反饋
+
+Example 1: "產品太好用了！" → POSITIVE
+Example 2: "界面很直覺，但報表功能需要改進" → MIXED
+Example 3: "與競品相比，定價太貴，而且缺少重要功能" → NEGATIVE
+Example 4: "客服回應慢，但產品本身不錯" → MIXED
+Example 5: "無法與現有系統整合，這是我們的交易破局點" → NEGATIVE
+
+覆蓋：短/長、正面/負面/混合、技術/業務問題</code></pre>
+                </div>
+
+                <h3>特徵 2：多樣性</h3>
+                <p>範例應該涵蓋邊界情況、異常值和不同的背景。</p>
+
+                <h3>特徵 3：清晰的輸入-輸出映射</h3>
+                <p>輸入和輸出之間的因果關係必須明顯。</p>
+
+                <div class="code-block">
+                    <div class="code-header">模糊 vs 清晰的範例</div>
+                    <pre><code>❌ 模糊：
+Input: "The market is saturated"
+Output: LOW
+
+為什麼輸出是 LOW？可能是市場機會、競爭程度、增長潛力都不清楚。
+
+✓ 清晰：
+Input: "市場中已有 20+ 競品，年增長率只有 2%"
+Output: LOW_OPPORTUNITY
+
+現在邏輯清晰：飽和市場 + 低增長 = 低機會</code></pre>
+                </div>
+
+                <h3>特徵 4：難度遞進</h3>
+                <p>從簡單到複雜安排範例，幫助 Claude 理解漸進式複雜性。</p>
+
+                <h3>特徵 5：相關性</h3>
+                <p>範例應該來自或直接相關於實際用例。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>3. Few-Shot 提示詞的黃金結構</h2>
+
+                <div class="code-block">
+                    <div class="code-header">完整 Few-Shot 提示詞模板</div>
+                    <pre><code># 部分 1：任務說明（清晰、簡潔）
+Your task is to [do X with Y].
+
+# 部分 2：評估標準（可選，但推薦）
+Evaluation criteria:
+- [Criterion 1]
+- [Criterion 2]
+- [Criterion 3]
+
+# 部分 3：輸出格式
+Output format: [JSON / Markdown / etc.]
+
+# 部分 4：範例（3-5 個）
+Example 1:
+Input: [input]
+Output: [output]
+Reasoning: [why this output] (可選但有幫助)
+
+Example 2:
+Input: [input]
+Output: [output]
+
+... [更多範例]
+
+# 部分 5：邊界情況或特殊規則（可選）
+Special cases:
+- If X, then Y
+- If Z, then W
+
+# 部分 6：用戶的實際問題
+Now process this:
+[actual input to process]</code></pre>
+                </div>
+
+                <p><strong>為什麼要加「推理」？</strong>解釋輸出邏輯能幫助 Claude 理解決策依據，特別是對於複雜任務。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 範例選擇和排序策略</h2>
+
+                <h3>如何選擇 3-5 個範例？</h3>
+                <ul>
+                    <li><strong>基礎情況</strong>：最常見、最簡單的例子（1 個）</li>
+                    <li><strong>複雜情況</strong>：涉及多個變數或邊界情況（1-2 個）</li>
+                    <li><strong>邊界情況</strong>：容易出錯的情況（1 個）</li>
+                    <li><strong>異常值</strong>：不規則但可能出現的情況（0-1 個）</li>
+                </ul>
+
+                <h3>範例排序：從簡到複雜</h3>
+                <div class="code-block">
+                    <div class="code-header">排序原則</div>
+                    <pre><code># 不推薦的排序
+Example 1: [複雜邊界情況]
+Example 2: [簡單情況]
+Example 3: [複雜情況]
+結果：Claude 被複雜性淹沒
+
+# 推薦的排序
+Example 1: [簡單、清晰的情況] ← 建立基礎
+Example 2: [中等複雜] ← 增加難度
+Example 3: [邊界情況] ← 教會 Claude 異常情況
+Example 4: [複雜情況] ← 展示完整能力
+結果：Claude 逐步理解，最後掌握複雜情況</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 七個實戰案例</h2>
+
+                <h3>案例 1：情感分析（多層次）</h3>
+                <div class="code-block">
+                    <pre><code>Task: Classify customer feedback sentiment with intensity.
+
+Output format:
+{
+  "sentiment": "POSITIVE | NEUTRAL | NEGATIVE",
+  "intensity": 1-5 (5 being strongest),
+  "primary_topic": "product | service | pricing | other"
+}
+
+Example 1:
+Input: "Great product!"
+Output: {"sentiment": "POSITIVE", "intensity": 3, "primary_topic": "product"}
+
+Example 2:
+Input: "The product works, but customer service never replies to emails. This is frustrating."
+Output: {"sentiment": "NEGATIVE", "intensity": 4, "primary_topic": "service"}
+
+Example 3:
+Input: "比起 A 公司，你們的定價貴了 30%，但功能更完整。有點值得。"
+Output: {"sentiment": "POSITIVE", "intensity": 2, "primary_topic": "pricing"}
+Reasoning: 承認缺點但認可價值=溫和正面
+
+Example 4:
+Input: "Meh, it's okay I guess."
+Output: {"sentiment": "NEUTRAL", "intensity": 1, "primary_topic": "other"}
+
+Example 5:
+Input: "Failed to integrate with our CRM. Support couldn't help. Switched to competitor."
+Output: {"sentiment": "NEGATIVE", "intensity": 5, "primary_topic": "product"}
+Reasoning: 導致流失=最強烈的負面</code></pre>
+                </div>
+
+                <h3>案例 2：代碼審查評級</h3>
+                <div class="code-block">
+                    <pre><code>Task: Review code snippet and rate on APPROVED | NEEDS_CHANGES | MAJOR_REWORK
+
+Example 1:
+Input:
+```python
+def calculate_total(items):
+    return sum(item['price'] * item['qty'] for item in items)
+```
+Output: APPROVED
+Reasoning: 清潔、簡潔、正確處理空列表
+
+Example 2:
+Input:
+```python
+total = 0
+for item in items:
+    total = total + item['price'] * item['qty']
+return total
+```
+Output: NEEDS_CHANGES
+Reasoning: 功能正確但應使用內建 sum() 和列表推導式
+
+Example 3:
+Input:
+```python
+total = 0
+for i in range(len(items)):
+    total += items[i]['price'] * items[i]['qty']
+if total < 0:
+    total = 0
+return total
+```
+Output: MAJOR_REWORK
+Reasoning: 索引訪問低效，負數邏輯可疑（為什麼？），應確認業務規則</code></pre>
+                </div>
+
+                <h3>案例 3：工作候選人篩選</h3>
+                <div class="code-block">
+                    <pre><code>Task: Screen job candidates, output STRONG_YES | YES | MAYBE | NO
+
+Context: Hiring for Senior Backend Engineer role, 5+ years required
+
+Example 1:
+Input: "10 years backend at Meta, Kubernetes expert, led 3 migrations"
+Output: STRONG_YES
+
+Example 2:
+Input: "4 years as full-stack dev, knows Python and some ops"
+Output: MAYBE
+Reasoning: 經驗略短，但有相關背景，可能有潛力
+
+Example 3:
+Input: "2 years as junior frontend dev, no backend experience"
+Output: NO
+Reasoning: 經驗太少，方向錯誤
+
+Example 4:
+Input: "6 years backend, strong fundamentals, but last job was in PHP/WordPress"
+Output: YES
+Reasoning: 經驗充足，基礎扎實，技術棧可學習</code></pre>
+                </div>
+
+                <h3>案例 4：文本分類（新聞頻道）</h3>
+                <div class="code-block">
+                    <pre><code>Task: Classify news articles → TECH | BUSINESS | SCIENCE | POLITICS | OTHER
+
+Example 1:
+Input: "Google releases new quantum processor with 1000 qubits"
+Output: TECH
+
+Example 2:
+Input: "Apple-EU antitrust settlement reaches $500M agreement"
+Output: BUSINESS
+Reasoning: 雖然涉及 Apple，但重點是商業協議，不是技術
+
+Example 3:
+Input: "Researchers discover new species in Amazon rainforest"
+Output: SCIENCE
+
+Example 4:
+Input: "新總統上臺，承諾改革稅制"
+Output: POLITICS
+
+Example 5:
+Input: "AI company raises Series B funding"
+Output: BUSINESS
+Reasoning: AI 是主題，但融資是商業事件，不是技術突破</code></pre>
+                </div>
+
+                <h3>案例 5：API 響應錯誤處理</h3>
+                <div class="code-block">
+                    <pre><code>Task: Determine proper HTTP status code
+
+Example 1:
+Input: User requests resource they don't have permission to view
+Output: 403 Forbidden
+
+Example 2:
+Input: Server can't connect to database
+Output: 503 Service Unavailable
+
+Example 3:
+Input: User submits invalid JSON
+Output: 400 Bad Request
+
+Example 4:
+Input: Endpoint doesn't exist at requested URL
+Output: 404 Not Found
+
+Example 5:
+Input: Server receives duplicate request within 1 second (idempotency)
+Output: 409 Conflict
+Reasoning: 重複請求應明確告訴客戶端重試可能有問題</code></pre>
+                </div>
+
+                <h3>案例 6：寫作風格匹配</h3>
+                <div class="code-block">
+                    <pre><code>Task: Rewrite in style of technical documentation (clear, direct, no fluff)
+
+Style guidelines:
+- Active voice
+- Short sentences
+- No marketing language
+- Define jargon on first use
+
+Example 1:
+Original: "The innovative solution leverages cutting-edge technology..."
+Rewrite: "This solution uses PostgreSQL and Redis to improve performance."
+
+Example 2:
+Original: "Users will be delighted to discover the intuitive interface"
+Rewrite: "The interface requires minimal training. Most users complete tasks on first attempt."
+
+Example 3:
+Original: "Our world-class team of experts has developed..."
+Rewrite: "Engineers built this over 18 months, incorporating feedback from 50+ beta users."</code></pre>
+                </div>
+
+                <h3>案例 7：數據驗證規則</h3>
+                <div class="code-block">
+                    <pre><code>Task: Validate customer data, output VALID | INVALID_FORMAT | INVALID_LOGIC | SUSPICIOUS
+
+Example 1:
+Input: {"email": "john@example.com", "age": 30, "signup_date": "2026-04-11"}
+Output: VALID
+
+Example 2:
+Input: {"email": "not-an-email", "age": 30}
+Output: INVALID_FORMAT
+Reasoning: 電郵格式錯誤
+
+Example 3:
+Input: {"email": "john@example.com", "age": 150, "signup_date": "2026-04-11"}
+Output: INVALID_LOGIC
+Reasoning: 年齡不合理（超過 120）
+
+Example 4:
+Input: {"email": "john@example.com", "age": 25, "signup_date": "2025-01-01", "last_purchase": "2026-04-10"}
+Output: SUSPICIOUS
+Reasoning: 15 個月內才購買一次=可能不是活躍用戶</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>6. Few-Shot 的常見陷阱</h2>
+
+                <table class="pitfalls-table">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>症狀</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>範例太少或太多</td>
+                            <td>太少：Claude 無法泛化；太多：成本上升，效果不成比例</td>
+                            <td>目標 3-5 個；複雜任務最多 7 個</td>
+                        </tr>
+                        <tr>
+                            <td>範例不代表</td>
+                            <td>Claude 學會了一個狹隘模式，無法處理不同輸入</td>
+                            <td>確保範例涵蓋多種情況、難度、邊界</td>
+                        </tr>
+                        <tr>
+                            <td>模糊的輸入-輸出映射</td>
+                            <td>Claude 無法理解邏輯，隨機猜測</td>
+                            <td>明確寫出「為什麼」這個輸出，尤其是非顯而易見的情況</td>
+                        </tr>
+                        <tr>
+                            <td>範例順序不當</td>
+                            <td>Claude 被複雜性淹沒，表現差</td>
+                            <td>從簡到複雜排序</td>
+                        </tr>
+                        <tr>
+                            <td>風格不一致</td>
+                            <td>範例使用不同格式或語言，Claude 輸出混亂</td>
+                            <td>所有範例應使用相同格式、語言、粒度</td>
+                        </tr>
+                        <tr>
+                            <td>過度依賴範例</td>
+                            <td>Claude 只是複製範例，無法創新或適應新情況</td>
+                            <td>結合 Few-Shot 和清晰的規則指引</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>7. Few-Shot 的高級技巧</h2>
+
+                <h3>動態範例選擇</h3>
+                <p>對於多個 API 呼叫，選擇與當前問題最相似的範例：</p>
+                <div class="code-block">
+                    <pre><code>用戶問題：「這個複雜產品應該定什麼價格？」
+
+動態選擇相似範例：
+1. 找出過去類似「複雜、高價」的定價案例
+2. 與通用範例一起提供
+3. Claude 看到相似背景會更準確
+
+偽代碼：
+examples = [
+    generic_example_1,
+    generic_example_2,
+    find_most_similar(user_input)  # ← 動態選擇
+]</code></pre>
+                </div>
+
+                <h3>範例驗證（Example Verification）</h3>
+                <p>定期測試你的範例集合是否有效：</p>
+                <div class="code-block">
+                    <pre><code>驗證流程：
+1. 隱藏每個範例的輸出
+2. 用 Claude 預測輸出
+3. 比較實際 vs 預測
+4. 如果準確度 < 90%，範例需要改進</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ Few-Shot 提升準確度 15-20%，成本極低</li>
+                    <li>✅ 目標 3-5 個代表性、多樣化的範例</li>
+                    <li>✅ 清晰的輸入-輸出映射是成敗關鍵</li>
+                    <li>✅ 從簡到複雜排序範例</li>
+                    <li>✅ 解釋「為什麼」這個輸出，特別是非顯而易見的情況</li>
+                    <li>✅ Few-Shot + 清晰規則 > 單純 Few-Shot</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_role-playing-prompt-techniques.html">角色設定提示詞技巧</a> — 結合角色和範例以獲得最佳效果</li>
+                    <li><a href="2026-04-11_claude-system-prompt-best-practices.html">Claude 系統提示詞最佳實踐</a> — 構建提示詞的四層框架</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 深入學習 AI 技能</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_few-shot-learning-techniques.html" alt="" style="display:none;">
+</body>
+</html>

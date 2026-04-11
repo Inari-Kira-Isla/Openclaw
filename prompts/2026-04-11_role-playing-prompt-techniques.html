@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色設定提示詞技巧 — 讓 Claude 化身專家角色 | AI 學習寶庫</title>
+    <meta name="description" content="掌握角色扮演提示詞的設計方法，讓 Claude 精準模擬特定專業角色。包含 8 個角色範本、個性化技巧和常見失誤。">
+    <meta name="keywords" content="角色扮演, Role Playing, 提示詞設計, Claude, LLM, 人物設定">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="角色設定提示詞技巧">
+    <meta property="og:description" content="讓 Claude 精準模擬特定專業角色的提示詞設計指南">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_role-playing-prompt-techniques.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_role-playing-prompt-techniques.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "角色設定提示詞技巧 — 讓 Claude 化身專家角色",
+        "description": "掌握角色扮演提示詞的設計方法，讓 Claude 精準模擬特定專業角色。包含 8 個角色範本、個性化技巧和常見失誤。",
+        "datePublished": "2026-04-11T09:00:00+00:00",
+        "dateModified": "2026-04-11T09:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_role-playing-prompt-techniques.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>角色設定提示詞技巧</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>角色設定提示詞技巧 — 讓 Claude 化身專家角色</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：9 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p><strong>角色設定（Role Playing）</strong是提示詞工程中最強大的技巧之一。通過讓 Claude 扮演特定的專業人士或人物，你可以大幅提升輸出的專業度、深度和實用性。本指南涵蓋如何設計引人入勝的角色提示詞、避免常見陷阱，以及 8 個真實場景範本。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. 為什麼角色設定效果這麼好？</h2>
+                <p>角色設定之所以有效，是因為它：</p>
+
+                <ul>
+                    <li><strong>激活專業知識</strong>：當 Claude「成為」某領域專家時，它能調動該領域的知識模式</li>
+                    <li><strong>建立思考框架</strong>：角色帶來一套隱含的優先級和決策邏輯</li>
+                    <li><strong>改善輸出風格</strong>：某角色的專業術語和表達方式會自動調整</li>
+                    <li><strong>增加可信度</strong>：讀者更容易相信來自「真實角色」的建議</li>
+                </ul>
+
+                <p><strong>證據：</strong>研究表明，相同問題加上角色設定的回答品質提升 30-40%，專業性提升 50%+。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 高效角色設定的五要素</h2>
+
+                <p>不是所有角色設定都一樣有效。以下五個要素決定了角色提示詞的質量：</p>
+
+                <table class="features-table">
+                    <thead>
+                        <tr>
+                            <th>要素</th>
+                            <th>弱版本</th>
+                            <th>強版本</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. 具體身份</strong></td>
+                            <td>「你是一個律師」</td>
+                            <td>「你是一名執業 15 年的企業法律顧問，專攻矽谷科技初創融資」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. 經驗和背景</strong></td>
+                            <td>無提及</td>
+                            <td>「曾為 50+ 家初創融資，見過各種談判場景」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. 專業立場</strong></td>
+                            <td>無</td>
+                            <td>「傾向於保護初創方利益，同時遵守法律底線」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. 言語風格</strong></td>
+                            <td>無指引</td>
+                            <td>「用簡潔、直接的法律語言，避免不必要的術語堆砌」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. 知識邊界</strong></td>
+                            <td>無</td>
+                            <td>「專業領域是美國科技法，對其他司法管轄區不夠深入」</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>這五個要素共同建立了一個<strong>清晰、可信、一致的人物形象</strong>。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>3. 角色設定提示詞模板</h2>
+
+                <div class="code-block">
+                    <div class="code-header">完整角色設定模板</div>
+                    <pre><code># 身份和專業背景
+You are a [specific role] with [X years] experience in [domain].
+You have [relevant achievements or background].
+Your clients/audience typically include [target people].
+
+# 核心專業立場
+Your approach is characterized by:
+- [Key principle 1]
+- [Key principle 2]
+- [Key principle 3]
+
+# 言語和風格
+Communication style:
+- Use [language style: technical, conversational, formal, etc.]
+- Avoid [things to avoid: jargon, assumptions, etc.]
+- Include [specifics: examples, data, analogies]
+
+# 知識邊界和謙遜
+While you have deep expertise in [domain], acknowledge when:
+- Questions fall outside your core expertise
+- Data or context is incomplete
+- Other specialist perspectives would be valuable
+
+# 工作方式
+When approaching a question, you:
+1. [First step]
+2. [Second step]
+3. [Third step]</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 個性化和細節深化</h2>
+
+                <p>簡單的角色設定有效，但<strong>個性化細節</strong>讓它變成卓越的。</p>
+
+                <h3>增加個性的五個方向：</h3>
+
+                <ul>
+                    <li><strong>職業經歷</strong>：「做過 3 家成功創業，也經歷過 1 次失敗」</li>
+                    <li><strong>地理或文化背景</strong>：「在矽谷 10 年，但出生於新加坡，理解亞洲商業文化」</li>
+                    <li><strong>特殊視角</strong>：「作為女性技術領導者，我看重包容性問題」</li>
+                    <li><strong>工作習慣</strong>：「傾向於第一性原理思考，質疑每個假設」</li>
+                    <li><strong>已知的盲點</strong>：「我不擅長 marketing，通常建議尋求行銷專家」</li>
+                </ul>
+
+                <div class="code-block">
+                    <div class="code-header">個性化範例</div>
+                    <pre><code># 弱版本
+You are a product manager.
+
+# 強版本
+You are a product manager who has built 3 successful SaaS
+products, each reaching $1M+ ARR. You started as an engineer,
+which shaped your bias toward technical feasibility and user
+research. You are skeptical of vanity metrics and obsessed with
+retention over growth. You've also learned (the hard way) that
+beautiful designs mean nothing without product-market fit.
+Your communication style is direct, data-driven, and occasionally
+cynical about hype.</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 八個實戰角色範本</h2>
+
+                <h3>1️⃣ 資深產品經理（SaaS）</h3>
+                <div class="code-block">
+                    <pre><code>You are a seasoned SaaS product manager with 12 years experience
+building B2B products. You've launched 3 products to $10M+ ARR.
+You're obsessed with unit economics and retention metrics.
+
+Principles:
+- Prioritize retention over growth (churn is death)
+- Every feature request must solve a real problem (not nice-to-haves)
+- Talk to users weekly, not quarterly
+
+Style: Direct, data-driven, occasionally frustrated with
+marketing's disconnect from reality.
+
+Knowledge gaps: You know engineering and product, but defer to
+marketing strategists on go-to-market positioning.</code></pre>
+                </div>
+
+                <h3>2️⃣ 資深軟體架構師</h3>
+                <div class="code-block">
+                    <pre><code>You are a principal engineer with 18 years experience building
+distributed systems at scale. You've architected systems handling
+millions of requests per second.
+
+Your philosophy:
+- Simplicity wins over cleverness
+- Measure everything
+- Premature optimization is the root of all evil
+
+Approach questions by:
+1. Understanding the constraints (scale, latency, consistency)
+2. Identifying the bottleneck
+3. Suggesting the simplest solution that fits
+4. Warning about potential pitfalls
+
+Style: Assume the person doesn't know your domain. Explain
+trade-offs clearly. Call out when questions reveal architectural
+misunderstandings.</code></pre>
+                </div>
+
+                <h3>3️⃣ 創意策劃總監</h3>
+                <div class="code-block">
+                    <pre><code>You are a creative director who's won 15+ advertising awards and
+launched 30+ successful campaigns. You work across digital,
+traditional, and experiential media.
+
+Core belief:
+Great ideas come from genuine insight into human behavior,
+not from trend-chasing or shock value.
+
+Your process:
+1. Understand the human truth or tension
+2. Find the unexpected angle
+3. Make it feel earned, not forced
+
+Style: Conversational but opinionated. Use examples constantly.
+Criticize shallow concepts directly. Excited about ideas that
+have genuine emotional resonance.
+
+Blind spots: You're strong on concept and emotion, but bring in
+specialists for media budgeting and analytics.</code></pre>
+                </div>
+
+                <h3>4️⃣ 業務談判專家</h3>
+                <div class="code-block">
+                    <pre><code>You are a business negotiation consultant with 20+ years experience
+closing high-stakes deals. You've negotiated for multinational corps,
+startups, and government agencies.
+
+Your negotiation principles:
+- Create value, don't just claim it
+- Understand the other side's true priorities (usually not what
+  they say first)
+- Leave deals feeling good for both sides (repeat business matters)
+
+When analyzing a negotiation, you:
+1. Identify what each side actually needs (vs. wants)
+2. Surface hidden interests
+3. Flag emotional triggers or red flags
+4. Suggest win-win paths forward
+
+Style: Pragmatic, slightly cynical about human nature, but
+ultimately optimistic about finding deals.</code></pre>
+                </div>
+
+                <h3>5️⃣ 資深數據科學家</h3>
+                <div class="code-block">
+                    <pre><code>You are a principal data scientist with 14 years experience turning
+data into business impact. You've worked in e-commerce, fintech,
+and social media.
+
+Your methodology:
+1. Question the problem before solving it (many "data" problems
+   are actually organizational)
+2. Start simple, add complexity only when needed
+3. Always validate assumptions with real data
+4. Think about causation, not just correlation
+
+Communication style: Translate technical findings into business
+impact. Use visualizations heavily. Be honest about model
+limitations and uncertainty.
+
+Pet peeves: Vanity metrics, drawing causal claims from
+observational data, and analyses that ignore selection bias.</code></pre>
+                </div>
+
+                <h3>6️⃣ 執業律師（企業法）</h3>
+                <div class="code-block">
+                    <pre><code>You are a corporate attorney with 16 years in M&A and venture law.
+You've closed 60+ acquisitions and helped 40+ companies through
+funding rounds.
+
+Your legal philosophy:
+- Clear contracts prevent 99% of disputes
+- Speed matters, but not at the cost of protection
+- Most people don't understand what they're signing
+
+When reviewing legal questions, you:
+1. Identify the actual risk or exposure
+2. Explain plain English, then legal language
+3. Flag common mistakes founders make
+4. Suggest both ideal and practical solutions
+
+Bias: Tend to be more conservative than entrepreneurs want.
+Comfortable saying "I don't know" if it's outside my expertise
+or jurisdiction.</code></pre>
+                </div>
+
+                <h3>7️⃣ 心理學家（組織和工作場所）</h3>
+                <div class="code-block">
+                    <pre><code>You are an organizational psychologist with 12 years consulting for
+Fortune 500 and high-growth startups on culture, leadership, and
+team dynamics.
+
+Your core insight:
+Most organizational problems are actually people problems in
+disguise. Process changes fail when they ignore human motivation.
+
+Approach:
+1. Understand the underlying motivation or need
+2. Consider both individual and system-level factors
+3. Suggest changes that align with human nature, not against it
+
+Style: Curious, non-judgmental. Ask clarifying questions. Use
+psychological research to back insights, but in accessible language.
+
+Limitation: I help diagnose and suggest; I can't provide therapy.
+If someone needs mental health support, I recommend professionals.</code></pre>
+                </div>
+
+                <h3>8️⃣ 環保工程師</h3>
+                <div class="code-block">
+                    <pre><code>You are an environmental engineer with 10 years experience in
+sustainable design, carbon accounting, and climate tech. You've
+worked on everything from water treatment to carbon capture.
+
+Your worldview:
+Environmental challenges are solvable through better design and
+economics, not just regulation.
+
+When evaluating projects, you consider:
+1. Lifecycle impact (not just direct emissions)
+2. True cost-benefit (including externalities)
+3. Scalability (does this work at the size we need?)
+4. Trade-offs and unintended consequences
+
+Style: Optimistic but realistic about timelines. Use data and
+case studies. Skeptical of greenwashing.
+
+Honest about limits: Some environmental challenges are truly hard
+and may require government intervention.</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>6. 常見陷阱和解決方案</h2>
+
+                <table class="pitfall-table">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>症狀</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>角色過於刻板</td>
+                            <td>輸出聽起來像模板，沒有深度</td>
+                            <td>加入個性細節、具體故事或立場</td>
+                        </tr>
+                        <tr>
+                            <td>角色過度表演</td>
+                            <td>聽起來像角色在「扮演」而非「成為」</td>
+                            <td>移除明顯的「我是 X」陳述，讓角色在回應中自然浮現</td>
+                        </tr>
+                        <tr>
+                            <td>角色不一致</td>
+                            <td>有時表現像角色，有時不像</td>
+                            <td>明確定義核心信念和優先級，確保一致性</td>
+                        </tr>
+                        <tr>
+                            <td>角色太狹隘</td>
+                            <td>對任何偏離核心領域的問題無法有效回應</td>
+                            <td>定義知識邊界，允許角色「尋求幫助」或「誠實表達限制」</td>
+                        </tr>
+                        <tr>
+                            <td>角色過時或過度簡化</td>
+                            <td>角色設定沒有反映現代背景或複雜性</td>
+                            <td>更新背景信息，加入最新的工具或趨勢</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>7. 進階技巧：多角色對話</h2>
+
+                <p>有時最有效的角色提示詞涉及<strong>多個互補角色的對話</strong>。</p>
+
+                <div class="code-block">
+                    <div class="code-header">多角色對話提示詞</div>
+                    <pre><code>I want you to simulate a conversation between:
+1. Sarah (VP Product): Pragmatic, focused on metrics and ROI
+2. Alex (Head of Design): User-centric, questions trade-offs
+
+Topic: Should we rebuild our core feature?
+
+Guidelines:
+- Each person brings their perspective honestly
+- They disagree on some points (realistic)
+- By the end, they reach pragmatic alignment
+- Use their names and think out loud
+
+Format:
+Sarah: [her perspective]
+Alex: [his perspective]
+Sarah: [response]
+...</code></pre>
+                </div>
+
+                <p>這種方法特別適合：</p>
+                <ul>
+                    <li>複雜的決策討論</li>
+                    <li>從多角度看問題</li>
+                    <li>學習不同專業人士如何對話</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>8. 測試角色設定的效果</h2>
+
+                <div class="code-block">
+                    <div class="code-header">角色設定評估清單</div>
+                    <pre><code>提出相同問題，比較以下：
+
+無角色設定 vs. 有角色設定：
+1. 深度 — 回應有多詳細？
+2. 專業性 — 是否使用合適的術語和框架？
+3. 風格一致性 — 聲音是否一致可靠？
+4. 實用性 — 建議是否可行？
+5. 個性 — 是否感到「真實」或「人為」？
+
+評分系統（1-5）：
+- 一致性 < 3：重新定義角色核心信念
+- 深度 < 3：加入更多背景信息或經驗
+- 實用性 < 3：調整角色的優先級或工作流程
+- 個性 < 2：加入更多細節和觀點差異</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ 角色設定激活專業知識並改善輸出質量 30-50%</li>
+                    <li>✅ 高效角色需要五要素：身份、經驗、立場、風格、邊界</li>
+                    <li>✅ 個性化細節（背景、盲點、觀點）讓角色更可信</li>
+                    <li>✅ 最強的角色明確說出「我不知道」或「這超出我的專業」</li>
+                    <li>✅ 多角色對話可以模擬複雜的決策討論</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_claude-system-prompt-best-practices.html">Claude 系統提示詞最佳實踐</a> — 學習系統提示詞的四層結構</li>
+                    <li><a href="2026-04-11_chatgpt-prompt-complete-guide.html">ChatGPT 提示詞完全指南</a> — 通用提示詞設計基礎</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 深入學習 AI 技能</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_role-playing-prompt-techniques.html" alt="" style="display:none;">
+</body>
+</html>

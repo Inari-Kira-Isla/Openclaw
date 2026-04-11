@@ -330,6 +330,21 @@ main { flex: 1; }
 .reveal-d3 { transition-delay: 0.18s; }
 .reveal-d4 { transition-delay: 0.24s; }
 
+/* ── Breadcrumb Navigation ── */
+.breadcrumb-nav {
+  font-size: 13px; color: var(--text-2); margin-bottom: 24px;
+  padding-top: 24px;
+}
+.breadcrumb-nav a { color: var(--primary); transition: color 0.15s; }
+.breadcrumb-nav a:hover { color: var(--primary-h); }
+.breadcrumb-nav span { margin: 0 8px; }
+
+/* ── Intro Text ── */
+.intro-text {
+  font-size: 16px; color: var(--text-2); line-height: 1.7;
+  margin-bottom: 24px;
+}
+
 /* ── Utility ── */
 @media (max-width: 680px) {
   .hero { padding: 48px 24px 36px; }

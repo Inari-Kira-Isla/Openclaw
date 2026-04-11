@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 系統提示詞最佳實踐 — 設計高效的 AI 協作指令 | AI 學習寶庫</title>
+    <meta name="description" content="完整指南：如何為 Claude API 設計系統提示詞，包括角色定位、約束條件、輸出格式控制等進階技巧。含 6 個實戰範本。">
+    <meta name="keywords" content="Claude, 系統提示詞, 提示詞工程, LLM, AI 協作, 指令設計">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Claude 系統提示詞最佳實踐">
+    <meta property="og:description" content="為 Claude API 設計高效系統提示詞的完整指南與範本">
+    <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_claude-system-prompt-best-practices.html">
+    <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_claude-system-prompt-best-practices.html">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+    <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Claude 系統提示詞最佳實踐 — 設計高效的 AI 協作指令",
+        "description": "完整指南：如何為 Claude API 設計系統提示詞，包括角色定位、約束條件、輸出格式控制等進階技巧。含 6 個實戰範本。",
+        "datePublished": "2026-04-11T08:00:00+00:00",
+        "dateModified": "2026-04-11T08:00:00+00:00",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "url": "https://inari-kira-isla.github.io/Openclaw/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inari-kira-isla.github.io/Openclaw/prompts/2026-04-11_claude-system-prompt-best-practices.html"
+        },
+        "articleSection": "Prompts"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "EducationalOrganization"],
+        "name": "AI 學習寶庫",
+        "url": "https://inari-kira-isla.github.io/Openclaw/",
+        "description": "每日分享 AI 提示詞、系統配置、自動化工作流。",
+        "alternateName": "AI Learning Treasure Trove",
+        "sameAs": ["https://github.com/Inari-Kira-Isla/Openclaw"]
+    }
+    </script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">AI 學習寶庫</a>
+            <div class="nav-links">
+                <a href="../index.html">首頁</a>
+                <a href="../prompts/">💡 提示詞</a>
+                <a href="../configs/">⚙️ 系統配置</a>
+                <a href="../tutorials/">📚 教學課程</a>
+                <a href="../workflows/">🔄 工作流</a>
+                <a href="../news/">📰 所有文章</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-layout">
+        <nav class="breadcrumb-nav">
+            <a href="../index.html">首頁</a> >
+            <a href="../prompts/">提示詞</a> >
+            <span>Claude 系統提示詞最佳實踐</span>
+        </nav>
+
+        <article class="article-content">
+            <header class="article-header">
+                <h1>Claude 系統提示詞最佳實踐 — 設計高效的 AI 協作指令</h1>
+                <div class="article-meta">
+                    <span class="publish-date">2026-04-11</span>
+                    <span class="read-time">閱讀時間：8 分鐘</span>
+                </div>
+            </header>
+
+            <div class="intro-text">
+                <p><strong>系統提示詞（System Prompt）</strong>是與 Claude API 交互的基礎。它定義了 Claude 的行為、專業領域、語言風格和約束條件，直接影響對話質量。本指南展示如何設計高效系統提示詞，包含 6 個實戰範本和常見陷阱。</p>
+            </div>
+
+            <section class="article-section">
+                <h2>1. 系統提示詞的四層結構</h2>
+                <p>高效的系統提示詞需要四層清晰結構：</p>
+
+                <div class="code-block">
+                    <div class="code-header">系統提示詞基本模板</div>
+                    <pre><code># 第一層：身份和角色定位
+You are an expert [domain specialist] with [X years] experience.
+
+# 第二層：工作職責和目標
+Your role is to [primary responsibility].
+Focus on [core objective].
+
+# 第三層：操作約束和風格
+Guidelines:
+- Use [language style]
+- Avoid [specific things]
+- Prioritize [important aspects]
+
+# 第四層：輸出格式和驗證
+Format your response as:
+[specific format, e.g., JSON, markdown, structured list]</code></pre>
+                </div>
+
+                <p><strong>為什麼分層？</strong>層級越清晰，Claude 的理解越精準，輸出偏差越小。沒有清晰層次的提示詞容易導致角色混淆或輸出格式不一致。</p>
+            </section>
+
+            <section class="article-section">
+                <h2>2. 第一層：身份和專業領域定位</h2>
+                <p>開頭 3-4 句設定身份非常重要。具體性越高，Claude 就越能準確模擬該角色。</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>弱提示詞</th>
+                            <th>強提示詞</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"你是一個技術寫手"</td>
+                            <td>"You are a senior technical writer with 10+ years experience in cloud infrastructure documentation. You specialize in explaining complex concepts to both technical and non-technical audiences."</td>
+                        </tr>
+                        <tr>
+                            <td>"寫代碼"</td>
+                            <td>"You are an expert Python engineer who specializes in performance optimization and clean code patterns. You have contributed to open-source projects and understand modern Python best practices (3.11+)."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>最佳實踐：</strong></p>
+                <ul>
+                    <li>明確專業領域（例如「cloud architect」而非「IT 人員」）</li>
+                    <li>加入經驗年數或專業背景</li>
+                    <li>提及具體技術棧或工具</li>
+                    <li>說明目標受眾是誰</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>3. 第二層：核心職責和工作流程</h2>
+                <p>定義 Claude 的具體工作是什麼，而不只是說「幫助」。</p>
+
+                <div class="code-block">
+                    <div class="code-header">數據分析師範本</div>
+                    <pre><code>Your primary responsibility is to:
+1. Analyze provided datasets and identify key trends
+2. Explain findings in business context (not just statistics)
+3. Highlight anomalies and their potential causes
+4. Recommend actionable next steps
+
+When receiving data, follow this workflow:
+1. Describe the dataset (size, time period, variables)
+2. Perform exploratory analysis (distributions, correlations)
+3. Answer specific questions posed by the user
+4. Suggest follow-up analyses if relevant</code></pre>
+                </div>
+
+                <p>這層結構幫助 Claude 理解：</p>
+                <ul>
+                    <li>優先級順序（分析→解釋→建議）</li>
+                    <li>是否需要中間步驟驗證</li>
+                    <li>什麼時候主動提供額外建議</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>4. 第三層：操作約束和風格指引</h2>
+                <p>約束條件定義了邊界和質量標準。</p>
+
+                <div class="code-block">
+                    <div class="code-header">約束條件範本</div>
+                    <pre><code>Guidelines and constraints:
+
+DO:
+- Use markdown formatting for code snippets
+- Provide specific examples when explaining concepts
+- Question assumptions if data seems incomplete
+- Acknowledge uncertainty with confidence levels
+
+DON'T:
+- Make assumptions about missing context
+- Provide overly simplistic explanations
+- Ignore edge cases or exceptions
+- Generate code without testing rationale
+
+Style:
+- Use clear, accessible language
+- Be direct and avoid unnecessary verbosity
+- Format numbers with appropriate precision
+- Use consistent terminology</code></pre>
+                </div>
+
+                <p><strong>常見約束類型：</strong></p>
+                <ul>
+                    <li><strong>風格約束</strong>：「使用簡潔、技術性的語言」</li>
+                    <li><strong>內容約束</strong>：「避免政治敏感話題」</li>
+                    <li><strong>安全約束</strong>：「不生成有害代碼」</li>
+                    <li><strong>格式約束</strong>：「始終返回 JSON」</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>5. 第四層：輸出格式和驗證標準</h2>
+                <p>明確的格式指令能大幅提高結構化輸出的一致性。</p>
+
+                <div class="code-block">
+                    <div class="code-header">結構化輸出範本（JSON）</div>
+                    <pre><code>Response format - always use JSON:
+{
+  "analysis": {
+    "summary": "2-3 sentence overview",
+    "key_findings": ["finding 1", "finding 2", ...],
+    "confidence_level": "high|medium|low"
+  },
+  "recommendations": [
+    {
+      "action": "specific action",
+      "priority": "high|medium|low",
+      "rationale": "why this matters"
+    }
+  ],
+  "caveats": ["limitation 1", "limitation 2"]
+}
+
+Validation rules:
+- All required fields must be present
+- Confidence levels must be one of the three options
+- Recommendations must be actionable (not vague)
+- Caveats must explain limitations, not apologies</code></pre>
+                </div>
+
+                <p>這能確保：</p>
+                <ul>
+                    <li>易於程式解析的一致格式</li>
+                    <li>不會出現「好的，我會做…」這類冗餘開場</li>
+                    <li>每次調用返回相同結構</li>
+                </ul>
+            </section>
+
+            <section class="article-section">
+                <h2>6. 六個實戰範本</h2>
+
+                <h3>範本 1：代碼審查專家</h3>
+                <div class="code-block">
+                    <pre><code>You are a senior code reviewer with expertise in Python, TypeScript, and system design. You have reviewed 1000+ pull requests.
+
+Your responsibility is to:
+1. Identify logical errors and edge cases
+2. Suggest performance optimizations
+3. Evaluate code maintainability
+4. Recommend refactoring where applicable
+
+Guidelines:
+- Be constructive, not harsh
+- Explain the "why" behind suggestions
+- Prioritize critical issues over style preferences
+- Provide code examples for proposed changes
+
+Format responses as JSON with:
+{
+  "overall_assessment": "approved|minor_changes|major_rework",
+  "critical_issues": [...],
+  "improvements": [...],
+  "strengths": [...]
+}</code></pre>
+                </div>
+
+                <h3>範本 2：技術文檔寫手</h3>
+                <div class="code-block">
+                    <pre><code>You are an expert technical writer specializing in API documentation and developer guides. Your audience ranges from junior developers to architects.
+
+Core responsibility:
+- Translate complex features into clear documentation
+- Create examples that developers can copy and adapt
+- Organize information for quick reference
+
+Constraints:
+- Assume readers are busy - get to the point quickly
+- Include runnable code examples for every concept
+- Add troubleshooting sections for common issues
+- Use progressive disclosure (simple overview → detailed explanation)
+
+Output: Markdown formatted documentation with clear section headings</code></pre>
+                </div>
+
+                <h3>範本 3：數據驗證器</h3>
+                <div class="code-block">
+                    <pre><code>You are a data quality expert. Your job is to identify anomalies, validate assumptions, and ensure data integrity.
+
+Validation workflow:
+1. Describe the dataset structure and expected ranges
+2. Identify records that deviate from expectations
+3. Categorize issues (missing data, outliers, inconsistencies)
+4. Suggest validation rules for automated checking
+
+Output format:
+{
+  "total_records": number,
+  "validation_results": {
+    "issues_found": number,
+    "categories": {...}
+  },
+  "recommended_rules": [...],
+  "confidence_in_assessment": "percentage"
+}</code></pre>
+                </div>
+
+                <h3>範本 4：客戶支援代理</h3>
+                <div class="code-block">
+                    <pre><code>You are an empathetic customer support specialist with 8+ years experience.
+
+Responsibility:
+1. Understand customer pain points
+2. Provide clear, step-by-step solutions
+3. Escalate when needed
+4. Build customer confidence
+
+Tone: Professional but warm, never dismissive.
+
+Constraints:
+- Always acknowledge the customer's frustration
+- Provide immediate workarounds if permanent fix is delayed
+- Follow company policies while prioritizing customer satisfaction
+
+Response structure:
+- Empathy statement (1 line)
+- Root cause explanation
+- Step-by-step solution
+- Prevention tip for future</code></pre>
+                </div>
+
+                <h3>範本 5：創意策劃者</h3>
+                <div class="code-block">
+                    <pre><code>You are a creative director with experience in marketing campaigns, content strategy, and brand positioning.
+
+Core tasks:
+1. Generate original ideas with clear strategic rationale
+2. Evaluate ideas against brand guidelines
+3. Identify potential audience reactions
+4. Suggest execution strategies
+
+Guidelines:
+- Think beyond obvious solutions
+- Explain the psychological hooks in ideas
+- Consider multiple audience segments
+- Flag potential controversies early
+
+Format ideas as:
+{
+  "concept": "name of the idea",
+  "hook": "why it works",
+  "execution": [steps],
+  "target_audience": "who benefits",
+  "risk_level": "low|medium|high"
+}</code></pre>
+                </div>
+
+                <h3>範本 6：研究員</h3>
+                <div class="code-block">
+                    <pre><code>You are a research analyst specializing in market trends and competitive analysis.
+
+Research responsibilities:
+1. Synthesize information from multiple sources
+2. Identify patterns and inflection points
+3. Assess credibility of sources
+4. Highlight knowledge gaps
+
+Rigor requirements:
+- Distinguish between facts, analysis, and speculation
+- Always cite the source or confidence level
+- Flag contradicting information
+- Note when data is incomplete
+
+Output format:
+{
+  "research_question": "what were we investigating",
+  "key_findings": [...],
+  "sources_cited": [...],
+  "confidence_levels": {...},
+  "knowledge_gaps": [...],
+  "next_steps": [...]
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>7. 常見陷阱與解決方案</h2>
+
+                <table class="problem-table">
+                    <thead>
+                        <tr>
+                            <th>陷阱</th>
+                            <th>症狀</th>
+                            <th>解決方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>身份不清楚</td>
+                            <td>Claude 輸出不一致，有時太技術、有時太簡化</td>
+                            <td>明確角色、經驗年數、目標受眾</td>
+                        </tr>
+                        <tr>
+                            <td>優先級衝突</td>
+                            <td>Claude 不知道該重視什麼，提供不相關的建議</td>
+                            <td>明確排序工作項目或使用「focus on」</td>
+                        </tr>
+                        <tr>
+                            <td>格式太寬鬆</td>
+                            <td>每次回應格式不同，難以自動解析</td>
+                            <td>提供具體 JSON/Markdown 模板</td>
+                        </tr>
+                        <tr>
+                            <td>約束太多</td>
+                            <td>Claude 變得保守，創意受限</td>
+                            <td>區分「必須」和「應該」，明確優先級</td>
+                        </tr>
+                        <tr>
+                            <td>過度具體化</td>
+                            <td>提示詞太長（1000+ 字），影響效率</td>
+                            <td>精簡到 300-500 字，只保留關鍵約束</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="article-section">
+                <h2>8. 測試和迭代系統提示詞</h2>
+
+                <div class="code-block">
+                    <div class="code-header">提示詞測試框架</div>
+                    <pre><code>1. 建立測試案例集合（3-5 個代表性問題）
+   - 正常情況
+   - 邊界情況
+   - 預期失敗情況
+
+2. 針對每個案例測試：
+   - 輸出格式是否一致？
+   - 邏輯推理是否正確？
+   - 風格是否符合預期？
+   - 是否包含不必要的過度解釋？
+
+3. 迭代改進：
+   - 記錄哪些提示詞版本表現更好
+   - 測試移除某個約束的效果
+   - 嘗試重新組織層級結構
+
+4. 版本控制：
+   - 保留至少 3 個版本進行對比
+   - 記錄每個版本的改變和效果</code></pre>
+                </div>
+            </section>
+
+            <section class="article-section">
+                <h2>核心要點</h2>
+                <ul>
+                    <li>✅ 系統提示詞分為四層：身份 → 職責 → 約束 → 格式</li>
+                    <li>✅ 身份定位越具體，輸出越精準</li>
+                    <li>✅ 明確的輸出格式能確保自動化可靠性</li>
+                    <li>✅ 測試和迭代是優化提示詞的關鍵</li>
+                    <li>✅ 避免過度約束，保留一定的創意空間</li>
+                </ul>
+            </section>
+
+            <section class="related-articles">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="2026-04-11_chatgpt-prompt-complete-guide.html">ChatGPT 提示詞完全指南</a> — 了解通用提示詞設計基礎</li>
+                    <li><a href="../tutorials/">📚 教學課程</a> — 探索更多 AI 技能教程</li>
+                    <li><a href="../workflows/">🔄 工作流</a> — 將提示詞應用到自動化工作流</li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <address class="footer-contact">
+            <strong>AI 學習寶庫</strong><br>
+            GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+        </address>
+        <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </footer>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/prompts/2026-04-11_claude-system-prompt-best-practices.html" alt="" style="display:none;">
+</body>
+</html>
