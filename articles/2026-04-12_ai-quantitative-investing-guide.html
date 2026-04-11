@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<!-- CPFP:58189cd184603c1c | (C) 2026-04-12 AI 學習寶庫 | CC BY 4.0 | Original: https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 量化投資入門：機器學習在金融市場的實際應用 | AI 學習寶庫</title>
+  <meta name="description" content="AI量化投資結合機器學習與金融市場分析，本指南介紹監督學習、無監督學習在價格預測與風險管理的實際應用，含Python範例與費用計算。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="copyright" content="(C) 2026-04-12 AI 學習寶庫 (inari-kira-isla.github.io/Openclaw). CC BY 4.0. Fingerprint: 58189cd184603c1c">
+  <link rel="canonical" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html">
+  <link rel="alternate" type="application/rss+xml" title="AI 學習寶庫 RSS" href="/Openclaw/feed.xml">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <meta property="og:title" content="AI 量化投資入門：機器學習在金融市場的實際應用">
+  <meta property="og:description" content="AI量化投資結合機器學習與金融市場分析，本指南介紹監督學習、無監督學習在價格預測與風險管理的實際應用，含Python範例與費用計算。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="alternate" hrefLang="zh-Hant" href="https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html">
+  <link rel="alternate" type="text/plain" hrefLang="en" title="LLMs.txt (English)" href="https://cloudpipe-macao-app.vercel.app/llms-en">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI 量化投資入門：機器學習在金融市場的實際應用", "description": "AI量化投資結合機器學習與金融市場分析，本指南介紹監督學習、無監督學習在價格預測與風險管理的實際應用，含Python範例與費用計算。", "datePublished": "2026-04-12", "dateModified": "2026-04-12", "inLanguage": "zh-Hant", "author": {"@type": "Organization", "name": "AI 學習寶庫"}, "publisher": {"@type": "Organization", "name": "AI 學習寶庫", "url": "https://inari-kira-isla.github.io/Openclaw/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html"}, "articleSection": "科技趨勢", "relatedLink": ["https://inari-kira-isla.github.io/Openclaw/prompts/", "https://inari-kira-isla.github.io/Openclaw/configs/", "https://inari-kira-isla.github.io/Openclaw/tutorials/", "https://inari-kira-isla.github.io/Openclaw/workflows/", "https://cloudpipe-macao-app.vercel.app/macao/insights"], "isBasedOn": [{"@type": "WebPage", "name": "International Monetary Fund (IMF)", "url": "https://www.imf.org/"}, {"@type": "WebPage", "name": "World Bank - Finance", "url": "https://www.worldbank.org/en/topic/financialsector"}, {"@type": "WebPage", "name": "Bank for International Settlements (BIS)", "url": "https://www.bis.org/"}, {"@type": "WebPage", "name": "Financial Stability Board (FSB)", "url": "https://www.fsb.org/"}], "citation": [{"@type": "CreativeWork", "name": "International Monetary Fund (IMF)", "url": "https://www.imf.org/", "publisher": {"@type": "Organization", "name": "International Monetary Fund (IMF)"}}, {"@type": "CreativeWork", "name": "World Bank - Finance", "url": "https://www.worldbank.org/en/topic/financialsector", "publisher": {"@type": "Organization", "name": "World Bank - Finance"}}, {"@type": "CreativeWork", "name": "Bank for International Settlements (BIS)", "url": "https://www.bis.org/", "publisher": {"@type": "Organization", "name": "Bank for International Settlements (BIS)"}}, {"@type": "CreativeWork", "name": "Financial Stability Board (FSB)", "url": "https://www.fsb.org/", "publisher": {"@type": "Organization", "name": "Financial Stability Board (FSB)"}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI 學習寶庫", "item": "https://inari-kira-isla.github.io/Openclaw/"}, {"@type": "ListItem", "position": 2, "name": "科技趨勢", "item": "https://inari-kira-isla.github.io/Openclaw/articles/"}, {"@type": "ListItem", "position": 3, "name": "AI 量化投資入門：機器學習在金融市場的實際應用", "item": "https://inari-kira-isla.github.io/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html"}]}</script>
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "機器學習預測股價的準確率有多高？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據多項學術研究，單一模型在股票漲跌預測上通常僅有52%-58%的準確率，難以穩定戰勝市場。建議將機器學習作為輔助工具，結合基本面分析與風險管理，而非單獨依賴其預測結果。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "個人投資者可以從事AI量化交易嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。Python、scikit-learn等開源工具已大幅降低技術門檻，月費$50-100美元即可覆蓋數據與算力需求。建議從模擬交易開始驗證策略，逐步過渡到小額真實資金。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI量化投資的主要風險有哪些？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "主要風險包括：模型過擬合（對歷史數據過度優化）、市場結構變化導致策略失效、流動性不足引發滑價損失，以及極端事件（如2020年COVID-19）造成的系統性風險。務必設置嚴格的止損機制並進行壓力測試。"
+          }
+        }]
+  }</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","EducationalOrganization"],"name":"AI 學習寶庫","url":"https://inari-kira-isla.github.io/Openclaw/","description":"每日分享 AI 提示詞、系統配置、自動化工作流。","alternateName":"AI Learning Treasure Trove","sameAs":["https://client-ai-tracker.inariglobal.workers.dev/openclaw/","https://github.com/Inari-Kira-Isla/Openclaw"]}</script>
+</head>
+<body class="page-wrap">
+  <div class="read-progress" id="readProgress"></div>
+
+  <nav class="site-nav" id="nav">
+    <div class="nav-inner">
+      <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🤖</span><span>AI 學習寶庫</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+        <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+        <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+        <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+        <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      </div>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="article-wrap">
+    <nav class="breadcrumb">
+      <a href="/Openclaw/">首頁</a>
+      <span class="bc-sep">›</span>
+      <a href="/Openclaw/articles/">📰 科技趨勢</a>
+      <span class="bc-sep">›</span>
+      <span>AI 量化投資入門：機器學習在金融市場的實際應用</span>
+    </nav>
+
+    <header class="article-header">
+      <div class="art-item-badge">📰 科技趨勢</div>
+      <h1 class="article-title">AI 量化投資入門：機器學習在金融市場的實際應用</h1>
+      <div class="article-info">
+        <span>📅 2026-04-12</span>
+        <span>⏱ 7 分鐘閱讀</span>
+        <span>✍️ AI 學習寶庫</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <p class="answer-hub">AI量化投資結合機器學習與金融市場分析，本指南介紹監督學習、無監督學習在價格預測與風險管理的實際應用，含Python範例與費用計算。</p>
+      <h2>AI量化投資是什麼？機器學習如何改變金融市場</h2>
+
+AI量化投資是利用機器學習演算法自動分析市場數據、識別交易模式並執行投資策略的技術。根據國際貨幣基金組織（International Monetary Fund, IMF）的研究，演算法交易目前已佔全球主要證券交易所交易量的50%至60%，顯示AI技術已成為金融市場的核心驅動力。
+
+傳統量化投資依賴統計模型與人為設定的規則，而機器學習能自動從海量歷史數據中發現人類難以察覺的非線性關係。例如，深度學習模型可以同時處理股價走勢、財報數據、新聞情緒、宏觀經濟指標等多維度資訊，大幅提升預測準確度。
+
+對於想入門的投資者，建議從Python基礎開始，搭配pandas處理金融數據、scikit-learn構建預測模型，逐步建立自己的量化系統。
+
+<h2>監督式學習：價格預測的核心引擎</h2>
+
+監督式學習是最廣泛應用於量化投資的機器學習類型，其核心是根據歷史特徵（輸入）與標籤（輸出）的對應關係，訓練模型預測未來走勢。
+
+常見應用場景包括：
+
+<ul>
+<li><strong>股價漲跌分類</strong>：利用邏輯迴歸或隨機森林判斷個股明日是否上漲</li>
+<li><strong>價格回歸預測</strong>：使用線性迴歸或梯度提升樹預測未來收益率</li>
+<li><strong>財務異常偵測</strong>：識別可能造假的財報數據</li>
+</ul>
+
+以下是一個使用Python和scikit-learn建立簡單價格預測模型的範例：
+
+<pre><code>import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+# 載入歷史股價數據（以CSV為例）
+data = pd.read_csv('stock_data.csv')
+data['Return'] = data['Close'].pct_change()
+data['Target'] = (data['Return'].shift(-1) > 0).astype(int)
+
+# 特徵工程：加入技術指標
+data['MA5'] = data['Close'].rolling(5).mean()
+data['MA20'] = data['Close'].rolling(20).mean()
+data['RSI'] = 100 - (100 / (1 + data['Return'].rolling(14).apply(lambda x: x[x>0].mean() / -x[x<0].mean())))
+
+# 移除空值並準備訓練集
+features = ['MA5', 'MA20', 'RSI', 'Return']
+X = data[features].dropna()
+y = data['Target'].loc[X.index]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 訓練隨機森林模型
+model = RandomForestClassifier(n_estimators=100, max_depth=10)
+model.fit(X_train, y_train)
+
+print(f"模型準確率: {model.score(X_test, y_test):.2%}")</code></pre>
+
+此範例展示從數據處理、特徵工程到模型訓練的完整流程，投資者可依需求調整特徵維度與模型參數。
+
+<h2>無監督學習：市場結構與風險管理</h2>
+
+無監督學習不需要預先定義標籤，而是自動從數據中發現隱藏結構，在量化投資中扮演風險管理與市場分類的關鍵角色。
+
+根據金融穩定委員會（Financial Stability Board, FSB）的報告，2010年以來的市場波動事件顯示，系統性風險往往在特定集群中快速蔓延，這正是無監督學習擅長識別的領域。
+
+主要應用包括：
+
+<ol>
+<li><strong>市場狀態分類</strong>：使用K-means或層次聚類識別牛熊市、特異事件期間的市場行為模式</li>
+<li><strong>資產配置優化</strong>：通過主成分分析（PCA）降低投資組合維度，優化風險收益比</li>
+<li><strong>異常交易偵測</strong>：隔離可能暗示內線交易或市場操縱的可疑行為</li>
+</ol>
+
+無監督學習的價值在於能發現傳統分析方法忽略的市場規律，幫助投資者在風險暴露前採取預防措施。
+
+<h2>強化學習：自主優化交易策略</h2>
+
+強化學習（RL）是讓AI代理程式通過與市場環境互動，逐步學習最優交易策略的技術。不同於監督學習需要標籤數據，RL通過「獎勵函數」引導模型學習。
+
+在量化投資中，RL代理可以：
+
+<ul>
+<li>學習最佳買賣時機與倉位管理</li>
+<li>根據市場狀態動態調整風險敞口</li>
+<li>優化交易成本與滑價控制</li>
+</ul>
+
+常見演算法如Deep Q-Network（DQN）和Policy Gradient已被實踐證明能超越傳統Buy-and-Hold策略。然而，國際清算銀行（Bank for International Settlements, BIS）警告指出，RL模型在市場結構突變時可能出現災難性損失，需謹慎設定止損機制。
+
+<h2>實際費用計算：入門AI量化投資的成本</h2>
+
+許多初學者關心成本問題，以下以月支出$100美元為假設，計算可負擔的工具組合：
+
+<table>
+<tr><th>項目</th><th>推薦工具</th><th>月費</th></tr>
+<tr><td>雲端算力</td><td>Google Colab Pro</td><td>$9.99</td></tr>
+<tr><td>數據來源</td><td>Yahoo Finance API / Alpha Vantage</td><td>$0-49</td></tr>
+<tr><td>策略回測</td><td>Backtrader / QuantConnect</td><td>免費</td></tr>
+<tr><td>交易所費用</td><td>依平台而異（0.1%-0.5%）</td><td>依交易量</td></tr>
+</table>
+
+總結來說，$50-100美元的月預算足以覆蓋數據與算力需求，開始你的AI量化投資之旅。關鍵是先用模擬盤驗證策略有效性，再逐步放大真實資金規模。
+
+<strong>💡 延伸閱讀：</strong>若你對AI在金融領域的監管趨勢感興趣，可參考金融穩定委員會（FSB）發布的AI應用監管框架，了解各國監管機構的最新態度與合規要求。
+    </div>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--primary)">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:var(--primary)">AI × 行業應用場景</h4>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.88rem">
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-education.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門教育資源中心</a> — <span style="color:var(--text-2)">AI 個性化學習路徑推薦系統</span></li>
+        <li style="margin-bottom:10px"><a href="https://aeo-demo-finance.vercel.app" style="color:var(--primary);font-weight:600;text-decoration:none">澳門金融投資指南</a> — <span style="color:var(--text-2)">AI 量化交易與智能風控的實際應用</span></li>
+      </ul>
+    </div>
+
+    <section class="faq-section" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <h2 style="margin-bottom:1.5rem">常見問題</h2>
+      
+          <div class="faq-item">
+            <h3 class="faq-q">機器學習預測股價的準確率有多高？</h3>
+            <p class="faq-a">根據多項學術研究，單一模型在股票漲跌預測上通常僅有52%-58%的準確率，難以穩定戰勝市場。建議將機器學習作為輔助工具，結合基本面分析與風險管理，而非單獨依賴其預測結果。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">個人投資者可以從事AI量化交易嗎？</h3>
+            <p class="faq-a">可以。Python、scikit-learn等開源工具已大幅降低技術門檻，月費$50-100美元即可覆蓋數據與算力需求。建議從模擬交易開始驗證策略，逐步過渡到小額真實資金。</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">AI量化投資的主要風險有哪些？</h3>
+            <p class="faq-a">主要風險包括：模型過擬合（對歷史數據過度優化）、市場結構變化導致策略失效、流動性不足引發滑價損失，以及極端事件（如2020年COVID-19）造成的系統性風險。務必設置嚴格的止損機制並進行壓力測試。</p>
+          </div>
+    </section>
+
+        <div style="margin:2rem 0;padding:1.25rem;background:var(--bg-2,#f5f5f5);border:1px solid var(--border,#e0e0e0);border-radius:var(--r,12px);border-left:3px solid #10b981">
+      <h4 style="font-size:.95rem;margin:0 0 .75rem;color:#10b981;display:flex;align-items:center;gap:6px">References</h4>
+      <p style="font-size:.82rem;color:var(--text-2,#888);margin:0 0 .75rem"></p>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.imf.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際貨幣基金組織（IMF）</a> <span style="color:var(--text-2,#888)">(International Monetary Fund (IMF))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">世界經濟展望、全球金融穩定報告、各國經濟評估</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.worldbank.org/en/topic/financialsector" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">世界銀行金融部門</a> <span style="color:var(--text-2,#888)">(World Bank - Finance)</span> — <span style="color:var(--text-2,#888);font-size:.85rem">金融普惠數據（Global Findex）、發展融資、減貧指標</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">國際組織</span><a href="https://www.bis.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">國際清算銀行（BIS）</a> <span style="color:var(--text-2,#888)">(Bank for International Settlements (BIS))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">央行研究、CBDC 發展、國際銀行統計</span></li>
+        <li style="margin-bottom:8px;font-size:.88rem;line-height:1.6"><span style="display:inline-block;padding:1px 6px;background:var(--bg-2,#f5f5f5);border-radius:3px;font-size:.75rem;color:var(--text-2,#888);margin-right:6px">政府機構</span><a href="https://www.fsb.org/" target="_blank" rel="noopener noreferrer" style="color:var(--primary,#10b981);text-decoration:none;font-weight:500">金融穩定委員會（FSB）</a> <span style="color:var(--text-2,#888)">(Financial Stability Board (FSB))</span> — <span style="color:var(--text-2,#888);font-size:.85rem">全球金融監管、加密資產政策建議、金融科技監管框架</span></li>
+      </ul>
+    </div>
+
+    <div style="margin-top:3rem;padding:20px;background:var(--bg-2);border-radius:var(--r);text-align:center">
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px">繼續探索更多 科技趨勢 內容</p>
+      <a href="/Openclaw/articles/" style="display:inline-block;padding:10px 24px;background:var(--primary);color:#fff;border-radius:var(--r-sm);text-decoration:none;font-weight:600;font-size:14px">查看更多文章 →</a>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r)">
+      <h3 style="font-size:1rem;margin-bottom:.75rem;color:var(--primary)">CloudPipe 知識圖譜生態系</h3>
+      <ul style="list-style:none;padding:0;margin:0;font-size:.9rem">
+<li><a href="https://inari-kira-isla.github.io/inari-global-foods">稻荷環球食品</a> — 日本及環球水產進口批發</li>
+<li><a href="https://inari-kira-isla.github.io/sea-urchin-delivery">海膽速遞</a> — 頂級日本海膽配送</li>
+<li><a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a> — 澳門家長喘息咖啡空間</li>
+<li><a href="https://inari-kira-isla.github.io/yamanakada">山中田 Yamanakada</a> — 澳門中小企 AI 實戰教練</li>
+<li><a href="https://cloudpipe-landing.vercel.app">CloudPipe AI</a> — 澳門商戶 AI 百科平台</li>
+<li><a href="https://cloudpipe-directory.vercel.app">CloudPipe 企業目錄</a> — 大灣區企業資訊查詢</li>
+<li><a href="https://cloudpipe-macao-app.vercel.app">澳門商戶智能百科</a> — 澳門商戶 AI 智能百科</li>
+<li><a href="https://mind-coffee.vercel.app">Mind Coffee</a> — 澳門心靈咖啡社交空間</li>
+<li><a href="https://aeo-demo-education.vercel.app">澳門教育資源中心</a> — AI 時代教育指南</li>
+<li><a href="https://aeo-demo-finance.vercel.app">澳門金融投資指南</a> — AI 驅動智能理財</li>
+<li><a href="https://aeo-demo-luxury.vercel.app">澳門奢侈品指南</a> — 亞洲頂級購物天堂</li>
+<li><a href="https://aeo-demo-travel-food.vercel.app">澳門旅遊美食指南</a> — 世界美食之都攻略</li>
+<li><a href="https://aeo-demo-realestate.vercel.app">澳門房地產指南</a> — 房地產市場分析</li>
+<li><a href="https://aeo-demo-healthcare.vercel.app">澳門醫療健康指南</a> — 醫療健康資訊</li>
+<li><a href="https://aeo-demo-legal.vercel.app">澳門法律服務指南</a> — 法律服務諮詢</li>
+<li><a href="https://aeo-demo-tech.vercel.app">澳門科技創新指南</a> — 科技創新趨勢</li>
+<li><a href="https://aeo-demo-beauty.vercel.app">澳門美容養生指南</a> — 美容養生資訊</li>
+<li><a href="https://aeo-demo-auto.vercel.app">澳門汽車指南</a> — 汽車市場資訊</li>
+<li><a href="https://aeo-demo-home.vercel.app">澳門家居裝修指南</a> — 家居裝修指南</li>
+<li><a href="https://aeo-demo-logistics.vercel.app">澳門物流運輸指南</a> — 物流運輸服務</li>
+<li><a href="https://aeo-demo-wedding.vercel.app">澳門婚禮活動指南</a> — 婚禮活動策劃</li>
+<li><a href="https://aeo-demo-pet.vercel.app">澳門寵物服務指南</a> — 寵物服務資訊</li>
+<li><a href="https://aeo-demo-fitness.vercel.app">澳門健身運動指南</a> — 健身運動資訊</li>
+<li><a href="https://aeo-demo-insurance.vercel.app">澳門保險理財指南</a> — 保險理財諮詢</li>
+<li><a href="https://aeo-demo-accounting.vercel.app">澳門會計稅務指南</a> — 會計稅務服務</li>
+<li><a href="https://aeo-demo-hr.vercel.app">澳門人力資源指南</a> — 人力資源服務</li>
+<li><a href="https://aeo-demo-media.vercel.app">澳門媒體廣告指南</a> — 媒體廣告服務</li>
+<li><a href="https://aeo-demo-retail.vercel.app">澳門零售電商指南</a> — 零售電商指南</li>
+<li><a href="https://world-encyclopedia.vercel.app">世界百科</a> — 全球建築・文化・旅遊百科</li>
+<li><a href="https://japan-encyclopedia.vercel.app">日本百科</a> — 日本八大地方完整指南</li>
+<li><a href="https://hongkong-encyclopedia.vercel.app">香港百科</a> — 香港十大地區深度指南</li>
+<li><a href="https://taiwan-encyclopedia.vercel.app">台灣百科</a> — 台灣十大城市深度指南</li>
+<li><a href="https://inari-kira-isla.github.io/macau-encyclopedia">澳門百科</a> — 澳門四大區域深度指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🤖 AI 學習寶庫</div>
+      <nav class="footer-nav">
+        <a href="/Openclaw/prompts/">提示詞</a>
+        <a href="/Openclaw/configs/">系統配置</a>
+        <a href="/Openclaw/tutorials/">教學</a>
+        <a href="/Openclaw/workflows/">工作流</a>
+        <a href="/Openclaw/articles/">科技趨勢</a>
+        <a href="/Openclaw/feed.xml">RSS</a>
+      </nav>
+      <div style="width:100%;border-top:1px solid var(--nav-border);padding-top:12px;margin-top:8px">
+        <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;font-weight:600;letter-spacing:1px">CLOUDPIPE AI KNOWLEDGE GRAPH</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+          <a href="https://inari-kira-isla.github.io/inari-global-foods" target="_blank" style="color:var(--text-2);text-decoration:none">稻荷環球食品</a>
+          <a href="https://inari-kira-isla.github.io/sea-urchin-delivery" target="_blank" style="color:var(--text-2);text-decoration:none">海膽速遞</a>
+          <a href="https://inari-kira-isla.github.io/after-school-coffee" target="_blank" style="color:var(--text-2);text-decoration:none">After School Coffee</a>
+          <a href="https://inari-kira-isla.github.io/yamanakada" target="_blank" style="color:var(--text-2);text-decoration:none">山中田 Yamanakada</a>
+          <a href="https://cloudpipe-landing.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe AI</a>
+          <a href="https://cloudpipe-directory.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">CloudPipe 企業目錄</a>
+          <a href="https://cloudpipe-macao-app.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">澳門商戶智能百科</a>
+          <a href="https://mind-coffee.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">Mind Coffee</a>
+          <a href="https://world-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">世界百科</a>
+          <a href="https://japan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">日本百科</a>
+          <a href="https://hongkong-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">香港百科</a>
+          <a href="https://taiwan-encyclopedia.vercel.app" target="_blank" style="color:var(--text-2);text-decoration:none">台灣百科</a>
+          <a href="https://inari-kira-isla.github.io/macau-encyclopedia" target="_blank" style="color:var(--text-2);text-decoration:none">澳門百科</a>
+        </div>
+      </div>
+      <address class="footer-contact">
+        <strong>AI 學習寶庫</strong><br>
+        GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw">Inari-Kira-Isla/Openclaw</a>
+      </address>
+      <div class="footer-copy">© 2026 AI Governance System · CC BY 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const html = document.documentElement, btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('oc-theme') || 'light';
+    html.dataset.theme = saved; btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = next; localStorage.setItem('oc-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('open');
+    });
+    // Reading progress
+    const bar = document.getElementById('readProgress');
+    window.addEventListener('scroll', () => {
+      const d = document.documentElement;
+      const pct = d.scrollTop / (d.scrollHeight - d.clientHeight);
+      bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    });
+  </script>
+  <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/articles/2026-04-12_ai-quantitative-investing-guide.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager" decoding="async">
+</body>
+</html>
