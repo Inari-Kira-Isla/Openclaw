@@ -1,0 +1,1969 @@
+{
+  "version": "2.0",
+  "last_updated": "2026-04-11",
+  "source": "Google Gemini for Workspace Prompting Guide 101 (October 2024)",
+  "source_url": "https://services.google.com/fh/files/misc/gemini_for_workspace_prompt_guide_october_2024_digital_final.pdf",
+  "total_prompts": 147,
+  "status": "完成（147 個 Prompt）",
+  "categories": {
+    "administrative": {
+      "name": "行政支援",
+      "name_en": "Administrative Support",
+      "icon": "📋",
+      "description": "幫助行政助理和管理人員提高效率的 Prompt",
+      "count": 25,
+      "prompts": [
+        {
+          "id": "admin_001",
+          "title": "規劃異地工作議程",
+          "prompt": "我是一位 [職位] 的行政助理。我們的新團隊由 [部門人員組成] 組成，將在 [城市] 進行為期 [天數] 的異地辦公。請為每一天規劃活動，包含團隊凝聚活動與深度策略工作時間，並為我建立一個議程範例。",
+          "category": "Administrative Support",
+          "use_case": "規劃異地工作會議、團隊建築活動、議程安排",
+          "variables": [
+            "職位",
+            "部門人員組成",
+            "城市",
+            "天數"
+          ],
+          "source_page": 7
+        },
+        {
+          "id": "admin_002",
+          "title": "設計破冰活動",
+          "prompt": "建議三種不同的破冰活動，鼓勵員工了解彼此的工作風格、強項與目標。確保活動吸引人，且 [人數] 人的團體可在 [時間] 分鐘內完成。",
+          "category": "Administrative Support",
+          "use_case": "團隊建築、員工融合、會議開場",
+          "variables": [
+            "人數",
+            "時間"
+          ],
+          "source_page": 7
+        },
+        {
+          "id": "admin_003",
+          "title": "格式化議程表格",
+          "prompt": "將此議程整理成表格格式，並在每一天中加入你建議的一項破冰活動。",
+          "category": "Administrative Support",
+          "use_case": "會議文檔整理、視覺化呈現",
+          "variables": [
+            "議程內容"
+          ],
+          "source_page": 7
+        },
+        {
+          "id": "admin_004",
+          "title": "撰寫開幕致詞",
+          "prompt": "使用 @[文件名稱] 文件，為這份議程第一天的開幕致詞生成一段摘要。",
+          "category": "Administrative Support",
+          "use_case": "文件整合、開幕致詞撰寫、人員融合",
+          "variables": [
+            "文件名稱"
+          ],
+          "source_page": 7
+        },
+        {
+          "id": "admin_005",
+          "title": "摘要郵件",
+          "prompt": "摘要過去 [時間範圍] 來自 [主管姓名] 的所有電子郵件。",
+          "category": "Administrative Support",
+          "use_case": "郵件管理、優先級排序、決策支持",
+          "variables": [
+            "時間範圍",
+            "主管姓名"
+          ],
+          "source_page": 8
+        },
+        {
+          "id": "admin_006",
+          "title": "提取待辦事項",
+          "prompt": "摘要此郵件對話串，並列出所有的待辦事項 (Action Items) 與截止日期。",
+          "category": "Administrative Support",
+          "use_case": "郵件對話分析、任務追蹤、時間管理",
+          "variables": [
+            "郵件對話"
+          ],
+          "source_page": 8
+        },
+        {
+          "id": "admin_007",
+          "title": "製作會議資料包",
+          "prompt": "根據會議議題 [會議主題]，從 @[相關文件1] 和 @[相關文件2] 中收集關鍵資訊，製作一份簡潔的背景資料包。",
+          "category": "Administrative Support",
+          "use_case": "會議準備、文件整理、決策支持",
+          "variables": [
+            "會議主題",
+            "相關文件1",
+            "相關文件2"
+          ],
+          "source_page": 8
+        },
+        {
+          "id": "admin_008",
+          "title": "追蹤會議後續",
+          "prompt": "基於 @[會議紀錄]，建立一份後續行動清單，包含責任人、截止日期和優先級。",
+          "category": "Administrative Support",
+          "use_case": "會議追蹤、責任分配、進度管理",
+          "variables": [
+            "會議紀錄"
+          ],
+          "source_page": 8
+        },
+        {
+          "id": "admin_009",
+          "title": "擬定會議邀請",
+          "prompt": "為 [會議名稱] 擬定一份會議邀請，包含背景資訊、議題清單和預期成果。時間：[日期] [時間]，參與者：[參與人員]。",
+          "category": "Administrative Support",
+          "use_case": "會議安排、溝通協調、時間管理",
+          "variables": [
+            "會議名稱",
+            "日期",
+            "時間",
+            "參與人員"
+          ],
+          "source_page": 9
+        },
+        {
+          "id": "admin_010",
+          "title": "整理會議紀錄",
+          "prompt": "根據 @[會議錄音逐字稿]，整理成規範的會議紀錄，包含：出席者、討論要點、決議事項、行動項目。",
+          "category": "Administrative Support",
+          "use_case": "會議紀錄標準化、檔案管理、決策追蹤",
+          "variables": [
+            "會議錄音逐字稿"
+          ],
+          "source_page": 9
+        },
+        {
+          "id": "admin_011",
+          "title": "整理財務報告",
+          "prompt": "從 @[財務數據] 中提取 [特定期間] 的核心數據，製作成一份簡潔的財務摘要報告。",
+          "category": "Administrative Support",
+          "use_case": "財務整理、報告生成、決策依據",
+          "variables": [
+            "財務數據",
+            "特定期間"
+          ],
+          "source_page": 9
+        },
+        {
+          "id": "admin_012",
+          "title": "製作年度計劃表",
+          "prompt": "根據 [公司目標] 和 @[上年度績效]，為 [部門名稱] 擬定 [年度] 的計劃表，包含季度重點和 KPI。",
+          "category": "Administrative Support",
+          "use_case": "年度規劃、目標設定、進度追蹤",
+          "variables": [
+            "公司目標",
+            "上年度績效",
+            "部門名稱",
+            "年度"
+          ],
+          "source_page": 9
+        },
+        {
+          "id": "admin_013",
+          "title": "建立員工入職檢查清單",
+          "prompt": "為新入職的 [職位] 員工建立一份入職檢查清單，包含 [公司規模] 的公司相關政策、系統設置和團隊介紹。清單應涵蓋前 [天數] 天的活動。",
+          "category": "Administrative Support",
+          "use_case": "員工入職、流程標準化、文件管理",
+          "variables": [
+            "職位",
+            "公司規模",
+            "天數"
+          ],
+          "source_page": 10
+        },
+        {
+          "id": "admin_014",
+          "title": "整理會議室預約衝突",
+          "prompt": "分析 @[會議行程表]，識別會議室預約的衝突或重複，並提出三個解決方案。",
+          "category": "Administrative Support",
+          "use_case": "資源管理、會議調度、衝突解決",
+          "variables": [
+            "會議行程表"
+          ],
+          "source_page": 10
+        },
+        {
+          "id": "admin_015",
+          "title": "製作差旅報銷報告",
+          "prompt": "根據 @[差旅收據和發票]，製作一份差旅報銷報告，分類為 [報銷分類]，並計算總額。",
+          "category": "Administrative Support",
+          "use_case": "差旅管理、財務報銷、預算追蹤",
+          "variables": [
+            "差旅收據和發票",
+            "報銷分類"
+          ],
+          "source_page": 10
+        },
+        {
+          "id": "admin_016",
+          "title": "設計組織結構圖",
+          "prompt": "根據 [公司部門] 的結構，設計一份組織結構圖，清楚展示報告關係、團隊規模和關鍵角色。",
+          "category": "Administrative Support",
+          "use_case": "組織管理、溝通協調、新員工導向",
+          "variables": [
+            "公司部門"
+          ],
+          "source_page": 11
+        },
+        {
+          "id": "admin_017",
+          "title": "製作會議議程檢查清單",
+          "prompt": "為 [會議類型] 會議製作議程檢查清單，包括會前準備、會中管理和會後跟進。",
+          "category": "Administrative Support",
+          "use_case": "會議管理、流程改進、效率提升",
+          "variables": [
+            "會議類型"
+          ],
+          "source_page": 11
+        },
+        {
+          "id": "admin_018",
+          "title": "彙整季度績效評估",
+          "prompt": "根據 @[個人績效數據] 和 @[360度反饋]，為員工 [員工名稱] 彙整季度績效評估。",
+          "category": "Administrative Support",
+          "use_case": "績效管理、員工評估、發展計劃",
+          "variables": [
+            "個人績效數據",
+            "360度反饋",
+            "員工名稱"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "admin_019",
+          "title": "製作供應商評估表",
+          "prompt": "為 [供應商數量] 位供應商製作評估表，評估項目包括 [評估標準]，並提供推薦排名。",
+          "category": "Administrative Support",
+          "use_case": "供應商管理、採購決策、品質控制",
+          "variables": [
+            "供應商數量",
+            "評估標準"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "admin_020",
+          "title": "製作部門預算提案",
+          "prompt": "根據 @[上年度預算] 和 [新年計劃]，為 [部門名稱] 製作新年度預算提案，需包含成本分析和投資理由。",
+          "category": "Administrative Support",
+          "use_case": "預算規劃、財務管理、資源分配",
+          "variables": [
+            "上年度預算",
+            "新年計劃",
+            "部門名稱"
+          ],
+          "source_page": 13
+        },
+        {
+          "id": "admin_021",
+          "title": "整理會議簽到表",
+          "prompt": "為 [會議名稱] 設計簽到表，包含出席者資訊欄位：姓名、部門、簽到時間、簽出時間。",
+          "category": "Administrative Support",
+          "use_case": "考勤管理、會議記錄、法律合規",
+          "variables": [
+            "會議名稱"
+          ],
+          "source_page": 13
+        },
+        {
+          "id": "admin_022",
+          "title": "撰寫公司內部指南",
+          "prompt": "為 [主題] 撰寫一份公司內部指南，涵蓋 [內容範圍]，以 [目標受眾] 能理解的方式呈現。",
+          "category": "Administrative Support",
+          "use_case": "流程標準化、員工培訓、知識沉澱",
+          "variables": [
+            "主題",
+            "內容範圍",
+            "目標受眾"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "admin_023",
+          "title": "管理資料重新分類",
+          "prompt": "根據 @[現有檔案清單]，建議重新分類方案，以改善 [部門] 的檔案組織和查找效率。",
+          "category": "Administrative Support",
+          "use_case": "檔案管理、資料組織、知識管理",
+          "variables": [
+            "現有檔案清單",
+            "部門"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "admin_024",
+          "title": "製作會議費用預算",
+          "prompt": "為 [會議類型] 會議製作詳細費用預算，包括場地、飲食、交通、材料等費用項。預期人數 [人數]。",
+          "category": "Administrative Support",
+          "use_case": "會議預算、成本控制、財務規劃",
+          "variables": [
+            "會議類型",
+            "人數"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "admin_025",
+          "title": "協調跨部門流程審核",
+          "prompt": "我們需要審核 [流程名稱]，涉及 [部門列表] 多個部門。請設計一個協調流程，確保所有部門意見都被納入。",
+          "category": "Administrative Support",
+          "use_case": "跨部門協調、流程優化、變革管理",
+          "variables": [
+            "流程名稱",
+            "部門列表"
+          ],
+          "source_page": 15
+        }
+      ]
+    },
+    "communications": {
+      "name": "溝通協作",
+      "name_en": "Communications",
+      "icon": "💬",
+      "description": "撰寫和整理各類溝通文件的 Prompt",
+      "count": 20,
+      "prompts": [
+        {
+          "id": "comm_001",
+          "title": "撰寫感謝信",
+          "prompt": "草擬一封感謝信給 [人名/機構]，感謝他們在 [事件] 上的 [貢獻內容]。語氣應該 [語氣要求]，並特別強調 [特別提及項目]。",
+          "category": "Communications",
+          "use_case": "感謝信、公關郵件、關係維護、員工認可",
+          "variables": [
+            "人名/機構",
+            "事件",
+            "貢獻內容",
+            "語氣要求",
+            "特別提及項目"
+          ],
+          "source_page": 10
+        },
+        {
+          "id": "comm_002",
+          "title": "撰寫公司公告",
+          "prompt": "寫一封電子郵件向全公司宣佈 [新聞內容]，強調其對公司 [影響層面] 的重要性，並邀請大家參加 [後續活動]。",
+          "category": "Communications",
+          "use_case": "公司公告、專案啟動、員工溝通、變革管理",
+          "variables": [
+            "新聞內容",
+            "影響層面",
+            "後續活動"
+          ],
+          "source_page": 10
+        },
+        {
+          "id": "comm_003",
+          "title": "整理會議紀錄",
+          "prompt": "根據這份 @[會議錄音逐字稿 或 筆記]，提取關鍵決策、討論要點，並以條列式列出每位成員的分配任務和截止日期。",
+          "category": "Communications",
+          "use_case": "會議記錄、決策追蹤、任務分配、透明溝通",
+          "variables": [
+            "會議錄音逐字稿 或 筆記"
+          ],
+          "source_page": 11
+        },
+        {
+          "id": "comm_004",
+          "title": "起草內部備忘錄",
+          "prompt": "為 [話題] 起草一份內部備忘錄（給 [收件人]），清楚說明 [關鍵信息]，並列出 [所需行動]。語氣應該 [專業程度]。",
+          "category": "Communications",
+          "use_case": "內部溝通、政策宣布、指示下達、變革通知",
+          "variables": [
+            "話題",
+            "收件人",
+            "關鍵信息",
+            "所需行動",
+            "專業程度"
+          ],
+          "source_page": 11
+        },
+        {
+          "id": "comm_005",
+          "title": "撰寫新聞稿",
+          "prompt": "為 [事件名稱] 撰寫一份新聞稿，突出 [核心亮點]，目標受眾是 [受眾類型]。新聞稿應該 [風格要求]。",
+          "category": "Communications",
+          "use_case": "媒體溝通、公關推廣、品牌建設、對外發言",
+          "variables": [
+            "事件名稱",
+            "核心亮點",
+            "受眾類型",
+            "風格要求"
+          ],
+          "source_page": 11
+        },
+        {
+          "id": "comm_006",
+          "title": "整理部門通訊",
+          "prompt": "整理本週部門內的重要事項，包括 [事項1]、[事項2]、[事項3]，製作一份簡潔的部門通訊，供周末發送。",
+          "category": "Communications",
+          "use_case": "週期性溝通、團隊更新、資訊同步、員工參與",
+          "variables": [
+            "事項1",
+            "事項2",
+            "事項3"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "comm_007",
+          "title": "撰寫客人致詞",
+          "prompt": "為 [嘉賓名稱] 準備一份 [時間長度] 的致詞草稿，主題是 [致詞主題]，應強調 [重點內容]。",
+          "category": "Communications",
+          "use_case": "活動策劃、演講稿、公開致詞、品牌代表",
+          "variables": [
+            "嘉賓名稱",
+            "時間長度",
+            "致詞主題",
+            "重點內容"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "comm_008",
+          "title": "翻譯或本地化內容",
+          "prompt": "將以下 @[原始內容文件] 翻譯成 [目標語言]，並確保其文化相適性，針對 [目標市場] 進行本地化。",
+          "category": "Communications",
+          "use_case": "國際擴展、多語言溝通、文化適應、全球團隊",
+          "variables": [
+            "原始內容文件",
+            "目標語言",
+            "目標市場"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "comm_009",
+          "title": "撰寫客戶案例研究",
+          "prompt": "根據 @[客戶故事 或 訪談記錄]，撰寫一份 [字數] 字的客戶案例研究，突出 [關鍵成果]。",
+          "category": "Communications",
+          "use_case": "內容行銷、社交證明、業務開發、品牌信任",
+          "variables": [
+            "客戶故事 或 訪談記錄",
+            "字數",
+            "關鍵成果"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "comm_010",
+          "title": "整理專案溝通摘要",
+          "prompt": "整理 [專案名稱] 在 [時間週期] 內的所有溝通內容，製作一份利益相關者摘要，突出 [進度亮點] 和 [待解決問題]。",
+          "category": "Communications",
+          "use_case": "專案透明度、利益相關者管理、進度溝通、風險提示",
+          "variables": [
+            "專案名稱",
+            "時間週期",
+            "進度亮點",
+            "待解決問題"
+          ],
+          "source_page": 12
+        },
+        {
+          "id": "comm_011",
+          "title": "起草政策文件",
+          "prompt": "為 [政策主題] 起草一份公司政策文件，涵蓋 [涵蓋範圍]，語言應該 [清晰度要求]。",
+          "category": "Communications",
+          "use_case": "治理建設、合規管理、政策制定、員工指南",
+          "variables": [
+            "政策主題",
+            "涵蓋範圍",
+            "清晰度要求"
+          ],
+          "source_page": 13
+        },
+        {
+          "id": "comm_012",
+          "title": "撰寫年度總結報告",
+          "prompt": "根據 @[過去一年的成就記錄] 和 [公司願景]，為公司撰寫一份年度總結報告，突出 [關鍵成就]。",
+          "category": "Communications",
+          "use_case": "年度總結、對外溝通、品牌建設",
+          "variables": [
+            "過去一年的成就記錄",
+            "公司願景",
+            "關鍵成就"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "comm_013",
+          "title": "起草員工敬函",
+          "prompt": "為離職的 [員工名稱] 起草一封感謝敬函，突出他/她在 [任職期間] 的貢獻和影響。",
+          "category": "Communications",
+          "use_case": "員工關係、離職交接、公司文化",
+          "variables": [
+            "員工名稱",
+            "任職期間"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "comm_014",
+          "title": "撰寫危機溝通聲明",
+          "prompt": "為 [危機事件] 撰寫一份公司危機溝通聲明，強調公司的 [回應措施]，並安撫 [目標受眾]。",
+          "category": "Communications",
+          "use_case": "危機管理、公關回應、聲譽管理",
+          "variables": [
+            "危機事件",
+            "回應措施",
+            "目標受眾"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "comm_015",
+          "title": "整理社群媒體日曆",
+          "prompt": "根據 [行銷主題] 和 [發布頻率]，為未來 [時間週期] 製作社群媒體日曆，包括貼文概念和最佳發布時間。",
+          "category": "Communications",
+          "use_case": "社群行銷、內容規劃、品牌推廣",
+          "variables": [
+            "行銷主題",
+            "發布頻率",
+            "時間週期"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "comm_016",
+          "title": "起草投資者信函",
+          "prompt": "為投資者起草一份季度信函，報告 [財務績效] 和 [商業動態]，並預測 [未來展望]。",
+          "category": "Communications",
+          "use_case": "投資者關係、財務溝通、透明度",
+          "variables": [
+            "財務績效",
+            "商業動態",
+            "未來展望"
+          ],
+          "source_page": 16
+        },
+        {
+          "id": "comm_017",
+          "title": "撰寫產品發布通知",
+          "prompt": "為新產品 [產品名稱] 撰寫發布通知，強調 [核心功能] 和 [市場價值]，針對 [目標市場] 進行定制。",
+          "category": "Communications",
+          "use_case": "產品行銷、市場推廣、客戶通知",
+          "variables": [
+            "產品名稱",
+            "核心功能",
+            "市場價值",
+            "目標市場"
+          ],
+          "source_page": 16
+        },
+        {
+          "id": "comm_018",
+          "title": "撰寫合作夥伴協議摘要",
+          "prompt": "將 @[合作協議文件] 濃縮為一份一頁的摘要，凸顯 [關鍵條款] 和雙方責任。",
+          "category": "Communications",
+          "use_case": "商業協議、法律溝通、合夥人通知",
+          "variables": [
+            "合作協議文件",
+            "關鍵條款"
+          ],
+          "source_page": 16
+        },
+        {
+          "id": "comm_019",
+          "title": "起草員工福利宣傳文案",
+          "prompt": "為 [新福利項目] 撰寫宣傳文案，解釋員工如何受益，以及申請流程。語氣應該 [語氣風格]。",
+          "category": "Communications",
+          "use_case": "員工溝通、福利宣傳、人力資源",
+          "variables": [
+            "新福利項目",
+            "語氣風格"
+          ],
+          "source_page": 17
+        },
+        {
+          "id": "comm_020",
+          "title": "撰寫技術更新通知",
+          "prompt": "為系統 [系統名稱] 的升級撰寫使用者通知，解釋 [新功能] 和 [遷移步驟]。",
+          "category": "Communications",
+          "use_case": "技術溝通、使用者支持、變革管理",
+          "variables": [
+            "系統名稱",
+            "新功能",
+            "遷移步驟"
+          ],
+          "source_page": 17
+        }
+      ]
+    },
+    "customer_service": {
+      "name": "客戶服務",
+      "name_en": "Customer Service",
+      "icon": "🎯",
+      "description": "提升客戶服務品質和效率的 Prompt",
+      "count": 20,
+      "prompts": [
+        {
+          "id": "cs_001",
+          "title": "撰寫同理心回覆",
+          "prompt": "我是一位客服代表，需要回覆一位收到 [問題描述] 的客戶投訴。客戶 [客戶背景]。我已提出 [初步方案]，但他們要求 [特殊需求]。請撰寫一封同理心的回覆，包含一段安撫情緒的話，以及 [方案數量] 個潛在解決方案。",
+          "category": "Customer Service",
+          "use_case": "客戶投訴回覆、關係修復、問題解決、顧客滿意度",
+          "variables": [
+            "問題描述",
+            "客戶背景",
+            "初步方案",
+            "特殊需求",
+            "方案數量"
+          ],
+          "source_page": 13
+        },
+        {
+          "id": "cs_002",
+          "title": "尋找替代方案",
+          "prompt": "除了 [原始方案]，請建議 [數量] 種其他的替代方案來解決客戶因 [問題根源] 而產生的不滿。",
+          "category": "Customer Service",
+          "use_case": "解決方案創新、客戶滿意度改善、超預期服務",
+          "variables": [
+            "原始方案",
+            "數量",
+            "問題根源"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "cs_003",
+          "title": "產品資訊摘要",
+          "prompt": "摘要關於 [產品名稱] 的資訊，包含其特定的 [政策類型1]、[政策類型2] 與 [政策類型3]。",
+          "category": "Customer Service",
+          "use_case": "客戶教育、FAQ 維護、產品資訊整理、知識庫建設",
+          "variables": [
+            "產品名稱",
+            "政策類型1",
+            "政策類型2",
+            "政策類型3"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "cs_004",
+          "title": "標準化溝通模板",
+          "prompt": "為三種不同類型的客戶溝通起草模板：[溝通類型1]、[溝通類型2]、以及 [溝通類型3]。每份模板保持 [長度] 的長度，語氣 [語氣特性]。",
+          "category": "Customer Service",
+          "use_case": "溝通標準化、品牌一致性、效率提升、質量保證",
+          "variables": [
+            "溝通類型1",
+            "溝通類型2",
+            "溝通類型3",
+            "長度",
+            "語氣特性"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "cs_005",
+          "title": "分析客戶反饋",
+          "prompt": "使用附加的試算表，識別 [時間段] 內 [類別] 的客戶反饋趨勢。找出客戶聯繫顯著增加的領域並調查原因。",
+          "category": "Customer Service",
+          "use_case": "反饋分析、趨勢識別、改善重點、數據驅動決策",
+          "variables": [
+            "時間段",
+            "類別"
+          ],
+          "source_page": 14
+        },
+        {
+          "id": "cs_006",
+          "title": "製作常見問題解答",
+          "prompt": "根據過去 [時間週期] 內的 [數量] 個客戶提問，製作一份常見問題解答 (FAQ)，分為 [分類數] 個主題類別。",
+          "category": "Customer Service",
+          "use_case": "自助服務、客戶賦能、支持成本降低、知識管理",
+          "variables": [
+            "時間週期",
+            "數量",
+            "分類數"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "cs_007",
+          "title": "設計客戶調查",
+          "prompt": "為了瞭解客戶對 [服務/產品] 的滿意度，設計一份 [問題數] 題的調查問卷，涵蓋 [調查面向]。",
+          "category": "Customer Service",
+          "use_case": "滿意度測量、改善需求識別、客戶聲音、數據收集",
+          "variables": [
+            "服務/產品",
+            "問題數",
+            "調查面向"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "cs_008",
+          "title": "撰寫客戶感謝信",
+          "prompt": "為長期客戶 [客戶名稱] 撰寫一份個性化的感謝信，感謝他們的 [忠誠原因]，並提及他們購買的 [特定產品/服務]。",
+          "category": "Customer Service",
+          "use_case": "客戶保留、關係深化、忠誠度提升、客戶黏著力",
+          "variables": [
+            "客戶名稱",
+            "忠誠原因",
+            "特定產品/服務"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "cs_009",
+          "title": "處理退貨請求",
+          "prompt": "客戶要求退回 [產品名稱]，理由是 [退貨原因]。根據我們的 @[退貨政策文件]，起草一份專業且同理的回覆。",
+          "category": "Customer Service",
+          "use_case": "退貨管理、政策執行、客戶滿意度、衝突解決",
+          "variables": [
+            "產品名稱",
+            "退貨原因",
+            "退貨政策文件"
+          ],
+          "source_page": 15
+        },
+        {
+          "id": "cs_010",
+          "title": "優化客服流程",
+          "prompt": "分析我們目前的客服流程，識別瓶頸點，並建議 [改善建議數] 個改善方案來提高 [改善指標]。",
+          "category": "Customer Service",
+          "use_case": "流程改善、效率提升、成本優化、滿意度增進",
+          "variables": [
+            "改善建議數",
+            "改善指標"
+          ],
+          "source_page": 16
+        },
+        {
+          "id": "cs_011",
+          "title": "處理退貨和退款請求",
+          "prompt": "客戶要求退貨 [產品名稱]，理由是 [退貨原因]。購買時間 [購買時間]，購買金額 [金額]。根據公司政策 [退貨政策]，擬定回覆方案。",
+          "category": "Customer Service",
+          "use_case": "退貨處理、退款流程、客戶滿意度",
+          "variables": [
+            "產品名稱",
+            "退貨原因",
+            "購買時間",
+            "金額",
+            "退貨政策"
+          ],
+          "source_page": 17
+        },
+        {
+          "id": "cs_012",
+          "title": "撰寫常見問題解答 (FAQ)",
+          "prompt": "根據客服團隊收到的常見問題 [主題]，撰寫一份有 [問題數量] 個問題的 FAQ 清單，提供清晰的答案。",
+          "category": "Customer Service",
+          "use_case": "客服效率、自助服務、客戶教育",
+          "variables": [
+            "主題",
+            "問題數量"
+          ],
+          "source_page": 17
+        },
+        {
+          "id": "cs_013",
+          "title": "分析客戶投訴模式",
+          "prompt": "根據 @[過去三個月的客戶投訴記錄]，識別 [問題類別] 投訴最多。分析原因並提出三個改進建議。",
+          "category": "Customer Service",
+          "use_case": "品質改進、問題根源分析、流程優化",
+          "variables": [
+            "過去三個月的客戶投訴記錄",
+            "問題類別"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "cs_014",
+          "title": "撰寫產品使用指南",
+          "prompt": "為產品 [產品名稱] 撰寫一份分步驟的使用指南，針對 [使用者等級] 使用者，包含 [功能數量] 個關鍵功能的說明。",
+          "category": "Customer Service",
+          "use_case": "客戶教育、產品支援、自助資源",
+          "variables": [
+            "產品名稱",
+            "使用者等級",
+            "功能數量"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "cs_015",
+          "title": "處理服務延誤賠償",
+          "prompt": "由於我們的 [服務類型] 延誤了 [天數] 天，客戶感到不滿。根據公司政策，提出合理的補償方案。",
+          "category": "Customer Service",
+          "use_case": "問題補救、客戶保留、信任修復",
+          "variables": [
+            "服務類型",
+            "天數"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "cs_016",
+          "title": "撰寫客戶升級程序",
+          "prompt": "設計客戶升級程序，當一線客服無法解決問題時如何升級到 [二級支援團隊]。包含升級觸發條件和所需資訊。",
+          "category": "Customer Service",
+          "use_case": "支援流程、問題解決、效率管理",
+          "variables": [
+            "二級支援團隊"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "cs_017",
+          "title": "撰寫產品更新說明",
+          "prompt": "為產品新增的 [新功能] 撰寫使用者說明，突出 [功能優勢]，並提供 [範例使用情景]。",
+          "category": "Customer Service",
+          "use_case": "客戶通知、功能推廣、技術支援",
+          "variables": [
+            "新功能",
+            "功能優勢",
+            "範例使用情景"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "cs_018",
+          "title": "處理訂單錯誤",
+          "prompt": "客戶收到了錯誤的訂單內容。訂單號 [訂單號]，應收 [預期內容]，實收 [實際內容]。提出解決方案。",
+          "category": "Customer Service",
+          "use_case": "問題解決、賠償處理、客戶滿意度",
+          "variables": [
+            "訂單號",
+            "預期內容",
+            "實際內容"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "cs_019",
+          "title": "撰寫技術故障排除指南",
+          "prompt": "產品 [產品名稱] 的 [故障現象] 是常見技術問題。撰寫一份故障排除指南，包含 [步驟數] 個診斷和修復步驟。",
+          "category": "Customer Service",
+          "use_case": "技術支援、自助服務、效率提升",
+          "variables": [
+            "產品名稱",
+            "故障現象",
+            "步驟數"
+          ],
+          "source_page": 20
+        },
+        {
+          "id": "cs_020",
+          "title": "撰寫服務等級協議 (SLA) 摘要",
+          "prompt": "為客戶撰寫服務等級協議摘要，說明 [服務類型] 的應答時間、解決時間和可用性承諾。",
+          "category": "Customer Service",
+          "use_case": "客戶期望管理、服務承諾、信任建立",
+          "variables": [
+            "服務類型"
+          ],
+          "source_page": 20
+        }
+      ]
+    },
+    "executives": {
+      "name": "高階主管",
+      "name_en": "Executives",
+      "icon": "👔",
+      "description": "為決策者和高層提供支援的 Prompt",
+      "count": 18,
+      "prompts": [
+        {
+          "id": "exec_001",
+          "title": "郵件優先級摘要",
+          "prompt": "我是 [公司/部門] 的 [職位]。請摘要我過去 [時間範圍] 內收到的郵件。列出需要我立即關注的 [優先項數] 個最重要的事項，並針對每一項提供簡短的背景資訊。",
+          "category": "Executives",
+          "use_case": "每日優先級摘要、決策支持、時間管理、訊息篩選",
+          "variables": [
+            "公司/部門",
+            "職位",
+            "時間範圍",
+            "優先項數"
+          ],
+          "source_page": 17
+        },
+        {
+          "id": "exec_002",
+          "title": "準備董事會簡報",
+          "prompt": "使用 @[報告1] 與 @[報告2]，為董事會準備一個 [頁數] 投影片的大綱。重點放在我們的 [重點1] 以及 [重點2]。",
+          "category": "Executives",
+          "use_case": "董事會簡報、策略規劃、競爭分析、成長機會溝通",
+          "variables": [
+            "報告1",
+            "報告2",
+            "頁數",
+            "重點1",
+            "重點2"
+          ],
+          "source_page": 17
+        },
+        {
+          "id": "exec_003",
+          "title": "撰寫思想領袖文章",
+          "prompt": "根據我在 @[會議記錄] 中提到的觀點，寫一篇約 [字數] 字的 LinkedIn 貼文，探討 [行業趨勢] 對 [目標市場] 的影響。語氣要 [語氣特性]。",
+          "category": "Executives",
+          "use_case": "思想領袖建設、品牌聲譽、行業影響力、個人品牌",
+          "variables": [
+            "會議記錄",
+            "字數",
+            "行業趨勢",
+            "目標市場",
+            "語氣特性"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "exec_004",
+          "title": "整理出差簡報",
+          "prompt": "我下週將前往 [城市] 參加 [活動名稱]。請根據我的 Gmail 預訂資訊整理一份行程表，並附上該地區最近關於 [相關產業] 的 [資訊類型] 簡報。",
+          "category": "Executives",
+          "use_case": "出差準備、行程規劃、市場情報、決策依據",
+          "variables": [
+            "城市",
+            "活動名稱",
+            "相關產業",
+            "資訊類型"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "exec_005",
+          "title": "起草投資方案",
+          "prompt": "為 [投資項目] 起草一份投資方案，包含 [投資金額]、預期回報率、[風險評估]，以及 [實施時間]。",
+          "category": "Executives",
+          "use_case": "投資決策、財務規劃、風險評估、董事會提案",
+          "variables": [
+            "投資項目",
+            "投資金額",
+            "風險評估",
+            "實施時間"
+          ],
+          "source_page": 18
+        },
+        {
+          "id": "exec_006",
+          "title": "製作季度報告",
+          "prompt": "根據 @[季度績效數據] 和 @[市場分析]，為 [季度] 製作一份完整的季度報告，重點突出 [成就1] 和 [挑戰1]。",
+          "category": "Executives",
+          "use_case": "定期報告、績效溝通、利益相關者管理、透明度",
+          "variables": [
+            "季度績效數據",
+            "市場分析",
+            "季度",
+            "成就1",
+            "挑戰1"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "exec_007",
+          "title": "分析競爭對手",
+          "prompt": "分析主要競爭對手 [競爭對手名稱]，評估他們的 [分析面向1]、[分析面向2]、[分析面向3]。提供我們相對優勢的評估。",
+          "category": "Executives",
+          "use_case": "競爭分析、市場定位、策略制定、商業智能",
+          "variables": [
+            "競爭對手名稱",
+            "分析面向1",
+            "分析面向2",
+            "分析面向3"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "exec_008",
+          "title": "撰寫公開聲明",
+          "prompt": "為 [事件名稱] 撰寫一份 [字數] 字的公開聲明，代表公司的立場。語氣應該 [語氣特性]，並強調 [核心信息]。",
+          "category": "Executives",
+          "use_case": "公關危機、政策立場、對外溝通、品牌代表",
+          "variables": [
+            "事件名稱",
+            "字數",
+            "語氣特性",
+            "核心信息"
+          ],
+          "source_page": 19
+        },
+        {
+          "id": "exec_009",
+          "title": "製作董事會報告",
+          "prompt": "根據 @[過去季度的績效數據]，為董事會製作報告，涵蓋 [關鍵指標]、[戰略進展] 和 [風險因素]。",
+          "category": "Executive",
+          "use_case": "董事會溝通、治理報告、決策支持",
+          "variables": [
+            "過去季度的績效數據",
+            "關鍵指標",
+            "戰略進展",
+            "風險因素"
+          ],
+          "source_page": 20
+        },
+        {
+          "id": "exec_010",
+          "title": "撰寫年度致股東信",
+          "prompt": "根據 @[年度財務報表] 和 [公司成就]，撰寫一份致股東信，突出 [長期願景] 和 [投資承諾]。",
+          "category": "Executive",
+          "use_case": "投資者溝通、公司願景、透明度",
+          "variables": [
+            "年度財務報表",
+            "公司成就",
+            "長期願景",
+            "投資承諾"
+          ],
+          "source_page": 21
+        },
+        {
+          "id": "exec_011",
+          "title": "準備重大決策備忘錄",
+          "prompt": "為 [重大決策] 準備執行備忘錄，包括 [決策背景]、[選項對比] 和 [建議行動]。",
+          "category": "Executive",
+          "use_case": "決策支持、戰略規劃、風險評估",
+          "variables": [
+            "重大決策",
+            "決策背景",
+            "選項對比",
+            "建議行動"
+          ],
+          "source_page": 21
+        },
+        {
+          "id": "exec_012",
+          "title": "製作執行摘要 (Executive Summary)",
+          "prompt": "根據 @[完整報告] 製作執行摘要，限制在 [字數] 字，涵蓋關鍵發現和建議。",
+          "category": "Executive",
+          "use_case": "管理溝通、決策加速、信息過濾",
+          "variables": [
+            "完整報告",
+            "字數"
+          ],
+          "source_page": 21
+        },
+        {
+          "id": "exec_013",
+          "title": "準備併購評估",
+          "prompt": "為潛在的收購目標公司 [目標公司] 準備評估報告，評估 [評估維度]，並提出 [建議決策]。",
+          "category": "Executive",
+          "use_case": "戰略規劃、併購決策、投資評估",
+          "variables": [
+            "目標公司",
+            "評估維度",
+            "建議決策"
+          ],
+          "source_page": 22
+        },
+        {
+          "id": "exec_014",
+          "title": "撰寫市場進入策略",
+          "prompt": "為進入 [新市場] 撰寫市場進入策略，涵蓋 [市場分析]、[競爭策略] 和 [資源需求]。",
+          "category": "Executive",
+          "use_case": "戰略規劃、市場擴展、資源分配",
+          "variables": [
+            "新市場",
+            "市場分析",
+            "競爭策略",
+            "資源需求"
+          ],
+          "source_page": 22
+        },
+        {
+          "id": "exec_015",
+          "title": "準備投資人演講稿",
+          "prompt": "為募資活動準備 [時間長度] 的演講稿，重點是公司的 [核心價值主張]、[市場機會] 和 [成長潛力]。",
+          "category": "Executive",
+          "use_case": "融資溝通、投資者說服、品牌塑造",
+          "variables": [
+            "時間長度",
+            "核心價值主張",
+            "市場機會",
+            "成長潛力"
+          ],
+          "source_page": 22
+        },
+        {
+          "id": "exec_016",
+          "title": "製作風險評估報告",
+          "prompt": "根據 @[業務運營數據]，為公司識別 [風險數量] 個重大風險，評估每個風險的 [影響程度]，並提出緩解措施。",
+          "category": "Executive",
+          "use_case": "風險管理、合規報告、治理",
+          "variables": [
+            "業務運營數據",
+            "風險數量",
+            "影響程度"
+          ],
+          "source_page": 23
+        },
+        {
+          "id": "exec_017",
+          "title": "準備薪酬委員會報告",
+          "prompt": "為薪酬委員會準備報告，涵蓋 [薪酬政策]、[行業基準] 和 [薪酬建議]。",
+          "category": "Executive",
+          "use_case": "薪酬管理、人力資源、合規性",
+          "variables": [
+            "薪酬政策",
+            "行業基準",
+            "薪酬建議"
+          ],
+          "source_page": 23
+        },
+        {
+          "id": "exec_018",
+          "title": "撰寫公司戰略願景文件",
+          "prompt": "撰寫公司未來 [年份] 年的戰略願景文件，涵蓋 [願景陳述]、[戰略目標] 和 [實施路線圖]。",
+          "category": "Executive",
+          "use_case": "戰略規劃、員工激勵、對外溝通",
+          "variables": [
+            "年份",
+            "願景陳述",
+            "戰略目標",
+            "實施路線圖"
+          ],
+          "source_page": 23
+        }
+      ]
+    },
+    "frontline_management": {
+      "name": "前線管理",
+      "name_en": "Frontline Management",
+      "icon": "⚙️",
+      "description": "幫助團隊領導者協調和管理的 Prompt",
+      "count": 20,
+      "prompts": [
+        {
+          "id": "fm_001",
+          "title": "製作排班表",
+          "prompt": "我正在為 [時間週期] 的團隊輪值做準備。請根據 @[員工請假申請] 與我們的 @[營運時段表]，建立一個初步的排班表，確保每天至少有 [人數] 名資深員工在場。",
+          "category": "Frontline Management",
+          "use_case": "排班管理、人力資源規劃、營運協調、公平性",
+          "variables": [
+            "時間週期",
+            "員工請假申請",
+            "營運時段表",
+            "人數"
+          ],
+          "source_page": 24
+        },
+        {
+          "id": "fm_002",
+          "title": "撰寫每日簡報",
+          "prompt": "根據 @[每日銷售數據] 與 @[現場回報紀錄]，寫一段給全體員工的簡短公告，總結昨天的表現，並列出今天需要重點關注的 [項目數] 個服務環節。",
+          "category": "Frontline Management",
+          "use_case": "每日團隊溝通、績效分享、重點提醒、目標對齊",
+          "variables": [
+            "每日銷售數據",
+            "現場回報紀錄",
+            "項目數"
+          ],
+          "source_page": 24
+        },
+        {
+          "id": "fm_003",
+          "title": "問題解決腦力激盪",
+          "prompt": "我們最近在 [營運環節] 遇到 [問題描述]。請分析可能的瓶頸，並提供 [建議數] 個可以立即實施的改進方案。",
+          "category": "Frontline Management",
+          "use_case": "問題診斷、流程改善、效率提升、團隊參與",
+          "variables": [
+            "營運環節",
+            "問題描述",
+            "建議數"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_004",
+          "title": "設計培訓課程",
+          "prompt": "為新進員工設計一個為期 [時間] 的 [技能主題] 培訓課程大綱。包含 [課程組件數] 個主要組件、情境演練與關鍵表現指標。",
+          "category": "Frontline Management",
+          "use_case": "員工培訓、技能發展、新人入職、能力建設",
+          "variables": [
+            "時間",
+            "技能主題",
+            "課程組件數"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_005",
+          "title": "進行績效評估",
+          "prompt": "為員工 [員工名稱] 進行績效評估，參考 @[績效數據] 和 @[客戶反饋]。提供平衡的反饋，包含 [優勢數] 個優勢和 [改善數] 個改善方向。",
+          "category": "Frontline Management",
+          "use_case": "績效管理、發展規劃、激勵機制、人才保留",
+          "variables": [
+            "員工名稱",
+            "績效數據",
+            "客戶反饋",
+            "優勢數",
+            "改善數"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_006",
+          "title": "管理團隊衝突",
+          "prompt": "團隊成員 [成員1] 和 [成員2] 之間存在衝突。根據 @[事件記錄]，分析根源並提出 [方案數] 個調解方案。",
+          "category": "Frontline Management",
+          "use_case": "衝突解決、團隊凝聚、溝通改善、心理安全",
+          "variables": [
+            "成員1",
+            "成員2",
+            "事件記錄",
+            "方案數"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_007",
+          "title": "制定團隊目標",
+          "prompt": "為 [部門/團隊] 制定 [時間週期] 的目標，基於 @[公司策略] 和 [市場分析]。目標應該 [SMART 特性]，包含 [目標數] 個主要目標。",
+          "category": "Frontline Management",
+          "use_case": "目標設定、策略對齊、績效管理、動力激發",
+          "variables": [
+            "部門/團隊",
+            "時間週期",
+            "公司策略",
+            "市場分析",
+            "SMART 特性",
+            "目標數"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_008",
+          "title": "籌劃團隊活動",
+          "prompt": "為 [團隊] 籌劃一個 [活動類型] 來提升團隊凝聚力。預算為 [預算]，人數 [人數]，時間 [時間]。提供 [建議數] 個活動選項。",
+          "category": "Frontline Management",
+          "use_case": "團隊建築、文化建設、員工參與、士氣提升",
+          "variables": [
+            "團隊",
+            "活動類型",
+            "預算",
+            "人數",
+            "時間",
+            "建議數"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_009",
+          "title": "撰寫交接文件",
+          "prompt": "為即將離職的員工 [員工名稱] 準備交接文件，涵蓋 [職責1]、[職責2]、[職責3] 等主要職責。包含流程說明和關鍵聯絡人。",
+          "category": "Frontline Management",
+          "use_case": "人事交接、知識轉移、風險管理、連續性",
+          "variables": [
+            "員工名稱",
+            "職責1",
+            "職責2",
+            "職責3"
+          ],
+          "source_page": 27
+        },
+        {
+          "id": "fm_010",
+          "title": "製作日常運營檢查清單",
+          "prompt": "為 [運營流程] 製作日常檢查清單，包含 [檢查項目數] 個關鍵項目，確保流程的一致性和品質。",
+          "category": "Frontline Management",
+          "use_case": "品質控制、流程標準化、人員培訓",
+          "variables": [
+            "運營流程",
+            "檢查項目數"
+          ],
+          "source_page": 24
+        },
+        {
+          "id": "fm_011",
+          "title": "處理員工績效警告",
+          "prompt": "員工 [員工名稱] 的績效未達標準，特別是在 [績效問題] 方面。準備績效改進計劃，包含目標和時間表。",
+          "category": "Frontline Management",
+          "use_case": "績效管理、員工發展、文檔記錄",
+          "variables": [
+            "員工名稱",
+            "績效問題"
+          ],
+          "source_page": 24
+        },
+        {
+          "id": "fm_012",
+          "title": "設計交班會議議程",
+          "prompt": "為 [職位] 的交班會議設計議程，涵蓋 [交班主題]，用時 [會議時間]。",
+          "category": "Frontline Management",
+          "use_case": "團隊轉移、知識移交、業務連續性",
+          "variables": [
+            "職位",
+            "交班主題",
+            "會議時間"
+          ],
+          "source_page": 24
+        },
+        {
+          "id": "fm_013",
+          "title": "撰寫員工發展計劃",
+          "prompt": "為員工 [員工名稱] 設計一份 [週期] 的發展計劃，目標是發展 [技能/能力]，包含培訓和實踐步驟。",
+          "category": "Frontline Management",
+          "use_case": "人才發展、員工保留、技能提升",
+          "variables": [
+            "員工名稱",
+            "週期",
+            "技能/能力"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_014",
+          "title": "準備團隊會議紀錄",
+          "prompt": "根據 @[會議錄音或筆記]，為 [團隊名稱] 整理會議紀錄，包含決策、行動項和責任分配。",
+          "category": "Frontline Management",
+          "use_case": "團隊溝通、行動追蹤、透明度",
+          "variables": [
+            "會議錄音或筆記",
+            "團隊名稱"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_015",
+          "title": "製作輪班安排計劃",
+          "prompt": "為 [部門/門店] 製作未來 [週期] 的輪班安排，員工數 [人數]，考慮 [限制條件]。",
+          "category": "Frontline Management",
+          "use_case": "人員調度、時間管理、公平分配",
+          "variables": [
+            "部門/門店",
+            "週期",
+            "人數",
+            "限制條件"
+          ],
+          "source_page": 25
+        },
+        {
+          "id": "fm_016",
+          "title": "撰寫員工評估反饋",
+          "prompt": "為在 [評估期間] 表現出色的員工 [員工名稱] 準備評估反饋，突出 [優點] 和改進建議。",
+          "category": "Frontline Management",
+          "use_case": "績效評估、員工反饋、發展規劃",
+          "variables": [
+            "評估期間",
+            "員工名稱",
+            "優點"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_017",
+          "title": "規劃團隊培訓計劃",
+          "prompt": "為團隊設計 [月份] 的培訓計劃，涵蓋 [培訓主題]，針對 [人員類型]，預算為 [預算額]。",
+          "category": "Frontline Management",
+          "use_case": "人才發展、技能提升、團隊效能",
+          "variables": [
+            "月份",
+            "培訓主題",
+            "人員類型",
+            "預算額"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_018",
+          "title": "處理員工衝突",
+          "prompt": "團隊內發生衝突，涉及員工 [員工1] 和 [員工2]，衝突原因是 [衝突原因]。請建議解決步驟和預防措施。",
+          "category": "Frontline Management",
+          "use_case": "衝突解決、團隊和諧、管理技巧",
+          "variables": [
+            "員工1",
+            "員工2",
+            "衝突原因"
+          ],
+          "source_page": 26
+        },
+        {
+          "id": "fm_019",
+          "title": "製作賦權授權計劃",
+          "prompt": "設計團隊 [團隊名稱] 的賦權計劃，明確 [授權範圍] 和決策權限，提升團隊自主性和效率。",
+          "category": "Frontline Management",
+          "use_case": "權力下放、團隊賦能、管理效率",
+          "variables": [
+            "團隊名稱",
+            "授權範圍"
+          ],
+          "source_page": 27
+        },
+        {
+          "id": "fm_020",
+          "title": "撰寫應急應變計劃",
+          "prompt": "為 [突發事件類型] 設計應急應變計劃，包含 [應對步驟]、通訊協議和責任分配。",
+          "category": "Frontline Management",
+          "use_case": "風險管理、業務連續性、危機應對",
+          "variables": [
+            "突發事件類型",
+            "應對步驟"
+          ],
+          "source_page": 27
+        }
+      ]
+    },
+    "marketing_sales_pm": {
+      "name": "行銷/銷售/PM",
+      "name_en": "Marketing/Sales/Project Management",
+      "icon": "📈",
+      "description": "支援市場推廣、業務發展和項目管理的 Prompt",
+      "count": 44,
+      "prompts": [
+        {
+          "id": "mkt_001",
+          "title": "策劃社群媒體內容",
+          "prompt": "我正在為 [產品名稱] 策劃發布活動。請針對 [平台1]、[平台2] 和 [平台3] 分別撰寫 [篇數] 篇不同的貼文文案，內容需強調 [核心賣點]，並加入吸引人的 CTA（Call-to-Action）。",
+          "category": "Marketing",
+          "use_case": "社群媒體行銷、產品發布、內容創意、粉絲參與",
+          "variables": [
+            "產品名稱",
+            "平台1",
+            "平台2",
+            "平台3",
+            "篇數",
+            "核心賣點"
+          ],
+          "source_page": 32
+        },
+        {
+          "id": "mkt_002",
+          "title": "撰寫部落格文章",
+          "prompt": "請根據 @[產品白皮書 或 資源] 撰寫一篇約 [字數] 字的部落格文章。主題是 [主題名稱]，目標受眾是 [受眾描述]，請確保內容包含 SEO 關鍵字：[關鍵字清單]。",
+          "category": "Marketing",
+          "use_case": "內容行銷、SEO 優化、思想領袖、有機流量",
+          "variables": [
+            "產品白皮書",
+            "字數",
+            "主題名稱",
+            "受眾描述",
+            "關鍵字清單"
+          ],
+          "source_page": 32
+        },
+        {
+          "id": "mkt_003",
+          "title": "製作廣告文案",
+          "prompt": "為一個 [廣告時長] 的短影音廣告撰寫腳本。產品是 [產品]，情境是 [描述情境]。請同時建議背景音樂的風格以及每段台詞對應的畫面視覺。",
+          "category": "Marketing",
+          "use_case": "影片行銷、廣告製作、品牌故事、情感連結",
+          "variables": [
+            "廣告時長",
+            "產品",
+            "描述情境"
+          ],
+          "source_page": 33
+        },
+        {
+          "id": "mkt_004",
+          "title": "進行市場競爭分析",
+          "prompt": "分析我們的產品 [產品名稱] 與競爭對手 [對手名稱] 的差異。請列出優劣勢分析表（SWOT），並建議我們在行銷溝通上應該主打的 [差異化標籤數] 個差異化標籤。",
+          "category": "Marketing",
+          "use_case": "競爭分析、定位策略、訊息化、品牌建設",
+          "variables": [
+            "產品名稱",
+            "對手名稱",
+            "差異化標籤數"
+          ],
+          "source_page": 33
+        },
+        {
+          "id": "mkt_005",
+          "title": "設計電子郵件行銷活動",
+          "prompt": "為 [目標客群] 設計一個 [郵件序列數] 封的電子郵件行銷序列，主題是 [活動主題]。每封郵件應該 [目標描述]。",
+          "category": "Marketing",
+          "use_case": "電子郵件行銷、潛在客戶培養、轉化優化、自動化",
+          "variables": [
+            "目標客群",
+            "郵件序列數",
+            "活動主題",
+            "目標描述"
+          ],
+          "source_page": 34
+        },
+        {
+          "id": "sales_001",
+          "title": "撰寫個性化開發郵件",
+          "prompt": "我正在開發 [公司名稱] 的 [職稱]。根據他們的官網描述 @[官網內容]，撰寫一封個性化的開發信，說明我們的 [解決方案] 如何能解決他們目前在 [領域] 可能遇到的痛點。",
+          "category": "Sales",
+          "use_case": "B2B 開發、冷郵件、客戶研究、商機發掘",
+          "variables": [
+            "公司名稱",
+            "職稱",
+            "官網內容",
+            "解決方案",
+            "領域"
+          ],
+          "source_page": 43
+        },
+        {
+          "id": "sales_002",
+          "title": "處理客戶異議",
+          "prompt": "客戶對我們產品的 [異議點] 提出了異議。請提供 [方案數] 種專業且具說服力的回應方式，將客戶的疑慮轉化為我們的優勢。",
+          "category": "Sales",
+          "use_case": "銷售技巧、異議處理、成交加速、信任建立",
+          "variables": [
+            "異議點",
+            "方案數"
+          ],
+          "source_page": 43
+        },
+        {
+          "id": "sales_003",
+          "title": "濃縮銷售提案",
+          "prompt": "將這份 [頁數] 頁的 @[詳細提案書] 濃縮成一個 [時間] 的電梯簡報大綱（Elevator Pitch）。重點放在我們能為客戶創造的具體 [價值指標]。",
+          "category": "Sales",
+          "use_case": "銷售簡報、電梯簡報、價值溝通、決策加速",
+          "variables": [
+            "頁數",
+            "詳細提案書",
+            "時間",
+            "價值指標"
+          ],
+          "source_page": 44
+        },
+        {
+          "id": "sales_004",
+          "title": "撰寫後續跟進郵件",
+          "prompt": "我剛與客戶完成了初次會議。請草擬一封跟進郵件，感謝他們的參與，摘要會議中討論的 [重點數] 個重點，並提議下週進行 [後續活動]。",
+          "category": "Sales",
+          "use_case": "銷售跟進、關係維護、成交推進、下一步清晰化",
+          "variables": [
+            "重點數",
+            "後續活動"
+          ],
+          "source_page": 44
+        },
+        {
+          "id": "pm_001",
+          "title": "撰寫專案計劃書",
+          "prompt": "我正在啟動一個 [專案名稱]。請幫我寫一份專案計劃書大綱，包含專案目標、關鍵里程碑、專案範圍、假設條件以及主要利益相關者清單。",
+          "category": "Project Management",
+          "use_case": "專案規劃、利益相關者管理、範圍定義、執行準備",
+          "variables": [
+            "專案名稱"
+          ],
+          "source_page": 40
+        },
+        {
+          "id": "pm_002",
+          "title": "識別專案風險",
+          "prompt": "識別 [專案類型] 專案中可能遇到的 [風險數] 個潛在風險。請為每個風險提供一個對應的緩解策略（Mitigation Plan），包括責任人和時間框架。",
+          "category": "Project Management",
+          "use_case": "風險管理、問題預防、應急規劃、信心提升",
+          "variables": [
+            "專案類型",
+            "風險數"
+          ],
+          "source_page": 40
+        },
+        {
+          "id": "pm_003",
+          "title": "撰寫週報摘要",
+          "prompt": "根據 @[本週任務清單] 和 @[團隊對話記錄]，撰寫一份發給利益相關者的週報摘要。請強調已完成的任務、延遲的項目以及下週的工作重點。",
+          "category": "Project Management",
+          "use_case": "進度溝通、利益相關者管理、透明度、風險提示",
+          "variables": [
+            "本週任務清單",
+            "團隊對話記錄"
+          ],
+          "source_page": 41
+        },
+        {
+          "id": "pm_004",
+          "title": "工作分解結構",
+          "prompt": "將 [大目標] 分解為具體的子任務清單。請為每個任務估算建議的執行時間，並按先後順序排列。包含任務依賴性說明。",
+          "category": "Project Management",
+          "use_case": "專案規劃、進度管理、資源分配、團隊協作",
+          "variables": [
+            "大目標"
+          ],
+          "source_page": 41
+        },
+        {
+          "id": "pm_005",
+          "title": "製作甘特圖",
+          "prompt": "根據專案 [專案名稱] 的 [任務清單]，製作一份甘特圖表，展示 [時間週期] 內各任務的時間安排、依賴性和里程碑。",
+          "category": "Project Management",
+          "use_case": "進度可視化、時間規劃、資源調度、團隊同步",
+          "variables": [
+            "專案名稱",
+            "任務清單",
+            "時間週期"
+          ],
+          "source_page": 42
+        },
+        {
+          "id": "pm_006",
+          "title": "監控專案KPI",
+          "prompt": "為專案 [專案名稱] 定義 [KPI數量] 個關鍵績效指標 (KPI)，用於監控專案在 [監控面向] 方面的進度。設定目標值和警告閾值。",
+          "category": "Project Management",
+          "use_case": "績效監控、數據驅動、早期預警、目標達成",
+          "variables": [
+            "專案名稱",
+            "KPI數量",
+            "監控面向"
+          ],
+          "source_page": 42
+        },
+        {
+          "id": "mkt_006",
+          "title": "製作內容行銷日曆",
+          "prompt": "為品牌 [品牌名稱] 製作 [月份] 的內容日曆，包括 [內容類型] 和發布頻率，針對 [目標受眾]。",
+          "category": "Marketing",
+          "use_case": "內容規劃、社群行銷、品牌一致性",
+          "variables": [
+            "品牌名稱",
+            "月份",
+            "內容類型",
+            "目標受眾"
+          ],
+          "source_page": 27
+        },
+        {
+          "id": "mkt_007",
+          "title": "撰寫行銷競活動簡報",
+          "prompt": "為行銷競活動 [活動名稱] 撰寫簡報，涵蓋 [目標]、[預算] 和預期 [成果指標]。",
+          "category": "Marketing",
+          "use_case": "活動規劃、成本估算、成果衡量",
+          "variables": [
+            "活動名稱",
+            "目標",
+            "預算",
+            "成果指標"
+          ],
+          "source_page": 28
+        },
+        {
+          "id": "mkt_008",
+          "title": "製作競對分析報告",
+          "prompt": "分析主要競爭對手 [競對1、競對2、競對3]，評估他們在 [評估維度] 方面的優勢和劣勢。",
+          "category": "Marketing",
+          "use_case": "市場分析、戰略規劃、定位優化",
+          "variables": [
+            "競對1、競對2、競對3",
+            "評估維度"
+          ],
+          "source_page": 28
+        },
+        {
+          "id": "mkt_009",
+          "title": "撰寫品牌故事",
+          "prompt": "為品牌 [品牌名稱] 撰寫品牌故事，突出 [品牌起源]、[價值觀] 和 [使命]，語氣為 [品牌風格]。",
+          "category": "Marketing",
+          "use_case": "品牌建設、感情連結、市場定位",
+          "variables": [
+            "品牌名稱",
+            "品牌起源",
+            "價值觀",
+            "使命",
+            "品牌風格"
+          ],
+          "source_page": 28
+        },
+        {
+          "id": "mkt_010",
+          "title": "製作視頻腳本",
+          "prompt": "為 [視頻主題] 製作 [視頻長度] 的視頻腳本，目標是 [目標動作]，針對 [目標受眾]。",
+          "category": "Marketing",
+          "use_case": "視頻行銷、內容製作、品牌推廣",
+          "variables": [
+            "視頻主題",
+            "視頻長度",
+            "目標動作",
+            "目標受眾"
+          ],
+          "source_page": 29
+        },
+        {
+          "id": "sales_005",
+          "title": "撰寫客戶成功案例",
+          "prompt": "根據客戶 [客戶名稱] 的成功故事，撰寫 [字數] 字的案例研究，突出 [達成成果]。",
+          "category": "Sales",
+          "use_case": "銷售支持、社交證明、信任建立",
+          "variables": [
+            "客戶名稱",
+            "字數",
+            "達成成果"
+          ],
+          "source_page": 29
+        },
+        {
+          "id": "sales_006",
+          "title": "準備銷售提案",
+          "prompt": "為潛在客戶 [客戶名稱] 準備銷售提案，針對其 [業務痛點]，提議的解決方案為 [方案簡述]。",
+          "category": "Sales",
+          "use_case": "銷售流程、交易推進、客戶說服",
+          "variables": [
+            "客戶名稱",
+            "業務痛點",
+            "方案簡述"
+          ],
+          "source_page": 30
+        },
+        {
+          "id": "sales_007",
+          "title": "製作銷售培訓資料",
+          "prompt": "為銷售團隊製作 [產品/服務] 的培訓資料，涵蓋 [銷售要點] 和回答常見問題的技巧。",
+          "category": "Sales",
+          "use_case": "銷售培訓、技能提升、成交率提升",
+          "variables": [
+            "產品/服務",
+            "銷售要點"
+          ],
+          "source_page": 30
+        },
+        {
+          "id": "sales_008",
+          "title": "製作競標應標方案",
+          "prompt": "根據招標文件 @[招標文件]，為公司 [公司名稱] 的產品/服務準備應標方案，突出 [競爭優勢]。",
+          "category": "Sales",
+          "use_case": "大客戶開發、招標應標、贏單策略",
+          "variables": [
+            "招標文件",
+            "公司名稱",
+            "競爭優勢"
+          ],
+          "source_page": 30
+        },
+        {
+          "id": "pm_007",
+          "title": "製作產品路線圖",
+          "prompt": "為產品 [產品名稱] 製作 [週期] 的產品路線圖，包含 [功能計劃] 和發布時間表。",
+          "category": "Project Management",
+          "use_case": "產品規劃、利益相關者溝通、優先級管理",
+          "variables": [
+            "產品名稱",
+            "週期",
+            "功能計劃"
+          ],
+          "source_page": 31
+        },
+        {
+          "id": "pm_008",
+          "title": "撰寫需求規格文件 (PRD)",
+          "prompt": "為新功能 [功能名稱] 撰寫產品需求文件，包含 [功能描述]、用戶故事和驗收標準。",
+          "category": "Project Management",
+          "use_case": "產品開發、團隊對齊、質量保證",
+          "variables": [
+            "功能名稱",
+            "功能描述"
+          ],
+          "source_page": 31
+        },
+        {
+          "id": "pm_009",
+          "title": "監控產品指標儀表板",
+          "prompt": "為產品 [產品名稱] 建立指標儀表板，追蹤 [關鍵指標]，設定告警閾值。",
+          "category": "Project Management",
+          "use_case": "產品監控、數據驅動、決策支持",
+          "variables": [
+            "產品名稱",
+            "關鍵指標"
+          ],
+          "source_page": 32
+        },
+        {
+          "id": "pm_010",
+          "title": "製作衝刺規劃",
+          "prompt": "為 [衝刺週期] 的衝刺規劃一個 [衝刺目標]，估算 [任務數量] 個任務，並分配給團隊成員。",
+          "category": "Project Management",
+          "use_case": "敏捷開發、衝刺計劃、進度追蹤",
+          "variables": [
+            "衝刺週期",
+            "衝刺目標",
+            "任務數量"
+          ],
+          "source_page": 32
+        },
+        {
+          "id": "pm_011",
+          "title": "製作技術債務評估",
+          "prompt": "評估產品 [產品名稱] 的技術債務，列出 [優先級] 的 [數量] 個重點改善項，並估算每項的工作量。",
+          "category": "Project Management",
+          "use_case": "技術規劃、資源分配、品質改進",
+          "variables": [
+            "產品名稱",
+            "優先級",
+            "數量"
+          ],
+          "source_page": 33
+        },
+        {
+          "id": "pm_012",
+          "title": "撰寫專案事後檢討報告",
+          "prompt": "為已完成的專案 [專案名稱] 撰寫事後檢討報告，涵蓋 [執行回顧]、成功因素和改進建議。",
+          "category": "Project Management",
+          "use_case": "經驗學習、流程改進、知識沉澱",
+          "variables": [
+            "專案名稱",
+            "執行回顧"
+          ],
+          "source_page": 33
+        },
+        {
+          "id": "pm_013",
+          "title": "製作用戶故事卡",
+          "prompt": "為產品功能 [功能] 編寫 [數量] 個用戶故事卡，涵蓋不同的使用者角色和場景。",
+          "category": "Project Management",
+          "use_case": "需求管理、敏捷開發、使用者中心設計",
+          "variables": [
+            "功能",
+            "數量"
+          ],
+          "source_page": 33
+        },
+        {
+          "id": "mkt_011",
+          "title": "撰寫郵件行銷活動計劃",
+          "prompt": "為 [促銷主題] 設計郵件行銷活動，預定發送給 [收件人數量] 個訂閱者，目標轉化率 [目標轉化]。",
+          "category": "Marketing",
+          "use_case": "直接行銷、客戶參與、銷售轉化",
+          "variables": [
+            "促銷主題",
+            "收件人數量",
+            "目標轉化"
+          ],
+          "source_page": 34
+        },
+        {
+          "id": "mkt_012",
+          "title": "製作影響力行銷合作提案",
+          "prompt": "為品牌 [品牌名稱] 準備與影響力人士 [影響力名稱] 的合作提案，預算 [預算]，目標是 [行銷目標]。",
+          "category": "Marketing",
+          "use_case": "影響力行銷、品牌推廣、受眾開發",
+          "variables": [
+            "品牌名稱",
+            "影響力名稱",
+            "預算",
+            "行銷目標"
+          ],
+          "source_page": 34
+        },
+        {
+          "id": "mkt_013",
+          "title": "撰寫公關計劃",
+          "prompt": "為 [公關目標] 撰寫公關計劃，涵蓋 [媒體策略]、[活動規劃] 和成功指標。",
+          "category": "Marketing",
+          "use_case": "公共關係、媒體管理、品牌建設",
+          "variables": [
+            "公關目標",
+            "媒體策略",
+            "活動規劃"
+          ],
+          "source_page": 34
+        },
+        {
+          "id": "mkt_014",
+          "title": "製作營銷漏斗分析",
+          "prompt": "根據 @[銷售數據]，分析品牌 [品牌名稱] 的營銷漏斗，確認 [轉化瓶頸]，建議改進方案。",
+          "category": "Marketing",
+          "use_case": "轉化優化、數據分析、績效改進",
+          "variables": [
+            "銷售數據",
+            "品牌名稱",
+            "轉化瓶頸"
+          ],
+          "source_page": 35
+        },
+        {
+          "id": "sales_009",
+          "title": "製作銷售達成計劃",
+          "prompt": "為銷售目標 [目標金額]，制定銷售達成計劃，分配給 [銷售人員數] 人，並訂立 [時間週期] 的里程碑。",
+          "category": "Sales",
+          "use_case": "銷售規劃、目標管理、業績追蹤",
+          "variables": [
+            "目標金額",
+            "銷售人員數",
+            "時間週期"
+          ],
+          "source_page": 35
+        },
+        {
+          "id": "sales_010",
+          "title": "撰寫交易總結會議紀錄",
+          "prompt": "根據與客戶 [客戶名稱] 的會議記錄，撰寫交易總結，包括 [交易亮點]、下一步行動和風險因素。",
+          "category": "Sales",
+          "use_case": "交易管理、客戶溝通、CRM更新",
+          "variables": [
+            "客戶名稱",
+            "交易亮點"
+          ],
+          "source_page": 35
+        },
+        {
+          "id": "sales_011",
+          "title": "分析銷售管道",
+          "prompt": "分析銷售團隊 [團隊名稱] 的管道，識別 [管道階段] 卡住的交易，並提出推進策略。",
+          "category": "Sales",
+          "use_case": "銷售預測、交易管理、績效改進",
+          "variables": [
+            "團隊名稱",
+            "管道階段"
+          ],
+          "source_page": 36
+        },
+        {
+          "id": "sales_012",
+          "title": "製作競價分析報告",
+          "prompt": "在贏得客戶訂單後，分析我們的報價 [報價金額] 相比競爭對手的優勢，並總結贏單因素。",
+          "category": "Sales",
+          "use_case": "交易分析、競爭優勢評估、經驗學習",
+          "variables": [
+            "報價金額"
+          ],
+          "source_page": 36
+        },
+        {
+          "id": "pm_014",
+          "title": "撰寫應用程式設計文件 (API 文件)",
+          "prompt": "為 [API 名稱] 撰寫技術文件，包含端點、參數、響應範例和錯誤代碼。",
+          "category": "Project Management",
+          "use_case": "技術文檔、開發人員支援、整合指南",
+          "variables": [
+            "API 名稱"
+          ],
+          "source_page": 36
+        },
+        {
+          "id": "pm_015",
+          "title": "設計A/B測試計劃",
+          "prompt": "為 [測試對象] 設計 A/B 測試計劃，包括 [測試變量]、樣本量和統計顯著性標準。",
+          "category": "Project Management",
+          "use_case": "數據驅動決策、轉化優化、實驗設計",
+          "variables": [
+            "測試對象",
+            "測試變量"
+          ],
+          "source_page": 37
+        },
+        {
+          "id": "pm_016",
+          "title": "製作行業基準報告",
+          "prompt": "對比公司 [公司名稱] 與行業 [行業] 的表現，分析 [比較維度]，並確認改進機會。",
+          "category": "Project Management",
+          "use_case": "競爭分析、績效基準、策略規劃",
+          "variables": [
+            "公司名稱",
+            "行業",
+            "比較維度"
+          ],
+          "source_page": 37
+        },
+        {
+          "id": "pm_017",
+          "title": "撰寫測試計劃文件",
+          "prompt": "為軟體版本 [版本號] 撰寫測試計劃，涵蓋 [測試範圍]、測試場景和驗收標準。",
+          "category": "Project Management",
+          "use_case": "品質保證、測試管理、發布準備",
+          "variables": [
+            "版本號",
+            "測試範圍"
+          ],
+          "source_page": 37
+        },
+        {
+          "id": "mkt_015",
+          "title": "製作品牌合規檢查清單",
+          "prompt": "根據品牌 [品牌名稱] 的品牌指南，製作品牌合規檢查清單，用於驗證 [資源類型] 是否符合品牌標準。",
+          "category": "Marketing",
+          "use_case": "品牌管理、品質控制、一致性維護",
+          "variables": [
+            "品牌名稱",
+            "資源類型"
+          ],
+          "source_page": 38
+        }
+      ]
+    }
+  }
+}
