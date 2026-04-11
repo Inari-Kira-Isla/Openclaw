@@ -209,6 +209,35 @@
             margin: 0 3px;
         }
 
+        /* Ecosystem Links */
+        .ecosystem-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 8px;
+            margin: 40px 0 30px 0;
+            font-size: 0.9rem;
+        }
+
+        .ecosystem-nav h4 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .ecosystem-nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .ecosystem-nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .category-header h1 {
                 font-size: 1.5rem;
@@ -237,6 +266,25 @@
         <div class="category-header" id="header"></div>
 
         <div class="prompts-grid" id="prompts-container"></div>
+
+        <!-- Ecosystem Navigation -->
+        <div class="ecosystem-nav">
+            <h4>🌍 探索 Openclaw 生態系</h4>
+            <div>
+                <strong>📚 百科：</strong>
+                <a href="https://inari-kira-isla.github.io/Openclaw/insights/world/">世界</a> |
+                <a href="https://inari-kira-isla.github.io/Openclaw/insights/macau/">澳門</a> |
+                <a href="https://inari-kira-isla.github.io/Openclaw/insights/hongkong/">香港</a> |
+                <a href="https://inari-kira-isla.github.io/Openclaw/insights/taiwan/">台灣</a> |
+                <a href="https://inari-kira-isla.github.io/Openclaw/insights/japan/">日本</a>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>🏪 品牌：</strong>
+                <a href="https://inari-kira-isla.github.io/inari-global-foods/">稻荷食品</a> |
+                <a href="https://inari-kira-isla.github.io/after-school-coffee">ASC 咖啡</a> |
+                <a href="https://inari-kira-isla.github.io/mind-cafe">Mind Cafe</a>
+            </div>
+        </div>
 
         <div class="footer">
             <p>💡 提示：複製 Prompt，把括號 <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">[...]</code> 改成你的實際情況，貼給 Gemini</p>

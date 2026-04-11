@@ -324,6 +324,62 @@
             text-decoration: underline;
         }
 
+        /* Ecosystem Links */
+        .ecosystem-nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ecosystem-nav h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .ecosystem-nav > div {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .ecosystem-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .ecosystem-section h4 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .ecosystem-section a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 8px;
+            padding: 6px 0;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .ecosystem-section a:hover {
+            padding-left: 8px;
+            opacity: 0.8;
+        }
+
+        .ecosystem-section a::before {
+            content: "→ ";
+            margin-right: 5px;
+            opacity: 0.7;
+        }
+
         /* Breadcrumb */
         .breadcrumb {
             padding: 15px 20px;
@@ -446,6 +502,32 @@
         <!-- Categories -->
         <h2 style="margin: 40px 0 20px 0; color: #333; font-size: 1.5rem;">📂 選擇你的職位分類</h2>
         <div class="categories" id="categories-container"></div>
+
+        <!-- Ecosystem Navigation -->
+        <div class="ecosystem-nav">
+            <h3>🌍 Openclaw 生態系</h3>
+            <div>
+                <div class="ecosystem-section">
+                    <h4>📚 百科資源</h4>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/insights/world/">世界百科</a>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/insights/macau/">澳門百科</a>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/insights/hongkong/">香港百科</a>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/insights/taiwan/">台灣百科</a>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/insights/japan/">日本百科</a>
+                </div>
+                <div class="ecosystem-section">
+                    <h4>🏪 品牌網站</h4>
+                    <a href="https://inari-kira-isla.github.io/inari-global-foods/">稻荷環球食品</a>
+                    <a href="https://inari-kira-isla.github.io/after-school-coffee">After School Coffee</a>
+                    <a href="https://inari-kira-isla.github.io/mind-cafe">Mind Cafe 文創咖啡</a>
+                </div>
+                <div class="ecosystem-section">
+                    <h4>🛠️ 工具平台</h4>
+                    <a href="https://inari-kira-isla.github.io/Openclaw/">AI 學習寶庫</a>
+                    <a href="https://github.com/Inari-Kira-Isla/Openclaw">GitHub 源碼</a>
+                </div>
+            </div>
+        </div>
 
         <!-- CTA -->
         <div class="cta-section">
