@@ -1,16 +1,17 @@
 {
-  "timestamp": "2026-04-05T00:40:56.410111",
-  "total_visits": 709,
+  "timestamp": "2026-04-11T14:03:21.081445",
+  "total_visits": 733,
   "bot_totals": {
-    "Claude Crawler": 400,
-    "OpenAI GPT": 236,
+    "Claude Crawler": 415,
+    "OpenAI GPT": 244,
     "Meta AI": 72,
-    "OpenAI Search": 1
+    "OpenAI Search": 1,
+    "Microsoft Bing AI": 1
   },
   "site_data": {
     "cloudpipe-macao-app": {
       "total": 70,
-      "today": 3,
+      "today": 0,
       "bots": {
         "Claude Crawler": 2,
         "OpenAI GPT": 2,
@@ -34,10 +35,10 @@
       }
     },
     "openclaw": {
-      "total": 385,
-      "today": 0,
+      "total": 399,
+      "today": 3,
       "bots": {
-        "Claude Crawler": 195,
+        "Claude Crawler": 209,
         "OpenAI GPT": 183,
         "OpenAI Search": 1,
         "Meta AI": 6
@@ -60,11 +61,12 @@
       }
     },
     "sea-urchin-delivery": {
-      "total": 20,
-      "today": 0,
+      "total": 29,
+      "today": 8,
       "bots": {
+        "Microsoft Bing AI": 1,
         "Claude Crawler": 18,
-        "OpenAI GPT": 2
+        "OpenAI GPT": 10
       }
     },
     "mind-coffee": {
@@ -75,10 +77,10 @@
       }
     },
     "cloudpipe-landing": {
-      "total": 13,
+      "total": 14,
       "today": 0,
       "bots": {
-        "Claude Crawler": 9,
+        "Claude Crawler": 10,
         "OpenAI GPT": 4
       }
     },
@@ -90,5 +92,5 @@
       }
     }
   },
-  "last_updated": "2026-04-05T00:40:56.410394"
+  "last_updated": "2026-04-11T14:03:21.081898"
 }
