@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token 優化策略與成本控制：降低 API 成本 50-70% | AI 學習寶庫</title>
+    <meta name="description" content="掌握Claude Token優化的核心技巧。學習如何測量Token消耗、批處理、緩存策略、模型選擇與成本計算。包含6個實務案例與ROI分析。">
+    <meta name="keywords" content="Token優化,成本控制,API成本,Claude定價,批量處理,Prompt緩存,模型選擇,成本計算">
+    <meta name="author" content="AI 學習寶庫">
+    <meta name="publisher" content="AI 學習寶庫">
+    <meta name="publication_date" content="2026-04-11">
+    <meta property="og:title" content="Token 優化策略與成本控制：降低 API 成本 50-70%">
+    <meta property="og:description" content="掌握Token優化的核心技巧，減少成本同時提升效率。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inariglobal.github.io/prompts/token-optimization-cost-control.html">
+    <link rel="canonical" href="https://inariglobal.github.io/prompts/token-optimization-cost-control.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.8; color: #2c3e50; background: #f8f9fa; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem 1rem; text-align: center; }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header p { font-size: 1.1rem; opacity: 0.95; }
+        nav { background: #2c3e50; padding: 1rem; text-align: center; }
+        nav a { color: white; margin: 0 1.5rem; text-decoration: none; font-weight: 500; }
+        nav a:hover { text-decoration: underline; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .breadcrumb { padding: 1rem; background: #ecf0f1; border-radius: 4px; margin-bottom: 2rem; font-size: 0.95rem; }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        article { padding: 2rem; }
+        h1 { font-size: 2rem; color: #2c3e50; margin-bottom: 1rem; }
+        h2 { font-size: 1.6rem; color: #667eea; margin-top: 2rem; margin-bottom: 1rem; border-left: 4px solid #667eea; padding-left: 1rem; }
+        h3 { font-size: 1.2rem; color: #34495e; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+        p { margin-bottom: 1rem; text-align: justify; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .highlight { background: #fff3cd; padding: 1.5rem; border-left: 4px solid #ffc107; margin: 1.5rem 0; border-radius: 4px; }
+        .comparison { margin: 1.5rem 0; }
+        .comparison table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+        .comparison th { background: #667eea; color: white; padding: 1rem; text-align: left; }
+        .comparison td { padding: 1rem; border-bottom: 1px solid #ecf0f1; }
+        .comparison tr:nth-child(even) { background: #f8f9fa; }
+        .case-study { background: #e8f4f8; padding: 1.5rem; border-radius: 4px; margin: 1.5rem 0; border-left: 4px solid #3498db; }
+        .case-study h4 { color: #2980b9; margin-bottom: 0.8rem; }
+        code { background: #2c3e50; color: #ecf0f1; padding: 0.3rem 0.6rem; border-radius: 3px; font-family: 'Courier New', monospace; }
+        pre { background: #2c3e50; color: #ecf0f1; padding: 1.5rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; color: #ecf0f1; padding: 0; }
+        .related { background: #f0f8f0; padding: 1.5rem; border-radius: 4px; margin-top: 2rem; }
+        .related h3 { color: #27ae60; margin-top: 0; }
+        .related a { color: #27ae60; text-decoration: none; }
+        .related a:hover { text-decoration: underline; }
+        footer { background: #2c3e50; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.9rem; }
+        footer a { color: #3498db; text-decoration: none; }
+        .metric { background: #d4edda; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Token 優化策略與成本控制</h1>
+        <p>系統化降低 API 成本 50-70%，提升效率</p>
+    </header>
+
+    <nav>
+        <a href="https://inariglobal.github.io/">首頁</a>
+        <a href="https://inariglobal.github.io/prompts/">提示詞工程</a>
+        <a href="https://inariglobal.github.io/insights/">洞察文庫</a>
+        <a href="https://github.com/inari-kira-isla/inariglobal">GitHub</a>
+    </nav>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="https://inariglobal.github.io/">首頁</a> /
+            <a href="https://inariglobal.github.io/prompts/">提示詞工程</a> /
+            Token 優化策略與成本控制
+        </div>
+
+        <article>
+            <h1>Token 優化策略與成本控制：系統化降低 API 成本</h1>
+
+            <p><strong>Token</strong>是Claude API計費的基本單位。1 Token ≈ 4 個字符或 1 個詞。一個看似簡單的優化決策，可能帶來 50-70% 的成本節省，同時保持甚至提升輸出品質。本文系統介紹Token成本的測量、優化策略、批處理設計，以及完整的成本計算框架。</p>
+
+            <h2>1. Token 的基本概念</h2>
+
+            <h3>Token 計數規則</h3>
+
+            <ul>
+                <li><strong>Input Token</strong>：用戶送入的內容（提示詞 + 上下文）</li>
+                <li><strong>Output Token</strong>：Claude 產生的回應</li>
+                <li><strong>Cache Hit Token</strong>：使用快取的內容（成本降低 90%）</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>💡 核心原則：</strong>Input Token 的成本最低（Opus $3/M input），Output Token 成本較高（$15/M output），但可控制。Cache Hit Token 成本最低（$0.30/M）—— 這是成本優化的黃金機會。
+            </div>
+
+            <h3>模型定價對比（2026年4月）</h3>
+
+            <div class="comparison">
+                <table>
+                    <tr>
+                        <th>模型</th>
+                        <th>Input 成本</th>
+                        <th>Output 成本</th>
+                        <th>特性</th>
+                    </tr>
+                    <tr>
+                        <td>Claude Opus 4.6</td>
+                        <td>$3/M</td>
+                        <td>$15/M</td>
+                        <td>最強能力、最高成本</td>
+                    </tr>
+                    <tr>
+                        <td>Claude Sonnet 4.6</td>
+                        <td>$3/M</td>
+                        <td>$15/M</td>
+                        <td>均衡方案、速度快</td>
+                    </tr>
+                    <tr>
+                        <td>Claude Haiku 4.5</td>
+                        <td>$0.80/M</td>
+                        <td>$4/M</td>
+                        <td>輕量任務、成本低 75%</td>
+                    </tr>
+                    <tr>
+                        <td>Prompt Caching</td>
+                        <td>$0.30/M</td>
+                        <td>—</td>
+                        <td>快取 Input（成本減 90%）</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p><strong>計費範例：</strong>100K tokens input + 50K tokens output（Opus）= (100K × $3/M) + (50K × $15/M) = $0.30 + $0.75 = $1.05</p>
+
+            <h2>2. 第一層優化：模型選擇</h2>
+
+            <p>40% 的成本節省來自選擇合適的模型。不是所有任務都需要 Opus：</p>
+
+            <div class="comparison">
+                <table>
+                    <tr>
+                        <th>任務類型</th>
+                        <th>推薦模型</th>
+                        <th>成本節省</th>
+                        <th>說明</th>
+                    </tr>
+                    <tr>
+                        <td>簡單歸類、提取</td>
+                        <td>Haiku</td>
+                        <td>75%</td>
+                        <td>邏輯簡單，Haiku足夠</td>
+                    </tr>
+                    <tr>
+                        <td>客服自動回覆</td>
+                        <td>Haiku + Few-Shot</td>
+                        <td>70%</td>
+                        <td>模式固定，無需推理</td>
+                    </tr>
+                    <tr>
+                        <td>數據清洗、格式轉換</td>
+                        <td>Haiku</td>
+                        <td>75%</td>
+                        <td>結構化任務</td>
+                    </tr>
+                    <tr>
+                        <td>複雜推理、創意生成</td>
+                        <td>Sonnet</td>
+                        <td>0%</td>
+                        <td>需要平衡性能與成本</td>
+                    </tr>
+                    <tr>
+                        <td>最高難度推理</td>
+                        <td>Opus</td>
+                        <td>0%</td>
+                        <td>必要投資</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="case-study">
+                <h4>案例 1：模型選擇帶來的成本改善</h4>
+                <p><strong>場景：</strong>批量處理 10,000 個客戶評論，分類情感（正面/中立/負面）。</p>
+                <p><strong>原方案（Opus）：</strong><br>
+                    • 每個評論平均 150 input + 20 output tokens<br>
+                    • 10K × (150 × $3/M + 20 × $15/M) = $5.50
+                </p>
+                <p><strong>優化方案（Haiku）：</strong><br>
+                    • 相同大小，但用 Haiku<br>
+                    • 10K × (150 × $0.80/M + 20 × $4/M) = $1.38<br>
+                    • <strong>成本節省：75%（$4.12）</strong>
+                </p>
+                <p><strong>準確率差異：</strong>Opus 95%，Haiku 92%。對情感分類而言，3% 差異可接受。</p>
+            </div>
+
+            <h2>3. 第二層優化：提示詞精煉</h2>
+
+            <p>不必要的文字最容易被忽視，但佔用最多token。以下技巧可減少 20-40% 的input tokens：</p>
+
+            <h3>五項精煉規則</h3>
+
+            <ol>
+                <li><strong>移除冗餘例子</strong>：3-5 個 Few-Shot 例子足夠，超過 10 個開始浪費</li>
+                <li><strong>使用短變數名</strong>：「customer_name」vs「c_name」可節省 10% 的token</li>
+                <li><strong>精簡系統提示詞</strong>：「你是一個X領域的專家，有Y年經驗...」改為「X領域專家」</li>
+                <li><strong>刪除說教語氣</strong>：「請你一定要非常仔細地...」無意義，直接說需求</li>
+                <li><strong>結構化 vs 自然語言</strong>：JSON 結構化指令比自然語言節省 15-25% token</li>
+            </ol>
+
+            <div class="case-study">
+                <h4>案例 2：提示詞精煉的實測效果</h4>
+                <p><strong>原始版本（冗長）：</strong></p>
+                <pre><code>你是一位在數據科學領域擁有15年經驗的資深專家，深諳各種機器學習演算法和統計學原理。
+請你非常仔細地分析下面的數據集，並請確保你的分析非常準確和詳細。
+我們需要你進行以下分析：
+1. 描述數據的基本統計特性
+2. 識別潛在的異常值
+3. 提出改善建議
+
+請確保你的回答清晰、全面、準確。
+
+[數據]</code></pre>
+                <p><strong>Token 消耗：</strong>約 130 tokens</p>
+
+                <p><strong>精煉版本：</strong></p>
+                <pre><code>數據科學家。分析以下數據：
+1. 基本統計（平均、標準差、分佈）
+2. 異常值
+3. 改善建議
+
+[數據]</code></pre>
+                <p><strong>Token 消耗：</strong>約 50 tokens</p>
+                <p><strong>節省：61% tokens，品質差異 &lt;5%</strong></p>
+            </div>
+
+            <h2>4. 第三層優化：批處理與分批策略</h2>
+
+            <p>批量處理帶來 2 重好處：（1）攤薄系統提示詞成本，（2）啟用緩存。</p>
+
+            <h3>批處理架構</h3>
+
+            <pre><code>【系統提示詞 200 tokens】（一次付款，多個任務共用）
+
+Task 1: [問題] → [回答]
+Task 2: [問題] → [回答]
+Task 3: [問題] → [回答]
+...
+Task 50: [問題] → [回答]</code></pre>
+
+            <p><strong>成本計算：</strong></p>
+            <ul>
+                <li>系統提示詞成本：200 tokens（50個任務共用）→ 平均每個任務 4 tokens</li>
+                <li>逐個調用：需要支付 50 × 200 = 10,000 tokens 系統提示詞成本</li>
+                <li><strong>批處理節省：99.6% 的系統提示詞成本</strong></li>
+            </ul>
+
+            <div class="case-study">
+                <h4>案例 3：批處理實例</h4>
+                <p><strong>場景：</strong>翻譯 100 篇文章從英文到繁體中文。</p>
+                <p><strong>方案 A（逐個翻譯）：</strong><br>
+                    • 系統提示詞：「你是翻譯專家...」（200 tokens）<br>
+                    • 每篇文章：平均 2,000 input + 2,200 output tokens<br>
+                    • 成本：100 × (200 + 2000 × $3/M + 2200 × $15/M) = ~$3,400
+                </p>
+                <p><strong>方案 B（批處理，10 篇/批）：</strong><br>
+                    • 系統提示詞：200 tokens（10篇文章共用）<br>
+                    • 10 批 × (200 + 10 × 2000 × $3/M + 10 × 2200 × $15/M) = ~$3,200<br>
+                    • <strong>節省 5.9%</strong>
+                </p>
+                <p><strong>方案 C（批處理 + 提示詞緩存）：</strong><br>
+                    • 系統提示詞 200 tokens（50 篇文章，啟用緩存）<br>
+                    • 首批（建立快取）：200 + 50 × 2000 × $3/M + 50 × 2200 × $15/M = ~$1,650<br>
+                    • 第二批（快取命中）：50 × 2000 × $0.30/M + 50 × 2200 × $15/M = ~$1,650<br>
+                    • 100 篇總成本：$3,300 → <strong>成本節省 3% vs逐個，但速度 +40%</strong>
+                </p>
+            </div>
+
+            <h2>5. 第四層優化：Prompt Caching</h2>
+
+            <p>Prompt Caching 是成本優化的終極武器。相同的 System Prompt 或上下文被重複使用時，後續調用的成本降低 90%。</p>
+
+            <h3>快取的三大應用場景</h3>
+
+            <ol>
+                <li><strong>持久系統提示詞</strong>：相同的 system message 被數千個請求共用（客服機器人、內容分類）</li>
+                <li><strong>大型知識庫</strong>：相同的參考文檔被反複查詢（FAQs、技術文檔）</li>
+                <li><strong>多輪對話</strong>：對話歷史被保留且不斷增長</li>
+            </ol>
+
+            <div class="metric">
+                <strong>📊 快取效果：</strong>System Prompt（200 tokens）在 1,000 個請求中重複使用，原成本 $0.60（1000 × 200 × $3/M），快取成本僅 $0.06（降低 90%）。節省 $0.54。
+            </div>
+
+            <div class="case-study">
+                <h4>案例 4：快取帶來的規模效應</h4>
+                <p><strong>場景：</strong>24小時內，1,000 個客戶提出客服問題。系統提示詞恆定。</p>
+                <p><strong>無快取：</strong><br>
+                    • System Prompt（200 tokens）× 1,000 請求 × $3/M = $0.60<br>
+                    • 用戶問題（平均 100 tokens）× 1,000 = $0.30<br>
+                    • 回答（平均 200 tokens）× 1,000 × $15/M = $3.00<br>
+                    • <strong>總成本：$3.90</strong>
+                </p>
+                <p><strong>啟用快取：</strong><br>
+                    • System Prompt 首次：200 × $3/M = $0.0006（另計入base成本）<br>
+                    • System Prompt 後續 999 次：200 × 999 × $0.30/M = $0.06（90% 折扣）<br>
+                    • 用戶問題：$0.30（不變）<br>
+                    • 回答：$3.00（不變）<br>
+                    • <strong>總成本：$3.36（節省 13.8%）</strong>
+                </p>
+            </div>
+
+            <h2>6. 第五層優化：上下文管理</h2>
+
+            <p>多輪對話中的上下文會快速增長。優化策略：</p>
+
+            <h3>四項上下文控制規則</h3>
+
+            <ol>
+                <li><strong>對話摘要</strong>：每 10 輪對話，生成摘要替換舊內容（減少 50-70% tokens）</li>
+                <li><strong>優先級排序</strong>：最近 5 輪保留，更早的對話進行摘要</li>
+                <li><strong>相關性過濾</strong>：移除與當前問題無關的歷史（減少 30-40% tokens）</li>
+                <li><strong>重置邊界</strong>：對話超過 10,000 tokens 時，開始新對話而非無限延長</li>
+            </ol>
+
+            <pre><code>【對話 1-10】完整保留（2,000 tokens）
+【對話 11-20】保留摘要而非完整內容（300 tokens）
+【對話 21-30】超過 10K token 閾值 → 新對話開始</code></pre>
+
+            <h2>7. 成本計算與監控框架</h2>
+
+            <h3>成本監控三層模型</h3>
+
+            <ol>
+                <li><strong>請求層</strong>：每個 API 呼叫記錄 input/output tokens</li>
+                <li><strong>特性層</strong>：按功能（客服、翻譯、分類）統計成本</li>
+                <li><strong>用戶層</strong>：按客戶/產品統計成本分佈</li>
+            </ol>
+
+            <div class="case-study">
+                <h4>案例 5：完整的成本監控實例</h4>
+                <p><strong>情景：</strong>SaaS 應用，日均 5,000 API 呼叫。</p>
+                <pre><code>日均成本分析：
+
+【功能維度】
+- 客服回答（60% 調用）：5,000 × 0.6 × $0.15 = $450/天
+- 內容翻譯（25% 調用）：5,000 × 0.25 × $0.40 = $500/天
+- 數據分類（15% 調用）：5,000 × 0.15 × $0.08 = $60/天
+
+日成本：$1,010
+月成本：$30,300
+
+【優化機會】
+- 客服轉用 Haiku（節省 75%）：$450 → $112.50 （-$337.50/天）
+- 翻譯啟用快取（節省 30%）：$500 → $350 （-$150/天）
+- 分類優化提示詞（節省 20%）：$60 → $48 （-$12/天）
+
+優化後月成本：$19,845（節省 34.5%）</code></pre>
+            </div>
+
+            <h2>8. 成本 vs 品質平衡</h2>
+
+            <p>並非所有節省都值得。以下決策框架幫助判斷：</p>
+
+            <div class="comparison">
+                <table>
+                    <tr>
+                        <th>優化類型</th>
+                        <th>成本降低</th>
+                        <th>品質影響</th>
+                        <th>推薦指數</th>
+                    </tr>
+                    <tr>
+                        <td>模型降級（Opus→Haiku）</td>
+                        <td>75%</td>
+                        <td>-3% 準確率</td>
+                        <td>⭐⭐⭐ 簡單分類</td>
+                    </tr>
+                    <tr>
+                        <td>提示詞精煉</td>
+                        <td>30%</td>
+                        <td>0%（無損）</td>
+                        <td>⭐⭐⭐⭐⭐ 必做</td>
+                    </tr>
+                    <tr>
+                        <td>批處理</td>
+                        <td>5-15%</td>
+                        <td>0%（無損）</td>
+                        <td>⭐⭐⭐⭐ 推薦</td>
+                    </tr>
+                    <tr>
+                        <td>Prompt 緩存</td>
+                        <td>10-20%（高重複時）</td>
+                        <td>0%（無損）</td>
+                        <td>⭐⭐⭐⭐⭐ 必做</td>
+                    </tr>
+                    <tr>
+                        <td>上下文摘要</td>
+                        <td>20-40%</td>
+                        <td>-2% 連貫性</td>
+                        <td>⭐⭐⭐ 長對話</td>
+                    </tr>
+                    <tr>
+                        <td>減少 Few-Shot 例子</td>
+                        <td>10-20%</td>
+                        <td>-5-10% 準確率</td>
+                        <td>⭐⭐ 謹慎</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>9. 實務優化工作流</h2>
+
+            <h3>一個月的成本優化計劃</h3>
+
+            <ol>
+                <li><strong>Week 1：審計與監控</strong><br>
+                    • 記錄所有 API 調用的 input/output tokens<br>
+                    • 按功能分類，找出成本最高的 3 個功能<br>
+                    • 建立成本基線</li>
+
+                <li><strong>Week 2：快速勝利</strong><br>
+                    • 優化 Week 1 找出的成本最高功能的提示詞<br>
+                    • 預期節省 20-30%</li>
+
+                <li><strong>Week 3：架構改進</strong><br>
+                    • 實施批處理（如適用）<br>
+                    • 啟用 Prompt 緩存<br>
+                    • 預期額外節省 10-20%</li>
+
+                <li><strong>Week 4：模型優化</strong><br>
+                    • 評估是否可從 Opus 降級至 Sonnet 或 Haiku<br>
+                    • 測試品質損失是否可接受<br>
+                    • 預期額外節省 30-50%（如適用）</li>
+            </ol>
+
+            <h2>10. 常見誤區</h2>
+
+            <h3>誤區 1：過度優化成本而損失品質</h3>
+            <p><strong>症狀：</strong>使用 Haiku 進行需要 Opus 的複雜推理，結果準確率降至 60%。<br>
+            <strong>改善：</strong>先測量品質損失。如果品質損失 &gt;10%，不值得節省 50% 成本。</p>
+
+            <h3>誤區 2：忽視快取的設置複雜性</h3>
+            <p><strong>症狀：</strong>計劃中快取可以節省 50% 成本，但實施需要 2 周工作。<br>
+            <strong>改善：</strong>優先實施 ROI 高的優化（提示詞精煉、批處理），再考慮快取。</p>
+
+            <h3>誤區 3：不考慮延遲的成本</h3>
+            <p><strong>症狀：</strong>批處理省成本，但延遲增加，影響用戶體驗。<br>
+            <strong>改善：</strong>對延遲敏感的功能（如客服），優先考慮品質。對離線任務，優先考慮成本。</p>
+
+            <h2>總結</h2>
+
+            <p>系統化的 Token 優化可帶來 50-70% 的成本節省，同時保持甚至提升品質。核心策略：</p>
+
+            <ul>
+                <li>✅ <strong>第一層：</strong>選擇合適的模型（30-40% 節省）</li>
+                <li>✅ <strong>第二層：</strong>精煉提示詞（20-30% 節省）</li>
+                <li>✅ <strong>第三層：</strong>批處理設計（5-15% 節省）</li>
+                <li>✅ <strong>第四層：</strong>Prompt 緩存（10-20% 節省，高重複場景）</li>
+                <li>✅ <strong>第五層：</strong>上下文管理（20-40% 節省，長對話）</li>
+            </ul>
+
+            <p>按優先級順序實施，每個優化都應有明確的 ROI 與品質檢驗。</p>
+
+            <div class="related">
+                <h3>相關文章</h3>
+                <ul>
+                    <li><a href="/prompts/claude-prompt-complete-guide.html">ChatGPT 提示詞完全指南</a></li>
+                    <li><a href="/prompts/claude-system-prompt-best-practices.html">Claude 系統提示詞最佳實踐</a></li>
+                    <li><a href="/prompts/few-shot-learning-techniques.html">零樣本與少樣本學習</a></li>
+                    <li><a href="/prompts/claude-multimodal-prompt-design.html">Claude 多模態提示詞設計</a></li>
+                </ul>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p><strong>AI 學習寶庫 | 提示詞工程系列</strong></p>
+        <p>作者：AI 學習寶庫 | 發布日期：2026年4月11日</p>
+        <p><a href="https://github.com/inari-kira-isla/inariglobal">GitHub 知識庫</a> | Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Token 優化策略與成本控制：降低 API 成本 50-70%",
+        "description": "掌握Token優化的核心技巧。學習如何測量Token消耗、批處理、緩存策略、模型選擇與成本計算。",
+        "image": "https://inariglobal.github.io/assets/token-optimization.png",
+        "author": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "AI 學習寶庫",
+            "logo": "https://inariglobal.github.io/assets/logo.png"
+        },
+        "datePublished": "2026-04-11",
+        "dateModified": "2026-04-11"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首頁",
+                "item": "https://inariglobal.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "提示詞工程",
+                "item": "https://inariglobal.github.io/prompts/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Token 優化策略與成本控制",
+                "item": "https://inariglobal.github.io/prompts/token-optimization-cost-control.html"
+            }
+        ]
+    }
+    </script>
+
+    <img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=prompts/token-optimization-cost-control.html" alt="" style="display:none;">
+</body>
+</html>
