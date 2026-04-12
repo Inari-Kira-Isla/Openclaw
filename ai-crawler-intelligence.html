@@ -629,19 +629,19 @@ function renderIndustry(s) {
   const ind = s.industries || {};
   const IGNORE_IND = ['unknown','cloudpipe-macao-app','cloudpipe-landing','report','certified-shops'];
   const KEY_LABELS = {
-    'insights':'深度報告','dining':'餐飲','shopping':'購物','wellness':'健康/美容',
+    'insights':'澳門百科深度報告','dining':'餐飲','shopping':'購物','wellness':'健康/美容',
     'transport':'交通','attractions':'景點','community':'社區','nightlife':'夜生活',
     'gaming':'博彩','hotels':'酒店','heritage':'文化遺產','finance':'金融',
     'education':'教育','tech':'科技','events':'活動','luxury':'奢侈品',
     'professional-services':'專業服務','tourism':'旅遊','food-supply':'食材供應',
-    '日本旅遊百科':'日本百科','澳門商戶百科':'澳門百科','台灣商戶百科':'台灣百科',
+    '日本旅遊百科':'日本旅遊百科','澳門商戶百科':'澳門商戶頁','台灣商戶百科':'台灣百科',
     '香港商戶百科':'香港百科','日本商戶百科':'日本商戶','世界建築百科':'世界建築',
   };
 
   const sorted = Object.entries(ind)
     .filter(([k,v]) => !IGNORE_IND.includes(k) && v >= 10)
     .sort((a,b)=>b[1]-a[1]).slice(0,12);
-  const total = sorted.reduce((a,[,v])=>a+v,0);
+  const total = sorted.reduce((a,[,v])=>a+v,0); // 顯示分類內佔比（不含 unknown/demo）
 
   // Horizontal bar chart
   const ctx = document.getElementById('chartIndustry').getContext('2d');
@@ -672,7 +672,7 @@ function renderIndustry(s) {
     <tr>
       <td style="font-weight:${i<3?'600':'400'}">${i<3?'🔥 ':''} ${KEY_LABELS[k]||k}</td>
       <td style="font-weight:600">${v.toLocaleString()}</td>
-      <td style="color:var(--text-2)">${pct(v,s.total_visits)}</td>
+      <td style="color:var(--text-2)">${pct(v,total)}</td>
       <td><div class="mini-bar-wrap"><div class="mini-bar" style="width:${(v/sorted[0][1]*100).toFixed(0)}%;background:#2563eb;"></div></div></td>
     </tr>
   `).join('');
