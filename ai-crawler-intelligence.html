@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 爬蟲情報中心 — 全球 AI 機器人行為分析 | AI 學習寶庫</title>
+  <meta name="description" content="即時追蹤 ClaudeBot、GPTBot、Amazonbot 等 16 種 AI 爬蟲的行為模式、內容偏好與每日訪問趨勢，為內容策略提供數據依據。">
+  <meta property="og:title" content="AI 爬蟲情報中心 — 全球 AI 機器人行為分析">
+  <meta property="og:description" content="即時追蹤 16 種 AI 爬蟲的訪問模式與內容偏好">
+  <link rel="stylesheet" href="/Openclaw/style.css">
+  <link rel="llms-txt" href="https://inari-kira-isla.github.io/Openclaw/llms.txt">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["Report","Dataset"],"name":"AI 爬蟲情報中心","description":"全球 AI 爬蟲行為分析，涵蓋 ClaudeBot、GPTBot、Amazonbot 等 16 種機器人的訪問模式、內容偏好與每日趨勢。","url":"https://inari-kira-isla.github.io/Openclaw/ai-crawler-intelligence.html","datePublished":"2026-04-01","publisher":{"@type":"Organization","name":"AI 學習寶庫"},"license":"https://creativecommons.org/licenses/by/4.0/","measurementTechnique":"伺服器端 Tracking Pixel 全量記錄","temporalCoverage":"2026-03-13/2026-04-12"}</script>
+  <style>
+    /* ── Dashboard-specific styles ── */
+    .dash-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white; padding: 48px 0 40px; margin-bottom: 32px;
+    }
+    .dash-hero h1 { font-size: clamp(22px,4vw,32px); font-weight: 800; margin-bottom: 8px; }
+    .dash-hero p { opacity: 0.85; font-size: 15px; margin-bottom: 24px; }
+    .hero-kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 16px; }
+    .hero-kpi {
+      background: rgba(255,255,255,0.15); border-radius: var(--r);
+      padding: 16px; text-align: center; backdrop-filter: blur(8px);
+    }
+    .hero-kpi .kpi-val { font-size: 28px; font-weight: 800; line-height: 1.1; }
+    .hero-kpi .kpi-label { font-size: 11px; opacity: 0.75; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .kpi-sub { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 18px; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px; color: var(--text);
+    }
+    .section-title .badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 99px; background: rgba(37,99,235,0.1);
+      color: var(--primary);
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .card-body { padding: 20px; }
+    .card-header {
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      font-weight: 600; font-size: 14px; color: var(--text-2);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    @media(max-width:680px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Bot cards */
+    .bot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; }
+    .bot-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 16px; position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .bot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .bot-card .bot-emoji { font-size: 24px; margin-bottom: 8px; }
+    .bot-card .bot-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .bot-card .bot-owner { font-size: 11px; color: var(--text-3); margin-bottom: 10px; }
+    .bot-card .bot-count { font-size: 24px; font-weight: 800; color: var(--primary); }
+    .bot-card .bot-pct { font-size: 12px; color: var(--text-2); }
+    .bot-card .bot-bar-wrap { background: var(--bg-2); border-radius: 99px; height: 4px; margin-top: 10px; }
+    .bot-card .bot-bar { height: 4px; border-radius: 99px; transition: width 0.8s ease; }
+    .bot-card .rank-badge {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 10px; font-weight: 700; padding: 2px 6px;
+      border-radius: 99px; background: var(--bg-2); color: var(--text-2);
+    }
+
+    /* Progress bars */
+    .prog-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .prog-label { font-size: 13px; width: 130px; flex-shrink: 0; font-weight: 500; }
+    .prog-bar-wrap { flex: 1; background: var(--bg-2); border-radius: 99px; height: 8px; overflow: hidden; }
+    .prog-bar { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
+    .prog-val { font-size: 12px; font-weight: 600; color: var(--text-2); width: 55px; text-align: right; }
+
+    /* Chart containers */
+    .chart-wrap { position: relative; width: 100%; }
+    .chart-wrap canvas { max-height: 280px; }
+
+    /* Industry table */
+    .industry-table { width: 100%; border-collapse: collapse; }
+    .industry-table th {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--text-3); font-weight: 600; padding: 8px 12px; text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .industry-table td { padding: 8px 12px; font-size: 13px; border-bottom: 1px solid var(--border); }
+    .industry-table tr:last-child td { border-bottom: none; }
+    .industry-table tr:hover td { background: var(--bg-2); }
+    .industry-table .mini-bar-wrap { background: var(--bg-2); border-radius: 99px; height: 5px; width: 80px; overflow: hidden; display: inline-block; vertical-align: middle; }
+    .industry-table .mini-bar { height: 100%; border-radius: 99px; }
+
+    /* Strategy cards */
+    .strategy-card {
+      border-left: 3px solid var(--primary); background: var(--card);
+      border-radius: 0 var(--r) var(--r) 0; padding: 14px 16px;
+      margin-bottom: 12px; border: 1px solid var(--border);
+      border-left-width: 3px;
+    }
+    .strategy-card .s-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .strategy-card .s-body { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+    .strategy-card.green { border-left-color: #10b981; }
+    .strategy-card.orange { border-left-color: #f59e0b; }
+    .strategy-card.purple { border-left-color: #8b5cf6; }
+    .strategy-card.red { border-left-color: #ef4444; }
+
+    /* Live indicator */
+    .live-dot {
+      display: inline-block; width: 8px; height: 8px;
+      background: #10b981; border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(0.8); }
+    }
+
+    /* Tabs */
+    .tab-bar { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+    .tab-btn {
+      font-size: 13px; font-weight: 500; padding: 8px 16px;
+      border: none; background: none; cursor: pointer;
+      color: var(--text-2); border-bottom: 2px solid transparent;
+      transition: color 0.15s; margin-bottom: -1px;
+    }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+    /* Insight comparison */
+    .compare-table { width:100%; border-collapse: collapse; font-size:13px; }
+    .compare-table th { text-align:left; padding:8px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-3); border-bottom:1px solid var(--border); }
+    .compare-table td { padding:8px 12px; border-bottom:1px solid var(--border); }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .tag { display:inline-block; font-size:11px; padding:2px 7px; border-radius:99px; font-weight:600; }
+    .tag-green { background:rgba(16,185,129,0.1); color:#10b981; }
+    .tag-blue { background:rgba(37,99,235,0.1); color:var(--primary); }
+    .tag-orange { background:rgba(245,158,11,0.1); color:#f59e0b; }
+    .tag-gray { background:var(--bg-2); color:var(--text-2); }
+
+    .update-ts { font-size:11px; color:var(--text-3); display:flex; align-items:center; gap:6px; }
+
+    .loading-overlay {
+      display:flex; align-items:center; justify-content:center;
+      height:200px; color:var(--text-3); font-size:14px; gap:8px;
+    }
+    .spinner {
+      width:18px; height:18px; border:2px solid var(--bg-3);
+      border-top-color:var(--primary); border-radius:50%;
+      animation:spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+  </style>
+</head>
+<body class="page-wrap">
+
+<!-- Navbar -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/Openclaw/" class="nav-brand"><span class="brand-emoji">🎓</span>AI 學習寶庫</a>
+    <div class="nav-links" id="navLinks">
+      <a href="/Openclaw/prompts/" class="nav-link">💡 提示詞</a>
+      <a href="/Openclaw/configs/" class="nav-link">⚙️ 系統配置</a>
+      <a href="/Openclaw/tutorials/" class="nav-link">📚 教學</a>
+      <a href="/Openclaw/workflows/" class="nav-link">🔄 工作流</a>
+      <a href="/Openclaw/articles/" class="nav-link">📰 科技趨勢</a>
+      <a href="/Openclaw/ai-crawler-intelligence.html" class="nav-link active">🤖 爬蟲情報</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="切換深色/淺色模式">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="dash-hero">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+      <span class="live-dot"></span>
+      <span style="font-size:12px;opacity:0.75;">每 5 分鐘更新</span>
+      <span class="update-ts" id="updateTs" style="opacity:0.65;"></span>
+    </div>
+    <h1>🤖 AI 爬蟲情報中心</h1>
+    <p>即時追蹤全球 16 種 AI 機器人的訪問行為、內容偏好與每日趨勢 — 為內容策略提供數據支撐</p>
+    <div class="hero-kpi-row" id="heroKpi">
+      <div class="hero-kpi"><div class="kpi-val">…</div><div class="kpi-label">30天總訪問</div></div>
+      <div class="hero-kpi"><div class="kpi-val">…</div><div class="kpi-label">今日訪問</div></div>
+      <div class="hero-kpi"><div class="kpi-val">…</div><div class="kpi-label">不同AI機器人</div></div>
+      <div class="hero-kpi"><div class="kpi-val">…</div><div class="kpi-label">最活躍機器人</div></div>
+      <div class="hero-kpi"><div class="kpi-val">…</div><div class="kpi-label">30天日均</div></div>
+    </div>
+  </div>
+</div>
+
+<main>
+<div class="container">
+
+  <!-- 30-Day Trend -->
+  <div class="section">
+    <div class="section-title">📈 30 天訪問趨勢 <span class="badge">每日合計</span></div>
+    <div class="card">
+      <div class="card-header">
+        <span>每日 AI 爬蟲訪問量</span>
+        <div style="display:flex;gap:8px;font-size:12px;" id="trendLegend"></div>
+      </div>
+      <div class="card-body">
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="chartTrend"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bot breakdown + Stacked by company -->
+  <div class="section">
+    <div class="section-title">🏢 AI 公司排名 <span class="badge">30天合計</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">按公司分類（訪問佔比）</div>
+        <div class="card-body">
+          <div class="chart-wrap" style="height:230px;">
+            <canvas id="chartCompany"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">公司詳細數據</div>
+        <div class="card-body" id="companyBars" style="padding-top:8px;">
+          <div class="loading-overlay"><div class="spinner"></div> 載入中…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bot Detail Cards -->
+  <div class="section">
+    <div class="section-title">🤖 機器人詳細排名 <span class="badge" id="botCountBadge">…</span></div>
+    <div class="bot-grid" id="botGrid">
+      <div class="loading-overlay" style="grid-column:1/-1;"><div class="spinner"></div> 載入中…</div>
+    </div>
+  </div>
+
+  <!-- Daily stacked by company -->
+  <div class="section">
+    <div class="section-title">📊 每日公司爬取分佈 <span class="badge">堆疊圖</span></div>
+    <div class="card">
+      <div class="card-header">各 AI 公司每日訪問量（過去 14 天）</div>
+      <div class="card-body">
+        <div class="chart-wrap" style="height:260px;">
+          <canvas id="chartStacked"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Preference -->
+  <div class="section">
+    <div class="section-title">📚 內容偏好分析 <span class="badge">行業分類</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">AI 爬蟲最愛哪些內容？</div>
+        <div class="card-body">
+          <div class="chart-wrap" style="height:250px;">
+            <canvas id="chartIndustry"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">行業訪問量排行</div>
+        <div class="card-body" style="padding:12px;">
+          <table class="industry-table" id="industryTable">
+            <thead><tr><th>行業/分類</th><th>訪問量</th><th>佔比</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Breakdown -->
+  <div class="section">
+    <div class="section-title">🌐 各站點爬取量 <span class="badge">30天</span></div>
+    <div class="card">
+      <div class="card-header">哪個站點吸引最多 AI 爬蟲？</div>
+      <div class="card-body">
+        <div class="chart-wrap" style="height:220px;">
+          <canvas id="chartSite"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real AI Reads -->
+  <div class="section">
+    <div class="section-title">🧠 真實 AI 讀取（非爬蟲）<span class="badge">AI 助理主動閱讀</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">Claude / GPT / Meta 真實讀取</div>
+        <div class="card-body">
+          <div class="chart-wrap" style="height:200px;">
+            <canvas id="chartRealAI"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">各站點真實 AI 互動</div>
+        <div class="card-body" style="padding:12px;" id="realAISiteTable">
+          <div class="loading-overlay"><div class="spinner"></div> 載入中…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bot Behavior Insights -->
+  <div class="section">
+    <div class="section-title">🔍 爬蟲行為洞察 <span class="badge">數據解讀</span></div>
+    <div class="grid-2" id="behaviorInsights">
+      <div class="loading-overlay" style="grid-column:1/-1;"><div class="spinner"></div> 載入中…</div>
+    </div>
+  </div>
+
+  <!-- Content Strategy -->
+  <div class="section">
+    <div class="section-title">🎯 內容策略建議 <span class="badge">基於爬蟲數據</span></div>
+    <div id="strategyCards">
+      <div class="loading-overlay"><div class="spinner"></div> 載入中…</div>
+    </div>
+  </div>
+
+  <!-- Data freshness -->
+  <div style="text-align:center;padding:24px 0 40px;color:var(--text-3);font-size:12px;">
+    數據來源：CloudPipe Tracking Pixel 全量記錄 · 每 5 分鐘自動更新 · CC BY 4.0<br>
+    <a href="/Openclaw/" style="color:var(--primary);text-decoration:none;">← 返回 AI 學習寶庫</a>
+  </div>
+
+</div><!-- /container -->
+</main>
+
+<!-- Footer -->
+<footer style="background:var(--bg-2);border-top:1px solid var(--border);padding:24px;text-align:center;">
+  <address class="footer-contact" style="font-style:normal;font-size:13px;color:var(--text-2);">
+    <strong>AI 學習寶庫</strong> — GitHub：<a href="https://github.com/Inari-Kira-Isla/Openclaw" style="color:var(--primary);">Inari-Kira-Isla/Openclaw</a>
+  </address>
+  <div style="font-size:12px;color:var(--text-3);margin-top:4px;">© 2026 AI Governance System · CC BY 4.0</div>
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+<script>
+// ── Theme toggle ────────────────────────────────────────────────────────────
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('oc-theme') || 'light';
+html.dataset.theme = saved;
+themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+themeBtn.addEventListener('click', () => {
+  const t = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = t;
+  localStorage.setItem('oc-theme', t);
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+});
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+const fmt = n => n >= 1000 ? (n/1000).toFixed(1)+'K' : n.toLocaleString();
+const pct = (n, total) => total ? ((n/total)*100).toFixed(1)+'%' : '0%';
+
+const COMPANY_COLORS = {
+  'Anthropic':   '#e07b39',
+  'OpenAI':      '#10a37f',
+  'Amazon':      '#ff9900',
+  'Yandex':      '#fc3f1d',
+  'Apple':       '#555555',
+  'Perplexity':  '#6366f1',
+  'Meta':        '#0082fb',
+  'Google':      '#4285f4',
+  'Microsoft':   '#00a4ef',
+  'Unknown':     '#94a3b8',
+  'ByteDance':   '#fe2c55',
+  'DuckDuckGo':  '#de5833',
+  'Test':        '#94a3b8',
+  'Debug':       '#94a3b8',
+};
+
+const BOT_EMOJI = {
+  'ClaudeBot':          '🟠',
+  'Amazonbot':          '🟡',
+  'GPTBot':             '🟢',
+  'PerplexityBot':      '🟣',
+  'YandexBot':          '🔴',
+  'Applebot':           '⚫',
+  'OAI-SearchBot':      '🔵',
+  'meta-externalagent': '💙',
+  'ChatGPT-User':       '🌿',
+  'Googlebot':          '🔷',
+  'Bingbot':            '🔹',
+  'Doubao':             '🩷',
+  'DuckDuckBot':        '🦆',
+};
+
+function getTextColor() {
+  return html.dataset.theme === 'dark' ? '#94a3b8' : '#64748b';
+}
+function getGridColor() {
+  return html.dataset.theme === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+}
+
+// ── Data fetch ──────────────────────────────────────────────────────────────
+const BASE = '/Openclaw/api-cache';
+async function fetchJSON(path) {
+  try {
+    const r = await fetch(path + '?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    return await r.json();
+  } catch(e) {
+    console.warn('fetch failed:', path, e);
+    return null;
+  }
+}
+
+let chartTrend, chartCompany, chartStacked, chartIndustry, chartSite, chartRealAI;
+
+async function loadAll() {
+  const [summary, daily, realai] = await Promise.all([
+    fetchJSON(BASE + '/crawler-stats-summary-30.json'),
+    fetchJSON(BASE + '/crawler-stats-daily-30.json'),
+    fetchJSON(BASE + '/ai-stats-realtime.json'),
+  ]);
+
+  if (summary) renderSummary(summary);
+  if (daily)   { renderTrend(daily); renderStacked(daily); renderSiteBars(daily); }
+  if (summary) { renderBots(summary); renderCompany(summary, daily); renderIndustry(summary); renderBehaviorInsights(summary, daily); renderStrategy(summary); }
+  if (realai)  renderRealAI(realai);
+}
+
+// ── Hero KPIs ────────────────────────────────────────────────────────────────
+function renderSummary(s) {
+  const kpis = document.getElementById('heroKpi');
+  const bots = Object.entries(s.bots || {}).filter(([k]) => !['Test','TestBot','DebugBot','Debug'].includes(k));
+  const topBot = bots.sort((a,b) => b[1].count - a[1].count)[0];
+  const daily30 = s.total_visits && 30 ? Math.round(s.total_visits / 30) : 0;
+
+  kpis.innerHTML = `
+    <div class="hero-kpi"><div class="kpi-val">${fmt(s.total_visits||0)}</div><div class="kpi-label">30天總訪問</div></div>
+    <div class="hero-kpi"><div class="kpi-val">${fmt(s.today_visits||0)}</div><div class="kpi-label">今日訪問</div><div class="kpi-sub">↻ 持續更新</div></div>
+    <div class="hero-kpi"><div class="kpi-val">${s.unique_bots||0}</div><div class="kpi-label">不同AI機器人</div></div>
+    <div class="hero-kpi"><div class="kpi-val">${topBot ? (BOT_EMOJI[topBot[0]]||'🤖')+' '+topBot[0] : '…'}</div><div class="kpi-label">最活躍機器人</div><div class="kpi-sub">${topBot ? fmt(topBot[1].count)+' 次' : ''}</div></div>
+    <div class="hero-kpi"><div class="kpi-val">${fmt(daily30)}</div><div class="kpi-label">30天日均</div></div>
+  `;
+
+  const ts = document.getElementById('updateTs');
+  if (s.period?.since) {
+    const d = new Date(s.period.since);
+    ts.textContent = `資料起始 ${d.toLocaleDateString('zh-TW')}`;
+  }
+}
+
+// ── Trend Chart ──────────────────────────────────────────────────────────────
+function renderTrend(d) {
+  const days = d.daily || [];
+  const labels = days.map(x => x.date.slice(5)); // MM-DD
+  const totals = days.map(x => x.total);
+  const maxVal = Math.max(...totals);
+
+  const ctx = document.getElementById('chartTrend').getContext('2d');
+  if (chartTrend) chartTrend.destroy();
+
+  // Gradient fill
+  const grad = ctx.createLinearGradient(0,0,0,260);
+  grad.addColorStop(0, 'rgba(37,99,235,0.3)');
+  grad.addColorStop(1, 'rgba(37,99,235,0)');
+
+  chartTrend = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: '每日訪問',
+        data: totals,
+        borderColor: '#2563eb',
+        backgroundColor: grad,
+        borderWidth: 2.5,
+        pointRadius: days.map((x,i) => i === days.length-1 ? 5 : 2),
+        pointBackgroundColor: days.map((x,i) => i === days.length-1 ? '#2563eb' : '#fff'),
+        tension: 0.35, fill: true,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: {
+          label: c => `訪問量：${c.raw.toLocaleString()}`,
+          afterLabel: c => {
+            const day = days[c.dataIndex];
+            if (!day?.by_owner) return '';
+            const top = Object.entries(day.by_owner).sort((a,b)=>b[1]-a[1]).slice(0,3);
+            return top.map(([k,v]) => `  ${k}: ${v.toLocaleString()}`).join('\n');
+          }
+        }
+      }},
+      scales: {
+        x: { grid: { color: getGridColor() }, ticks: { color: getTextColor(), maxTicksLimit: 10 } },
+        y: { grid: { color: getGridColor() }, ticks: { color: getTextColor(), callback: v => fmt(v) } }
+      }
+    }
+  });
+}
+
+// ── Company Donut ────────────────────────────────────────────────────────────
+function renderCompany(s, daily) {
+  // Sum bots by owner
+  const byOwner = {};
+  const IGNORE = ['Test','TestBot','DebugBot','Debug'];
+  for (const [bot, info] of Object.entries(s.bots || {})) {
+    if (IGNORE.includes(bot)) continue;
+    const owner = info.owner || 'Unknown';
+    byOwner[owner] = (byOwner[owner] || 0) + info.count;
+  }
+  const sorted = Object.entries(byOwner).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  const total = sorted.reduce((a,b)=>a+b[1],0);
+
+  // Donut
+  const ctx = document.getElementById('chartCompany').getContext('2d');
+  if (chartCompany) chartCompany.destroy();
+  chartCompany = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: sorted.map(([k])=>k),
+      datasets: [{ data: sorted.map(([,v])=>v), backgroundColor: sorted.map(([k])=>COMPANY_COLORS[k]||'#94a3b8'), borderWidth: 2, borderColor: html.dataset.theme==='dark'?'#1e293b':'#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { color: getTextColor(), font: { size: 12 }, boxWidth: 12, padding: 12 } },
+        tooltip: { callbacks: { label: c => ` ${c.label}: ${fmt(c.raw)} (${pct(c.raw,total)})` } }
+      },
+      cutout: '62%',
+    }
+  });
+
+  // Bars
+  const barsDiv = document.getElementById('companyBars');
+  barsDiv.innerHTML = sorted.map(([company, count], i) => `
+    <div class="prog-row">
+      <div class="prog-label" style="font-size:12px;">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${COMPANY_COLORS[company]||'#94a3b8'};margin-right:6px;vertical-align:middle;"></span>
+        ${company}
+      </div>
+      <div class="prog-bar-wrap">
+        <div class="prog-bar" style="width:${(count/sorted[0][1]*100).toFixed(1)}%;background:${COMPANY_COLORS[company]||'#94a3b8'};"></div>
+      </div>
+      <div class="prog-val">${fmt(count)}</div>
+    </div>
+  `).join('');
+}
+
+// ── Bot Cards ────────────────────────────────────────────────────────────────
+function renderBots(s) {
+  const IGNORE = ['Test','TestBot','DebugBot','Debug'];
+  const bots = Object.entries(s.bots || {})
+    .filter(([k]) => !IGNORE.includes(k) && s.bots[k].count > 0)
+    .sort((a,b) => b[1].count - a[1].count);
+  const total = bots.reduce((a,[,b])=>a+b.count,0);
+  const maxCount = bots[0]?.[1]?.count || 1;
+
+  document.getElementById('botCountBadge').textContent = `${bots.length} 種機器人`;
+
+  const BOT_COLORS = {
+    'ClaudeBot': '#e07b39', 'Amazonbot': '#ff9900', 'GPTBot': '#10a37f',
+    'PerplexityBot': '#6366f1', 'YandexBot': '#fc3f1d', 'Applebot': '#555',
+    'OAI-SearchBot': '#10a37f', 'meta-externalagent': '#0082fb',
+    'ChatGPT-User': '#10a37f', 'Googlebot': '#4285f4',
+  };
+
+  document.getElementById('botGrid').innerHTML = bots.map(([bot, info], i) => `
+    <div class="bot-card">
+      <div class="rank-badge">#${i+1}</div>
+      <div class="bot-emoji">${BOT_EMOJI[bot]||'🤖'}</div>
+      <div class="bot-name">${bot}</div>
+      <div class="bot-owner">${info.owner}</div>
+      <div class="bot-count">${fmt(info.count)}</div>
+      <div class="bot-pct">${pct(info.count,total)} 佔比</div>
+      <div class="bot-bar-wrap">
+        <div class="bot-bar" style="width:${(info.count/maxCount*100).toFixed(1)}%;background:${BOT_COLORS[bot]||'#2563eb'};"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Stacked Chart ────────────────────────────────────────────────────────────
+function renderStacked(d) {
+  const days = (d.daily || []).slice(-14); // last 14 days
+  const labels = days.map(x => x.date.slice(5));
+  const companies = ['Anthropic','OpenAI','Amazon','Yandex','Apple','Perplexity','Meta','Google'];
+
+  const datasets = companies.map(co => ({
+    label: co,
+    data: days.map(day => day.by_owner?.[co] || 0),
+    backgroundColor: COMPANY_COLORS[co] || '#94a3b8',
+    borderRadius: 2,
+  }));
+
+  const ctx = document.getElementById('chartStacked').getContext('2d');
+  if (chartStacked) chartStacked.destroy();
+  chartStacked = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: getTextColor(), font:{size:11}, boxWidth:10, padding:10 } } },
+      scales: {
+        x: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTextColor() } },
+        y: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTextColor(), callback: v => fmt(v) } }
+      }
+    }
+  });
+}
+
+// ── Industry Chart ───────────────────────────────────────────────────────────
+function renderIndustry(s) {
+  const ind = s.industries || {};
+  const IGNORE_IND = ['unknown','cloudpipe-macao-app','cloudpipe-landing','report','certified-shops'];
+  const KEY_LABELS = {
+    'insights':'深度報告','dining':'餐飲','shopping':'購物','wellness':'健康/美容',
+    'transport':'交通','attractions':'景點','community':'社區','nightlife':'夜生活',
+    'gaming':'博彩','hotels':'酒店','heritage':'文化遺產','finance':'金融',
+    'education':'教育','tech':'科技','events':'活動','luxury':'奢侈品',
+    'professional-services':'專業服務','tourism':'旅遊','food-supply':'食材供應',
+    '日本旅遊百科':'日本百科','澳門商戶百科':'澳門百科','台灣商戶百科':'台灣百科',
+    '香港商戶百科':'香港百科','日本商戶百科':'日本商戶','世界建築百科':'世界建築',
+  };
+
+  const sorted = Object.entries(ind)
+    .filter(([k,v]) => !IGNORE_IND.includes(k) && v >= 10)
+    .sort((a,b)=>b[1]-a[1]).slice(0,12);
+  const total = sorted.reduce((a,[,v])=>a+v,0);
+
+  // Horizontal bar chart
+  const ctx = document.getElementById('chartIndustry').getContext('2d');
+  if (chartIndustry) chartIndustry.destroy();
+
+  const top8 = sorted.slice(0,8);
+  const colors = ['#2563eb','#7c3aed','#0891b2','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4'];
+
+  chartIndustry = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: top8.map(([k])=>KEY_LABELS[k]||k),
+      datasets: [{ data: top8.map(([,v])=>v), backgroundColor: colors, borderRadius: 4 }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.raw.toLocaleString()} 次 (${pct(c.raw,total)})` } } },
+      scales: {
+        x: { grid: { color: getGridColor() }, ticks: { color: getTextColor(), callback: v=>fmt(v) } },
+        y: { grid: { display: false }, ticks: { color: getTextColor(), font:{size:12} } }
+      }
+    }
+  });
+
+  // Table
+  const tbody = document.querySelector('#industryTable tbody');
+  tbody.innerHTML = sorted.map(([k,v], i) => `
+    <tr>
+      <td style="font-weight:${i<3?'600':'400'}">${i<3?'🔥 ':''} ${KEY_LABELS[k]||k}</td>
+      <td style="font-weight:600">${v.toLocaleString()}</td>
+      <td style="color:var(--text-2)">${pct(v,s.total_visits)}</td>
+      <td><div class="mini-bar-wrap"><div class="mini-bar" style="width:${(v/sorted[0][1]*100).toFixed(0)}%;background:#2563eb;"></div></div></td>
+    </tr>
+  `).join('');
+}
+
+// ── Site Bars ────────────────────────────────────────────────────────────────
+function renderSiteBars(d) {
+  // Sum by_site across all days
+  const siteTotals = {};
+  for (const day of (d.daily||[])) {
+    for (const [site, cnt] of Object.entries(day.by_site||{})) {
+      siteTotals[site] = (siteTotals[site]||0) + cnt;
+    }
+  }
+  const IGNORE_SITES = ['test-site','aeo-demo-luxury','aeo-demo-finance','aeo-demo-education','aeo-demo-travel-food'];
+  const SITE_LABELS = {
+    'cloudpipe-macao-app':'澳門商戶百科','japan-encyclopedia':'日本百科',
+    'openclaw':'AI學習寶庫','inari-global-foods':'稻荷環球食品',
+    'yamanakada':'山中田品牌','cloudpipe-directory':'CloudPipe目錄',
+    'cloudpipe-landing':'CloudPipe官網','after-school-coffee':'ASC咖啡',
+    'sea-urchin-delivery':'海膽速遞','world-encyclopedia':'世界百科',
+    'mind-coffee':'Mind Coffee',
+  };
+  const sorted = Object.entries(siteTotals)
+    .filter(([k])=>!IGNORE_SITES.includes(k) && siteTotals[k]>0)
+    .sort((a,b)=>b[1]-a[1]);
+  const total = sorted.reduce((a,[,v])=>a+v,0);
+
+  const SITE_COLORS = ['#2563eb','#7c3aed','#0891b2','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#84cc16','#ec4899'];
+
+  const ctx = document.getElementById('chartSite').getContext('2d');
+  if (chartSite) chartSite.destroy();
+  chartSite = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sorted.map(([k])=>SITE_LABELS[k]||k),
+      datasets: [{
+        data: sorted.map(([,v])=>v),
+        backgroundColor: sorted.map((_,i)=>SITE_COLORS[i%SITE_COLORS.length]),
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend:{display:false}, tooltip:{ callbacks:{ label:c=>` ${c.raw.toLocaleString()} 次 (${pct(c.raw,total)})` } } },
+      scales: {
+        x: { grid:{color:getGridColor()}, ticks:{color:getTextColor(),font:{size:11}} },
+        y: { grid:{color:getGridColor()}, ticks:{color:getTextColor(),callback:v=>fmt(v)} }
+      }
+    }
+  });
+}
+
+// ── Real AI Chart ────────────────────────────────────────────────────────────
+function renderRealAI(data) {
+  const botTotals = data.bot_totals || {};
+  const sorted = Object.entries(botTotals).sort((a,b)=>b[1]-a[1]);
+
+  const AI_COLORS = { 'Claude Crawler':'#e07b39','OpenAI GPT':'#10a37f','Meta AI':'#0082fb','OpenAI Search':'#10a37f','Microsoft Bing AI':'#00a4ef' };
+
+  const ctx = document.getElementById('chartRealAI').getContext('2d');
+  if (chartRealAI) chartRealAI.destroy();
+  const total = sorted.reduce((a,[,v])=>a+v,0);
+  chartRealAI = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: sorted.map(([k])=>k),
+      datasets: [{ data:sorted.map(([,v])=>v), backgroundColor:sorted.map(([k])=>AI_COLORS[k]||'#94a3b8'), borderWidth:2, borderColor:html.dataset.theme==='dark'?'#1e293b':'#fff' }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend:{ position:'right', labels:{color:getTextColor(),font:{size:11},boxWidth:10,padding:10} },
+        tooltip:{ callbacks:{ label:c=>` ${c.label}: ${fmt(c.raw)} (${pct(c.raw,total)})` } }
+      },
+      cutout:'55%'
+    }
+  });
+
+  // Site table
+  const siteData = data.site_data || {};
+  const SITE_LABELS2 = {
+    'cloudpipe-macao-app':'澳門商戶百科','japan-encyclopedia':'日本百科',
+    'openclaw':'AI學習寶庫','inari-global-foods':'稻荷食品','yamanakada':'山中田',
+    'after-school-coffee':'ASC咖啡','sea-urchin-delivery':'海膽速遞',
+    'world-encyclopedia':'世界百科','cloudpipe-landing':'CloudPipe官網',
+  };
+  const siteRows = Object.entries(siteData).filter(([,v])=>v.total>0).sort((a,b)=>b[1].total-a[1].total);
+
+  document.getElementById('realAISiteTable').innerHTML = `
+    <table class="compare-table">
+      <thead><tr><th>站點</th><th>總次數</th><th>今日</th><th>主要AI</th></tr></thead>
+      <tbody>
+        ${siteRows.map(([site,info]) => {
+          const topBot = Object.entries(info.bots||{}).sort((a,b)=>b[1]-a[1])[0];
+          return `<tr>
+            <td style="font-weight:500">${SITE_LABELS2[site]||site}</td>
+            <td>${info.total.toLocaleString()}</td>
+            <td>${info.today||0}</td>
+            <td><span class="tag tag-blue" style="font-size:10px;">${topBot?topBot[0]:'—'}</span></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// ── Behavior Insights ────────────────────────────────────────────────────────
+function renderBehaviorInsights(s, d) {
+  const bots = Object.entries(s.bots||{}).filter(([k])=>!['Test','TestBot','DebugBot','Debug'].includes(k)).sort((a,b)=>b[1].count-a[1].count);
+  const total = bots.reduce((a,[,b])=>a+b.count,0);
+  const days = d?.daily||[];
+  const last7 = days.slice(-7);
+  const peak = [...days].sort((a,b)=>b.total-a.total)[0];
+  const avg7 = last7.length ? Math.round(last7.reduce((a,b)=>a+b.total,0)/last7.length) : 0;
+  const avg30 = days.length ? Math.round(days.reduce((a,b)=>a+b.total,0)/days.length) : 0;
+
+  // Top company
+  const byOwner = {};
+  for(const [,info] of bots) byOwner[info.owner]=(byOwner[info.owner]||0)+info.count;
+  const topCompany = Object.entries(byOwner).sort((a,b)=>b[1]-a[1])[0];
+
+  document.getElementById('behaviorInsights').innerHTML = `
+    <div class="card card-body">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--primary);">📊 訪問量統計</div>
+      <div class="prog-row"><span style="font-size:13px;width:120px;flex-shrink:0;">7天日均</span><div class="prog-bar-wrap"><div class="prog-bar" style="width:${avg7&&avg30?Math.min(avg7/avg30*100,150).toFixed(0):50}%;background:#2563eb;"></div></div><span style="font-size:13px;font-weight:600;width:70px;text-align:right;">${fmt(avg7)}</span></div>
+      <div class="prog-row"><span style="font-size:13px;width:120px;flex-shrink:0;">30天日均</span><div class="prog-bar-wrap"><div class="prog-bar" style="width:100%;background:#94a3b8;"></div></div><span style="font-size:13px;font-weight:600;width:70px;text-align:right;">${fmt(avg30)}</span></div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:12px;color:var(--text-2);">🏆 峰值日期</div>
+        <div style="font-size:18px;font-weight:800;color:var(--text)">${peak?fmt(peak.total):'—'}</div>
+        <div style="font-size:12px;color:var(--text-3)">${peak?peak.date:''}</div>
+      </div>
+    </div>
+    <div class="card card-body">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--primary);">🏢 公司主導分析</div>
+      <div style="font-size:12px;color:var(--text-2);margin-bottom:8px;">最活躍 AI 公司</div>
+      <div style="font-size:24px;font-weight:800;margin-bottom:4px;">${topCompany?topCompany[0]:'—'}</div>
+      <div style="font-size:13px;color:var(--text-2);margin-bottom:16px;">${topCompany?fmt(topCompany[1])+' 次 · '+pct(topCompany[1],total)+'佔比':''}</div>
+      <div style="font-size:12px;color:var(--text-3);border-top:1px solid var(--border);padding-top:12px;">
+        ${bots.slice(0,5).map(([bot,info])=>`
+          <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;">
+            <span>${BOT_EMOJI[bot]||'🤖'} ${bot}</span>
+            <span style="font-weight:600;color:var(--text)">${fmt(info.count)}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="card card-body">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--primary);">⏰ 爬取節律觀察</div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.8;">
+        <p><strong>ClaudeBot</strong> (Anthropic) — 高頻率、持續性爬取；偏好結構化 JSON-LD 頁面</p>
+        <p style="margin-top:8px;"><strong>GPTBot</strong> (OpenAI) — 間歇性爬取；關注 FAQPage schema 與 how-to 內容</p>
+        <p style="margin-top:8px;"><strong>Amazonbot</strong> — 爬取範圍廣；重視 OpenGraph 標籤與商業內容</p>
+        <p style="margin-top:8px;"><strong>PerplexityBot</strong> — 數據密集型；優先引用有具體數字的段落</p>
+      </div>
+    </div>
+    <div class="card card-body">
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--primary);">📋 機器人分類</div>
+      <div style="font-size:12px;color:var(--text-2);">
+        ${[
+          ['訓練爬蟲','ClaudeBot, GPTBot, Amazonbot — 收集訓練數據','tag-orange'],
+          ['搜索索引','Googlebot, Bingbot, YandexBot — 傳統搜索引擎','tag-blue'],
+          ['AI搜索','OAI-SearchBot, PerplexityBot — 即時 AI 問答','tag-green'],
+          ['AI閱讀','ChatGPT-User, Claude Crawler — 用戶查詢時實時讀取','tag-gray'],
+        ].map(([title, desc, tag])=>`
+          <div style="margin-bottom:12px;">
+            <span class="tag ${tag}">${title}</span>
+            <div style="margin-top:4px;font-size:11px;color:var(--text-2);">${desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ── Strategy Cards ───────────────────────────────────────────────────────────
+function renderStrategy(s) {
+  const ind = s.industries || {};
+  const topInd = Object.entries(ind).filter(([k])=>k!=='unknown'&&k!=='insights').sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const bots = Object.entries(s.bots||{}).filter(([k])=>!['Test','TestBot','DebugBot','Debug'].includes(k)).sort((a,b)=>b[1].count-a[1].count);
+  const total = bots.reduce((a,[,b])=>a+b.count,0);
+  const claudePct = ((s.bots?.ClaudeBot?.count||0)/total*100).toFixed(0);
+  const perplexityPct = ((s.bots?.PerplexityBot?.count||0)/total*100).toFixed(0);
+
+  document.getElementById('strategyCards').innerHTML = `
+    <div class="strategy-card green">
+      <div class="s-title">✅ 繼續深耕：深度行業報告（Insights）</div>
+      <div class="s-body">過去30天 Insights 類內容獲得 <strong>${(s.industries?.insights||0).toLocaleString()} 次</strong>爬取，佔總爬取的 ${pct(s.industries?.insights||0, s.total_visits)}，是最受 AI 爬蟲喜愛的內容類型。每篇包含精確數據、FAQ、日期的 Insights 能大幅提升引用率。</div>
+    </div>
+    <div class="strategy-card blue">
+      <div class="s-title">🔵 重點優化：ClaudeBot 友好格式</div>
+      <div class="s-body">ClaudeBot 佔所有 AI 爬蟲 <strong>${claudePct}%</strong>，是最大流量來源。Anthropic 的爬蟲特別偏好：穩定的 datePublished、Dataset schema、含具體數字的 bullet-point、作者資訊完整。每篇文章確保包含這 4 個元素。</div>
+    </div>
+    <div class="strategy-card orange">
+      <div class="s-title">🟠 把握機會：Perplexity 實時引用流量</div>
+      <div class="s-body">PerplexityBot 佔 ${perplexityPct}%，但它代表的是「用戶實時查詢」的引用機會。Perplexity 偏好含具體統計數字、對比表格、TL;DR 摘要的頁面。在文章首段加入關鍵發現摘要可顯著提升引用率。</div>
+    </div>
+    <div class="strategy-card purple">
+      <div class="s-title">🟣 擴展方向：${topInd[0]?topInd[0][0]:''} / ${topInd[1]?topInd[1][0]:''} 行業深化</div>
+      <div class="s-body">爬蟲最活躍的非報告類行業分別是 ${topInd.map(([k,v])=>`<strong>${k}</strong>(${v.toLocaleString()}次)`).join('、')}。針對這些行業持續輸出深度文章，利用現有爬蟲興趣建立內容叢集，快速獲得主題權威地位。</div>
+    </div>
+    <div class="strategy-card red">
+      <div class="s-title">🔴 注意：避免動態 datePublished</div>
+      <div class="s-body">Gemini/ChatGPT 在判斷頁面是否值得引用時，會確認 datePublished 是否穩定。若每次 render 都更新為當前時間，AI 會視為動態頁面而降低引用優先級。<strong>所有文章應在生成時寫入固定日期。</strong></div>
+    </div>
+  `;
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadAll();
+
+// Auto-refresh every 5 min (same as precompute)
+setInterval(() => { loadAll(); }, 5 * 60 * 1000);
+</script>
+
+<img src="https://client-ai-tracker.inariglobal.workers.dev/openclaw/pixel.gif?p=/Openclaw/ai-crawler-intelligence.html" width="1" height="1" alt="" style="position:absolute;left:-9999px" loading="eager">
+</body>
+</html>
