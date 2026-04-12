@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-04-12T15:44:30.552323",
-  "total_visits": 2772,
+  "timestamp": "2026-04-12T15:49:32.886456",
+  "total_visits": 2773,
   "bot_totals": {
-    "Claude Crawler": 2454,
+    "Claude Crawler": 2455,
     "OpenAI GPT": 244,
     "Meta AI": 72,
     "OpenAI Search": 1,
@@ -35,10 +35,10 @@
       }
     },
     "openclaw": {
-      "total": 403,
-      "today": 1,
+      "total": 404,
+      "today": 2,
       "bots": {
-        "Claude Crawler": 213,
+        "Claude Crawler": 214,
         "OpenAI GPT": 183,
         "OpenAI Search": 1,
         "Meta AI": 6
@@ -92,5 +92,5 @@
       }
     }
   },
-  "last_updated": "2026-04-12T15:44:30.552708"
+  "last_updated": "2026-04-12T15:49:32.886836"
 }
